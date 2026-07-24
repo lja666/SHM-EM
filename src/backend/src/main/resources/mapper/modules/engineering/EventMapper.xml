@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.iem.em.modules.engineering.infrastructure.mapper.EventMapper">
+    <select id="selectList" resultType="mybatis.iem.em.modules.engineering.domain.model.Event">
+        SELECT * FROM em_monitoring_event
+        <where>
+            <if test="projectId != null">AND project_id = #{projectId}</if>
+        </where>
+        ORDER BY detected_at DESC, id DESC
+        LIMIT #{limit}
+    </select>
+
+    <select id="selectDeviceWarnings" resultType="java.util.LinkedHashMap">
+        SELECT
+            e.id,
+            e.event_code AS eventCode,
+            e.project_id AS projectId,
+            e.station_id AS stationId,
+            e.instrument_id AS instrumentId,
+            e.metric_code AS metricCode,
+            e.event_type AS eventType,
+            e.event_level AS eventLevel,
+            e.event_status AS eventStatus,
+            e.detected_at AS detectedAt,
+            e.trigger_value AS triggerValue,
+            e.threshold_value AS thresholdValue,
+            e.unit,
+            e.trigger_reason AS triggerReason,
+            s.station_code AS stationCode,
+            COALESCE(NULLIF(s.station_name, ''), s.station_code) AS stationName,
+            s.station_type AS stationType,
+            i.instrument_code AS instrumentCode,
+            COALESCE(NULLIF(i.instrument_name, ''), i.instrument_code) AS instrumentName,
+            i.instrument_type AS instrumentType,
+            i.status AS instrumentStatus
+        FROM em_monitoring_event e
+        LEFT JOIN em_station s ON s.id = e.station_id
+        LEFT JOIN em_instrument i ON i.id = e.instrument_id
+        <where>
+            <if test="projectId != null">AND e.project_id = #{projectId}</if>
+        </where>
+        ORDER BY e.detected_at DESC, e.id DESC
+        LIMIT #{limit}
+    </select>
+
+    <select id="selectById" resultType="mybatis.iem.em.modules.engineering.domain.model.Event">
+        SELECT * FROM em_monitoring_event WHERE id = #{id}
+    </select>
+
+    <select id="selectByIdAndProject" resultType="mybatis.iem.em.modules.engineering.domain.model.Event">
+        SELECT * FROM em_monitoring_event
+        WHERE id = #{id} AND project_id = #{projectId}
+    </select>
+
+    <select id="selectByCode" resultType="mybatis.iem.em.modules.engineering.domain.model.Event">
+        SELECT * FROM em_monitoring_event
+        WHERE project_id = #{projectId} AND event_code = #{eventCode}
+        LIMIT 1
+    </select>
+
+    <insert id="insert">
+        INSERT INTO em_monitoring_event
+        (event_code, project_id, station_id, instrument_id, metric_code, rule_id, evaluation_run_id,
+         event_type, event_level, event_status, source_type, run_type, detected_at, window_start, window_end,
+         trigger_value, threshold_value, unit, trigger_reason, source_registry_code, calculation_snapshot_json)
+        VALUES
+        (#{eventCode}, #{projectId}, #{stationId}, #{instrumentId}, #{metricCode}, #{ruleId}, #{evaluationRunId},
+         #{eventType}, #{eventLevel}, #{eventStatus}, #{sourceType}, #{runType}, #{detectedAt}, #{windowStart}, #{windowEnd},
+         #{triggerValue}, #{thresholdValue}, #{unit}, #{triggerReason}, #{sourceRegistryCode}, #{calculationSnapshotJson})
+        ON DUPLICATE KEY UPDATE
+            evaluation_run_id = VALUES(evaluation_run_id),
+            event_type = VALUES(event_type),
+            event_level = VALUES(event_level),
+            source_type = VALUES(source_type),
+            run_type = VALUES(run_type),
+            detected_at = VALUES(detected_at),
+            window_start = VALUES(window_start),
+            window_end = VALUES(window_end),
+            trigger_value = VALUES(trigger_value),
+            threshold_value = VALUES(threshold_value),
+            unit = VALUES(unit),
+            trigger_reason = VALUES(trigger_reason),
+            source_registry_code = VALUES(source_registry_code),
+            calculation_snapshot_json = VALUES(calculation_snapshot_json),
+            updated_at = CURRENT_TIMESTAMP
+    </insert>
+
+    <update id="updateStatus">
+        UPDATE em_monitoring_event
+        SET event_status = #{status},
+            <if test="status == 'acknowledged'">
+                acknowledged_by = #{operatorName},
+                acknowledged_at = CURRENT_TIMESTAMP,
+            </if>
+            <if test="status == 'resolved'">
+                resolved_by = #{operatorName},
+                resolved_at = CURRENT_TIMESTAMP,
+            </if>
+            <if test="status == 'closed'">
+                closed_by = #{operatorName},
+                closed_at = CURRENT_TIMESTAMP,
+            </if>
+            updated_at = CURRENT_TIMESTAMP
+        WHERE id = #{id}
+    </update>
+
+    <update id="updateLevel">
+        UPDATE em_monitoring_event
+        SET event_level = #{eventLevel},
+            updated_at = CURRENT_TIMESTAMP
+        WHERE id = #{id}
+    </update>
+</mapper>
+
+
+
+
+

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.iem.em.modules.engineering.infrastructure.mapper.PredictionExecutionGateMapper">
+    <resultMap id="gateMap" type="mybatis.iem.em.modules.engineering.domain.model.PredictionExecutionGate">
+        <id property="id" column="id" />
+        <result property="batchId" column="batch_id" />
+        <result property="projectId" column="project_id" />
+        <result property="batchCode" column="batch_code" />
+        <result property="executionMode" column="execution_mode" />
+        <result property="referenceTime" column="reference_time" />
+        <result property="contractVersion" column="contract_version" />
+        <result property="contractFingerprint" column="contract_fingerprint" />
+        <result property="expectedModelCount" column="expected_model_count" />
+        <result property="actualModelCount" column="actual_model_count" />
+        <result property="successfulModelCount" column="successful_model_count" />
+        <result property="expectedFeatureCount" column="expected_feature_count" />
+        <result property="actualFeatureCount" column="actual_feature_count" />
+        <result property="expectedSteps" column="expected_steps" />
+        <result property="expectedPointCount" column="expected_point_count" />
+        <result property="actualPointCount" column="actual_point_count" />
+        <result property="missingPointCount" column="missing_point_count" />
+        <result property="invalidTimestampCount" column="invalid_timestamp_count" />
+        <result property="qualityIssueCount" column="quality_issue_count" />
+        <result property="baseTimeAgeMinutes" column="base_time_age_minutes" />
+        <result property="maxAgeMinutes" column="max_age_minutes" />
+        <result property="modelSetValid" column="model_set_valid" />
+        <result property="featureSetValid" column="feature_set_valid" />
+        <result property="timelineValid" column="timeline_valid" />
+        <result property="qualityValid" column="quality_valid" />
+        <result property="artifactHashValid" column="artifact_hash_valid" />
+        <result property="freshnessValid" column="freshness_valid" />
+        <result property="executionEligible" column="execution_eligible" />
+        <result property="gateHash" column="gate_hash" />
+        <result property="evaluatedAt" column="evaluated_at" />
+        <result property="issuesJson" column="issues_json" />
+        <result property="missingModelsJson" column="missing_models_json" />
+        <result property="unexpectedModelsJson" column="unexpected_models_json" />
+        <result property="missingFeaturesJson" column="missing_features_json" />
+        <result property="unexpectedFeaturesJson" column="unexpected_features_json" />
+        <result property="missingTimelinePointsJson" column="missing_timeline_points_json" />
+        <result property="targetSummaryJson" column="target_summary_json" />
+    </resultMap>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO em_prediction_execution_gate
+        (batch_id, project_id, batch_code, execution_mode, reference_time,
+         contract_version, contract_fingerprint,
+         expected_model_count, actual_model_count, successful_model_count,
+         expected_feature_count, actual_feature_count, expected_steps,
+         expected_point_count, actual_point_count, missing_point_count,
+         invalid_timestamp_count, quality_issue_count,
+         base_time_age_minutes, max_age_minutes,
+         model_set_valid, feature_set_valid, timeline_valid, quality_valid,
+         artifact_hash_valid, freshness_valid, execution_eligible,
+         issues_json, missing_models_json, unexpected_models_json,
+         missing_features_json, unexpected_features_json, missing_timeline_points_json,
+         target_summary_json, gate_hash, evaluated_at)
+        VALUES
+        (#{batchId}, #{projectId}, #{batchCode}, #{executionMode}, #{referenceTime},
+         #{contractVersion}, #{contractFingerprint},
+         #{expectedModelCount}, #{actualModelCount}, #{successfulModelCount},
+         #{expectedFeatureCount}, #{actualFeatureCount}, #{expectedSteps},
+         #{expectedPointCount}, #{actualPointCount}, #{missingPointCount},
+         #{invalidTimestampCount}, #{qualityIssueCount},
+         #{baseTimeAgeMinutes}, #{maxAgeMinutes},
+         #{modelSetValid}, #{featureSetValid}, #{timelineValid}, #{qualityValid},
+         #{artifactHashValid}, #{freshnessValid}, #{executionEligible},
+         #{issuesJson}, #{missingModelsJson}, #{unexpectedModelsJson},
+         #{missingFeaturesJson}, #{unexpectedFeaturesJson}, #{missingTimelinePointsJson},
+         #{targetSummaryJson}, #{gateHash}, #{evaluatedAt})
+        ON DUPLICATE KEY UPDATE
+            id = LAST_INSERT_ID(id),
+            reference_time = VALUES(reference_time),
+            evaluated_at = VALUES(evaluated_at)
+    </insert>
+
+    <select id="selectByIdentity" resultMap="gateMap">
+        SELECT * FROM em_prediction_execution_gate
+        WHERE batch_id = #{batchId} AND execution_mode = #{executionMode} AND gate_hash = #{gateHash}
+        LIMIT 1
+    </select>
+
+    <select id="selectLatest" resultMap="gateMap">
+        SELECT * FROM em_prediction_execution_gate
+        WHERE batch_id = #{batchId} AND execution_mode = #{executionMode}
+        ORDER BY evaluated_at DESC, id DESC
+        LIMIT 1
+    </select>
+</mapper>

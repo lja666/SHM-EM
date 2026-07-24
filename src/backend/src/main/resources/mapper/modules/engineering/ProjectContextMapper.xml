@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.iem.em.modules.engineering.infrastructure.mapper.ProjectContextMapper">
+    <select id="selectProjectSummary" resultType="java.util.LinkedHashMap">
+        SELECT
+            p.id AS projectId,
+            p.project_code AS projectCode,
+            p.project_name AS projectName,
+            p.infrastructure_type AS infrastructureType,
+            p.status AS projectStatus,
+            p.location_text AS locationText,
+            p.longitude AS longitude,
+            p.latitude AS latitude,
+            COALESCE(
+                CAST(JSON_UNQUOTE(JSON_EXTRACT(p.spatial_context_json, '$.monitoringPointCount')) AS UNSIGNED),
+                (SELECT COUNT(*) FROM em_station s WHERE s.project_id = p.id AND IFNULL(s.enabled, 1) = 1)
+            ) AS siteCount,
+            COALESCE(
+                CAST(JSON_UNQUOTE(JSON_EXTRACT(p.spatial_context_json, '$.monitoringPointCount')) AS UNSIGNED),
+                (SELECT COUNT(*) FROM em_station s WHERE s.project_id = p.id AND IFNULL(s.enabled, 1) = 1)
+            ) AS stationCount,
+            (SELECT COUNT(*) FROM em_station s WHERE s.project_id = p.id AND IFNULL(s.enabled, 1) = 1) AS stationRecordCount,
+            (SELECT COUNT(*) FROM em_instrument i WHERE i.project_id = p.id AND IFNULL(i.enabled, 1) = 1) AS instrumentCount,
+            (SELECT COUNT(DISTINCT i.module_no) FROM em_instrument i WHERE i.project_id = p.id AND IFNULL(i.enabled, 1) = 1 AND i.module_no IS NOT NULL) AS acquisitionModuleCount,
+            (SELECT COUNT(DISTINCT i.dtu_code) FROM em_instrument i WHERE i.project_id = p.id AND IFNULL(i.enabled, 1) = 1 AND i.dtu_code IS NOT NULL) AS dtuCount,
+            (SELECT COUNT(*) FROM em_station_metric sm WHERE sm.project_id = p.id AND IFNULL(sm.enabled, 1) = 1) AS stationMetricCount,
+            (SELECT COUNT(*) FROM em_observation_table_registry r WHERE r.project_id = p.id AND IFNULL(r.enabled, 1) = 1) AS registryCount,
+            (SELECT COUNT(*) FROM em_monitoring_event e WHERE e.project_id = p.id) AS eventCount,
+            (SELECT COUNT(*) FROM em_monitoring_event e WHERE e.project_id = p.id AND e.event_status IN ('open', 'OPEN')) AS openEventCount,
+            (SELECT MAX(e.detected_at) FROM em_monitoring_event e WHERE e.project_id = p.id) AS latestEventTime,
+            (SELECT COUNT(*) FROM em_notification_task n WHERE n.project_id = p.id) AS notificationTaskCount,
+            (SELECT COUNT(*) FROM em_report_instance ri WHERE ri.project_id = p.id) AS reportInstanceCount,
+            ((SELECT COUNT(*) FROM em_obs_displacement o WHERE o.project_id = p.id)
+             + (SELECT COUNT(*) FROM em_obs_earth_pressure o WHERE o.project_id = p.id)
+             + (SELECT COUNT(*) FROM em_obs_pressure_water_level o WHERE o.project_id = p.id)
+             + (SELECT COUNT(*) FROM em_obs_static_level o WHERE o.project_id = p.id)) AS lowFrequencyObservationCount,
+            (SELECT COALESCE(SUM(ab.sample_count), 0) FROM em_accel_batch ab WHERE ab.project_id = p.id) AS accelerationSampleCount,
+            (
+                SELECT MAX(x.t)
+                FROM (
+                    SELECT MAX(o.observed_at) AS t FROM em_obs_displacement o WHERE o.project_id = p.id
+                    UNION ALL
+                    SELECT MAX(o.observed_at) FROM em_obs_earth_pressure o WHERE o.project_id = p.id
+                    UNION ALL
+                    SELECT MAX(o.observed_at) FROM em_obs_pressure_water_level o WHERE o.project_id = p.id
+                    UNION ALL
+                    SELECT MAX(o.observed_at) FROM em_obs_static_level o WHERE o.project_id = p.id
+                    UNION ALL
+                    SELECT MAX(COALESCE(ab.end_time, ab.start_time)) AS t FROM em_accel_batch ab WHERE ab.project_id = p.id
+                ) x
+            ) AS latestObservationTime
+        FROM em_project p
+        WHERE p.id = #{projectId}
+    </select>
+
+    <select id="selectProjectCards" resultType="java.util.LinkedHashMap">
+        SELECT
+            p.id AS projectId,
+            p.project_code AS projectCode,
+            p.project_name AS projectName,
+            p.infrastructure_type AS infrastructureType,
+            p.status AS projectStatus,
+            p.location_text AS locationText,
+            p.longitude AS longitude,
+            p.latitude AS latitude,
+            COALESCE(
+                CAST(JSON_UNQUOTE(JSON_EXTRACT(p.spatial_context_json, '$.monitoringPointCount')) AS UNSIGNED),
+                (SELECT COUNT(*) FROM em_station s WHERE s.project_id = p.id AND IFNULL(s.enabled, 1) = 1)
+            ) AS siteCount,
+            COALESCE(
+                CAST(JSON_UNQUOTE(JSON_EXTRACT(p.spatial_context_json, '$.monitoringPointCount')) AS UNSIGNED),
+                (SELECT COUNT(*) FROM em_station s WHERE s.project_id = p.id AND IFNULL(s.enabled, 1) = 1)
+            ) AS stationCount,
+            (SELECT COUNT(*) FROM em_station s WHERE s.project_id = p.id AND IFNULL(s.enabled, 1) = 1) AS stationRecordCount,
+            (SELECT COUNT(*) FROM em_instrument i WHERE i.project_id = p.id AND IFNULL(i.enabled, 1) = 1) AS instrumentCount,
+            (SELECT COUNT(DISTINCT i.module_no) FROM em_instrument i WHERE i.project_id = p.id AND IFNULL(i.enabled, 1) = 1 AND i.module_no IS NOT NULL) AS acquisitionModuleCount,
+            (SELECT COUNT(DISTINCT i.dtu_code) FROM em_instrument i WHERE i.project_id = p.id AND IFNULL(i.enabled, 1) = 1 AND i.dtu_code IS NOT NULL) AS dtuCount,
+            (SELECT COUNT(*) FROM em_monitoring_event e WHERE e.project_id = p.id) AS eventCount,
+            (SELECT COUNT(*) FROM em_monitoring_event e WHERE e.project_id = p.id AND e.event_status IN ('open', 'OPEN')) AS openEventCount,
+            (
+                SELECT MAX(x.t)
+                FROM (
+                    SELECT MAX(o.observed_at) AS t FROM em_obs_displacement o WHERE o.project_id = p.id
+                    UNION ALL
+                    SELECT MAX(o.observed_at) FROM em_obs_earth_pressure o WHERE o.project_id = p.id
+                    UNION ALL
+                    SELECT MAX(o.observed_at) FROM em_obs_pressure_water_level o WHERE o.project_id = p.id
+                    UNION ALL
+                    SELECT MAX(o.observed_at) FROM em_obs_static_level o WHERE o.project_id = p.id
+                    UNION ALL
+                    SELECT MAX(COALESCE(ab.end_time, ab.start_time)) AS t FROM em_accel_batch ab WHERE ab.project_id = p.id
+                ) x
+            ) AS latestObservationTime
+        FROM em_project p
+        ORDER BY p.id
+    </select>
+
+    <select id="selectStationTypeCounts" resultType="java.util.LinkedHashMap">
+        SELECT station_type AS itemCode, COUNT(*) AS itemCount
+        FROM em_station
+        WHERE project_id = #{projectId} AND IFNULL(enabled, 1) = 1
+        GROUP BY station_type
+        ORDER BY itemCount DESC, itemCode ASC
+    </select>
+
+    <select id="selectInstrumentTypeCounts" resultType="java.util.LinkedHashMap">
+        SELECT instrument_type AS itemCode, COUNT(*) AS itemCount
+        FROM em_instrument
+        WHERE project_id = #{projectId} AND IFNULL(enabled, 1) = 1
+        GROUP BY instrument_type
+        ORDER BY itemCount DESC, itemCode ASC
+    </select>
+
+    <select id="selectMetricCounts" resultType="java.util.LinkedHashMap">
+        SELECT metric_code AS itemCode, COUNT(*) AS itemCount
+        FROM em_station_metric
+        WHERE project_id = #{projectId} AND IFNULL(enabled, 1) = 1
+        GROUP BY metric_code
+        ORDER BY itemCount DESC, itemCode ASC
+    </select>
+
+    <select id="selectEventLevelCounts" resultType="java.util.LinkedHashMap">
+        SELECT event_level AS itemCode, COUNT(*) AS itemCount
+        FROM em_monitoring_event
+        WHERE project_id = #{projectId}
+        GROUP BY event_level
+        ORDER BY itemCount DESC, itemCode ASC
+    </select>
+
+    <select id="selectDatasetManifest" resultType="java.util.LinkedHashMap">
+        SELECT
+            dataset_code AS datasetCode,
+            dataset_name AS datasetName,
+            scenario_type AS scenarioType,
+            input_description AS inputDescription,
+            dataset_uri AS datasetUri,
+            time_start AS timeStart,
+            time_end AS timeEnd,
+            expected_result_hash AS expectedResultHash,
+            license,
+            citation,
+            reproducibility_level AS reproducibilityLevel
+        FROM em_dataset_manifest
+        WHERE project_id = #{projectId} AND enabled = 1
+        ORDER BY id DESC
+        LIMIT 1
+    </select>
+</mapper>

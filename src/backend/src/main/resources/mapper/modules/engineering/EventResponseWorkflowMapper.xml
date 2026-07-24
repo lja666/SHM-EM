@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.iem.em.modules.engineering.infrastructure.mapper.EventResponseWorkflowMapper">
+<select id="selectNotificationChannels" resultType="java.util.HashMap">
+        SELECT id,
+               project_id AS projectId,
+               channel_code AS channelCode,
+               channel_name AS channelName,
+               channel_type AS channelType,
+               endpoint,
+               enabled,
+               created_at AS createdAt,
+               updated_at AS updatedAt
+        FROM em_notification_channel
+        WHERE (#{projectId} IS NULL OR project_id = #{projectId})
+        ORDER BY enabled DESC, channel_code, id
+    </select>
+
+    <select id="selectResponseWorkflows" resultType="java.util.HashMap">
+        SELECT id,
+               event_id AS eventId,
+               project_id AS projectId,
+               workflow_code AS workflowCode,
+               workflow_name AS workflowName,
+               workflow_status AS workflowStatus,
+               trigger_mode AS triggerMode,
+               result_summary_json AS resultSummaryJson,
+               started_at AS startedAt,
+               finished_at AS finishedAt
+        FROM em_event_response_workflow
+        WHERE (#{projectId} IS NULL OR project_id = #{projectId})
+        ORDER BY started_at DESC, id DESC
+    </select>
+
+    <select id="selectResponseWorkflowByEvent" resultType="java.util.HashMap">
+        SELECT id,
+               event_id AS eventId,
+               project_id AS projectId,
+               workflow_code AS workflowCode,
+               workflow_name AS workflowName,
+               workflow_status AS workflowStatus,
+               trigger_mode AS triggerMode,
+               result_summary_json AS resultSummaryJson,
+               started_at AS startedAt,
+               finished_at AS finishedAt
+        FROM em_event_response_workflow
+        WHERE project_id = #{projectId}
+          AND event_id = #{eventId}
+          AND workflow_code = 'EVENT_RESPONSE_V3'
+        ORDER BY id DESC
+        LIMIT 1
+    </select>
+
+    <select id="selectResponseSteps" resultType="java.util.HashMap">
+        SELECT id,
+               workflow_id AS workflowId,
+               step_order AS stepOrder,
+               step_code AS stepCode,
+               step_name AS stepName,
+               status,
+               related_task_type AS relatedTaskType,
+               related_task_id AS relatedTaskId,
+               message,
+               started_at AS startedAt,
+               finished_at AS finishedAt
+        FROM em_event_response_step
+        WHERE workflow_id = #{workflowId}
+        ORDER BY step_order ASC, id ASC
+    </select>
+<select id="selectReportInstancesByEvent" resultType="java.util.HashMap">
+        SELECT id,
+               project_id AS projectId,
+               event_id AS eventId,
+               template_id AS templateId,
+               report_type AS reportType,
+               report_title AS reportTitle,
+               docx_url AS docxUrl,
+               pdf_url AS pdfUrl,
+               report_url AS reportUrl,
+               report_hash AS reportHash,
+               status,
+               generated_by AS generatedBy,
+               generated_at AS generatedAt,
+               source_record_key AS sourceRecordKey,
+               metadata_json AS metadataJson
+        FROM em_report_instance
+        WHERE project_id = #{projectId}
+          AND event_id = #{eventId}
+        ORDER BY COALESCE(generated_at, CURRENT_TIMESTAMP) DESC, id DESC
+    </select>
+
+    <select id="selectEvidenceResourcesByEvent" resultType="java.util.HashMap">
+        SELECT e.id,
+               e.project_id AS projectId,
+               l.event_id AS eventId,
+               e.station_id AS stationId,
+               e.resource_type AS resourceType,
+               e.resource_url AS resourceUrl,
+               e.captured_at AS capturedAt,
+               e.source_record_key AS sourceRecordKey,
+               e.hash_value AS hashValue,
+               e.metadata_json AS metadataJson,
+               l.link_type AS linkType,
+               l.confidence,
+               l.remark,
+               e.created_at AS createdAt
+        FROM em_event_evidence_link l
+        JOIN em_evidence_resource e ON e.id = l.evidence_id
+        WHERE e.project_id = #{projectId}
+          AND l.event_id = #{eventId}
+        ORDER BY e.created_at DESC, e.id DESC
+    </select>
+
+    <select id="selectActionLogsByEvent" resultType="java.util.HashMap">
+        SELECT id,
+               event_id AS eventId,
+               project_id AS projectId,
+               action_type AS actionType,
+               operator_name AS operatorName,
+               message,
+               attachments_json AS attachmentsJson,
+               created_at AS createdAt
+        FROM em_event_handling_log
+        WHERE project_id = #{projectId}
+          AND event_id = #{eventId}
+        ORDER BY created_at DESC, id DESC
+    </select>
+
+    <insert id="insertWorkflow">
+        INSERT INTO em_event_response_workflow
+        (event_id, project_id, workflow_code, workflow_name, workflow_status, trigger_mode, result_summary_json, started_at)
+        VALUES
+        (#{eventId}, #{projectId}, 'EVENT_RESPONSE_V3', 'SHM-EM event response v3', 'running', 'event_triggered',
+         JSON_OBJECT('steps', 4, 'core', 'notification_report_evidence'), CURRENT_TIMESTAMP)
+        ON DUPLICATE KEY UPDATE workflow_status = VALUES(workflow_status), result_summary_json = VALUES(result_summary_json)
+    </insert>
+
+    <select id="selectWorkflowId" resultType="java.lang.Long">
+        SELECT id FROM em_event_response_workflow
+        WHERE event_id = #{eventId} AND workflow_code = 'EVENT_RESPONSE_V3'
+        LIMIT 1
+    </select>
+
+    <insert id="insertStep">
+        INSERT INTO em_event_response_step
+        (workflow_id, step_order, step_code, step_name, status, related_task_type, related_task_id, started_at, finished_at)
+        VALUES
+        (#{workflowId}, #{stepOrder}, #{stepCode}, #{stepName}, #{status}, #{relatedTaskType}, #{relatedTaskId},
+         CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+        ON DUPLICATE KEY UPDATE status = VALUES(status), related_task_type = VALUES(related_task_type),
+                                related_task_id = VALUES(related_task_id), finished_at = VALUES(finished_at)
+    </insert>
+    <insert id="insertReportInstance">
+        INSERT INTO em_report_instance
+        (project_id, event_id, template_id, report_type, report_title, content_text, report_url,
+         report_hash, status, generated_by, generated_at, source_record_key, metadata_json)
+        SELECT #{projectId}, e.id, t.id, 'event', CONCAT('Event Report ', e.event_code),
+               CONCAT('Event Code: ', e.event_code, CHAR(10),
+                      'Source: ', e.source_type, CHAR(10),
+                      'Run Type: ', e.run_type, CHAR(10),
+                      'Risk Level: ', e.event_level, CHAR(10),
+                      'Metric: ', e.metric_code, CHAR(10),
+                      'Detected At: ', DATE_FORMAT(e.detected_at, '%Y-%m-%dT%H:%i:%s.%f'), CHAR(10),
+                      'Trigger / Threshold: ', COALESCE(e.trigger_value, ''), ' / ', COALESCE(e.threshold_value, ''), ' ', COALESCE(e.unit, ''), CHAR(10),
+                      'Reason: ', COALESCE(e.trigger_reason, ''), CHAR(10),
+                      'Calculation Snapshot: ', COALESCE(CAST(e.calculation_snapshot_json AS CHAR), '{}')),
+               NULL,
+               SHA2(CONCAT_WS('|', e.event_code, e.source_type, e.run_type, e.event_level, e.metric_code,
+                              DATE_FORMAT(e.detected_at, '%Y-%m-%dT%H:%i:%s.%f'), e.trigger_value,
+                              e.threshold_value, e.unit, CAST(e.calculation_snapshot_json AS CHAR)), 256),
+               'generated', 'EVENT_RESPONSE_V3', CURRENT_TIMESTAMP,
+               CONCAT('event_report:', #{projectId}, ':', #{eventId}, ':', t.id),
+               JSON_OBJECT('createdBy', 'EVENT_RESPONSE_V3', 'sourceType', e.source_type,
+                           'runType', e.run_type, 'eventCode', e.event_code)
+        FROM em_monitoring_event e
+        JOIN em_report_template t
+          ON (t.project_id = #{projectId} OR t.project_id IS NULL)
+         AND t.report_type = 'event'
+         AND t.enabled = 1
+        WHERE e.id = #{eventId} AND e.project_id = #{projectId}
+        ORDER BY t.project_id DESC, t.id ASC
+        LIMIT 1
+        ON DUPLICATE KEY UPDATE report_title = VALUES(report_title), content_text = VALUES(content_text),
+                                report_hash = VALUES(report_hash), status = VALUES(status),
+                                generated_by = VALUES(generated_by), generated_at = VALUES(generated_at),
+                                metadata_json = VALUES(metadata_json)
+    </insert>
+
+    <select id="selectReportInstanceId" resultType="java.lang.Long">
+        SELECT id
+        FROM em_report_instance
+        WHERE project_id = #{projectId} AND event_id = #{eventId} AND report_type = 'event'
+        ORDER BY id ASC
+        LIMIT 1
+    </select>
+
+    <update id="completeWorkflow">
+        UPDATE em_event_response_workflow
+        SET workflow_status = 'completed',
+            result_summary_json = JSON_OBJECT('steps', 4,
+                                              'core', 'notification_report_evidence',
+                                              'notificationTaskId', #{notificationTaskId},
+                                              'reportId', #{reportId}),
+            finished_at = CURRENT_TIMESTAMP
+        WHERE id = #{workflowId}
+    </update>
+</mapper>

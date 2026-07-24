@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.iem.em.modules.engineering.infrastructure.mapper.AccelerationWaveformMapper">
+    <select id="selectByRegistry" resultType="mybatis.iem.em.modules.engineering.domain.model.AccelerationWaveform">
+        SELECT id, project_id, station_id, instrument_id, batch_id, sample_index,
+               sample_offset_ms, sample_time, x_raw, y_raw, z_raw,
+               x_accel, y_accel, z_accel, accel_unit, quality_flag,
+               source_record_key, created_at
+        FROM ${tableName}
+        <where>
+            <if test="query.projectId != null">AND project_id = #{query.projectId}</if>
+            <if test="query.stationId != null">AND station_id = #{query.stationId}</if>
+            <if test="query.instrumentId != null">AND instrument_id = #{query.instrumentId}</if>
+            <if test="query.startTime != null">AND sample_time &gt;= #{query.startTime}</if>
+            <if test="query.endTime != null">AND sample_time &lt;= #{query.endTime}</if>
+        </where>
+        ORDER BY sample_time ASC, sample_index ASC, id ASC
+        LIMIT #{limit}
+    </select>
+</mapper>
+
+
+
+
+

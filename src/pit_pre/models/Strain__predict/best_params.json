@@ -1,0 +1,13 @@
+{
+    "lag": 3,
+    "attn_dim": 96,
+    "num_heads": 4,
+    "ff_hidden_dim": 64,
+    "conv_hidden_dim": 48,
+    "kernel_size": 5,
+    "dropout": 0.07680317420912611,
+    "learning_rate": 0.00035792395494525043,
+    "batch_size": 64,
+    "fixed_m": 10,
+    "fixed_n": 3
+}

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.iem.em.modules.engineering.infrastructure.mapper.ReportMapper">
+    <select id="selectReports" resultType="mybatis.iem.em.modules.engineering.domain.model.Report">
+        SELECT id,
+               project_id AS projectId,
+               event_id AS eventId,
+               template_id AS templateId,
+               COALESCE(report_title, CONCAT('Report #', id)) AS reportName,
+               report_title AS reportTitle,
+               report_type AS reportType,
+               content_html AS contentHtml,
+               content_text AS contentText,
+               docx_url AS docxUrl,
+               pdf_url AS pdfUrl,
+               report_url AS reportUrl,
+               report_hash AS reportHash,
+               metadata_json AS metadataJson,
+               generated_at AS generatedAt,
+               status
+        FROM em_report_instance
+        WHERE (#{projectId} IS NULL OR project_id = #{projectId})
+        ORDER BY COALESCE(generated_at, CURRENT_TIMESTAMP) DESC, id DESC
+        LIMIT #{limit}
+    </select>
+
+    <select id="selectById" resultType="mybatis.iem.em.modules.engineering.domain.model.Report">
+        SELECT id,
+               project_id AS projectId,
+               event_id AS eventId,
+               template_id AS templateId,
+               COALESCE(report_title, CONCAT('Report #', id)) AS reportName,
+               report_title AS reportTitle,
+               report_type AS reportType,
+               content_html AS contentHtml,
+               content_text AS contentText,
+               docx_url AS docxUrl,
+               pdf_url AS pdfUrl,
+               report_url AS reportUrl,
+               report_hash AS reportHash,
+               metadata_json AS metadataJson,
+               generated_at AS generatedAt,
+               status
+        FROM em_report_instance
+        WHERE id = #{id}
+    </select>
+
+    <update id="updateGeneratedFile">
+        UPDATE em_report_instance
+        SET
+        <choose>
+            <when test="format == 'docx'">
+                docx_url = #{downloadUrl},
+            </when>
+            <otherwise>
+                pdf_url = #{downloadUrl},
+            </otherwise>
+        </choose>
+            report_url = #{downloadUrl},
+            report_hash = #{hash},
+            status = 'generated',
+            generated_at = COALESCE(generated_at, #{generatedAt}),
+            metadata_json = JSON_SET(COALESCE(metadata_json, JSON_OBJECT()),
+                '$.artifactHashAlgorithm', 'SHA-256',
+                '$.lastGeneratedFormat', #{format})
+        WHERE id = #{id}
+    </update>
+
+    <insert id="upsertReportEvidence">
+        INSERT INTO em_evidence_resource
+        (project_id, station_id, resource_type, resource_url, captured_at,
+         source_record_key, hash_value, metadata_json)
+        SELECT r.project_id,
+               NULL,
+               'report',
+               COALESCE(r.report_url, r.pdf_url, r.docx_url),
+               COALESCE(r.generated_at, CURRENT_TIMESTAMP),
+               CONCAT('report_instance:', r.id),
+               r.report_hash,
+               JSON_OBJECT('reportType', r.report_type, 'status', r.status, 'source', 'em_report_instance',
+                           'engineeringSnapshot', JSON_EXTRACT(ev.calculation_snapshot_json, '$'))
+        FROM em_report_instance r
+        LEFT JOIN em_monitoring_event ev ON ev.id=r.event_id
+        WHERE r.id = #{reportId}
+          AND COALESCE(r.report_url, r.pdf_url, r.docx_url) IS NOT NULL
+        ON DUPLICATE KEY UPDATE
+            resource_url = VALUES(resource_url),
+            captured_at = VALUES(captured_at),
+            hash_value = VALUES(hash_value),
+            metadata_json = VALUES(metadata_json)
+    </insert>
+
+    <insert id="linkReportEvidence">
+        INSERT INTO em_event_evidence_link
+        (event_id, evidence_id, link_type, confidence, remark)
+        SELECT r.event_id,
+               e.id,
+               'report',
+               1.0000,
+               'Generated report archived as event evidence'
+        FROM em_report_instance r
+        JOIN em_evidence_resource e
+          ON e.project_id = r.project_id
+         AND e.source_record_key = CONCAT('report_instance:', r.id)
+        WHERE r.id = #{reportId}
+          AND r.event_id IS NOT NULL
+        ON DUPLICATE KEY UPDATE
+            link_type = VALUES(link_type),
+            confidence = VALUES(confidence),
+            remark = VALUES(remark)
+    </insert>
+</mapper>

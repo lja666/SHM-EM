@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.iem.em.modules.engineering.infrastructure.mapper.ProjectFutureStateMapper">
+    <select id="selectActivePolicy" resultType="mybatis.iem.em.modules.engineering.domain.model.FutureStatePolicy">
+        SELECT id,
+               project_id,
+               policy_code,
+               policy_version,
+               policy_json,
+               policy_hash,
+               enabled
+        FROM em_future_state_policy
+        WHERE enabled = 1
+          AND (project_id = #{projectId} OR project_id IS NULL)
+        ORDER BY CASE WHEN project_id = #{projectId} THEN 0 ELSE 1 END, id DESC
+        LIMIT 1
+    </select>
+
+    <select id="selectRiskThresholds" resultType="mybatis.iem.em.modules.engineering.domain.model.FutureRiskThreshold">
+        SELECT r.id AS rule_id,
+               r.rule_code,
+               COALESCE(NULLIF(c.metric_code, ''), r.metric_code) AS metric_code,
+               l.level_code,
+               l.level_rank,
+               c.operator,
+               c.threshold_value,
+               c.threshold_value_upper,
+               c.threshold_unit,
+               GREATEST(COALESCE(r.minimum_consecutive_steps, 1), 1) AS minimum_consecutive_steps
+        FROM em_event_rule r
+        JOIN em_event_rule_level l ON l.rule_id = r.id
+        JOIN em_event_rule_condition c ON c.level_id = l.id AND c.required = 1
+        JOIN (
+            SELECT level_id
+            FROM em_event_rule_condition
+            WHERE required = 1
+            GROUP BY level_id
+            HAVING COUNT(*) = 1
+        ) single_condition ON single_condition.level_id = l.id
+        WHERE r.project_id = #{projectId}
+          AND r.enabled = 1
+        ORDER BY l.level_rank ASC, r.id ASC
+    </select>
+
+    <select id="selectOpenObservedRiskCounts" resultType="java.util.LinkedHashMap">
+        SELECT LOWER(event_level) AS riskLevel, COUNT(*) AS eventCount
+        FROM em_monitoring_event
+        WHERE project_id = #{projectId}
+          AND UPPER(COALESCE(source_type, 'OBSERVATION')) = 'OBSERVATION'
+          AND LOWER(event_status) NOT IN ('resolved', 'closed')
+        GROUP BY LOWER(event_level)
+    </select>
+
+    <select id="selectStationNames" resultType="java.util.LinkedHashMap">
+        SELECT id AS stationId, COALESCE(NULLIF(station_name, ''), station_code) AS stationName
+        FROM em_station
+        WHERE project_id = #{projectId} AND COALESCE(enabled, 1) = 1
+    </select>
+</mapper>

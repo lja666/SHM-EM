@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.iem.em.modules.engineering.infrastructure.mapper.StationMapper">
+    <select id="selectList" resultType="mybatis.iem.em.modules.engineering.domain.model.Station">
+        SELECT * FROM em_station
+        <where>
+            <if test="projectId != null">AND project_id = #{projectId}</if>
+        </where>
+        ORDER BY id DESC
+        LIMIT #{limit}
+    </select>
+
+    <select id="selectById" resultType="mybatis.iem.em.modules.engineering.domain.model.Station">
+        SELECT * FROM em_station WHERE id = #{id}
+    </select>
+</mapper>
+
+
+
+
+

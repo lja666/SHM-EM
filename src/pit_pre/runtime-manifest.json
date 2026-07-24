@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "pit_pre_runtime_v1",
+  "python": "3.10",
+  "executionDevice": "cpu",
+  "environment": {
+    "type": "native",
+    "supportedOperatingSystems": ["Windows 10 or later"],
+    "setup": "requirements.lock.txt"
+  },
+  "dependencyLock": "requirements.lock.txt",
+  "dependencies": {
+    "joblib": "1.5.3",
+    "numpy": "2.2.6",
+    "pandas": "2.3.3",
+    "PyMySQL": "1.1.2",
+    "scikit-learn": "1.7.2",
+    "torch": "2.11.0"
+  },
+  "runtimeCapture": "Each prediction run stores this manifest hash and the effective package versions in input_snapshot_json."
+}

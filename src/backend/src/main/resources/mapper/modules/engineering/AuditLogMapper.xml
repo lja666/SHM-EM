@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.iem.em.modules.engineering.infrastructure.mapper.AuditLogMapper">
+    <select id="selectList" resultType="mybatis.iem.em.modules.engineering.domain.model.AuditLog">
+        SELECT id, project_id, actor_id, actor_name, action_type, object_type, object_id,
+               object_code, before_json, after_json, request_id, ip_address, created_at
+        FROM em_audit_log
+        <where>
+            <if test="projectId != null">AND project_id = #{projectId}</if>
+            <if test="actionType != null and actionType != ''">AND action_type = #{actionType}</if>
+        </where>
+        ORDER BY created_at DESC, id DESC
+        LIMIT #{limit}
+    </select>
+
+    <select id="countByRequestId" resultType="int">
+        SELECT COUNT(*) FROM em_audit_log WHERE request_id = #{requestId}
+    </select>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO em_audit_log
+        (project_id, actor_id, actor_name, action_type, object_type, object_id,
+         object_code, before_json, after_json, request_id, ip_address)
+        VALUES
+        (#{projectId}, #{actorId}, #{actorName}, #{actionType}, #{objectType}, #{objectId},
+         #{objectCode}, #{beforeJson}, #{afterJson}, #{requestId}, #{ipAddress})
+    </insert>
+</mapper>

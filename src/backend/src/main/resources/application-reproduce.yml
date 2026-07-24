@@ -1,0 +1,9 @@
+shm-em:
+  reproduction:
+    execute-enabled: true
+    database-name-pattern: '^shm_em_reproduce_[A-Za-z0-9_]+$'
+  notification:
+    enabled: false
+    task-create-enabled: false
+    scheduler-enabled: false
+    mail-send-enabled: false

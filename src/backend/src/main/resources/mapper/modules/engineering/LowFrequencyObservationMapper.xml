@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.iem.em.modules.engineering.infrastructure.mapper.LowFrequencyObservationMapper">
+    <select id="selectByRegistry" resultType="mybatis.iem.em.modules.engineering.domain.model.LowFrequencyObservation">
+        SELECT id, project_id, station_id, instrument_id, metric_code, engineering_metric_code, observed_at,
+               raw_value, raw_unit, metric_value, metric_unit, baseline_value,
+               quality_flag, conversion_operator_code, conversion_version, conversion_status, conversion_remark,
+               source_record_key, created_at
+        FROM ${tableName}
+        <where>
+            <if test="query.projectId != null">AND project_id = #{query.projectId}</if>
+            <if test="query.stationId != null">AND station_id = #{query.stationId}</if>
+            <if test="query.stationIds != null and query.stationIds.size() > 0">
+                AND station_id IN
+                <foreach collection="query.stationIds" item="stationId" open="(" separator="," close=")">
+                    #{stationId}
+                </foreach>
+            </if>
+            <if test="query.instrumentId != null">AND instrument_id = #{query.instrumentId}</if>
+            <if test="query.instrumentIds != null and query.instrumentIds.size() > 0">
+                AND instrument_id IN
+                <foreach collection="query.instrumentIds" item="instrumentId" open="(" separator="," close=")">
+                    #{instrumentId}
+                </foreach>
+            </if>
+            <if test="query.metricCode != null and query.metricCode != ''">
+                AND (metric_code = #{query.metricCode} OR engineering_metric_code = #{query.metricCode})
+            </if>
+            <if test="query.startTime != null">AND observed_at &gt;= #{query.startTime}</if>
+            <if test="query.endTime != null">AND observed_at &lt;= #{query.endTime}</if>
+        </where>
+        ORDER BY observed_at DESC, id DESC
+        LIMIT #{limit}
+    </select>
+</mapper>
+
+
+
+
+

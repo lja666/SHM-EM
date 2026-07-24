@@ -1,0 +1,38 @@
+cff-version: 1.2.0
+title: "SHM-EM: A forecast-aware event management framework for heterogeneous engineering monitoring"
+message: "If you use SHM-EM, cite the software release and its SoftwareX article."
+type: software
+authors:
+  - family-names: "Liao"
+    given-names: "Ji'an"
+    email: "nlfdzlja@163.com"
+    affiliation: "Key Laboratory of Earthquake Engineering and Engineering Vibration, Institute of Engineering Mechanics, China Earthquake Administration; Key Laboratory of Earthquake Disaster Mitigation, Ministry of Emergency Management"
+  - family-names: "Wang"
+    given-names: "Zifa"
+    email: "Zifa@iem.ac.cn"
+    affiliation: "Key Laboratory of Earthquake Engineering and Engineering Vibration, Institute of Engineering Mechanics, China Earthquake Administration; Key Laboratory of Earthquake Disaster Mitigation, Ministry of Emergency Management"
+  - family-names: "Zhao"
+    given-names: "Dengke"
+    affiliation: "Key Laboratory of Earthquake Engineering and Engineering Vibration, Institute of Engineering Mechanics, China Earthquake Administration; Key Laboratory of Earthquake Disaster Mitigation, Ministry of Emergency Management"
+  - family-names: "Wang"
+    given-names: "Jianming"
+    affiliation: "Key Laboratory of Earthquake Engineering and Engineering Vibration, Institute of Engineering Mechanics, China Earthquake Administration; Key Laboratory of Earthquake Disaster Mitigation, Ministry of Emergency Management"
+  - family-names: "Li"
+    given-names: "Zhaoyan"
+    affiliation: "Key Laboratory of Earthquake Engineering and Engineering Vibration, Institute of Engineering Mechanics, China Earthquake Administration; Key Laboratory of Earthquake Disaster Mitigation, Ministry of Emergency Management"
+  - family-names: "Yang"
+    given-names: "Siran"
+    affiliation: "Key Laboratory of Earthquake Engineering and Engineering Vibration, Institute of Engineering Mechanics, China Earthquake Administration; Key Laboratory of Earthquake Disaster Mitigation, Ministry of Emergency Management"
+version: "1.0.0"
+date-released: "2026-07-24"
+license: MIT
+repository-code: "https://github.com/lja666/SHM-EM"
+url: "https://github.com/lja666/SHM-EM"
+abstract: "SHM-EM connects heterogeneous engineering observations, frozen time-series prediction models, governed rule execution, formal events, response workflows, and traceable evidence through database-authoritative data-model contracts."
+keywords:
+  - structural health monitoring
+  - time-series prediction
+  - forecast-aware event management
+  - heterogeneous monitoring data
+  - research software
+  - reproducible research software

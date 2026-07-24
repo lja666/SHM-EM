@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.iem.em.modules.engineering.infrastructure.mapper.ObservationTableRegistryMapper">
+    <select id="selectList" resultType="mybatis.iem.em.modules.engineering.domain.model.ObservationTableRegistry">
+        SELECT * FROM em_observation_table_registry
+        <where>
+            <if test="projectId != null">AND (project_id = #{projectId} OR project_id IS NULL)</if>
+        </where>
+        ORDER BY id DESC
+        LIMIT #{limit}
+    </select>
+
+    <select id="selectById" resultType="mybatis.iem.em.modules.engineering.domain.model.ObservationTableRegistry">
+        SELECT * FROM em_observation_table_registry WHERE id = #{id}
+    </select>
+
+    <select id="selectByCode" resultType="mybatis.iem.em.modules.engineering.domain.model.ObservationTableRegistry">
+        SELECT * FROM em_observation_table_registry WHERE registry_code = #{registryCode}
+    </select>
+
+    <select id="selectBestMatch" resultType="mybatis.iem.em.modules.engineering.domain.model.ObservationTableRegistry">
+        SELECT * FROM em_observation_table_registry
+        <where>
+            enabled = 1
+            AND is_queryable = 1
+            <if test="projectId != null">AND (project_id = #{projectId} OR project_id IS NULL)</if>
+            <if test="instrumentId != null">AND (instrument_id = #{instrumentId} OR instrument_id IS NULL)</if>
+            <if test="instrumentType != null and instrumentType != ''">AND (instrument_type = #{instrumentType} OR instrument_type IS NULL)</if>
+            <if test="metricCode != null and metricCode != ''">AND (metric_group = #{metricCode} OR metric_group = 'low_frequency' OR metric_group IS NULL)</if>
+            <if test="expectedStorageMode != null and expectedStorageMode != ''">AND storage_mode = #{expectedStorageMode}</if>
+        </where>
+        ORDER BY
+            CASE WHEN project_id = #{projectId} THEN 0 ELSE 1 END,
+            CASE WHEN instrument_id = #{instrumentId} THEN 0 ELSE 1 END,
+            CASE WHEN instrument_type = #{instrumentType} THEN 0 ELSE 1 END,
+            CASE WHEN metric_group = #{metricCode} THEN 0 ELSE 1 END,
+            CASE WHEN metric_group = 'low_frequency' THEN 0 ELSE 1 END,
+            id DESC
+        LIMIT 1
+    </select>
+</mapper>
+
+
+
+
+

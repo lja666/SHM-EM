@@ -1,0 +1,11 @@
+{
+  "database": {
+    "host": "127.0.0.1",
+    "port": 3306,
+    "user": "shm_em",
+    "password": "change-me",
+    "database": "shm_em",
+    "charset": "utf8mb4"
+  },
+  "working_directory": "."
+}

@@ -1,0 +1,25 @@
+SHM-EM Public Sample and Concept Image License
+
+Copyright (c) 2026 Ji'an Liao, Zifa Wang, Jianming Wang, Dengke Zhao,
+Zhaoyan Li, and Siran Yang
+
+The following public research artifacts are licensed under the Creative
+Commons Attribution 4.0 International License (CC BY 4.0):
+
+- sql/shm_em_database/02_SHM_EM_public_sample.sql
+- src/frontend/public/pit-point-layout.png
+
+You may share and adapt these artifacts for any purpose, provided appropriate
+credit is given, a link to the license is supplied, and changes are indicated.
+The full license text is available at:
+
+https://creativecommons.org/licenses/by/4.0/legalcode
+
+Suggested attribution:
+
+SHM-EM authors (2026), SHM-EM de-identified public reproduction sample and
+conceptual project-plan image, version 1.0.0, CC BY 4.0.
+
+This license does not apply to the restricted full project data, original
+identifiers, site location, waveform history, or historical operational
+records, none of which are distributed in the public repository.

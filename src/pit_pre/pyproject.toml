@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "shm-em-pit-pre"
+version = "1.0.0"
+description = "Database-contracted prediction runtime for SHM-EM"
+requires-python = ">=3.10,<3.11"
+dynamic = ["dependencies"]
+
+[project.scripts]
+pit-pre = "pit_pre.main:main"
+
+[tool.setuptools.dynamic]
+dependencies = { file = ["requirements.lock.txt"] }
+
+[tool.setuptools.packages.find]
+include = ["pit_pre*"]

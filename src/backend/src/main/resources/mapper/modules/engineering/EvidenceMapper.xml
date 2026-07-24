@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.iem.em.modules.engineering.infrastructure.mapper.EvidenceMapper">
+    <select id="selectEvidence" resultType="mybatis.iem.em.modules.engineering.domain.model.Evidence">
+        SELECT e.id,
+               e.project_id AS projectId,
+               l.event_id AS eventId,
+               e.station_id AS stationId,
+               CONCAT(UPPER(e.resource_type), '-', LPAD(e.id, 6, '0')) AS evidenceCode,
+               e.resource_type AS evidenceType,
+               e.resource_type AS resourceType,
+               e.resource_url AS resourceUrl,
+               ev.event_code AS relatedEventCode,
+               e.source_record_key AS sourceRecordKey,
+               e.hash_value AS hashValue,
+               e.metadata_json AS metadataJson,
+               l.link_type AS linkType,
+               CAST(l.confidence AS CHAR) AS confidence,
+               COALESCE(e.captured_at, e.created_at) AS archivedAt,
+               e.captured_at AS capturedAt,
+               e.created_at AS createdAt,
+               CASE
+                   WHEN e.resource_url IS NULL OR e.resource_url = '' THEN 'pending'
+                   ELSE 'archived'
+               END AS status
+        FROM em_evidence_resource e
+        LEFT JOIN em_event_evidence_link l ON l.evidence_id = e.id
+        LEFT JOIN em_monitoring_event ev ON ev.id = l.event_id
+        WHERE (#{projectId} IS NULL OR e.project_id = #{projectId})
+        ORDER BY e.created_at DESC, e.id DESC
+        LIMIT #{limit}
+    </select>
+</mapper>

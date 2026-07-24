@@ -1,0 +1,70 @@
+server:
+  port: ${SERVER_PORT:5101}
+  tomcat:
+    uri-encoding: UTF-8
+
+spring:
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:dev}
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      url: ${DB_URL:jdbc:mysql://localhost:3306/shm_em?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&serverTimezone=Asia/Shanghai}
+      username: ${DB_USERNAME:shm_em}
+      password: ${DB_PASSWORD:}
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      max-wait: ${DB_MAX_WAIT:10000}
+      connection-error-retry-attempts: ${DB_CONNECTION_ERROR_RETRY_ATTEMPTS:0}
+      break-after-acquire-failure: ${DB_BREAK_AFTER_ACQUIRE_FAILURE:true}
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    serialization:
+      fail-on-empty-beans: false
+    default-property-inclusion: NON_NULL
+  mail:
+    host: ${MAIL_HOST:}
+    port: ${MAIL_PORT:25}
+    username: ${MAIL_USERNAME:}
+    password: ${MAIL_PASSWORD:}
+    protocol: ${MAIL_PROTOCOL:smtp}
+    properties:
+      mail:
+        smtp:
+          auth: ${MAIL_SMTP_AUTH:false}
+          starttls:
+            enable: ${MAIL_SMTP_STARTTLS_ENABLE:false}
+mybatis:
+  mapper-locations: classpath*:/mapper/**/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
+  type-aliases-package: mybatis.iem.em.modules.engineering.domain.model
+
+logging:
+  level:
+    org.mybatis: warn
+    org.apache.ibatis: warn
+
+shm-em:
+  reproduction:
+    execute-enabled: ${SHM_EM_REPRODUCTION_EXECUTE_ENABLED:false}
+    database-name-pattern: ${SHM_EM_REPRODUCTION_DATABASE_PATTERN:^shm_em_reproduce_[A-Za-z0-9_]+$}
+  notification:
+    enabled: ${SHM_EM_NOTIFICATION_ENABLED:true}
+    task-create-enabled: ${SHM_EM_NOTIFICATION_TASK_CREATE_ENABLED:true}
+    scheduler-enabled: ${SHM_EM_NOTIFICATION_SCHEDULER_ENABLED:false}
+    mail-send-enabled: ${SHM_EM_NOTIFICATION_MAIL_SEND_ENABLED:false}
+    batch-size: ${SHM_EM_NOTIFICATION_BATCH_SIZE:20}
+    fixed-delay-ms: ${SHM_EM_NOTIFICATION_FIXED_DELAY_MS:5000}
+    initial-delay-ms: ${SHM_EM_NOTIFICATION_INITIAL_DELAY_MS:10000}
+    mail-recipient-mode: ${SHM_EM_NOTIFICATION_MAIL_RECIPIENT_MODE:TO}
+    mail-bcc-anchor-to: ${SHM_EM_NOTIFICATION_MAIL_BCC_ANCHOR_TO:}
+    mail-from-name: ${SHM_EM_NOTIFICATION_MAIL_FROM_NAME:SHM-EM Event Response}
+    max-stuck-sending-minutes: ${SHM_EM_NOTIFICATION_MAX_STUCK_SENDING_MINUTES:10}
+    retry-delay-seconds: ${SHM_EM_NOTIFICATION_RETRY_DELAY_SECONDS:60,300,900}
+    same-level-cooldown-minutes: ${SHM_EM_NOTIFICATION_SAME_LEVEL_COOLDOWN_MINUTES:60}
+    persistent-reminder-minutes: ${SHM_EM_NOTIFICATION_PERSISTENT_REMINDER_MINUTES:720}
+    red-reminder-minutes: ${SHM_EM_NOTIFICATION_RED_REMINDER_MINUTES:180}
+    significant-change-percent: ${SHM_EM_NOTIFICATION_SIGNIFICANT_CHANGE_PERCENT:50}
+    significant-change-absolute: ${SHM_EM_NOTIFICATION_SIGNIFICANT_CHANGE_ABSOLUTE:0}

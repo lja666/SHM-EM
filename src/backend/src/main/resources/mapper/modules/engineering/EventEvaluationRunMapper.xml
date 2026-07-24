@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.iem.em.modules.engineering.infrastructure.mapper.EventEvaluationRunMapper">
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO em_event_evaluation_run
+        (project_id, rule_id, run_mode, rule_version, conversion_version, input_registry_code,
+         time_start, time_end, input_params_json, event_count, result_summary_json,
+         result_hash, status, message, started_at, finished_at, created_by)
+        VALUES
+        (#{projectId}, #{ruleId}, #{runMode}, #{ruleVersion}, #{conversionVersion}, #{inputRegistryCode},
+         #{timeStart}, #{timeEnd}, #{inputParamsJson}, #{eventCount}, #{resultSummaryJson},
+         #{resultHash}, #{status}, #{message}, #{startedAt}, #{finishedAt}, #{createdBy})
+    </insert>
+</mapper>
+
+
+
+
+

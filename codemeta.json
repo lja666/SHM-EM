@@ -1,0 +1,179 @@
+{
+  "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
+  "@type": "SoftwareSourceCode",
+  "name": "SHM-EM",
+  "alternateName": "SHM-EM",
+  "version": "1.0.0",
+  "datePublished": "2026-07-24",
+  "dateModified": "2026-07-24",
+  "codeRepository": "https://github.com/lja666/SHM-EM",
+  "issueTracker": "https://github.com/lja666/SHM-EM/issues",
+  "downloadUrl": "https://github.com/lja666/SHM-EM/releases/tag/v1.0.0",
+  "description": "A forecast-aware event management framework that connects heterogeneous engineering observations, frozen time-series prediction models, governed rule execution, formal events, response workflows, and traceable evidence.",
+  "license": "https://spdx.org/licenses/MIT",
+  "programmingLanguage": ["Java", "TypeScript", "Python", "SQL", "PowerShell"],
+  "runtimePlatform": ["Java 8", "Node.js 20", "Python 3.10", "MySQL 8.4"],
+  "applicationCategory": "Structural health monitoring and engineering event management",
+  "operatingSystem": ["Windows 10", "Windows 11"],
+  "keywords": [
+    "structural health monitoring",
+    "forecast-aware event management",
+    "heterogeneous monitoring data",
+    "time-series prediction",
+    "research software",
+    "reproducibility"
+  ],
+  "isAccessibleForFree": true,
+  "developmentStatus": "active",
+  "softwareRequirements": [
+    "Spring Boot 2.6",
+    "MyBatis 2.2",
+    "Vue 3",
+    "PyTorch 2.11",
+    "MySQL 8.4"
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "givenName": "Ji'an",
+      "familyName": "Liao",
+      "email": "nlfdzlja@163.com",
+      "affiliation": [
+        {
+          "@type": "Organization",
+          "name": "Key Laboratory of Earthquake Engineering and Engineering Vibration, Institute of Engineering Mechanics, China Earthquake Administration"
+        },
+        {
+          "@type": "Organization",
+          "name": "Key Laboratory of Earthquake Disaster Mitigation, Ministry of Emergency Management"
+        }
+      ]
+    },
+    {
+      "@type": "Person",
+      "givenName": "Zifa",
+      "familyName": "Wang",
+      "email": "Zifa@iem.ac.cn",
+      "affiliation": [
+        {
+          "@type": "Organization",
+          "name": "Key Laboratory of Earthquake Engineering and Engineering Vibration, Institute of Engineering Mechanics, China Earthquake Administration"
+        },
+        {
+          "@type": "Organization",
+          "name": "Key Laboratory of Earthquake Disaster Mitigation, Ministry of Emergency Management"
+        }
+      ]
+    },
+    {
+      "@type": "Person",
+      "givenName": "Dengke",
+      "familyName": "Zhao",
+      "affiliation": [
+        {
+          "@type": "Organization",
+          "name": "Key Laboratory of Earthquake Engineering and Engineering Vibration, Institute of Engineering Mechanics, China Earthquake Administration"
+        },
+        {
+          "@type": "Organization",
+          "name": "Key Laboratory of Earthquake Disaster Mitigation, Ministry of Emergency Management"
+        }
+      ]
+    },
+    {
+      "@type": "Person",
+      "givenName": "Jianming",
+      "familyName": "Wang",
+      "affiliation": [
+        {
+          "@type": "Organization",
+          "name": "Key Laboratory of Earthquake Engineering and Engineering Vibration, Institute of Engineering Mechanics, China Earthquake Administration"
+        },
+        {
+          "@type": "Organization",
+          "name": "Key Laboratory of Earthquake Disaster Mitigation, Ministry of Emergency Management"
+        }
+      ]
+    },
+    {
+      "@type": "Person",
+      "givenName": "Zhaoyan",
+      "familyName": "Li",
+      "affiliation": [
+        {
+          "@type": "Organization",
+          "name": "Key Laboratory of Earthquake Engineering and Engineering Vibration, Institute of Engineering Mechanics, China Earthquake Administration"
+        },
+        {
+          "@type": "Organization",
+          "name": "Key Laboratory of Earthquake Disaster Mitigation, Ministry of Emergency Management"
+        }
+      ]
+    },
+    {
+      "@type": "Person",
+      "givenName": "Siran",
+      "familyName": "Yang",
+      "affiliation": [
+        {
+          "@type": "Organization",
+          "name": "Key Laboratory of Earthquake Engineering and Engineering Vibration, Institute of Engineering Mechanics, China Earthquake Administration"
+        },
+        {
+          "@type": "Organization",
+          "name": "Key Laboratory of Earthquake Disaster Mitigation, Ministry of Emergency Management"
+        }
+      ]
+    }
+  ],
+  "maintainer": {
+    "@type": "Person",
+    "givenName": "Ji'an",
+    "familyName": "Liao",
+    "email": "nlfdzlja@163.com"
+  },
+  "copyrightHolder": [
+    {
+      "@type": "Person",
+      "name": "Ji'an Liao"
+    },
+    {
+      "@type": "Person",
+      "name": "Zifa Wang"
+    },
+    {
+      "@type": "Person",
+      "name": "Jianming Wang"
+    },
+    {
+      "@type": "Person",
+      "name": "Dengke Zhao"
+    },
+    {
+      "@type": "Person",
+      "name": "Zhaoyan Li"
+    },
+    {
+      "@type": "Person",
+      "name": "Siran Yang"
+    }
+  ],
+  "copyrightYear": "2026",
+  "funder": [
+    {
+      "@type": "Organization",
+      "name": "National Key Research and Development Program of China",
+      "identifier": "2023YFC3805203"
+    },
+    {
+      "@type": "Organization",
+      "name": "National Natural Science Foundation of China",
+      "identifier": ["52378543", "52378544"]
+    },
+    {
+      "@type": "Organization",
+      "name": "Scientific Research Fund of the Institute of Engineering Mechanics, China Earthquake Administration",
+      "identifier": "2023A01"
+    }
+  ]
+}

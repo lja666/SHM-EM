@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis.iem.em.modules.engineering.infrastructure.mapper.PredictionMapper">
+    <select id="selectBatches" resultType="mybatis.iem.em.modules.engineering.domain.model.PredictionBatch">
+        SELECT *
+        FROM em_prediction_batch
+        <where>
+            <if test="query.projectId != null">AND project_id = #{query.projectId}</if>
+            <if test="query.batchCode != null and query.batchCode != ''">AND batch_code = #{query.batchCode}</if>
+            <if test="query.batchId != null">AND id = #{query.batchId}</if>
+            <if test="query.status != null and query.status != ''">AND status = #{query.status}</if>
+        </where>
+        ORDER BY base_time DESC, id DESC
+        LIMIT #{limit}
+    </select>
+
+    <select id="selectModels" resultType="mybatis.iem.em.modules.engineering.domain.model.PredictionModel">
+        SELECT *
+        FROM em_prediction_model
+        <where>
+            <if test="query.projectId != null">AND project_id = #{query.projectId}</if>
+            <if test="query.modelCode != null and query.modelCode != ''">AND model_code = #{query.modelCode}</if>
+            <if test="query.targetType != null and query.targetType != ''">AND target_type = #{query.targetType}</if>
+            AND status = 'active'
+        </where>
+        ORDER BY model_code ASC, model_version DESC, id DESC
+        LIMIT #{limit}
+    </select>
+
+    <select id="selectFeatures" resultType="mybatis.iem.em.modules.engineering.domain.model.PredictionFeatureMapping">
+        SELECT *
+        FROM em_prediction_feature_mapping
+        <where>
+            <if test="query.projectId != null">AND project_id = #{query.projectId}</if>
+            <if test="query.targetType != null and query.targetType != ''">AND target_type = #{query.targetType}</if>
+            <if test="query.featureCode != null and query.featureCode != ''">AND feature_code = #{query.featureCode}</if>
+            AND enabled = 1
+        </where>
+        ORDER BY target_type ASC, feature_order ASC, id ASC
+        LIMIT #{limit}
+    </select>
+
+    <select id="selectSeries" resultType="mybatis.iem.em.modules.engineering.domain.model.PredictionDisplay">
+        SELECT d.*, r.result_hash AS run_result_hash, b.output_hash AS batch_output_hash
+        FROM em_prediction_display d
+        LEFT JOIN em_prediction_run r ON r.id = d.run_id
+        LEFT JOIN em_prediction_batch b ON b.id = d.batch_id
+        <where>
+            <if test="query.projectId != null">AND d.project_id = #{query.projectId}</if>
+            <if test="query.batchId != null">AND d.batch_id = #{query.batchId}</if>
+            <if test="query.batchCode != null and query.batchCode != ''">AND d.batch_code = #{query.batchCode}</if>
+            <if test="query.runId != null">AND d.run_id = #{query.runId}</if>
+            <if test="query.modelCode != null and query.modelCode != ''">AND d.model_code = #{query.modelCode}</if>
+            <if test="query.targetType != null and query.targetType != ''">AND d.target_type = #{query.targetType}</if>
+            <if test="query.featureCode != null and query.featureCode != ''">AND d.feature_code = #{query.featureCode}</if>
+            <if test="query.stationId != null">AND d.station_id = #{query.stationId}</if>
+            <if test="query.stationIds != null and query.stationIds.size() > 0">
+                AND d.station_id IN
+                <foreach collection="query.stationIds" item="stationId" open="(" separator="," close=")">#{stationId}</foreach>
+            </if>
+            <if test="query.instrumentId != null">AND d.instrument_id = #{query.instrumentId}</if>
+            <if test="query.instrumentIds != null and query.instrumentIds.size() > 0">
+                AND d.instrument_id IN
+                <foreach collection="query.instrumentIds" item="instrumentId" open="(" separator="," close=")">#{instrumentId}</foreach>
+            </if>
+            <if test="query.metricCode != null and query.metricCode != ''">
+                AND (d.metric_code = #{query.metricCode} OR d.engineering_metric_code = #{query.metricCode})
+            </if>
+            <if test="query.maxHorizonMinutes != null">AND d.horizon_minutes &lt;= #{query.maxHorizonMinutes}</if>
+            <if test="query.qualityFilter != null and query.qualityFilter != '' and query.qualityFilter != 'allow_all'">
+                AND LOWER(COALESCE(d.quality_flag, 'normal')) = LOWER(#{query.qualityFilter})
+            </if>
+            <if test="query.startTime != null">AND d.future_time &gt;= #{query.startTime}</if>
+            <if test="query.endTime != null">AND d.future_time &lt;= #{query.endTime}</if>
+        </where>
+        ORDER BY d.future_time ASC, d.target_type ASC, d.feature_code ASC, d.step ASC
+        LIMIT #{limit}
+    </select>
+
+    <select id="selectBatchById" resultType="mybatis.iem.em.modules.engineering.domain.model.PredictionBatch">
+        SELECT * FROM em_prediction_batch WHERE id = #{batchId}
+    </select>
+
+    <select id="selectRunsByBatch" resultType="mybatis.iem.em.modules.engineering.domain.model.PredictionRun">
+        SELECT * FROM em_prediction_run WHERE batch_id = #{batchId} ORDER BY target_type ASC, id ASC
+    </select>
+</mapper>

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import tempfile
 import unittest
 from pathlib import Path
@@ -118,8 +119,15 @@ class ModelContractRepositoryTest(unittest.TestCase):
 
         self.assertEqual(40, config.runtime.expected_steps)
         self.assertEqual(120, config.runtime.prediction_horizon_minutes)
-        self.assertEqual(self.root / "model.pth", config.models["water"].model_path)
-        self.assertEqual(self.root / "preprocessor.joblib", config.models["water"].preprocessor_path)
+        self.assertTrue(
+            os.path.samefile(self.root / "model.pth", config.models["water"].model_path)
+        )
+        self.assertTrue(
+            os.path.samefile(
+                self.root / "preprocessor.joblib",
+                config.models["water"].preprocessor_path,
+            )
+        )
         self.assertEqual({"water": 1}, config.prediction_target_counts)
         self.assertEqual(64, len(config.contract_fingerprint))
 

@@ -1,0 +1,71 @@
+{
+  "artifacts": [
+    {
+      "bytes": 4335,
+      "path": "artifacts/revision/phase0_6/alignment-audit-v2-review.md",
+      "sha256": "5dcf3caccc1725e7192c732c209101cd013e95eead710f540cc12a11f67a98ef"
+    },
+    {
+      "bytes": 7848,
+      "path": "artifacts/revision/phase0_6/alignment-audit-v2-summary.json",
+      "sha256": "ecaddb154db7edccac6aae3cede13a1055649e6e08f749d695c2d308e5565fd6"
+    },
+    {
+      "bytes": 102396,
+      "path": "artifacts/revision/phase0_6/alignment-audit-v2.csv",
+      "sha256": "9410b7fb47cb8ded0ed832630171cfa32b45c6b89befa09fdc5ff9108208529b"
+    },
+    {
+      "bytes": 2523,
+      "path": "artifacts/revision/phase0_6/metadata-hash-change-review.md",
+      "sha256": "8c3e3d03466a9b9751427d63acd0ca4907526fd6f1c35137d2645ddf4b03bb8c"
+    },
+    {
+      "bytes": 151421,
+      "path": "artifacts/revision/phase0_6/phase0_6-code-diff.patch",
+      "sha256": "fba0825b394e4ad05169fed48e761e0de672bf609a8dd5639b86aa3aef186087"
+    },
+    {
+      "bytes": 917,
+      "path": "artifacts/revision/phase0_6/phase0_6-scope-decision-summary.md",
+      "sha256": "4b759d5eba0d264abb45ef6b9c1094678bd9d9ebc943604f8b7aa1120f5be157"
+    },
+    {
+      "bytes": 1546860,
+      "path": "artifacts/revision/phase0_6/regression-baseline-capture.json",
+      "sha256": "6d344876dba587151036370b06de5ef189b4f14219b6fd5c3dac1bbe53811ba3"
+    },
+    {
+      "bytes": 3447,
+      "path": "artifacts/revision/phase0_6/regression-input-matrix.json",
+      "sha256": "b2d304228484cd1212b572b7fd0c2f7b36b85d44930003627cb2563e8e0afad9"
+    },
+    {
+      "bytes": 1550673,
+      "path": "artifacts/revision/phase0_6/regression-instrumented-capture.json",
+      "sha256": "e14b2c7cdc26460e218ea0e6a12f874449b1f8340f740e6bd60d4cbe65fb9ea5"
+    },
+    {
+      "bytes": 22721,
+      "path": "artifacts/revision/phase0_6/regression-prediction-values.json",
+      "sha256": "e2edec997a6a00232a099e085a1a21475c6825dba2f53a0e5185c6a93c064636"
+    },
+    {
+      "bytes": 589,
+      "path": "artifacts/revision/phase0_6/regression-summary.md",
+      "sha256": "169ddc53d2cdb47bc389488b4bb307002f51ee841e0be6a2403c6e9557374aeb"
+    },
+    {
+      "bytes": 1195,
+      "path": "artifacts/revision/phase0_6/validation-summary.json",
+      "sha256": "767327720d5cd4b6d24ed22c9ff84674ced3b3e85600824f6e2c049a016a43c6"
+    }
+  ],
+  "generationTimestamp": "2026-08-28T10:40:07+00:00",
+  "phase": "Phase 0.6 - Alignment Diagnostics Instrumentation and Core Stabilization",
+  "schemaVersion": "shm-em-phase0-6-manifest-v1",
+  "sourceGitCommit": "1d2ab45e516ef4167c6c4c4265da5b533b2eab78",
+  "submittedBaselineUnchanged": true,
+  "submittedTag": "v1.0.0",
+  "submittedTagCommit": "1d2ab45e516ef4167c6c4c4265da5b533b2eab78"
+}

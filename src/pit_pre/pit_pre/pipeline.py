@@ -62,7 +62,8 @@ class PredictionPipeline:
         max_required_rows = max(model.required_history_rows for model in models)
         rolling_steps = runtime.expected_steps
 
-        virtual_df = self.wide_builder.build(max_required_rows)
+        aligned_input = self.wide_builder.build_with_diagnostics(max_required_rows)
+        virtual_df = aligned_input.values
         base_time = pd.Timestamp(virtual_df["time"].iloc[-1]).to_pydatetime()
         base_time1 = float(virtual_df["time1"].iloc[-1])
         input_window_start = pd.Timestamp(virtual_df["time"].iloc[0]).to_pydatetime()
@@ -75,6 +76,13 @@ class PredictionPipeline:
         feature_count = sum(self.config.prediction_target_counts[model.code] for model in models)
 
         pending_outputs: dict[str, list[pd.DataFrame]] = {model.code: [] for model in models}
+        alignment_metadata = {
+            model.code: aligned_input.diagnostics.snapshot_metadata(
+                _model_input_columns(self.model_runner, model.code, virtual_df),
+                model.required_history_rows,
+            )
+            for model in models
+        }
 
         for global_step in range(1, rolling_steps + 1):
             round_predictions: dict[str, dict[str, float]] = {}
@@ -140,6 +148,7 @@ class PredictionPipeline:
                 batch_id=batch_id,
                 runtime_seconds=perf_counter() - started,
                 input_schema_hash=input_schema_hash,
+                input_alignment_metadata=alignment_metadata[model.code],
             )
             result_hashes.append(write_result.result_hash)
             summaries.append(
@@ -166,6 +175,15 @@ def _input_window_for_model(virtual_df: pd.DataFrame, required_rows: int) -> pd.
     input_df = virtual_df.tail(required_rows).copy().reset_index(drop=True)
     input_df["time1"] = range(1, required_rows + 1)
     return input_df
+
+
+def _model_input_columns(model_runner, model_code: str, input_df: pd.DataFrame) -> list[str]:
+    cached_models = getattr(model_runner, "cache", {})
+    cached = cached_models.get(model_code) if isinstance(cached_models, dict) else None
+    columns = getattr(cached, "input_columns", None)
+    if columns:
+        return list(columns)
+    return [column for column in input_df.columns if column not in {"time", "time1"}]
 
 
 def _validate_rolling_output(model: ModelConfig, long_df: pd.DataFrame, rolling_steps: int) -> None:

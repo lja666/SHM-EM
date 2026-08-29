@@ -1,0 +1,124 @@
+{
+  "commonInput": {
+    "columnsIdentical": true,
+    "dtypeCompatible": true,
+    "hashAfter": "e4013a4e5afd37d711cc738fca26479dbba5b0d410f2dc49bac2ae1c04b80ab4",
+    "hashBefore": "e4013a4e5afd37d711cc738fca26479dbba5b0d410f2dc49bac2ae1c04b80ab4",
+    "maxAbsDifference": 0.0,
+    "numericallyIdentical": true,
+    "shapeAfter": [
+      16,
+      164
+    ],
+    "shapeBefore": [
+      16,
+      164
+    ],
+    "shapeIdentical": true
+  },
+  "models": {
+    "Pressure": {
+      "columnsIdentical": true,
+      "dtypeCompatible": true,
+      "hashAfter": "3083be65e0215c1d33bf84cb25a93ecdab2fdadc00b8e5640f9f889402956959",
+      "hashBefore": "3083be65e0215c1d33bf84cb25a93ecdab2fdadc00b8e5640f9f889402956959",
+      "maxAbsDifference": 0.0,
+      "numericallyIdentical": true,
+      "shapeAfter": [
+        13,
+        114
+      ],
+      "shapeBefore": [
+        13,
+        114
+      ],
+      "shapeIdentical": true
+    },
+    "Strain": {
+      "columnsIdentical": true,
+      "dtypeCompatible": true,
+      "hashAfter": "3083be65e0215c1d33bf84cb25a93ecdab2fdadc00b8e5640f9f889402956959",
+      "hashBefore": "3083be65e0215c1d33bf84cb25a93ecdab2fdadc00b8e5640f9f889402956959",
+      "maxAbsDifference": 0.0,
+      "numericallyIdentical": true,
+      "shapeAfter": [
+        13,
+        114
+      ],
+      "shapeBefore": [
+        13,
+        114
+      ],
+      "shapeIdentical": true
+    },
+    "XD": {
+      "columnsIdentical": true,
+      "dtypeCompatible": true,
+      "hashAfter": "109b2382831cfcccbbd2759bc78001ec18f4a479477f688fe4e851a895e104a9",
+      "hashBefore": "109b2382831cfcccbbd2759bc78001ec18f4a479477f688fe4e851a895e104a9",
+      "maxAbsDifference": 0.0,
+      "numericallyIdentical": true,
+      "shapeAfter": [
+        12,
+        114
+      ],
+      "shapeBefore": [
+        12,
+        114
+      ],
+      "shapeIdentical": true
+    },
+    "YD": {
+      "columnsIdentical": true,
+      "dtypeCompatible": true,
+      "hashAfter": "9bcc5ffaa8d3fc6dd84b6cb546e9f5501995bccb0c4072c47e58ea6389680eda",
+      "hashBefore": "9bcc5ffaa8d3fc6dd84b6cb546e9f5501995bccb0c4072c47e58ea6389680eda",
+      "maxAbsDifference": 0.0,
+      "numericallyIdentical": true,
+      "shapeAfter": [
+        16,
+        114
+      ],
+      "shapeBefore": [
+        16,
+        114
+      ],
+      "shapeIdentical": true
+    },
+    "settlement": {
+      "columnsIdentical": true,
+      "dtypeCompatible": true,
+      "hashAfter": "3c668ce1bbfbc63dfaa334962dea38d1a3764d4ce32f4c94e50d1f6f9c5eb9d4",
+      "hashBefore": "3c668ce1bbfbc63dfaa334962dea38d1a3764d4ce32f4c94e50d1f6f9c5eb9d4",
+      "maxAbsDifference": 0.0,
+      "numericallyIdentical": true,
+      "shapeAfter": [
+        12,
+        164
+      ],
+      "shapeBefore": [
+        12,
+        164
+      ],
+      "shapeIdentical": true
+    },
+    "water": {
+      "columnsIdentical": true,
+      "dtypeCompatible": true,
+      "hashAfter": "3083be65e0215c1d33bf84cb25a93ecdab2fdadc00b8e5640f9f889402956959",
+      "hashBefore": "3083be65e0215c1d33bf84cb25a93ecdab2fdadc00b8e5640f9f889402956959",
+      "maxAbsDifference": 0.0,
+      "numericallyIdentical": true,
+      "shapeAfter": [
+        13,
+        114
+      ],
+      "shapeBefore": [
+        13,
+        114
+      ],
+      "shapeIdentical": true
+    }
+  },
+  "schemaVersion": "shm-em-phase0-6-input-regression-v1"
+}

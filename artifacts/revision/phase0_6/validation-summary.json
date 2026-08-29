@@ -1,0 +1,38 @@
+{
+  "diagnosticCrossCheck": {
+    "productionMatchesOfflineAuditV2": true
+  },
+  "eligibilityThresholdsAdded": false,
+  "newTestFiles": [
+    "src/pit_pre/tests/test_alignment_diagnostics.py"
+  ],
+  "numericalRegression": {
+    "maxEngineeringValueAbsDifference": 0.0,
+    "maxInputAbsDifference": 0.0,
+    "maxRawPredictionAbsDifference": 0.0,
+    "models": 6,
+    "passed": true,
+    "predictionRecords": 4960,
+    "steps": 40,
+    "targets": 124
+  },
+  "pitPreUnitTests": {
+    "command": "python -m unittest discover -s src/pit_pre/tests -v",
+    "failed": 0,
+    "passed": 9,
+    "testsRun": 9
+  },
+  "preExistingCheckoutIssue": "Windows core.autocrlf converts six inference scripts to CRLF; LF-normalized hashes match the public contract.",
+  "prohibitedModulesModified": false,
+  "revisionTools": [
+    "tools/revision/audit_input_alignment.py",
+    "tools/revision/phase0_6_regression.py",
+    "tools/revision/revision_audit.py"
+  ],
+  "schemaVersion": "shm-em-phase0-6-validation-v1",
+  "trackedBusinessFilesModified": [
+    "src/pit_pre/pit_pre/features.py",
+    "src/pit_pre/pit_pre/pipeline.py",
+    "src/pit_pre/pit_pre/result_writer.py"
+  ]
+}

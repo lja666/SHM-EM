@@ -1,0 +1,57 @@
+{
+  "artifacts": [
+    {
+      "bytes": 19972,
+      "path": "artifacts/revision/audit/architecture-coupling-review.json",
+      "sha256": "3175090a834188216ccbb990513505be0735b44382621e682bf0a34aa8cc81ad"
+    },
+    {
+      "bytes": 8456,
+      "path": "artifacts/revision/audit/architecture-coupling-review.md",
+      "sha256": "00b5951d75564eddf63766901be515454e1bb60cea0fc84c170b4d74bcd52f8a"
+    },
+    {
+      "bytes": 8759,
+      "path": "artifacts/revision/audit/claim-gap-matrix.json",
+      "sha256": "8a2204572af96dad68ec76acca2d8c5854b02574e70509dea876b5426820895d"
+    },
+    {
+      "bytes": 4772,
+      "path": "artifacts/revision/audit/claim-gap-matrix.md",
+      "sha256": "fc2d3ce0bae3e08a786a3cc30a4dfe562c7d4f55e1d4791ec878eb392d3c28d4"
+    },
+    {
+      "bytes": 80109,
+      "path": "artifacts/revision/audit/input-alignment-baseline.csv",
+      "sha256": "a644e81070f0d72a52afb2998666584022e9644f6c1af99489e6422c813970cc"
+    },
+    {
+      "bytes": 4764,
+      "path": "artifacts/revision/audit/input-alignment-policy-review.md",
+      "sha256": "5c135694f5d3aac7c8c6ad16bce553fcd1c7964030bd31c63c4a373dfc915857"
+    },
+    {
+      "bytes": 3875,
+      "path": "artifacts/revision/audit/input-alignment-summary.json",
+      "sha256": "866469aa70745c6c7cec46df693680983165282c2cce97b7d6466d1a04492cfd"
+    },
+    {
+      "bytes": 5094,
+      "path": "artifacts/revision/audit/phase0_6-minimal-change-proposal.md",
+      "sha256": "81d9b0c5ea3f01793d64650c82b65950d554462eb263ead3cfc959b579e658a6"
+    },
+    {
+      "bytes": 40563,
+      "path": "artifacts/revision/audit/repository-baseline.json",
+      "sha256": "a1bd9b750ba28ccc9faac8482c9fb3f86e639aba18e9c3db17fcdaf73ded131a"
+    },
+    {
+      "bytes": 5452,
+      "path": "artifacts/revision/audit/repository-baseline.md",
+      "sha256": "9b8dab79da66d566109322e5f3203c3c22cee1f43b7d29ec81e5dccdd136a25e"
+    }
+  ],
+  "generationTimestamp": "2026-08-28T17:09:23+00:00",
+  "schemaVersion": "shm-em-audit-manifest-v1",
+  "sourceGitCommit": "1d2ab45e516ef4167c6c4c4265da5b533b2eab78"
+}

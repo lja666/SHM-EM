@@ -115,6 +115,7 @@ class PredictionResultWriter:
         batch_id: int,
         runtime_seconds: float,
         input_schema_hash: str | None = None,
+        input_alignment_metadata: dict[str, object] | None = None,
     ) -> PredictionWriteResult:
         model_id = self._model_id(model)
         target_features = self._feature_lookup(model.target_type)
@@ -154,17 +155,12 @@ class PredictionResultWriter:
                 self.horizon_minutes,
                 self.rolling_steps,
                 json.dumps(
-                    {
-                        "predictionRunCode": prediction_run_id,
-                        "artifactUri": model.model_path.name,
-                        "preprocessorUri": model.preprocessor_path.name,
-                        "inferenceScriptHash": model.inference_script_hash,
-                        "bestParamsHash": model.best_params_hash,
-                        "runtimeManifestHash": model.runtime_manifest_hash,
-                        "environmentDigest": model.environment_digest,
-                        "runtimeEnvironment": _runtime_environment(),
-                        "featureMappingVersion": self.feature_mapping_version,
-                    },
+                    _input_snapshot(
+                        model=model,
+                        prediction_run_id=prediction_run_id,
+                        feature_mapping_version=self.feature_mapping_version,
+                        input_alignment_metadata=input_alignment_metadata,
+                    ),
                     ensure_ascii=False,
                     sort_keys=True,
                 ),
@@ -394,6 +390,28 @@ def _runtime_environment() -> dict[str, object]:
         "platform": platform.platform(),
         "packages": packages,
     }
+
+
+def _input_snapshot(
+    model: ModelConfig,
+    prediction_run_id: str,
+    feature_mapping_version: str,
+    input_alignment_metadata: dict[str, object] | None = None,
+) -> dict[str, object]:
+    snapshot: dict[str, object] = {
+        "predictionRunCode": prediction_run_id,
+        "artifactUri": model.model_path.name,
+        "preprocessorUri": model.preprocessor_path.name,
+        "inferenceScriptHash": model.inference_script_hash,
+        "bestParamsHash": model.best_params_hash,
+        "runtimeManifestHash": model.runtime_manifest_hash,
+        "environmentDigest": model.environment_digest,
+        "runtimeEnvironment": _runtime_environment(),
+        "featureMappingVersion": feature_mapping_version,
+    }
+    if input_alignment_metadata:
+        snapshot.update(input_alignment_metadata)
+    return snapshot
 
 
 def _prediction_value_column(target_type: str, df: pd.DataFrame) -> str:

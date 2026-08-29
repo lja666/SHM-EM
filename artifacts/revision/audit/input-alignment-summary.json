@@ -1,0 +1,121 @@
+{
+  "asofToleranceSeconds": 180,
+  "auditMode": "offline-read-only-public-sql",
+  "auditedModelFeatureCount": 734,
+  "commonLatestTime": "2025-01-01T00:42:02",
+  "mappedFeatureCount": 164,
+  "maximumProductionHistoryWindowSize": 16,
+  "modelCount": 6,
+  "models": [
+    {
+      "backwardAsofFeatureCount": 114,
+      "backwardFillFeatureCount": 0,
+      "featureCount": 114,
+      "forwardFillFeatureCount": 0,
+      "historyWindowSize": 13,
+      "interpolationFeatureCount": 12,
+      "maxEffectiveObservationAgeSeconds": 192.0,
+      "maxImputationRatio": 1.0,
+      "maxRawGapSeconds": 193.0,
+      "medianImputationRatio": 1.0,
+      "modelCode": "Pressure",
+      "unresolvedMissingCount": 0
+    },
+    {
+      "backwardAsofFeatureCount": 114,
+      "backwardFillFeatureCount": 0,
+      "featureCount": 114,
+      "forwardFillFeatureCount": 0,
+      "historyWindowSize": 13,
+      "interpolationFeatureCount": 12,
+      "maxEffectiveObservationAgeSeconds": 192.0,
+      "maxImputationRatio": 1.0,
+      "maxRawGapSeconds": 193.0,
+      "medianImputationRatio": 1.0,
+      "modelCode": "Strain",
+      "unresolvedMissingCount": 0
+    },
+    {
+      "backwardAsofFeatureCount": 114,
+      "backwardFillFeatureCount": 0,
+      "featureCount": 114,
+      "forwardFillFeatureCount": 0,
+      "historyWindowSize": 12,
+      "interpolationFeatureCount": 12,
+      "maxEffectiveObservationAgeSeconds": 192.0,
+      "maxImputationRatio": 1.0,
+      "maxRawGapSeconds": 192.0,
+      "medianImputationRatio": 1.0,
+      "modelCode": "XD",
+      "unresolvedMissingCount": 0
+    },
+    {
+      "backwardAsofFeatureCount": 114,
+      "backwardFillFeatureCount": 0,
+      "featureCount": 114,
+      "forwardFillFeatureCount": 0,
+      "historyWindowSize": 16,
+      "interpolationFeatureCount": 113,
+      "maxEffectiveObservationAgeSeconds": 192.0,
+      "maxImputationRatio": 1.0,
+      "maxRawGapSeconds": 193.0,
+      "medianImputationRatio": 1.0,
+      "modelCode": "YD",
+      "unresolvedMissingCount": 0
+    },
+    {
+      "backwardAsofFeatureCount": 164,
+      "backwardFillFeatureCount": 0,
+      "featureCount": 164,
+      "forwardFillFeatureCount": 0,
+      "historyWindowSize": 12,
+      "interpolationFeatureCount": 12,
+      "maxEffectiveObservationAgeSeconds": 192.0,
+      "maxImputationRatio": 1.0,
+      "maxRawGapSeconds": 192.0,
+      "medianImputationRatio": 1.0,
+      "modelCode": "settlement",
+      "unresolvedMissingCount": 0
+    },
+    {
+      "backwardAsofFeatureCount": 114,
+      "backwardFillFeatureCount": 0,
+      "featureCount": 114,
+      "forwardFillFeatureCount": 0,
+      "historyWindowSize": 13,
+      "interpolationFeatureCount": 12,
+      "maxEffectiveObservationAgeSeconds": 192.0,
+      "maxImputationRatio": 1.0,
+      "maxRawGapSeconds": 193.0,
+      "medianImputationRatio": 1.0,
+      "modelCode": "water",
+      "unresolvedMissingCount": 0
+    }
+  ],
+  "overall": {
+    "backwardAsofFeatureCount": 734,
+    "backwardFillFeatureCount": 0,
+    "forwardFillFeatureCount": 0,
+    "interpolationFeatureCount": 173,
+    "maxEffectiveObservationAgeSeconds": 192.0,
+    "maxImputationRatio": 1.0,
+    "maxRawGapSeconds": 193.0,
+    "medianImputationRatio": 1.0,
+    "unresolvedMissingCount": 0
+  },
+  "productionMethod": [
+    "backward_asof",
+    "linear_interpolation_limit_direction_both",
+    "forward_fill",
+    "backward_fill",
+    "remaining_missing_check"
+  ],
+  "projectCode": "SHM_EM_PUBLIC_SAMPLE",
+  "publicSample": {
+    "path": "sql/shm_em_database/02_SHM_EM_public_sample.sql",
+    "sha256": "04bcd00847b74db6c1227fd6b49c6fe6b427e2b896567af8f7b9240944444e7f"
+  },
+  "schemaVersion": "shm-em-input-alignment-audit-v1",
+  "sourceGitCommit": "1d2ab45e516ef4167c6c4c4265da5b533b2eab78",
+  "timeStepMinutes": 3
+}

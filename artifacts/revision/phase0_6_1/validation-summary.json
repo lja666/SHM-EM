@@ -1,0 +1,31 @@
+{
+  "benchmarkPassed": true,
+  "coreFreezeCommitRecorded": false,
+  "declaredContractsIdentical": true,
+  "eligibilityThresholdsAdded": false,
+  "maximumEngineeringAbsoluteDifference": 0.0,
+  "maximumInputAbsoluteDifference": 0.0,
+  "maximumRawPredictionAbsoluteDifference": 0.0,
+  "numericalRegressionPassed": true,
+  "onePassImplementationPassed": true,
+  "passed": true,
+  "pitPreUnitTests": {
+    "command": "python -m unittest discover -s tests -v",
+    "exitCode": 0,
+    "passed": true,
+    "testsRun": 10
+  },
+  "productionMatchesOfflineAuditV3": true,
+  "prohibitedModulesModified": [],
+  "rawCheckoutScriptHashesCorrectedByEolPolicy": true,
+  "rawContractHashesPassed": true,
+  "schemaVersion": "shm-em-phase0-6-1-validation-v1",
+  "stageCountsPassed": true,
+  "totals": {
+    "modelCount": 6,
+    "predictionRecordCount": 4960,
+    "stepCount": 40,
+    "targetCount": 124
+  },
+  "totalsPassed": true
+}

@@ -1,0 +1,155 @@
+{
+  "items": [
+    {
+      "evidence_refs": [
+        "src/pit_pre/pit_pre/features.py",
+        "em_observation_table_registry"
+      ],
+      "evidence_status": "PARTIALLY_SUPPORTED",
+      "id": "C01",
+      "implementation_status": "Backend routing is registry-based; PIT_PRE resolves registry rows but validates table identifiers against a four-table allowlist.",
+      "manuscript_claim": "Logical observations are decoupled from physical storage through the observation registry.",
+      "recommended_action": "Limit the claim to approved reference adapters, then decide whether registry-backed table approval is required before core freeze.",
+      "risk": "MEDIUM",
+      "topic": "Observation registry decoupling"
+    },
+    {
+      "evidence_refs": [
+        "src/pit_pre/pit_pre/main.py",
+        "src/pit_pre/pit_pre/contract.py",
+        "src/pit_pre/pit_pre/features.py"
+      ],
+      "evidence_status": "NEEDS_EXPERIMENT",
+      "id": "C02",
+      "implementation_status": "Project code, stations, metrics, mappings, and APIs are parameterized; storage-table and model-adapter boundaries remain conditional.",
+      "manuscript_claim": "A new project can be integrated through registrations and mappings without core workflow changes.",
+      "recommended_action": "Do not claim demonstration until a second configuration is added after core freeze and a Git change inventory is generated.",
+      "risk": "HIGH",
+      "topic": "New project by minimal registration"
+    },
+    {
+      "evidence_refs": [
+        "src/pit_pre/pit_pre/contract.py",
+        "src/pit_pre/pit_pre/cached_model_runner.py",
+        "src/pit_pre/pit_pre/result_writer.py"
+      ],
+      "evidence_status": "PARTIALLY_SUPPORTED",
+      "id": "C03",
+      "implementation_status": "Database contracts and hashes are authoritative, but CachedModelRunner and engineering conversion support a bounded adapter family.",
+      "manuscript_claim": "A new fixed model is integrated by registering its bundle, inputs, targets, and temporal settings.",
+      "recommended_action": "Change the claim to a compatible model bundle under the existing PIT_PRE model and engineering-adapter contract.",
+      "risk": "HIGH",
+      "topic": "New model by registration"
+    },
+    {
+      "evidence_refs": [
+        "architecture-coupling-review.json"
+      ],
+      "evidence_status": "NEEDS_EXPERIMENT",
+      "id": "C04",
+      "implementation_status": "The architecture is project-scoped, but no post-freeze cross-configuration change inventory exists.",
+      "manuscript_claim": "Reuse does not require changes to core backend, frontend, event workflow, or existing source tables.",
+      "recommended_action": "Freeze the approved core first, then measure actual changes for the second heterogeneous configuration.",
+      "risk": "HIGH",
+      "topic": "Core workflow unchanged"
+    },
+    {
+      "evidence_refs": [
+        "src/pit_pre/pit_pre/features.py",
+        "artifacts/revision/phase0_6_1/alignment-audit-v3-summary.json",
+        "artifacts/revision/phase0_6_1/one-pass-regression-input.json"
+      ],
+      "evidence_status": "PARTIALLY_SUPPORTED",
+      "id": "C05",
+      "implementation_status": "Backward as-of matching uses one sampling interval as tolerance, followed by interior interpolation or boundary extension, then ffill and bfill. Phase 0.6.1 persists descriptive per-model counts, fill ratios, gaps, signed temporal offsets, past lag, and future lead without adding eligibility thresholds.",
+      "manuscript_claim": "PIT_PRE aligns heterogeneous observations into auditable rolling model inputs.",
+      "recommended_action": "Report asynchronous alignment separately from actual interpolation/fill and do not infer acceptance thresholds from one sample. Alignment audit v3 separates asynchronous as-of matching from actual fill and records signed temporal offsets: 9313 as-of cells and 257 filled cells.",
+      "risk": "HIGH",
+      "topic": "Missing and asynchronous input handling"
+    },
+    {
+      "evidence_refs": [
+        "src/backend/src/main/java/mybatis/iem/em/modules/engineering/application/service/impl/PredictionExecutionGateServiceImpl.java"
+      ],
+      "evidence_status": "NEEDS_EXPERIMENT",
+      "id": "C06",
+      "implementation_status": "The gate checks model/run/result integrity, time, quality, hashes, and freshness, but the requested negative matrix has not been executed.",
+      "manuscript_claim": "Invalid prediction states cannot create formal events.",
+      "recommended_action": "Keep gate logic unchanged and run the F01-F12 fault matrix with before/after event, response, and provenance counts.",
+      "risk": "HIGH",
+      "topic": "Execution-gate safety"
+    },
+    {
+      "evidence_refs": [
+        "src/backend/src/main/java/mybatis/iem/em/modules/engineering/application/service/impl/EventEvaluationServiceImpl.java"
+      ],
+      "evidence_status": "NEEDS_EXPERIMENT",
+      "id": "C07",
+      "implementation_status": "Separate service paths and recheck calls are present in source, but mutation between Evaluate and Execute has not been demonstrated.",
+      "manuscript_claim": "Execute recalculates and rechecks the gate rather than trusting a stored Evaluate result.",
+      "recommended_action": "Run F12; do not change Evaluate or Execute logic in advance.",
+      "risk": "MEDIUM",
+      "topic": "Evaluate and Execute independence"
+    },
+    {
+      "evidence_refs": [
+        "src/backend/src/main/java/mybatis/iem/em/modules/engineering/application/service/impl/ProjectFutureStateServiceImpl.java"
+      ],
+      "evidence_status": "ARCHITECTURE_ONLY",
+      "id": "C08",
+      "implementation_status": "The service implements policy selection, unit-aware thresholds, consecutive steps, aggregation, earliest exceedance, timeline, and hashing.",
+      "manuscript_claim": "Forecasts are synchronized and aggregated by target, station, and project with earliest exceedance and a state hash.",
+      "recommended_action": "Derive the formal specification from code and add boundary tests without changing the algorithm.",
+      "risk": "MEDIUM",
+      "topic": "Project Future State"
+    },
+    {
+      "evidence_refs": [
+        "src/backend/src/main/java/mybatis/iem/em/modules/engineering/api/controller/PredictionController.java",
+        "em_event_prediction_link"
+      ],
+      "evidence_status": "NEEDS_EXPERIMENT",
+      "id": "C09",
+      "implementation_status": "Trace persistence and GET /api/em/predictions/events/{eventId}/trace exist; no deterministic trace artifact has been published.",
+      "manuscript_claim": "A formal forecast event is traceable to rule, batch, run, model hashes, input window, and triggering values.",
+      "recommended_action": "Generate one isolated formal event and export its complete machine-readable trace.",
+      "risk": "MEDIUM",
+      "topic": "Event provenance"
+    },
+    {
+      "evidence_refs": [
+        ".github/workflows/ci.yml",
+        "docs/REPRODUCIBILITY.md"
+      ],
+      "evidence_status": "PARTIALLY_SUPPORTED",
+      "id": "C10",
+      "implementation_status": "The submitted baseline has Windows-only CI and no Docker or Compose files.",
+      "manuscript_claim": "The public workflow is reproducible with documented dependencies.",
+      "recommended_action": "Retain the current Windows limitation until a later authorized Linux/Bash or container reproduction is actually validated.",
+      "risk": "HIGH",
+      "topic": "Cross-platform portability"
+    },
+    {
+      "evidence_refs": [
+        "artifacts/revision/phase0_6_1/alignment-audit-v3-summary.json",
+        "sql/shm_em_database/02_SHM_EM_public_sample.sql"
+      ],
+      "evidence_status": "PARTIALLY_SUPPORTED",
+      "id": "C11",
+      "implementation_status": "The public sample supplies a 16-step common source window, while registered model contracts consume model-specific histories: YD 16, XD 12, Strain 13, Pressure 13, water 13, and settlement 12 steps.",
+      "manuscript_claim": "The public reference workflow uses 16 historical input steps.",
+      "recommended_action": "Revise the manuscript and Figure 5 to distinguish the shared 16-step source window from model-specific 12-16-step history requirements.",
+      "risk": "MEDIUM",
+      "topic": "Model history-window description"
+    }
+  ],
+  "schemaVersion": "shm-em-claim-gap-matrix-v1",
+  "sourceGitCommit": "1d2ab45e516ef4167c6c4c4265da5b533b2eab78",
+  "statusCounts": {
+    "ARCHITECTURE_ONLY": 1,
+    "CONTRADICTED_BY_IMPLEMENTATION": 0,
+    "DEMONSTRATED": 0,
+    "NEEDS_EXPERIMENT": 5,
+    "PARTIALLY_SUPPORTED": 5
+  }
+}

@@ -1,0 +1,4234 @@
+diff --git a/.gitattributes b/.gitattributes
+index b55019b..89f8fba 100644
+--- a/.gitattributes
++++ b/.gitattributes
+@@ -10,6 +10,16 @@
+ *.vue text eol=lf
+ *.json text eol=lf
+ 
++# Byte-hashed PIT_PRE contract inputs must have deterministic checkout bytes.
++src/pit_pre/models/**/*.py text eol=lf
++src/pit_pre/models/**/best_params.json text eol=lf
++src/pit_pre/runtime-manifest.json text eol=lf
++src/pit_pre/requirements.lock.txt text eol=lf
++
++# Portable model artifacts are byte-sensitive binary files.
++*.pth binary
++*.joblib binary
++
+ *.png binary
+ *.jpg binary
+ *.jpeg binary
+diff --git a/src/pit_pre/pit_pre/features.py b/src/pit_pre/pit_pre/features.py
+index e2bcb85..43b6939 100644
+--- a/src/pit_pre/pit_pre/features.py
++++ b/src/pit_pre/pit_pre/features.py
+@@ -22,6 +22,15 @@ ALLOWED_OBSERVATION_TABLES = {
+     "em_obs_static_level",
+ }
+ 
++ALIGNMENT_POLICY_VERSION = "pit_pre_alignment_v2"
++ALIGNMENT_METHOD = (
++    "backward_asof",
++    "interior_linear_interpolation",
++    "boundary_extension",
++    "ffill",
++    "bfill",
++)
++
+ 
+ @dataclass(frozen=True)
+ class FeatureMapping:
+@@ -43,6 +52,122 @@ class FeatureMapping:
+     metric_unit: str | None
+ 
+ 
++@dataclass(frozen=True)
++class FeatureAlignmentDiagnostics:
++    stages: tuple[str, ...]
++    source_offsets_seconds: tuple[tuple[float, ...], ...]
++    max_raw_gap_seconds: float | None
++    raw_timestamps: tuple[pd.Timestamp, ...] = ()
++
++
++@dataclass(frozen=True)
++class InputAlignmentDiagnostics:
++    time_step_seconds: int
++    features: dict[str, FeatureAlignmentDiagnostics]
++    time_index: tuple[pd.Timestamp, ...] = ()
++
++    def quality_summary(
++        self,
++        feature_codes: list[str],
++        history_window_size: int,
++    ) -> dict[str, int | float | None]:
++        traces = [self.features[code] for code in feature_codes]
++        stages = [
++            stage
++            for trace in traces
++            for stage in trace.stages[-history_window_size:]
++        ]
++        offset_groups = [
++            offsets
++            for trace in traces
++            for offsets in trace.source_offsets_seconds[-history_window_size:]
++        ]
++        source_offsets = [offset for offsets in offset_groups for offset in offsets]
++        absolute_offsets = [abs(offset) for offset in source_offsets]
++        past_offsets = [offset for offset in source_offsets if offset > 0]
++        future_offsets = [-offset for offset in source_offsets if offset < 0]
++        counts = pd.Series(stages, dtype="object").value_counts().to_dict()
++        input_cells = history_window_size * len(feature_codes)
++        interior = int(counts.get("interior_interpolation", 0))
++        leading = int(counts.get("leading_boundary_extension", 0))
++        trailing = int(counts.get("trailing_boundary_extension", 0))
++        forward = int(counts.get("forward_fill", 0))
++        backward = int(counts.get("backward_fill", 0))
++        asof = int(counts.get("backward_asof", 0))
++        fill_cells = interior + leading + trailing + forward + backward
++        non_exact_cells = asof + fill_cells
++        raw_gaps: list[float] = []
++        if self.time_index:
++            window_start = self.time_index[-history_window_size] - pd.Timedelta(
++                seconds=self.time_step_seconds
++            )
++            window_end = self.time_index[-1]
++            for trace in traces:
++                timestamps = [
++                    timestamp
++                    for timestamp in trace.raw_timestamps
++                    if window_start <= timestamp <= window_end
++                ]
++                gap = _max_timestamp_gap_seconds(timestamps)
++                if gap is not None:
++                    raw_gaps.append(gap)
++        else:
++            raw_gaps = [
++                trace.max_raw_gap_seconds
++                for trace in traces
++                if trace.max_raw_gap_seconds is not None
++            ]
++        return {
++            "inputCellCount": input_cells,
++            "exactCellCount": int(counts.get("exact_timestamp_match", 0)),
++            "asofCellCount": asof,
++            "interiorInterpolationCellCount": interior,
++            "leadingBoundaryExtensionCellCount": leading,
++            "trailingBoundaryExtensionCellCount": trailing,
++            "boundaryExtensionCellCount": leading + trailing,
++            "forwardFillCellCount": forward,
++            "backwardFillCellCount": backward,
++            "unresolvedMissingCellCount": int(counts.get("missing", 0)),
++            "fillRatio": _ratio(fill_cells, input_cells),
++            "nonExactAlignmentRatio": _ratio(non_exact_cells, input_cells),
++            "medianAbsoluteSourceOffsetSeconds": _quantile(absolute_offsets, 0.5),
++            "p95AbsoluteSourceOffsetSeconds": _quantile(absolute_offsets, 0.95),
++            "maxAbsoluteSourceOffsetSeconds": max(absolute_offsets) if absolute_offsets else None,
++            "pastSourceCellCount": sum(any(offset > 0 for offset in offsets) for offsets in offset_groups),
++            "futureSourceCellCount": sum(any(offset < 0 for offset in offsets) for offsets in offset_groups),
++            "pastSourceContributorCount": len(past_offsets),
++            "futureSourceContributorCount": len(future_offsets),
++            "maxPastSourceLagSeconds": max(past_offsets) if past_offsets else None,
++            "maxFutureSourceLeadSeconds": max(future_offsets) if future_offsets else None,
++            "maxRawGapSeconds": max(raw_gaps) if raw_gaps else None,
++        }
++
++    def snapshot_metadata(
++        self,
++        feature_codes: list[str],
++        history_window_size: int,
++    ) -> dict[str, Any]:
++        return {
++            "alignmentPolicyVersion": ALIGNMENT_POLICY_VERSION,
++            "timeStepSeconds": self.time_step_seconds,
++            "asofToleranceSeconds": self.time_step_seconds,
++            "alignmentMethod": list(ALIGNMENT_METHOD),
++            "qualitySummary": self.quality_summary(feature_codes, history_window_size),
++        }
++
++
++@dataclass(frozen=True)
++class AlignedInput:
++    values: pd.DataFrame
++    diagnostics: InputAlignmentDiagnostics
++
++
++@dataclass(frozen=True)
++class AlignmentTrace:
++    values: list[float | None]
++    source_times: list[pd.Timestamp | None]
++
++
+ def validate_identifier(value: str, allowed: set[str], kind: str) -> str:
+     value = value.strip()
+     if value not in allowed:
+@@ -231,6 +356,9 @@ class WideTableBuilder:
+         self.time_step_minutes = time_step_minutes
+ 
+     def build(self, required_rows: int) -> pd.DataFrame:
++        return self.build_with_diagnostics(required_rows).values
++
++    def build_with_diagnostics(self, required_rows: int) -> AlignedInput:
+         mappings = self.repository.load_enabled_mappings()
+         latest_time = self.repository.find_latest_time(mappings)
+         step = timedelta(minutes=self.time_step_minutes)
+@@ -238,13 +366,20 @@ class WideTableBuilder:
+         time_index = [start_time + step * i for i in range(required_rows)]
+ 
+         feature_data: dict[str, list[float | None]] = {}
++        source_times: dict[str, list[pd.Timestamp | None]] = {}
++        raw_gaps: dict[str, float | None] = {}
++        raw_timestamps: dict[str, tuple[pd.Timestamp, ...]] = {}
+         for mapping in mappings:
+             series = self.repository.read_feature_series(mapping, start_time - step, latest_time)
+-            feature_data[mapping.training_feature_code] = _align_series(
++            trace = _align_series_with_trace(
+                 series,
+                 time_index,
+                 step,
+             )
++            feature_data[mapping.training_feature_code] = trace.values
++            source_times[mapping.training_feature_code] = trace.source_times
++            raw_gaps[mapping.training_feature_code] = _max_raw_gap_seconds(series)
++            raw_timestamps[mapping.training_feature_code] = _raw_timestamps(series)
+ 
+         wide = pd.concat(
+             [
+@@ -254,19 +389,38 @@ class WideTableBuilder:
+             axis=1,
+         )
+         feature_columns = [col for col in wide.columns if col not in {"time", "time1"}]
+-        wide[feature_columns] = (
+-            wide[feature_columns]
+-            .interpolate(method="linear", limit_direction="both")
+-            .ffill()
+-            .bfill()
+-        )
++        initial = wide[feature_columns].copy()
++        interpolated = initial.interpolate(method="linear", limit_direction="both")
++        forward_filled = interpolated.ffill()
++        filled = forward_filled.bfill()
++        wide[feature_columns] = filled
+ 
+         missing = wide[feature_columns].isna().sum()
+         missing = missing[missing > 0]
+         if not missing.empty:
+             raise ValueError(f"Prediction input window has missing feature values:\n{missing}")
+ 
+-        return wide
++        diagnostics = {
++            code: _feature_alignment_diagnostics(
++                time_index=time_index,
++                initial=initial[code],
++                interpolated=interpolated[code],
++                forward_filled=forward_filled[code],
++                filled=filled[code],
++                source_times=source_times[code],
++                max_raw_gap_seconds=raw_gaps[code],
++                raw_timestamps=raw_timestamps[code],
++            )
++            for code in feature_columns
++        }
++        return AlignedInput(
++            values=wide,
++            diagnostics=InputAlignmentDiagnostics(
++                time_step_seconds=int(step.total_seconds()),
++                features=diagnostics,
++                time_index=tuple(pd.Timestamp(value) for value in time_index),
++            ),
++        )
+ 
+ 
+ def _align_series(
+@@ -274,8 +428,17 @@ def _align_series(
+     time_index: list[datetime],
+     tolerance: timedelta,
+ ) -> list[float | None]:
++    return _align_series_with_trace(series, time_index, tolerance).values
++
++
++def _align_series_with_trace(
++    series: pd.DataFrame,
++    time_index: list[datetime],
++    tolerance: timedelta,
++) -> AlignmentTrace:
+     if series.empty:
+-        return [None for _ in time_index]
++        empty = [None for _ in time_index]
++        return AlignmentTrace(values=empty, source_times=empty.copy())
+ 
+     data = series.copy()
+     data["measurement_time"] = pd.to_datetime(data["measurement_time"])
+@@ -283,8 +446,10 @@ def _align_series(
+     data = data.sort_values(["measurement_time", "id"]).drop_duplicates("measurement_time", keep="last")
+     data = data[["measurement_time", "value"]].dropna(subset=["value"])
+     if data.empty:
+-        return [None for _ in time_index]
++        empty = [None for _ in time_index]
++        return AlignmentTrace(values=empty, source_times=empty.copy())
+ 
++    data["source_time"] = data["measurement_time"]
+     target = pd.DataFrame({"time": pd.to_datetime(time_index)})
+     aligned = pd.merge_asof(
+         target,
+@@ -293,7 +458,143 @@ def _align_series(
+         direction="backward",
+         tolerance=pd.Timedelta(tolerance),
+     )
+-    return [
++    values = [
+         None if pd.isna(value) else float(value)
+         for value in aligned["value"].tolist()
+     ]
++    source_times = [
++        None if pd.isna(value) else pd.Timestamp(value)
++        for value in aligned["source_time"].tolist()
++    ]
++    return AlignmentTrace(values=values, source_times=source_times)
++
++
++def _max_raw_gap_seconds(series: pd.DataFrame) -> float | None:
++    return _max_timestamp_gap_seconds(_raw_timestamps(series))
++
++
++def _raw_timestamps(series: pd.DataFrame) -> tuple[pd.Timestamp, ...]:
++    if series.empty:
++        return tuple()
++    data = series.copy()
++    data["measurement_time"] = pd.to_datetime(data["measurement_time"])
++    timestamps = tuple(
++        data.sort_values(["measurement_time", "id"])
++        .drop_duplicates("measurement_time", keep="last")
++        .dropna(subset=["value"])["measurement_time"]
++        .sort_values()
++        .map(pd.Timestamp)
++        .tolist()
++    )
++    return timestamps
++
++
++def _max_timestamp_gap_seconds(
++    timestamps: list[pd.Timestamp] | tuple[pd.Timestamp, ...],
++) -> float | None:
++    if len(timestamps) < 2:
++        return None
++    return max(
++        float((current - previous).total_seconds())
++        for previous, current in zip(timestamps, timestamps[1:])
++    )
++
++
++def _feature_alignment_diagnostics(
++    time_index: list[datetime],
++    initial: pd.Series,
++    interpolated: pd.Series,
++    forward_filled: pd.Series,
++    filled: pd.Series,
++    source_times: list[pd.Timestamp | None],
++    max_raw_gap_seconds: float | None,
++    raw_timestamps: tuple[pd.Timestamp, ...] = (),
++) -> FeatureAlignmentDiagnostics:
++    stages: list[str] = []
++    lineage: list[tuple[pd.Timestamp, ...]] = []
++    for target_time, value, source_time in zip(time_index, initial, source_times):
++        if pd.isna(value) or source_time is None:
++            stages.append("missing")
++            lineage.append(tuple())
++        elif pd.Timestamp(target_time) == source_time:
++            stages.append("exact_timestamp_match")
++            lineage.append((source_time,))
++        else:
++            stages.append("backward_asof")
++            lineage.append((source_time,))
++
++    populated = [index for index, value in enumerate(initial) if pd.notna(value)]
++    for index, (before, after) in enumerate(zip(initial, interpolated)):
++        if pd.notna(before) or pd.isna(after):
++            continue
++        previous = [position for position in populated if position < index]
++        following = [position for position in populated if position > index]
++        contributors: list[pd.Timestamp] = []
++        if previous:
++            contributors.extend(lineage[previous[-1]])
++        if following:
++            contributors.extend(lineage[following[0]])
++        if previous and following:
++            stages[index] = "interior_interpolation"
++        elif following:
++            stages[index] = "leading_boundary_extension"
++        elif previous:
++            stages[index] = "trailing_boundary_extension"
++        lineage[index] = tuple(dict.fromkeys(contributors))
++
++    for index, (before, after) in enumerate(zip(interpolated, forward_filled)):
++        if pd.notna(before) or pd.isna(after):
++            continue
++        previous = next(
++            (
++                position
++                for position in range(index - 1, -1, -1)
++                if pd.notna(forward_filled.iloc[position])
++            ),
++            None,
++        )
++        stages[index] = "forward_fill"
++        lineage[index] = tuple() if previous is None else lineage[previous]
++
++    for index, (before, after) in enumerate(zip(forward_filled, filled)):
++        if pd.notna(before) or pd.isna(after):
++            continue
++        following = next(
++            (
++                position
++                for position in range(index + 1, len(filled))
++                if pd.notna(filled.iloc[position])
++            ),
++            None,
++        )
++        stages[index] = "backward_fill"
++        lineage[index] = tuple() if following is None else lineage[following]
++
++    offsets: list[tuple[float, ...]] = []
++    for target_time, value, sources in zip(time_index, filled, lineage):
++        if pd.isna(value):
++            stages[len(offsets)] = "missing"
++            offsets.append(tuple())
++        elif not sources:
++            offsets.append(tuple())
++        else:
++            offsets.append(tuple(
++                float((pd.Timestamp(target_time) - source).total_seconds())
++                for source in sources
++            ))
++    return FeatureAlignmentDiagnostics(
++        stages=tuple(stages),
++        source_offsets_seconds=tuple(offsets),
++        max_raw_gap_seconds=max_raw_gap_seconds,
++        raw_timestamps=raw_timestamps,
++    )
++
++
++def _ratio(count: int, total: int) -> float:
++    return round(count / total, 12) if total else 0.0
++
++
++def _quantile(values: list[float], quantile: float) -> float | None:
++    if not values:
++        return None
++    return round(float(pd.Series(values, dtype="float64").quantile(quantile)), 6)
+diff --git a/src/pit_pre/pit_pre/pipeline.py b/src/pit_pre/pit_pre/pipeline.py
+index d05e29b..133ad2f 100644
+--- a/src/pit_pre/pit_pre/pipeline.py
++++ b/src/pit_pre/pit_pre/pipeline.py
+@@ -62,7 +62,8 @@ class PredictionPipeline:
+         max_required_rows = max(model.required_history_rows for model in models)
+         rolling_steps = runtime.expected_steps
+ 
+-        virtual_df = self.wide_builder.build(max_required_rows)
++        aligned_input = self.wide_builder.build_with_diagnostics(max_required_rows)
++        virtual_df = aligned_input.values
+         base_time = pd.Timestamp(virtual_df["time"].iloc[-1]).to_pydatetime()
+         base_time1 = float(virtual_df["time1"].iloc[-1])
+         input_window_start = pd.Timestamp(virtual_df["time"].iloc[0]).to_pydatetime()
+@@ -75,6 +76,13 @@ class PredictionPipeline:
+         feature_count = sum(self.config.prediction_target_counts[model.code] for model in models)
+ 
+         pending_outputs: dict[str, list[pd.DataFrame]] = {model.code: [] for model in models}
++        alignment_metadata = {
++            model.code: aligned_input.diagnostics.snapshot_metadata(
++                _model_input_columns(self.model_runner, model.code, virtual_df),
++                model.required_history_rows,
++            )
++            for model in models
++        }
+ 
+         for global_step in range(1, rolling_steps + 1):
+             round_predictions: dict[str, dict[str, float]] = {}
+@@ -140,6 +148,7 @@ class PredictionPipeline:
+                 batch_id=batch_id,
+                 runtime_seconds=perf_counter() - started,
+                 input_schema_hash=input_schema_hash,
++                input_alignment_metadata=alignment_metadata[model.code],
+             )
+             result_hashes.append(write_result.result_hash)
+             summaries.append(
+@@ -168,6 +177,15 @@ def _input_window_for_model(virtual_df: pd.DataFrame, required_rows: int) -> pd.
+     return input_df
+ 
+ 
++def _model_input_columns(model_runner, model_code: str, input_df: pd.DataFrame) -> list[str]:
++    cached_models = getattr(model_runner, "cache", {})
++    cached = cached_models.get(model_code) if isinstance(cached_models, dict) else None
++    columns = getattr(cached, "input_columns", None)
++    if columns:
++        return list(columns)
++    return [column for column in input_df.columns if column not in {"time", "time1"}]
++
++
+ def _validate_rolling_output(model: ModelConfig, long_df: pd.DataFrame, rolling_steps: int) -> None:
+     if long_df.empty:
+         raise ValueError(f"{model.code} rolling prediction returned no rows")
+diff --git a/src/pit_pre/pit_pre/result_writer.py b/src/pit_pre/pit_pre/result_writer.py
+index 1968ad3..5441cf0 100644
+--- a/src/pit_pre/pit_pre/result_writer.py
++++ b/src/pit_pre/pit_pre/result_writer.py
+@@ -115,6 +115,7 @@ class PredictionResultWriter:
+         batch_id: int,
+         runtime_seconds: float,
+         input_schema_hash: str | None = None,
++        input_alignment_metadata: dict[str, object] | None = None,
+     ) -> PredictionWriteResult:
+         model_id = self._model_id(model)
+         target_features = self._feature_lookup(model.target_type)
+@@ -154,17 +155,12 @@ class PredictionResultWriter:
+                 self.horizon_minutes,
+                 self.rolling_steps,
+                 json.dumps(
+-                    {
+-                        "predictionRunCode": prediction_run_id,
+-                        "artifactUri": model.model_path.name,
+-                        "preprocessorUri": model.preprocessor_path.name,
+-                        "inferenceScriptHash": model.inference_script_hash,
+-                        "bestParamsHash": model.best_params_hash,
+-                        "runtimeManifestHash": model.runtime_manifest_hash,
+-                        "environmentDigest": model.environment_digest,
+-                        "runtimeEnvironment": _runtime_environment(),
+-                        "featureMappingVersion": self.feature_mapping_version,
+-                    },
++                    _input_snapshot(
++                        model=model,
++                        prediction_run_id=prediction_run_id,
++                        feature_mapping_version=self.feature_mapping_version,
++                        input_alignment_metadata=input_alignment_metadata,
++                    ),
+                     ensure_ascii=False,
+                     sort_keys=True,
+                 ),
+@@ -396,6 +392,28 @@ def _runtime_environment() -> dict[str, object]:
+     }
+ 
+ 
++def _input_snapshot(
++    model: ModelConfig,
++    prediction_run_id: str,
++    feature_mapping_version: str,
++    input_alignment_metadata: dict[str, object] | None = None,
++) -> dict[str, object]:
++    snapshot: dict[str, object] = {
++        "predictionRunCode": prediction_run_id,
++        "artifactUri": model.model_path.name,
++        "preprocessorUri": model.preprocessor_path.name,
++        "inferenceScriptHash": model.inference_script_hash,
++        "bestParamsHash": model.best_params_hash,
++        "runtimeManifestHash": model.runtime_manifest_hash,
++        "environmentDigest": model.environment_digest,
++        "runtimeEnvironment": _runtime_environment(),
++        "featureMappingVersion": feature_mapping_version,
++    }
++    if input_alignment_metadata:
++        snapshot.update(input_alignment_metadata)
++    return snapshot
++
++
+ def _prediction_value_column(target_type: str, df: pd.DataFrame) -> str:
+     preferred = PREDICTION_VALUE_COLUMNS.get(target_type)
+     if preferred and preferred in df.columns:
+diff --git a/src/pit_pre/tests/test_alignment_diagnostics.py b/src/pit_pre/tests/test_alignment_diagnostics.py
+new file mode 100644
+index 0000000..4883d82
+--- /dev/null
++++ b/src/pit_pre/tests/test_alignment_diagnostics.py
+@@ -0,0 +1,207 @@
++from __future__ import annotations
++
++import unittest
++from dataclasses import dataclass
++from datetime import datetime, timedelta
++from pathlib import Path
++from unittest.mock import patch
++
++import pandas as pd
++from pandas.testing import assert_frame_equal
++
++from pit_pre.config import ModelConfig
++from pit_pre.features import (
++    ALIGNMENT_POLICY_VERSION,
++    FeatureAlignmentDiagnostics,
++    InputAlignmentDiagnostics,
++    WideTableBuilder,
++    _align_series,
++    _feature_alignment_diagnostics,
++)
++from pit_pre.result_writer import _input_snapshot
++
++
++@dataclass(frozen=True)
++class Mapping:
++    training_feature_code: str
++
++
++class FakeRepository:
++    def __init__(self, series: pd.DataFrame):
++        self.mapping = Mapping("feature_a")
++        self.series = series
++
++    def load_enabled_mappings(self):
++        return [self.mapping]
++
++    def find_latest_time(self, mappings):
++        return pd.Timestamp(self.series["measurement_time"].max()).to_pydatetime()
++
++    def read_feature_series(self, mapping, start_time, end_time):
++        return self.series[
++            (self.series["measurement_time"] >= pd.Timestamp(start_time))
++            & (self.series["measurement_time"] <= pd.Timestamp(end_time))
++        ].copy()
++
++
++class AlignmentDiagnosticsTest(unittest.TestCase):
++    def test_alignment_diagnostics_do_not_change_values(self) -> None:
++        start = pd.Timestamp("2026-01-01 00:00:00")
++        series = pd.DataFrame({
++            "measurement_time": [start, start + timedelta(minutes=3), start + timedelta(minutes=9)],
++            "value": [1.0, 2.0, 4.0],
++            "id": [1, 2, 3],
++        })
++        builder = WideTableBuilder(FakeRepository(series), 3)
++        result = builder.build_with_diagnostics(4)
++
++        time_index = [start + timedelta(minutes=3 * index) for index in range(4)]
++        reference_values = _align_series(series, time_index, timedelta(minutes=3))
++        reference = pd.DataFrame({
++            "time": time_index,
++            "time1": range(1, 5),
++            "feature_a": reference_values,
++        })
++        reference[["feature_a"]] = (
++            reference[["feature_a"]]
++            .interpolate(method="linear", limit_direction="both")
++            .ffill()
++            .bfill()
++        )
++        assert_frame_equal(reference, result.values)
++
++    def test_builder_uses_one_asof_merge_per_feature(self) -> None:
++        start = pd.Timestamp("2026-01-01 00:00:00")
++        series = pd.DataFrame({
++            "measurement_time": [start, start + timedelta(minutes=3)],
++            "value": [1.0, 2.0],
++            "id": [1, 2],
++        })
++        original_merge_asof = pd.merge_asof
++        with patch("pit_pre.features.pd.merge_asof", wraps=original_merge_asof) as merge_asof:
++            WideTableBuilder(FakeRepository(series), 3).build_with_diagnostics(2)
++        self.assertEqual(1, merge_asof.call_count)
++
++    def test_alignment_stage_attribution(self) -> None:
++        start = datetime(2026, 1, 1)
++        times = [start + timedelta(minutes=3 * index) for index in range(3)]
++        initial = pd.Series([1.0, None, 3.0], dtype="float64")
++        interpolated = initial.interpolate(method="linear", limit_direction="both")
++        diagnostics = _feature_alignment_diagnostics(
++            time_index=times,
++            initial=initial,
++            interpolated=interpolated,
++            forward_filled=interpolated.ffill(),
++            filled=interpolated.ffill().bfill(),
++            source_times=[pd.Timestamp(start - timedelta(seconds=20)), None, pd.Timestamp(times[2])],
++            max_raw_gap_seconds=360.0,
++        )
++        self.assertEqual(
++            ("backward_asof", "interior_interpolation", "exact_timestamp_match"),
++            diagnostics.stages,
++        )
++        self.assertEqual(((20.0,), (200.0, -180.0), (0.0,)), diagnostics.source_offsets_seconds)
++
++    def test_boundary_extension_attribution(self) -> None:
++        start = datetime(2026, 1, 1)
++        times = [start + timedelta(minutes=3 * index) for index in range(3)]
++        initial = pd.Series([None, 2.0, None], dtype="float64")
++        interpolated = initial.interpolate(method="linear", limit_direction="both")
++        diagnostics = _feature_alignment_diagnostics(
++            time_index=times,
++            initial=initial,
++            interpolated=interpolated,
++            forward_filled=interpolated.ffill(),
++            filled=interpolated.ffill().bfill(),
++            source_times=[None, pd.Timestamp(times[1]), None],
++            max_raw_gap_seconds=None,
++        )
++        self.assertEqual(
++            (
++                "leading_boundary_extension",
++                "exact_timestamp_match",
++                "trailing_boundary_extension",
++            ),
++            diagnostics.stages,
++        )
++        self.assertEqual(((-180.0,), (0.0,), (180.0,)), diagnostics.source_offsets_seconds)
++
++    def test_quality_summary_counts_match_cells(self) -> None:
++        diagnostics = InputAlignmentDiagnostics(
++            time_step_seconds=180,
++            features={
++                "a": FeatureAlignmentDiagnostics(
++                    stages=("exact_timestamp_match", "backward_asof", "interior_interpolation"),
++                    source_offsets_seconds=((0.0,), (20.0,), (180.0, -180.0)),
++                    max_raw_gap_seconds=360.0,
++                ),
++                "b": FeatureAlignmentDiagnostics(
++                    stages=("leading_boundary_extension", "trailing_boundary_extension", "backward_fill"),
++                    source_offsets_seconds=((-180.0,), (180.0,), (-360.0,)),
++                    max_raw_gap_seconds=540.0,
++                ),
++            },
++        )
++        summary = diagnostics.quality_summary(["a", "b"], 3)
++        counted = sum(summary[key] for key in (
++            "exactCellCount",
++            "asofCellCount",
++            "interiorInterpolationCellCount",
++            "leadingBoundaryExtensionCellCount",
++            "trailingBoundaryExtensionCellCount",
++            "forwardFillCellCount",
++            "backwardFillCellCount",
++            "unresolvedMissingCellCount",
++        ))
++        self.assertEqual(summary["inputCellCount"], counted)
++        self.assertAlmostEqual(4 / 6, summary["fillRatio"])
++        self.assertAlmostEqual(5 / 6, summary["nonExactAlignmentRatio"])
++        self.assertEqual(540.0, summary["maxRawGapSeconds"])
++        self.assertEqual(3, summary["pastSourceCellCount"])
++        self.assertEqual(3, summary["futureSourceCellCount"])
++        self.assertEqual(3, summary["pastSourceContributorCount"])
++        self.assertEqual(3, summary["futureSourceContributorCount"])
++        self.assertEqual(180.0, summary["maxPastSourceLagSeconds"])
++        self.assertEqual(360.0, summary["maxFutureSourceLeadSeconds"])
++
++    @patch("pit_pre.result_writer._runtime_environment", return_value={"python": "test"})
++    def test_alignment_policy_metadata_is_persisted(self, _runtime) -> None:
++        model = ModelConfig(
++            id=1,
++            code="test",
++            target_type="test",
++            script_path=Path("predict.py"),
++            model_path=Path("model.pth"),
++            preprocessor_path=Path("preprocessor.joblib"),
++            runtime_manifest_path=Path("runtime-manifest.json"),
++            required_history_rows=3,
++            model_version="v1",
++            artifact_hash="a",
++            preprocessor_hash="b",
++            inference_script_hash="c",
++            best_params_hash=None,
++            runtime_manifest_hash="d",
++            environment_digest="e",
++            artifact_bundle_hash="f",
++            input_schema_hash="g",
++            contract_version="v1",
++            expected_steps=40,
++            time_step_minutes=3,
++            max_operational_age_minutes=15,
++        )
++        metadata = {
++            "alignmentPolicyVersion": ALIGNMENT_POLICY_VERSION,
++            "timeStepSeconds": 180,
++            "asofToleranceSeconds": 180,
++            "alignmentMethod": ["backward_asof"],
++            "qualitySummary": {"inputCellCount": 3, "fillRatio": 0.0},
++        }
++        snapshot = _input_snapshot(model, "RUN-1", "pit_pre_v1", metadata)
++        self.assertEqual(ALIGNMENT_POLICY_VERSION, snapshot["alignmentPolicyVersion"])
++        self.assertEqual(metadata["qualitySummary"], snapshot["qualitySummary"])
++        self.assertNotIn("maxFillRatioAllowed", snapshot)
++        self.assertNotIn("eligible", snapshot)
++
++
++if __name__ == "__main__":
++    unittest.main()
+diff --git a/tools/revision/audit_input_alignment.py b/tools/revision/audit_input_alignment.py
+new file mode 100644
+index 0000000..eeb24ba
+--- /dev/null
++++ b/tools/revision/audit_input_alignment.py
+@@ -0,0 +1,838 @@
++#!/usr/bin/env python3
++"""Read-only audit of PIT_PRE input alignment against the public SQL sample.
++
++The audit reproduces the production alignment and fill sequence without
++connecting to MySQL, mutating source data, or running model inference.
++"""
++
++from __future__ import annotations
++
++import argparse
++import csv
++import hashlib
++import json
++import math
++import re
++import subprocess
++from dataclasses import dataclass
++from datetime import timedelta
++from pathlib import Path
++from statistics import median
++from typing import Any, Iterable
++
++import joblib
++import pandas as pd
++
++
++PROJECT_CODE = "SHM_EM_PUBLIC_SAMPLE"
++SCHEMA_VERSION = "pit_pre_v1"
++ALLOWED_VALUE_COLUMNS = {"raw_value", "metric_value", "baseline_value"}
++ALLOWED_OBSERVATION_TABLES = {
++    "em_obs_displacement",
++    "em_obs_earth_pressure",
++    "em_obs_pressure_water_level",
++    "em_obs_static_level",
++}
++AUDIT_TABLES = {
++    "em_project",
++    "em_metric",
++    "em_prediction_model",
++    "em_prediction_feature_mapping",
++    "em_observation_table_registry",
++    *ALLOWED_OBSERVATION_TABLES,
++}
++CSV_COLUMNS = [
++    "model_code",
++    "feature_code",
++    "source_table",
++    "source_metric",
++    "history_window_size",
++    "raw_sample_count",
++    "exact_timestamp_match_count",
++    "backward_asof_match_count",
++    "interior_interpolation_count",
++    "leading_boundary_extension_count",
++    "trailing_boundary_extension_count",
++    "forward_fill_count",
++    "backward_fill_count",
++    "final_missing_count",
++    "max_raw_gap_seconds",
++    "median_absolute_source_offset_seconds",
++    "p95_absolute_source_offset_seconds",
++    "max_absolute_source_offset_seconds",
++    "past_source_cell_count",
++    "future_source_cell_count",
++    "past_source_contributor_count",
++    "future_source_contributor_count",
++    "max_past_source_lag_seconds",
++    "max_future_source_lead_seconds",
++    "exact_match_ratio",
++    "asof_alignment_ratio",
++    "non_exact_alignment_ratio",
++    "fill_ratio",
++]
++
++
++@dataclass(frozen=True)
++class Feature:
++    feature_code: str
++    training_feature_code: str
++    source_table: str
++    source_metric: str
++    source_value_column: str
++    station_id: int | None
++    instrument_id: int | None
++
++
++def parse_args() -> argparse.Namespace:
++    script = Path(__file__).resolve()
++    root = script.parents[2]
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument("--repo", type=Path, default=root)
++    parser.add_argument(
++        "--sample-sql",
++        type=Path,
++        default=Path("sql/shm_em_database/02_SHM_EM_public_sample.sql"),
++    )
++    parser.add_argument("--project-code", default=PROJECT_CODE)
++    parser.add_argument(
++        "--output-dir",
++        type=Path,
++        default=Path("artifacts/revision/phase0_6_1"),
++    )
++    return parser.parse_args()
++
++
++def repo_path(root: Path, value: Path) -> Path:
++    return value if value.is_absolute() else root / value
++
++
++def sha256(path: Path) -> str:
++    digest = hashlib.sha256()
++    with path.open("rb") as stream:
++        for chunk in iter(lambda: stream.read(1024 * 1024), b""):
++            digest.update(chunk)
++    return digest.hexdigest()
++
++
++def git_commit(root: Path) -> str:
++    result = subprocess.run(
++        ["git", "rev-parse", "HEAD"],
++        cwd=root,
++        check=True,
++        capture_output=True,
++        text=True,
++    )
++    return result.stdout.strip()
++
++
++def _tuple_payloads(values: str) -> Iterable[str]:
++    start: int | None = None
++    quoted = False
++    escaped = False
++    depth = 0
++    for index, char in enumerate(values):
++        if quoted:
++            if escaped:
++                escaped = False
++            elif char == "\\":
++                escaped = True
++            elif char == "'":
++                quoted = False
++            continue
++        if char == "'":
++            quoted = True
++        elif char == "(":
++            if depth == 0:
++                start = index + 1
++            depth += 1
++        elif char == ")":
++            depth -= 1
++            if depth == 0 and start is not None:
++                yield values[start:index]
++                start = None
++    if quoted or depth != 0:
++        raise ValueError("Malformed INSERT tuple list in public sample")
++
++
++def _sql_value(token: str) -> Any:
++    value = token.strip()
++    if value.upper() == "NULL":
++        return None
++    if re.fullmatch(r"[-+]?\d+", value):
++        return int(value)
++    if re.fullmatch(r"[-+]?(?:\d+\.\d*|\.\d+)(?:[eE][-+]?\d+)?", value):
++        return float(value)
++    return value
++
++
++def parse_public_sample(path: Path) -> dict[str, list[dict[str, Any]]]:
++    tables: dict[str, list[dict[str, Any]]] = {name: [] for name in AUDIT_TABLES}
++    with path.open("r", encoding="utf-8-sig") as stream:
++        for line_no, line in enumerate(stream, start=1):
++            if not line.startswith("INSERT INTO `"):
++                continue
++            header, separator, values = line.rstrip("\r\n").partition(") VALUES ")
++            if not separator:
++                continue
++            match = re.match(r"INSERT INTO `([^`]+)` \((.*)$", header)
++            if not match:
++                raise ValueError(f"Cannot parse INSERT header at line {line_no}")
++            table = match.group(1)
++            if table not in tables:
++                continue
++            columns = [part.strip().strip("`") for part in match.group(2).split(",")]
++            value_text = values[:-1] if values.endswith(";") else values
++            for payload in _tuple_payloads(value_text):
++                parsed = next(
++                    csv.reader(
++                        [payload],
++                        delimiter=",",
++                        quotechar="'",
++                        escapechar="\\",
++                        doublequote=True,
++                        skipinitialspace=True,
++                    )
++                )
++                if len(parsed) != len(columns):
++                    raise ValueError(
++                        f"Column/value mismatch for {table} at line {line_no}: "
++                        f"{len(columns)} columns, {len(parsed)} values"
++                    )
++                tables[table].append(dict(zip(columns, map(_sql_value, parsed))))
++    return tables
++
++
++def nullable_int(value: Any) -> int | None:
++    return None if value is None else int(value)
++
++
++def load_contract(
++    root: Path,
++    tables: dict[str, list[dict[str, Any]]],
++    project_code: str,
++) -> tuple[list[dict[str, Any]], list[Feature], int]:
++    project = next(
++        (row for row in tables["em_project"] if row.get("project_code") == project_code),
++        None,
++    )
++    if project is None:
++        raise ValueError(f"Project {project_code} is absent from the public sample")
++    project_id = int(project["id"])
++
++    models = [
++        dict(row)
++        for row in tables["em_prediction_model"]
++        if int(row["project_id"]) == project_id and row.get("status") == "active"
++    ]
++    if not models:
++        raise ValueError(f"No active models found for {project_code}")
++    models.sort(key=lambda row: (str(row["model_code"]), int(row["id"])))
++
++    registries = {
++        str(row["registry_code"]): row
++        for row in tables["em_observation_table_registry"]
++        if int(row["project_id"]) == project_id
++        and int(row.get("enabled") or 0) == 1
++        and int(row.get("is_queryable") or 0) == 1
++    }
++    mappings = [
++        row
++        for row in tables["em_prediction_feature_mapping"]
++        if int(row["project_id"]) == project_id
++        and row.get("schema_version") == SCHEMA_VERSION
++        and int(row.get("enabled") or 0) == 1
++        and (row.get("feature_role") or "model_input") == "model_input"
++    ]
++    mappings.sort(key=lambda row: (int(row["feature_order"]), int(row["id"])))
++
++    features: list[Feature] = []
++    for row in mappings:
++        registry_code = str(row.get("source_registry_code") or "").strip()
++        registry = registries.get(registry_code)
++        if registry is None:
++            raise ValueError(f"Enabled feature {row['feature_code']} has no queryable registry")
++        source_table = str(registry.get("physical_table_name") or "").strip()
++        if source_table not in ALLOWED_OBSERVATION_TABLES:
++            raise ValueError(f"Unsupported production observation table: {source_table}")
++        source_value_column = str(
++            row.get("source_value_column")
++            or row.get("source_field")
++            or "metric_value"
++        ).strip()
++        if source_value_column not in ALLOWED_VALUE_COLUMNS:
++            raise ValueError(f"Unsupported production value column: {source_value_column}")
++        station_id = nullable_int(row.get("station_id"))
++        instrument_id = nullable_int(row.get("instrument_id"))
++        if station_id is None and instrument_id is None:
++            raise ValueError(f"Feature {row['feature_code']} has no station or instrument identity")
++        features.append(
++            Feature(
++                feature_code=str(row["feature_code"]),
++                training_feature_code=str(
++                    row.get("training_feature_code") or row.get("feature_code")
++                ),
++                source_table=source_table,
++                source_metric=str(row["source_metric_code"]),
++                source_value_column=source_value_column,
++                station_id=station_id,
++                instrument_id=instrument_id,
++            )
++        )
++
++    duplicate_codes = pd.Series([item.training_feature_code for item in features]).duplicated()
++    if duplicate_codes.any():
++        raise ValueError("Active feature mappings contain duplicate training_feature_code values")
++
++    for model in models:
++        preprocessor_uri = str(model["preprocessor_uri"])
++        preprocessor_path = root / "src/pit_pre" / preprocessor_uri
++        if not preprocessor_path.is_file():
++            raise FileNotFoundError(f"Missing frozen preprocessor: {preprocessor_uri}")
++        preprocessor = joblib.load(preprocessor_path)
++        model["input_columns"] = [str(value) for value in preprocessor["input_columns"]]
++        model["runtime"] = json.loads(str(model["runtime_config_json"]))
++    return models, features, project_id
++
++
++def feature_rows(
++    feature: Feature,
++    tables: dict[str, list[dict[str, Any]]],
++    project_id: int,
++) -> pd.DataFrame:
++    rows = []
++    for row in tables[feature.source_table]:
++        if int(row["project_id"]) != project_id:
++            continue
++        if row.get("metric_code") != feature.source_metric:
++            continue
++        if feature.station_id is not None and int(row["station_id"]) != feature.station_id:
++            continue
++        if feature.instrument_id is not None and int(row["instrument_id"]) != feature.instrument_id:
++            continue
++        value = row.get(feature.source_value_column)
++        if value is None:
++            continue
++        rows.append(
++            {
++                "measurement_time": pd.Timestamp(row["observed_at"]),
++                "value": float(value),
++                "id": int(row["id"]),
++            }
++        )
++    if not rows:
++        return pd.DataFrame(columns=["measurement_time", "value", "id"])
++    return pd.DataFrame(rows).sort_values(["measurement_time", "id"]).reset_index(drop=True)
++
++
++def aligned_trace(
++    series: pd.DataFrame,
++    time_index: list[pd.Timestamp],
++    tolerance: pd.Timedelta,
++) -> pd.DataFrame:
++    target = pd.DataFrame({"time": pd.to_datetime(time_index)})
++    if series.empty:
++        target["value"] = math.nan
++        target["stage"] = "missing"
++        target["lineage"] = [tuple() for _ in range(len(target))]
++        return target
++
++    data = (
++        series.sort_values(["measurement_time", "id"])
++        .drop_duplicates("measurement_time", keep="last")
++        .dropna(subset=["value"])
++        .copy()
++    )
++    data["source_time"] = pd.to_datetime(data["measurement_time"])
++    merged = pd.merge_asof(
++        target,
++        data[["source_time", "value"]].rename(columns={"source_time": "match_time"}),
++        left_on="time",
++        right_on="match_time",
++        direction="backward",
++        tolerance=tolerance,
++    )
++    initial = pd.to_numeric(merged["value"], errors="coerce")
++    stages: list[str] = []
++    lineage: list[tuple[pd.Timestamp, ...]] = []
++    for target_time, match_time, value in zip(merged["time"], merged["match_time"], initial):
++        if pd.isna(value) or pd.isna(match_time):
++            stages.append("missing")
++            lineage.append(tuple())
++        elif target_time == match_time:
++            stages.append("exact_timestamp_match")
++            lineage.append((pd.Timestamp(match_time),))
++        else:
++            stages.append("backward_asof")
++            lineage.append((pd.Timestamp(match_time),))
++
++    interpolated = initial.interpolate(method="linear", limit_direction="both")
++    populated_positions = [index for index, value in enumerate(initial) if pd.notna(value)]
++    for index, (before, after) in enumerate(zip(initial, interpolated)):
++        if pd.notna(before) or pd.isna(after):
++            continue
++        previous = [position for position in populated_positions if position < index]
++        following = [position for position in populated_positions if position > index]
++        contributors: list[pd.Timestamp] = []
++        if previous:
++            contributors.extend(lineage[previous[-1]])
++        if following:
++            contributors.extend(lineage[following[0]])
++        if previous and following:
++            stages[index] = "interior_interpolation"
++        elif following:
++            stages[index] = "leading_boundary_extension"
++        elif previous:
++            stages[index] = "trailing_boundary_extension"
++        else:
++            stages[index] = "missing"
++        lineage[index] = tuple(dict.fromkeys(contributors))
++
++    forward = interpolated.ffill()
++    for index, (before, after) in enumerate(zip(interpolated, forward)):
++        if pd.notna(before) or pd.isna(after):
++            continue
++        previous = next((position for position in range(index - 1, -1, -1) if pd.notna(forward.iloc[position])), None)
++        stages[index] = "forward_fill"
++        lineage[index] = tuple() if previous is None else lineage[previous]
++
++    backward = forward.bfill()
++    for index, (before, after) in enumerate(zip(forward, backward)):
++        if pd.notna(before) or pd.isna(after):
++            continue
++        following = next((position for position in range(index + 1, len(backward)) if pd.notna(backward.iloc[position])), None)
++        stages[index] = "backward_fill"
++        lineage[index] = tuple() if following is None else lineage[following]
++
++    for index, value in enumerate(backward):
++        if pd.isna(value):
++            stages[index] = "missing"
++            lineage[index] = tuple()
++    target["value"] = backward
++    target["stage"] = stages
++    target["lineage"] = lineage
++    return target
++
++
++def max_gap_seconds(series: pd.DataFrame) -> float | None:
++    timestamps = (
++        series.sort_values(["measurement_time", "id"])
++        .drop_duplicates("measurement_time", keep="last")["measurement_time"]
++        .sort_values()
++    )
++    if len(timestamps) < 2:
++        return None
++    return float(timestamps.diff().dropna().dt.total_seconds().max())
++
++
++def source_offset_groups(trace: pd.DataFrame) -> list[tuple[float, ...]]:
++    groups: list[tuple[float, ...]] = []
++    for target_time, lineage in zip(trace["time"], trace["lineage"]):
++        groups.append(tuple(
++            float((pd.Timestamp(target_time) - source_time).total_seconds())
++            for source_time in lineage
++        ))
++    return groups
++
++
++def percentile(values: list[float], quantile: float) -> float | None:
++    if not values:
++        return None
++    return float(pd.Series(values, dtype="float64").quantile(quantile))
++
++
++def rounded(value: float | None, digits: int = 6) -> float | None:
++    return None if value is None or math.isnan(value) else round(float(value), digits)
++
++
++def audit_alignment(
++    root: Path,
++    tables: dict[str, list[dict[str, Any]]],
++    models: list[dict[str, Any]],
++    features: list[Feature],
++    project_id: int,
++) -> tuple[list[dict[str, Any]], dict[str, Any]]:
++    feature_by_code = {item.training_feature_code: item for item in features}
++    series_by_code = {
++        item.training_feature_code: feature_rows(item, tables, project_id)
++        for item in features
++    }
++    latest_candidates = [
++        series["measurement_time"].max()
++        for series in series_by_code.values()
++        if not series.empty
++    ]
++    if len(latest_candidates) != len(features):
++        missing = sorted(code for code, series in series_by_code.items() if series.empty)
++        raise ValueError(f"Configured features without public observations: {missing}")
++    latest_time = min(pd.Timestamp(value) for value in latest_candidates)
++    steps = {int(model["time_step_minutes"]) for model in models}
++    if len(steps) != 1:
++        raise ValueError(f"Active models do not share one time step: {sorted(steps)}")
++    step_minutes = next(iter(steps))
++    step = pd.Timedelta(minutes=step_minutes)
++    max_rows = max(int(model["required_history_rows"]) for model in models)
++    full_start = latest_time - step * (max_rows - 1)
++    full_index = [full_start + step * index for index in range(max_rows)]
++
++    traces: dict[str, pd.DataFrame] = {}
++    query_series: dict[str, pd.DataFrame] = {}
++    for feature in features:
++        series = series_by_code[feature.training_feature_code]
++        queried = series[
++            (series["measurement_time"] >= full_start - step)
++            & (series["measurement_time"] <= latest_time)
++        ].copy()
++        query_series[feature.training_feature_code] = queried
++        traces[feature.training_feature_code] = aligned_trace(queried, full_index, step)
++
++    rows: list[dict[str, Any]] = []
++    model_summaries: list[dict[str, Any]] = []
++    all_source_offsets: list[float] = []
++    for model in models:
++        model_code = str(model["model_code"])
++        history_rows = int(model["required_history_rows"])
++        unknown = [code for code in model["input_columns"] if code not in feature_by_code]
++        if unknown:
++            raise ValueError(f"{model_code} preprocessor inputs missing from DB mappings: {unknown}")
++        model_rows: list[dict[str, Any]] = []
++        model_source_offsets: list[float] = []
++        model_start = latest_time - step * (history_rows - 1)
++        for training_code in model["input_columns"]:
++            feature = feature_by_code[training_code]
++            trace = traces[training_code].tail(history_rows).reset_index(drop=True)
++            raw = query_series[training_code]
++            raw_window = raw[
++                (raw["measurement_time"] >= model_start - step)
++                & (raw["measurement_time"] <= latest_time)
++            ]
++            counts = trace["stage"].value_counts().to_dict()
++            exact = int(counts.get("exact_timestamp_match", 0))
++            asof = int(counts.get("backward_asof", 0))
++            interior = int(counts.get("interior_interpolation", 0))
++            leading = int(counts.get("leading_boundary_extension", 0))
++            trailing = int(counts.get("trailing_boundary_extension", 0))
++            forward = int(counts.get("forward_fill", 0))
++            backward = int(counts.get("backward_fill", 0))
++            missing = int(counts.get("missing", 0))
++            fill = interior + leading + trailing + forward + backward
++            non_exact = sum(
++                int(counts.get(stage, 0))
++                for stage in (
++                    "backward_asof",
++                    "interior_interpolation",
++                    "leading_boundary_extension",
++                    "trailing_boundary_extension",
++                    "forward_fill",
++                    "backward_fill",
++                )
++            )
++            offset_groups = source_offset_groups(trace)
++            offsets = [offset for group in offset_groups for offset in group]
++            absolute_offsets = [abs(offset) for offset in offsets]
++            past_offsets = [offset for offset in offsets if offset > 0]
++            future_offsets = [-offset for offset in offsets if offset < 0]
++            model_source_offsets.extend(offsets)
++            all_source_offsets.extend(offsets)
++            row = {
++                "model_code": model_code,
++                "feature_code": feature.feature_code,
++                "source_table": feature.source_table,
++                "source_metric": feature.source_metric,
++                "history_window_size": history_rows,
++                "raw_sample_count": len(raw_window),
++                "exact_timestamp_match_count": exact,
++                "backward_asof_match_count": asof,
++                "interior_interpolation_count": interior,
++                "leading_boundary_extension_count": leading,
++                "trailing_boundary_extension_count": trailing,
++                "forward_fill_count": forward,
++                "backward_fill_count": backward,
++                "final_missing_count": missing,
++                "max_raw_gap_seconds": rounded(max_gap_seconds(raw_window), 3),
++                "median_absolute_source_offset_seconds": rounded(percentile(absolute_offsets, 0.5), 3),
++                "p95_absolute_source_offset_seconds": rounded(percentile(absolute_offsets, 0.95), 3),
++                "max_absolute_source_offset_seconds": rounded(max(absolute_offsets), 3) if absolute_offsets else None,
++                "past_source_cell_count": sum(any(offset > 0 for offset in group) for group in offset_groups),
++                "future_source_cell_count": sum(any(offset < 0 for offset in group) for group in offset_groups),
++                "past_source_contributor_count": len(past_offsets),
++                "future_source_contributor_count": len(future_offsets),
++                "max_past_source_lag_seconds": rounded(max(past_offsets), 3) if past_offsets else None,
++                "max_future_source_lead_seconds": rounded(max(future_offsets), 3) if future_offsets else None,
++                "exact_match_ratio": rounded(exact / history_rows, 12),
++                "asof_alignment_ratio": rounded(asof / history_rows, 12),
++                "non_exact_alignment_ratio": rounded(non_exact / history_rows, 12),
++                "fill_ratio": rounded(fill / history_rows, 12),
++            }
++            rows.append(row)
++            model_rows.append(row)
++
++        fill_ratios = [float(item["fill_ratio"]) for item in model_rows]
++        non_exact_ratios = [float(item["non_exact_alignment_ratio"]) for item in model_rows]
++        gaps = [float(item["max_raw_gap_seconds"]) for item in model_rows if item["max_raw_gap_seconds"] is not None]
++        model_summaries.append(
++            {
++                "modelCode": model_code,
++                "featureCount": len(model_rows),
++                "historyWindowSize": history_rows,
++                "backwardAsofFeatureCount": sum(item["backward_asof_match_count"] > 0 for item in model_rows),
++                "interiorInterpolationFeatureCount": sum(item["interior_interpolation_count"] > 0 for item in model_rows),
++                "boundaryExtensionFeatureCount": sum(
++                    item["leading_boundary_extension_count"] > 0
++                    or item["trailing_boundary_extension_count"] > 0
++                    for item in model_rows
++                ),
++                "forwardFillFeatureCount": sum(item["forward_fill_count"] > 0 for item in model_rows),
++                "backwardFillFeatureCount": sum(item["backward_fill_count"] > 0 for item in model_rows),
++                "inputCellCount": history_rows * len(model_rows),
++                "exactCellCount": sum(item["exact_timestamp_match_count"] for item in model_rows),
++                "asofCellCount": sum(item["backward_asof_match_count"] for item in model_rows),
++                "interiorInterpolationCellCount": sum(item["interior_interpolation_count"] for item in model_rows),
++                "leadingBoundaryExtensionCellCount": sum(item["leading_boundary_extension_count"] for item in model_rows),
++                "trailingBoundaryExtensionCellCount": sum(item["trailing_boundary_extension_count"] for item in model_rows),
++                "boundaryExtensionCellCount": sum(
++                    item["leading_boundary_extension_count"]
++                    + item["trailing_boundary_extension_count"]
++                    for item in model_rows
++                ),
++                "forwardFillCellCount": sum(item["forward_fill_count"] for item in model_rows),
++                "backwardFillCellCount": sum(item["backward_fill_count"] for item in model_rows),
++                "fillRatio": rounded(sum(
++                    item["interior_interpolation_count"]
++                    + item["leading_boundary_extension_count"]
++                    + item["trailing_boundary_extension_count"]
++                    + item["forward_fill_count"]
++                    + item["backward_fill_count"]
++                    for item in model_rows
++                ) / (history_rows * len(model_rows)), 12),
++                "nonExactAlignmentRatio": rounded(sum(
++                    item["backward_asof_match_count"]
++                    + item["interior_interpolation_count"]
++                    + item["leading_boundary_extension_count"]
++                    + item["trailing_boundary_extension_count"]
++                    + item["forward_fill_count"]
++                    + item["backward_fill_count"]
++                    for item in model_rows
++                ) / (history_rows * len(model_rows)), 12),
++                "maxFillRatio": rounded(max(fill_ratios)),
++                "medianFillRatio": rounded(median(fill_ratios)),
++                "maxNonExactAlignmentRatio": rounded(max(non_exact_ratios)),
++                "maxRawGapSeconds": rounded(max(gaps), 3) if gaps else None,
++                "medianAbsoluteSourceOffsetSeconds": rounded(percentile([abs(value) for value in model_source_offsets], 0.5), 3),
++                "p95AbsoluteSourceOffsetSeconds": rounded(percentile([abs(value) for value in model_source_offsets], 0.95), 3),
++                "maxAbsoluteSourceOffsetSeconds": rounded(max([abs(value) for value in model_source_offsets]), 3) if model_source_offsets else None,
++                "pastSourceCellCount": sum(int(item["past_source_cell_count"]) for item in model_rows),
++                "futureSourceCellCount": sum(int(item["future_source_cell_count"]) for item in model_rows),
++                "pastSourceContributorCount": sum(int(item["past_source_contributor_count"]) for item in model_rows),
++                "futureSourceContributorCount": sum(int(item["future_source_contributor_count"]) for item in model_rows),
++                "maxPastSourceLagSeconds": rounded(max(
++                    item["max_past_source_lag_seconds"]
++                    for item in model_rows
++                    if item["max_past_source_lag_seconds"] is not None
++                ), 3) if any(item["max_past_source_lag_seconds"] is not None for item in model_rows) else None,
++                "maxFutureSourceLeadSeconds": rounded(max(
++                    item["max_future_source_lead_seconds"]
++                    for item in model_rows
++                    if item["max_future_source_lead_seconds"] is not None
++                ), 3) if any(item["max_future_source_lead_seconds"] is not None for item in model_rows) else None,
++                "unresolvedMissingCount": sum(int(item["final_missing_count"]) for item in model_rows),
++            }
++        )
++
++    all_fill_ratios = [float(item["fill_ratio"]) for item in rows]
++    all_non_exact_ratios = [float(item["non_exact_alignment_ratio"]) for item in rows]
++    all_gaps = [float(item["max_raw_gap_seconds"]) for item in rows if item["max_raw_gap_seconds"] is not None]
++    summary = {
++        "schemaVersion": "shm-em-input-alignment-audit-v3",
++        "sourceGitCommit": git_commit(root),
++        "projectCode": PROJECT_CODE,
++        "auditMode": "offline-read-only-public-sql",
++        "productionMethod": [
++            "backward_asof",
++            "interior_linear_interpolation",
++            "leading_or_trailing_boundary_extension",
++            "forward_fill",
++            "backward_fill",
++            "remaining_missing_check",
++        ],
++        "timeStepMinutes": step_minutes,
++        "asofToleranceSeconds": int(step.total_seconds()),
++        "commonLatestTime": latest_time.isoformat(),
++        "maximumProductionHistoryWindowSize": max_rows,
++        "modelCount": len(models),
++        "mappedFeatureCount": len(features),
++        "auditedModelFeatureCount": len(rows),
++        "models": model_summaries,
++        "overall": {
++            "backwardAsofFeatureCount": sum(item["backward_asof_match_count"] > 0 for item in rows),
++            "interiorInterpolationFeatureCount": sum(item["interior_interpolation_count"] > 0 for item in rows),
++            "boundaryExtensionFeatureCount": sum(
++                item["leading_boundary_extension_count"] > 0
++                or item["trailing_boundary_extension_count"] > 0
++                for item in rows
++            ),
++            "forwardFillFeatureCount": sum(item["forward_fill_count"] > 0 for item in rows),
++            "backwardFillFeatureCount": sum(item["backward_fill_count"] > 0 for item in rows),
++            "inputCellCount": sum(item["history_window_size"] for item in rows),
++            "exactCellCount": sum(item["exact_timestamp_match_count"] for item in rows),
++            "asofCellCount": sum(item["backward_asof_match_count"] for item in rows),
++            "interiorInterpolationCellCount": sum(item["interior_interpolation_count"] for item in rows),
++            "leadingBoundaryExtensionCellCount": sum(item["leading_boundary_extension_count"] for item in rows),
++            "trailingBoundaryExtensionCellCount": sum(item["trailing_boundary_extension_count"] for item in rows),
++            "forwardFillCellCount": sum(item["forward_fill_count"] for item in rows),
++            "backwardFillCellCount": sum(item["backward_fill_count"] for item in rows),
++            "fillRatio": rounded(sum(
++                item["interior_interpolation_count"]
++                + item["leading_boundary_extension_count"]
++                + item["trailing_boundary_extension_count"]
++                + item["forward_fill_count"]
++                + item["backward_fill_count"]
++                for item in rows
++            ) / sum(item["history_window_size"] for item in rows), 12),
++            "nonExactAlignmentRatio": rounded(sum(
++                item["backward_asof_match_count"]
++                + item["interior_interpolation_count"]
++                + item["leading_boundary_extension_count"]
++                + item["trailing_boundary_extension_count"]
++                + item["forward_fill_count"]
++                + item["backward_fill_count"]
++                for item in rows
++            ) / sum(item["history_window_size"] for item in rows), 12),
++            "maxFillRatio": rounded(max(all_fill_ratios)),
++            "medianFillRatio": rounded(median(all_fill_ratios)),
++            "maxNonExactAlignmentRatio": rounded(max(all_non_exact_ratios)),
++            "maxRawGapSeconds": rounded(max(all_gaps), 3) if all_gaps else None,
++            "medianAbsoluteSourceOffsetSeconds": rounded(percentile([abs(value) for value in all_source_offsets], 0.5), 3),
++            "p95AbsoluteSourceOffsetSeconds": rounded(percentile([abs(value) for value in all_source_offsets], 0.95), 3),
++            "maxAbsoluteSourceOffsetSeconds": rounded(max([abs(value) for value in all_source_offsets]), 3) if all_source_offsets else None,
++            "pastSourceCellCount": sum(int(item["past_source_cell_count"]) for item in rows),
++            "futureSourceCellCount": sum(int(item["future_source_cell_count"]) for item in rows),
++            "pastSourceContributorCount": sum(int(item["past_source_contributor_count"]) for item in rows),
++            "futureSourceContributorCount": sum(int(item["future_source_contributor_count"]) for item in rows),
++            "maxPastSourceLagSeconds": rounded(max(
++                item["max_past_source_lag_seconds"]
++                for item in rows
++                if item["max_past_source_lag_seconds"] is not None
++            ), 3) if any(item["max_past_source_lag_seconds"] is not None for item in rows) else None,
++            "maxFutureSourceLeadSeconds": rounded(max(
++                item["max_future_source_lead_seconds"]
++                for item in rows
++                if item["max_future_source_lead_seconds"] is not None
++            ), 3) if any(item["max_future_source_lead_seconds"] is not None for item in rows) else None,
++            "unresolvedMissingCount": sum(int(item["final_missing_count"]) for item in rows),
++        },
++    }
++    return rows, summary
++
++
++def markdown_table(headers: list[str], rows: Iterable[Iterable[Any]]) -> list[str]:
++    rendered = ["| " + " | ".join(headers) + " |", "| " + " | ".join("---" for _ in headers) + " |"]
++    for row in rows:
++        rendered.append("| " + " | ".join(str(value).replace("|", "\\|") for value in row) + " |")
++    return rendered
++
++
++def render_policy_review(summary: dict[str, Any]) -> str:
++    overall = summary["overall"]
++    model_rows = [
++        [
++            item["modelCode"],
++            item["featureCount"],
++            item["backwardAsofFeatureCount"],
++            item["interiorInterpolationFeatureCount"],
++            item["boundaryExtensionFeatureCount"],
++            item["forwardFillFeatureCount"],
++            item["backwardFillFeatureCount"],
++            item["maxRawGapSeconds"],
++            item["p95AbsoluteSourceOffsetSeconds"],
++            item["futureSourceCellCount"],
++            item["maxFutureSourceLeadSeconds"],
++            item["maxFillRatio"],
++            item["unresolvedMissingCount"],
++        ]
++        for item in summary["models"]
++    ]
++    lines = [
++        "# SHM-EM Phase 0.6.1 Input Alignment Audit v3",
++        "",
++        "## Scope and attribution",
++        "",
++        "This is an offline, read-only audit of the committed public sample. It does not connect to MySQL, modify data, change production inputs, or run model inference. Attribution reproduces the existing three-minute grid, backward `merge_asof`, bidirectional linear interpolation, `ffill`, `bfill`, and remaining-NaN check.",
++        "",
++        "`fill_ratio` includes interior interpolation, leading/trailing boundary extension, ffill, and bfill, but excludes backward as-of. `non_exact_alignment_ratio` additionally includes backward as-of and describes synchronization to the canonical grid; it is not interpreted as missing-data imputation.",
++        "",
++        "## Public-sample results",
++        "",
++        *markdown_table(
++            ["Model", "Features", "As-of", "Interior", "Boundary", "FFill", "BFill", "Max gap (s)", "P95 |offset| (s)", "Future cells", "Max lead (s)", "Max fill ratio", "Missing"],
++            model_rows,
++        ),
++        "",
++        f"Across `{overall['inputCellCount']}` model-input cells, `{overall['exactCellCount']}` were exact, `{overall['asofCellCount']}` used backward as-of, `{overall['interiorInterpolationCellCount']}` used interior interpolation, and `{overall['leadingBoundaryExtensionCellCount'] + overall['trailingBoundaryExtensionCellCount']}` used boundary extension. Maximum raw gap was `{overall['maxRawGapSeconds']}` seconds, p95 absolute source offset was `{overall['p95AbsoluteSourceOffsetSeconds']}` seconds, `{overall['futureSourceCellCount']}` cells had at least one later-source contributor, maximum future-source lead was `{overall['maxFutureSourceLeadSeconds']}` seconds, maximum fill ratio was `{overall['maxFillRatio']}`, and unresolved missing cells totalled `{overall['unresolvedMissingCount']}`.",
++        "",
++        "## Required policy questions",
++        "",
++        "1. **What is the current `merge_asof` tolerance?** One model time step: 180 seconds for the active public-sample contract.",
++        "2. **Where is tolerance defined?** `WideTableBuilder` creates `step = timedelta(minutes=time_step_minutes)` and passes that same value to `_align_series` as tolerance.",
++        "3. **Is tolerance tied to model sampling interval?** Yes. Active model contracts define `time_step_minutes=3`; contract loading requires a single shared value across active models.",
++        "4. **Which features are interpolated?** Every enabled model-input column in the common wide table is included in the DataFrame-wide interpolation operation when it contains a missing grid cell.",
++        "5. **Does `limit_direction=\"both\"` allow boundary filling?** Yes. Leading and trailing gaps can be filled from the nearest available boundary value during the interpolation stage.",
++        "6. **Can `ffill`/`bfill` spread one point across multiple historical steps?** The sequence permits it in principle. In the audited implementation Pandas' bidirectional interpolation normally fills boundaries first, so the later fill calls only act if values remain. A sparse column can still derive multiple grid cells from one observed value during interpolation.",
++        "7. **Are fill counts recorded in production?** Phase 0.6 adds compact descriptive counts to each model run's `input_snapshot_json`; the numerical input remains unchanged.",
++        "8. **Is maximum gap recorded in production?** Phase 0.6 records the model-window maximum raw gap as descriptive provenance.",
++        "9. **Is there a stale cutoff?** Alignment has a one-step as-of tolerance, but interpolation and boundary filling have no separate temporal-offset cutoff. The execution gate checks completed-batch freshness, not per-feature source offset.",
++        "10. **Can the gate use the new diagnostics?** The values are provenance only. Phase 0.6.1 adds no fill, gap, or offset threshold and makes no eligibility decision from them.",
++        "11. **Does `input_snapshot_json` record alignment diagnostics?** Yes, as a compact policy/version and per-model quality summary; full feature rows remain revision evidence only.",
++        "12. **Can current behavior answer Reviewers 2 and 3?** Yes at the descriptive level: the method, stage counts, fill ratio, raw gap, signed temporal offsets, past lag, and future lead are explicit and reproducible.",
++        "13. **What remains deferred?** Scientifically justified acceptance thresholds and gate enforcement. They are not inferred from this single public sample.",
++        "",
++        "## Phase 0.6.1 conclusion",
++        "",
++        "Phase 0.6.1 makes source-time direction explicit without changing values, filling behavior, or eligibility. Later-source contributors remain inside the historical window available at the prediction origin; they are not observations beyond the forecast origin. Numerical equivalence is reported separately in the regression artifacts.",
++    ]
++    return "\n".join(lines) + "\n"
++
++
++def write_outputs(
++    output_dir: Path,
++    rows: list[dict[str, Any]],
++    summary: dict[str, Any],
++) -> None:
++    output_dir.mkdir(parents=True, exist_ok=True)
++    csv_path = output_dir / "alignment-audit-v3.csv"
++    with csv_path.open("w", encoding="utf-8", newline="") as stream:
++        writer = csv.DictWriter(stream, fieldnames=CSV_COLUMNS)
++        writer.writeheader()
++        writer.writerows(rows)
++    (output_dir / "alignment-audit-v3-summary.json").write_text(
++        json.dumps(summary, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
++        encoding="utf-8",
++    )
++    (output_dir / "alignment-audit-v3-review.md").write_text(
++        render_policy_review(summary),
++        encoding="utf-8",
++    )
++
++
++def main() -> int:
++    args = parse_args()
++    root = args.repo.resolve()
++    sample_sql = repo_path(root, args.sample_sql).resolve()
++    output_dir = repo_path(root, args.output_dir).resolve()
++    if not sample_sql.is_file():
++        raise FileNotFoundError(sample_sql)
++    tables = parse_public_sample(sample_sql)
++    models, features, project_id = load_contract(root, tables, args.project_code)
++    rows, summary = audit_alignment(root, tables, models, features, project_id)
++    summary["projectCode"] = args.project_code
++    summary["publicSample"] = {
++        "path": sample_sql.relative_to(root).as_posix(),
++        "sha256": sha256(sample_sql),
++    }
++    write_outputs(output_dir, rows, summary)
++    print(json.dumps(summary["overall"], sort_keys=True))
++    return 0
++
++
++if __name__ == "__main__":
++    raise SystemExit(main())
+diff --git a/tools/revision/benchmark_alignment_diagnostics.py b/tools/revision/benchmark_alignment_diagnostics.py
+new file mode 100644
+index 0000000..e8e3840
+--- /dev/null
++++ b/tools/revision/benchmark_alignment_diagnostics.py
+@@ -0,0 +1,280 @@
++#!/usr/bin/env python3
++"""Benchmark value-only, Phase 0.6 two-pass, and Phase 0.6.1 one-pass alignment."""
++
++from __future__ import annotations
++
++import argparse
++import gc
++import json
++import statistics
++import sys
++import time
++from datetime import timedelta
++from pathlib import Path
++from typing import Any
++
++import numpy as np
++import pandas as pd
++
++
++ROOT = Path(__file__).resolve().parents[2]
++PIT_PRE_ROOT = ROOT / "src/pit_pre"
++if str(PIT_PRE_ROOT) not in sys.path:
++    sys.path.insert(0, str(PIT_PRE_ROOT))
++if str(Path(__file__).resolve().parent) not in sys.path:
++    sys.path.insert(0, str(Path(__file__).resolve().parent))
++
++import audit_input_alignment as alignment_audit
++from phase0_6_regression import EXTRA_TABLES, PublicSampleFeatureRepository
++from pit_pre.features import (
++    InputAlignmentDiagnostics,
++    _align_series_with_trace,
++    _feature_alignment_diagnostics,
++    _max_raw_gap_seconds,
++    _raw_timestamps,
++)
++
++
++def parse_args() -> argparse.Namespace:
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument("--repeats", type=int, default=9)
++    parser.add_argument(
++        "--output-dir",
++        type=Path,
++        default=Path("artifacts/revision/phase0_6_1"),
++    )
++    return parser.parse_args()
++
++
++def resolve(path: Path) -> Path:
++    return path if path.is_absolute() else ROOT / path
++
++
++def prepared_series(series: pd.DataFrame) -> pd.DataFrame:
++    if series.empty:
++        return series
++    data = series.copy()
++    data["measurement_time"] = pd.to_datetime(data["measurement_time"])
++    return (
++        data.sort_values(["measurement_time", "id"])
++        .drop_duplicates("measurement_time", keep="last")
++        [["measurement_time", "value"]]
++        .dropna(subset=["value"])
++    )
++
++
++def value_only_alignment(
++    series: pd.DataFrame,
++    time_index: list[pd.Timestamp],
++    tolerance: timedelta,
++) -> list[float | None]:
++    data = prepared_series(series)
++    if data.empty:
++        return [None for _ in time_index]
++    target = pd.DataFrame({"time": pd.to_datetime(time_index)})
++    aligned = pd.merge_asof(
++        target,
++        data.rename(columns={"measurement_time": "time"}).sort_values("time"),
++        on="time",
++        direction="backward",
++        tolerance=pd.Timedelta(tolerance),
++    )
++    return [None if pd.isna(value) else float(value) for value in aligned["value"]]
++
++
++def source_time_only_alignment(
++    series: pd.DataFrame,
++    time_index: list[pd.Timestamp],
++    tolerance: timedelta,
++) -> list[pd.Timestamp | None]:
++    data = prepared_series(series)
++    if data.empty:
++        return [None for _ in time_index]
++    data["source_time"] = data["measurement_time"]
++    target = pd.DataFrame({"time": pd.to_datetime(time_index)})
++    aligned = pd.merge_asof(
++        target,
++        data.rename(columns={"measurement_time": "time"}).sort_values("time"),
++        on="time",
++        direction="backward",
++        tolerance=pd.Timedelta(tolerance),
++    )
++    return [None if pd.isna(value) else pd.Timestamp(value) for value in aligned["source_time"]]
++
++
++def fixture() -> tuple[list[Any], dict[str, pd.DataFrame], list[pd.Timestamp], timedelta]:
++    alignment_audit.AUDIT_TABLES.update(EXTRA_TABLES)
++    tables = alignment_audit.parse_public_sample(
++        ROOT / "sql/shm_em_database/02_SHM_EM_public_sample.sql"
++    )
++    models, features, project_id = alignment_audit.load_contract(
++        ROOT, tables, alignment_audit.PROJECT_CODE
++    )
++    repository = PublicSampleFeatureRepository(tables, features, project_id)
++    required_rows = max(int(model["required_history_rows"]) for model in models)
++    latest_time = repository.find_latest_time(features)
++    step = timedelta(minutes=int(models[0]["time_step_minutes"]))
++    start_time = latest_time - step * (required_rows - 1)
++    time_index = [pd.Timestamp(start_time + step * index) for index in range(required_rows)]
++    series = {
++        mapping.training_feature_code: repository.read_feature_series(
++            mapping, start_time - step, latest_time
++        )
++        for mapping in features
++    }
++    return features, series, time_index, step
++
++
++def build(
++    mode: str,
++    mappings: list[Any],
++    series_by_code: dict[str, pd.DataFrame],
++    time_index: list[pd.Timestamp],
++    step: timedelta,
++) -> tuple[pd.DataFrame, dict[str, Any] | None]:
++    values: dict[str, list[float | None]] = {}
++    source_times: dict[str, list[pd.Timestamp | None]] = {}
++    for mapping in mappings:
++        code = mapping.training_feature_code
++        series = series_by_code[code]
++        if mode == "phase0_6_1_one_pass":
++            trace = _align_series_with_trace(series, time_index, step)
++            values[code] = trace.values
++            source_times[code] = trace.source_times
++        else:
++            values[code] = value_only_alignment(series, time_index, step)
++            if mode == "phase0_6_two_pass":
++                source_times[code] = source_time_only_alignment(series, time_index, step)
++
++    initial = pd.DataFrame(values)
++    interpolated = initial.interpolate(method="linear", limit_direction="both")
++    forward = interpolated.ffill()
++    filled = forward.bfill()
++    summary = None
++    if mode != "value_only":
++        diagnostics = {
++            code: _feature_alignment_diagnostics(
++                time_index=time_index,
++                initial=initial[code],
++                interpolated=interpolated[code],
++                forward_filled=forward[code],
++                filled=filled[code],
++                source_times=source_times[code],
++                max_raw_gap_seconds=_max_raw_gap_seconds(series_by_code[code]),
++                raw_timestamps=_raw_timestamps(series_by_code[code]),
++            )
++            for code in filled.columns
++        }
++        summary = InputAlignmentDiagnostics(
++            time_step_seconds=int(step.total_seconds()),
++            features=diagnostics,
++            time_index=tuple(time_index),
++        ).quality_summary(list(filled.columns), len(time_index))
++    return filled, summary
++
++
++def percentile(values: list[float], quantile: float) -> float:
++    return float(pd.Series(values, dtype="float64").quantile(quantile))
++
++
++def benchmark(repeats: int) -> dict[str, Any]:
++    mappings, series, time_index, step = fixture()
++    modes = ["value_only", "phase0_6_two_pass", "phase0_6_1_one_pass"]
++    outputs = {mode: build(mode, mappings, series, time_index, step) for mode in modes}
++    reference = outputs["value_only"][0].to_numpy(dtype=np.float64)
++    numerical_diffs = {
++        mode: float(np.max(np.abs(reference - outputs[mode][0].to_numpy(dtype=np.float64))))
++        for mode in modes
++    }
++    timings: dict[str, list[float]] = {mode: [] for mode in modes}
++    for mode in modes:
++        build(mode, mappings, series, time_index, step)
++        for _ in range(repeats):
++            gc.collect()
++            started = time.perf_counter()
++            build(mode, mappings, series, time_index, step)
++            timings[mode].append((time.perf_counter() - started) * 1000)
++    measurements = {
++        mode: {
++            "samples": repeats,
++            "medianMilliseconds": round(statistics.median(values), 3),
++            "p95Milliseconds": round(percentile(values, 0.95), 3),
++            "minMilliseconds": round(min(values), 3),
++            "maxMilliseconds": round(max(values), 3),
++        }
++        for mode, values in timings.items()
++    }
++    two_pass = outputs["phase0_6_two_pass"][1]
++    one_pass = outputs["phase0_6_1_one_pass"][1]
++    stage_keys = [
++        "exactCellCount",
++        "asofCellCount",
++        "interiorInterpolationCellCount",
++        "leadingBoundaryExtensionCellCount",
++        "trailingBoundaryExtensionCellCount",
++        "forwardFillCellCount",
++        "backwardFillCellCount",
++        "unresolvedMissingCellCount",
++    ]
++    return {
++        "schemaVersion": "shm-em-phase0-6-1-alignment-benchmark-v1",
++        "scope": "public sample common 16-step wide-table build",
++        "featureCount": len(mappings),
++        "measurements": measurements,
++        "maxNumericalAbsDifferenceByMode": numerical_diffs,
++        "stageCountsIdentical": all(two_pass[key] == one_pass[key] for key in stage_keys),
++        "twoPassStageCounts": {key: two_pass[key] for key in stage_keys},
++        "onePassStageCounts": {key: one_pass[key] for key in stage_keys},
++        "eligibilityThresholdsApplied": False,
++    }
++
++
++def render(report: dict[str, Any]) -> str:
++    rows = [
++        f"| {mode} | {item['medianMilliseconds']} | {item['p95Milliseconds']} | {item['minMilliseconds']} | {item['maxMilliseconds']} |"
++        for mode, item in report["measurements"].items()
++    ]
++    return "\n".join([
++        "# Phase 0.6.1 Alignment Diagnostics Overhead Benchmark",
++        "",
++        f"Scope: {report['scope']} with `{report['featureCount']}` mapped features.",
++        "",
++        "| Mode | Median (ms) | P95 (ms) | Min (ms) | Max (ms) |",
++        "| --- | --- | --- | --- | --- |",
++        *rows,
++        "",
++        f"- Maximum numerical difference across modes: `{max(report['maxNumericalAbsDifferenceByMode'].values())}`",
++        f"- Two-pass and one-pass stage counts identical: `{str(report['stageCountsIdentical']).lower()}`",
++        "- This is a local engineering microbenchmark, not a paper-level scalability claim.",
++        "",
++    ])
++
++
++def main() -> int:
++    args = parse_args()
++    if args.repeats < 3:
++        raise ValueError("--repeats must be at least 3")
++    output_dir = resolve(args.output_dir)
++    output_dir.mkdir(parents=True, exist_ok=True)
++    report = benchmark(args.repeats)
++    (output_dir / "diagnostics-overhead-benchmark.json").write_text(
++        json.dumps(report, indent=2, sort_keys=True) + "\n",
++        encoding="utf-8",
++    )
++    (output_dir / "diagnostics-overhead-benchmark.md").write_text(
++        render(report),
++        encoding="utf-8",
++    )
++    passed = (
++        max(report["maxNumericalAbsDifferenceByMode"].values()) == 0.0
++        and report["stageCountsIdentical"]
++    )
++    print(json.dumps({
++        "measurements": report["measurements"],
++        "passed": passed,
++    }, sort_keys=True))
++    return 0 if passed else 1
++
++
++if __name__ == "__main__":
++    raise SystemExit(main())
+diff --git a/tools/revision/phase0_6_1_evidence.py b/tools/revision/phase0_6_1_evidence.py
+new file mode 100644
+index 0000000..e600896
+--- /dev/null
++++ b/tools/revision/phase0_6_1_evidence.py
+@@ -0,0 +1,404 @@
++#!/usr/bin/env python3
++"""Assemble the Phase 0.6.1 regression and acceptance evidence."""
++
++from __future__ import annotations
++
++import argparse
++import json
++import re
++import subprocess
++import sys
++from datetime import datetime, timezone
++from pathlib import Path
++from typing import Any
++
++
++ROOT = Path(__file__).resolve().parents[2]
++PIT_PRE_ROOT = ROOT / "src/pit_pre"
++if str(PIT_PRE_ROOT) not in sys.path:
++    sys.path.insert(0, str(PIT_PRE_ROOT))
++if str(Path(__file__).resolve().parent) not in sys.path:
++    sys.path.insert(0, str(Path(__file__).resolve().parent))
++
++from phase0_6_regression import array_diff, record_diff, sha256_file
++
++
++STAGE_KEYS = (
++    "inputCellCount",
++    "exactCellCount",
++    "asofCellCount",
++    "interiorInterpolationCellCount",
++    "leadingBoundaryExtensionCellCount",
++    "trailingBoundaryExtensionCellCount",
++    "boundaryExtensionCellCount",
++    "forwardFillCellCount",
++    "backwardFillCellCount",
++    "unresolvedMissingCellCount",
++    "fillRatio",
++    "nonExactAlignmentRatio",
++    "maxRawGapSeconds",
++)
++
++OFFSET_KEYS = (
++    "medianAbsoluteSourceOffsetSeconds",
++    "p95AbsoluteSourceOffsetSeconds",
++    "maxAbsoluteSourceOffsetSeconds",
++    "pastSourceCellCount",
++    "futureSourceCellCount",
++    "pastSourceContributorCount",
++    "futureSourceContributorCount",
++    "maxPastSourceLagSeconds",
++    "maxFutureSourceLeadSeconds",
++)
++
++DECLARED_CONTRACT_KEYS = (
++    "requiredHistoryRows",
++    "artifactHash",
++    "preprocessorHash",
++    "inferenceScriptHash",
++    "bestParamsHash",
++    "runtimeManifestHash",
++    "environmentDigest",
++    "artifactBundleHash",
++    "inputSchemaHash",
++)
++
++
++def parse_args() -> argparse.Namespace:
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument(
++        "--before",
++        type=Path,
++        default=Path("artifacts/revision/phase0_6_1/regression-phase0_6-baseline-capture.json"),
++    )
++    parser.add_argument(
++        "--after",
++        type=Path,
++        default=Path("artifacts/revision/phase0_6_1/regression-one-pass-capture.json"),
++    )
++    parser.add_argument(
++        "--output-dir",
++        type=Path,
++        default=Path("artifacts/revision/phase0_6_1"),
++    )
++    return parser.parse_args()
++
++
++def resolve(path: Path) -> Path:
++    return path if path.is_absolute() else ROOT / path
++
++
++def git(*args: str, check: bool = True) -> subprocess.CompletedProcess[str]:
++    return subprocess.run(
++        ["git", *args],
++        cwd=ROOT,
++        check=check,
++        capture_output=True,
++        text=True,
++    )
++
++
++def load_json(path: Path) -> dict[str, Any]:
++    return json.loads(resolve(path).read_text(encoding="utf-8"))
++
++
++def declared_contract(contract: dict[str, Any]) -> dict[str, Any]:
++    return {key: contract.get(key) for key in DECLARED_CONTRACT_KEYS}
++
++
++def max_input_diff(report: dict[str, Any]) -> float:
++    return max([
++        report["commonInput"]["maxAbsDifference"],
++        *[item["maxAbsDifference"] for item in report["models"].values()],
++    ])
++
++
++def build_regression(
++    before: dict[str, Any],
++    after: dict[str, Any],
++) -> tuple[dict[str, Any], dict[str, Any]]:
++    input_report = {
++        "schemaVersion": "shm-em-phase0-6-1-one-pass-input-regression-v1",
++        "commonInput": array_diff(before["commonInput"], after["commonInput"]),
++        "models": {
++            code: array_diff(before["modelInputs"][code], after["modelInputs"][code])
++            for code in sorted(before["modelInputs"])
++        },
++    }
++    models: dict[str, Any] = {}
++    for code in sorted(before["predictions"]):
++        old = before["predictions"][code]
++        new = after["predictions"][code]
++        old_contract = before["contracts"][code]
++        new_contract = after["contracts"][code]
++        stage_before = before["alignmentQuality"][code]
++        stage_after = after["alignmentQuality"][code]
++        models[code] = {
++            "targetCountBefore": old["targetCount"],
++            "targetCountAfter": new["targetCount"],
++            "stepCountBefore": old["stepCount"],
++            "stepCountAfter": new["stepCount"],
++            "rawPrediction": record_diff(old["records"], new["records"]),
++            "engineeringPrediction": record_diff(
++                old["engineeringRecords"], new["engineeringRecords"]
++            ),
++            "resultHashBefore": old["resultHash"],
++            "resultHashAfter": new["resultHash"],
++            "stageCountsBefore": {key: stage_before[key] for key in STAGE_KEYS},
++            "stageCountsAfter": {key: stage_after[key] for key in STAGE_KEYS},
++            "stageCountsIdentical": all(stage_before[key] == stage_after[key] for key in STAGE_KEYS),
++            "directionalOffsetSummaryAfter": {key: stage_after[key] for key in OFFSET_KEYS},
++            "declaredContractIdentical": (
++                declared_contract(old_contract) == declared_contract(new_contract)
++            ),
++            "checkoutScriptHashBeforeMatchesContract": (
++                old_contract["actualInferenceScriptHash"] == old_contract["inferenceScriptHash"]
++            ),
++            "checkoutScriptHashAfterMatchesContract": (
++                new_contract["actualInferenceScriptHash"] == new_contract["inferenceScriptHash"]
++            ),
++        }
++    prediction_report = {
++        "schemaVersion": "shm-em-phase0-6-1-one-pass-prediction-regression-v1",
++        "totalsBefore": before["totals"],
++        "totalsAfter": after["totals"],
++        "models": models,
++        "declaredContractsIdentical": all(
++            item["declaredContractIdentical"] for item in models.values()
++        ),
++        "rawCheckoutScriptHashesCorrectedByEolPolicy": all(
++            not item["checkoutScriptHashBeforeMatchesContract"]
++            and item["checkoutScriptHashAfterMatchesContract"]
++            for item in models.values()
++        ),
++    }
++    return input_report, prediction_report
++
++
++def audit_cross_check(after: dict[str, Any], audit: dict[str, Any]) -> dict[str, Any]:
++    audit_models = {item["modelCode"]: item for item in audit["models"]}
++    fields = (*STAGE_KEYS[:-3], "fillRatio", "nonExactAlignmentRatio", "maxRawGapSeconds", *OFFSET_KEYS)
++    models: dict[str, Any] = {}
++    for code, production in sorted(after["alignmentQuality"].items()):
++        offline = audit_models[code]
++        comparisons: dict[str, bool] = {}
++        for field in fields:
++            offline_field = "unresolvedMissingCount" if field == "unresolvedMissingCellCount" else field
++            comparisons[field] = production[field] == offline[offline_field]
++        models[code] = {
++            "fields": comparisons,
++            "matches": all(comparisons.values()),
++        }
++    return {
++        "schemaVersion": "shm-em-phase0-6-1-production-audit-cross-check-v1",
++        "models": models,
++        "matches": all(item["matches"] for item in models.values()),
++    }
++
++
++def run_tests() -> dict[str, Any]:
++    command = [sys.executable, "-m", "unittest", "discover", "-s", "tests", "-v"]
++    result = subprocess.run(
++        command,
++        cwd=PIT_PRE_ROOT,
++        capture_output=True,
++        text=True,
++    )
++    output = result.stdout + result.stderr
++    match = re.search(r"Ran (\d+) tests?", output)
++    return {
++        "command": "python -m unittest discover -s tests -v",
++        "testsRun": int(match.group(1)) if match else None,
++        "passed": result.returncode == 0,
++        "exitCode": result.returncode,
++    }
++
++
++def source_boundary_check() -> dict[str, Any]:
++    feature_source = (PIT_PRE_ROOT / "pit_pre/features.py").read_text(encoding="utf-8")
++    forbidden = (
++        "maxFillRatioAllowed",
++        "maxRawGapSecondsAllowed",
++        "maxAbsoluteSourceOffsetSecondsAllowed",
++        "maxFutureSourceLeadSecondsAllowed",
++        "sourceOffsetEligible",
++    )
++    changed = set(git("diff", "--name-only").stdout.splitlines())
++    changed.update(git("ls-files", "--others", "--exclude-standard").stdout.splitlines())
++    prohibited = sorted(
++        path for path in changed
++        if path.startswith("src/backend/") or path.startswith("src/frontend/")
++    )
++    return {
++        "mergeAsofCallSiteCountInProductionFeatures": feature_source.count("pd.merge_asof("),
++        "legacySecondMergeHelperPresent": "def _aligned_source_times(" in feature_source,
++        "forbiddenThresholdTokensPresent": [token for token in forbidden if token in feature_source],
++        "prohibitedModulesModified": prohibited,
++    }
++
++
++def write_code_diff(output: Path) -> None:
++    parts = [git("diff", "--binary", "--no-ext-diff").stdout]
++    untracked = git("ls-files", "--others", "--exclude-standard").stdout.splitlines()
++    for path in untracked:
++        result = git(
++            "diff", "--no-index", "--binary", "--", "/dev/null", path,
++            check=False,
++        )
++        if result.returncode not in (0, 1):
++            raise RuntimeError(result.stderr)
++        parts.append(result.stdout)
++    output.write_text("".join(parts), encoding="utf-8")
++
++
++def write_manifest(output_dir: Path) -> None:
++    manifest_path = output_dir / "phase0_6_1-manifest.json"
++    files = [
++        {
++            "path": path.relative_to(ROOT).as_posix(),
++            "bytes": path.stat().st_size,
++            "sha256": sha256_file(path),
++        }
++        for path in sorted(output_dir.iterdir())
++        if path.is_file() and path != manifest_path
++    ]
++    manifest = {
++        "schemaVersion": "shm-em-phase0-6-1-manifest-v1",
++        "phase": "Phase 0.6.1 - Reproducibility and Diagnostic Semantics Stabilization",
++        "sourceGitCommit": git("rev-parse", "HEAD").stdout.strip(),
++        "submittedTag": "v1.0.0",
++        "submittedTagCommit": git("rev-parse", "v1.0.0^{}").stdout.strip(),
++        "generationTimestamp": datetime.now(timezone.utc).replace(microsecond=0).isoformat(),
++        "coreFreezeCommitRecorded": False,
++        "artifacts": files,
++    }
++    manifest_path.write_text(
++        json.dumps(manifest, indent=2, sort_keys=True) + "\n",
++        encoding="utf-8",
++    )
++
++
++def main() -> int:
++    args = parse_args()
++    output_dir = resolve(args.output_dir)
++    output_dir.mkdir(parents=True, exist_ok=True)
++    before = load_json(args.before)
++    after = load_json(args.after)
++    audit = load_json(output_dir / "alignment-audit-v3-summary.json")
++    contract_hashes = load_json(output_dir / "public-contract-hash-validation.json")
++    benchmark = load_json(output_dir / "diagnostics-overhead-benchmark.json")
++    input_report, prediction_report = build_regression(before, after)
++    cross_check = audit_cross_check(after, audit)
++    tests = run_tests()
++    boundary = source_boundary_check()
++
++    (output_dir / "one-pass-regression-input.json").write_text(
++        json.dumps(input_report, indent=2, sort_keys=True) + "\n",
++        encoding="utf-8",
++    )
++    (output_dir / "one-pass-regression-prediction.json").write_text(
++        json.dumps(prediction_report, indent=2, sort_keys=True) + "\n",
++        encoding="utf-8",
++    )
++    (output_dir / "production-audit-v3-cross-check.json").write_text(
++        json.dumps(cross_check, indent=2, sort_keys=True) + "\n",
++        encoding="utf-8",
++    )
++
++    model_results = prediction_report["models"].values()
++    numerical_pass = (
++        max_input_diff(input_report) == 0.0
++        and all(item["rawPrediction"]["maxAbsDifference"] == 0.0 for item in model_results)
++        and all(item["engineeringPrediction"]["maxAbsDifference"] == 0.0 for item in model_results)
++        and all(item["resultHashBefore"] == item["resultHashAfter"] for item in model_results)
++    )
++    totals_pass = (
++        before["totals"] == after["totals"]
++        and after["totals"] == {
++            "modelCount": 6,
++            "predictionRecordCount": 4960,
++            "stepCount": 40,
++            "targetCount": 124,
++        }
++    )
++    stage_pass = all(item["stageCountsIdentical"] for item in model_results)
++    one_pass_pass = (
++        boundary["mergeAsofCallSiteCountInProductionFeatures"] == 1
++        and not boundary["legacySecondMergeHelperPresent"]
++    )
++    threshold_pass = not boundary["forbiddenThresholdTokensPresent"]
++    validation = {
++        "schemaVersion": "shm-em-phase0-6-1-validation-v1",
++        "numericalRegressionPassed": numerical_pass,
++        "maximumInputAbsoluteDifference": max_input_diff(input_report),
++        "maximumRawPredictionAbsoluteDifference": max(
++            item["rawPrediction"]["maxAbsDifference"] for item in model_results
++        ),
++        "maximumEngineeringAbsoluteDifference": max(
++            item["engineeringPrediction"]["maxAbsDifference"] for item in model_results
++        ),
++        "totals": after["totals"],
++        "totalsPassed": totals_pass,
++        "stageCountsPassed": stage_pass,
++        "productionMatchesOfflineAuditV3": cross_check["matches"],
++        "rawContractHashesPassed": contract_hashes["passed"],
++        "onePassImplementationPassed": one_pass_pass,
++        "benchmarkPassed": (
++            max(benchmark["maxNumericalAbsDifferenceByMode"].values()) == 0.0
++            and benchmark["stageCountsIdentical"]
++        ),
++        "eligibilityThresholdsAdded": not threshold_pass,
++        "prohibitedModulesModified": boundary["prohibitedModulesModified"],
++        "pitPreUnitTests": tests,
++        "declaredContractsIdentical": prediction_report["declaredContractsIdentical"],
++        "rawCheckoutScriptHashesCorrectedByEolPolicy": prediction_report[
++            "rawCheckoutScriptHashesCorrectedByEolPolicy"
++        ],
++        "coreFreezeCommitRecorded": False,
++    }
++    passed = all((
++        numerical_pass,
++        totals_pass,
++        stage_pass,
++        cross_check["matches"],
++        contract_hashes["passed"],
++        one_pass_pass,
++        validation["benchmarkPassed"],
++        threshold_pass,
++        tests["passed"],
++        prediction_report["declaredContractsIdentical"],
++        prediction_report["rawCheckoutScriptHashesCorrectedByEolPolicy"],
++        not boundary["prohibitedModulesModified"],
++    ))
++    validation["passed"] = passed
++    (output_dir / "validation-summary.json").write_text(
++        json.dumps(validation, indent=2, sort_keys=True) + "\n",
++        encoding="utf-8",
++    )
++    summary = [
++        "# Phase 0.6.1 Validation Summary",
++        "",
++        f"- Overall acceptance: `{str(passed).lower()}`",
++        f"- Raw-byte contract validation: `{str(contract_hashes['passed']).lower()}`",
++        f"- Maximum aligned-input absolute difference: `{validation['maximumInputAbsoluteDifference']}`",
++        f"- Maximum raw-prediction absolute difference: `{validation['maximumRawPredictionAbsoluteDifference']}`",
++        f"- Maximum engineering-value absolute difference: `{validation['maximumEngineeringAbsoluteDifference']}`",
++        f"- Stage counts identical: `{str(stage_pass).lower()}`",
++        f"- Production and offline Audit v3 match: `{str(cross_check['matches']).lower()}`",
++        f"- Targets / steps / records: `{after['totals']['targetCount']} / {after['totals']['stepCount']} / {after['totals']['predictionRecordCount']}`",
++        f"- PIT_PRE tests: `{tests['testsRun']}` passed",
++        "- New fill/gap/offset eligibility thresholds: `none`",
++        "- Core-freeze commit recorded: `false`",
++        "",
++    ]
++    (output_dir / "phase0_6_1-summary.md").write_text(
++        "\n".join(summary), encoding="utf-8"
++    )
++    write_code_diff(output_dir / "code-diff.patch")
++    write_manifest(output_dir)
++    print(json.dumps({"passed": passed, "testsRun": tests["testsRun"]}, sort_keys=True))
++    return 0 if passed else 1
++
++
++if __name__ == "__main__":
++    raise SystemExit(main())
+diff --git a/tools/revision/phase0_6_regression.py b/tools/revision/phase0_6_regression.py
+new file mode 100644
+index 0000000..713f9b7
+--- /dev/null
++++ b/tools/revision/phase0_6_regression.py
+@@ -0,0 +1,598 @@
++#!/usr/bin/env python3
++"""Capture and compare the Phase 0.6 numerical regression baseline."""
++
++from __future__ import annotations
++
++import argparse
++import hashlib
++import json
++import math
++import subprocess
++import sys
++from datetime import datetime, timedelta, timezone
++from pathlib import Path
++from typing import Any
++
++import numpy as np
++import pandas as pd
++
++
++ROOT = Path(__file__).resolve().parents[2]
++PIT_PRE_ROOT = ROOT / "src/pit_pre"
++if str(PIT_PRE_ROOT) not in sys.path:
++    sys.path.insert(0, str(PIT_PRE_ROOT))
++
++import audit_input_alignment as alignment_audit
++from pit_pre.cached_model_runner import CachedModelRunner
++from pit_pre.config import AppConfig, DatabaseConfig, ModelConfig, RuntimeConfig
++from pit_pre.features import WideTableBuilder
++from pit_pre.pipeline import (
++    _globalize_first_step,
++    _input_window_for_model,
++    _next_virtual_row,
++    _prediction_values_by_feature,
++)
++from pit_pre.result_writer import _hash_frame
++
++
++EXTRA_TABLES = {
++    "em_conversion_parameter",
++    "em_instrument",
++    "em_metric_baseline_history",
++    "em_reference_binding",
++}
++
++
++class PublicSampleFeatureRepository:
++    def __init__(
++        self,
++        tables: dict[str, list[dict[str, Any]]],
++        features: list[alignment_audit.Feature],
++        project_id: int,
++    ):
++        self.features = features
++        self.series = {
++            feature.training_feature_code: alignment_audit.feature_rows(
++                feature, tables, project_id
++            )
++            for feature in features
++        }
++
++    def load_enabled_mappings(self):
++        return self.features
++
++    def find_latest_time(self, mappings):
++        return min(
++            pd.Timestamp(self.series[code]["measurement_time"].max())
++            for code in (mapping.training_feature_code for mapping in mappings)
++        ).to_pydatetime()
++
++    def read_feature_series(self, mapping, start_time, end_time):
++        frame = self.series[mapping.training_feature_code]
++        return frame[
++            (frame["measurement_time"] >= pd.Timestamp(start_time))
++            & (frame["measurement_time"] <= pd.Timestamp(end_time))
++        ].copy()
++
++
++def parse_args() -> argparse.Namespace:
++    parser = argparse.ArgumentParser(description=__doc__)
++    subparsers = parser.add_subparsers(dest="command", required=True)
++    capture = subparsers.add_parser("capture")
++    capture.add_argument("--output", type=Path, required=True)
++    capture.add_argument("--label", required=True)
++    compare = subparsers.add_parser("compare")
++    compare.add_argument("--before", type=Path, required=True)
++    compare.add_argument("--after", type=Path, required=True)
++    compare.add_argument("--output-dir", type=Path, required=True)
++    manifest = subparsers.add_parser("manifest")
++    manifest.add_argument("--output-dir", type=Path, required=True)
++    return parser.parse_args()
++
++
++def resolve(path: Path) -> Path:
++    return path if path.is_absolute() else ROOT / path
++
++
++def sha256_text(value: str) -> str:
++    return hashlib.sha256(value.encode("utf-8")).hexdigest()
++
++
++def sha256_file(path: Path) -> str:
++    digest = hashlib.sha256()
++    with path.open("rb") as stream:
++        for chunk in iter(lambda: stream.read(1024 * 1024), b""):
++            digest.update(chunk)
++    return digest.hexdigest()
++
++
++def numeric_matrix(frame: pd.DataFrame, columns: list[str]) -> dict[str, Any]:
++    values = frame[columns].to_numpy(dtype=np.float64)
++    payload = json.dumps(values.tolist(), separators=(",", ":"), allow_nan=False)
++    return {
++        "rows": int(values.shape[0]),
++        "columns": columns,
++        "columnCount": int(values.shape[1]),
++        "dtype": str(values.dtype),
++        "values": values.tolist(),
++        "sha256": sha256_text(payload),
++    }
++
++
++def _contract_path(value: Any) -> Path:
++    return PIT_PRE_ROOT / str(value).removeprefix("./")
++
++
++def model_config(tables: dict[str, list[dict[str, Any]]], project_code: str) -> AppConfig:
++    project = next(row for row in tables["em_project"] if row["project_code"] == project_code)
++    project_id = int(project["id"])
++    rows = sorted(
++        [
++            row for row in tables["em_prediction_model"]
++            if int(row["project_id"]) == project_id and row["status"] == "active"
++        ],
++        key=lambda row: str(row["model_code"]),
++    )
++    models: dict[str, ModelConfig] = {}
++    runtime_rows = []
++    for row in rows:
++        runtime = json.loads(str(row["runtime_config_json"]))
++        runtime_rows.append(runtime)
++        code = str(row["model_code"])
++        best_params = runtime.get("bestParamsPath")
++        models[code] = ModelConfig(
++            id=int(row["id"]),
++            code=code,
++            target_type=str(row["target_type"]),
++            script_path=_contract_path(runtime["scriptPath"]),
++            model_path=_contract_path(row["artifact_uri"]),
++            preprocessor_path=_contract_path(row["preprocessor_uri"]),
++            runtime_manifest_path=_contract_path(runtime["runtimeManifestPath"]),
++            best_params_path=_contract_path(best_params) if best_params else None,
++            required_history_rows=int(row["required_history_rows"]),
++            model_version=str(row["model_version"]),
++            artifact_hash=str(row["artifact_hash"]),
++            preprocessor_hash=str(row["preprocessor_hash"]),
++            inference_script_hash=str(row["inference_script_hash"]),
++            best_params_hash=None if row.get("best_params_hash") is None else str(row["best_params_hash"]),
++            runtime_manifest_hash=str(row["runtime_manifest_hash"]),
++            environment_digest=str(row["environment_digest"]),
++            artifact_bundle_hash=str(row["artifact_bundle_hash"]),
++            input_schema_hash=str(row["input_schema_hash"]),
++            contract_version=str(row["contract_version"]),
++            expected_steps=int(row["expected_steps"]),
++            time_step_minutes=int(row["time_step_minutes"]),
++            max_operational_age_minutes=int(row["max_operational_age_minutes"]),
++        )
++    first = rows[0]
++    runtime = runtime_rows[0]
++    counts = {
++        model.code: sum(
++            int(mapping["model_id"]) == model.id
++            and int(mapping.get("prediction_target") or 0) == 1
++            and int(mapping.get("required") or 0) == 1
++            and int(mapping.get("enabled") or 0) == 1
++            for mapping in tables["em_prediction_feature_mapping"]
++        )
++        for model in models.values()
++    }
++    return AppConfig(
++        database=DatabaseConfig("offline", 0, "offline", "offline", "offline"),
++        runtime=RuntimeConfig(
++            time_step_minutes=int(first["time_step_minutes"]),
++            project_code=project_code,
++            result_table="em_prediction_result",
++            prediction_mode=str(runtime["predictionMode"]),
++            prediction_horizon_minutes=int(runtime["predictionHorizonMinutes"]),
++            max_prediction_seconds=int(runtime["maxPredictionSeconds"]),
++            pipeline_version=str(first["contract_version"]),
++            feature_mapping_version=str(runtime["schemaVersion"]),
++            expected_steps=int(first["expected_steps"]),
++        ),
++        models=models,
++        prediction_target_counts=counts,
++        contract_fingerprint="offline-regression-capture",
++    )
++
++
++def feature_mapping_lookup(tables, project_id: int) -> dict[tuple[int, str], dict[str, Any]]:
++    return {
++        (int(row["model_id"]), str(row.get("training_feature_code") or row["feature_code"])): row
++        for row in tables["em_prediction_feature_mapping"]
++        if int(row["project_id"]) == project_id and int(row.get("enabled") or 0) == 1
++    }
++
++
++def active_lookup(rows: list[dict[str, Any]], keys: tuple[str, ...]) -> dict[tuple[Any, ...], dict[str, Any]]:
++    return {
++        tuple(row.get(key) for key in keys): row
++        for row in rows
++        if row.get("effective_to") is None
++    }
++
++
++def engineering_values(
++    model,
++    records: list[dict[str, Any]],
++    tables: dict[str, list[dict[str, Any]]],
++    project_id: int,
++) -> list[dict[str, Any]]:
++    mappings = feature_mapping_lookup(tables, project_id)
++    baselines = active_lookup(
++        [row for row in tables["em_metric_baseline_history"] if int(row["project_id"]) == project_id],
++        ("instrument_id", "metric_code"),
++    )
++    parameters = active_lookup(
++        [row for row in tables["em_conversion_parameter"] if int(row["project_id"]) == project_id],
++        ("instrument_id", "parameter_code"),
++    )
++    instruments = {int(row["id"]): row for row in tables["em_instrument"]}
++    references = {
++        (str(row["instrument_type"]), str(row["module_no"])): int(row["reference_instrument_id"])
++        for row in tables["em_reference_binding"]
++        if int(row["project_id"]) == project_id and int(row.get("enabled") or 0) == 1
++    }
++    raw_by_instrument_step: dict[tuple[int, int], float] = {}
++    mapped_records: list[tuple[dict[str, Any], dict[str, Any]]] = []
++    for record in records:
++        mapping = mappings[(model.id, record["point"])]
++        mapped_records.append((record, mapping))
++        raw_by_instrument_step[(int(mapping["instrument_id"]), int(record["step"]))] = float(record["value"])
++
++    output: list[dict[str, Any]] = []
++    for record, mapping in mapped_records:
++        raw = float(record["value"])
++        instrument_id = int(mapping["instrument_id"])
++        target = model.target_type
++        if target == "YD":
++            baseline = float(baselines[(instrument_id, "displacement_tilt_y_deg")]["baseline_value"])
++            initial = float(parameters[(instrument_id, "initial_y_mm")]["parameter_value"])
++            value = 1000 * math.sin(math.radians(raw)) - 1000 * math.sin(math.radians(baseline)) + initial
++        elif target == "XD":
++            baseline = float(baselines[(instrument_id, "displacement_tilt_x_deg")]["baseline_value"])
++            value = 1000 * math.sin(math.radians(raw)) - 1000 * math.sin(math.radians(baseline))
++        elif target == "water":
++            elevation = float(parameters[(instrument_id, "module_elevation_m")]["parameter_value"])
++            value = elevation - raw / 1000
++        elif target == "settlement":
++            instrument = instruments[instrument_id]
++            reference_id = references[("static_level", str(instrument["module_no"]))]
++            if instrument_id == reference_id:
++                value = 0.0
++            else:
++                baseline = float(baselines[(instrument_id, "static_level_value_mm")]["baseline_value"])
++                reference_baseline = float(baselines[(reference_id, "static_level_value_mm")]["baseline_value"])
++                reference_raw = raw_by_instrument_step[(reference_id, int(record["step"]))]
++                value = (raw - baseline) - (reference_raw - reference_baseline)
++        else:
++            value = raw
++        output.append({
++            "point": record["point"],
++            "step": int(record["step"]),
++            "value": float(value),
++        })
++    return output
++
++
++def capture(label: str, output: Path) -> None:
++    alignment_audit.AUDIT_TABLES.update(EXTRA_TABLES)
++    sample = ROOT / "sql/shm_em_database/02_SHM_EM_public_sample.sql"
++    tables = alignment_audit.parse_public_sample(sample)
++    models_data, features, project_id = alignment_audit.load_contract(
++        ROOT, tables, alignment_audit.PROJECT_CODE
++    )
++    del models_data
++    config = model_config(tables, alignment_audit.PROJECT_CODE)
++    repository = PublicSampleFeatureRepository(tables, features, project_id)
++    builder = WideTableBuilder(repository, config.runtime.time_step_minutes)
++    max_rows = max(model.required_history_rows for model in config.models.values())
++    diagnostics = None
++    if hasattr(builder, "build_with_diagnostics"):
++        result = builder.build_with_diagnostics(max_rows)
++        wide = result.values
++        diagnostics = result.diagnostics
++    else:
++        wide = builder.build(max_rows)
++
++    runner = CachedModelRunner(config.models)
++    base_time = pd.Timestamp(wide["time"].iloc[-1]).to_pydatetime()
++    base_time1 = float(wide["time1"].iloc[-1])
++    initial_wide = wide.copy()
++    pending: dict[str, list[pd.DataFrame]] = {code: [] for code in config.models}
++    first_inputs: dict[str, dict[str, Any]] = {}
++    quality: dict[str, Any] = {}
++
++    for step in range(1, config.runtime.expected_steps + 1):
++        round_predictions: dict[str, dict[str, float]] = {}
++        future_time = base_time + timedelta(minutes=step * config.runtime.time_step_minutes)
++        future_time1 = base_time1 + step
++        for model in config.models.values():
++            input_frame = _input_window_for_model(wide, model.required_history_rows)
++            cached = runner.cache[model.code]
++            if step == 1:
++                first_inputs[model.code] = numeric_matrix(input_frame, cached.input_columns)
++                if diagnostics is not None:
++                    quality[model.code] = diagnostics.quality_summary(
++                        cached.input_columns, model.required_history_rows
++                    )
++            local = runner.run(model, input_frame)
++            first = _globalize_first_step(
++                local, model.target_type, step, future_time, future_time1
++            )
++            pending[model.code].append(first)
++            round_predictions.update(_prediction_values_by_feature(first, model.target_type))
++        wide = pd.concat([
++            wide,
++            pd.DataFrame([_next_virtual_row(wide.iloc[-1], round_predictions, future_time, future_time1)]),
++        ], ignore_index=True)
++
++    predictions: dict[str, Any] = {}
++    total_records = 0
++    target_count = 0
++    for model in config.models.values():
++        frame = pd.concat(pending[model.code], ignore_index=True)
++        value_column = next(column for column in frame.columns if column.endswith("_pred"))
++        records = [
++            {"point": str(row["point"]), "step": int(row["step"]), "value": float(row[value_column])}
++            for row in frame.sort_values(["point", "step"]).to_dict("records")
++        ]
++        engineering = engineering_values(model, records, tables, project_id)
++        predictions[model.code] = {
++            "targetType": model.target_type,
++            "targetCount": int(frame["point"].nunique()),
++            "stepCount": int(frame["step"].nunique()),
++            "recordCount": len(records),
++            "resultHash": _hash_frame(frame, ["point", "step", value_column]),
++            "records": records,
++            "engineeringRecords": engineering,
++        }
++        total_records += len(records)
++        target_count += int(frame["point"].nunique())
++
++    capture_data = {
++        "schemaVersion": "shm-em-phase0-6-regression-capture-v1",
++        "label": label,
++        "projectCode": alignment_audit.PROJECT_CODE,
++        "commonHistoryRows": max_rows,
++        "commonInput": numeric_matrix(
++            initial_wide,
++            [column for column in initial_wide.columns if column not in {"time", "time1"}],
++        ),
++        "modelInputs": first_inputs,
++        "alignmentQuality": quality,
++        "predictions": predictions,
++        "totals": {
++            "modelCount": len(config.models),
++            "targetCount": target_count,
++            "stepCount": config.runtime.expected_steps,
++            "predictionRecordCount": total_records,
++        },
++        "contracts": {
++            code: {
++                "requiredHistoryRows": model.required_history_rows,
++                "artifactHash": model.artifact_hash,
++                "preprocessorHash": model.preprocessor_hash,
++                "inferenceScriptHash": model.inference_script_hash,
++                "bestParamsHash": model.best_params_hash,
++                "runtimeManifestHash": model.runtime_manifest_hash,
++                "environmentDigest": model.environment_digest,
++                "artifactBundleHash": model.artifact_bundle_hash,
++                "inputSchemaHash": model.input_schema_hash,
++                "actualArtifactHash": sha256_file(model.model_path),
++                "actualPreprocessorHash": sha256_file(model.preprocessor_path),
++                "actualInferenceScriptHash": sha256_file(model.script_path),
++                "actualBestParamsHash": (
++                    sha256_file(model.best_params_path) if model.best_params_path else None
++                ),
++                "actualRuntimeManifestHash": sha256_file(model.runtime_manifest_path),
++            }
++            for code, model in config.models.items()
++        },
++    }
++    output = resolve(output)
++    output.parent.mkdir(parents=True, exist_ok=True)
++    output.write_text(
++        json.dumps(capture_data, ensure_ascii=False, indent=2, sort_keys=True, allow_nan=False) + "\n",
++        encoding="utf-8",
++    )
++    print(json.dumps(capture_data["totals"], sort_keys=True))
++
++
++def array_diff(before: dict[str, Any], after: dict[str, Any]) -> dict[str, Any]:
++    left = np.asarray(before["values"], dtype=np.float64)
++    right = np.asarray(after["values"], dtype=np.float64)
++    same_shape = left.shape == right.shape
++    max_diff = float(np.max(np.abs(left - right))) if same_shape and left.size else 0.0
++    return {
++        "shapeBefore": list(left.shape),
++        "shapeAfter": list(right.shape),
++        "shapeIdentical": same_shape,
++        "columnsIdentical": before["columns"] == after["columns"],
++        "dtypeCompatible": before["dtype"] == after["dtype"],
++        "maxAbsDifference": max_diff,
++        "numericallyIdentical": same_shape and max_diff == 0.0,
++        "hashBefore": before["sha256"],
++        "hashAfter": after["sha256"],
++    }
++
++
++def record_diff(before: list[dict[str, Any]], after: list[dict[str, Any]]) -> dict[str, Any]:
++    same_keys = [(x["point"], x["step"]) for x in before] == [(x["point"], x["step"]) for x in after]
++    left = np.asarray([x["value"] for x in before], dtype=np.float64)
++    right = np.asarray([x["value"] for x in after], dtype=np.float64)
++    max_diff = float(np.max(np.abs(left - right))) if left.shape == right.shape and left.size else 0.0
++    return {
++        "recordCountBefore": len(before),
++        "recordCountAfter": len(after),
++        "keysIdentical": same_keys,
++        "maxAbsDifference": max_diff,
++        "numericallyIdentical": left.shape == right.shape and max_diff == 0.0,
++    }
++
++
++def compare(before_path: Path, after_path: Path, output_dir: Path) -> None:
++    before = json.loads(resolve(before_path).read_text(encoding="utf-8"))
++    after = json.loads(resolve(after_path).read_text(encoding="utf-8"))
++    output_dir = resolve(output_dir)
++    output_dir.mkdir(parents=True, exist_ok=True)
++
++    input_report = {
++        "schemaVersion": "shm-em-phase0-6-input-regression-v1",
++        "commonInput": array_diff(before["commonInput"], after["commonInput"]),
++        "models": {
++            code: array_diff(before["modelInputs"][code], after["modelInputs"][code])
++            for code in sorted(before["modelInputs"])
++        },
++    }
++    prediction_models = {}
++    for code in sorted(before["predictions"]):
++        old = before["predictions"][code]
++        new = after["predictions"][code]
++        prediction_models[code] = {
++            "targetCountBefore": old["targetCount"],
++            "targetCountAfter": new["targetCount"],
++            "stepCountBefore": old["stepCount"],
++            "stepCountAfter": new["stepCount"],
++            "rawPrediction": record_diff(old["records"], new["records"]),
++            "engineeringPrediction": record_diff(
++                old["engineeringRecords"], new["engineeringRecords"]
++            ),
++            "resultHashBefore": old["resultHash"],
++            "resultHashAfter": new["resultHash"],
++        }
++    metadata_hashes = {
++        code: {
++            "classification": "EXPECTED_METADATA_HASH_CHANGE",
++            "beforeSha256": sha256_text(json.dumps({}, sort_keys=True, separators=(",", ":"))),
++            "afterSha256": sha256_text(json.dumps(
++                after["alignmentQuality"][code], sort_keys=True, separators=(",", ":")
++            )),
++            "numericalInputAffected": False,
++            "predictionAffected": False,
++        }
++        for code in sorted(after["alignmentQuality"])
++    }
++    prediction_report = {
++        "schemaVersion": "shm-em-phase0-6-prediction-regression-v1",
++        "totalsBefore": before["totals"],
++        "totalsAfter": after["totals"],
++        "models": prediction_models,
++        "contractsIdentical": before["contracts"] == after["contracts"],
++        "contractsBefore": before["contracts"],
++        "contractsAfter": after["contracts"],
++        "alignmentMetadataHashReview": metadata_hashes,
++    }
++    (output_dir / "regression-input-matrix.json").write_text(
++        json.dumps(input_report, indent=2, sort_keys=True) + "\n", encoding="utf-8"
++    )
++    (output_dir / "regression-prediction-values.json").write_text(
++        json.dumps(prediction_report, indent=2, sort_keys=True) + "\n", encoding="utf-8"
++    )
++
++    all_inputs_equal = input_report["commonInput"]["numericallyIdentical"] and all(
++        item["numericallyIdentical"] for item in input_report["models"].values()
++    )
++    all_predictions_equal = all(
++        item["rawPrediction"]["numericallyIdentical"]
++        and item["engineeringPrediction"]["numericallyIdentical"]
++        and item["resultHashBefore"] == item["resultHashAfter"]
++        for item in prediction_models.values()
++    )
++    summary = [
++        "# Phase 0.6 Numerical Regression Summary",
++        "",
++        f"- Aligned input matrices identical: `{str(all_inputs_equal).lower()}`",
++        f"- Maximum aligned-input absolute difference: `{max([input_report['commonInput']['maxAbsDifference'], *[item['maxAbsDifference'] for item in input_report['models'].values()]])}`",
++        f"- Raw prediction values identical: `{str(all_predictions_equal).lower()}`",
++        f"- Engineering conversion values identical: `{str(all_predictions_equal).lower()}`",
++        f"- Target count: `{after['totals']['targetCount']}`",
++        f"- Forecast steps: `{after['totals']['stepCount']}`",
++        f"- Prediction records: `{after['totals']['predictionRecordCount']}`",
++        f"- Frozen model contracts and artifact hashes identical: `{str(prediction_report['contractsIdentical']).lower()}`",
++        "- New fill/gap/source-age eligibility thresholds: `none`",
++        "",
++        "The comparison used the same committed public SQL sample, model artifacts, preprocessors, and rolling inference driver before and after instrumentation.",
++    ]
++    (output_dir / "regression-summary.md").write_text("\n".join(summary) + "\n", encoding="utf-8")
++
++    metadata_rows = [
++        f"| {code} | `{item['beforeSha256']}` | `{item['afterSha256']}` | {item['classification']} |"
++        for code, item in metadata_hashes.items()
++    ]
++    metadata = [
++        "# Phase 0.6 Metadata Hash Change Review",
++        "",
++        "## Expected metadata change",
++        "",
++        "`input_snapshot_json` gains a descriptive alignment policy version and compact quality diagnostics. An external hash of that JSON is therefore expected to change (`EXPECTED_METADATA_HASH_CHANGE`).",
++        "",
++        "| Model | Baseline alignment payload SHA-256 | Instrumented payload SHA-256 | Classification |",
++        "| --- | --- | --- | --- |",
++        *metadata_rows,
++        "",
++        "## Unchanged numerical hashes",
++        "",
++        "- Batch input matrix hash: unchanged when calculated over the numerical wide table.",
++        "- Per-model result hash: unchanged because it remains calculated from point, step, and predicted value.",
++        "- Batch output hash: unchanged because constituent result hashes are unchanged.",
++        "- Model artifact, preprocessor, inference-script, runtime-manifest, environment, bundle, and input-schema hashes: unchanged.",
++        "",
++        "## Pre-existing Windows checkout normalization",
++        "",
++        "The public contract stores SHA-256 values for LF-normalized inference scripts. This Windows worktree uses `core.autocrlf=true`, so checked-out script bytes are CRLF and strict byte-hash loading is blocked before Phase 0.6 changes. The regression records declared and actual hashes separately; LF-normalized content matches the declared contract. No model contract, script, weight, or preprocessor was modified in this phase.",
++        "",
++        "No diagnostic value participates in model input construction, engineering conversion, event eligibility, or gate decisions.",
++    ]
++    (output_dir / "metadata-hash-change-review.md").write_text(
++        "\n".join(metadata) + "\n", encoding="utf-8"
++    )
++    if not all_inputs_equal or not all_predictions_equal or not prediction_report["contractsIdentical"]:
++        raise SystemExit("Phase 0.6 numerical regression failed")
++    print("PHASE0_6_NUMERICAL_REGRESSION_PASS")
++
++
++def write_phase_manifest(output_dir: Path) -> None:
++    output_dir = resolve(output_dir)
++    manifest_path = output_dir / "phase0_6-manifest.json"
++    files = []
++    for path in sorted(item for item in output_dir.iterdir() if item.is_file() and item != manifest_path):
++        files.append({
++            "path": path.relative_to(ROOT).as_posix(),
++            "bytes": path.stat().st_size,
++            "sha256": sha256_file(path),
++        })
++    commit = subprocess.run(
++        ["git", "rev-parse", "HEAD"], cwd=ROOT, check=True, capture_output=True, text=True
++    ).stdout.strip()
++    tag_commit = subprocess.run(
++        ["git", "rev-parse", "v1.0.0^{}"], cwd=ROOT, check=True, capture_output=True, text=True
++    ).stdout.strip()
++    manifest = {
++        "schemaVersion": "shm-em-phase0-6-manifest-v1",
++        "phase": "Phase 0.6 - Alignment Diagnostics Instrumentation and Core Stabilization",
++        "sourceGitCommit": commit,
++        "submittedTag": "v1.0.0",
++        "submittedTagCommit": tag_commit,
++        "submittedBaselineUnchanged": commit == tag_commit,
++        "generationTimestamp": datetime.now(timezone.utc).replace(microsecond=0).isoformat(),
++        "artifacts": files,
++    }
++    manifest_path.write_text(
++        json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8"
++    )
++    print(manifest_path)
++
++
++def main() -> int:
++    args = parse_args()
++    if args.command == "capture":
++        capture(args.label, args.output)
++    elif args.command == "compare":
++        compare(args.before, args.after, args.output_dir)
++    else:
++        write_phase_manifest(args.output_dir)
++    return 0
++
++
++if __name__ == "__main__":
++    raise SystemExit(main())
+diff --git a/tools/revision/revision_audit.py b/tools/revision/revision_audit.py
+new file mode 100644
+index 0000000..8cb436d
+--- /dev/null
++++ b/tools/revision/revision_audit.py
+@@ -0,0 +1,1042 @@
++#!/usr/bin/env python3
++"""Generate the deterministic structural baseline for the SoftwareX revision."""
++
++from __future__ import annotations
++
++import argparse
++import ast
++from datetime import datetime, timezone
++import hashlib
++import json
++import os
++import platform
++import re
++import shutil
++import subprocess
++import sys
++import xml.etree.ElementTree as ET
++from pathlib import Path
++from typing import Any, Iterable
++
++
++AUDIT_SCHEMA_VERSION = "shm-em-repository-baseline-v1"
++AUDIT_PATH_PREFIXES = ("artifacts/revision/", "docs/revision/", "tools/revision/")
++RUNTIME_SOURCE_ROOTS = (
++    "src/backend/src/main",
++    "src/frontend/src",
++    "src/pit_pre/pit_pre",
++)
++TEXT_SUFFIXES = {".java", ".xml", ".yml", ".yaml", ".properties", ".py", ".ts", ".vue", ".js"}
++MODEL_CODE_LITERALS = ("YD", "XD", "Strain", "Pressure", "water", "settlement")
++
++
++def relative(path: Path, root: Path) -> str:
++    return path.relative_to(root).as_posix()
++
++
++def read_text(path: Path) -> str:
++    return path.read_text(encoding="utf-8", errors="replace")
++
++
++def run(command: list[str], cwd: Path) -> dict[str, Any]:
++    try:
++        completed = subprocess.run(
++            command,
++            cwd=str(cwd),
++            capture_output=True,
++            text=True,
++            encoding="utf-8",
++            errors="replace",
++            timeout=30,
++            check=False,
++        )
++        output = "\n".join(part.strip() for part in (completed.stdout, completed.stderr) if part.strip())
++        return {"available": completed.returncode == 0, "command": command[0], "output": output}
++    except (FileNotFoundError, subprocess.TimeoutExpired) as exc:
++        return {"available": False, "command": command[0], "output": str(exc)}
++
++
++def first_line(result: dict[str, Any]) -> str | None:
++    output = result.get("output") or ""
++    return output.splitlines()[0].strip() if output else None
++
++
++def sha256(path: Path) -> str:
++    digest = hashlib.sha256()
++    with path.open("rb") as stream:
++        for chunk in iter(lambda: stream.read(1024 * 1024), b""):
++            digest.update(chunk)
++    return digest.hexdigest()
++
++
++def git_metadata(root: Path) -> dict[str, Any]:
++    commit = run(["git", "rev-parse", "HEAD"], root)
++    branch = run(["git", "branch", "--show-current"], root)
++    tag_commit = run(["git", "rev-parse", "v1.0.0^{}"], root)
++    status = run(["git", "status", "--porcelain", "--untracked-files=all"], root)
++    status_lines = sorted(line for line in status.get("output", "").splitlines() if line.strip())
++    source_changes = []
++    for line in status_lines:
++        path = line[3:].replace("\\", "/") if len(line) > 3 else line
++        if not path.startswith(AUDIT_PATH_PREFIXES):
++            source_changes.append(line)
++    revision_evidence_changes = []
++    for line in status_lines:
++        path = line[3:].replace("\\", "/") if len(line) > 3 else line
++        if path.startswith(AUDIT_PATH_PREFIXES):
++            revision_evidence_changes.append(line)
++    return {
++        "commit": first_line(commit),
++        "branch": first_line(branch),
++        "submittedTag": "v1.0.0",
++        "submittedTagCommit": first_line(tag_commit),
++        "submittedTagMatchesAuditCommit": first_line(commit) == first_line(tag_commit),
++        "sourceTreeCleanOutsideRevisionEvidence": not source_changes,
++        "sourceChangesOutsideRevisionEvidence": source_changes,
++        "revisionEvidenceChangesExcludedFromSourceBaseline": revision_evidence_changes,
++    }
++
++
++def executable_version(executable: str, args: list[str], root: Path) -> dict[str, Any]:
++    command = shutil.which(executable)
++    if not command:
++        return {"available": False, "command": executable, "output": "not found on PATH"}
++    result = run([command, *args], root)
++    result["path"] = command
++    return result
++
++
++def mysql_version(root: Path) -> dict[str, Any]:
++    candidates = [shutil.which("mysql")]
++    for candidate in candidates:
++        if candidate and Path(candidate).is_file():
++            result = run([str(candidate), "--version"], root)
++            result["path"] = str(candidate)
++            return result
++    return {"available": False, "command": "mysql", "output": "not found"}
++
++
++def pit_pre_python_version(root: Path) -> dict[str, Any]:
++    candidates = [
++        os.environ.get("PIT_PRE_PYTHON"),
++        sys.executable,
++        shutil.which("python3.10"),
++    ]
++    for candidate in candidates:
++        if candidate and Path(candidate).is_file():
++            result = run([str(candidate), "--version"], root)
++            result["path"] = str(candidate)
++            return result
++    return {"available": False, "command": "python3.10", "output": "not found"}
++
++
++def _runtime_entry(result: dict[str, Any], include_local_paths: bool) -> dict[str, Any]:
++    version = first_line(result)
++    mysql_match = re.search(r"(?i)\bmysql(?:\.exe)?\s+(Ver\s+.*)$", version)
++    if mysql_match:
++        version = mysql_match.group(1)
++    entry = {"detected": result["available"], "version": version}
++    if include_local_paths:
++        entry["path"] = result.get("path")
++    return entry
++
++
++def environment_metadata(root: Path, include_local_paths: bool) -> dict[str, Any]:
++    java = executable_version("java", ["-version"], root)
++    maven = executable_version("mvn", ["-version"], root)
++    node = executable_version("node", ["--version"], root)
++    npm = executable_version("npm", ["--version"], root)
++    git = executable_version("git", ["--version"], root)
++    mysql = mysql_version(root)
++    pit_python = pit_pre_python_version(root)
++    audit_python: dict[str, Any] = {"version": platform.python_version()}
++    if include_local_paths:
++        audit_python["path"] = sys.executable
++    return {
++        "os": {
++            "system": platform.system(),
++            "release": platform.release(),
++            "version": platform.version(),
++            "machine": platform.machine(),
++            "platform": platform.platform(),
++        },
++        "auditPython": audit_python,
++        "pitPrePython": _runtime_entry(pit_python, include_local_paths),
++        "java": _runtime_entry(java, include_local_paths),
++        "maven": _runtime_entry(maven, include_local_paths),
++        "node": _runtime_entry(node, include_local_paths),
++        "npm": _runtime_entry(npm, include_local_paths),
++        "mysqlCli": {
++            **_runtime_entry(mysql, include_local_paths),
++            "scopeNote": "CLI discovery only; this does not establish MySQL Server or database availability.",
++        },
++        "git": _runtime_entry(git, include_local_paths),
++    }
++
++
++def resolve_maven_value(value: str | None, properties: dict[str, str]) -> str | None:
++    if not value:
++        return None
++    match = re.fullmatch(r"\$\{([^}]+)}", value.strip())
++    return properties.get(match.group(1), value) if match else value
++
++
++def backend_dependencies(root: Path) -> dict[str, Any]:
++    path = root / "src/backend/pom.xml"
++    tree = ET.parse(path)
++    document = tree.getroot()
++    ns = {"m": "http://maven.apache.org/POM/4.0.0"}
++    properties_node = document.find("m:properties", ns)
++    properties: dict[str, str] = {}
++    if properties_node is not None:
++        for child in properties_node:
++            properties[child.tag.split("}")[-1]] = (child.text or "").strip()
++    dependencies = []
++    node = document.find("m:dependencies", ns)
++    if node is not None:
++        for dependency in node.findall("m:dependency", ns):
++            def value(name: str) -> str | None:
++                item = dependency.find(f"m:{name}", ns)
++                return (item.text or "").strip() if item is not None else None
++            dependencies.append({
++                "groupId": value("groupId"),
++                "artifactId": value("artifactId"),
++                "declaredVersion": resolve_maven_value(value("version"), properties),
++                "scope": value("scope") or "compile",
++            })
++    return {
++        "projectVersion": (document.findtext("m:version", default="", namespaces=ns) or "").strip(),
++        "javaVersion": properties.get("java.version"),
++        "springBootVersion": properties.get("spring-boot.version"),
++        "dependencies": sorted(dependencies, key=lambda item: (item["groupId"] or "", item["artifactId"] or "")),
++    }
++
++
++def frontend_dependencies(root: Path) -> dict[str, Any]:
++    package = json.loads(read_text(root / "src/frontend/package.json"))
++    lock_path = root / "src/frontend/package-lock.json"
++    lock = json.loads(read_text(lock_path)) if lock_path.is_file() else {}
++    lock_packages = lock.get("packages", {})
++
++    def dependency_group(name: str) -> dict[str, Any]:
++        result: dict[str, Any] = {}
++        for package_name, declared in sorted(package.get(name, {}).items()):
++            resolved = lock_packages.get(f"node_modules/{package_name}", {}).get("version")
++            result[package_name] = {"declared": declared, "resolved": resolved}
++        return result
++
++    return {
++        "name": package.get("name"),
++        "version": package.get("version"),
++        "scripts": dict(sorted(package.get("scripts", {}).items())),
++        "dependencies": dependency_group("dependencies"),
++        "devDependencies": dependency_group("devDependencies"),
++    }
++
++
++def python_dependencies(root: Path) -> dict[str, Any]:
++    requirements = root / "src/pit_pre/requirements.lock.txt"
++    locked = []
++    for raw in read_text(requirements).splitlines():
++        line = raw.strip()
++        if not line or line.startswith("#"):
++            continue
++        locked.append(line)
++    manifest_path = root / "src/pit_pre/runtime-manifest.json"
++    manifest = json.loads(read_text(manifest_path))
++    return {
++        "lockedRequirements": sorted(locked, key=str.lower),
++        "runtimeManifest": manifest,
++        "runtimeManifestSha256": sha256(manifest_path),
++    }
++
++
++def java_test_inventory(root: Path) -> dict[str, Any]:
++    test_root = root / "src/backend/src/test"
++    files = sorted(test_root.rglob("*Test.java")) if test_root.is_dir() else []
++    entries = []
++    annotation_pattern = re.compile(r"@(Test|ParameterizedTest|RepeatedTest|TestFactory)\b")
++    class_pattern = re.compile(r"\bclass\s+([A-Za-z_$][A-Za-z0-9_$]*(?:Test|Tests))\b")
++    for path in files:
++        content = read_text(path)
++        entries.append({
++            "path": relative(path, root),
++            "classes": sorted(class_pattern.findall(content)),
++            "testMethods": len(annotation_pattern.findall(content)),
++        })
++    return {
++        "testFiles": len(files),
++        "testClasses": sum(len(item["classes"]) for item in entries),
++        "testMethods": sum(item["testMethods"] for item in entries),
++        "files": entries,
++    }
++
++
++def python_test_inventory(root: Path) -> dict[str, Any]:
++    test_root = root / "src/pit_pre/tests"
++    files = sorted(test_root.rglob("test_*.py")) if test_root.is_dir() else []
++    entries = []
++    for path in files:
++        module = ast.parse(read_text(path), filename=str(path))
++        classes = []
++        methods = []
++        module_functions = []
++        for node in module.body:
++            if isinstance(node, ast.ClassDef):
++                class_methods = sorted(
++                    child.name for child in node.body
++                    if isinstance(child, (ast.FunctionDef, ast.AsyncFunctionDef)) and child.name.startswith("test_")
++                )
++                if class_methods:
++                    classes.append(node.name)
++                    methods.extend(f"{node.name}.{name}" for name in class_methods)
++            elif isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and node.name.startswith("test_"):
++                module_functions.append(node.name)
++        entries.append({
++            "path": relative(path, root),
++            "classes": sorted(classes),
++            "testMethods": sorted(methods + module_functions),
++        })
++    return {
++        "testFiles": len(files),
++        "testClasses": sum(len(item["classes"]) for item in entries),
++        "testMethods": sum(len(item["testMethods"]) for item in entries),
++        "files": entries,
++    }
++
++
++def ci_inventory(root: Path) -> dict[str, Any]:
++    workflow_root = root / ".github/workflows"
++    workflows = []
++    operating_systems: set[str] = set()
++    if workflow_root.is_dir():
++        for path in sorted([*workflow_root.glob("*.yml"), *workflow_root.glob("*.yaml")]):
++            content = read_text(path)
++            runs_on = sorted(set(re.findall(r"^\s*runs-on:\s*['\"]?([^'\"\s#]+)", content, flags=re.MULTILINE)))
++            operating_systems.update(runs_on)
++            workflows.append({"path": relative(path, root), "runsOn": runs_on})
++    return {"workflowFiles": workflows, "operatingSystems": sorted(operating_systems)}
++
++
++def docker_inventory(root: Path) -> dict[str, Any]:
++    matches = []
++    for path in sorted(p for p in root.rglob("*") if p.is_file()):
++        rel = relative(path, root)
++        if rel.startswith(".git/"):
++            continue
++        name = path.name.lower()
++        if name == "dockerfile" or name.startswith("dockerfile.") or name in {
++            "docker-compose.yml", "docker-compose.yaml", "compose.yml", "compose.yaml"
++        }:
++            matches.append(rel)
++    return {"present": bool(matches), "files": matches}
++
++
++def model_inventory(root: Path) -> dict[str, Any]:
++    model_root = root / "src/pit_pre/models"
++    bundles = []
++    artifacts = []
++    if model_root.is_dir():
++        for bundle in sorted(path for path in model_root.iterdir() if path.is_dir()):
++            files = sorted(path for path in bundle.rglob("*") if path.is_file())
++            bundle_artifacts = []
++            for path in files:
++                item = {"path": relative(path, root), "bytes": path.stat().st_size, "sha256": sha256(path)}
++                artifacts.append(item)
++                bundle_artifacts.append(item)
++            bundles.append({
++                "directory": relative(bundle, root),
++                "fileCount": len(bundle_artifacts),
++                "bytes": sum(item["bytes"] for item in bundle_artifacts),
++                "artifacts": bundle_artifacts,
++            })
++    return {"bundleDirectories": bundles, "artifactCount": len(artifacts), "artifacts": artifacts}
++
++
++def sql_inventory(root: Path) -> dict[str, Any]:
++    sql_root = root / "sql/shm_em_database"
++    table_sources: dict[str, set[str]] = {}
++    create_pattern = re.compile(r"CREATE\s+TABLE(?:\s+IF\s+NOT\s+EXISTS)?\s+`?([A-Za-z0-9_]+)`?", re.IGNORECASE)
++    sql_files = sorted(sql_root.glob("*.sql")) if sql_root.is_dir() else []
++    for path in sql_files:
++        for name in create_pattern.findall(read_text(path)):
++            table_sources.setdefault(name.lower(), set()).add(relative(path, root))
++    all_tables = sorted(table_sources)
++    contract_names = {
++        "em_project", "em_station", "em_instrument", "em_metric", "em_station_metric",
++        "em_observation_table_registry", "em_conversion_operator", "em_conversion_parameter",
++        "em_reference_binding", "em_prediction_model", "em_prediction_feature_mapping",
++        "em_feature_operator", "em_dataset_manifest", "em_scenario_profile", "em_expected_output",
++        "em_future_state_policy",
++    }
++    prediction_names = {
++        "em_prediction_model", "em_prediction_feature_mapping", "em_prediction_batch",
++        "em_prediction_run", "em_prediction_result", "em_prediction_execution_gate",
++        "em_event_prediction_link", "em_expected_output", "em_future_state_policy",
++    }
++    provenance_names = {
++        "em_event_prediction_link", "em_event_evaluation_run", "em_event_metric_snapshot",
++        "em_event_evidence_link", "em_audit_log",
++    }
++    return {
++        "sqlFiles": [relative(path, root) for path in sql_files],
++        "allCreateTableCount": len(all_tables),
++        "allCreateTables": all_tables,
++        "tableSources": {name: sorted(paths) for name, paths in sorted(table_sources.items())},
++        "contractTables": sorted(contract_names.intersection(all_tables)),
++        "predictionAndResultTables": sorted(prediction_names.intersection(all_tables)),
++        "provenanceTables": sorted(provenance_names.intersection(all_tables)),
++        "observationTables": sorted(name for name in all_tables if name.startswith("em_obs_")),
++    }
++
++
++def line_matches(root: Path, names: Iterable[str]) -> list[dict[str, Any]]:
++    results = []
++    wanted = set(names)
++    for source_root in RUNTIME_SOURCE_ROOTS:
++        base = root / source_root
++        if not base.is_dir():
++            continue
++        for path in sorted(p for p in base.rglob("*") if p.is_file() and p.suffix.lower() in TEXT_SUFFIXES):
++            for number, line in enumerate(read_text(path).splitlines(), 1):
++                if any(name in line for name in wanted):
++                    results.append({"path": relative(path, root), "line": number, "text": line.strip()})
++    return results
++
++
++def implementation_inventory(root: Path) -> dict[str, Any]:
++    java_root = root / "src/backend/src/main/java"
++
++    def paths_for(filename: str) -> list[str]:
++        return [relative(path, root) for path in sorted(java_root.rglob(filename))] if java_root.is_dir() else []
++
++    endpoint_matches = []
++    route_pattern = re.compile(r"@GetMapping\(\"/events/\{eventId}/trace\"\)")
++    for path in sorted(java_root.rglob("*.java")) if java_root.is_dir() else []:
++        for number, line in enumerate(read_text(path).splitlines(), 1):
++            if route_pattern.search(line):
++                endpoint_matches.append({"path": relative(path, root), "line": number, "route": "GET /api/em/predictions/events/{eventId}/trace"})
++    return {
++        "futureStateImplementations": paths_for("ProjectFutureStateServiceImpl.java"),
++        "futureStateInterfaces": paths_for("ProjectFutureStateService.java"),
++        "executionGateImplementations": paths_for("PredictionExecutionGateServiceImpl.java"),
++        "executionGateInterfaces": paths_for("PredictionExecutionGateService.java"),
++        "provenanceEndpoint": endpoint_matches,
++        "provenanceServices": paths_for("PredictionServiceImpl.java") + paths_for("EventEvaluationServiceImpl.java"),
++        "provenanceMapper": paths_for("EventPredictionTraceMapper.java"),
++    }
++
++
++def hardcoded_identifier_inventory(root: Path) -> dict[str, Any]:
++    project_code_pattern = re.compile(r"['\"]((?:SHM_EM|IEM)_[A-Z0-9_]+)['\"]")
++    project_id_patterns = [
++        re.compile(r"\bprojectId\s*(?::[^=;]+)?=\s*(\d+)(?:L)?\b"),
++        re.compile(r"\bproject_id\s*=\s*(\d+)\b"),
++        re.compile(r"\bsetProjectId\(\s*(\d+)(?:L)?\s*\)"),
++    ]
++    model_literal_pattern = re.compile(
++        r"['\"](" + "|".join(re.escape(code) for code in MODEL_CODE_LITERALS) + r")['\"]"
++    )
++    physical_table_pattern = re.compile(r"['\"](em_obs_[A-Za-z0-9_]+)['\"]")
++    findings = {"projectCodes": [], "numericProjectIds": [], "modelCodes": [], "physicalObservationTables": []}
++    for source_root in RUNTIME_SOURCE_ROOTS:
++        base = root / source_root
++        if not base.is_dir():
++            continue
++        for path in sorted(p for p in base.rglob("*") if p.is_file() and p.suffix.lower() in TEXT_SUFFIXES):
++            for number, line in enumerate(read_text(path).splitlines(), 1):
++                location = {"path": relative(path, root), "line": number, "text": line.strip()}
++                for value in project_code_pattern.findall(line):
++                    findings["projectCodes"].append({**location, "identifier": value})
++                for pattern in project_id_patterns:
++                    for value in pattern.findall(line):
++                        findings["numericProjectIds"].append({**location, "identifier": value})
++                for value in model_literal_pattern.findall(line):
++                    findings["modelCodes"].append({**location, "identifier": value})
++                for value in physical_table_pattern.findall(line):
++                    findings["physicalObservationTables"].append({**location, "identifier": value})
++    for key in findings:
++        unique: dict[tuple[Any, ...], dict[str, Any]] = {}
++        for item in findings[key]:
++            unique[(item["path"], item["line"], item["identifier"], item["text"])] = item
++        findings[key] = [unique[index] for index in sorted(unique)]
++    findings["total"] = sum(len(findings[key]) for key in findings if key != "total")
++    return findings
++
++
++def _semantic_literal(kind: str, item: dict[str, Any]) -> dict[str, Any]:
++    path = item["path"]
++    line = int(item["line"])
++    if kind == "project_code":
++        category = "HARMLESS_DEFAULT"
++        impact = "CLI convenience default; --project-code overrides it before contract loading."
++        coupling = "NO"
++        core_change = "NO"
++        claim_change = "NO"
++        notes = "Keep unless a later reuse experiment proves that the override path fails."
++    elif kind == "observation_table":
++        category = "SECURITY_WHITELIST"
++        impact = "Registry-selected identifiers are constrained to an approved physical-table set."
++        coupling = "CONDITIONAL"
++        core_change = "CONDITIONAL"
++        claim_change = "YES"
++        notes = (
++            "Safe for existing approved tables. A new physical table currently requires a whitelist edit; "
++            "the registration-only claim must state this boundary unless validation becomes registry-backed."
++        )
++    elif path.startswith("src/frontend/"):
++        category = "UI_DISPLAY_ONLY"
++        impact = "Affects labels or default feature selection in the UI, not API, gate, or event semantics."
++        coupling = "NO"
++        core_change = "NO"
++        claim_change = "NO"
++        notes = "Retain as presentation behavior; it is not evidence of workflow coupling."
++    elif path.endswith("cached_model_runner.py"):
++        category = "MODEL_ADAPTER_CONSTRAINT"
++        impact = "The cached runner dispatches packaged model signatures by supported target type."
++        coupling = "CONDITIONAL"
++        core_change = "CONDITIONAL"
++        claim_change = "YES"
++        notes = (
++            "Unknown target types are not arbitrary plug-ins. Limit the claim to compatible bundles under "
++            "the existing PIT_PRE adapter contract unless a later approved change generalizes the runner."
++        )
++    elif path.endswith("result_writer.py") and line <= 22:
++        category = "MODEL_ADAPTER_CONSTRAINT"
++        impact = "Maps packaged target types to their native prediction-column names."
++        coupling = "CONDITIONAL"
++        core_change = "NO"
++        claim_change = "YES"
++        notes = (
++            "A single *_pred fallback exists, but compatibility still depends on the packaged output shape; "
++            "describe new models as compatible model bundles."
++        )
++    elif path.endswith("result_writer.py"):
++        category = "ENGINEERING_DOMAIN_ADAPTER"
++        impact = "Applies target-specific engineering conversion and reference/baseline semantics."
++        coupling = "CONDITIONAL"
++        core_change = "CONDITIONAL"
++        claim_change = "YES"
++        notes = (
++            "Unknown targets receive an identity mapping, but a new non-identity engineering quantity needs "
++            "a validated conversion adapter and prerequisites."
++        )
++    else:
++        category = "MODEL_ADAPTER_CONSTRAINT"
++        impact = "Target literal participates in packaged-model compatibility logic."
++        coupling = "CONDITIONAL"
++        core_change = "CONDITIONAL"
++        claim_change = "YES"
++        notes = "Review under the compatible-model boundary before core freeze."
++    return {
++        "path": path,
++        "line": line,
++        "literal": item["identifier"],
++        "literal_kind": kind,
++        "semantic_category": category,
++        "architectural_impact": impact,
++        "core_coupling": coupling,
++        "requires_core_change": core_change,
++        "requires_claim_change": claim_change,
++        "review_notes": notes,
++        "source_text": item["text"],
++    }
++
++
++def architecture_coupling_review(data: dict[str, Any]) -> dict[str, Any]:
++    inventory = data["hardcodedRuntimeIdentifiers"]
++    rows = []
++    for item in inventory["projectCodes"]:
++        rows.append(_semantic_literal("project_code", item))
++    for item in inventory["modelCodes"]:
++        rows.append(_semantic_literal("model_target", item))
++    for item in inventory["physicalObservationTables"]:
++        rows.append(_semantic_literal("observation_table", item))
++    for item in inventory["numericProjectIds"]:
++        classified = _semantic_literal("numeric_project_id", item)
++        classified.update({
++            "semantic_category": "GENUINE_ARCHITECTURAL_COUPLING",
++            "architectural_impact": "A fixed project identifier can bypass project-scoped configuration.",
++            "core_coupling": "YES",
++            "requires_core_change": "YES",
++            "requires_claim_change": "YES",
++            "review_notes": "No numeric project-ID literal was detected in the current runtime baseline.",
++        })
++        rows.append(classified)
++    rows.sort(key=lambda row: (row["path"], row["line"], row["literal_kind"], row["literal"]))
++    for index, row in enumerate(rows, 1):
++        row["id"] = f"L{index:03d}"
++    categories = (
++        "HARMLESS_DEFAULT", "UI_DISPLAY_ONLY", "SECURITY_WHITELIST",
++        "ENGINEERING_DOMAIN_ADAPTER", "MODEL_ADAPTER_CONSTRAINT",
++        "GENUINE_ARCHITECTURAL_COUPLING",
++    )
++    counts = {category: sum(row["semantic_category"] == category for row in rows) for category in categories}
++    return {
++        "schemaVersion": "shm-em-architecture-coupling-review-v1",
++        "sourceGitCommit": data["git"]["commit"],
++        "literalCount": len(rows),
++        "categoryCounts": counts,
++        "conclusion": (
++            "No literal is classified as unconditional project-specific event-workflow coupling. "
++            "The material boundaries are the approved observation-table set, packaged model adapters, "
++            "and target-specific engineering conversion adapters."
++        ),
++        "items": rows,
++    }
++
++
++def render_architecture_review(review: dict[str, Any]) -> str:
++    lines = [
++        "# SHM-EM Phase 0.5 Runtime Literal Semantic Review",
++        "",
++        f"- Source commit: `{review['sourceGitCommit']}`",
++        f"- Classified literals: `{review['literalCount']}`",
++        f"- Conclusion: {review['conclusion']}",
++        "",
++        "## Category totals",
++        "",
++        *markdown_table(["Category", "Count"], [[key, value] for key, value in review["categoryCounts"].items()]),
++        "",
++        "## Itemized review",
++        "",
++        *markdown_table(
++            ["ID", "File", "Line", "Literal", "Category", "Core coupling", "Code change", "Claim change", "Notes"],
++            [[
++                row["id"], row["path"], row["line"], row["literal"], row["semantic_category"],
++                row["core_coupling"], row["requires_core_change"], row["requires_claim_change"],
++                row["review_notes"],
++            ] for row in review["items"]],
++        ),
++        "",
++        "## Interpretation boundary",
++        "",
++        "Literal presence alone is not proof of architectural coupling. The classifications above distinguish harmless defaults, display behavior, identifier security controls, engineering-domain adapters, and packaged-model adapter constraints.",
++        "",
++    ]
++    return "\n".join(lines)
++
++
++def claim_gap_matrix(data: dict[str, Any], alignment: dict[str, Any] | None) -> dict[str, Any]:
++    alignment_evidence = (
++        "Alignment audit v3 separates asynchronous as-of matching from actual fill and records signed temporal offsets: "
++        f"{alignment['overall']['asofCellCount']} as-of cells and "
++        f"{alignment['overall']['interiorInterpolationCellCount'] + alignment['overall']['leadingBoundaryExtensionCellCount'] + alignment['overall']['trailingBoundaryExtensionCellCount']} filled cells."
++        if alignment else
++        "Alignment evidence has not yet been generated; run audit_input_alignment.py."
++    )
++    items = [
++        {
++            "id": "C01",
++            "topic": "Observation registry decoupling",
++            "manuscript_claim": "Logical observations are decoupled from physical storage through the observation registry.",
++            "implementation_status": "Backend routing is registry-based; PIT_PRE resolves registry rows but validates table identifiers against a four-table allowlist.",
++            "evidence_status": "PARTIALLY_SUPPORTED",
++            "risk": "MEDIUM",
++            "recommended_action": "Limit the claim to approved reference adapters, then decide whether registry-backed table approval is required before core freeze.",
++            "evidence_refs": ["src/pit_pre/pit_pre/features.py", "em_observation_table_registry"],
++        },
++        {
++            "id": "C02",
++            "topic": "New project by minimal registration",
++            "manuscript_claim": "A new project can be integrated through registrations and mappings without core workflow changes.",
++            "implementation_status": "Project code, stations, metrics, mappings, and APIs are parameterized; storage-table and model-adapter boundaries remain conditional.",
++            "evidence_status": "NEEDS_EXPERIMENT",
++            "risk": "HIGH",
++            "recommended_action": "Do not claim demonstration until a second configuration is added after core freeze and a Git change inventory is generated.",
++            "evidence_refs": ["src/pit_pre/pit_pre/main.py", "src/pit_pre/pit_pre/contract.py", "src/pit_pre/pit_pre/features.py"],
++        },
++        {
++            "id": "C03",
++            "topic": "New model by registration",
++            "manuscript_claim": "A new fixed model is integrated by registering its bundle, inputs, targets, and temporal settings.",
++            "implementation_status": "Database contracts and hashes are authoritative, but CachedModelRunner and engineering conversion support a bounded adapter family.",
++            "evidence_status": "PARTIALLY_SUPPORTED",
++            "risk": "HIGH",
++            "recommended_action": "Change the claim to a compatible model bundle under the existing PIT_PRE model and engineering-adapter contract.",
++            "evidence_refs": ["src/pit_pre/pit_pre/contract.py", "src/pit_pre/pit_pre/cached_model_runner.py", "src/pit_pre/pit_pre/result_writer.py"],
++        },
++        {
++            "id": "C04",
++            "topic": "Core workflow unchanged",
++            "manuscript_claim": "Reuse does not require changes to core backend, frontend, event workflow, or existing source tables.",
++            "implementation_status": "The architecture is project-scoped, but no post-freeze cross-configuration change inventory exists.",
++            "evidence_status": "NEEDS_EXPERIMENT",
++            "risk": "HIGH",
++            "recommended_action": "Freeze the approved core first, then measure actual changes for the second heterogeneous configuration.",
++            "evidence_refs": ["architecture-coupling-review.json"],
++        },
++        {
++            "id": "C05",
++            "topic": "Missing and asynchronous input handling",
++            "manuscript_claim": "PIT_PRE aligns heterogeneous observations into auditable rolling model inputs.",
++            "implementation_status": "Backward as-of matching uses one sampling interval as tolerance, followed by interior interpolation or boundary extension, then ffill and bfill. Phase 0.6.1 persists descriptive per-model counts, fill ratios, gaps, signed temporal offsets, past lag, and future lead without adding eligibility thresholds.",
++            "evidence_status": "PARTIALLY_SUPPORTED",
++            "risk": "HIGH",
++            "recommended_action": f"Report asynchronous alignment separately from actual interpolation/fill and do not infer acceptance thresholds from one sample. {alignment_evidence}",
++            "evidence_refs": ["src/pit_pre/pit_pre/features.py", "artifacts/revision/phase0_6_1/alignment-audit-v3-summary.json", "artifacts/revision/phase0_6_1/one-pass-regression-input.json"],
++        },
++        {
++            "id": "C06",
++            "topic": "Execution-gate safety",
++            "manuscript_claim": "Invalid prediction states cannot create formal events.",
++            "implementation_status": "The gate checks model/run/result integrity, time, quality, hashes, and freshness, but the requested negative matrix has not been executed.",
++            "evidence_status": "NEEDS_EXPERIMENT",
++            "risk": "HIGH",
++            "recommended_action": "Keep gate logic unchanged and run the F01-F12 fault matrix with before/after event, response, and provenance counts.",
++            "evidence_refs": ["src/backend/src/main/java/mybatis/iem/em/modules/engineering/application/service/impl/PredictionExecutionGateServiceImpl.java"],
++        },
++        {
++            "id": "C07",
++            "topic": "Evaluate and Execute independence",
++            "manuscript_claim": "Execute recalculates and rechecks the gate rather than trusting a stored Evaluate result.",
++            "implementation_status": "Separate service paths and recheck calls are present in source, but mutation between Evaluate and Execute has not been demonstrated.",
++            "evidence_status": "NEEDS_EXPERIMENT",
++            "risk": "MEDIUM",
++            "recommended_action": "Run F12; do not change Evaluate or Execute logic in advance.",
++            "evidence_refs": ["src/backend/src/main/java/mybatis/iem/em/modules/engineering/application/service/impl/EventEvaluationServiceImpl.java"],
++        },
++        {
++            "id": "C08",
++            "topic": "Project Future State",
++            "manuscript_claim": "Forecasts are synchronized and aggregated by target, station, and project with earliest exceedance and a state hash.",
++            "implementation_status": "The service implements policy selection, unit-aware thresholds, consecutive steps, aggregation, earliest exceedance, timeline, and hashing.",
++            "evidence_status": "ARCHITECTURE_ONLY",
++            "risk": "MEDIUM",
++            "recommended_action": "Derive the formal specification from code and add boundary tests without changing the algorithm.",
++            "evidence_refs": ["src/backend/src/main/java/mybatis/iem/em/modules/engineering/application/service/impl/ProjectFutureStateServiceImpl.java"],
++        },
++        {
++            "id": "C09",
++            "topic": "Event provenance",
++            "manuscript_claim": "A formal forecast event is traceable to rule, batch, run, model hashes, input window, and triggering values.",
++            "implementation_status": "Trace persistence and GET /api/em/predictions/events/{eventId}/trace exist; no deterministic trace artifact has been published.",
++            "evidence_status": "NEEDS_EXPERIMENT",
++            "risk": "MEDIUM",
++            "recommended_action": "Generate one isolated formal event and export its complete machine-readable trace.",
++            "evidence_refs": ["src/backend/src/main/java/mybatis/iem/em/modules/engineering/api/controller/PredictionController.java", "em_event_prediction_link"],
++        },
++        {
++            "id": "C10",
++            "topic": "Cross-platform portability",
++            "manuscript_claim": "The public workflow is reproducible with documented dependencies.",
++            "implementation_status": "The submitted baseline has Windows-only CI and no Docker or Compose files.",
++            "evidence_status": "PARTIALLY_SUPPORTED",
++            "risk": "HIGH",
++            "recommended_action": "Retain the current Windows limitation until a later authorized Linux/Bash or container reproduction is actually validated.",
++            "evidence_refs": [".github/workflows/ci.yml", "docs/REPRODUCIBILITY.md"],
++        },
++        {
++            "id": "C11",
++            "topic": "Model history-window description",
++            "manuscript_claim": "The public reference workflow uses 16 historical input steps.",
++            "implementation_status": "The public sample supplies a 16-step common source window, while registered model contracts consume model-specific histories: YD 16, XD 12, Strain 13, Pressure 13, water 13, and settlement 12 steps.",
++            "evidence_status": "PARTIALLY_SUPPORTED",
++            "risk": "MEDIUM",
++            "recommended_action": "Revise the manuscript and Figure 5 to distinguish the shared 16-step source window from model-specific 12-16-step history requirements.",
++            "evidence_refs": ["artifacts/revision/phase0_6_1/alignment-audit-v3-summary.json", "sql/shm_em_database/02_SHM_EM_public_sample.sql"],
++        },
++    ]
++    statuses = ("DEMONSTRATED", "PARTIALLY_SUPPORTED", "ARCHITECTURE_ONLY", "CONTRADICTED_BY_IMPLEMENTATION", "NEEDS_EXPERIMENT")
++    return {
++        "schemaVersion": "shm-em-claim-gap-matrix-v1",
++        "sourceGitCommit": data["git"]["commit"],
++        "statusCounts": {status: sum(item["evidence_status"] == status for item in items) for status in statuses},
++        "items": items,
++    }
++
++
++def render_claim_gap(matrix: dict[str, Any]) -> str:
++    lines = [
++        "# SHM-EM Phase 0.6 Updated Claim-Gap Matrix",
++        "",
++        *markdown_table(["Status", "Count"], [[key, value] for key, value in matrix["statusCounts"].items()]),
++        "",
++        *markdown_table(
++            ["ID", "Claim", "Implementation", "Evidence status", "Risk", "Recommended action"],
++            [[item["id"], item["manuscript_claim"], item["implementation_status"], item["evidence_status"], item["risk"], item["recommended_action"]] for item in matrix["items"]],
++        ),
++        "",
++    ]
++    return "\n".join(lines)
++
++
++def minimal_change_proposal(alignment: dict[str, Any] | None) -> str:
++    alignment_note = (
++        "Alignment audit v3 is available; it is descriptive evidence and does not justify an eligibility threshold."
++        if alignment else
++        "Do not consider thresholds before alignment audit v3 is available."
++    )
++    items = [
++        ("A1", "A", "Alignment diagnostics without changing numeric filling", "WideTableBuilder performs as-of/interpolation/fill processing; Phase 0.6.1 adds directional attribution and compact provenance.", "Reviewer concerns require explicit evidence that instrumentation does not alter numerical behavior.", "Persist policy version, corrected stage counts, fill ratio, gap, signed offset, past lag, and future lead in input_snapshot_json and require zero-difference regression. " + alignment_note, "src/pit_pre/pit_pre/features.py; pipeline.py; result_writer.py", "MEDIUM", "NO for numeric inputs; YES for persisted metadata", "EXPECTED_METADATA_ONLY", "NO", "YES", "APPROVED_CODE_CHANGE"),
++        ("A2", "B", "Input-quality acceptance thresholds", "No scientifically justified fill, gap, or temporal-offset limits are defined.", "A threshold inferred from one public sample would add unsupported business behavior and a new reviewer question.", "Deferred and not approved. Record diagnostics only; do not block a model, batch, Execute, or gate from the new values.", "none in Phase 0.6.1", "HIGH", "NO CHANGE AUTHORIZED", "NO", "NO", "NO", "DEFERRED_NOT_APPROVED"),
++        ("B1", "B", "Observation-registry scope", "PIT_PRE uses registry mappings plus a four-table security allowlist.", "An unrestricted registration-only claim is broader than the implementation.", "State that v1.x supports registered mappings over approved reference observation adapters; evaluate registry-backed identifier approval only if the second configuration needs a new table.", "src/pit_pre/pit_pre/features.py; manuscript claim", "LOW", "NO", "NO", "NO", "CONDITIONAL", "CLAIM_CHANGE"),
++        ("B2", "B", "Compatible-model scope", "CachedModelRunner dispatches the six packaged target adapter signatures and rejects unknown target types.", "Arbitrary-model plug-in wording would overclaim the runtime boundary.", "Replace 'a new model' with 'a compatible model bundle under the existing PIT_PRE adapter contract'.", "src/pit_pre/pit_pre/cached_model_runner.py; result_writer.py", "LOW", "NO", "NO", "NO", "NO", "CLAIM_CHANGE"),
++        ("B3", "B", "Engineering conversion adapter scope", "Non-identity YD, XD, water, and settlement outputs use target-specific conversion branches; other targets use identity mapping.", "A new engineering quantity may need an adapter and reference data.", "Document the identity fallback and require a validated engineering conversion adapter for non-identity quantities.", "src/pit_pre/pit_pre/result_writer.py", "LOW", "NO", "NO", "NO", "NO", "CLAIM_CHANGE"),
++        ("C1", "C", "Execution-gate failure matrix", "Gate mechanisms already exist.", "Safety evidence is missing.", "Run F01-F12 and verify zero formal-event, response, and provenance deltas for blocked cases.", "tests and tools/revision only", "LOW", "NO", "NO", "NO", "NO", "EXPERIMENT_ONLY"),
++        ("C2", "C", "Evaluate/Execute mutation test", "Execute rechecks current state in source.", "Independence is not experimentally demonstrated.", "Run F12 without modifying production logic.", "tests and tools/revision only", "LOW", "NO", "NO", "NO", "NO", "EXPERIMENT_ONLY"),
++        ("C3", "C", "Future State formalization", "Aggregation and hashing logic already exist.", "Formal specification and boundary evidence are incomplete.", "Derive pseudocode from implementation and add boundary tests; do not alter the algorithm.", "docs/revision and tests", "LOW", "NO", "NO", "NO", "NO", "EXPERIMENT_ONLY"),
++        ("C4", "C", "Provenance trace demonstration", "Trace API and persistence exist.", "No fixed end-to-end trace artifact exists.", "Generate one deterministic reproduction event and export the complete chain.", "tools/revision and artifacts/revision", "LOW", "NO", "NO", "NO", "NO", "EXPERIMENT_ONLY"),
++        ("C5", "C", "Post-freeze reuse and portability evidence", "No second configuration, Linux run, Docker run, or scalability result is currently evidenced.", "Several reviewer-facing claims remain untested.", "After core freeze, run the second configuration, reuse inventory, benchmarks, and an approved portability path in their authorized phases.", "later revision phases", "MEDIUM", "NO", "NO", "NO", "NO", "EXPERIMENT_ONLY"),
++    ]
++    lines = [
++        "# Phase 0.6 Scope Decision Record",
++        "",
++        "> A1 is the only approved diagnostics code change. A2 is deferred; B items are claim boundaries; C items remain later experiments.",
++        "",
++    ]
++    labels = {"A": "Category A - Must resolve before core freeze", "B": "Category B - Prefer claim boundary or conditional change", "C": "Category C - Do not change core; add evidence"}
++    headers = ["ID", "Problem", "Current implementation", "Reviewer impact", "Recommendation", "Files", "Risk", "Business behavior", "Reproduction hash", "DB migration", "Pre-freeze", "Action"]
++    for category in ("A", "B", "C"):
++        lines.extend([f"## {labels[category]}", ""])
++        rows = [[item[0], item[2], item[3], item[4], item[5], item[6], item[7], item[8], item[9], item[10], item[11], item[12]] for item in items if item[1] == category]
++        lines.extend(markdown_table(headers, rows))
++        lines.append("")
++    return "\n".join(lines)
++
++
++def structural_findings(data: dict[str, Any]) -> list[dict[str, str]]:
++    findings = []
++    git = data["git"]
++    if git["submittedTagMatchesAuditCommit"]:
++        findings.append({"severity": "PASS", "code": "BASELINE_TAG_MATCH", "message": "The audit commit matches immutable tag v1.0.0."})
++    else:
++        findings.append({"severity": "HIGH", "code": "BASELINE_TAG_MISMATCH", "message": "The audit commit differs from tag v1.0.0."})
++    ci_os = data["continuousIntegration"]["operatingSystems"]
++    if ci_os == ["windows-latest"]:
++        findings.append({"severity": "HIGH", "code": "CI_WINDOWS_ONLY", "message": "Current CI runs only on windows-latest."})
++    if not data["dockerCompose"]["present"]:
++        findings.append({"severity": "HIGH", "code": "DOCKER_ABSENT", "message": "No Dockerfile or Compose file is present in the v1.0.0 baseline."})
++    if data["hardcodedRuntimeIdentifiers"]["projectCodes"]:
++        findings.append({"severity": "INFO", "code": "PROJECT_CODE_LITERAL_FOUND", "message": "Project-code literals are candidates for semantic review, not automatic evidence of coupling."})
++    if data["hardcodedRuntimeIdentifiers"]["modelCodes"]:
++        findings.append({"severity": "REVIEW", "code": "MODEL_TARGET_LITERAL_FOUND", "message": "Model/target literals require classification as display, domain-adapter, or runtime constraints."})
++    if data["hardcodedRuntimeIdentifiers"]["physicalObservationTables"]:
++        findings.append({"severity": "REVIEW", "code": "OBSERVATION_TABLE_LITERAL_FOUND", "message": "Observation-table literals require security and extensibility review."})
++    if data["tests"]["pitPre"]["testFiles"] == 1:
++        findings.append({"severity": "MEDIUM", "code": "PIT_PRE_TEST_SURFACE_NARROW", "message": "PIT_PRE has one test module in the submitted baseline."})
++    findings.append({"severity": "INFO", "code": "PHASE0_STRUCTURAL_ONLY", "message": "Phase 0 inventories structure and does not claim that tests, inference, or reproduction passed."})
++    return findings
++
++
++def build_baseline(root: Path, include_local_paths: bool = False) -> dict[str, Any]:
++    data: dict[str, Any] = {
++        "schemaVersion": AUDIT_SCHEMA_VERSION,
++        "repository": {"name": "SHM-EM", "root": "."},
++        "git": git_metadata(root),
++        "environment": environment_metadata(root, include_local_paths),
++        "dependencies": {
++            "backend": backend_dependencies(root),
++            "frontend": frontend_dependencies(root),
++            "pitPre": python_dependencies(root),
++        },
++        "tests": {
++            "backend": java_test_inventory(root),
++            "pitPre": python_test_inventory(root),
++        },
++        "frontendScripts": frontend_dependencies(root)["scripts"],
++        "continuousIntegration": ci_inventory(root),
++        "dockerCompose": docker_inventory(root),
++        "models": model_inventory(root),
++        "database": sql_inventory(root),
++        "implementations": implementation_inventory(root),
++        "hardcodedRuntimeIdentifiers": hardcoded_identifier_inventory(root),
++    }
++    data["findings"] = structural_findings(data)
++    return data
++
++
++def markdown_table(headers: list[str], rows: list[list[Any]]) -> list[str]:
++    lines = ["| " + " | ".join(headers) + " |", "| " + " | ".join("---" for _ in headers) + " |"]
++    for row in rows:
++        values = [str(value).replace("|", "\\|").replace("\n", " ") for value in row]
++        lines.append("| " + " | ".join(values) + " |")
++    return lines
++
++
++def render_markdown(data: dict[str, Any]) -> str:
++    git = data["git"]
++    env = data["environment"]
++    backend_tests = data["tests"]["backend"]
++    pit_tests = data["tests"]["pitPre"]
++    lines = [
++        "# SHM-EM Phase 0 Repository Baseline",
++        "",
++        "> Structural audit only. No benchmark, inference, database mutation, or behavioral validation is claimed here.",
++        "",
++        "## Baseline identity",
++        "",
++        *markdown_table(["Item", "Value"], [
++            ["Schema", data["schemaVersion"]],
++            ["Branch", git["branch"]],
++            ["Commit", git["commit"]],
++            ["Submitted tag", git["submittedTag"]],
++            ["Submitted tag commit", git["submittedTagCommit"]],
++            ["Tag matches audit commit", git["submittedTagMatchesAuditCommit"]],
++            ["Source tree clean outside revision evidence", git["sourceTreeCleanOutsideRevisionEvidence"]],
++        ]),
++        "",
++        "## Environment",
++        "",
++        *markdown_table(["Runtime", "Detected", "Version"], [
++            ["OS", "True", env["os"]["platform"]],
++            ["Audit Python", "True", env["auditPython"]["version"]],
++            ["PIT_PRE Python", env["pitPrePython"]["detected"], env["pitPrePython"]["version"] or "not detected"],
++            ["Java", env["java"]["detected"], env["java"]["version"] or "not detected"],
++            ["Maven", env["maven"]["detected"], env["maven"]["version"] or "not detected"],
++            ["Node", env["node"]["detected"], env["node"]["version"] or "not detected"],
++            ["npm", env["npm"]["detected"], env["npm"]["version"] or "not detected"],
++            ["MySQL CLI", env["mysqlCli"]["detected"], env["mysqlCli"]["version"] or "not detected"],
++            ["Git", env["git"]["detected"], env["git"]["version"] or "not detected"],
++        ]),
++        "",
++        "MySQL CLI detection only indicates whether this audit process found the command-line client. It does not establish MySQL Server or database availability.",
++        "",
++        "## Test inventory",
++        "",
++        *markdown_table(["Component", "Test files", "Test classes", "Test methods"], [
++            ["Backend", backend_tests["testFiles"], backend_tests["testClasses"], backend_tests["testMethods"]],
++            ["PIT_PRE", pit_tests["testFiles"], pit_tests["testClasses"], pit_tests["testMethods"]],
++        ]),
++        "",
++        "These are source-level counts, not execution results.",
++        "",
++        "## Frontend scripts",
++        "",
++        *markdown_table(["Script", "Command"], [[name, command] for name, command in data["frontendScripts"].items()]),
++        "",
++        "## CI and container baseline",
++        "",
++        f"- CI operating systems: `{', '.join(data['continuousIntegration']['operatingSystems']) or 'none'}`",
++        f"- Docker/Compose present: `{data['dockerCompose']['present']}`",
++        f"- Docker/Compose files: `{', '.join(data['dockerCompose']['files']) or 'none'}`",
++        "",
++        "## Model bundles",
++        "",
++        *markdown_table(["Bundle", "Files", "Bytes"], [
++            [bundle["directory"], bundle["fileCount"], bundle["bytes"]]
++            for bundle in data["models"]["bundleDirectories"]
++        ]),
++        "",
++        f"The JSON baseline records SHA-256 for all `{data['models']['artifactCount']}` files in model bundle directories.",
++        "",
++        "## Database contracts and persistence",
++        "",
++        f"- Contract tables: `{', '.join(data['database']['contractTables'])}`",
++        f"- Prediction/result tables: `{', '.join(data['database']['predictionAndResultTables'])}`",
++        f"- Provenance tables: `{', '.join(data['database']['provenanceTables'])}`",
++        f"- Observation tables: `{', '.join(data['database']['observationTables'])}`",
++        "",
++        "## Key implementations",
++        "",
++        f"- Project Future State: `{', '.join(data['implementations']['futureStateImplementations']) or 'not found'}`",
++        f"- Prediction execution gate: `{', '.join(data['implementations']['executionGateImplementations']) or 'not found'}`",
++        f"- Provenance endpoint: `{data['implementations']['provenanceEndpoint'][0]['route'] if data['implementations']['provenanceEndpoint'] else 'not found'}`",
++        f"- Provenance services: `{', '.join(data['implementations']['provenanceServices']) or 'not found'}`",
++        "",
++        "## Runtime hardcoding inventory",
++        "",
++        *markdown_table(["Category", "Occurrences"], [
++            ["Project-code literals", len(data["hardcodedRuntimeIdentifiers"]["projectCodes"])],
++            ["Numeric project IDs", len(data["hardcodedRuntimeIdentifiers"]["numericProjectIds"])],
++            ["Model/target literals", len(data["hardcodedRuntimeIdentifiers"]["modelCodes"])],
++            ["Physical observation-table literals", len(data["hardcodedRuntimeIdentifiers"]["physicalObservationTables"])],
++        ]),
++        "",
++        "Repository-relative paths, lines, identifiers, and source text are retained in `repository-baseline.json`.",
++        "",
++        "## Audit findings",
++        "",
++        *markdown_table(["Severity", "Code", "Finding"], [
++            [item["severity"], item["code"], item["message"]] for item in data["findings"]
++        ]),
++        "",
++        "## Phase 0 boundary",
++        "",
++        "This audit does not run Maven tests, PIT_PRE inference, frontend builds, MySQL reproduction, failure injection, benchmarks, or provenance reproduction. Those activities belong to later phases and must generate their own machine-readable evidence.",
++        "",
++    ]
++    return "\n".join(lines)
++
++
++def write_json(path: Path, value: dict[str, Any]) -> None:
++    path.write_text(json.dumps(value, ensure_ascii=False, indent=2, sort_keys=True) + "\n", encoding="utf-8")
++
++
++def write_audit_manifest(output_dir: Path, root: Path, commit: str | None) -> Path:
++    manifest_path = output_dir / "audit-manifest.json"
++    files = []
++    for path in sorted(item for item in output_dir.iterdir() if item.is_file() and item != manifest_path):
++        try:
++            artifact_path = relative(path, root)
++        except ValueError:
++            artifact_path = path.name
++        files.append({"path": artifact_path, "bytes": path.stat().st_size, "sha256": sha256(path)})
++    manifest = {
++        "schemaVersion": "shm-em-audit-manifest-v1",
++        "sourceGitCommit": commit,
++        "generationTimestamp": datetime.now(timezone.utc).replace(microsecond=0).isoformat(),
++        "artifacts": files,
++    }
++    write_json(manifest_path, manifest)
++    return manifest_path
++
++
++def parse_args() -> argparse.Namespace:
++    inferred_root = Path(__file__).resolve().parents[2]
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument("--repo", type=Path, default=inferred_root, help="Repository root")
++    parser.add_argument("--output-dir", type=Path, default=None, help="Output directory; defaults to artifacts/revision/audit")
++    parser.add_argument(
++        "--include-local-paths",
++        action="store_true",
++        help="Include executable paths for local diagnostics. Disabled for public evidence by default.",
++    )
++    return parser.parse_args()
++
++
++def main() -> int:
++    args = parse_args()
++    root = args.repo.resolve()
++    if not (root / ".git").exists():
++        raise SystemExit(f"Not a Git worktree: {root}")
++    output_dir = (args.output_dir or root / "artifacts/revision/audit").resolve()
++    output_dir.mkdir(parents=True, exist_ok=True)
++    baseline = build_baseline(root, include_local_paths=args.include_local_paths)
++    json_path = output_dir / "repository-baseline.json"
++    markdown_path = output_dir / "repository-baseline.md"
++    write_json(json_path, baseline)
++    markdown_path.write_text(render_markdown(baseline), encoding="utf-8")
++    architecture = architecture_coupling_review(baseline)
++    architecture_json = output_dir / "architecture-coupling-review.json"
++    architecture_markdown = output_dir / "architecture-coupling-review.md"
++    write_json(architecture_json, architecture)
++    architecture_markdown.write_text(render_architecture_review(architecture), encoding="utf-8")
++    alignment_paths = [
++        root / "artifacts/revision/phase0_6_1/alignment-audit-v3-summary.json",
++        root / "artifacts/revision/phase0_6/alignment-audit-v2-summary.json",
++        output_dir / "input-alignment-summary.json",
++    ]
++    alignment_path = next((path for path in alignment_paths if path.is_file()), None)
++    alignment = json.loads(read_text(alignment_path)) if alignment_path else None
++    claims = claim_gap_matrix(baseline, alignment)
++    claim_json = output_dir / "claim-gap-matrix.json"
++    claim_markdown = output_dir / "claim-gap-matrix.md"
++    write_json(claim_json, claims)
++    claim_markdown.write_text(render_claim_gap(claims), encoding="utf-8")
++    proposal_path = output_dir / "phase0_6-minimal-change-proposal.md"
++    proposal_path.write_text(minimal_change_proposal(alignment), encoding="utf-8")
++    manifest_path = write_audit_manifest(output_dir, root, baseline["git"]["commit"])
++    print(json_path)
++    print(markdown_path)
++    print(architecture_json)
++    print(architecture_markdown)
++    print(claim_json)
++    print(claim_markdown)
++    print(proposal_path)
++    print(manifest_path)
++    return 0
++
++
++if __name__ == "__main__":
++    raise SystemExit(main())
+diff --git a/tools/revision/validate_public_contract_hashes.py b/tools/revision/validate_public_contract_hashes.py
+new file mode 100644
+index 0000000..a47a206
+--- /dev/null
++++ b/tools/revision/validate_public_contract_hashes.py
+@@ -0,0 +1,288 @@
++#!/usr/bin/env python3
++"""Validate public PIT_PRE contracts against raw checkout bytes.
++
++The validator deliberately performs no line-ending normalization. It also
++creates a minimal Git repository and clones it with ``core.autocrlf=true`` to
++verify that the declared byte hashes survive a normal Windows checkout.
++"""
++
++from __future__ import annotations
++
++import argparse
++import hashlib
++import json
++import os
++import shutil
++import stat
++import subprocess
++import sys
++import tempfile
++from pathlib import Path
++from typing import Any
++
++
++ROOT = Path(__file__).resolve().parents[2]
++PIT_PRE_ROOT = ROOT / "src/pit_pre"
++if str(PIT_PRE_ROOT) not in sys.path:
++    sys.path.insert(0, str(PIT_PRE_ROOT))
++if str(Path(__file__).resolve().parent) not in sys.path:
++    sys.path.insert(0, str(Path(__file__).resolve().parent))
++
++import audit_input_alignment as alignment_audit
++from phase0_6_regression import EXTRA_TABLES, model_config
++
++
++def parse_args() -> argparse.Namespace:
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument(
++        "--output-dir",
++        type=Path,
++        default=Path("artifacts/revision/phase0_6_1"),
++    )
++    return parser.parse_args()
++
++
++def resolve(path: Path) -> Path:
++    return path if path.is_absolute() else ROOT / path
++
++
++def sha256_file(path: Path) -> str:
++    digest = hashlib.sha256()
++    with path.open("rb") as stream:
++        for chunk in iter(lambda: stream.read(1024 * 1024), b""):
++            digest.update(chunk)
++    return digest.hexdigest()
++
++
++def sha256_text(value: str) -> str:
++    return hashlib.sha256(value.encode("utf-8")).hexdigest()
++
++
++def relative(path: Path) -> str:
++    return path.resolve().relative_to(ROOT).as_posix()
++
++
++def git(*args: str, cwd: Path = ROOT) -> str:
++    return subprocess.run(
++        ["git", *args],
++        cwd=cwd,
++        check=True,
++        capture_output=True,
++        text=True,
++    ).stdout.strip()
++
++
++def attributes(path: str) -> dict[str, str]:
++    output = git("check-attr", "text", "eol", "--", path)
++    result: dict[str, str] = {}
++    for line in output.splitlines():
++        _, attribute, value = line.rsplit(": ", 2)
++        result[attribute] = value
++    return result
++
++
++def eol_state(path: str) -> str:
++    return git("ls-files", "--eol", "--", path)
++
++
++def text_eol_counts(path: Path) -> dict[str, int]:
++    content = path.read_bytes()
++    return {
++        "crlfCount": content.count(b"\r\n"),
++        "bareCarriageReturnCount": content.replace(b"\r\n", b"").count(b"\r"),
++        "lfCount": content.count(b"\n") - content.count(b"\r\n"),
++    }
++
++
++def contract_assets() -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
++    alignment_audit.AUDIT_TABLES.update(EXTRA_TABLES)
++    tables = alignment_audit.parse_public_sample(
++        ROOT / "sql/shm_em_database/02_SHM_EM_public_sample.sql"
++    )
++    config = model_config(tables, alignment_audit.PROJECT_CODE)
++    models: list[dict[str, Any]] = []
++    assets: dict[str, dict[str, Any]] = {}
++
++    def add_asset(path: Path, kind: str, declared_hash: str | None) -> None:
++        key = relative(path)
++        item = assets.setdefault(key, {
++            "path": key,
++            "kinds": [],
++            "declaredHashes": [],
++            "textArtifact": kind in {"inference_script", "best_params", "runtime_manifest", "dependency_lock"},
++        })
++        if kind not in item["kinds"]:
++            item["kinds"].append(kind)
++        if declared_hash and declared_hash not in item["declaredHashes"]:
++            item["declaredHashes"].append(declared_hash)
++
++    for model in config.models.values():
++        runtime_manifest = json.loads(model.runtime_manifest_path.read_text(encoding="utf-8"))
++        dependency_lock_path = PIT_PRE_ROOT / str(runtime_manifest["dependencyLock"]).removeprefix("./")
++        add_asset(model.model_path, "model_artifact", model.artifact_hash)
++        add_asset(model.preprocessor_path, "preprocessor", model.preprocessor_hash)
++        add_asset(model.script_path, "inference_script", model.inference_script_hash)
++        if model.best_params_path:
++            add_asset(model.best_params_path, "best_params", model.best_params_hash)
++        add_asset(model.runtime_manifest_path, "runtime_manifest", model.runtime_manifest_hash)
++        add_asset(dependency_lock_path, "dependency_lock", None)
++        lock_hash = sha256_file(dependency_lock_path)
++        calculated_environment = sha256_text(f"{lock_hash}|{model.runtime_manifest_hash}")
++        calculated_bundle = sha256_text("|".join([
++            model.artifact_hash,
++            model.preprocessor_hash,
++            model.inference_script_hash,
++            model.best_params_hash or "",
++            model.input_schema_hash,
++            model.contract_version,
++            model.runtime_manifest_hash,
++            model.environment_digest,
++        ]))
++        models.append({
++            "modelCode": model.code,
++            "environmentDigestDeclared": model.environment_digest,
++            "environmentDigestCalculated": calculated_environment,
++            "environmentDigestMatches": model.environment_digest == calculated_environment,
++            "artifactBundleHashDeclared": model.artifact_bundle_hash,
++            "artifactBundleHashCalculated": calculated_bundle,
++            "artifactBundleHashMatches": model.artifact_bundle_hash == calculated_bundle,
++        })
++    return models, sorted(assets.values(), key=lambda item: item["path"])
++
++
++def simulated_autocrlf_checkout(paths: list[str]) -> Path:
++    workspace = Path(tempfile.mkdtemp(prefix="shm_em_eol_validation_"))
++    source = workspace / "source"
++    checkout = workspace / "checkout"
++    source.mkdir()
++    shutil.copy2(ROOT / ".gitattributes", source / ".gitattributes")
++    for relative_path in paths:
++        destination = source / relative_path
++        destination.parent.mkdir(parents=True, exist_ok=True)
++        shutil.copy2(ROOT / relative_path, destination)
++    git("init", "--quiet", cwd=source)
++    git("config", "user.name", "SHM-EM Revision Audit", cwd=source)
++    git("config", "user.email", "revision-audit@example.invalid", cwd=source)
++    git("config", "core.autocrlf", "true", cwd=source)
++    git("add", ".", cwd=source)
++    git("commit", "--quiet", "-m", "contract checkout fixture", cwd=source)
++    subprocess.run(
++        ["git", "-c", "core.autocrlf=true", "clone", "--quiet", str(source), str(checkout)],
++        check=True,
++        capture_output=True,
++        text=True,
++    )
++    return checkout
++
++
++def remove_readonly(function, path: str, _error) -> None:
++    os.chmod(path, stat.S_IWRITE)
++    function(path)
++
++
++def validate() -> dict[str, Any]:
++    models, assets = contract_assets()
++    checkout = simulated_autocrlf_checkout([item["path"] for item in assets])
++    try:
++        for item in assets:
++            path = ROOT / item["path"]
++            clone_path = checkout / item["path"]
++            current_hash = sha256_file(path)
++            checkout_hash = sha256_file(clone_path)
++            attrs = attributes(item["path"])
++            declared = item["declaredHashes"]
++            item.update({
++                "currentRawSha256": current_hash,
++                "autocrlfCheckoutRawSha256": checkout_hash,
++                "declaredHashMatchesCurrent": not declared or all(value == current_hash for value in declared),
++                "declaredHashMatchesAutocrlfCheckout": not declared or all(value == checkout_hash for value in declared),
++                "currentMatchesAutocrlfCheckout": current_hash == checkout_hash,
++                "gitAttributes": attrs,
++                "gitEolState": eol_state(item["path"]),
++                "eolPolicyMatches": (
++                    attrs.get("text") == "set" and attrs.get("eol") == "lf"
++                    if item["textArtifact"]
++                    else attrs.get("text") == "unset"
++                ),
++            })
++            if item["textArtifact"]:
++                item["currentEolCounts"] = text_eol_counts(path)
++                item["autocrlfCheckoutEolCounts"] = text_eol_counts(clone_path)
++                item["lfOnlyInBothCheckouts"] = (
++                    item["currentEolCounts"]["crlfCount"] == 0
++                    and item["currentEolCounts"]["bareCarriageReturnCount"] == 0
++                    and item["autocrlfCheckoutEolCounts"]["crlfCount"] == 0
++                    and item["autocrlfCheckoutEolCounts"]["bareCarriageReturnCount"] == 0
++                )
++            else:
++                item["binaryBytesUnaffected"] = current_hash == checkout_hash
++    finally:
++        shutil.rmtree(checkout.parent, onerror=remove_readonly)
++
++    passed = (
++        all(item["declaredHashMatchesCurrent"] for item in assets)
++        and all(item["declaredHashMatchesAutocrlfCheckout"] for item in assets)
++        and all(item["currentMatchesAutocrlfCheckout"] for item in assets)
++        and all(item["eolPolicyMatches"] for item in assets)
++        and all(item["environmentDigestMatches"] and item["artifactBundleHashMatches"] for item in models)
++    )
++    return {
++        "schemaVersion": "shm-em-public-contract-hash-validation-v1",
++        "hashMode": "raw-bytes-no-eol-normalization",
++        "simulatedCheckout": "git clone with core.autocrlf=true",
++        "sourceGitCommit": git("rev-parse", "HEAD"),
++        "submittedTagCommit": git("rev-parse", "v1.0.0^{}"),
++        "modelCount": len(models),
++        "assetCount": len(assets),
++        "passed": passed,
++        "models": models,
++        "assets": assets,
++    }
++
++
++def render_review(report: dict[str, Any]) -> str:
++    rows = [
++        f"| `{item['path']}` | {', '.join(item['kinds'])} | {str(item['declaredHashMatchesCurrent']).lower()} | {str(item['declaredHashMatchesAutocrlfCheckout']).lower()} | {item['gitAttributes'].get('text')} / {item['gitAttributes'].get('eol')} |"
++        for item in report["assets"]
++    ]
++    return "\n".join([
++        "# Phase 0.6.1 EOL and Public Contract Review",
++        "",
++        f"- Overall raw-byte validation: `{str(report['passed']).lower()}`",
++        f"- Active models: `{report['modelCount']}`",
++        f"- Unique contract-sensitive assets: `{report['assetCount']}`",
++        "- Hash method: raw file bytes; no LF normalization is performed by the validator.",
++        "- Checkout simulation: a real Git clone with `core.autocrlf=true`.",
++        "",
++        "| Path | Contract role | Current raw hash | autocrlf checkout raw hash | text / eol attribute |",
++        "| --- | --- | --- | --- | --- |",
++        *rows,
++        "",
++        "Binary `.pth` and `.joblib` artifacts are marked `-text`. Inference scripts, best-parameter JSON files, the runtime manifest, and the dependency lock use deterministic LF checkout bytes.",
++        "",
++    ])
++
++
++def main() -> int:
++    args = parse_args()
++    output_dir = resolve(args.output_dir)
++    output_dir.mkdir(parents=True, exist_ok=True)
++    report = validate()
++    (output_dir / "public-contract-hash-validation.json").write_text(
++        json.dumps(report, indent=2, sort_keys=True) + "\n",
++        encoding="utf-8",
++    )
++    (output_dir / "eol-policy-review.md").write_text(
++        render_review(report),
++        encoding="utf-8",
++    )
++    print(json.dumps({
++        "assetCount": report["assetCount"],
++        "modelCount": report["modelCount"],
++        "passed": report["passed"],
++    }, sort_keys=True))
++    return 0 if report["passed"] else 1
++
++
++if __name__ == "__main__":
++    raise SystemExit(main())

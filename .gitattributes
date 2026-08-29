@@ -10,6 +10,19 @@
 *.vue text eol=lf
 *.json text eol=lf
 
+# Byte-hashed PIT_PRE contract inputs must have deterministic checkout bytes.
+src/pit_pre/models/**/*.py text eol=lf
+src/pit_pre/models/**/best_params.json text eol=lf
+src/pit_pre/runtime-manifest.json text eol=lf
+src/pit_pre/requirements.lock.txt text eol=lf
+
+# Portable model artifacts are byte-sensitive binary files.
+*.pth binary
+*.joblib binary
+
+# Generated diff evidence preserves the original patch bytes.
+artifacts/revision/**/*.patch -whitespace
+
 *.png binary
 *.jpg binary
 *.jpeg binary

@@ -1,0 +1,55 @@
+{
+  "eligibilityThresholdsApplied": false,
+  "featureCount": 164,
+  "maxNumericalAbsDifferenceByMode": {
+    "phase0_6_1_one_pass": 0.0,
+    "phase0_6_two_pass": 0.0,
+    "value_only": 0.0
+  },
+  "measurements": {
+    "phase0_6_1_one_pass": {
+      "maxMilliseconds": 1669.28,
+      "medianMilliseconds": 1521.687,
+      "minMilliseconds": 1466.548,
+      "p95Milliseconds": 1650.707,
+      "samples": 9
+    },
+    "phase0_6_two_pass": {
+      "maxMilliseconds": 2291.376,
+      "medianMilliseconds": 2199.344,
+      "minMilliseconds": 2079.917,
+      "p95Milliseconds": 2288.009,
+      "samples": 9
+    },
+    "value_only": {
+      "maxMilliseconds": 781.641,
+      "medianMilliseconds": 641.918,
+      "minMilliseconds": 583.636,
+      "p95Milliseconds": 757.406,
+      "samples": 9
+    }
+  },
+  "onePassStageCounts": {
+    "asofCellCount": 2431,
+    "backwardFillCellCount": 0,
+    "exactCellCount": 6,
+    "forwardFillCellCount": 0,
+    "interiorInterpolationCellCount": 24,
+    "leadingBoundaryExtensionCellCount": 163,
+    "trailingBoundaryExtensionCellCount": 0,
+    "unresolvedMissingCellCount": 0
+  },
+  "schemaVersion": "shm-em-phase0-6-1-alignment-benchmark-v1",
+  "scope": "public sample common 16-step wide-table build",
+  "stageCountsIdentical": true,
+  "twoPassStageCounts": {
+    "asofCellCount": 2431,
+    "backwardFillCellCount": 0,
+    "exactCellCount": 6,
+    "forwardFillCellCount": 0,
+    "interiorInterpolationCellCount": 24,
+    "leadingBoundaryExtensionCellCount": 163,
+    "trailingBoundaryExtensionCellCount": 0,
+    "unresolvedMissingCellCount": 0
+  }
+}

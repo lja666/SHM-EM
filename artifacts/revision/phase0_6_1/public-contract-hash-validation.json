@@ -1,0 +1,746 @@
+{
+  "assetCount": 25,
+  "assets": [
+    {
+      "autocrlfCheckoutRawSha256": "aef1d20d99b94607b22ded3c37c2a75300c2441db50b9fa005018fb163e1a31c",
+      "binaryBytesUnaffected": true,
+      "currentMatchesAutocrlfCheckout": true,
+      "currentRawSha256": "aef1d20d99b94607b22ded3c37c2a75300c2441db50b9fa005018fb163e1a31c",
+      "declaredHashMatchesAutocrlfCheckout": true,
+      "declaredHashMatchesCurrent": true,
+      "declaredHashes": [
+        "aef1d20d99b94607b22ded3c37c2a75300c2441db50b9fa005018fb163e1a31c"
+      ],
+      "eolPolicyMatches": true,
+      "gitAttributes": {
+        "eol": "unspecified",
+        "text": "unset"
+      },
+      "gitEolState": "i/-text w/-text attr/-text            \tsrc/pit_pre/models/Pressure__predict/best_model_Pressure_optuna.pth",
+      "kinds": [
+        "model_artifact"
+      ],
+      "path": "src/pit_pre/models/Pressure__predict/best_model_Pressure_optuna.pth",
+      "textArtifact": false
+    },
+    {
+      "autocrlfCheckoutEolCounts": {
+        "bareCarriageReturnCount": 0,
+        "crlfCount": 0,
+        "lfCount": 12
+      },
+      "autocrlfCheckoutRawSha256": "647647090e79067b2fdcda7f59efb6b62790468c68685817643a4d73a5f994b5",
+      "currentEolCounts": {
+        "bareCarriageReturnCount": 0,
+        "crlfCount": 0,
+        "lfCount": 12
+      },
+      "currentMatchesAutocrlfCheckout": true,
+      "currentRawSha256": "647647090e79067b2fdcda7f59efb6b62790468c68685817643a4d73a5f994b5",
+      "declaredHashMatchesAutocrlfCheckout": true,
+      "declaredHashMatchesCurrent": true,
+      "declaredHashes": [
+        "647647090e79067b2fdcda7f59efb6b62790468c68685817643a4d73a5f994b5"
+      ],
+      "eolPolicyMatches": true,
+      "gitAttributes": {
+        "eol": "lf",
+        "text": "set"
+      },
+      "gitEolState": "i/lf    w/lf    attr/text eol=lf      \tsrc/pit_pre/models/Pressure__predict/best_params.json",
+      "kinds": [
+        "best_params"
+      ],
+      "lfOnlyInBothCheckouts": true,
+      "path": "src/pit_pre/models/Pressure__predict/best_params.json",
+      "textArtifact": true
+    },
+    {
+      "autocrlfCheckoutEolCounts": {
+        "bareCarriageReturnCount": 0,
+        "crlfCount": 0,
+        "lfCount": 517
+      },
+      "autocrlfCheckoutRawSha256": "a087cbb6ce3ae205bbfcb561d636579508b864f495cc95de4d42dae165c0977b",
+      "currentEolCounts": {
+        "bareCarriageReturnCount": 0,
+        "crlfCount": 0,
+        "lfCount": 517
+      },
+      "currentMatchesAutocrlfCheckout": true,
+      "currentRawSha256": "a087cbb6ce3ae205bbfcb561d636579508b864f495cc95de4d42dae165c0977b",
+      "declaredHashMatchesAutocrlfCheckout": true,
+      "declaredHashMatchesCurrent": true,
+      "declaredHashes": [
+        "a087cbb6ce3ae205bbfcb561d636579508b864f495cc95de4d42dae165c0977b"
+      ],
+      "eolPolicyMatches": true,
+      "gitAttributes": {
+        "eol": "lf",
+        "text": "set"
+      },
+      "gitEolState": "i/lf    w/lf    attr/text eol=lf      \tsrc/pit_pre/models/Pressure__predict/predict_Pressure_future_fixed_best_params_annotated.py",
+      "kinds": [
+        "inference_script"
+      ],
+      "lfOnlyInBothCheckouts": true,
+      "path": "src/pit_pre/models/Pressure__predict/predict_Pressure_future_fixed_best_params_annotated.py",
+      "textArtifact": true
+    },
+    {
+      "autocrlfCheckoutRawSha256": "3a0db327bd99be620380b4fb4a280f734325bd4767788bb5d8d7242980fe7183",
+      "binaryBytesUnaffected": true,
+      "currentMatchesAutocrlfCheckout": true,
+      "currentRawSha256": "3a0db327bd99be620380b4fb4a280f734325bd4767788bb5d8d7242980fe7183",
+      "declaredHashMatchesAutocrlfCheckout": true,
+      "declaredHashMatchesCurrent": true,
+      "declaredHashes": [
+        "3a0db327bd99be620380b4fb4a280f734325bd4767788bb5d8d7242980fe7183"
+      ],
+      "eolPolicyMatches": true,
+      "gitAttributes": {
+        "eol": "unspecified",
+        "text": "unset"
+      },
+      "gitEolState": "i/-text w/-text attr/-text            \tsrc/pit_pre/models/Pressure__predict/preprocessor.joblib",
+      "kinds": [
+        "preprocessor"
+      ],
+      "path": "src/pit_pre/models/Pressure__predict/preprocessor.joblib",
+      "textArtifact": false
+    },
+    {
+      "autocrlfCheckoutRawSha256": "687acb1a44f79f9566e2e677f33478addd66c83a9e300f32666674f7d2cdc694",
+      "binaryBytesUnaffected": true,
+      "currentMatchesAutocrlfCheckout": true,
+      "currentRawSha256": "687acb1a44f79f9566e2e677f33478addd66c83a9e300f32666674f7d2cdc694",
+      "declaredHashMatchesAutocrlfCheckout": true,
+      "declaredHashMatchesCurrent": true,
+      "declaredHashes": [
+        "687acb1a44f79f9566e2e677f33478addd66c83a9e300f32666674f7d2cdc694"
+      ],
+      "eolPolicyMatches": true,
+      "gitAttributes": {
+        "eol": "unspecified",
+        "text": "unset"
+      },
+      "gitEolState": "i/-text w/-text attr/-text            \tsrc/pit_pre/models/Strain__predict/best_model_Strain_optuna.pth",
+      "kinds": [
+        "model_artifact"
+      ],
+      "path": "src/pit_pre/models/Strain__predict/best_model_Strain_optuna.pth",
+      "textArtifact": false
+    },
+    {
+      "autocrlfCheckoutEolCounts": {
+        "bareCarriageReturnCount": 0,
+        "crlfCount": 0,
+        "lfCount": 12
+      },
+      "autocrlfCheckoutRawSha256": "3455a62b26a365b60157f390433da7e9174a5f6701aee4ab39af2507352b01e8",
+      "currentEolCounts": {
+        "bareCarriageReturnCount": 0,
+        "crlfCount": 0,
+        "lfCount": 12
+      },
+      "currentMatchesAutocrlfCheckout": true,
+      "currentRawSha256": "3455a62b26a365b60157f390433da7e9174a5f6701aee4ab39af2507352b01e8",
+      "declaredHashMatchesAutocrlfCheckout": true,
+      "declaredHashMatchesCurrent": true,
+      "declaredHashes": [
+        "3455a62b26a365b60157f390433da7e9174a5f6701aee4ab39af2507352b01e8"
+      ],
+      "eolPolicyMatches": true,
+      "gitAttributes": {
+        "eol": "lf",
+        "text": "set"
+      },
+      "gitEolState": "i/lf    w/lf    attr/text eol=lf      \tsrc/pit_pre/models/Strain__predict/best_params.json",
+      "kinds": [
+        "best_params"
+      ],
+      "lfOnlyInBothCheckouts": true,
+      "path": "src/pit_pre/models/Strain__predict/best_params.json",
+      "textArtifact": true
+    },
+    {
+      "autocrlfCheckoutEolCounts": {
+        "bareCarriageReturnCount": 0,
+        "crlfCount": 0,
+        "lfCount": 858
+      },
+      "autocrlfCheckoutRawSha256": "b41d0e55ef58d04bb6a90ce224a55b5180c2794f1debd18a863ba4f1309cd8fd",
+      "currentEolCounts": {
+        "bareCarriageReturnCount": 0,
+        "crlfCount": 0,
+        "lfCount": 858
+      },
+      "currentMatchesAutocrlfCheckout": true,
+      "currentRawSha256": "b41d0e55ef58d04bb6a90ce224a55b5180c2794f1debd18a863ba4f1309cd8fd",
+      "declaredHashMatchesAutocrlfCheckout": true,
+      "declaredHashMatchesCurrent": true,
+      "declaredHashes": [
+        "b41d0e55ef58d04bb6a90ce224a55b5180c2794f1debd18a863ba4f1309cd8fd"
+      ],
+      "eolPolicyMatches": true,
+      "gitAttributes": {
+        "eol": "lf",
+        "text": "set"
+      },
+      "gitEolState": "i/lf    w/lf    attr/text eol=lf      \tsrc/pit_pre/models/Strain__predict/predict_Strain_future_fixed_best_params_annotated.py",
+      "kinds": [
+        "inference_script"
+      ],
+      "lfOnlyInBothCheckouts": true,
+      "path": "src/pit_pre/models/Strain__predict/predict_Strain_future_fixed_best_params_annotated.py",
+      "textArtifact": true
+    },
+    {
+      "autocrlfCheckoutRawSha256": "6660a92d879f1774bae92619392f95219927608584c6f3c72e6ce1f7c77b71df",
+      "binaryBytesUnaffected": true,
+      "currentMatchesAutocrlfCheckout": true,
+      "currentRawSha256": "6660a92d879f1774bae92619392f95219927608584c6f3c72e6ce1f7c77b71df",
+      "declaredHashMatchesAutocrlfCheckout": true,
+      "declaredHashMatchesCurrent": true,
+      "declaredHashes": [
+        "6660a92d879f1774bae92619392f95219927608584c6f3c72e6ce1f7c77b71df"
+      ],
+      "eolPolicyMatches": true,
+      "gitAttributes": {
+        "eol": "unspecified",
+        "text": "unset"
+      },
+      "gitEolState": "i/-text w/-text attr/-text            \tsrc/pit_pre/models/Strain__predict/preprocessor.joblib",
+      "kinds": [
+        "preprocessor"
+      ],
+      "path": "src/pit_pre/models/Strain__predict/preprocessor.joblib",
+      "textArtifact": false
+    },
+    {
+      "autocrlfCheckoutRawSha256": "6a1b376e0390e5d0470ff7ee7bc54032565f42b2768ede36c5b931546b716cd9",
+      "binaryBytesUnaffected": true,
+      "currentMatchesAutocrlfCheckout": true,
+      "currentRawSha256": "6a1b376e0390e5d0470ff7ee7bc54032565f42b2768ede36c5b931546b716cd9",
+      "declaredHashMatchesAutocrlfCheckout": true,
+      "declaredHashMatchesCurrent": true,
+      "declaredHashes": [
+        "6a1b376e0390e5d0470ff7ee7bc54032565f42b2768ede36c5b931546b716cd9"
+      ],
+      "eolPolicyMatches": true,
+      "gitAttributes": {
+        "eol": "unspecified",
+        "text": "unset"
+      },
+      "gitEolState": "i/-text w/-text attr/-text            \tsrc/pit_pre/models/XD__predict/best_model_XD_optuna.pth",
+      "kinds": [
+        "model_artifact"
+      ],
+      "path": "src/pit_pre/models/XD__predict/best_model_XD_optuna.pth",
+      "textArtifact": false
+    },
+    {
+      "autocrlfCheckoutEolCounts": {
+        "bareCarriageReturnCount": 0,
+        "crlfCount": 0,
+        "lfCount": 12
+      },
+      "autocrlfCheckoutRawSha256": "60cf08e567a244d400f40a13df1e25d99e7356cf8ad6055813f84a647533c4dc",
+      "currentEolCounts": {
+        "bareCarriageReturnCount": 0,
+        "crlfCount": 0,
+        "lfCount": 12
+      },
+      "currentMatchesAutocrlfCheckout": true,
+      "currentRawSha256": "60cf08e567a244d400f40a13df1e25d99e7356cf8ad6055813f84a647533c4dc",
+      "declaredHashMatchesAutocrlfCheckout": true,
+      "declaredHashMatchesCurrent": true,
+      "declaredHashes": [
+        "60cf08e567a244d400f40a13df1e25d99e7356cf8ad6055813f84a647533c4dc"
+      ],
+      "eolPolicyMatches": true,
+      "gitAttributes": {
+        "eol": "lf",
+        "text": "set"
+      },
+      "gitEolState": "i/lf    w/lf    attr/text eol=lf      \tsrc/pit_pre/models/XD__predict/best_params.json",
+      "kinds": [
+        "best_params"
+      ],
+      "lfOnlyInBothCheckouts": true,
+      "path": "src/pit_pre/models/XD__predict/best_params.json",
+      "textArtifact": true
+    },
+    {
+      "autocrlfCheckoutEolCounts": {
+        "bareCarriageReturnCount": 0,
+        "crlfCount": 0,
+        "lfCount": 829
+      },
+      "autocrlfCheckoutRawSha256": "3c4c4fd5724cb4de4c1ee6cc7e2ce64364837569877648a29c35b67d7aae10d7",
+      "currentEolCounts": {
+        "bareCarriageReturnCount": 0,
+        "crlfCount": 0,
+        "lfCount": 829
+      },
+      "currentMatchesAutocrlfCheckout": true,
+      "currentRawSha256": "3c4c4fd5724cb4de4c1ee6cc7e2ce64364837569877648a29c35b67d7aae10d7",
+      "declaredHashMatchesAutocrlfCheckout": true,
+      "declaredHashMatchesCurrent": true,
+      "declaredHashes": [
+        "3c4c4fd5724cb4de4c1ee6cc7e2ce64364837569877648a29c35b67d7aae10d7"
+      ],
+      "eolPolicyMatches": true,
+      "gitAttributes": {
+        "eol": "lf",
+        "text": "set"
+      },
+      "gitEolState": "i/lf    w/lf    attr/text eol=lf      \tsrc/pit_pre/models/XD__predict/predict_XD_future_direct_comment_enhanced.py",
+      "kinds": [
+        "inference_script"
+      ],
+      "lfOnlyInBothCheckouts": true,
+      "path": "src/pit_pre/models/XD__predict/predict_XD_future_direct_comment_enhanced.py",
+      "textArtifact": true
+    },
+    {
+      "autocrlfCheckoutRawSha256": "ac01c13899e0f647758cb65fd1ba9a04e3560569a66fa2c82f0d2a4ec394a54b",
+      "binaryBytesUnaffected": true,
+      "currentMatchesAutocrlfCheckout": true,
+      "currentRawSha256": "ac01c13899e0f647758cb65fd1ba9a04e3560569a66fa2c82f0d2a4ec394a54b",
+      "declaredHashMatchesAutocrlfCheckout": true,
+      "declaredHashMatchesCurrent": true,
+      "declaredHashes": [
+        "ac01c13899e0f647758cb65fd1ba9a04e3560569a66fa2c82f0d2a4ec394a54b"
+      ],
+      "eolPolicyMatches": true,
+      "gitAttributes": {
+        "eol": "unspecified",
+        "text": "unset"
+      },
+      "gitEolState": "i/-text w/-text attr/-text            \tsrc/pit_pre/models/XD__predict/preprocessor.joblib",
+      "kinds": [
+        "preprocessor"
+      ],
+      "path": "src/pit_pre/models/XD__predict/preprocessor.joblib",
+      "textArtifact": false
+    },
+    {
+      "autocrlfCheckoutRawSha256": "ad586b1219bc7399ce486a7196216017a563b9c5a4f5f4be6d4eb3e0d1ccf543",
+      "binaryBytesUnaffected": true,
+      "currentMatchesAutocrlfCheckout": true,
+      "currentRawSha256": "ad586b1219bc7399ce486a7196216017a563b9c5a4f5f4be6d4eb3e0d1ccf543",
+      "declaredHashMatchesAutocrlfCheckout": true,
+      "declaredHashMatchesCurrent": true,
+      "declaredHashes": [
+        "ad586b1219bc7399ce486a7196216017a563b9c5a4f5f4be6d4eb3e0d1ccf543"
+      ],
+      "eolPolicyMatches": true,
+      "gitAttributes": {
+        "eol": "unspecified",
+        "text": "unset"
+      },
+      "gitEolState": "i/-text w/-text attr/-text            \tsrc/pit_pre/models/YD__predict/best_model_YD_custom_m10_n3.pth",
+      "kinds": [
+        "model_artifact"
+      ],
+      "path": "src/pit_pre/models/YD__predict/best_model_YD_custom_m10_n3.pth",
+      "textArtifact": false
+    },
+    {
+      "autocrlfCheckoutEolCounts": {
+        "bareCarriageReturnCount": 0,
+        "crlfCount": 0,
+        "lfCount": 651
+      },
+      "autocrlfCheckoutRawSha256": "96afa649deb323be7a4962312ff0846616315d03f43357a37a4222d81a8327e3",
+      "currentEolCounts": {
+        "bareCarriageReturnCount": 0,
+        "crlfCount": 0,
+        "lfCount": 651
+      },
+      "currentMatchesAutocrlfCheckout": true,
+      "currentRawSha256": "96afa649deb323be7a4962312ff0846616315d03f43357a37a4222d81a8327e3",
+      "declaredHashMatchesAutocrlfCheckout": true,
+      "declaredHashMatchesCurrent": true,
+      "declaredHashes": [
+        "96afa649deb323be7a4962312ff0846616315d03f43357a37a4222d81a8327e3"
+      ],
+      "eolPolicyMatches": true,
+      "gitAttributes": {
+        "eol": "lf",
+        "text": "set"
+      },
+      "gitEolState": "i/lf    w/lf    attr/text eol=lf      \tsrc/pit_pre/models/YD__predict/predict_YD_future_direct.py",
+      "kinds": [
+        "inference_script"
+      ],
+      "lfOnlyInBothCheckouts": true,
+      "path": "src/pit_pre/models/YD__predict/predict_YD_future_direct.py",
+      "textArtifact": true
+    },
+    {
+      "autocrlfCheckoutRawSha256": "49020979b1cd086fa6ed093c68ea496063327b6c37ccb8f42305635ac914eff1",
+      "binaryBytesUnaffected": true,
+      "currentMatchesAutocrlfCheckout": true,
+      "currentRawSha256": "49020979b1cd086fa6ed093c68ea496063327b6c37ccb8f42305635ac914eff1",
+      "declaredHashMatchesAutocrlfCheckout": true,
+      "declaredHashMatchesCurrent": true,
+      "declaredHashes": [
+        "49020979b1cd086fa6ed093c68ea496063327b6c37ccb8f42305635ac914eff1"
+      ],
+      "eolPolicyMatches": true,
+      "gitAttributes": {
+        "eol": "unspecified",
+        "text": "unset"
+      },
+      "gitEolState": "i/-text w/-text attr/-text            \tsrc/pit_pre/models/YD__predict/preprocessor.joblib",
+      "kinds": [
+        "preprocessor"
+      ],
+      "path": "src/pit_pre/models/YD__predict/preprocessor.joblib",
+      "textArtifact": false
+    },
+    {
+      "autocrlfCheckoutRawSha256": "3c18be8ae8fcdb1f8c740e8d0bf1c3e8775a5c0d1d11994d4360be1213c7ad40",
+      "binaryBytesUnaffected": true,
+      "currentMatchesAutocrlfCheckout": true,
+      "currentRawSha256": "3c18be8ae8fcdb1f8c740e8d0bf1c3e8775a5c0d1d11994d4360be1213c7ad40",
+      "declaredHashMatchesAutocrlfCheckout": true,
+      "declaredHashMatchesCurrent": true,
+      "declaredHashes": [
+        "3c18be8ae8fcdb1f8c740e8d0bf1c3e8775a5c0d1d11994d4360be1213c7ad40"
+      ],
+      "eolPolicyMatches": true,
+      "gitAttributes": {
+        "eol": "unspecified",
+        "text": "unset"
+      },
+      "gitEolState": "i/-text w/-text attr/-text            \tsrc/pit_pre/models/settlement_predict/best_model_settlement_optuna.pth",
+      "kinds": [
+        "model_artifact"
+      ],
+      "path": "src/pit_pre/models/settlement_predict/best_model_settlement_optuna.pth",
+      "textArtifact": false
+    },
+    {
+      "autocrlfCheckoutEolCounts": {
+        "bareCarriageReturnCount": 0,
+        "crlfCount": 0,
+        "lfCount": 10
+      },
+      "autocrlfCheckoutRawSha256": "697bf5d27284caceec55875ede19cab5b42dec49026ccda1be304707ff230801",
+      "currentEolCounts": {
+        "bareCarriageReturnCount": 0,
+        "crlfCount": 0,
+        "lfCount": 10
+      },
+      "currentMatchesAutocrlfCheckout": true,
+      "currentRawSha256": "697bf5d27284caceec55875ede19cab5b42dec49026ccda1be304707ff230801",
+      "declaredHashMatchesAutocrlfCheckout": true,
+      "declaredHashMatchesCurrent": true,
+      "declaredHashes": [
+        "697bf5d27284caceec55875ede19cab5b42dec49026ccda1be304707ff230801"
+      ],
+      "eolPolicyMatches": true,
+      "gitAttributes": {
+        "eol": "lf",
+        "text": "set"
+      },
+      "gitEolState": "i/lf    w/lf    attr/text eol=lf      \tsrc/pit_pre/models/settlement_predict/best_params.json",
+      "kinds": [
+        "best_params"
+      ],
+      "lfOnlyInBothCheckouts": true,
+      "path": "src/pit_pre/models/settlement_predict/best_params.json",
+      "textArtifact": true
+    },
+    {
+      "autocrlfCheckoutEolCounts": {
+        "bareCarriageReturnCount": 0,
+        "crlfCount": 0,
+        "lfCount": 851
+      },
+      "autocrlfCheckoutRawSha256": "3d347f2da9230937e664a98cfd5386035469bc0bd57002a8032f1fd64a61c0f2",
+      "currentEolCounts": {
+        "bareCarriageReturnCount": 0,
+        "crlfCount": 0,
+        "lfCount": 851
+      },
+      "currentMatchesAutocrlfCheckout": true,
+      "currentRawSha256": "3d347f2da9230937e664a98cfd5386035469bc0bd57002a8032f1fd64a61c0f2",
+      "declaredHashMatchesAutocrlfCheckout": true,
+      "declaredHashMatchesCurrent": true,
+      "declaredHashes": [
+        "3d347f2da9230937e664a98cfd5386035469bc0bd57002a8032f1fd64a61c0f2"
+      ],
+      "eolPolicyMatches": true,
+      "gitAttributes": {
+        "eol": "lf",
+        "text": "set"
+      },
+      "gitEolState": "i/lf    w/lf    attr/text eol=lf      \tsrc/pit_pre/models/settlement_predict/predict_settlement_future_fixed_best_params_annotated.py",
+      "kinds": [
+        "inference_script"
+      ],
+      "lfOnlyInBothCheckouts": true,
+      "path": "src/pit_pre/models/settlement_predict/predict_settlement_future_fixed_best_params_annotated.py",
+      "textArtifact": true
+    },
+    {
+      "autocrlfCheckoutRawSha256": "78b070dd1fbd6006b3254b60fb328a36f7748a401baca51d114586f5f9cc3e10",
+      "binaryBytesUnaffected": true,
+      "currentMatchesAutocrlfCheckout": true,
+      "currentRawSha256": "78b070dd1fbd6006b3254b60fb328a36f7748a401baca51d114586f5f9cc3e10",
+      "declaredHashMatchesAutocrlfCheckout": true,
+      "declaredHashMatchesCurrent": true,
+      "declaredHashes": [
+        "78b070dd1fbd6006b3254b60fb328a36f7748a401baca51d114586f5f9cc3e10"
+      ],
+      "eolPolicyMatches": true,
+      "gitAttributes": {
+        "eol": "unspecified",
+        "text": "unset"
+      },
+      "gitEolState": "i/-text w/-text attr/-text            \tsrc/pit_pre/models/settlement_predict/preprocessor.joblib",
+      "kinds": [
+        "preprocessor"
+      ],
+      "path": "src/pit_pre/models/settlement_predict/preprocessor.joblib",
+      "textArtifact": false
+    },
+    {
+      "autocrlfCheckoutRawSha256": "f3d3bb389db4efeb59a76cf6d6421b1ac1f72749779eb00404a1ea154cc1efee",
+      "binaryBytesUnaffected": true,
+      "currentMatchesAutocrlfCheckout": true,
+      "currentRawSha256": "f3d3bb389db4efeb59a76cf6d6421b1ac1f72749779eb00404a1ea154cc1efee",
+      "declaredHashMatchesAutocrlfCheckout": true,
+      "declaredHashMatchesCurrent": true,
+      "declaredHashes": [
+        "f3d3bb389db4efeb59a76cf6d6421b1ac1f72749779eb00404a1ea154cc1efee"
+      ],
+      "eolPolicyMatches": true,
+      "gitAttributes": {
+        "eol": "unspecified",
+        "text": "unset"
+      },
+      "gitEolState": "i/-text w/-text attr/-text            \tsrc/pit_pre/models/water__predict/best_model_water_optuna.pth",
+      "kinds": [
+        "model_artifact"
+      ],
+      "path": "src/pit_pre/models/water__predict/best_model_water_optuna.pth",
+      "textArtifact": false
+    },
+    {
+      "autocrlfCheckoutEolCounts": {
+        "bareCarriageReturnCount": 0,
+        "crlfCount": 0,
+        "lfCount": 12
+      },
+      "autocrlfCheckoutRawSha256": "c9724232fec9d312c4fa94fca20068bcc427bc3949358fb248124579f33f1a29",
+      "currentEolCounts": {
+        "bareCarriageReturnCount": 0,
+        "crlfCount": 0,
+        "lfCount": 12
+      },
+      "currentMatchesAutocrlfCheckout": true,
+      "currentRawSha256": "c9724232fec9d312c4fa94fca20068bcc427bc3949358fb248124579f33f1a29",
+      "declaredHashMatchesAutocrlfCheckout": true,
+      "declaredHashMatchesCurrent": true,
+      "declaredHashes": [
+        "c9724232fec9d312c4fa94fca20068bcc427bc3949358fb248124579f33f1a29"
+      ],
+      "eolPolicyMatches": true,
+      "gitAttributes": {
+        "eol": "lf",
+        "text": "set"
+      },
+      "gitEolState": "i/lf    w/lf    attr/text eol=lf      \tsrc/pit_pre/models/water__predict/best_params.json",
+      "kinds": [
+        "best_params"
+      ],
+      "lfOnlyInBothCheckouts": true,
+      "path": "src/pit_pre/models/water__predict/best_params.json",
+      "textArtifact": true
+    },
+    {
+      "autocrlfCheckoutEolCounts": {
+        "bareCarriageReturnCount": 0,
+        "crlfCount": 0,
+        "lfCount": 740
+      },
+      "autocrlfCheckoutRawSha256": "d4f30c8e0c57dbeb37987249ed45657c60e5d50b5eda8b587cf8e266d95a72be",
+      "currentEolCounts": {
+        "bareCarriageReturnCount": 0,
+        "crlfCount": 0,
+        "lfCount": 740
+      },
+      "currentMatchesAutocrlfCheckout": true,
+      "currentRawSha256": "d4f30c8e0c57dbeb37987249ed45657c60e5d50b5eda8b587cf8e266d95a72be",
+      "declaredHashMatchesAutocrlfCheckout": true,
+      "declaredHashMatchesCurrent": true,
+      "declaredHashes": [
+        "d4f30c8e0c57dbeb37987249ed45657c60e5d50b5eda8b587cf8e266d95a72be"
+      ],
+      "eolPolicyMatches": true,
+      "gitAttributes": {
+        "eol": "lf",
+        "text": "set"
+      },
+      "gitEolState": "i/lf    w/lf    attr/text eol=lf      \tsrc/pit_pre/models/water__predict/predict_water_future_fixed_best_params_annotated.py",
+      "kinds": [
+        "inference_script"
+      ],
+      "lfOnlyInBothCheckouts": true,
+      "path": "src/pit_pre/models/water__predict/predict_water_future_fixed_best_params_annotated.py",
+      "textArtifact": true
+    },
+    {
+      "autocrlfCheckoutRawSha256": "c28aa693d73085d9ff5996fc8e0b5e4011f232c5d81b1b7acec1014912473256",
+      "binaryBytesUnaffected": true,
+      "currentMatchesAutocrlfCheckout": true,
+      "currentRawSha256": "c28aa693d73085d9ff5996fc8e0b5e4011f232c5d81b1b7acec1014912473256",
+      "declaredHashMatchesAutocrlfCheckout": true,
+      "declaredHashMatchesCurrent": true,
+      "declaredHashes": [
+        "c28aa693d73085d9ff5996fc8e0b5e4011f232c5d81b1b7acec1014912473256"
+      ],
+      "eolPolicyMatches": true,
+      "gitAttributes": {
+        "eol": "unspecified",
+        "text": "unset"
+      },
+      "gitEolState": "i/-text w/-text attr/-text            \tsrc/pit_pre/models/water__predict/preprocessor.joblib",
+      "kinds": [
+        "preprocessor"
+      ],
+      "path": "src/pit_pre/models/water__predict/preprocessor.joblib",
+      "textArtifact": false
+    },
+    {
+      "autocrlfCheckoutEolCounts": {
+        "bareCarriageReturnCount": 0,
+        "crlfCount": 0,
+        "lfCount": 6
+      },
+      "autocrlfCheckoutRawSha256": "0a0d33fd9372dd6299aa92a9f7e8a61c4e1ddc24abbb29759fb8446bc7c6241d",
+      "currentEolCounts": {
+        "bareCarriageReturnCount": 0,
+        "crlfCount": 0,
+        "lfCount": 6
+      },
+      "currentMatchesAutocrlfCheckout": true,
+      "currentRawSha256": "0a0d33fd9372dd6299aa92a9f7e8a61c4e1ddc24abbb29759fb8446bc7c6241d",
+      "declaredHashMatchesAutocrlfCheckout": true,
+      "declaredHashMatchesCurrent": true,
+      "declaredHashes": [],
+      "eolPolicyMatches": true,
+      "gitAttributes": {
+        "eol": "lf",
+        "text": "set"
+      },
+      "gitEolState": "i/lf    w/lf    attr/text eol=lf      \tsrc/pit_pre/requirements.lock.txt",
+      "kinds": [
+        "dependency_lock"
+      ],
+      "lfOnlyInBothCheckouts": true,
+      "path": "src/pit_pre/requirements.lock.txt",
+      "textArtifact": true
+    },
+    {
+      "autocrlfCheckoutEolCounts": {
+        "bareCarriageReturnCount": 0,
+        "crlfCount": 0,
+        "lfCount": 20
+      },
+      "autocrlfCheckoutRawSha256": "302a869bca69d40846cab5fad8d681f176220058e724b3699b4c74fbc3e09ed0",
+      "currentEolCounts": {
+        "bareCarriageReturnCount": 0,
+        "crlfCount": 0,
+        "lfCount": 20
+      },
+      "currentMatchesAutocrlfCheckout": true,
+      "currentRawSha256": "302a869bca69d40846cab5fad8d681f176220058e724b3699b4c74fbc3e09ed0",
+      "declaredHashMatchesAutocrlfCheckout": true,
+      "declaredHashMatchesCurrent": true,
+      "declaredHashes": [
+        "302a869bca69d40846cab5fad8d681f176220058e724b3699b4c74fbc3e09ed0"
+      ],
+      "eolPolicyMatches": true,
+      "gitAttributes": {
+        "eol": "lf",
+        "text": "set"
+      },
+      "gitEolState": "i/lf    w/lf    attr/text eol=lf      \tsrc/pit_pre/runtime-manifest.json",
+      "kinds": [
+        "runtime_manifest"
+      ],
+      "lfOnlyInBothCheckouts": true,
+      "path": "src/pit_pre/runtime-manifest.json",
+      "textArtifact": true
+    }
+  ],
+  "hashMode": "raw-bytes-no-eol-normalization",
+  "modelCount": 6,
+  "models": [
+    {
+      "artifactBundleHashCalculated": "ccf75dd1a15df36869486022eac8f47e5d1846e94e50490cf7c9903f852fd99c",
+      "artifactBundleHashDeclared": "ccf75dd1a15df36869486022eac8f47e5d1846e94e50490cf7c9903f852fd99c",
+      "artifactBundleHashMatches": true,
+      "environmentDigestCalculated": "5a2ec34259bee668cdfd19897f799280cac40087aece8b7d6e6d15fcf44a569d",
+      "environmentDigestDeclared": "5a2ec34259bee668cdfd19897f799280cac40087aece8b7d6e6d15fcf44a569d",
+      "environmentDigestMatches": true,
+      "modelCode": "Pressure"
+    },
+    {
+      "artifactBundleHashCalculated": "8a5b23617c265ea5da22e368ab1a5d69414d96f63244fdb4f0633798f085328e",
+      "artifactBundleHashDeclared": "8a5b23617c265ea5da22e368ab1a5d69414d96f63244fdb4f0633798f085328e",
+      "artifactBundleHashMatches": true,
+      "environmentDigestCalculated": "5a2ec34259bee668cdfd19897f799280cac40087aece8b7d6e6d15fcf44a569d",
+      "environmentDigestDeclared": "5a2ec34259bee668cdfd19897f799280cac40087aece8b7d6e6d15fcf44a569d",
+      "environmentDigestMatches": true,
+      "modelCode": "Strain"
+    },
+    {
+      "artifactBundleHashCalculated": "af220f90ae2c868359dea5d991dc46ac3df1fa6727adcee48385fec2fe9457dc",
+      "artifactBundleHashDeclared": "af220f90ae2c868359dea5d991dc46ac3df1fa6727adcee48385fec2fe9457dc",
+      "artifactBundleHashMatches": true,
+      "environmentDigestCalculated": "5a2ec34259bee668cdfd19897f799280cac40087aece8b7d6e6d15fcf44a569d",
+      "environmentDigestDeclared": "5a2ec34259bee668cdfd19897f799280cac40087aece8b7d6e6d15fcf44a569d",
+      "environmentDigestMatches": true,
+      "modelCode": "XD"
+    },
+    {
+      "artifactBundleHashCalculated": "98b8465071829275f00c82002df5a529b637c4114598fdb92659fbea1ca395fe",
+      "artifactBundleHashDeclared": "98b8465071829275f00c82002df5a529b637c4114598fdb92659fbea1ca395fe",
+      "artifactBundleHashMatches": true,
+      "environmentDigestCalculated": "5a2ec34259bee668cdfd19897f799280cac40087aece8b7d6e6d15fcf44a569d",
+      "environmentDigestDeclared": "5a2ec34259bee668cdfd19897f799280cac40087aece8b7d6e6d15fcf44a569d",
+      "environmentDigestMatches": true,
+      "modelCode": "YD"
+    },
+    {
+      "artifactBundleHashCalculated": "c9a3dc8775b31696f64e211e6d4a0dbd02b3112c11bb68c3a1e70e8a9d0a2b12",
+      "artifactBundleHashDeclared": "c9a3dc8775b31696f64e211e6d4a0dbd02b3112c11bb68c3a1e70e8a9d0a2b12",
+      "artifactBundleHashMatches": true,
+      "environmentDigestCalculated": "5a2ec34259bee668cdfd19897f799280cac40087aece8b7d6e6d15fcf44a569d",
+      "environmentDigestDeclared": "5a2ec34259bee668cdfd19897f799280cac40087aece8b7d6e6d15fcf44a569d",
+      "environmentDigestMatches": true,
+      "modelCode": "settlement"
+    },
+    {
+      "artifactBundleHashCalculated": "752d223ce9915ac38a136cbccdc34516a8f7e71b63d3925568544d736f3558eb",
+      "artifactBundleHashDeclared": "752d223ce9915ac38a136cbccdc34516a8f7e71b63d3925568544d736f3558eb",
+      "artifactBundleHashMatches": true,
+      "environmentDigestCalculated": "5a2ec34259bee668cdfd19897f799280cac40087aece8b7d6e6d15fcf44a569d",
+      "environmentDigestDeclared": "5a2ec34259bee668cdfd19897f799280cac40087aece8b7d6e6d15fcf44a569d",
+      "environmentDigestMatches": true,
+      "modelCode": "water"
+    }
+  ],
+  "passed": true,
+  "schemaVersion": "shm-em-public-contract-hash-validation-v1",
+  "simulatedCheckout": "git clone with core.autocrlf=true",
+  "sourceGitCommit": "1d2ab45e516ef4167c6c4c4265da5b533b2eab78",
+  "submittedTagCommit": "1d2ab45e516ef4167c6c4c4265da5b533b2eab78"
+}

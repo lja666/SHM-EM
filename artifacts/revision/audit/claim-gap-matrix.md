@@ -1,0 +1,23 @@
+# SHM-EM Phase 0.6 Updated Claim-Gap Matrix
+
+| Status | Count |
+| --- | --- |
+| DEMONSTRATED | 0 |
+| PARTIALLY_SUPPORTED | 5 |
+| ARCHITECTURE_ONLY | 1 |
+| CONTRADICTED_BY_IMPLEMENTATION | 0 |
+| NEEDS_EXPERIMENT | 5 |
+
+| ID | Claim | Implementation | Evidence status | Risk | Recommended action |
+| --- | --- | --- | --- | --- | --- |
+| C01 | Logical observations are decoupled from physical storage through the observation registry. | Backend routing is registry-based; PIT_PRE resolves registry rows but validates table identifiers against a four-table allowlist. | PARTIALLY_SUPPORTED | MEDIUM | Limit the claim to approved reference adapters, then decide whether registry-backed table approval is required before core freeze. |
+| C02 | A new project can be integrated through registrations and mappings without core workflow changes. | Project code, stations, metrics, mappings, and APIs are parameterized; storage-table and model-adapter boundaries remain conditional. | NEEDS_EXPERIMENT | HIGH | Do not claim demonstration until a second configuration is added after core freeze and a Git change inventory is generated. |
+| C03 | A new fixed model is integrated by registering its bundle, inputs, targets, and temporal settings. | Database contracts and hashes are authoritative, but CachedModelRunner and engineering conversion support a bounded adapter family. | PARTIALLY_SUPPORTED | HIGH | Change the claim to a compatible model bundle under the existing PIT_PRE model and engineering-adapter contract. |
+| C04 | Reuse does not require changes to core backend, frontend, event workflow, or existing source tables. | The architecture is project-scoped, but no post-freeze cross-configuration change inventory exists. | NEEDS_EXPERIMENT | HIGH | Freeze the approved core first, then measure actual changes for the second heterogeneous configuration. |
+| C05 | PIT_PRE aligns heterogeneous observations into auditable rolling model inputs. | Backward as-of matching uses one sampling interval as tolerance, followed by interior interpolation or boundary extension, then ffill and bfill. Phase 0.6.1 persists descriptive per-model counts, fill ratios, gaps, signed temporal offsets, past lag, and future lead without adding eligibility thresholds. | PARTIALLY_SUPPORTED | HIGH | Report asynchronous alignment separately from actual interpolation/fill and do not infer acceptance thresholds from one sample. Alignment audit v3 separates asynchronous as-of matching from actual fill and records signed temporal offsets: 9313 as-of cells and 257 filled cells. |
+| C06 | Invalid prediction states cannot create formal events. | The gate checks model/run/result integrity, time, quality, hashes, and freshness, but the requested negative matrix has not been executed. | NEEDS_EXPERIMENT | HIGH | Keep gate logic unchanged and run the F01-F12 fault matrix with before/after event, response, and provenance counts. |
+| C07 | Execute recalculates and rechecks the gate rather than trusting a stored Evaluate result. | Separate service paths and recheck calls are present in source, but mutation between Evaluate and Execute has not been demonstrated. | NEEDS_EXPERIMENT | MEDIUM | Run F12; do not change Evaluate or Execute logic in advance. |
+| C08 | Forecasts are synchronized and aggregated by target, station, and project with earliest exceedance and a state hash. | The service implements policy selection, unit-aware thresholds, consecutive steps, aggregation, earliest exceedance, timeline, and hashing. | ARCHITECTURE_ONLY | MEDIUM | Derive the formal specification from code and add boundary tests without changing the algorithm. |
+| C09 | A formal forecast event is traceable to rule, batch, run, model hashes, input window, and triggering values. | Trace persistence and GET /api/em/predictions/events/{eventId}/trace exist; no deterministic trace artifact has been published. | NEEDS_EXPERIMENT | MEDIUM | Generate one isolated formal event and export its complete machine-readable trace. |
+| C10 | The public workflow is reproducible with documented dependencies. | The submitted baseline has Windows-only CI and no Docker or Compose files. | PARTIALLY_SUPPORTED | HIGH | Retain the current Windows limitation until a later authorized Linux/Bash or container reproduction is actually validated. |
+| C11 | The public reference workflow uses 16 historical input steps. | The public sample supplies a 16-step common source window, while registered model contracts consume model-specific histories: YD 16, XD 12, Strain 13, Pressure 13, water 13, and settlement 12 steps. | PARTIALLY_SUPPORTED | MEDIUM | Revise the manuscript and Figure 5 to distinguish the shared 16-step source window from model-specific 12-16-step history requirements. |

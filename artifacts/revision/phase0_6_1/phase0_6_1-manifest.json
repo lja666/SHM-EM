@@ -1,0 +1,86 @@
+{
+  "artifacts": [
+    {
+      "bytes": 4766,
+      "path": "artifacts/revision/phase0_6_1/alignment-audit-v3-review.md",
+      "sha256": "07d9aac6f746958a7bae7e4bf969252ac0728b7494c8486a29defcb9078a7ad9"
+    },
+    {
+      "bytes": 9772,
+      "path": "artifacts/revision/phase0_6_1/alignment-audit-v3-summary.json",
+      "sha256": "a2647ffde5d38d0fed027a48713f4d633c0affcc0d6ab588a5dda5b38efa1dab"
+    },
+    {
+      "bytes": 115600,
+      "path": "artifacts/revision/phase0_6_1/alignment-audit-v3.csv",
+      "sha256": "b0c79281d23d72cbd0ff2e2b5312116a728159f38069dbd35fba8ee968764c3e"
+    },
+    {
+      "bytes": 198875,
+      "path": "artifacts/revision/phase0_6_1/code-diff.patch",
+      "sha256": "00b020c9da7ea6324aa8e989168e6b2a8a16872eee943576875c9c8daacbb7b0"
+    },
+    {
+      "bytes": 1637,
+      "path": "artifacts/revision/phase0_6_1/diagnostics-overhead-benchmark.json",
+      "sha256": "a040b5daaa6ae8010db14080b0f1e75b2772f92a3404d74e42efefb707ded9ae"
+    },
+    {
+      "bytes": 617,
+      "path": "artifacts/revision/phase0_6_1/diagnostics-overhead-benchmark.md",
+      "sha256": "8dd2dc104d9aa6303ae751dd69d4d56cdd86c03b9d49a3de853f09f458ec5ff0"
+    },
+    {
+      "bytes": 3503,
+      "path": "artifacts/revision/phase0_6_1/eol-policy-review.md",
+      "sha256": "1a31533a8e228f47dc64c9228e64d89f1e059ec8bf5358dc24a26e8de5195d8c"
+    },
+    {
+      "bytes": 3458,
+      "path": "artifacts/revision/phase0_6_1/one-pass-regression-input.json",
+      "sha256": "181be22824a6e01d9b7be220e53d9cd745717ece346b6ccd7c09a31687381cab"
+    },
+    {
+      "bytes": 15669,
+      "path": "artifacts/revision/phase0_6_1/one-pass-regression-prediction.json",
+      "sha256": "8887612b5285c5c4bb34cd595a17c22d196e55b100af8cd7182599bfc86dd389"
+    },
+    {
+      "bytes": 522,
+      "path": "artifacts/revision/phase0_6_1/phase0_6_1-summary.md",
+      "sha256": "01f65ba70bb18bf46c8149a48d0d6403f398f20751e2fef916a977c254177fd3"
+    },
+    {
+      "bytes": 6163,
+      "path": "artifacts/revision/phase0_6_1/production-audit-v3-cross-check.json",
+      "sha256": "0e82f9a8e9cbd96226f85bdca11a418533d07c1831653a4ca7c9f1f44c247cf6"
+    },
+    {
+      "bytes": 29875,
+      "path": "artifacts/revision/phase0_6_1/public-contract-hash-validation.json",
+      "sha256": "28e63d8abf82ba4cf75a81b3cd727c57cdefd6fb1a381fcbe947bd3577fd00d4"
+    },
+    {
+      "bytes": 1552329,
+      "path": "artifacts/revision/phase0_6_1/regression-one-pass-capture.json",
+      "sha256": "32278485559ba41f7b02cd428e36f145990b4ef52bf5599163f1d521ca17ad54"
+    },
+    {
+      "bytes": 1550678,
+      "path": "artifacts/revision/phase0_6_1/regression-phase0_6-baseline-capture.json",
+      "sha256": "b593dd12e2587a53dd5132ea2cb6f7786eac7bb1061f42de11cce764028aea93"
+    },
+    {
+      "bytes": 944,
+      "path": "artifacts/revision/phase0_6_1/validation-summary.json",
+      "sha256": "63a1d748eed99d481fab93a8c388a33bf991d3cb4eadabaaddd7f68573a02efc"
+    }
+  ],
+  "coreFreezeCommitRecorded": false,
+  "generationTimestamp": "2026-08-28T17:08:53+00:00",
+  "phase": "Phase 0.6.1 - Reproducibility and Diagnostic Semantics Stabilization",
+  "schemaVersion": "shm-em-phase0-6-1-manifest-v1",
+  "sourceGitCommit": "1d2ab45e516ef4167c6c4c4265da5b533b2eab78",
+  "submittedTag": "v1.0.0",
+  "submittedTagCommit": "1d2ab45e516ef4167c6c4c4265da5b533b2eab78"
+}

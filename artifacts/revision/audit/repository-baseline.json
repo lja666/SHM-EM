@@ -1,0 +1,1175 @@
+{
+  "continuousIntegration": {
+    "operatingSystems": [
+      "windows-latest"
+    ],
+    "workflowFiles": [
+      {
+        "path": ".github/workflows/ci.yml",
+        "runsOn": [
+          "windows-latest"
+        ]
+      }
+    ]
+  },
+  "database": {
+    "allCreateTableCount": 57,
+    "allCreateTables": [
+      "em_accel_batch",
+      "em_accel_s_1426000125",
+      "em_accel_s_1426000126",
+      "em_action_policy",
+      "em_audit_log",
+      "em_conversion_operator",
+      "em_conversion_parameter",
+      "em_data_quality_issue",
+      "em_dataset_manifest",
+      "em_dictionary",
+      "em_event_evaluation_run",
+      "em_event_evidence_link",
+      "em_event_handling_log",
+      "em_event_metric_snapshot",
+      "em_event_notification_state",
+      "em_event_prediction_link",
+      "em_event_response_step",
+      "em_event_response_workflow",
+      "em_event_rule",
+      "em_event_rule_condition",
+      "em_event_rule_level",
+      "em_event_rule_version",
+      "em_event_state_candidate_log",
+      "em_event_state_transition",
+      "em_evidence_resource",
+      "em_expected_output",
+      "em_feature_operator",
+      "em_future_state_policy",
+      "em_instrument",
+      "em_metric",
+      "em_metric_baseline_history",
+      "em_monitoring_event",
+      "em_notification_channel",
+      "em_notification_delivery_log",
+      "em_notification_subscriber",
+      "em_notification_task",
+      "em_obs_acceleration_feature",
+      "em_obs_displacement",
+      "em_obs_earth_pressure",
+      "em_obs_pressure_water_level",
+      "em_obs_static_level",
+      "em_observation_table_registry",
+      "em_prediction_batch",
+      "em_prediction_execution_gate",
+      "em_prediction_feature_mapping",
+      "em_prediction_model",
+      "em_prediction_result",
+      "em_prediction_run",
+      "em_project",
+      "em_reference_binding",
+      "em_report_instance",
+      "em_report_template",
+      "em_scenario_profile",
+      "em_station",
+      "em_station_metric",
+      "em_workflow_run",
+      "em_workflow_run_step"
+    ],
+    "contractTables": [
+      "em_conversion_operator",
+      "em_conversion_parameter",
+      "em_dataset_manifest",
+      "em_expected_output",
+      "em_feature_operator",
+      "em_future_state_policy",
+      "em_instrument",
+      "em_metric",
+      "em_observation_table_registry",
+      "em_prediction_feature_mapping",
+      "em_prediction_model",
+      "em_project",
+      "em_reference_binding",
+      "em_scenario_profile",
+      "em_station",
+      "em_station_metric"
+    ],
+    "observationTables": [
+      "em_obs_acceleration_feature",
+      "em_obs_displacement",
+      "em_obs_earth_pressure",
+      "em_obs_pressure_water_level",
+      "em_obs_static_level"
+    ],
+    "predictionAndResultTables": [
+      "em_event_prediction_link",
+      "em_expected_output",
+      "em_future_state_policy",
+      "em_prediction_batch",
+      "em_prediction_execution_gate",
+      "em_prediction_feature_mapping",
+      "em_prediction_model",
+      "em_prediction_result",
+      "em_prediction_run"
+    ],
+    "provenanceTables": [
+      "em_audit_log",
+      "em_event_evaluation_run",
+      "em_event_evidence_link",
+      "em_event_metric_snapshot",
+      "em_event_prediction_link"
+    ],
+    "sqlFiles": [
+      "sql/shm_em_database/00_SHM_EM_complete_schema.sql",
+      "sql/shm_em_database/01_SHM_EM_conversion_operators.sql",
+      "sql/shm_em_database/02_SHM_EM_public_sample.sql",
+      "sql/shm_em_database/03_SHM_EM_public_validation.sql"
+    ],
+    "tableSources": {
+      "em_accel_batch": [
+        "sql/shm_em_database/00_SHM_EM_complete_schema.sql"
+      ],
+      "em_accel_s_1426000125": [
+        "sql/shm_em_database/00_SHM_EM_complete_schema.sql"
+      ],
+      "em_accel_s_1426000126": [
+        "sql/shm_em_database/00_SHM_EM_complete_schema.sql"
+      ],
+      "em_action_policy": [
+        "sql/shm_em_database/00_SHM_EM_complete_schema.sql"
+      ],
+      "em_audit_log": [
+        "sql/shm_em_database/00_SHM_EM_complete_schema.sql"
+      ],
+      "em_conversion_operator": [
+        "sql/shm_em_database/00_SHM_EM_complete_schema.sql"
+      ],
+      "em_conversion_parameter": [
+        "sql/shm_em_database/00_SHM_EM_complete_schema.sql"
+      ],
+      "em_data_quality_issue": [
+        "sql/shm_em_database/00_SHM_EM_complete_schema.sql"
+      ],
+      "em_dataset_manifest": [
+        "sql/shm_em_database/00_SHM_EM_complete_schema.sql"
+      ],
+      "em_dictionary": [
+        "sql/shm_em_database/00_SHM_EM_complete_schema.sql"
+      ],
+      "em_event_evaluation_run": [
+        "sql/shm_em_database/00_SHM_EM_complete_schema.sql"
+      ],
+      "em_event_evidence_link": [
+        "sql/shm_em_database/00_SHM_EM_complete_schema.sql"
+      ],
+      "em_event_handling_log": [
+        "sql/shm_em_database/00_SHM_EM_complete_schema.sql"
+      ],
+      "em_event_metric_snapshot": [
+        "sql/shm_em_database/00_SHM_EM_complete_schema.sql"
+      ],
+      "em_event_notification_state": [
+        "sql/shm_em_database/00_SHM_EM_complete_schema.sql"
+      ],
+      "em_event_prediction_link": [
+        "sql/shm_em_database/00_SHM_EM_complete_schema.sql"
+      ],
+      "em_event_response_step": [
+        "sql/shm_em_database/00_SHM_EM_complete_schema.sql"
+      ],
+      "em_event_response_workflow": [
+        "sql/shm_em_database/00_SHM_EM_complete_schema.sql"
+      ],
+      "em_event_rule": [
+        "sql/shm_em_database/00_SHM_EM_complete_schema.sql"
+      ],
+      "em_event_rule_condition": [
+        "sql/shm_em_database/00_SHM_EM_complete_schema.sql"
+      ],
+      "em_event_rule_level": [
+        "sql/shm_em_database/00_SHM_EM_complete_schema.sql"
+      ],
+      "em_event_rule_version": [
+        "sql/shm_em_database/00_SHM_EM_complete_schema.sql"
+      ],
+      "em_event_state_candidate_log": [
+        "sql/shm_em_database/00_SHM_EM_complete_schema.sql"
+      ],
+      "em_event_state_transition": [
+        "sql/shm_em_database/00_SHM_EM_complete_schema.sql"
+      ],
+      "em_evidence_resource": [
+        "sql/shm_em_database/00_SHM_EM_complete_schema.sql"
+      ],
+      "em_expected_output": [
+        "sql/shm_em_database/00_SHM_EM_complete_schema.sql"
+      ],
+      "em_feature_operator": [
+        "sql/shm_em_database/00_SHM_EM_complete_schema.sql"
+      ],
+      "em_future_state_policy": [
+        "sql/shm_em_database/00_SHM_EM_complete_schema.sql"
+      ],
+      "em_instrument": [
+        "sql/shm_em_database/00_SHM_EM_complete_schema.sql"
+      ],
+      "em_metric": [
+        "sql/shm_em_database/00_SHM_EM_complete_schema.sql"
+      ],
+      "em_metric_baseline_history": [
+        "sql/shm_em_database/00_SHM_EM_complete_schema.sql"
+      ],
+      "em_monitoring_event": [
+        "sql/shm_em_database/00_SHM_EM_complete_schema.sql"
+      ],
+      "em_notification_channel": [
+        "sql/shm_em_database/00_SHM_EM_complete_schema.sql"
+      ],
+      "em_notification_delivery_log": [
+        "sql/shm_em_database/00_SHM_EM_complete_schema.sql"
+      ],
+      "em_notification_subscriber": [
+        "sql/shm_em_database/00_SHM_EM_complete_schema.sql"
+      ],
+      "em_notification_task": [
+        "sql/shm_em_database/00_SHM_EM_complete_schema.sql"
+      ],
+      "em_obs_acceleration_feature": [
+        "sql/shm_em_database/00_SHM_EM_complete_schema.sql"
+      ],
+      "em_obs_displacement": [
+        "sql/shm_em_database/00_SHM_EM_complete_schema.sql"
+      ],
+      "em_obs_earth_pressure": [
+        "sql/shm_em_database/00_SHM_EM_complete_schema.sql"
+      ],
+      "em_obs_pressure_water_level": [
+        "sql/shm_em_database/00_SHM_EM_complete_schema.sql"
+      ],
+      "em_obs_static_level": [
+        "sql/shm_em_database/00_SHM_EM_complete_schema.sql"
+      ],
+      "em_observation_table_registry": [
+        "sql/shm_em_database/00_SHM_EM_complete_schema.sql"
+      ],
+      "em_prediction_batch": [
+        "sql/shm_em_database/00_SHM_EM_complete_schema.sql"
+      ],
+      "em_prediction_execution_gate": [
+        "sql/shm_em_database/00_SHM_EM_complete_schema.sql"
+      ],
+      "em_prediction_feature_mapping": [
+        "sql/shm_em_database/00_SHM_EM_complete_schema.sql"
+      ],
+      "em_prediction_model": [
+        "sql/shm_em_database/00_SHM_EM_complete_schema.sql"
+      ],
+      "em_prediction_result": [
+        "sql/shm_em_database/00_SHM_EM_complete_schema.sql"
+      ],
+      "em_prediction_run": [
+        "sql/shm_em_database/00_SHM_EM_complete_schema.sql"
+      ],
+      "em_project": [
+        "sql/shm_em_database/00_SHM_EM_complete_schema.sql"
+      ],
+      "em_reference_binding": [
+        "sql/shm_em_database/00_SHM_EM_complete_schema.sql"
+      ],
+      "em_report_instance": [
+        "sql/shm_em_database/00_SHM_EM_complete_schema.sql"
+      ],
+      "em_report_template": [
+        "sql/shm_em_database/00_SHM_EM_complete_schema.sql"
+      ],
+      "em_scenario_profile": [
+        "sql/shm_em_database/00_SHM_EM_complete_schema.sql"
+      ],
+      "em_station": [
+        "sql/shm_em_database/00_SHM_EM_complete_schema.sql"
+      ],
+      "em_station_metric": [
+        "sql/shm_em_database/00_SHM_EM_complete_schema.sql"
+      ],
+      "em_workflow_run": [
+        "sql/shm_em_database/00_SHM_EM_complete_schema.sql"
+      ],
+      "em_workflow_run_step": [
+        "sql/shm_em_database/00_SHM_EM_complete_schema.sql"
+      ]
+    }
+  },
+  "dependencies": {
+    "backend": {
+      "dependencies": [
+        {
+          "artifactId": "druid-spring-boot-starter",
+          "declaredVersion": "1.2.23",
+          "groupId": "com.alibaba",
+          "scope": "compile"
+        },
+        {
+          "artifactId": "openpdf",
+          "declaredVersion": "1.3.36",
+          "groupId": "com.github.librepdf",
+          "scope": "compile"
+        },
+        {
+          "artifactId": "mysql-connector-j",
+          "declaredVersion": null,
+          "groupId": "com.mysql",
+          "scope": "runtime"
+        },
+        {
+          "artifactId": "poi-ooxml",
+          "declaredVersion": "5.2.5",
+          "groupId": "org.apache.poi",
+          "scope": "compile"
+        },
+        {
+          "artifactId": "json",
+          "declaredVersion": "20211205",
+          "groupId": "org.json",
+          "scope": "compile"
+        },
+        {
+          "artifactId": "mybatis-spring-boot-starter",
+          "declaredVersion": "2.2.2",
+          "groupId": "org.mybatis.spring.boot",
+          "scope": "compile"
+        },
+        {
+          "artifactId": "lombok",
+          "declaredVersion": "1.18.30",
+          "groupId": "org.projectlombok",
+          "scope": "provided"
+        },
+        {
+          "artifactId": "springdoc-openapi-ui",
+          "declaredVersion": "1.8.0",
+          "groupId": "org.springdoc",
+          "scope": "compile"
+        },
+        {
+          "artifactId": "spring-boot-starter-jdbc",
+          "declaredVersion": null,
+          "groupId": "org.springframework.boot",
+          "scope": "compile"
+        },
+        {
+          "artifactId": "spring-boot-starter-mail",
+          "declaredVersion": null,
+          "groupId": "org.springframework.boot",
+          "scope": "compile"
+        },
+        {
+          "artifactId": "spring-boot-starter-test",
+          "declaredVersion": null,
+          "groupId": "org.springframework.boot",
+          "scope": "test"
+        },
+        {
+          "artifactId": "spring-boot-starter-web",
+          "declaredVersion": null,
+          "groupId": "org.springframework.boot",
+          "scope": "compile"
+        }
+      ],
+      "javaVersion": "1.8",
+      "projectVersion": "1.0.0",
+      "springBootVersion": "2.6.13"
+    },
+    "frontend": {
+      "dependencies": {
+        "@element-plus/icons-vue": {
+          "declared": "^2.3.1",
+          "resolved": "2.3.2"
+        },
+        "axios": {
+          "declared": "^1.9.0",
+          "resolved": "1.18.1"
+        },
+        "echarts": {
+          "declared": "6.1.0",
+          "resolved": "6.1.0"
+        },
+        "element-plus": {
+          "declared": "^2.9.11",
+          "resolved": "2.14.2"
+        },
+        "pinia": {
+          "declared": "^3.0.2",
+          "resolved": "3.0.4"
+        },
+        "vue": {
+          "declared": "^3.5.16",
+          "resolved": "3.5.39"
+        },
+        "vue-router": {
+          "declared": "^4.5.1",
+          "resolved": "4.6.4"
+        }
+      },
+      "devDependencies": {
+        "@vitejs/plugin-vue": {
+          "declared": "^5.2.4",
+          "resolved": "5.2.4"
+        },
+        "typescript": {
+          "declared": "^5.8.3",
+          "resolved": "5.9.3"
+        },
+        "vite": {
+          "declared": "^6.3.5",
+          "resolved": "6.4.3"
+        },
+        "vue-tsc": {
+          "declared": "^2.2.10",
+          "resolved": "2.2.12"
+        }
+      },
+      "name": "shm-em-frontend",
+      "scripts": {
+        "build": "vue-tsc --noEmit && vite build",
+        "dev": "vite --host 0.0.0.0",
+        "preview": "vite preview --host 0.0.0.0",
+        "test:build": "vue-tsc --noEmit && vite build --mode development",
+        "typecheck": "vue-tsc --noEmit"
+      },
+      "version": "1.0.0"
+    },
+    "pitPre": {
+      "lockedRequirements": [
+        "joblib==1.5.3",
+        "numpy==2.2.6",
+        "pandas==2.3.3",
+        "PyMySQL==1.1.2",
+        "scikit-learn==1.7.2",
+        "torch==2.11.0"
+      ],
+      "runtimeManifest": {
+        "dependencies": {
+          "PyMySQL": "1.1.2",
+          "joblib": "1.5.3",
+          "numpy": "2.2.6",
+          "pandas": "2.3.3",
+          "scikit-learn": "1.7.2",
+          "torch": "2.11.0"
+        },
+        "dependencyLock": "requirements.lock.txt",
+        "environment": {
+          "setup": "requirements.lock.txt",
+          "supportedOperatingSystems": [
+            "Windows 10 or later"
+          ],
+          "type": "native"
+        },
+        "executionDevice": "cpu",
+        "python": "3.10",
+        "runtimeCapture": "Each prediction run stores this manifest hash and the effective package versions in input_snapshot_json.",
+        "schemaVersion": "pit_pre_runtime_v1"
+      },
+      "runtimeManifestSha256": "302a869bca69d40846cab5fad8d681f176220058e724b3699b4c74fbc3e09ed0"
+    }
+  },
+  "dockerCompose": {
+    "files": [],
+    "present": false
+  },
+  "environment": {
+    "auditPython": {
+      "version": "3.10.20"
+    },
+    "git": {
+      "detected": true,
+      "version": "git version 2.50.0.windows.1"
+    },
+    "java": {
+      "detected": true,
+      "version": "java version \"1.8.0_221\""
+    },
+    "maven": {
+      "detected": true,
+      "version": "Apache Maven 3.9.16 (2bdd9fddda4b155ebf8000e807eb73fd829a51d5)"
+    },
+    "mysqlCli": {
+      "detected": true,
+      "scopeNote": "CLI discovery only; this does not establish MySQL Server or database availability.",
+      "version": "Ver 8.0.41 for Win64 on x86_64 (MySQL Community Server - GPL)"
+    },
+    "node": {
+      "detected": true,
+      "version": "v22.13.1"
+    },
+    "npm": {
+      "detected": true,
+      "version": "10.9.2"
+    },
+    "os": {
+      "machine": "AMD64",
+      "platform": "Windows-10-10.0.22631-SP0",
+      "release": "10",
+      "system": "Windows",
+      "version": "10.0.22631"
+    },
+    "pitPrePython": {
+      "detected": true,
+      "version": "Python 3.10.20"
+    }
+  },
+  "findings": [
+    {
+      "code": "BASELINE_TAG_MATCH",
+      "message": "The audit commit matches immutable tag v1.0.0.",
+      "severity": "PASS"
+    },
+    {
+      "code": "CI_WINDOWS_ONLY",
+      "message": "Current CI runs only on windows-latest.",
+      "severity": "HIGH"
+    },
+    {
+      "code": "DOCKER_ABSENT",
+      "message": "No Dockerfile or Compose file is present in the v1.0.0 baseline.",
+      "severity": "HIGH"
+    },
+    {
+      "code": "PROJECT_CODE_LITERAL_FOUND",
+      "message": "Project-code literals are candidates for semantic review, not automatic evidence of coupling.",
+      "severity": "INFO"
+    },
+    {
+      "code": "MODEL_TARGET_LITERAL_FOUND",
+      "message": "Model/target literals require classification as display, domain-adapter, or runtime constraints.",
+      "severity": "REVIEW"
+    },
+    {
+      "code": "OBSERVATION_TABLE_LITERAL_FOUND",
+      "message": "Observation-table literals require security and extensibility review.",
+      "severity": "REVIEW"
+    },
+    {
+      "code": "PIT_PRE_TEST_SURFACE_NARROW",
+      "message": "PIT_PRE has one test module in the submitted baseline.",
+      "severity": "MEDIUM"
+    },
+    {
+      "code": "PHASE0_STRUCTURAL_ONLY",
+      "message": "Phase 0 inventories structure and does not claim that tests, inference, or reproduction passed.",
+      "severity": "INFO"
+    }
+  ],
+  "frontendScripts": {
+    "build": "vue-tsc --noEmit && vite build",
+    "dev": "vite --host 0.0.0.0",
+    "preview": "vite preview --host 0.0.0.0",
+    "test:build": "vue-tsc --noEmit && vite build --mode development",
+    "typecheck": "vue-tsc --noEmit"
+  },
+  "git": {
+    "branch": "revision/softx-d-26-00931",
+    "commit": "1d2ab45e516ef4167c6c4c4265da5b533b2eab78",
+    "revisionEvidenceChangesExcludedFromSourceBaseline": [
+      "?? tools/revision/audit_input_alignment.py",
+      "?? tools/revision/revision_audit.py"
+    ],
+    "sourceChangesOutsideRevisionEvidence": [],
+    "sourceTreeCleanOutsideRevisionEvidence": true,
+    "submittedTag": "v1.0.0",
+    "submittedTagCommit": "1d2ab45e516ef4167c6c4c4265da5b533b2eab78",
+    "submittedTagMatchesAuditCommit": true
+  },
+  "hardcodedRuntimeIdentifiers": {
+    "modelCodes": [
+      {
+        "identifier": "settlement",
+        "line": 301,
+        "path": "src/frontend/src/views/projects/ProjectWorkspace.vue",
+        "text": "return siteFeatures.find(feature => eventStationIds.has(Number(feature.stationId)) && String(feature.targetType).toLowerCase() === 'settlement')"
+      },
+      {
+        "identifier": "settlement",
+        "line": 303,
+        "path": "src/frontend/src/views/projects/ProjectWorkspace.vue",
+        "text": "|| siteFeatures.find(feature => String(feature.targetType).toLowerCase() === 'settlement')"
+      },
+      {
+        "identifier": "Strain",
+        "line": 1003,
+        "path": "src/frontend/src/views/workflow/LowFrequencyBrowse.vue",
+        "text": "const map: Record<string, string> = { settlement: 'Cumulative Settlement', displacement: 'Horizontal Displacement', strain: 'Strain', earth_pressure: 'Earth Pressure', voltage1: 'Voltage 1', voltage2: 'Voltage 2' }"
+      },
+      {
+        "identifier": "settlement",
+        "line": 44,
+        "path": "src/pit_pre/pit_pre/cached_model_runner.py",
+        "text": "if model.target_type == \"settlement\":"
+      },
+      {
+        "identifier": "water",
+        "line": 65,
+        "path": "src/pit_pre/pit_pre/cached_model_runner.py",
+        "text": "if model.target_type == \"water\":"
+      },
+      {
+        "identifier": "YD",
+        "line": 203,
+        "path": "src/pit_pre/pit_pre/cached_model_runner.py",
+        "text": "if target_type == \"YD\":"
+      },
+      {
+        "identifier": "XD",
+        "line": 205,
+        "path": "src/pit_pre/pit_pre/cached_model_runner.py",
+        "text": "if target_type == \"XD\":"
+      },
+      {
+        "identifier": "Strain",
+        "line": 207,
+        "path": "src/pit_pre/pit_pre/cached_model_runner.py",
+        "text": "if target_type == \"Strain\":"
+      },
+      {
+        "identifier": "Pressure",
+        "line": 209,
+        "path": "src/pit_pre/pit_pre/cached_model_runner.py",
+        "text": "if target_type == \"Pressure\":"
+      },
+      {
+        "identifier": "water",
+        "line": 211,
+        "path": "src/pit_pre/pit_pre/cached_model_runner.py",
+        "text": "if target_type == \"water\":"
+      },
+      {
+        "identifier": "YD",
+        "line": 17,
+        "path": "src/pit_pre/pit_pre/result_writer.py",
+        "text": "\"YD\": \"YD_pred\","
+      },
+      {
+        "identifier": "XD",
+        "line": 18,
+        "path": "src/pit_pre/pit_pre/result_writer.py",
+        "text": "\"XD\": \"XD_pred\","
+      },
+      {
+        "identifier": "Strain",
+        "line": 19,
+        "path": "src/pit_pre/pit_pre/result_writer.py",
+        "text": "\"Strain\": \"Strain_pred\","
+      },
+      {
+        "identifier": "Pressure",
+        "line": 20,
+        "path": "src/pit_pre/pit_pre/result_writer.py",
+        "text": "\"Pressure\": \"Pressure_pred\","
+      },
+      {
+        "identifier": "water",
+        "line": 21,
+        "path": "src/pit_pre/pit_pre/result_writer.py",
+        "text": "\"water\": \"water_pred\","
+      },
+      {
+        "identifier": "settlement",
+        "line": 22,
+        "path": "src/pit_pre/pit_pre/result_writer.py",
+        "text": "\"settlement\": \"settlement_pred\","
+      },
+      {
+        "identifier": "YD",
+        "line": 242,
+        "path": "src/pit_pre/pit_pre/result_writer.py",
+        "text": "if target_type == \"YD\":"
+      },
+      {
+        "identifier": "XD",
+        "line": 264,
+        "path": "src/pit_pre/pit_pre/result_writer.py",
+        "text": "elif target_type == \"XD\":"
+      },
+      {
+        "identifier": "water",
+        "line": 283,
+        "path": "src/pit_pre/pit_pre/result_writer.py",
+        "text": "elif target_type == \"water\":"
+      },
+      {
+        "identifier": "settlement",
+        "line": 301,
+        "path": "src/pit_pre/pit_pre/result_writer.py",
+        "text": "elif target_type == \"settlement\":"
+      },
+      {
+        "identifier": "settlement",
+        "line": 316,
+        "path": "src/pit_pre/pit_pre/result_writer.py",
+        "text": "ON rr.batch_id=r.batch_id AND rr.step=r.step AND rr.target_type='settlement'"
+      }
+    ],
+    "numericProjectIds": [],
+    "physicalObservationTables": [
+      {
+        "identifier": "em_obs_displacement",
+        "line": 19,
+        "path": "src/pit_pre/pit_pre/features.py",
+        "text": "\"em_obs_displacement\","
+      },
+      {
+        "identifier": "em_obs_earth_pressure",
+        "line": 20,
+        "path": "src/pit_pre/pit_pre/features.py",
+        "text": "\"em_obs_earth_pressure\","
+      },
+      {
+        "identifier": "em_obs_pressure_water_level",
+        "line": 21,
+        "path": "src/pit_pre/pit_pre/features.py",
+        "text": "\"em_obs_pressure_water_level\","
+      },
+      {
+        "identifier": "em_obs_static_level",
+        "line": 22,
+        "path": "src/pit_pre/pit_pre/features.py",
+        "text": "\"em_obs_static_level\","
+      }
+    ],
+    "projectCodes": [
+      {
+        "identifier": "SHM_EM_PUBLIC_SAMPLE",
+        "line": 19,
+        "path": "src/pit_pre/pit_pre/daemon.py",
+        "text": "parser.add_argument(\"--project-code\", default=\"SHM_EM_PUBLIC_SAMPLE\")"
+      },
+      {
+        "identifier": "SHM_EM_PUBLIC_SAMPLE",
+        "line": 25,
+        "path": "src/pit_pre/pit_pre/main.py",
+        "text": "parser.add_argument(\"--project-code\", default=\"SHM_EM_PUBLIC_SAMPLE\")"
+      }
+    ],
+    "total": 27
+  },
+  "implementations": {
+    "executionGateImplementations": [
+      "src/backend/src/main/java/mybatis/iem/em/modules/engineering/application/service/impl/PredictionExecutionGateServiceImpl.java"
+    ],
+    "executionGateInterfaces": [
+      "src/backend/src/main/java/mybatis/iem/em/modules/engineering/application/service/PredictionExecutionGateService.java"
+    ],
+    "futureStateImplementations": [
+      "src/backend/src/main/java/mybatis/iem/em/modules/engineering/application/service/impl/ProjectFutureStateServiceImpl.java"
+    ],
+    "futureStateInterfaces": [
+      "src/backend/src/main/java/mybatis/iem/em/modules/engineering/application/service/ProjectFutureStateService.java"
+    ],
+    "provenanceEndpoint": [
+      {
+        "line": 108,
+        "path": "src/backend/src/main/java/mybatis/iem/em/modules/engineering/api/controller/PredictionController.java",
+        "route": "GET /api/em/predictions/events/{eventId}/trace"
+      }
+    ],
+    "provenanceMapper": [
+      "src/backend/src/main/java/mybatis/iem/em/modules/engineering/infrastructure/mapper/EventPredictionTraceMapper.java"
+    ],
+    "provenanceServices": [
+      "src/backend/src/main/java/mybatis/iem/em/modules/engineering/application/service/impl/PredictionServiceImpl.java",
+      "src/backend/src/main/java/mybatis/iem/em/modules/engineering/application/service/impl/EventEvaluationServiceImpl.java"
+    ]
+  },
+  "models": {
+    "artifactCount": 23,
+    "artifacts": [
+      {
+        "bytes": 218773,
+        "path": "src/pit_pre/models/Pressure__predict/best_model_Pressure_optuna.pth",
+        "sha256": "aef1d20d99b94607b22ded3c37c2a75300c2441db50b9fa005018fb163e1a31c"
+      },
+      {
+        "bytes": 269,
+        "path": "src/pit_pre/models/Pressure__predict/best_params.json",
+        "sha256": "647647090e79067b2fdcda7f59efb6b62790468c68685817643a4d73a5f994b5"
+      },
+      {
+        "bytes": 20113,
+        "path": "src/pit_pre/models/Pressure__predict/predict_Pressure_future_fixed_best_params_annotated.py",
+        "sha256": "a95e12666b4d277369eb705cff8216bd3371a1534da9ba06c7e34ef5830223cd"
+      },
+      {
+        "bytes": 3557,
+        "path": "src/pit_pre/models/Pressure__predict/preprocessor.joblib",
+        "sha256": "3a0db327bd99be620380b4fb4a280f734325bd4767788bb5d8d7242980fe7183"
+      },
+      {
+        "bytes": 561361,
+        "path": "src/pit_pre/models/settlement_predict/best_model_settlement_optuna.pth",
+        "sha256": "3c18be8ae8fcdb1f8c740e8d0bf1c3e8775a5c0d1d11994d4360be1213c7ad40"
+      },
+      {
+        "bytes": 232,
+        "path": "src/pit_pre/models/settlement_predict/best_params.json",
+        "sha256": "697bf5d27284caceec55875ede19cab5b42dec49026ccda1be304707ff230801"
+      },
+      {
+        "bytes": 28365,
+        "path": "src/pit_pre/models/settlement_predict/predict_settlement_future_fixed_best_params_annotated.py",
+        "sha256": "c152722675d93053966715148e4881f9224f55b77b90dd76d161ec29e0673740"
+      },
+      {
+        "bytes": 4717,
+        "path": "src/pit_pre/models/settlement_predict/preprocessor.joblib",
+        "sha256": "78b070dd1fbd6006b3254b60fb328a36f7748a401baca51d114586f5f9cc3e10"
+      },
+      {
+        "bytes": 429273,
+        "path": "src/pit_pre/models/Strain__predict/best_model_Strain_optuna.pth",
+        "sha256": "687acb1a44f79f9566e2e677f33478addd66c83a9e300f32666674f7d2cdc694"
+      },
+      {
+        "bytes": 270,
+        "path": "src/pit_pre/models/Strain__predict/best_params.json",
+        "sha256": "3455a62b26a365b60157f390433da7e9174a5f6701aee4ab39af2507352b01e8"
+      },
+      {
+        "bytes": 28793,
+        "path": "src/pit_pre/models/Strain__predict/predict_Strain_future_fixed_best_params_annotated.py",
+        "sha256": "7bf040e9a6c24b9017646ca4cd311de9885db42eb5168d93246bb94c8f95aa08"
+      },
+      {
+        "bytes": 3556,
+        "path": "src/pit_pre/models/Strain__predict/preprocessor.joblib",
+        "sha256": "6660a92d879f1774bae92619392f95219927608584c6f3c72e6ce1f7c77b71df"
+      },
+      {
+        "bytes": 323707,
+        "path": "src/pit_pre/models/water__predict/best_model_water_optuna.pth",
+        "sha256": "f3d3bb389db4efeb59a76cf6d6421b1ac1f72749779eb00404a1ea154cc1efee"
+      },
+      {
+        "bytes": 273,
+        "path": "src/pit_pre/models/water__predict/best_params.json",
+        "sha256": "c9724232fec9d312c4fa94fca20068bcc427bc3949358fb248124579f33f1a29"
+      },
+      {
+        "bytes": 25146,
+        "path": "src/pit_pre/models/water__predict/predict_water_future_fixed_best_params_annotated.py",
+        "sha256": "e4bb34726b65e065eb7b8f341b5cfad28b39f71e296348b84473afb9b6230da8"
+      },
+      {
+        "bytes": 3524,
+        "path": "src/pit_pre/models/water__predict/preprocessor.joblib",
+        "sha256": "c28aa693d73085d9ff5996fc8e0b5e4011f232c5d81b1b7acec1014912473256"
+      },
+      {
+        "bytes": 908257,
+        "path": "src/pit_pre/models/XD__predict/best_model_XD_optuna.pth",
+        "sha256": "6a1b376e0390e5d0470ff7ee7bc54032565f42b2768ede36c5b931546b716cd9"
+      },
+      {
+        "bytes": 271,
+        "path": "src/pit_pre/models/XD__predict/best_params.json",
+        "sha256": "60cf08e567a244d400f40a13df1e25d99e7356cf8ad6055813f84a647533c4dc"
+      },
+      {
+        "bytes": 29425,
+        "path": "src/pit_pre/models/XD__predict/predict_XD_future_direct_comment_enhanced.py",
+        "sha256": "59bacf03011083927b3c97d8cab395f39c7ffc06ad625fc0135520ea72c93558"
+      },
+      {
+        "bytes": 3651,
+        "path": "src/pit_pre/models/XD__predict/preprocessor.joblib",
+        "sha256": "ac01c13899e0f647758cb65fd1ba9a04e3560569a66fa2c82f0d2a4ec394a54b"
+      },
+      {
+        "bytes": 1032411,
+        "path": "src/pit_pre/models/YD__predict/best_model_YD_custom_m10_n3.pth",
+        "sha256": "ad586b1219bc7399ce486a7196216017a563b9c5a4f5f4be6d4eb3e0d1ccf543"
+      },
+      {
+        "bytes": 23377,
+        "path": "src/pit_pre/models/YD__predict/predict_YD_future_direct.py",
+        "sha256": "d9187c81ed5ae0c7083fa0808c52f786ce59b6487cd087c0ab51e864f73382d5"
+      },
+      {
+        "bytes": 3642,
+        "path": "src/pit_pre/models/YD__predict/preprocessor.joblib",
+        "sha256": "49020979b1cd086fa6ed093c68ea496063327b6c37ccb8f42305635ac914eff1"
+      }
+    ],
+    "bundleDirectories": [
+      {
+        "artifacts": [
+          {
+            "bytes": 218773,
+            "path": "src/pit_pre/models/Pressure__predict/best_model_Pressure_optuna.pth",
+            "sha256": "aef1d20d99b94607b22ded3c37c2a75300c2441db50b9fa005018fb163e1a31c"
+          },
+          {
+            "bytes": 269,
+            "path": "src/pit_pre/models/Pressure__predict/best_params.json",
+            "sha256": "647647090e79067b2fdcda7f59efb6b62790468c68685817643a4d73a5f994b5"
+          },
+          {
+            "bytes": 20113,
+            "path": "src/pit_pre/models/Pressure__predict/predict_Pressure_future_fixed_best_params_annotated.py",
+            "sha256": "a95e12666b4d277369eb705cff8216bd3371a1534da9ba06c7e34ef5830223cd"
+          },
+          {
+            "bytes": 3557,
+            "path": "src/pit_pre/models/Pressure__predict/preprocessor.joblib",
+            "sha256": "3a0db327bd99be620380b4fb4a280f734325bd4767788bb5d8d7242980fe7183"
+          }
+        ],
+        "bytes": 242712,
+        "directory": "src/pit_pre/models/Pressure__predict",
+        "fileCount": 4
+      },
+      {
+        "artifacts": [
+          {
+            "bytes": 561361,
+            "path": "src/pit_pre/models/settlement_predict/best_model_settlement_optuna.pth",
+            "sha256": "3c18be8ae8fcdb1f8c740e8d0bf1c3e8775a5c0d1d11994d4360be1213c7ad40"
+          },
+          {
+            "bytes": 232,
+            "path": "src/pit_pre/models/settlement_predict/best_params.json",
+            "sha256": "697bf5d27284caceec55875ede19cab5b42dec49026ccda1be304707ff230801"
+          },
+          {
+            "bytes": 28365,
+            "path": "src/pit_pre/models/settlement_predict/predict_settlement_future_fixed_best_params_annotated.py",
+            "sha256": "c152722675d93053966715148e4881f9224f55b77b90dd76d161ec29e0673740"
+          },
+          {
+            "bytes": 4717,
+            "path": "src/pit_pre/models/settlement_predict/preprocessor.joblib",
+            "sha256": "78b070dd1fbd6006b3254b60fb328a36f7748a401baca51d114586f5f9cc3e10"
+          }
+        ],
+        "bytes": 594675,
+        "directory": "src/pit_pre/models/settlement_predict",
+        "fileCount": 4
+      },
+      {
+        "artifacts": [
+          {
+            "bytes": 429273,
+            "path": "src/pit_pre/models/Strain__predict/best_model_Strain_optuna.pth",
+            "sha256": "687acb1a44f79f9566e2e677f33478addd66c83a9e300f32666674f7d2cdc694"
+          },
+          {
+            "bytes": 270,
+            "path": "src/pit_pre/models/Strain__predict/best_params.json",
+            "sha256": "3455a62b26a365b60157f390433da7e9174a5f6701aee4ab39af2507352b01e8"
+          },
+          {
+            "bytes": 28793,
+            "path": "src/pit_pre/models/Strain__predict/predict_Strain_future_fixed_best_params_annotated.py",
+            "sha256": "7bf040e9a6c24b9017646ca4cd311de9885db42eb5168d93246bb94c8f95aa08"
+          },
+          {
+            "bytes": 3556,
+            "path": "src/pit_pre/models/Strain__predict/preprocessor.joblib",
+            "sha256": "6660a92d879f1774bae92619392f95219927608584c6f3c72e6ce1f7c77b71df"
+          }
+        ],
+        "bytes": 461892,
+        "directory": "src/pit_pre/models/Strain__predict",
+        "fileCount": 4
+      },
+      {
+        "artifacts": [
+          {
+            "bytes": 323707,
+            "path": "src/pit_pre/models/water__predict/best_model_water_optuna.pth",
+            "sha256": "f3d3bb389db4efeb59a76cf6d6421b1ac1f72749779eb00404a1ea154cc1efee"
+          },
+          {
+            "bytes": 273,
+            "path": "src/pit_pre/models/water__predict/best_params.json",
+            "sha256": "c9724232fec9d312c4fa94fca20068bcc427bc3949358fb248124579f33f1a29"
+          },
+          {
+            "bytes": 25146,
+            "path": "src/pit_pre/models/water__predict/predict_water_future_fixed_best_params_annotated.py",
+            "sha256": "e4bb34726b65e065eb7b8f341b5cfad28b39f71e296348b84473afb9b6230da8"
+          },
+          {
+            "bytes": 3524,
+            "path": "src/pit_pre/models/water__predict/preprocessor.joblib",
+            "sha256": "c28aa693d73085d9ff5996fc8e0b5e4011f232c5d81b1b7acec1014912473256"
+          }
+        ],
+        "bytes": 352650,
+        "directory": "src/pit_pre/models/water__predict",
+        "fileCount": 4
+      },
+      {
+        "artifacts": [
+          {
+            "bytes": 908257,
+            "path": "src/pit_pre/models/XD__predict/best_model_XD_optuna.pth",
+            "sha256": "6a1b376e0390e5d0470ff7ee7bc54032565f42b2768ede36c5b931546b716cd9"
+          },
+          {
+            "bytes": 271,
+            "path": "src/pit_pre/models/XD__predict/best_params.json",
+            "sha256": "60cf08e567a244d400f40a13df1e25d99e7356cf8ad6055813f84a647533c4dc"
+          },
+          {
+            "bytes": 29425,
+            "path": "src/pit_pre/models/XD__predict/predict_XD_future_direct_comment_enhanced.py",
+            "sha256": "59bacf03011083927b3c97d8cab395f39c7ffc06ad625fc0135520ea72c93558"
+          },
+          {
+            "bytes": 3651,
+            "path": "src/pit_pre/models/XD__predict/preprocessor.joblib",
+            "sha256": "ac01c13899e0f647758cb65fd1ba9a04e3560569a66fa2c82f0d2a4ec394a54b"
+          }
+        ],
+        "bytes": 941604,
+        "directory": "src/pit_pre/models/XD__predict",
+        "fileCount": 4
+      },
+      {
+        "artifacts": [
+          {
+            "bytes": 1032411,
+            "path": "src/pit_pre/models/YD__predict/best_model_YD_custom_m10_n3.pth",
+            "sha256": "ad586b1219bc7399ce486a7196216017a563b9c5a4f5f4be6d4eb3e0d1ccf543"
+          },
+          {
+            "bytes": 23377,
+            "path": "src/pit_pre/models/YD__predict/predict_YD_future_direct.py",
+            "sha256": "d9187c81ed5ae0c7083fa0808c52f786ce59b6487cd087c0ab51e864f73382d5"
+          },
+          {
+            "bytes": 3642,
+            "path": "src/pit_pre/models/YD__predict/preprocessor.joblib",
+            "sha256": "49020979b1cd086fa6ed093c68ea496063327b6c37ccb8f42305635ac914eff1"
+          }
+        ],
+        "bytes": 1059430,
+        "directory": "src/pit_pre/models/YD__predict",
+        "fileCount": 3
+      }
+    ]
+  },
+  "repository": {
+    "name": "SHM-EM",
+    "root": "."
+  },
+  "schemaVersion": "shm-em-repository-baseline-v1",
+  "tests": {
+    "backend": {
+      "files": [
+        {
+          "classes": [
+            "ApiSmokeTest"
+          ],
+          "path": "src/backend/src/test/java/mybatis/iem/em/ApiSmokeTest.java",
+          "testMethods": 6
+        },
+        {
+          "classes": [
+            "EventNotificationDecisionPolicyTest"
+          ],
+          "path": "src/backend/src/test/java/mybatis/iem/em/EventNotificationDecisionPolicyTest.java",
+          "testMethods": 8
+        },
+        {
+          "classes": [
+            "MetricRuleEventEngineTest"
+          ],
+          "path": "src/backend/src/test/java/mybatis/iem/em/MetricRuleEventEngineTest.java",
+          "testMethods": 6
+        },
+        {
+          "classes": [
+            "EngineeringConversionServiceImplTest"
+          ],
+          "path": "src/backend/src/test/java/mybatis/iem/em/modules/engineering/application/service/impl/EngineeringConversionServiceImplTest.java",
+          "testMethods": 6
+        },
+        {
+          "classes": [
+            "EventResponseOrchestratorTest"
+          ],
+          "path": "src/backend/src/test/java/mybatis/iem/em/modules/engineering/application/service/impl/EventResponseOrchestratorTest.java",
+          "testMethods": 1
+        },
+        {
+          "classes": [
+            "MetricRuleEventEngineEngineeringTest"
+          ],
+          "path": "src/backend/src/test/java/mybatis/iem/em/modules/engineering/application/service/impl/MetricRuleEventEngineEngineeringTest.java",
+          "testMethods": 2
+        },
+        {
+          "classes": [
+            "PredictionExecutionGateServiceImplTest"
+          ],
+          "path": "src/backend/src/test/java/mybatis/iem/em/modules/engineering/application/service/impl/PredictionExecutionGateServiceImplTest.java",
+          "testMethods": 2
+        },
+        {
+          "classes": [
+            "PredictionServiceImplTest"
+          ],
+          "path": "src/backend/src/test/java/mybatis/iem/em/modules/engineering/application/service/impl/PredictionServiceImplTest.java",
+          "testMethods": 2
+        },
+        {
+          "classes": [
+            "ProjectContextServiceImplTest"
+          ],
+          "path": "src/backend/src/test/java/mybatis/iem/em/modules/engineering/application/service/impl/ProjectContextServiceImplTest.java",
+          "testMethods": 1
+        },
+        {
+          "classes": [
+            "ProjectFutureStateServiceImplTest"
+          ],
+          "path": "src/backend/src/test/java/mybatis/iem/em/modules/engineering/application/service/impl/ProjectFutureStateServiceImplTest.java",
+          "testMethods": 2
+        },
+        {
+          "classes": [
+            "ReproductionExecutionPolicyTest"
+          ],
+          "path": "src/backend/src/test/java/mybatis/iem/em/modules/engineering/application/service/impl/ReproductionExecutionPolicyTest.java",
+          "testMethods": 2
+        },
+        {
+          "classes": [
+            "ObservationRoutingServiceImplTest"
+          ],
+          "path": "src/backend/src/test/java/mybatis/iem/em/ObservationRoutingServiceImplTest.java",
+          "testMethods": 3
+        }
+      ],
+      "testClasses": 12,
+      "testFiles": 12,
+      "testMethods": 41
+    },
+    "pitPre": {
+      "files": [
+        {
+          "classes": [
+            "ModelContractRepositoryTest"
+          ],
+          "path": "src/pit_pre/tests/test_contract.py",
+          "testMethods": [
+            "ModelContractRepositoryTest.test_bootstrap_file_rejects_runtime_or_model_settings",
+            "ModelContractRepositoryTest.test_loads_runtime_and_models_only_from_database_contract",
+            "ModelContractRepositoryTest.test_rejects_feature_schema_drift",
+            "ModelContractRepositoryTest.test_rejects_inference_script_drift"
+          ]
+        }
+      ],
+      "testClasses": 1,
+      "testFiles": 1,
+      "testMethods": 4
+    }
+  }
+}

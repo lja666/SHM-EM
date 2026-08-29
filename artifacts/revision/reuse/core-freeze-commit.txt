@@ -1,0 +1,7 @@
+SHM-EM SoftwareX revision core-freeze baseline
+
+submitted_tag=v1.0.0
+submitted_commit=1d2ab45e516ef4167c6c4c4265da5b533b2eab78
+core_freeze_commit=df39ffb2b57d16cfdca419adf2492959fcc0931c
+
+purpose=Baseline for post-freeze failure-path, reuse, and scalability experiments.

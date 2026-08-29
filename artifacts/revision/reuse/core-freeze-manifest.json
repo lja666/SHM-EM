@@ -1,0 +1,35 @@
+{
+  "branch": "revision/softx-d-26-00931",
+  "coreFreezeCommit": "df39ffb2b57d16cfdca419adf2492959fcc0931c",
+  "coreFreezeParent": "1d2ab45e516ef4167c6c4c4265da5b533b2eab78",
+  "coreFreezeTree": "02f75173bf7d7e3194435ca5afaf87b08e1866ed",
+  "createdAt": "2026-08-29T04:14:21Z",
+  "gitTagCreated": false,
+  "modelArtifactOrScriptSubstantiveDiff": false,
+  "numericalRegression": {
+    "maximumEngineeringAbsoluteDifference": 0.0,
+    "maximumInputAbsoluteDifference": 0.0,
+    "maximumRawPredictionAbsoluteDifference": 0.0,
+    "passed": true
+  },
+  "pitPreTests": {
+    "failed": 0,
+    "passed": 10,
+    "testsRun": 10
+  },
+  "rawPublicContractHashValidation": {
+    "assetCount": 25,
+    "modelCount": 6,
+    "passed": true,
+    "validationMode": "raw-bytes-no-eol-normalization"
+  },
+  "referenceWorkflow": {
+    "futureSteps": 40,
+    "modelCount": 6,
+    "predictionRecords": 4960,
+    "targetCount": 124
+  },
+  "schemaVersion": "shm-em-core-freeze-manifest-v1",
+  "submittedCommit": "1d2ab45e516ef4167c6c4c4265da5b533b2eab78",
+  "submittedTag": "v1.0.0"
+}

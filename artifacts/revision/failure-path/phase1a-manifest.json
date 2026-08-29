@@ -1,0 +1,544 @@
+{
+  "schemaVersion": "shm-em-phase1a-manifest-v1",
+  "generatedAt": "2026-08-29T08:51:54.879921+00:00",
+  "coreFreezeCommit": "df39ffb2b57d16cfdca419adf2492959fcc0931c",
+  "freezeRecordCommit": "6ea8ec64ed456fc7ea503e365107c1b3db82737a",
+  "sourceBranch": "revision/softx-d-26-00931",
+  "positiveControlPassed": true,
+  "caseCount": 15,
+  "passedCount": 14,
+  "failedCount": 1,
+  "discoveryGapCount": 1,
+  "formalSideEffectTables": [
+    "em_monitoring_event",
+    "em_event_response_workflow",
+    "em_event_response_step",
+    "em_report_instance",
+    "em_notification_task",
+    "em_event_prediction_link",
+    "em_event_evidence_link",
+    "em_event_metric_snapshot",
+    "em_evidence_resource",
+    "em_event_state_transition",
+    "em_event_notification_state",
+    "em_notification_delivery_log",
+    "em_event_handling_log"
+  ],
+  "auditTables": [
+    "em_prediction_execution_gate",
+    "em_event_evaluation_run",
+    "em_audit_log"
+  ],
+  "isolatedDatabasePattern": "^shm_em_reproduce_phase1a_[A-Za-z0-9_]+$",
+  "baselineDatabase": "shm_em_reproduce_phase1a_base",
+  "backendTests": {
+    "command": [
+      "D:\\Tools\\apache-maven-3.9.16\\bin\\mvn.cmd",
+      "-q",
+      "test"
+    ],
+    "exitCode": 0,
+    "elapsedSeconds": 14.951,
+    "stdoutTail": ".ProjectController:\n\t{GET [/api/em/projects/{id}]}: get(Long)\n\t{GET [/api/em/projects/{id}/context]}: context(Long)\n\t{GET [/api/em/projects]}: list(Long,Integer)\n\t{GET [/api/em/projects/{id}/object-tree]}: objectTree(Long)\n\t{GET [/api/em/projects/overview]}: overview()\n\t{GET [/api/em/projects/{id}/future-state]}: futureState(Long,Long,Integer,PredictionExecutionMode,LocalDateTime)\n16:31:16.466 [main] DEBUG _org.springframework.web.servlet.HandlerMapping.Mappings - \n\tm.i.e.m.e.a.c.PredictionController:\n\t{GET [/api/em/predictions/features]}: features(PredictionQuery)\n\t{GET [/api/em/predictions/series]}: series(PredictionQuery)\n\t{GET [/api/em/predictions/latest]}: latest(PredictionQuery)\n\t{GET [/api/em/predictions/batches/{batchId}/runs]}: runs(Long)\n\t{GET [/api/em/predictions/batches]}: batches(PredictionQuery)\n\t{GET [/api/em/predictions/models]}: models(PredictionQuery)\n\t{GET [/api/em/predictions/events/{eventId}/trace]}: eventTrace(Long)\n\t{GET [/api/em/predictions/batches/{batchId}]}: batchDetail(Long)\n\t{GET [/api/em/predictions/batches/{batchId}/execution-gate]}: executionGate(Long,String,LocalDateTime)\n\t{GET [/api/em/predictions/batches/{batchId}/execution-gate/latest]}: latestExecutionGate(Long,String)\n\t{POST [/api/em/predictions/batches/{batchId}/execution-gate/evaluate]}: evaluateExecutionGate(Long,String,LocalDateTime)\n16:31:16.468 [main] DEBUG _org.springframework.web.servlet.HandlerMapping.Mappings - \n\tm.i.e.m.e.a.c.LowFrequencyObservationController:\n\t{GET [/api/em/observations/low-frequency]}: list(ObservationQuery)\n\t{POST [/api/em/observations/low-frequency/query]}: query(ObservationQuery)\n\t{POST [/api/em/observations/low-frequency/timeseries]}: timeseries(ObservationQuery)\n16:31:16.469 [main] DEBUG _org.springframework.web.servlet.HandlerMapping.Mappings - \n\tm.i.e.m.e.a.c.AccelerationWaveformController:\n\t{GET [/api/em/acceleration]}: list(ObservationQuery)\n\t{POST [/api/em/acceleration/waveform]}: waveform(ObservationQuery)\n16:31:16.470 [main] DEBUG _org.springframework.web.servlet.HandlerMapping.Mappings - \n\tm.i.e.m.e.a.c.ProjectRuleController:\n\t{GET [/api/em/projects/{projectId}/rules/{ruleId}]}: get(Long,Long)\n\t{POST [/api/em/projects/{projectId}/rules/{ruleId}/execute]}: execute(Long,Long,RuleEvaluationRequest)\n\t{GET [/api/em/projects/{projectId}/rules]}: list(Long,Integer)\n\t{POST [/api/em/projects/{projectId}/rules/{ruleId}/evaluate]}: evaluate(Long,Long,RuleEvaluationRequest)\n\t{POST [/api/em/projects/{projectId}/rules/execute]}: executeCustom(Long,RuleEvaluationRequest)\n\t{POST [/api/em/projects/{projectId}/rules/evaluate]}: evaluateCustom(Long,RuleEvaluationRequest)\n16:31:16.471 [main] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - 28 mappings in org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping\n16:31:16.479 [main] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice\n16:31:16.482 [main] DEBUG org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver - ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice\n16:31:16.482 [main] INFO org.springframework.mock.web.MockServletContext - Initializing Spring TestDispatcherServlet ''\n16:31:16.482 [main] INFO org.springframework.test.web.servlet.TestDispatcherServlet - Initializing Servlet ''\n16:31:16.482 [main] DEBUG org.springframework.test.web.servlet.TestDispatcherServlet - Detected AcceptHeaderLocaleResolver\n16:31:16.482 [main] DEBUG org.springframework.test.web.servlet.TestDispatcherServlet - Detected FixedThemeResolver\n16:31:16.482 [main] DEBUG org.springframework.test.web.servlet.TestDispatcherServlet - Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@4f8b4bd0\n16:31:16.483 [main] DEBUG org.springframework.test.web.servlet.TestDispatcherServlet - Detected org.springframework.web.servlet.support.SessionFlashMapManager@4e904fd5\n16:31:16.483 [main] DEBUG org.springframework.test.web.servlet.TestDispatcherServlet - enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data\n16:31:16.483 [main] INFO org.springframework.test.web.servlet.TestDispatcherServlet - Completed initialization in 1 ms\n16:31:16.484 [main] DEBUG org.springframework.test.web.servlet.TestDispatcherServlet - POST \"/api/em/projects/1/rules/evaluate\", parameters={}\n16:31:16.485 [main] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to mybatis.iem.em.modules.engineering.api.controller.ProjectRuleController#evaluateCustom(Long, RuleEvaluationRequest)\n16:31:16.560 [main] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor - Read \"application/json\" to [RuleEvaluationRequest(ruleId=null, projectId=null, stationIds=null, instrumentIds=null, instrumentTy (truncated)...]\n16:31:16.561 [main] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]\n16:31:16.562 [main] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor - Writing [ApiResponse(code=0, message=success, data={eventCount=1, runId=11})]\n16:31:16.569 [main] DEBUG org.springframework.test.web.servlet.TestDispatcherServlet - Completed 200 OK\n16:31:16.570 [main] DEBUG com.jayway.jsonpath.internal.path.CompiledPath - Evaluating path: $['code']\n16:31:16.570 [main] DEBUG com.jayway.jsonpath.internal.path.CompiledPath - Evaluating path: $['data']['eventCount']\n16:31:16.574 [main] DEBUG _org.springframework.web.servlet.HandlerMapping.Mappings - \n\tm.i.e.m.e.a.c.ProjectController:\n\t{GET [/api/em/projects/{id}]}: get(Long)\n\t{GET [/api/em/projects/{id}/context]}: context(Long)\n\t{GET [/api/em/projects]}: list(Long,Integer)\n\t{GET [/api/em/projects/{id}/object-tree]}: objectTree(Long)\n\t{GET [/api/em/projects/overview]}: overview()\n\t{GET [/api/em/projects/{id}/future-state]}: futureState(Long,Long,Integer,PredictionExecutionMode,LocalDateTime)\n16:31:16.575 [main] DEBUG _org.springframework.web.servlet.HandlerMapping.Mappings - \n\tm.i.e.m.e.a.c.PredictionController:\n\t{GET [/api/em/predictions/features]}: features(PredictionQuery)\n\t{GET [/api/em/predictions/series]}: series(PredictionQuery)\n\t{GET [/api/em/predictions/latest]}: latest(PredictionQuery)\n\t{GET [/api/em/predictions/batches/{batchId}/runs]}: runs(Long)\n\t{GET [/api/em/predictions/batches]}: batches(PredictionQuery)\n\t{GET [/api/em/predictions/models]}: models(PredictionQuery)\n\t{GET [/api/em/predictions/events/{eventId}/trace]}: eventTrace(Long)\n\t{GET [/api/em/predictions/batches/{batchId}]}: batchDetail(Long)\n\t{GET [/api/em/predictions/batches/{batchId}/execution-gate]}: executionGate(Long,String,LocalDateTime)\n\t{GET [/api/em/predictions/batches/{batchId}/execution-gate/latest]}: latestExecutionGate(Long,String)\n\t{POST [/api/em/predictions/batches/{batchId}/execution-gate/evaluate]}: evaluateExecutionGate(Long,String,LocalDateTime)\n16:31:16.576 [main] DEBUG _org.springframework.web.servlet.HandlerMapping.Mappings - \n\tm.i.e.m.e.a.c.LowFrequencyObservationController:\n\t{GET [/api/em/observations/low-frequency]}: list(ObservationQuery)\n\t{POST [/api/em/observations/low-frequency/query]}: query(ObservationQuery)\n\t{POST [/api/em/observations/low-frequency/timeseries]}: timeseries(ObservationQuery)\n16:31:16.576 [main] DEBUG _org.springframework.web.servlet.HandlerMapping.Mappings - \n\tm.i.e.m.e.a.c.AccelerationWaveformController:\n\t{GET [/api/em/acceleration]}: list(ObservationQuery)\n\t{POST [/api/em/acceleration/waveform]}: waveform(ObservationQuery)\n16:31:16.577 [main] DEBUG _org.springframework.web.servlet.HandlerMapping.Mappings - \n\tm.i.e.m.e.a.c.ProjectRuleController:\n\t{GET [/api/em/projects/{projectId}/rules/{ruleId}]}: get(Long,Long)\n\t{POST [/api/em/projects/{projectId}/rules/{ruleId}/execute]}: execute(Long,Long,RuleEvaluationRequest)\n\t{GET [/api/em/projects/{projectId}/rules]}: list(Long,Integer)\n\t{POST [/api/em/projects/{projectId}/rules/{ruleId}/evaluate]}: evaluate(Long,Long,RuleEvaluationRequest)\n\t{POST [/api/em/projects/{projectId}/rules/execute]}: executeCustom(Long,RuleEvaluationRequest)\n\t{POST [/api/em/projects/{projectId}/rules/evaluate]}: evaluateCustom(Long,RuleEvaluationRequest)\n16:31:16.577 [main] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - 28 mappings in org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping\n16:31:16.584 [main] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice\n16:31:16.587 [main] DEBUG org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver - ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice\n16:31:16.588 [main] INFO org.springframework.mock.web.MockServletContext - Initializing Spring TestDispatcherServlet ''\n16:31:16.588 [main] INFO org.springframework.test.web.servlet.TestDispatcherServlet - Initializing Servlet ''\n16:31:16.588 [main] DEBUG org.springframework.test.web.servlet.TestDispatcherServlet - Detected AcceptHeaderLocaleResolver\n16:31:16.588 [main] DEBUG org.springframework.test.web.servlet.TestDispatcherServlet - Detected FixedThemeResolver\n16:31:16.588 [main] DEBUG org.springframework.test.web.servlet.TestDispatcherServlet - Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@1f6d27cc\n16:31:16.588 [main] DEBUG org.springframework.test.web.servlet.TestDispatcherServlet - Detected org.springframework.web.servlet.support.SessionFlashMapManager@4393593c\n16:31:16.588 [main] DEBUG org.springframework.test.web.servlet.TestDispatcherServlet - enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data\n16:31:16.588 [main] INFO org.springframework.test.web.servlet.TestDispatcherServlet - Completed initialization in 0 ms\n16:31:16.592 [main] DEBUG org.springframework.test.web.servlet.TestDispatcherServlet - GET \"/api/em/projects/1/future-state\", parameters={masked}\n16:31:16.592 [main] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to mybatis.iem.em.modules.engineering.api.controller.ProjectController#futureState(Long, Long, Integer, PredictionExecutionMode, LocalDateTime)\n16:31:16.599 [main] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]\n16:31:16.599 [main] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor - Writing [ApiResponse(code=0, message=success, data=ProjectFutureState(projectId=1, batchId=7, batchCode=null, (truncated)...]\n16:31:16.610 [main] DEBUG org.springframework.test.web.servlet.TestDispatcherServlet - Completed 200 OK\n16:31:16.611 [main] DEBUG com.jayway.jsonpath.internal.path.CompiledPath - Evaluating path: $['code']\n16:31:16.611 [main] DEBUG com.jayway.jsonpath.internal.path.CompiledPath - Evaluating path: $['data']['batchId']\n16:31:16.612 [main] DEBUG com.jayway.jsonpath.internal.path.CompiledPath - Evaluating path: $['data']['executionMode']\n16:31:16.612 [main] DEBUG com.jayway.jsonpath.internal.path.CompiledPath - Evaluating path: $['data']['executionEligible']\n16:31:16.612 [main] DEBUG com.jayway.jsonpath.internal.path.CompiledPath - Evaluating path: $['data']['executionGate']['id']\n16:31:17.075 [main] DEBUG org.springframework.mock.env.MockEnvironment - Activating profiles [reproduce]\n16:31:17.081 [main] DEBUG org.springframework.mock.env.MockEnvironment - Activating profiles [reproduce]\n",
+    "stderrTail": "",
+    "passed": true
+  },
+  "pitPreTests": {
+    "command": [
+      "D:\\anaconda3\\envs\\py310\\python.exe",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-v"
+    ],
+    "exitCode": 0,
+    "elapsedSeconds": 1.866,
+    "stdoutTail": "",
+    "stderrTail": "test_alignment_diagnostics_do_not_change_values (test_alignment_diagnostics.AlignmentDiagnosticsTest) ... ok\ntest_alignment_policy_metadata_is_persisted (test_alignment_diagnostics.AlignmentDiagnosticsTest) ... ok\ntest_alignment_stage_attribution (test_alignment_diagnostics.AlignmentDiagnosticsTest) ... ok\ntest_boundary_extension_attribution (test_alignment_diagnostics.AlignmentDiagnosticsTest) ... ok\ntest_builder_uses_one_asof_merge_per_feature (test_alignment_diagnostics.AlignmentDiagnosticsTest) ... ok\ntest_quality_summary_counts_match_cells (test_alignment_diagnostics.AlignmentDiagnosticsTest) ... ok\ntest_bootstrap_file_rejects_runtime_or_model_settings (test_contract.ModelContractRepositoryTest) ... ok\ntest_loads_runtime_and_models_only_from_database_contract (test_contract.ModelContractRepositoryTest) ... ok\ntest_rejects_feature_schema_drift (test_contract.ModelContractRepositoryTest) ... ok\ntest_rejects_inference_script_drift (test_contract.ModelContractRepositoryTest) ... ok\n\n----------------------------------------------------------------------\nRan 10 tests in 0.164s\n\nOK\n",
+    "passed": true
+  },
+  "artifacts": [
+    {
+      "path": "artifacts/revision/failure-path/cases/F01/api-response.json",
+      "bytes": 4337,
+      "sha256": "aec54b57eaca048defb2a12ae8a7391696d40b43101722cdd40b3cf3065e5ec9"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/F01/case-summary.json",
+      "bytes": 1269,
+      "sha256": "617fe3b1956843235b8313c1d4fbb0b1deac9a5d00d120b2fa7a890b55b6d6f4"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/F01/gate.json",
+      "bytes": 3745,
+      "sha256": "5c6b262e449eaf284896253ec9eb2898569101c9d0eee5a0cc0e245ca44cb511"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/F01/mutation.sql",
+      "bytes": 86,
+      "sha256": "a72155962fd3f5b738bce6d68cea5efcd779bfb1e70f63dac8384d71b30a330e"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/F01/state-after.json",
+      "bytes": 6082,
+      "sha256": "eb9e956bd2a403c70aa8241bfa4759a70c1dad087369a87fb8bda00960a0bd19"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/F01/state-before.json",
+      "bytes": 6082,
+      "sha256": "71fa3dce3334d8a7123ffb54bda1f39bf73cfa425db28cfd196f3f2b0459dd84"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/F02/api-response.json",
+      "bytes": 4206,
+      "sha256": "a72e81eff95a844c3cdd50c269edc0b14fdbbbfe476bf3859c64b4c0efb69a30"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/F02/case-summary.json",
+      "bytes": 1243,
+      "sha256": "a9ac7584626a62954792da3794ba3c0f72d79189f6e451b5f58ba8d8a1606e78"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/F02/gate.json",
+      "bytes": 3625,
+      "sha256": "85b8375e7fd67953952f476e38f3463b10a5f917cd6d6774067b25f219a552ce"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/F02/mutation.sql",
+      "bytes": 75,
+      "sha256": "40d92e1178e9140e1b792805372fda9ed9eb0c1e46710e2fa225bfc022a4d64c"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/F02/state-after.json",
+      "bytes": 6082,
+      "sha256": "50e45687309827f478b325c06848623582dd16a578b892d5068e1821e4427287"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/F02/state-before.json",
+      "bytes": 6082,
+      "sha256": "7080769533644e2eef1865b3cedb3d8bf67dce915cebef6b61ed2e6a9e685425"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/F03/api-response.json",
+      "bytes": 4201,
+      "sha256": "cd7cc02208f0f93aec69b43820d2cf5c5d4bbc5a49c49ee6b1e12b696d2dcd23"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/F03/case-summary.json",
+      "bytes": 1306,
+      "sha256": "35af3b147ceb477b94d5771b74c5bf3b4863a79cd0bba3cd8dadc8e53e984f99"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/F03/gate.json",
+      "bytes": 3619,
+      "sha256": "b5ca47decd18e3a65859eef55bc9813980a15acd78a52b410f953d19f853a824"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/F03/mutation.sql",
+      "bytes": 123,
+      "sha256": "3ce22d279920d9c9d65f3c55cd429975a5de5e7d505f48bd530687fc826c0ead"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/F03/state-after.json",
+      "bytes": 6082,
+      "sha256": "458eca7a786a80a4ab0106e78a37eb2a5627345949ac389437e500dfdfdae34d"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/F03/state-before.json",
+      "bytes": 6082,
+      "sha256": "5c21ca32fd3b9bb6c0f82b4c5a4fba25a8de201e7a747934455999e9767ba35e"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/F04/api-response.json",
+      "bytes": 9216,
+      "sha256": "71dfedc53ec07f55691ca773d2e4e0831e59d7986c9bdd5c6024fab43df01d06"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/F04/case-summary.json",
+      "bytes": 1385,
+      "sha256": "18280de3d66190f046e39428937b4df12dcf8c537c89516c4f03b0e81b064b87"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/F04/gate.json",
+      "bytes": 8420,
+      "sha256": "0186a4a89359f906a9606de525e54cfdc7adfa08975950809f8bf870711284c5"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/F04/mutation.sql",
+      "bytes": 110,
+      "sha256": "9971b6db177fdabb2b62aeb1be29a68b45d619863c3838cd0ea8c1f5b8b0b198"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/F04/state-after.json",
+      "bytes": 6082,
+      "sha256": "aff6f04a280ae49eeb165a1a106bc4f1572f4fc6ea17779562537cee128adf16"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/F04/state-before.json",
+      "bytes": 6082,
+      "sha256": "c3d3713b86b63744c4f7ee6a401dee45bf6026d79041632311187da0c01e2d09"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/F05/api-response.json",
+      "bytes": 4105,
+      "sha256": "7aa437d33d8400fd0283f9dca9be87ef1ad4770acb52d0de4c08adae2ee0ff18"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/F05/case-summary.json",
+      "bytes": 1227,
+      "sha256": "c474ea62d660d1aac64ed1ceb3cbb188d0ada5e9ede01784370fa86a0880ee5e"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/F05/gate.json",
+      "bytes": 3547,
+      "sha256": "52ae34b8b48c6a62b48fcdfe7f774b3f908153ce2135c2ce363ac74bea6a60ae"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/F05/mutation.sql",
+      "bytes": 121,
+      "sha256": "19c652a0c103d7c74c494cb40326db2a24267d2b07ab4f8714b3d26cd711f798"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/F05/state-after.json",
+      "bytes": 6082,
+      "sha256": "93fd44f3629bff3154a4d1e442b247720a4d8a8bcfedcd00d300ecf3aa0b2a54"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/F05/state-before.json",
+      "bytes": 6082,
+      "sha256": "5e21bce943ed935e36aa56047dc5feb4fb9745a5d0a05797eb5a7fc761f348dd"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/F06/api-response.json",
+      "bytes": 4209,
+      "sha256": "93e3be8b545c318f70a29fcc84492ab54c86649c96727f827b0ade3122ba5340"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/F06/case-summary.json",
+      "bytes": 1310,
+      "sha256": "0826f3344c724bfc4c05b3c1f00e8a207ce56ff7d20467465dfd07589fe2fbf3"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/F06/gate.json",
+      "bytes": 3623,
+      "sha256": "e98ff6097a316b53b54e168f780d1dd3451edcd8f3fd3ae6d07186d56e381521"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/F06/mutation.sql",
+      "bytes": 127,
+      "sha256": "a067751b446917f220aab00965f1999389dc14ffe511a1ae17bf259fef086b7f"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/F06/state-after.json",
+      "bytes": 6082,
+      "sha256": "894c7434bc7fa906bab2fe8e919221b61cd448e64a64e0aa478bd6cd06cd83e5"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/F06/state-before.json",
+      "bytes": 6082,
+      "sha256": "f372c233dc5fa6f7afd640055ac8c9aa92baccc17ea83371a2dc3416fb2ee2d9"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/F07/api-response.json",
+      "bytes": 4225,
+      "sha256": "550a4cb8bafa22cd519a4919f9eba68a61a999cb1adfca1c25b52d952d81bb53"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/F07/case-summary.json",
+      "bytes": 1303,
+      "sha256": "6dc7d68f5b9a47dd8be880b2ed69a790ff8ff63a0068e83c49565fe2b014a96b"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/F07/gate.json",
+      "bytes": 3630,
+      "sha256": "7812d0d1f4adc2c0600c6f3ab62abd9933e536d9f91259a93084e41b09ff4137"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/F07/mutation.sql",
+      "bytes": 102,
+      "sha256": "9b891dd3d2ec437ee52b884060e0e80295c6473591e16f99ead76b3bd8964371"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/F07/state-after.json",
+      "bytes": 6082,
+      "sha256": "3389f94c41690bd637a0f70e55798372da6020fac8cd81fb3f7bd2e90a36c1d9"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/F07/state-before.json",
+      "bytes": 6082,
+      "sha256": "c5644b86a69f84c7a3a5e8768a7d0c4e2edfe10d95bbcfe6e7bf32b7d66820a5"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/F08/api-response.json",
+      "bytes": 4197,
+      "sha256": "5011e9a5aec97b7f23b8d2d710b4a999820722e61bd46f70337a9d59a1966bde"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/F08/case-summary.json",
+      "bytes": 1236,
+      "sha256": "832b811939caf5b23d6dbbb6eb15290fe5edfc8a4a6f4d8715d67a471de0c274"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/F08/gate.json",
+      "bytes": 3617,
+      "sha256": "e38f1cc5bd0dc25c9b1ac0e215858736b1c6fb25469a0cdce1e8ba80c1f74fc4"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/F08/mutation.sql",
+      "bytes": 70,
+      "sha256": "0c80a7af570ce8e6ab837034f1275fda6c1761da726b5085f45adaef5fb77f80"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/F08/state-after.json",
+      "bytes": 6081,
+      "sha256": "955a6a95e1e6c36b9ec5ec1ef446dc9f42e12cf7275c9e780d43955a0285b1f6"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/F08/state-before.json",
+      "bytes": 6082,
+      "sha256": "c7efb6ece59bec2e73e274205e7ae75297a46958125cea11fc21070898e45cad"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/F09/api-response.json",
+      "bytes": 25058,
+      "sha256": "72238a5a3b9073d7d54e45b292a977f006965e252427789cb95fe72f9d141041"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/F09/case-summary.json",
+      "bytes": 1436,
+      "sha256": "101a06e54da6ed555c324134e4a9a7a966c5088854aa84e13264288cc8cb52ba"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/F09/gate.json",
+      "bytes": 3547,
+      "sha256": "61db7224aafc5d061e30a86b168ffd6fea5600882d5e9b76d4c9cfec4d0a96f7"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/F09/mutation.sql",
+      "bytes": 259,
+      "sha256": "d53808a6000e383f8af84c72dffe1f23d9316540e9252c293800a396f5a08d4a"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/F09/state-after.json",
+      "bytes": 6082,
+      "sha256": "f124a513d43f888ae6ac9de1d0dac2a189e137c769c5a7d57d00bab192d7e316"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/F09/state-before.json",
+      "bytes": 6082,
+      "sha256": "438e06f1401e161efc3cbe9cb5ef86ea5916554a8c141858be0b377e41841901"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/F10/api-response.json",
+      "bytes": 4211,
+      "sha256": "858f1d89a845f71535d0f679719c865d333788683edfafec80e4a9da88f8aa97"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/F10/case-summary.json",
+      "bytes": 1301,
+      "sha256": "6f180e247b0cdc9b27a5ed3ab68f1d17933715430191c10349089a972c05e2aa"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/F10/gate.json",
+      "bytes": 3624,
+      "sha256": "1d40dd8135f21d8e1f195b6b90a8f390c28f7346a87adc7aafe2a6929f51a280"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/F10/mutation.sql",
+      "bytes": 106,
+      "sha256": "3aa97cb499eaf86f089c174bc7a813c7997e74eb7caef0a0d75b51f206e95f72"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/F10/state-after.json",
+      "bytes": 6082,
+      "sha256": "c7f17a544842ce94a242d358dc3c6ba0e37f0516da27fe96ed59575b972a7ae1"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/F10/state-before.json",
+      "bytes": 6082,
+      "sha256": "2bbc294fe7a9e3463fbe212401f546bdd1d288d4a12f3f110a63e522ad345fa1"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/F11/api-response.json",
+      "bytes": 4150,
+      "sha256": "bd5f9a357cb7c4a2a91ae1e63d28cc0415d3c13b732a114c11a3860db727cf10"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/F11/case-summary.json",
+      "bytes": 1182,
+      "sha256": "90da0dfde47c5eef04e6ec4547af7c24906060e608b9ee013f5d129fa844d38d"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/F11/gate.json",
+      "bytes": 3593,
+      "sha256": "c77eedd5f8a8a33c276d98dd5dc0c400265718007cc0f9dc8cec41309b635a67"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/F11/mutation.sql",
+      "bytes": 59,
+      "sha256": "7ac70f046e02cc941a706a9ed33cb2dfda361d62bfa064fea900a076223c55e1"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/F11/state-after.json",
+      "bytes": 6081,
+      "sha256": "04b34ad36c2b3e56168d85e4aedba71bb3fe16e91bcef28fb757803ed3150d5f"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/F11/state-before.json",
+      "bytes": 6082,
+      "sha256": "a5d01a735281485afdaec61b0e65f77ce67dd808de07985c63e93ee9c1109ec4"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/F12/api-response.json",
+      "bytes": 14654,
+      "sha256": "84379984391e09f3476c0c977099a8f4356d4d7c87543108cbcc26c1953b904f"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/F12/case-summary.json",
+      "bytes": 1420,
+      "sha256": "633310f60aecf94972d7fd3ed84e99d8da60224dcf279b110c81e62953c49289"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/F12/gate.json",
+      "bytes": 3604,
+      "sha256": "55db8a6457129b99f773125cd8aba799eb953e29b6227410510f002102d1cc93"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/F12/mutation.sql",
+      "bytes": 175,
+      "sha256": "ebb2c9cc57ad96ea824d012cc1fa0151516e770644dd55990ba22d4510c0da96"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/F12/state-after.json",
+      "bytes": 6082,
+      "sha256": "61829d208947ff9b0c33d1c3bae20e4837534509e7d17e26206fc6f9adcb7920"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/F12/state-before.json",
+      "bytes": 6082,
+      "sha256": "8dc0b85816bada97235f201ab63b34e78411d8eb796836abaa274c5f8028a994"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/I01/api-response.json",
+      "bytes": 554,
+      "sha256": "f49e61a7df941edd638a5b5c3eba71d360999f54dfd5c1dda46113c7170d26c8"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/I01/case-summary.json",
+      "bytes": 1211,
+      "sha256": "ed49137c51e7a082986eaa1c5d62a780927194c5250dcb3f137b4778e303df50"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/I01/gate.json",
+      "bytes": 83,
+      "sha256": "349fd699064d0b5a52136ffb069c7a8bdb26e2fea740366c257017854cfba996"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/I01/mutation.sql",
+      "bytes": 98,
+      "sha256": "84f9929a7a1b0f63e51b926bc89d25424eaceb5a2fa414e5cfde92ae05dfccc7"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/I01/state-after.json",
+      "bytes": 8522,
+      "sha256": "8a101df507fc1c80c319882191d21d23f8d20ef39cbf4b9174f67d3814e8a60b"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/I01/state-before.json",
+      "bytes": 8574,
+      "sha256": "861c0cb4d32ad6005c1128111411aa06bb0218002faa0e4a489024fabb5fdcb8"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/I02/api-response.json",
+      "bytes": 1819,
+      "sha256": "4d1497f987e9fc3b079cefc1d78ed366db9f5c4580f4cda8019948c57cbeeb4d"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/I02/case-summary.json",
+      "bytes": 1221,
+      "sha256": "18e90e8417b5b01ebe5abfad972154de5245ba7a8d04f1af044ac54b508d76fa"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/I02/gate.json",
+      "bytes": 83,
+      "sha256": "349fd699064d0b5a52136ffb069c7a8bdb26e2fea740366c257017854cfba996"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/I02/mutation.sql",
+      "bytes": 130,
+      "sha256": "f7695420a9444f976199381c19c79751e4d4549985d7b667cb0812030937637c"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/I02/state-after.json",
+      "bytes": 6181,
+      "sha256": "bf83038d08131838a021f15c5bcf6667011568d9cc66466a62440d0336bdef8f"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/I02/state-before.json",
+      "bytes": 8574,
+      "sha256": "73d0fff44e325a7d8bb26529a33e2e6600413dd521a54290017dbffd380a8e97"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/P00/api-response.json",
+      "bytes": 35572,
+      "sha256": "5df82ed0d22592eb2ccbf04a4528f25a05d0a04ddad3d26e37b8f25b7e31f2cc"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/P00/case-summary.json",
+      "bytes": 1114,
+      "sha256": "86e000406e9205db34c4af2ea3efda151e3fda9c826edee925f0a3662967ca52"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/P00/gate.json",
+      "bytes": 3547,
+      "sha256": "fe4f690f3573d2e4c035ce8b61ea1a92411f516cf819a779693b13692a5712e4"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/P00/mutation.sql",
+      "bytes": 40,
+      "sha256": "1e39aea44bce1ce06b250b2e66b8482c8d5476e04029eb22ef148e0e54e27b62"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/P00/state-after.json",
+      "bytes": 6082,
+      "sha256": "151247f5f8c10cd7e8cc01453a681ae9e8254d4239d24bbc65c59770f635da44"
+    },
+    {
+      "path": "artifacts/revision/failure-path/cases/P00/state-before.json",
+      "bytes": 6082,
+      "sha256": "43dab2d1a73e7fc53d2cddaa192bbfc0369b4a918fdd58db7c983bdea2939f95"
+    },
+    {
+      "path": "artifacts/revision/failure-path/failure-matrix.csv",
+      "bytes": 6850,
+      "sha256": "405134a473a49210cab2a951c54db800a8403a01b5353d971e5e1dfe2a3f5a43"
+    },
+    {
+      "path": "artifacts/revision/failure-path/failure-matrix.json",
+      "bytes": 20292,
+      "sha256": "6d97feee47ab8f3fc3fe85d1442fe9ebf586bf7066b3dde6c6b734886df01e26"
+    },
+    {
+      "path": "artifacts/revision/failure-path/failure-matrix.md",
+      "bytes": 2010,
+      "sha256": "be7a58eab5d2c13ac0f474e9a819ce6ed847283fde02cfb3eb8d7fef94ed67a1"
+    },
+    {
+      "path": "artifacts/revision/failure-path/PHASE1A_COMPLETION_REPORT.md",
+      "bytes": 6180,
+      "sha256": "3b6a2241e69919927bc847e7398ab5740014082a414bc18e21d0ebeec3c9084c"
+    },
+    {
+      "path": "artifacts/revision/failure-path/production-core-diff.json",
+      "bytes": 1084,
+      "sha256": "c92c370ffe68153c7a4b5f01598e8c4a4b40cc7ffa9d3f3c46fabec1255cb3e3"
+    },
+    {
+      "path": "artifacts/revision/failure-path/regression-tests.json",
+      "bytes": 13826,
+      "sha256": "be483403fec54dcff362e8510a516725ba765de4980072c6b26f83fb881db3d5"
+    }
+  ]
+}

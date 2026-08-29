@@ -1,0 +1,135 @@
+{
+  "gate": {
+    "ok": true,
+    "httpStatus": 200,
+    "body": {
+      "code": 0,
+      "message": "success",
+      "data": {
+        "id": 1,
+        "batchId": 5,
+        "projectId": 1,
+        "batchCode": "ROLLING_120M_20250101004202_RUN_20260829144344538252",
+        "executionMode": "REPRODUCTION",
+        "referenceTime": "2025-01-01T00:42:02",
+        "contractVersion": "pit_pre_contract_v1",
+        "contractFingerprint": "f191eb390ea2219caf33790ae8e144778af463e7c42b83295d0edcdeb96c276f",
+        "expectedModelCount": 6,
+        "actualModelCount": 6,
+        "successfulModelCount": 6,
+        "expectedFeatureCount": 124,
+        "actualFeatureCount": 124,
+        "expectedSteps": 40,
+        "expectedPointCount": 4960,
+        "actualPointCount": 4960,
+        "missingPointCount": 0,
+        "invalidTimestampCount": 0,
+        "qualityIssueCount": 0,
+        "baseTimeAgeMinutes": 0,
+        "maxAgeMinutes": 120,
+        "modelSetValid": true,
+        "featureSetValid": true,
+        "timelineValid": true,
+        "qualityValid": true,
+        "artifactHashValid": true,
+        "freshnessValid": true,
+        "executionEligible": false,
+        "gateHash": "50ed2ea7cd724fddc76109afd6f977ecd4b188fd0284fd72a2461cec3ba161a8",
+        "evaluatedAt": "2026-08-29T16:29:56.341",
+        "issues": [
+          "Batch status is not success"
+        ],
+        "missingModels": [],
+        "unexpectedModels": [],
+        "missingFeatures": [],
+        "unexpectedFeatures": [],
+        "missingTimelinePoints": [],
+        "targets": [
+          {
+            "targetType": "Pressure",
+            "featureCount": 14,
+            "expectedPointCount": 560,
+            "actualPointCount": 560,
+            "missingPointCount": 0,
+            "completenessPercent": 100.0,
+            "complete": true,
+            "coveredSteps": 40,
+            "qualityIssueCount": 0,
+            "missingPoints": []
+          },
+          {
+            "targetType": "settlement",
+            "featureCount": 10,
+            "expectedPointCount": 400,
+            "actualPointCount": 400,
+            "missingPointCount": 0,
+            "completenessPercent": 100.0,
+            "complete": true,
+            "coveredSteps": 40,
+            "qualityIssueCount": 0,
+            "missingPoints": []
+          },
+          {
+            "targetType": "Strain",
+            "featureCount": 14,
+            "expectedPointCount": 560,
+            "actualPointCount": 560,
+            "missingPointCount": 0,
+            "completenessPercent": 100.0,
+            "complete": true,
+            "coveredSteps": 40,
+            "qualityIssueCount": 0,
+            "missingPoints": []
+          },
+          {
+            "targetType": "water",
+            "featureCount": 2,
+            "expectedPointCount": 80,
+            "actualPointCount": 80,
+            "missingPointCount": 0,
+            "completenessPercent": 100.0,
+            "complete": true,
+            "coveredSteps": 40,
+            "qualityIssueCount": 0,
+            "missingPoints": []
+          },
+          {
+            "targetType": "XD",
+            "featureCount": 42,
+            "expectedPointCount": 1680,
+            "actualPointCount": 1680,
+            "missingPointCount": 0,
+            "completenessPercent": 100.0,
+            "complete": true,
+            "coveredSteps": 40,
+            "qualityIssueCount": 0,
+            "missingPoints": []
+          },
+          {
+            "targetType": "YD",
+            "featureCount": 42,
+            "expectedPointCount": 1680,
+            "actualPointCount": 1680,
+            "missingPointCount": 0,
+            "completenessPercent": 100.0,
+            "complete": true,
+            "coveredSteps": 40,
+            "qualityIssueCount": 0,
+            "missingPoints": []
+          }
+        ]
+      }
+    }
+  },
+  "evaluate": null,
+  "evaluateFormalSideEffectDelta": null,
+  "execute": {
+    "ok": false,
+    "httpStatus": 400,
+    "body": {
+      "code": 400,
+      "message": "Prediction batch is not eligible for formal event execution: Batch status is not success"
+    },
+    "error": "HTTP Error 400: "
+  }
+}

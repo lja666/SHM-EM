@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "shm-em-core-freeze-lineage-v2",
+  "submittedCommit": "1d2ab45e516ef4167c6c4c4265da5b533b2eab78",
+  "initialCoreFreeze": "df39ffb2b57d16cfdca419adf2492959fcc0931c",
+  "initialFreezeRecord": "6ea8ec64ed456fc7ea503e365107c1b3db82737a",
+  "phase1aEvidence": "dba31094604eee60320fdd1638854b8611f5ac56",
+  "phase1aCriticalFinding": "PERSISTED_RESULT_INTEGRITY_GAP",
+  "finalCoreFreezeV2": "b41c1894f75561c8ef682062a5e6dab35c3916a7",
+  "validation": {
+    "f09Fixed": true,
+    "failureMatrix": "15/15 PASS",
+    "numericalPredictionRegression": "unchanged",
+    "legacyResultHashes": "unchanged",
+    "legacyOutputHash": "unchanged",
+    "backendTests": "PASS",
+    "pitPreTests": "13/13 PASS"
+  },
+  "gitTagCreated": false
+}

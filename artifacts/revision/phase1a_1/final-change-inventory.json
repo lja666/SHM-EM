@@ -1,0 +1,190 @@
+{
+  "schemaVersion": "shm-em-phase1a1-final-change-inventory-v1",
+  "headBeforeCommitD": "dba31094604eee60320fdd1638854b8611f5ac56",
+  "source": "git diff --cached",
+  "stagedFileCount": 21,
+  "stagedStat": " sql/shm_em_database/00_SHM_EM_complete_schema.sql  |  11 ++\n .../04_SHM_EM_persisted_prediction_integrity.sql   | 104 ++++++++++++\n sql/shm_em_database/README.md                      |   1 +\n .../PersistedPredictionIntegrityHashService.java   | 117 +++++++++++++\n .../impl/PredictionExecutionGateServiceImpl.java   |  51 ++++++\n .../engineering/domain/model/PredictionBatch.java  |   2 +\n .../domain/model/PredictionDisplay.java            |   6 +\n .../domain/model/PredictionExecutionGate.java      |   1 +\n .../engineering/domain/model/PredictionRun.java    |   2 +\n .../engineering/PredictionExecutionGateMapper.xml  |   5 +-\n ...ersistedPredictionIntegrityHashServiceTest.java | 106 ++++++++++++\n .../PredictionExecutionGateServiceImplTest.java    | 120 ++++++++++++++\n src/pit_pre/pit_pre/result_writer.py               | 122 +++++++++++++-\n .../fixtures/persisted-integrity-fixture.json      |  67 ++++++++\n src/pit_pre/tests/test_persisted_integrity.py      |  46 ++++++\n tools/revision/backfill_persisted_integrity.py     |  60 +++++++\n tools/revision/build_final_change_inventory.py     | 103 ++++++++++++\n tools/revision/build_phase1a1_review_package.py    | 125 ++++++++++++++\n tools/revision/persisted_integrity_reference.py    | 105 ++++++++++++\n tools/revision/run_failure_matrix.py               |  97 ++++++-----\n tools/revision/verify_phase1a1_integrity.py        | 184 +++++++++++++++++++++\n 21 files changed, 1393 insertions(+), 42 deletions(-)",
+  "categories": {
+    "database/schema": [
+      "sql/shm_em_database/00_SHM_EM_complete_schema.sql",
+      "sql/shm_em_database/04_SHM_EM_persisted_prediction_integrity.sql",
+      "sql/shm_em_database/README.md"
+    ],
+    "production core": [
+      "src/backend/src/main/java/mybatis/iem/em/modules/engineering/application/service/impl/PersistedPredictionIntegrityHashService.java",
+      "src/backend/src/main/java/mybatis/iem/em/modules/engineering/application/service/impl/PredictionExecutionGateServiceImpl.java",
+      "src/backend/src/main/java/mybatis/iem/em/modules/engineering/domain/model/PredictionBatch.java",
+      "src/backend/src/main/java/mybatis/iem/em/modules/engineering/domain/model/PredictionDisplay.java",
+      "src/backend/src/main/java/mybatis/iem/em/modules/engineering/domain/model/PredictionExecutionGate.java",
+      "src/backend/src/main/java/mybatis/iem/em/modules/engineering/domain/model/PredictionRun.java",
+      "src/backend/src/main/resources/mapper/modules/engineering/PredictionExecutionGateMapper.xml",
+      "src/pit_pre/pit_pre/result_writer.py"
+    ],
+    "tests": [
+      "src/backend/src/test/java/mybatis/iem/em/modules/engineering/application/service/impl/PersistedPredictionIntegrityHashServiceTest.java",
+      "src/backend/src/test/java/mybatis/iem/em/modules/engineering/application/service/impl/PredictionExecutionGateServiceImplTest.java",
+      "src/pit_pre/tests/fixtures/persisted-integrity-fixture.json",
+      "src/pit_pre/tests/test_persisted_integrity.py"
+    ],
+    "revision tools": [
+      "tools/revision/backfill_persisted_integrity.py",
+      "tools/revision/build_final_change_inventory.py",
+      "tools/revision/build_phase1a1_review_package.py",
+      "tools/revision/persisted_integrity_reference.py",
+      "tools/revision/run_failure_matrix.py",
+      "tools/revision/verify_phase1a1_integrity.py"
+    ]
+  },
+  "entries": [
+    {
+      "status": "M",
+      "path": "sql/shm_em_database/00_SHM_EM_complete_schema.sql",
+      "category": "database/schema",
+      "addedLines": "11",
+      "deletedLines": "0"
+    },
+    {
+      "status": "A",
+      "path": "sql/shm_em_database/04_SHM_EM_persisted_prediction_integrity.sql",
+      "category": "database/schema",
+      "addedLines": "104",
+      "deletedLines": "0"
+    },
+    {
+      "status": "M",
+      "path": "sql/shm_em_database/README.md",
+      "category": "database/schema",
+      "addedLines": "1",
+      "deletedLines": "0"
+    },
+    {
+      "status": "A",
+      "path": "src/backend/src/main/java/mybatis/iem/em/modules/engineering/application/service/impl/PersistedPredictionIntegrityHashService.java",
+      "category": "production core",
+      "addedLines": "117",
+      "deletedLines": "0"
+    },
+    {
+      "status": "M",
+      "path": "src/backend/src/main/java/mybatis/iem/em/modules/engineering/application/service/impl/PredictionExecutionGateServiceImpl.java",
+      "category": "production core",
+      "addedLines": "51",
+      "deletedLines": "0"
+    },
+    {
+      "status": "M",
+      "path": "src/backend/src/main/java/mybatis/iem/em/modules/engineering/domain/model/PredictionBatch.java",
+      "category": "production core",
+      "addedLines": "2",
+      "deletedLines": "0"
+    },
+    {
+      "status": "M",
+      "path": "src/backend/src/main/java/mybatis/iem/em/modules/engineering/domain/model/PredictionDisplay.java",
+      "category": "production core",
+      "addedLines": "6",
+      "deletedLines": "0"
+    },
+    {
+      "status": "M",
+      "path": "src/backend/src/main/java/mybatis/iem/em/modules/engineering/domain/model/PredictionExecutionGate.java",
+      "category": "production core",
+      "addedLines": "1",
+      "deletedLines": "0"
+    },
+    {
+      "status": "M",
+      "path": "src/backend/src/main/java/mybatis/iem/em/modules/engineering/domain/model/PredictionRun.java",
+      "category": "production core",
+      "addedLines": "2",
+      "deletedLines": "0"
+    },
+    {
+      "status": "M",
+      "path": "src/backend/src/main/resources/mapper/modules/engineering/PredictionExecutionGateMapper.xml",
+      "category": "production core",
+      "addedLines": "3",
+      "deletedLines": "2"
+    },
+    {
+      "status": "A",
+      "path": "src/backend/src/test/java/mybatis/iem/em/modules/engineering/application/service/impl/PersistedPredictionIntegrityHashServiceTest.java",
+      "category": "tests",
+      "addedLines": "106",
+      "deletedLines": "0"
+    },
+    {
+      "status": "M",
+      "path": "src/backend/src/test/java/mybatis/iem/em/modules/engineering/application/service/impl/PredictionExecutionGateServiceImplTest.java",
+      "category": "tests",
+      "addedLines": "120",
+      "deletedLines": "0"
+    },
+    {
+      "status": "M",
+      "path": "src/pit_pre/pit_pre/result_writer.py",
+      "category": "production core",
+      "addedLines": "120",
+      "deletedLines": "2"
+    },
+    {
+      "status": "A",
+      "path": "src/pit_pre/tests/fixtures/persisted-integrity-fixture.json",
+      "category": "tests",
+      "addedLines": "67",
+      "deletedLines": "0"
+    },
+    {
+      "status": "A",
+      "path": "src/pit_pre/tests/test_persisted_integrity.py",
+      "category": "tests",
+      "addedLines": "46",
+      "deletedLines": "0"
+    },
+    {
+      "status": "A",
+      "path": "tools/revision/backfill_persisted_integrity.py",
+      "category": "revision tools",
+      "addedLines": "60",
+      "deletedLines": "0"
+    },
+    {
+      "status": "A",
+      "path": "tools/revision/build_final_change_inventory.py",
+      "category": "revision tools",
+      "addedLines": "103",
+      "deletedLines": "0"
+    },
+    {
+      "status": "A",
+      "path": "tools/revision/build_phase1a1_review_package.py",
+      "category": "revision tools",
+      "addedLines": "125",
+      "deletedLines": "0"
+    },
+    {
+      "status": "A",
+      "path": "tools/revision/persisted_integrity_reference.py",
+      "category": "revision tools",
+      "addedLines": "105",
+      "deletedLines": "0"
+    },
+    {
+      "status": "M",
+      "path": "tools/revision/run_failure_matrix.py",
+      "category": "revision tools",
+      "addedLines": "59",
+      "deletedLines": "38"
+    },
+    {
+      "status": "A",
+      "path": "tools/revision/verify_phase1a1_integrity.py",
+      "category": "revision tools",
+      "addedLines": "184",
+      "deletedLines": "0"
+    }
+  ],
+  "requiredNewFilesMissing": [],
+  "forbiddenFrozenFilesStaged": [],
+  "complete": true
+}

@@ -1,0 +1,22 @@
+{
+  "phase": "Phase 1A.1",
+  "database": "shm_em_reproduce_phase1a1_schema",
+  "freshSchemaImportPassed": true,
+  "migrationAppliedTwice": true,
+  "migrationIdempotent": true,
+  "requiredColumns": {
+    "em_prediction_run": [
+      "persisted_result_hash",
+      "persisted_result_hash_version"
+    ],
+    "em_prediction_batch": [
+      "persisted_output_hash",
+      "persisted_output_hash_version"
+    ],
+    "em_prediction_execution_gate": [
+      "result_integrity_valid"
+    ]
+  },
+  "predictionDisplayIntegrityColumns": 6,
+  "passed": true
+}

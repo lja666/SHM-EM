@@ -1,0 +1,140 @@
+{
+  "project": {
+    "id": 2,
+    "project_code": "SHM_EM_SYNTH_BRIDGE",
+    "project_name": "SHM-EM Synthetic Bridge Reuse Fixture",
+    "infrastructure_type": "bridge",
+    "scenario_label": "phase1b_cross_configuration_reuse",
+    "location_text": "Synthetic software-validation site",
+    "longitude": null,
+    "latitude": null,
+    "coordinate_system": "local_layout",
+    "coordinate_source": "synthetic_fixture",
+    "coordinate_quality": "validated_fixture",
+    "map_provider": null,
+    "spatial_context_json": "{\"fixtureScope\": \"software_reuse_only\", \"stationCount\": 3, \"stationTopology\": [\"west_pier\", \"midspan\", \"east_pier\"], \"predictiveAccuracyClaim\": false}",
+    "description": "Synthetic non-excavation configuration for validating SHM-EM registration, prediction, gating, event, response, and provenance reuse.",
+    "start_time": null,
+    "end_time": null,
+    "status": "active",
+    "created_at": "2026-08-30 15:59:08",
+    "updated_at": "2026-08-30 15:59:08"
+  },
+  "counts": {
+    "stations": 3,
+    "instruments": 12,
+    "stationMetrics": 26,
+    "registries": 4,
+    "models": 2,
+    "features": 164,
+    "predictionTargets": "28",
+    "rules": 1
+  },
+  "models": [
+    {
+      "model_code": "Pressure",
+      "target_type": "Pressure",
+      "required_history_rows": 13,
+      "expected_steps": 40,
+      "time_step_minutes": 3,
+      "input_schema_hash": "5c2f6f0f2351b15675fc223b36043729b1e7f8ab0bd08caa891593672daa65f1",
+      "artifact_hash": "aef1d20d99b94607b22ded3c37c2a75300c2441db50b9fa005018fb163e1a31c",
+      "preprocessor_hash": "3a0db327bd99be620380b4fb4a280f734325bd4767788bb5d8d7242980fe7183",
+      "artifact_bundle_hash": "ccf75dd1a15df36869486022eac8f47e5d1846e94e50490cf7c9903f852fd99c"
+    },
+    {
+      "model_code": "Strain",
+      "target_type": "Strain",
+      "required_history_rows": 13,
+      "expected_steps": 40,
+      "time_step_minutes": 3,
+      "input_schema_hash": "5c2f6f0f2351b15675fc223b36043729b1e7f8ab0bd08caa891593672daa65f1",
+      "artifact_hash": "687acb1a44f79f9566e2e677f33478addd66c83a9e300f32666674f7d2cdc694",
+      "preprocessor_hash": "6660a92d879f1774bae92619392f95219927608584c6f3c72e6ce1f7c77b71df",
+      "artifact_bundle_hash": "8a5b23617c265ea5da22e368ab1a5d69414d96f63244fdb4f0633798f085328e"
+    }
+  ],
+  "registries": [
+    {
+      "registry_code": "SHM_EM_SYNTH_BRIDGE_DISPLACEMENT",
+      "instrument_type": "displacement",
+      "physical_table_name": "em_obs_displacement",
+      "storage_mode": "type_table"
+    },
+    {
+      "registry_code": "SHM_EM_SYNTH_BRIDGE_EARTH_PRESSURE",
+      "instrument_type": "earth_pressure",
+      "physical_table_name": "em_obs_earth_pressure",
+      "storage_mode": "type_table"
+    },
+    {
+      "registry_code": "SHM_EM_SYNTH_BRIDGE_PRESSURE_WATER_LEVEL",
+      "instrument_type": "pressure_water_level",
+      "physical_table_name": "em_obs_pressure_water_level",
+      "storage_mode": "type_table"
+    },
+    {
+      "registry_code": "SHM_EM_SYNTH_BRIDGE_STATIC_LEVEL",
+      "instrument_type": "static_level",
+      "physical_table_name": "em_obs_static_level",
+      "storage_mode": "type_table"
+    }
+  ],
+  "metricComposition": [
+    {
+      "feature_group": "Pressure",
+      "source_metric_code": "earth_pressure_p",
+      "feature_count": 14,
+      "prediction_target_count": "14"
+    },
+    {
+      "feature_group": "settlement",
+      "source_metric_code": "ground_settlement",
+      "feature_count": 10,
+      "prediction_target_count": "0"
+    },
+    {
+      "feature_group": "settlement",
+      "source_metric_code": "static_level_aux_mm",
+      "feature_count": 10,
+      "prediction_target_count": "0"
+    },
+    {
+      "feature_group": "settlement",
+      "source_metric_code": "static_level_temperature_c",
+      "feature_count": 10,
+      "prediction_target_count": "0"
+    },
+    {
+      "feature_group": "settlement",
+      "source_metric_code": "static_level_value_mm",
+      "feature_count": 20,
+      "prediction_target_count": "0"
+    },
+    {
+      "feature_group": "Strain",
+      "source_metric_code": "earth_pressure_strain_ue",
+      "feature_count": 14,
+      "prediction_target_count": "14"
+    },
+    {
+      "feature_group": "water",
+      "source_metric_code": "pressure_water_level_mm",
+      "feature_count": 2,
+      "prediction_target_count": "0"
+    },
+    {
+      "feature_group": "XD",
+      "source_metric_code": "displacement_tilt_x_deg",
+      "feature_count": 42,
+      "prediction_target_count": "0"
+    },
+    {
+      "feature_group": "YD",
+      "source_metric_code": "displacement_tilt_y_deg",
+      "feature_count": 42,
+      "prediction_target_count": "0"
+    }
+  ],
+  "scope": "software-reuse fixture; no cross-domain predictive-accuracy claim"
+}

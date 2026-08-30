@@ -1,0 +1,171 @@
+{
+  "schemaVersion": "shm-em-phase1b-gpt-review-package-v1",
+  "finalCoreFreezeV2": "b41c1894f75561c8ef682062a5e6dab35c3916a7",
+  "freezeRecordCommit": "3a1b4fc5990b28929c78f46f93a5deaae85140bf",
+  "phase1bCommitted": false,
+  "stop": "STOP_FOR_GPT_REVIEW",
+  "sourceFileCount": 5,
+  "fileCountExcludingManifest": 32,
+  "files": [
+    {
+      "path": "evidence/api-registration-and-series.json",
+      "bytes": 98618,
+      "sha256": "67a643d46e885a628b9bd10fea0f0cb8bd1e957b2dc9d54feaccc67696216102"
+    },
+    {
+      "path": "evidence/backend-log-tail.txt",
+      "bytes": 2521,
+      "sha256": "a521b77bbb72c47ffd2c2717f0a4c5b85f6e65cc5a45290c1b604ddbb8c065ff"
+    },
+    {
+      "path": "evidence/configuration-inventory.csv",
+      "bytes": 420,
+      "sha256": "d3a516091ffa3cfb3051384e72aa581d96e32f4be98f28484df1e50eea564dad"
+    },
+    {
+      "path": "evidence/core-diff-inventory.json",
+      "bytes": 2036,
+      "sha256": "569e63f80520737cb6724c5d459b0613bae67ecf0f0238d6c88bf1a1730240ac"
+    },
+    {
+      "path": "evidence/core-diff-inventory.md",
+      "bytes": 287,
+      "sha256": "65c963afcc191c10adb16ef1f5fcb58542b0c5c26e6c11d339728909acb7d751"
+    },
+    {
+      "path": "evidence/end-to-end-summary.json",
+      "bytes": 41937,
+      "sha256": "d15e657f63b4ff3d3eb6d2f77dc98ce766f7500ca308ee02c641bfb0d8c4ff5b"
+    },
+    {
+      "path": "evidence/evaluate.json",
+      "bytes": 8543,
+      "sha256": "fb97f379f99ed63d66f410be420f9a38fdd515486bff7d0cb8a1c14b2c4881df"
+    },
+    {
+      "path": "evidence/execute.json",
+      "bytes": 17609,
+      "sha256": "a1c7f476488d437c4efc499d8c284c21aae81915bb3200af0f05a143a0b84506"
+    },
+    {
+      "path": "evidence/frontend-validation.json",
+      "bytes": 6150,
+      "sha256": "50b8497dc4dcf1857732db23c89280023761e1e9d3061c85e2abcb5d37a4de6f"
+    },
+    {
+      "path": "evidence/future-state.json",
+      "bytes": 19736,
+      "sha256": "921f21612ece3ac588802b81cb9d48104faf1402fd1aa7cdba6c430c4134890a"
+    },
+    {
+      "path": "evidence/gate.json",
+      "bytes": 1988,
+      "sha256": "32305436d9ca4f1e8d05acb22cfb383fbde5dfeca53740b6cb24e5b84de9c442"
+    },
+    {
+      "path": "evidence/GPT_REVIEW_HANDOFF.md",
+      "bytes": 7653,
+      "sha256": "2c8318f893198e20de53321f44a2c23ccf1b9d2b8e096b263f3c7946ea3c010b"
+    },
+    {
+      "path": "evidence/model-fixture-card.md",
+      "bytes": 1256,
+      "sha256": "986ade1f9237eb16312ca3d9c959420f2a0a938281d0a49d57a8e7efdb4cffb9"
+    },
+    {
+      "path": "evidence/negative-onboarding-case.json",
+      "bytes": 699,
+      "sha256": "a39e162883b2e7b7608669ca86878d5852712032086af581fbd76629bae54fbe"
+    },
+    {
+      "path": "evidence/phase1b-manifest.json",
+      "bytes": 3627,
+      "sha256": "7fe0d26735610a7d31ac9a0bbcb2a8fa7c0f5a7f39d4667502ee2277f21dc5cf"
+    },
+    {
+      "path": "evidence/PHASE1B_COMPLETION_REPORT.md",
+      "bytes": 2239,
+      "sha256": "3957548ed13e5ae62ae926cb3d590a2120da2a68d072389e3a60a934078e1a47"
+    },
+    {
+      "path": "evidence/pit-pre-run.json",
+      "bytes": 535,
+      "sha256": "74b7d942b2d2e7a05886ee2df0bd0ff437cf864a53faaed63dfa73eb25c71489"
+    },
+    {
+      "path": "evidence/prediction-summary.json",
+      "bytes": 2393,
+      "sha256": "8c0a04dc7566e7b263f14c55f7376183cb24ee74592fa49ff423d174a373a16a"
+    },
+    {
+      "path": "evidence/provenance-trace.json",
+      "bytes": 9254,
+      "sha256": "0194b0865a8f6e83ec4614ba2fce579649f95c40ace00c7bdc41edbf9edb31a1"
+    },
+    {
+      "path": "evidence/registration-effort.json",
+      "bytes": 583,
+      "sha256": "851345ef464f2c08679b2e5238d4dabc87ab49b9dcdb025593850cbc6cf3c4d9"
+    },
+    {
+      "path": "evidence/regression-tests.json",
+      "bytes": 10759,
+      "sha256": "112aa539de451200bd3877473a6f07c7dbce38b68a54a31791c14f50b006971c"
+    },
+    {
+      "path": "evidence/second-configuration-manifest.json",
+      "bytes": 4750,
+      "sha256": "ceea2522b17940fd3d6664641e6090245bf1d9068c0ccf7a21a3c0115385575d"
+    },
+    {
+      "path": "evidence/second-configuration-spec.md",
+      "bytes": 2813,
+      "sha256": "49bb345f5f79bcd33cf02a157010882ee6ab6cc1e83d7dabe72f44e3989adee5"
+    },
+    {
+      "path": "evidence/sql-imports.json",
+      "bytes": 1357,
+      "sha256": "02265d4c1e3b84240798a5a81f826951f76b693096577c5fb0742bf9e9c96f87"
+    },
+    {
+      "path": "frozen-core.diff",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "git-status.txt",
+      "bytes": 5023,
+      "sha256": "c1e5a7d23273e4a1685ac7654ab6fa1378a3eddaab283394ac226be3240d0c2c"
+    },
+    {
+      "path": "GPT_REVIEW_HANDOFF.md",
+      "bytes": 7653,
+      "sha256": "2c8318f893198e20de53321f44a2c23ccf1b9d2b8e096b263f3c7946ea3c010b"
+    },
+    {
+      "path": "source/docs/revision/phase1b-model-fixture-card.md",
+      "bytes": 1256,
+      "sha256": "986ade1f9237eb16312ca3d9c959420f2a0a938281d0a49d57a8e7efdb4cffb9"
+    },
+    {
+      "path": "source/docs/revision/phase1b-second-configuration.md",
+      "bytes": 2813,
+      "sha256": "49bb345f5f79bcd33cf02a157010882ee6ab6cc1e83d7dabe72f44e3989adee5"
+    },
+    {
+      "path": "source/sql/shm_em_database/revision/phase1b_synthetic_bridge.sql",
+      "bytes": 23456,
+      "sha256": "dd534e3bd1f90fb2dd911e8852f23d1f3e45201a6fc57a2d4e2cf8d801643135"
+    },
+    {
+      "path": "source/tools/revision/build_phase1b_review_package.py",
+      "bytes": 10095,
+      "sha256": "34580a217822763e668e4563451f56a194e763a19001c68103b41c321e175509"
+    },
+    {
+      "path": "source/tools/revision/run_phase1b_reuse_validation.py",
+      "bytes": 44992,
+      "sha256": "6a94ee931874b908e0405f7d7db550593a9bc976d03f826ef8301f156d8915b7"
+    }
+  ]
+}

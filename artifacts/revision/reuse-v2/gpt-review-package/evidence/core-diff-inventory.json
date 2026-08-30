@@ -1,0 +1,39 @@
+{
+  "baseline": "b41c1894f75561c8ef682062a5e6dab35c3916a7",
+  "freezeRecordCommit": "3a1b4fc5990b28929c78f46f93a5deaae85140bf",
+  "frozenPaths": [
+    "src/backend/src/main",
+    "src/frontend/src",
+    "src/pit_pre/pit_pre",
+    ".gitattributes"
+  ],
+  "frozenFilesModified": [],
+  "coreBackendFilesModified": 0,
+  "coreFrontendFilesModified": 0,
+  "pitPreCoreFilesModified": 0,
+  "eventWorkflowFilesModified": 0,
+  "existingSourceTablesAltered": [],
+  "existingSourceTableSchemaChangeCount": 0,
+  "phase1bStatusEntries": [
+    "AD artifacts/revision/reuse-v2/gpt-review-package/source/docs/revision/phase1b-model-fixture-card.md",
+    "AD artifacts/revision/reuse-v2/gpt-review-package/source/docs/revision/phase1b-second-configuration.md",
+    "AD artifacts/revision/reuse-v2/gpt-review-package/source/sql/shm_em_database/revision/phase1b_synthetic_bridge.sql",
+    "AD artifacts/revision/reuse-v2/gpt-review-package/source/tools/revision/build_phase1b_review_package.py",
+    "AD artifacts/revision/reuse-v2/gpt-review-package/source/tools/revision/run_phase1b_reuse_validation.py",
+    "AM docs/revision/phase1b-model-fixture-card.md",
+    "AM docs/revision/phase1b-second-configuration.md",
+    "A  sql/shm_em_database/revision/phase1b_synthetic_bridge.sql",
+    "A  tools/revision/build_phase1b_review_package.py",
+    "A  tools/revision/run_phase1b_reuse_validation.py"
+  ],
+  "inheritedEolIndexEntries": [
+    " M src/pit_pre/models/Pressure__predict/predict_Pressure_future_fixed_best_params_annotated.py",
+    " M src/pit_pre/models/Strain__predict/predict_Strain_future_fixed_best_params_annotated.py",
+    " M src/pit_pre/models/XD__predict/predict_XD_future_direct_comment_enhanced.py",
+    " M src/pit_pre/models/YD__predict/predict_YD_future_direct.py",
+    " M src/pit_pre/models/settlement_predict/predict_settlement_future_fixed_best_params_annotated.py",
+    " M src/pit_pre/models/water__predict/predict_water_future_fixed_best_params_annotated.py",
+    " M src/pit_pre/requirements.lock.txt"
+  ],
+  "pass": true
+}

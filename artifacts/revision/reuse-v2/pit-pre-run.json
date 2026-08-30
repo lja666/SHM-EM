@@ -1,0 +1,19 @@
+{
+  "command": [
+    "python.exe",
+    "-m",
+    "pit_pre",
+    "--config",
+    "C:\\Users\\nlfdz\\AppData\\Local\\Temp\\shm-em-phase1b-k1c728py\\pit-pre-config.json",
+    "--project-code",
+    "SHM_EM_SYNTH_BRIDGE"
+  ],
+  "exitCode": 0,
+  "elapsedSeconds": 16.185,
+  "outputTail": [
+    "PIT_PRE run mode: mode=rolling, effective_rolling=True, horizon_minutes=120",
+    "Pressure: output_rows=560, inserted_rows=560, elapsed_seconds=9.90",
+    "Strain: output_rows=560, inserted_rows=560, elapsed_seconds=10.27"
+  ],
+  "pass": true
+}

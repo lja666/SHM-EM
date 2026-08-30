@@ -1,0 +1,10 @@
+item,count,detail
+project,1,SHM_EM_SYNTH_BRIDGE
+stations,3,west pier; midspan; east pier
+instruments,12,four instrument families per station
+station metrics,26,existing metric catalogue
+observation registries,4,existing typed adapters
+feature mappings,164,frozen training order
+active models,2,Strain and Pressure workflow fixtures
+prediction targets,28,14 Strain + 14 Pressure
+event rules,1,three-step pressure trigger

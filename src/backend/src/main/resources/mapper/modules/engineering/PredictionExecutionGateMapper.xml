@@ -29,6 +29,7 @@
         <result property="qualityValid" column="quality_valid" />
         <result property="artifactHashValid" column="artifact_hash_valid" />
         <result property="freshnessValid" column="freshness_valid" />
+        <result property="resultIntegrityValid" column="result_integrity_valid" />
         <result property="executionEligible" column="execution_eligible" />
         <result property="gateHash" column="gate_hash" />
         <result property="evaluatedAt" column="evaluated_at" />
@@ -51,7 +52,7 @@
          invalid_timestamp_count, quality_issue_count,
          base_time_age_minutes, max_age_minutes,
          model_set_valid, feature_set_valid, timeline_valid, quality_valid,
-         artifact_hash_valid, freshness_valid, execution_eligible,
+         artifact_hash_valid, freshness_valid, result_integrity_valid, execution_eligible,
          issues_json, missing_models_json, unexpected_models_json,
          missing_features_json, unexpected_features_json, missing_timeline_points_json,
          target_summary_json, gate_hash, evaluated_at)
@@ -64,7 +65,7 @@
          #{invalidTimestampCount}, #{qualityIssueCount},
          #{baseTimeAgeMinutes}, #{maxAgeMinutes},
          #{modelSetValid}, #{featureSetValid}, #{timelineValid}, #{qualityValid},
-         #{artifactHashValid}, #{freshnessValid}, #{executionEligible},
+         #{artifactHashValid}, #{freshnessValid}, #{resultIntegrityValid}, #{executionEligible},
          #{issuesJson}, #{missingModelsJson}, #{unexpectedModelsJson},
          #{missingFeaturesJson}, #{unexpectedFeaturesJson}, #{missingTimelinePointsJson},
          #{targetSummaryJson}, #{gateHash}, #{evaluatedAt})

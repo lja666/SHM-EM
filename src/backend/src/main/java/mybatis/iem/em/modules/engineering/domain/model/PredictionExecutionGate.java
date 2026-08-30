@@ -36,6 +36,7 @@ public class PredictionExecutionGate {
     private Boolean qualityValid;
     private Boolean artifactHashValid;
     private Boolean freshnessValid;
+    private Boolean resultIntegrityValid;
     private Boolean executionEligible;
     private String gateHash;
     private LocalDateTime evaluatedAt;

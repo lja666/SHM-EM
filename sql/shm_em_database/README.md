@@ -13,6 +13,7 @@ instrument, gateway, module, and location metadata are de-identified.
 | `01_SHM_EM_conversion_operators.sql` | Registers public engineering-conversion formulas without case parameters. |
 | `02_SHM_EM_public_sample.sql` | Loads the de-identified 16-step model-input window and required contracts. |
 | `03_SHM_EM_public_validation.sql` | Verifies the public sample boundary and expected record counts. |
+| `04_SHM_EM_persisted_prediction_integrity.sql` | Migrates existing databases to the independent persisted-result integrity contract; legacy rows remain fail-closed until authorized backfill. |
 
 The schema preserves four type-specific low-frequency observation tables and
 the two explicitly retained acceleration sensor-table definitions. Runtime

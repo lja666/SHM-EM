@@ -15,6 +15,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -34,16 +35,19 @@ public class PredictionExecutionGateServiceImplTest {
     private PredictionModel model;
     private PredictionFeatureMapping feature;
     private PredictionRun run;
+    private PersistedPredictionIntegrityHashService integrityHashService;
 
     @BeforeEach
     public void setUp() {
         predictionMapper = mock(PredictionMapper.class);
         PredictionExecutionGateMapper gateMapper = mock(PredictionExecutionGateMapper.class);
         ObjectMapper objectMapper = new ObjectMapper();
+        integrityHashService = new PersistedPredictionIntegrityHashService(objectMapper);
         service = new PredictionExecutionGateServiceImpl(
                 predictionMapper,
                 gateMapper,
                 new CanonicalHashService(objectMapper),
+                integrityHashService,
                 objectMapper);
         doAnswer(invocation -> {
             PredictionExecutionGate gate = invocation.getArgument(0);
@@ -100,6 +104,7 @@ public class PredictionExecutionGateServiceImplTest {
         run.setArtifactBundleHash("bundle-hash");
         run.setInputSchemaHash("schema-hash");
         run.setResultHash("result-hash");
+        run.setPersistedResultHashVersion(PersistedPredictionIntegrityHashService.RESULT_HASH_VERSION);
         run.setRollingSteps(40);
         run.setStatus("success");
 
@@ -136,9 +141,104 @@ public class PredictionExecutionGateServiceImplTest {
         PredictionExecutionGate operational = service.evaluate(1L, PredictionExecutionMode.OPERATIONAL, batch.getBaseTime().plusMinutes(20));
 
         assertTrue(replay.getFreshnessValid());
+        assertTrue(replay.getResultIntegrityValid());
         assertTrue(replay.getExecutionEligible());
         assertFalse(operational.getFreshnessValid());
         assertFalse(operational.getExecutionEligible());
+    }
+
+    @Test
+    public void rejectsLegacyBatchWithoutPersistedIntegrityHash() {
+        List<PredictionDisplay> rows = stubValidSeries();
+        run.setPersistedResultHash(null);
+
+        PredictionExecutionGate gate = service.inspect(1L, PredictionExecutionMode.REPLAY, batch.getBaseTime());
+
+        assertFalse(gate.getResultIntegrityValid());
+        assertFalse(gate.getExecutionEligible());
+    }
+
+    @Test
+    public void rejectsUnsupportedIntegrityHashVersion() {
+        stubValidSeries();
+        run.setPersistedResultHashVersion("unsupported-v0");
+
+        PredictionExecutionGate gate = service.inspect(1L, PredictionExecutionMode.REPLAY, batch.getBaseTime());
+
+        assertFalse(gate.getResultIntegrityValid());
+        assertFalse(gate.getExecutionEligible());
+    }
+
+    @Test
+    public void rejectsPersistedPredictionValueMutation() {
+        List<PredictionDisplay> rows = stubValidSeries();
+        rows.get(0).setStoredPredictedValue(BigDecimal.valueOf(999));
+
+        PredictionExecutionGate gate = service.inspect(1L, PredictionExecutionMode.REPLAY, batch.getBaseTime());
+
+        assertFalse(gate.getResultIntegrityValid());
+        assertFalse(gate.getExecutionEligible());
+    }
+
+    @Test
+    public void rejectsEngineeringValueMutation() {
+        List<PredictionDisplay> rows = stubValidSeries();
+        rows.get(0).setEngineeringValue(BigDecimal.valueOf(999));
+
+        assertFalse(service.inspect(1L, PredictionExecutionMode.REPLAY, batch.getBaseTime()).getResultIntegrityValid());
+    }
+
+    @Test
+    public void rejectsUnitMutationWithStaleHash() {
+        List<PredictionDisplay> rows = stubValidSeries();
+        rows.get(0).setEngineeringUnit("kPa");
+
+        assertFalse(service.inspect(1L, PredictionExecutionMode.REPLAY, batch.getBaseTime()).getResultIntegrityValid());
+    }
+
+    @Test
+    public void acceptsRecomputedIntegrityBeforeSemanticUnitValidation() {
+        List<PredictionDisplay> rows = stubValidSeries();
+        rows.forEach(row -> row.setEngineeringUnit("kPa"));
+        String recomputed = integrityHashService.resultHash(rows);
+        run.setPersistedResultHash(recomputed);
+        batch.setPersistedOutputHash(integrityHashService.outputHash(Collections.singletonMap("YD@v1", recomputed)));
+
+        PredictionExecutionGate gate = service.inspect(1L, PredictionExecutionMode.REPLAY, batch.getBaseTime());
+
+        assertTrue(gate.getResultIntegrityValid());
+        assertTrue(gate.getExecutionEligible());
+    }
+
+    @Test
+    public void rejectsBatchAggregateMismatch() {
+        stubValidSeries();
+        batch.setPersistedOutputHash("0f0f0f0f");
+
+        PredictionExecutionGate gate = service.inspect(1L, PredictionExecutionMode.REPLAY, batch.getBaseTime());
+
+        assertFalse(gate.getResultIntegrityValid());
+        assertFalse(gate.getExecutionEligible());
+    }
+
+    @Test
+    public void rechecksRowsAfterAValidEvaluation() {
+        List<PredictionDisplay> rows = stubValidSeries();
+        assertTrue(service.inspect(1L, PredictionExecutionMode.REPLAY, batch.getBaseTime()).getExecutionEligible());
+
+        rows.get(0).setEngineeringValue(BigDecimal.valueOf(1000));
+        PredictionExecutionGate rechecked = service.inspect(1L, PredictionExecutionMode.REPLAY, batch.getBaseTime());
+
+        assertFalse(rechecked.getResultIntegrityValid());
+        assertFalse(rechecked.getExecutionEligible());
+    }
+
+    private List<PredictionDisplay> stubValidSeries() {
+        when(predictionMapper.selectFeatures(any(PredictionQuery.class), anyInt()))
+                .thenReturn(Collections.singletonList(feature));
+        List<PredictionDisplay> rows = series(feature.getFeatureCode());
+        when(predictionMapper.selectSeries(any(PredictionQuery.class), anyInt())).thenReturn(rows);
+        return rows;
     }
 
     private PredictionFeatureMapping feature(String code) {
@@ -159,15 +259,35 @@ public class PredictionExecutionGateServiceImplTest {
             PredictionDisplay row = new PredictionDisplay();
             row.setModelCode("YD");
             row.setModelVersion("v1");
+            row.setProjectId(1L);
+            row.setRunId(20L);
             row.setTargetType("YD");
             row.setFeatureCode(featureCode);
+            row.setMetricCode("displacement_tilt_y_deg");
+            row.setEngineeringMetricCode("deep_horizontal_displacement_y");
             row.setStep(step);
             row.setHorizonMinutes(step * 3);
             row.setBaseTime(batch.getBaseTime());
             row.setFutureTime(batch.getBaseTime().plusMinutes(step * 3L));
+            row.setPersistedBaseTime(batch.getBaseTime());
+            row.setPersistedFutureTime(batch.getBaseTime().plusMinutes(step * 3L));
+            row.setRawPredictedValue(BigDecimal.valueOf(step));
+            row.setRawPredictedUnit("deg");
+            row.setStoredPredictedValue(BigDecimal.valueOf(step));
+            row.setStoredPredictedUnit("deg");
+            row.setEngineeringValue(BigDecimal.valueOf(step));
+            row.setEngineeringUnit("mm");
+            row.setConversionOperatorCode("displacement_y_engineering");
+            row.setConversionVersion("displacement-v2-20260714");
+            row.setConversionStatus("success");
             row.setQualityFlag("normal");
+            row.setSourceRecordKey("BATCH-1:YD:" + featureCode + ":" + step);
             rows.add(row);
         }
+        String hash = integrityHashService.resultHash(rows);
+        run.setPersistedResultHash(hash);
+        batch.setPersistedOutputHashVersion(PersistedPredictionIntegrityHashService.OUTPUT_HASH_VERSION);
+        batch.setPersistedOutputHash(integrityHashService.outputHash(Collections.singletonMap("YD@v1", hash)));
         return rows;
     }
 

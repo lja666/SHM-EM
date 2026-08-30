@@ -6,6 +6,7 @@ import json
 import platform
 from dataclasses import dataclass
 from datetime import datetime, timedelta
+from decimal import Decimal
 
 import pandas as pd
 
@@ -22,12 +23,31 @@ PREDICTION_VALUE_COLUMNS = {
     "settlement": "settlement_pred",
 }
 
+PERSISTED_RESULT_HASH_VERSION = "prediction-persisted-integrity-v1"
+PERSISTED_OUTPUT_HASH_VERSION = "prediction-persisted-output-integrity-v1"
+PERSISTED_RESULT_FIELDS = (
+    "target_type", "feature_code", "project_id", "station_id", "instrument_id",
+    "metric_code", "engineering_metric_code", "step", "horizon_minutes",
+    "base_time", "future_time", "raw_predicted_value", "raw_predicted_unit",
+    "predicted_value", "predicted_unit", "engineering_value", "engineering_unit",
+    "lower_bound", "upper_bound", "engineering_lower_bound", "engineering_upper_bound",
+    "confidence", "conversion_operator_code", "conversion_version", "conversion_status",
+    "quality_flag", "source_record_key",
+)
+PERSISTED_DECIMAL_SCALES = {
+    "raw_predicted_value": 8, "predicted_value": 8, "engineering_value": 8,
+    "lower_bound": 8, "upper_bound": 8, "engineering_lower_bound": 8,
+    "engineering_upper_bound": 8, "confidence": 6,
+}
+PERSISTED_DATETIME_FIELDS = {"base_time", "future_time"}
+
 
 @dataclass(frozen=True)
 class PredictionWriteResult:
     run_id: int
     inserted_rows: int
     result_hash: str
+    persisted_result_hash: str
 
 
 class PredictionResultWriter:
@@ -92,16 +112,23 @@ class PredictionResultWriter:
         output_hash: str | None = None,
         finished_at: datetime | None = None,
     ) -> None:
+        persisted_output_hash = self._persisted_output_hash(batch_id) if status.lower() == "success" else None
         self.db.execute(
             """
             UPDATE em_prediction_batch
             SET status = %s,
                 message = %s,
                 output_hash = %s,
+                persisted_output_hash = %s,
+                persisted_output_hash_version = %s,
                 finished_at = %s
             WHERE id = %s
             """,
-            [status, message, output_hash, finished_at or datetime.now(), batch_id],
+            [
+                status, message, output_hash, persisted_output_hash,
+                PERSISTED_OUTPUT_HASH_VERSION if persisted_output_hash else None,
+                finished_at or datetime.now(), batch_id,
+            ],
         )
 
     def write(
@@ -232,7 +259,56 @@ class PredictionResultWriter:
         """
         inserted_rows = self.db.execute_many(sql, rows)
         self._apply_engineering_conversion(run_id, model.target_type)
-        return PredictionWriteResult(run_id=run_id, inserted_rows=inserted_rows, result_hash=result_hash)
+        persisted_hash = self._persisted_result_hash(run_id)
+        self.db.execute(
+            """
+            UPDATE em_prediction_run
+            SET persisted_result_hash=%s, persisted_result_hash_version=%s
+            WHERE id=%s
+            """,
+            [persisted_hash, PERSISTED_RESULT_HASH_VERSION, run_id],
+        )
+        return PredictionWriteResult(
+            run_id=run_id,
+            inserted_rows=inserted_rows,
+            result_hash=result_hash,
+            persisted_result_hash=persisted_hash,
+        )
+
+    def _persisted_result_hash(self, run_id: int) -> str:
+        rows = self.db.read_frame(
+            """
+            SELECT target_type, feature_code, project_id, station_id, instrument_id,
+                   metric_code, engineering_metric_code, step, horizon_minutes,
+                   base_time, future_time, raw_predicted_value, raw_predicted_unit,
+                   predicted_value, predicted_unit, engineering_value, engineering_unit,
+                   lower_bound, upper_bound, engineering_lower_bound, engineering_upper_bound,
+                   confidence, conversion_operator_code, conversion_version,
+                   conversion_status, quality_flag, source_record_key
+            FROM em_prediction_result
+            WHERE run_id=%s
+            ORDER BY feature_code ASC, step ASC, source_record_key ASC
+            """,
+            [run_id],
+        ).to_dict("records")
+        return persisted_result_hash(rows)
+
+    def _persisted_output_hash(self, batch_id: int) -> str:
+        rows = self.db.read_frame(
+            """
+            SELECT model_code, model_version, persisted_result_hash
+            FROM em_prediction_run
+            WHERE batch_id=%s
+            ORDER BY model_code ASC, model_version ASC
+            """,
+            [batch_id],
+        ).to_dict("records")
+        if not rows or any(not row.get("persisted_result_hash") for row in rows):
+            raise ValueError("Cannot finalize successful batch without persisted result hashes")
+        return persisted_output_hash({
+            f"{row['model_code']}@{row['model_version']}": str(row["persisted_result_hash"])
+            for row in rows
+        })
 
     def _apply_engineering_conversion(self, run_id: int, target_type: str) -> None:
         if target_type == "YD":
@@ -448,3 +524,45 @@ def _hash_frame(df: pd.DataFrame, columns: list[str]) -> str:
     stable = stable.sort_values(columns[:2]).reset_index(drop=True)
     payload = stable.to_json(orient="records", date_format="iso", force_ascii=False)
     return hashlib.sha256(payload.encode("utf-8")).hexdigest()
+
+
+def persisted_result_hash(rows: list[dict]) -> str:
+    ordered = sorted(
+        rows,
+        key=lambda row: (
+            str(row.get("feature_code") or ""),
+            int(row.get("step") or 0),
+            str(row.get("source_record_key") or ""),
+        ),
+    )
+    canonical_rows = [
+        json.dumps(
+            [_canonical_persisted_value(field, row.get(field)) for field in PERSISTED_RESULT_FIELDS],
+            ensure_ascii=False,
+            separators=(",", ":"),
+        )
+        for row in ordered
+    ]
+    payload = "\n".join([PERSISTED_RESULT_HASH_VERSION, *canonical_rows])
+    return hashlib.sha256(payload.encode("utf-8")).hexdigest()
+
+
+def persisted_output_hash(run_hashes: dict[str, str]) -> str:
+    canonical_rows = [
+        json.dumps([key, run_hashes[key]], ensure_ascii=False, separators=(",", ":"))
+        for key in sorted(run_hashes)
+    ]
+    payload = "\n".join([PERSISTED_OUTPUT_HASH_VERSION, *canonical_rows])
+    return hashlib.sha256(payload.encode("utf-8")).hexdigest()
+
+
+def _canonical_persisted_value(field: str, value):
+    if value is None or pd.isna(value):
+        return None
+    if field in PERSISTED_DECIMAL_SCALES:
+        return format(Decimal(str(value)), f".{PERSISTED_DECIMAL_SCALES[field]}f")
+    if field in PERSISTED_DATETIME_FIELDS:
+        return pd.Timestamp(value).to_pydatetime().strftime("%Y-%m-%dT%H:%M:%S.%f")[:23]
+    if field in {"project_id", "station_id", "instrument_id", "step", "horizon_minutes"}:
+        return str(int(value))
+    return str(value)

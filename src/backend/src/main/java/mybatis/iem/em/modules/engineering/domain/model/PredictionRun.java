@@ -35,6 +35,8 @@ public class PredictionRun {
     private String status;
     private String message;
     private String resultHash;
+    private String persistedResultHash;
+    private String persistedResultHashVersion;
     private BigDecimal runtimeSeconds;
     private LocalDateTime startedAt;
     private LocalDateTime finishedAt;

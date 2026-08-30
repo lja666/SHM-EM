@@ -19,6 +19,8 @@ public class PredictionBatch {
     private String featureMappingVersion;
     private String inputHash;
     private String outputHash;
+    private String persistedOutputHash;
+    private String persistedOutputHashVersion;
     private String status;
     private String message;
     private LocalDateTime startedAt;

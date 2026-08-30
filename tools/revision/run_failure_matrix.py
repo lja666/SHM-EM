@@ -28,6 +28,8 @@ import urllib.request
 
 import pymysql
 
+from persisted_integrity_reference import recompute_batch
+
 
 CORE_FREEZE_SHA = "df39ffb2b57d16cfdca419adf2492959fcc0931c"
 FREEZE_RECORD_SHA = "6ea8ec64ed456fc7ea503e365107c1b3db82737a"
@@ -87,6 +89,7 @@ MATRIX_FIELDS = [
     "expected_rejection_stage", "actual_rejection_stage",
     "model_set_valid", "feature_set_valid", "timeline_valid",
     "quality_valid", "artifact_hash_valid", "freshness_valid",
+    "result_integrity_valid",
     "execution_eligible", "gate_issues",
     "evaluate_attempted", "execute_attempted", "execute_rejected",
     *FORMAL_TABLES.keys(), *AUDIT_TABLES.keys(),
@@ -334,8 +337,8 @@ def clone_database(args: argparse.Namespace, dump_path: Path, database: str) -> 
 
 
 def drop_database(args: argparse.Namespace, database: str) -> None:
-    if not re.fullmatch(r"shm_em_reproduce_phase1a_[A-Za-z0-9_]+", database):
-        raise ValueError(f"Refusing to drop database outside Phase 1A: {database}")
+    if not re.fullmatch(rf"{re.escape(args.database_prefix)}_[A-Za-z0-9_]+", database):
+        raise ValueError(f"Refusing to drop database outside {args.phase_label}: {database}")
     command = mysql_base_args(args.mysql, args, args.admin_user) + [
         "--execute", f"DROP DATABASE IF EXISTS `{database}`;"
     ]
@@ -368,7 +371,8 @@ def database_state(db: Database, batch_id: int) -> dict[str, Any]:
         "batch": db.one("SELECT * FROM em_prediction_batch WHERE id=%s", (batch_id,)),
         "runs": db.all(
             "SELECT id, model_id, model_code, model_version, target_type, status, rolling_steps, "
-            "artifact_hash, input_schema_hash, result_hash FROM em_prediction_run "
+            "artifact_hash, input_schema_hash, result_hash, persisted_result_hash, "
+            "persisted_result_hash_version FROM em_prediction_run "
             "WHERE batch_id=%s ORDER BY model_code", (batch_id,)
         ),
         "results": db.one(
@@ -440,6 +444,7 @@ def gate_columns(gate: dict[str, Any]) -> dict[str, Any]:
         "quality_valid": gate.get("qualityValid"),
         "artifact_hash_valid": gate.get("artifactHashValid"),
         "freshness_valid": gate.get("freshnessValid"),
+        "result_integrity_valid": gate.get("resultIntegrityValid"),
         "execution_eligible": gate.get("executionEligible"),
         "gate_issues": " | ".join(gate.get("issues") or []),
     }
@@ -488,9 +493,11 @@ def inject_fault(db: Database, case_id: str, batch_id: int, rule: dict[str, Any]
             "UPDATE em_prediction_result SET engineering_unit='kPa' WHERE batch_id=%s AND feature_code=%s",
             (batch_id, feature),
         )
+        recompute_batch(db, batch_id)
         return (
             "UPDATE em_prediction_result SET engineering_unit='kPa' "
-            f"WHERE batch_id={batch_id} AND feature_code='{feature}';"
+            f"WHERE batch_id={batch_id} AND feature_code='{feature}';\n"
+            "-- persisted result/output integrity hashes recomputed by the independent Phase 1A.1 helper"
         )
 
     if case_id == "F06":
@@ -576,7 +583,7 @@ def evaluate_case_result(case_id: str, row: dict[str, Any], gate: dict[str, Any]
         execute_data = response_data(execute)
         all_gate_valid = all(gate.get(key) is True for key in (
             "modelSetValid", "featureSetValid", "timelineValid", "qualityValid",
-            "artifactHashValid", "freshnessValid", "executionEligible",
+            "artifactHashValid", "freshnessValid", "resultIntegrityValid", "executionEligible",
         ))
         eval_formal_zero = evaluate_delta is not None and formal_is_zero(evaluate_delta)
         execute_ok = not rejected and bool(execute_data.get("event"))
@@ -596,13 +603,14 @@ def evaluate_case_result(case_id: str, row: dict[str, Any], gate: dict[str, Any]
         return
 
     if case_id == "F09":
-        blocked = rejected and formal_zero
+        blocked = gate.get("resultIntegrityValid") is False and eligible is False and rejected and formal_zero
         row["actual_rejection_stage"] = "PERSISTED_RESULT_INTEGRITY" if blocked else "NONE"
         row["pass"] = blocked
         row["finding_code"] = "" if blocked else "PERSISTED_RESULT_INTEGRITY_GAP"
         row["notes"] = (
-            f"Gate eligible={eligible}; Execute rejected={rejected}; "
-            f"formal event delta={row['event_delta']}; stored hashes intentionally unchanged"
+            f"resultIntegrityValid={gate.get('resultIntegrityValid')}; Gate eligible={eligible}; "
+            f"Execute rejected={rejected}; formal event delta={row['event_delta']}; "
+            "persisted integrity hashes intentionally unchanged"
         )
         return
 
@@ -616,12 +624,12 @@ def evaluate_case_result(case_id: str, row: dict[str, Any], gate: dict[str, Any]
     if case_id == "F12":
         eval_data = response_data(evaluate or {})
         eval_formal_zero = evaluate_delta is not None and formal_is_zero(evaluate_delta)
-        row["actual_rejection_stage"] = "EXECUTE_RECHECK" if rejected and gate.get("artifactHashValid") is False else "NONE"
+        row["actual_rejection_stage"] = "EXECUTE_RECHECK" if rejected and gate.get("resultIntegrityValid") is False else "NONE"
         row["pass"] = (
             eval_data.get("eventCount", 0) >= 1
             and eval_data.get("executionEligible") is True
             and eval_formal_zero
-            and gate.get("artifactHashValid") is False
+            and gate.get("resultIntegrityValid") is False
             and eligible is False
             and rejected
             and formal_zero
@@ -638,7 +646,7 @@ def evaluate_case_result(case_id: str, row: dict[str, Any], gate: dict[str, Any]
 
 
 def run_api_case(args: argparse.Namespace, dump_path: Path, case_id: str, case_index: int) -> dict[str, Any]:
-    database = f"shm_em_reproduce_phase1a_{case_id.lower()}"
+    database = f"{args.database_prefix}_{case_id.lower()}"
     case_dir = args.evidence_root / "cases" / case_id
     clone_database(args, dump_path, database)
     db = Database(args, database)
@@ -688,12 +696,13 @@ def run_api_case(args: argparse.Namespace, dump_path: Path, case_id: str, case_i
             )
             post_evaluate_counts = count_state(db)
             evaluate_delta = delta_state(pre_evaluate_counts, post_evaluate_counts)
-            run = db.one("SELECT id,artifact_hash FROM em_prediction_run WHERE batch_id=%s ORDER BY id LIMIT 1", (batch_id,))
-            bad_hash = "c" * 64 if run["artifact_hash"] != "c" * 64 else "d" * 64
-            db.execute("UPDATE em_prediction_run SET artifact_hash=%s WHERE id=%s", (bad_hash, run["id"]))
+            result = db.one("SELECT id,engineering_value FROM em_prediction_result WHERE batch_id=%s ORDER BY id LIMIT 1", (batch_id,))
+            changed_value = decimal.Decimal(result["engineering_value"] or 0) + decimal.Decimal("1")
+            db.execute("UPDATE em_prediction_result SET engineering_value=%s WHERE id=%s", (changed_value, result["id"]))
             mutation_sql = (
                 "-- Applied after valid Evaluate and before Execute.\n"
-                f"UPDATE em_prediction_run SET artifact_hash='{bad_hash}' WHERE id={run['id']};"
+                f"UPDATE em_prediction_result SET engineering_value={changed_value} WHERE id={result['id']};\n"
+                "-- persisted integrity hashes intentionally remain unchanged"
             )
             write_text(
                 case_dir / "mutation.sql",
@@ -824,7 +833,7 @@ def run_pit_pre(args: argparse.Namespace, database: str) -> dict[str, Any]:
 
 
 def run_input_case(args: argparse.Namespace, dump_path: Path, case_id: str) -> dict[str, Any]:
-    database = f"shm_em_reproduce_phase1a_{case_id.lower()}"
+    database = f"{args.database_prefix}_{case_id.lower()}"
     case_dir = args.evidence_root / "cases" / case_id
     clone_database(args, dump_path, database)
     db = Database(args, database)
@@ -933,6 +942,7 @@ def run_input_case(args: argparse.Namespace, dump_path: Path, case_id: str) -> d
             "quality_valid": None,
             "artifact_hash_valid": None,
             "freshness_valid": None,
+            "result_integrity_valid": None,
             "execution_eligible": None,
             "gate_issues": "",
             "evaluate_attempted": False,
@@ -951,21 +961,22 @@ def run_input_case(args: argparse.Namespace, dump_path: Path, case_id: str) -> d
             drop_database(args, database)
 
 
-def write_matrices(evidence_root: Path, rows: list[dict[str, Any]]) -> None:
-    write_json(evidence_root / "failure-matrix.json", rows)
-    with (evidence_root / "failure-matrix.csv").open("w", encoding="utf-8-sig", newline="") as handle:
+def write_matrices(args: argparse.Namespace, rows: list[dict[str, Any]]) -> None:
+    matrix_stem = "failure-matrix-v2" if args.phase_label == "phase1a1" else "failure-matrix"
+    write_json(args.evidence_root / f"{matrix_stem}.json", rows)
+    with (args.evidence_root / f"{matrix_stem}.csv").open("w", encoding="utf-8-sig", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=MATRIX_FIELDS, extrasaction="ignore")
         writer.writeheader()
         for row in rows:
             writer.writerow({key: json.dumps(value, ensure_ascii=False) if isinstance(value, (list, dict)) else value for key, value in row.items()})
 
     lines = [
-        "# Phase 1A Failure-Path Matrix",
+        f"# {args.phase_label_display} Failure-Path Matrix",
         "",
         f"- Core freeze: `{CORE_FREEZE_SHA}`",
         f"- Freeze record: `{FREEZE_RECORD_SHA}`",
-        "- Database policy: independent `shm_em_reproduce_phase1a_*` database per case",
-        "- Production core changes: prohibited",
+        f"- Database policy: independent `{args.database_prefix}_*` database per case",
+        "- Production changes: restricted to the authorized persisted-integrity repair",
         "",
         "| Case | Fault | Expected stage | Actual stage | Eligible | Formal event delta | Result | Finding |",
         "|---|---|---|---|---:|---:|---|---|",
@@ -976,19 +987,21 @@ def write_matrices(evidence_root: Path, rows: list[dict[str, Any]]) -> None:
             f"{row['actual_rejection_stage']} | {row['execution_eligible']} | {row['event_delta']} | "
             f"{'PASS' if row['pass'] else 'FAIL'} | {row['finding_code'] or '-'} |"
         )
-    lines.extend([
-        "",
-        "## Interpretation",
-        "",
-        "A failed discovery case is retained as an empirical finding. This Phase 1A harness does not repair production code.",
-    ])
-    write_text(evidence_root / "failure-matrix.md", "\n".join(lines))
+    lines.extend(["", "## Interpretation", ""])
+    if args.phase_label == "phase1a1":
+        lines.append(
+            "Phase 1A.1 reruns the same isolated failure-path matrix against the authorized "
+            "persisted-integrity repair. The original Phase 1A discovery evidence remains preserved separately."
+        )
+    else:
+        lines.append("A failed discovery case is retained as an empirical finding. This Phase 1A harness does not repair production code.")
+    write_text(args.evidence_root / f"{matrix_stem}.md", "\n".join(lines))
 
 
 def write_manifest(args: argparse.Namespace, rows: list[dict[str, Any]], test_results: dict[str, Any]) -> None:
     artifacts = []
     for path in sorted(args.evidence_root.rglob("*")):
-        if path.is_file() and path.name != "phase1a-manifest.json":
+        if path.is_file() and path.name != args.manifest_name:
             artifacts.append({
                 "path": path.relative_to(args.repo_root).as_posix(),
                 "bytes": path.stat().st_size,
@@ -997,7 +1010,7 @@ def write_manifest(args: argparse.Namespace, rows: list[dict[str, Any]], test_re
     failed = [row for row in rows if not row["pass"]]
     discovery = [row for row in rows if row.get("finding_code") == "PERSISTED_RESULT_INTEGRITY_GAP"]
     manifest = {
-        "schemaVersion": "shm-em-phase1a-manifest-v1",
+        "schemaVersion": "shm-em-phase1a1-manifest-v1" if args.phase_label == "phase1a1" else "shm-em-phase1a-manifest-v1",
         "generatedAt": dt.datetime.now(dt.timezone.utc).isoformat(),
         "coreFreezeCommit": CORE_FREEZE_SHA,
         "freezeRecordCommit": FREEZE_RECORD_SHA,
@@ -1009,13 +1022,13 @@ def write_manifest(args: argparse.Namespace, rows: list[dict[str, Any]], test_re
         "discoveryGapCount": len(discovery),
         "formalSideEffectTables": list(FORMAL_TABLES.values()),
         "auditTables": list(AUDIT_TABLES.values()),
-        "isolatedDatabasePattern": "^shm_em_reproduce_phase1a_[A-Za-z0-9_]+$",
+        "isolatedDatabasePattern": f"^{args.database_prefix}_[A-Za-z0-9_]+$",
         "baselineDatabase": args.baseline_database,
         "backendTests": test_results.get("backend"),
         "pitPreTests": test_results.get("pitPre"),
         "artifacts": artifacts,
     }
-    write_json(args.evidence_root / "phase1a-manifest.json", manifest)
+    write_json(args.evidence_root / args.manifest_name, manifest)
 
 
 def run_test_command(command: list[str], cwd: Path, timeout: int) -> dict[str, Any]:
@@ -1073,7 +1086,8 @@ def resolve_args() -> argparse.Namespace:
     parser.add_argument("--admin-password", default=os.environ.get("DB_ADMIN_PASSWORD"))
     parser.add_argument("--app-user", default="shm_em_reproduce")
     parser.add_argument("--app-password", default=os.environ.get("MYSQL_PASSWORD"))
-    parser.add_argument("--baseline-database", default="shm_em_reproduce_phase1a_base")
+    parser.add_argument("--phase-label", choices=["phase1a", "phase1a1"], default="phase1a1")
+    parser.add_argument("--baseline-database")
     parser.add_argument("--backend-port", type=int, default=5192)
     parser.add_argument("--backend-start-timeout", type=int, default=90)
     parser.add_argument("--pit-pre-timeout", type=int, default=300)
@@ -1091,10 +1105,16 @@ def resolve_args() -> argparse.Namespace:
         parser.error("Set DB_ADMIN_PASSWORD and MYSQL_PASSWORD (passwords are never written to evidence).")
 
     args.repo_root = repo_root
+    args.phase_label_display = "Phase 1A.1" if args.phase_label == "phase1a1" else "Phase 1A"
+    args.database_prefix = "shm_em_reproduce_phase1a1" if args.phase_label == "phase1a1" else "shm_em_reproduce_phase1a"
+    args.baseline_database = args.baseline_database or f"{args.database_prefix}_base"
+    args.manifest_name = "phase1a1-manifest-v2.json" if args.phase_label == "phase1a1" else "phase1a-manifest.json"
     args.backend_root = repo_root / "src" / "backend"
     args.pit_pre_root = repo_root / "src" / "pit_pre"
-    args.evidence_root = repo_root / "artifacts" / "revision" / "failure-path"
-    args.runtime_root = Path(tempfile.mkdtemp(prefix="shm-em-phase1a-"))
+    args.evidence_root = (repo_root / "artifacts" / "revision" / "phase1a_1" / "failure-path-v2"
+                          if args.phase_label == "phase1a1"
+                          else repo_root / "artifacts" / "revision" / "failure-path")
+    args.runtime_root = Path(tempfile.mkdtemp(prefix=f"shm-em-{args.phase_label}-"))
     jars = sorted(
         (args.backend_root / "target").glob("*.jar"),
         key=lambda item: item.stat().st_mtime,
@@ -1116,7 +1136,8 @@ def main() -> int:
     rows: list[dict[str, Any]] = []
     try:
         if args.finalize_only:
-            rows = json.loads((args.evidence_root / "failure-matrix.json").read_text(encoding="utf-8"))
+            matrix_name = "failure-matrix-v2.json" if args.phase_label == "phase1a1" else "failure-matrix.json"
+            rows = json.loads((args.evidence_root / matrix_name).read_text(encoding="utf-8"))
             tests = json.loads((args.evidence_root / "regression-tests.json").read_text(encoding="utf-8"))
             git_evidence(args)
             write_manifest(args, rows, tests)
@@ -1130,7 +1151,7 @@ def main() -> int:
             else:
                 row = run_api_case(args, dump_path, case_id, index)
             rows.append(row)
-            write_matrices(args.evidence_root, rows)
+            write_matrices(args, rows)
             print(f"  -> {'PASS' if row['pass'] else 'FAIL'} {row['finding_code']}", flush=True)
 
         tests = {"backend": {"skipped": True}, "pitPre": {"skipped": True}}

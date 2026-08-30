@@ -39,15 +39,18 @@ public class PredictionExecutionGateServiceImpl implements PredictionExecutionGa
     private final PredictionMapper predictionMapper;
     private final PredictionExecutionGateMapper gateMapper;
     private final CanonicalHashService canonicalHashService;
+    private final PersistedPredictionIntegrityHashService integrityHashService;
     private final ObjectMapper objectMapper;
 
     public PredictionExecutionGateServiceImpl(PredictionMapper predictionMapper,
                                               PredictionExecutionGateMapper gateMapper,
                                               CanonicalHashService canonicalHashService,
+                                              PersistedPredictionIntegrityHashService integrityHashService,
                                               ObjectMapper objectMapper) {
         this.predictionMapper = predictionMapper;
         this.gateMapper = gateMapper;
         this.canonicalHashService = canonicalHashService;
+        this.integrityHashService = integrityHashService;
         this.objectMapper = objectMapper;
     }
 
@@ -91,6 +94,7 @@ public class PredictionExecutionGateServiceImpl implements PredictionExecutionGa
         Map<String, Set<String>> expectedFeatures = expectedFeatures(expectedModels, features, gate);
         validateFeaturesAndTimeline(batch, expectedModels, expectedFeatures, results, effectiveMode, gate);
         validateArtifacts(batch, expectedModels, actualRuns, gate);
+        validatePersistedResultIntegrity(batch, expectedModels, actualRuns, results, gate);
         validateFreshness(batch, models, effectiveMode, referenceTime, gate);
 
         boolean batchSuccessful = "success".equalsIgnoreCase(batch.getStatus());
@@ -103,6 +107,7 @@ public class PredictionExecutionGateServiceImpl implements PredictionExecutionGa
                 && Boolean.TRUE.equals(gate.getTimelineValid())
                 && Boolean.TRUE.equals(gate.getQualityValid())
                 && Boolean.TRUE.equals(gate.getArtifactHashValid())
+                && Boolean.TRUE.equals(gate.getResultIntegrityValid())
                 && Boolean.TRUE.equals(gate.getFreshnessValid()));
         gate.setGateHash(gateHash(batch, gate));
         return gate;
@@ -401,6 +406,51 @@ public class PredictionExecutionGateServiceImpl implements PredictionExecutionGa
         gate.setArtifactHashValid(valid);
     }
 
+    private void validatePersistedResultIntegrity(PredictionBatch batch,
+                                                  Map<String, PredictionModel> models,
+                                                  Map<String, PredictionRun> runs,
+                                                  List<PredictionDisplay> results,
+                                                  PredictionExecutionGate gate) {
+        boolean valid = true;
+        Map<Long, List<PredictionDisplay>> rowsByRun = results.stream()
+                .filter(row -> row.getRunId() != null)
+                .collect(Collectors.groupingBy(PredictionDisplay::getRunId));
+        Map<String, String> calculatedRunHashes = new LinkedHashMap<String, String>();
+
+        for (Map.Entry<String, PredictionModel> entry : models.entrySet()) {
+            String modelKey = entry.getKey();
+            PredictionRun run = runs.get(modelKey);
+            if (run == null) {
+                valid = false;
+                continue;
+            }
+            if (!PersistedPredictionIntegrityHashService.RESULT_HASH_VERSION.equals(run.getPersistedResultHashVersion())
+                    || isBlank(run.getPersistedResultHash())) {
+                valid = false;
+                gate.getIssues().add("Persisted result integrity metadata is missing or unsupported for model " + modelKey);
+                continue;
+            }
+            List<PredictionDisplay> runRows = rowsByRun.getOrDefault(run.getId(), Collections.<PredictionDisplay>emptyList());
+            String calculatedHash = integrityHashService.resultHash(runRows);
+            calculatedRunHashes.put(modelKey, calculatedHash);
+            if (!calculatedHash.equalsIgnoreCase(run.getPersistedResultHash())) {
+                valid = false;
+                gate.getIssues().add("Persisted result integrity mismatch for model " + modelKey);
+            }
+        }
+
+        if (!PersistedPredictionIntegrityHashService.OUTPUT_HASH_VERSION.equals(batch.getPersistedOutputHashVersion())
+                || isBlank(batch.getPersistedOutputHash())) {
+            valid = false;
+            gate.getIssues().add("Persisted batch output integrity metadata is missing or unsupported");
+        } else if (calculatedRunHashes.size() != models.size()
+                || !integrityHashService.outputHash(calculatedRunHashes).equalsIgnoreCase(batch.getPersistedOutputHash())) {
+            valid = false;
+            gate.getIssues().add("Persisted batch output integrity mismatch");
+        }
+        gate.setResultIntegrityValid(valid);
+    }
+
     private void validateFreshness(PredictionBatch batch,
                                    List<PredictionModel> models,
                                    PredictionExecutionMode mode,
@@ -500,6 +550,7 @@ public class PredictionExecutionGateServiceImpl implements PredictionExecutionGa
         state.put("timelineValid", gate.getTimelineValid());
         state.put("qualityValid", gate.getQualityValid());
         state.put("artifactHashValid", gate.getArtifactHashValid());
+        state.put("resultIntegrityValid", gate.getResultIntegrityValid());
         state.put("freshnessValid", gate.getFreshnessValid());
         state.put("executionEligible", gate.getExecutionEligible());
         state.put("issues", gate.getIssues());

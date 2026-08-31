@@ -1,0 +1,156 @@
+{
+  "schemaVersion": "shm-em-phase2a-scale-result-v1",
+  "database": "shm_em_reproduce_benchmark_scaling_s1",
+  "scale": "S1",
+  "targetCount": 124,
+  "rowCount": 4960,
+  "persistence": {
+    "label": "S1",
+    "targetCount": 124,
+    "rowCount": 4960,
+    "elapsedMs": 16131.5955,
+    "rowsPerSecond": 307.471,
+    "chunkRows": 2000,
+    "transactionMode": "autocommit per executemany chunk"
+  },
+  "integrity": {
+    "label": "S1",
+    "rowCount": 4960,
+    "generationMs": 313.0917,
+    "verificationMs": 316.7463,
+    "persistedResultHash": "c045e73c168e531b0c08a5e00562aacc574945c85e0ce82e0869862b50a0ed0f",
+    "persistedOutputHash": "cd2b74198cd1706328db1f1e9cfb20db53e47a878e228e98c5e1109872ca4e18",
+    "hashVersions": {
+      "result": "prediction-persisted-integrity-v1",
+      "output": "prediction-persisted-output-integrity-v1"
+    },
+    "independentRecomputationMatch": true
+  },
+  "databaseIntegrity": {
+    "rows": 4960,
+    "features": 124,
+    "steps": 40,
+    "duplicateFeatureSteps": 0
+  },
+  "storageBefore": [
+    {
+      "TABLE_NAME": "em_prediction_batch",
+      "ENGINE": "InnoDB",
+      "TABLE_ROWS": 0,
+      "DATA_LENGTH": 16384,
+      "INDEX_LENGTH": 49152,
+      "DATA_FREE": 0
+    },
+    {
+      "TABLE_NAME": "em_prediction_execution_gate",
+      "ENGINE": "InnoDB",
+      "TABLE_ROWS": 0,
+      "DATA_LENGTH": 16384,
+      "INDEX_LENGTH": 49152,
+      "DATA_FREE": 0
+    },
+    {
+      "TABLE_NAME": "em_prediction_result",
+      "ENGINE": "InnoDB",
+      "TABLE_ROWS": 0,
+      "DATA_LENGTH": 16384,
+      "INDEX_LENGTH": 98304,
+      "DATA_FREE": 0
+    },
+    {
+      "TABLE_NAME": "em_prediction_run",
+      "ENGINE": "InnoDB",
+      "TABLE_ROWS": 0,
+      "DATA_LENGTH": 16384,
+      "INDEX_LENGTH": 81920,
+      "DATA_FREE": 0
+    }
+  ],
+  "storageAfter": [
+    {
+      "TABLE_NAME": "em_prediction_batch",
+      "ENGINE": "InnoDB",
+      "TABLE_ROWS": 1,
+      "DATA_LENGTH": 16384,
+      "INDEX_LENGTH": 49152,
+      "DATA_FREE": 0
+    },
+    {
+      "TABLE_NAME": "em_prediction_execution_gate",
+      "ENGINE": "InnoDB",
+      "TABLE_ROWS": 0,
+      "DATA_LENGTH": 16384,
+      "INDEX_LENGTH": 49152,
+      "DATA_FREE": 0
+    },
+    {
+      "TABLE_NAME": "em_prediction_result",
+      "ENGINE": "InnoDB",
+      "TABLE_ROWS": 4817,
+      "DATA_LENGTH": 2637824,
+      "INDEX_LENGTH": 1736704,
+      "DATA_FREE": 4194304
+    },
+    {
+      "TABLE_NAME": "em_prediction_run",
+      "ENGINE": "InnoDB",
+      "TABLE_ROWS": 1,
+      "DATA_LENGTH": 16384,
+      "INDEX_LENGTH": 81920,
+      "DATA_FREE": 0
+    }
+  ],
+  "api": {
+    "series-single-target": {
+      "operation": "series-single-target",
+      "firstMs": 69.9783,
+      "count": 30,
+      "medianMs": 34.417,
+      "p95Ms": 67.8148,
+      "minMs": 14.8082,
+      "maxMs": 76.2259,
+      "meanMs": 36.30702,
+      "stddevMs": 16.7228,
+      "outliersRemoved": 0
+    },
+    "series-full-batch": {
+      "operation": "series-full-batch",
+      "firstMs": 2371.0481,
+      "count": 30,
+      "medianMs": 2368.03615,
+      "p95Ms": 2600.8637,
+      "minMs": 2208.5985,
+      "maxMs": 2608.5383,
+      "meanMs": 2381.728597,
+      "stddevMs": 123.422687,
+      "outliersRemoved": 0
+    },
+    "gate-inspect": {
+      "operation": "gate-inspect",
+      "firstMs": 2642.4426,
+      "count": 30,
+      "medianMs": 2308.91155,
+      "p95Ms": 2534.4546,
+      "minMs": 2108.3215,
+      "maxMs": 2548.1302,
+      "meanMs": 2325.143057,
+      "stddevMs": 112.928657,
+      "outliersRemoved": 0
+    },
+    "future-state": {
+      "operation": "future-state",
+      "firstMs": 4751.8187,
+      "count": 30,
+      "medianMs": 4747.197,
+      "p95Ms": 4909.5688,
+      "minMs": 4513.5365,
+      "maxMs": 4913.6861,
+      "meanMs": 4763.441437,
+      "stddevMs": 95.322843,
+      "outliersRemoved": 0
+    }
+  },
+  "boundary": null,
+  "pass": true,
+  "stopRequired": false
+}

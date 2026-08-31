@@ -1,0 +1,50 @@
+{
+  "series-single-target": {
+    "operation": "series-single-target",
+    "firstMs": 69.9783,
+    "count": 30,
+    "medianMs": 34.417,
+    "p95Ms": 67.8148,
+    "minMs": 14.8082,
+    "maxMs": 76.2259,
+    "meanMs": 36.30702,
+    "stddevMs": 16.7228,
+    "outliersRemoved": 0
+  },
+  "series-full-batch": {
+    "operation": "series-full-batch",
+    "firstMs": 2371.0481,
+    "count": 30,
+    "medianMs": 2368.03615,
+    "p95Ms": 2600.8637,
+    "minMs": 2208.5985,
+    "maxMs": 2608.5383,
+    "meanMs": 2381.728597,
+    "stddevMs": 123.422687,
+    "outliersRemoved": 0
+  },
+  "gate-inspect": {
+    "operation": "gate-inspect",
+    "firstMs": 2642.4426,
+    "count": 30,
+    "medianMs": 2308.91155,
+    "p95Ms": 2534.4546,
+    "minMs": 2108.3215,
+    "maxMs": 2548.1302,
+    "meanMs": 2325.143057,
+    "stddevMs": 112.928657,
+    "outliersRemoved": 0
+  },
+  "future-state": {
+    "operation": "future-state",
+    "firstMs": 4751.8187,
+    "count": 30,
+    "medianMs": 4747.197,
+    "p95Ms": 4909.5688,
+    "minMs": 4513.5365,
+    "maxMs": 4913.6861,
+    "meanMs": 4763.441437,
+    "stddevMs": 95.322843,
+    "outliersRemoved": 0
+  }
+}

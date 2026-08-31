@@ -1,0 +1,239 @@
+{
+  "schemaVersion": "shm-em-phase2a-manifest-v1",
+  "coreFreezeSha": "b41c1894f75561c8ef682062a5e6dab35c3916a7",
+  "phase1bCommit": "2107674",
+  "generatedAt": "2026-08-30T17:36:37.046389+00:00",
+  "fileCountExcludingManifest": 46,
+  "files": [
+    {
+      "path": "core-diff-inventory.json",
+      "bytes": 218,
+      "sha256": "6a9b80884e0cf15ff73848937a16223cbf243d980084b88d8888c5adb1c3b16d"
+    },
+    {
+      "path": "environment.json",
+      "bytes": 3186,
+      "sha256": "cd0d9fc8b0865eefd731d3db2efc481964084b4a99d5fe92b8f8e7e060b2e4d7"
+    },
+    {
+      "path": "frozen-core.diff",
+      "bytes": 1,
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "git-status.txt",
+      "bytes": 738,
+      "sha256": "91fe03615e676555fce8640b00b2cc46c1487372ae3add856c7a0d393fe7fce0"
+    },
+    {
+      "path": "integrity/integrity-raw.csv",
+      "bytes": 1332,
+      "sha256": "26125d6dbe8ba4dee90efd2609776c9125eb567476ebb8e8b7010e622ac3cf3c"
+    },
+    {
+      "path": "integrity/integrity-summary.json",
+      "bytes": 399,
+      "sha256": "88b91016f0c3a93d62edad96998b6b50ed9457f7c943da1cd18763a313622ad3"
+    },
+    {
+      "path": "methodology.md",
+      "bytes": 1030,
+      "sha256": "5dda631c68fc15c86179289373d5690df837d6236c0be2c78398e6a3988e224f"
+    },
+    {
+      "path": "PHASE2A_COMPLETION_REPORT.md",
+      "bytes": 6720,
+      "sha256": "79b7a88c8474fa451fcdcd165e419ef99f24a64a38c81f7932c4617774e93d43"
+    },
+    {
+      "path": "reference/backend-log-tail.txt",
+      "bytes": 2545,
+      "sha256": "1c881f40862dce5a68a99d7eee45f6f3ac737bb1d4a09df8ca5cd6e42916e572"
+    },
+    {
+      "path": "reference/backend-raw.csv",
+      "bytes": 21037,
+      "sha256": "d512a30794f7cbcc9aa5dff1b1ed4c9da8b5790a9e04ec3d0ffea16e660db696"
+    },
+    {
+      "path": "reference/backend-summary.json",
+      "bytes": 2829,
+      "sha256": "66c50fa2b0f32b88c6856c408c15d6a5a56b0cdceb67fd1afe9831c73e560130"
+    },
+    {
+      "path": "reference/execute-case-evidence/baseline.json",
+      "bytes": 972,
+      "sha256": "0aa74ef18a3d3cd22e2aa03618e50f77560f55480329e33b4ed9a68fbd5ec240"
+    },
+    {
+      "path": "reference/execute-case-evidence/last-response.json",
+      "bytes": 947,
+      "sha256": "aad9e9d017f1ec1366a2db27182f00e473f8296a42727650fcbaf76efc03fdde"
+    },
+    {
+      "path": "reference/execute-raw.csv",
+      "bytes": 2017,
+      "sha256": "78aa9f3d788a1bedfa633abc0b59b9466f90dfb3380689edbc2e1399edc2ed15"
+    },
+    {
+      "path": "reference/pitpre-per-model-raw.csv",
+      "bytes": 6457,
+      "sha256": "e92ec233301e15b86fb62f90cfc51871d15c6b62439b338275259d1667281e62"
+    },
+    {
+      "path": "reference/pitpre-raw.csv",
+      "bytes": 3796,
+      "sha256": "bba864e0f2f4a7681db959a2b5cf240faec78e87f76664a8222d8e053c7f04c4"
+    },
+    {
+      "path": "reference/pitpre-summary.json",
+      "bytes": 3938,
+      "sha256": "ca230368cb0f7cf96ea7d8a98988be5545e8e143df280ef2f49be0260bfb3da1"
+    },
+    {
+      "path": "reference/reference-summary.json",
+      "bytes": 8012,
+      "sha256": "036941a92da083dc98b7c27bd28ce62e4738ea1a66487111db5a4a678278c9e7"
+    },
+    {
+      "path": "reference/sql-imports.json",
+      "bytes": 2677,
+      "sha256": "e322763d7f9e2392c3eb285eddc64030e632b4229d8dc2a7b50b92f61dcf5e7a"
+    },
+    {
+      "path": "reference/storage-after.json",
+      "bytes": 709,
+      "sha256": "b7847e9423274054e7e8f97779c648b7fee87eb3487a348c2240976c0b263009"
+    },
+    {
+      "path": "reference/storage-before.json",
+      "bytes": 679,
+      "sha256": "fbdcaff1158a996bcc8c127dd3a6df4e7f8f69ae358fbe14371354d4292adda2"
+    },
+    {
+      "path": "regression-tests.json",
+      "bytes": 24608,
+      "sha256": "cf74d62fabe52e28e13c67b6dc5e93818cb04d70bd61bd48fa67d6b60ff5be32"
+    },
+    {
+      "path": "scaling/s1/api-raw.csv",
+      "bytes": 11257,
+      "sha256": "069d78aabb35ca851a5235fcdf19247a706d0fa1fd2dbba200d876b471f3cb3a"
+    },
+    {
+      "path": "scaling/s1/api-summary.json",
+      "bytes": 1132,
+      "sha256": "09e9559033b548bb88dbd9f10470c567c35c284865a42a8fa12dac460f9b0025"
+    },
+    {
+      "path": "scaling/s1/backend-log-tail.txt",
+      "bytes": 2538,
+      "sha256": "28b451023e8f0ca43c21f7831060e49cfbed16dfafc661bf3ae6baed4771d31f"
+    },
+    {
+      "path": "scaling/s1/database-integrity.json",
+      "bytes": 110,
+      "sha256": "dc6555dc48a5a847f85033dd1ab9d27bc23b1e5c392233e32f0e96e43ae22daa"
+    },
+    {
+      "path": "scaling/s1/scale-summary.json",
+      "bytes": 3857,
+      "sha256": "83c233ba9784fd5eb0c192e30949d3a94e9c99125efd34436f764dfa3be8e1bf"
+    },
+    {
+      "path": "scaling/s1/sql-imports.json",
+      "bytes": 2677,
+      "sha256": "d62b8e351fcb3c2830a6b3f4e2c5760919e1b44a7ade692b74acba7744c13554"
+    },
+    {
+      "path": "scaling/s1/storage-after.json",
+      "bytes": 692,
+      "sha256": "2e71067ea2eb1f71e6215240d590feabfda664dce5e55f5f1c76e536827f5d90"
+    },
+    {
+      "path": "scaling/s1/storage-before.json",
+      "bytes": 679,
+      "sha256": "fbdcaff1158a996bcc8c127dd3a6df4e7f8f69ae358fbe14371354d4292adda2"
+    },
+    {
+      "path": "scaling/s1/workload.json",
+      "bytes": 586,
+      "sha256": "d1475721e90ac1099b610600367d056557976f5f3acf3b455f437cc6fd76e836"
+    },
+    {
+      "path": "scaling/s2/api-partial-raw.csv",
+      "bytes": 9318,
+      "sha256": "5911c03b9ec5bc1f1ab2113b17660e8c2a9d6e010bbfe70e6c906cbde1db644f"
+    },
+    {
+      "path": "scaling/s2/api-partial-summary.json",
+      "bytes": 1463,
+      "sha256": "2cd7ee2fdc5b7ac82076191426dae4179102b6358fbdcc267b846d9b2ac0e16f"
+    },
+    {
+      "path": "scaling/s2/api-progress.json",
+      "bytes": 23570,
+      "sha256": "27ec36bf0f4a2c9f05aa3bc5939cc3491994ae9a8f217eff9f9fe44651080a04"
+    },
+    {
+      "path": "scaling/s2/backend-log-tail.txt",
+      "bytes": 2522,
+      "sha256": "dffae71aed8ff3b081d7368144a3c06d4925b1943a48d1d3ff973688155b7185"
+    },
+    {
+      "path": "scaling/s2/database-integrity.json",
+      "bytes": 112,
+      "sha256": "21d3a2f40f5eb8276a873b4761b0d67f0c7efdaaa5e5a8040f723a5814ccfb66"
+    },
+    {
+      "path": "scaling/s2/persisted-integrity.json",
+      "bytes": 461,
+      "sha256": "5e736e27db35f3eacb218022e2ed7d53e5a5f5ece0dc19de58bb3bb1a75fd5e9"
+    },
+    {
+      "path": "scaling/s2/persistence.json",
+      "bytes": 198,
+      "sha256": "ed7ea8472e19b7f4efeab0bd8174fb0643df1b57c1c44e2fff404d643335424f"
+    },
+    {
+      "path": "scaling/s2/runtime-failure.json",
+      "bytes": 410,
+      "sha256": "e67e2da60600c3a60762d0a1f8b2623f522305bde8254aebc768edfd18045255"
+    },
+    {
+      "path": "scaling/s2/scale-summary.json",
+      "bytes": 3070,
+      "sha256": "371fe0a21b3a7078a2903e2a1360a74c2df7eb0eb3f1f3ec0d58c2abe679d5f6"
+    },
+    {
+      "path": "scaling/s2/sql-imports.json",
+      "bytes": 2678,
+      "sha256": "eb9bee05603e4b143e692c2ad0ebeecc6a69bf8ba7a76f7cdd7e86605ad5a2e5"
+    },
+    {
+      "path": "scaling/s2/storage-after.json",
+      "bytes": 695,
+      "sha256": "e81fb99ec47c858350f1d7453c2c76f227cabb0e5db79471c5c45ec6941fd583"
+    },
+    {
+      "path": "scaling/s2/storage-before.json",
+      "bytes": 679,
+      "sha256": "fbdcaff1158a996bcc8c127dd3a6df4e7f8f69ae358fbe14371354d4292adda2"
+    },
+    {
+      "path": "scaling/s2/workload.json",
+      "bytes": 588,
+      "sha256": "5ab6bde963b49b7d7bb0bce5829d7aeb32a19b6a6c17b27d304c114edadea68c"
+    },
+    {
+      "path": "scaling/scaling-summary.json",
+      "bytes": 8673,
+      "sha256": "263c165a55a5e6bd48da5e56ab9e3b4747d492d0bfcfae2327df373d0f8b5a8e"
+    },
+    {
+      "path": "scaling/workload-manifest.csv",
+      "bytes": 300,
+      "sha256": "a31f438f32ca091a1db03ae60158bcb50ed641b679b0350bc0021831e1ecb9c3"
+    }
+  ]
+}

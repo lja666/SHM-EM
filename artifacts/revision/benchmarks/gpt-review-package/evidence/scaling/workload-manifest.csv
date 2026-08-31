@@ -1,0 +1,3 @@
+scale,targets,steps,rows,database,persistRowsPerSecond,integrityGenerationMs,independentIntegrityValid,gatePass,stopRequired
+S1,124,40,4960,shm_em_reproduce_benchmark_scaling_s1,307.471,313.0917,True,True,False
+S2,1240,40,49600,shm_em_reproduce_benchmark_scaling_s2,266.049,4038.4727,True,False,True

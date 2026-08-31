@@ -1,0 +1,24 @@
+{
+  "label": "S2",
+  "projectId": 2,
+  "modelId": 45,
+  "modelCode": "PHASE2A_S2_MODEL",
+  "modelVersion": "fixture-v1",
+  "targetType": "phase2a_s2_pressure",
+  "targetCount": 1240,
+  "rowCount": 49600,
+  "stationCount": 10,
+  "instrumentCount": 10,
+  "ruleId": 11,
+  "batchId": 5,
+  "runId": 25,
+  "baseTime": "2026-06-24T10:00:00",
+  "workloadClass": "synthetic backend/storage scalability fixture",
+  "inferenceMeasured": false,
+  "predictiveAccuracyClaim": false,
+  "topologyScaling": false,
+  "scalingAxes": [
+    "prediction target channels",
+    "persisted prediction rows"
+  ]
+}

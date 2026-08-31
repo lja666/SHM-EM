@@ -1,0 +1,60 @@
+{
+  "schemaVersion": "shm-em-phase2a-partial-api-summary-v1",
+  "scale": "S2",
+  "operations": {
+    "gate-inspect": {
+      "firstStatus": "failed",
+      "firstMs": 180007.6622,
+      "count": 0,
+      "medianMs": null,
+      "p95Ms": null,
+      "minMs": null,
+      "maxMs": null,
+      "meanMs": null,
+      "stddevMs": null
+    },
+    "series-full-batch": {
+      "firstStatus": "completed",
+      "firstMs": 4133.5553,
+      "count": 30,
+      "medianMs": 3684.52395,
+      "p95Ms": 3868.8518,
+      "minMs": 3394.4295,
+      "maxMs": 3906.7586,
+      "meanMs": 3685.11321,
+      "stddevMs": 120.22443,
+      "outliersRemoved": 0
+    },
+    "series-single-target": {
+      "firstStatus": "completed",
+      "firstMs": 329.055,
+      "count": 30,
+      "medianMs": 209.1803,
+      "p95Ms": 292.9754,
+      "minMs": 97.0754,
+      "maxMs": 335.9753,
+      "meanMs": 212.43325,
+      "stddevMs": 50.879221,
+      "outliersRemoved": 0
+    }
+  },
+  "failures": [
+    {
+      "operation": "gate-inspect",
+      "phase": "first",
+      "repetition": 1,
+      "status": "failed",
+      "elapsedMs": 180007.6622,
+      "scale": "S2",
+      "targetCount": 1240,
+      "startedAt": "2026-08-30T17:14:00.983810+00:00",
+      "finishedAt": "2026-08-30T17:17:00.994160+00:00",
+      "errorType": "TimeoutError",
+      "error": "timed out"
+    }
+  ],
+  "completedSeriesRepetitions": 72,
+  "gateCompleted": false,
+  "futureStateAttempted": false,
+  "stopRequired": true
+}

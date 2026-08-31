@@ -1,0 +1,107 @@
+{
+  "schemaVersion": "shm-em-phase2a-environment-v1",
+  "capturedAt": "2026-08-30T17:36:27.698804+00:00",
+  "os": {
+    "platform": "Windows-10-10.0.22631-SP0",
+    "system": "Windows",
+    "release": "10",
+    "version": "10.0.22631"
+  },
+  "hardware": {
+    "logicalCores": 20,
+    "cpu": "13th Gen Intel(R) Core(TM) i7-13700H",
+    "storage": [
+      {
+        "FriendlyName": "KBG5AZNV1T02 LA KIOXIA",
+        "MediaType": "SSD",
+        "BusType": "NVMe",
+        "Size": 1024209543168
+      },
+      {
+        "FriendlyName": "E680 40E SSD M.2 2280s PCIe4.0 1TB",
+        "MediaType": "SSD",
+        "BusType": "NVMe",
+        "Size": 1024209543168
+      },
+      {
+        "FriendlyName": "Seagate Basic",
+        "MediaType": "Unspecified",
+        "BusType": "USB",
+        "Size": 4000787029504
+      }
+    ],
+    "ramBytes": 68376010752,
+    "physicalCores": 14
+  },
+  "runtime": {
+    "python": "3.10.20",
+    "pythonImplementation": "CPython",
+    "packages": {
+      "torch": "2.11.0+cu130",
+      "numpy": "2.2.6",
+      "pandas": "2.3.3",
+      "PyMySQL": "1.1.2",
+      "scikit-learn": "1.7.2",
+      "joblib": "1.5.3"
+    },
+    "java": {
+      "available": true,
+      "command": [
+        "C:\\Users\\nlfdz\\.jdks\\temurin-1.8.0_482\\bin\\java.exe",
+        "-version"
+      ],
+      "output": "openjdk version \"1.8.0_482\"\nOpenJDK Runtime Environment (Temurin)(build 1.8.0_482-b08)\nOpenJDK 64-Bit Server VM (Temurin)(build 25.482-b08, mixed mode)"
+    },
+    "maven": {
+      "available": true,
+      "command": [
+        "D:\\Tools\\apache-maven-3.9.16\\bin\\mvn.cmd",
+        "-version"
+      ],
+      "output": "Apache Maven 3.9.16 (2bdd9fddda4b155ebf8000e807eb73fd829a51d5)\nMaven home: D:\\Tools\\apache-maven-3.9.16\nJava version: 1.8.0_221, vendor: Oracle Corporation, runtime: D:\\Program Files\\Java\\jdk1.8.0_221\\jdk\\jre\nDefault locale: zh_CN, platform encoding: GBK\nOS name: \"windows 10\", version: \"10.0\", arch: \"amd64\", family: \"windows\""
+    },
+    "node": {
+      "available": true,
+      "command": [
+        "node",
+        "--version"
+      ],
+      "output": "v22.13.1"
+    },
+    "npm": {
+      "available": true,
+      "command": [
+        "npm.cmd",
+        "--version"
+      ],
+      "output": "10.9.2"
+    }
+  },
+  "mysql": {
+    "version": "8.0.41",
+    "innodbBufferPoolSize": 134217728,
+    "maxConnections": 200,
+    "defaultStorageEngine": "InnoDB",
+    "innodbFlushLogAtTrxCommit": 1,
+    "transactionIsolation": "REPEATABLE-READ"
+  },
+  "mysqlClient": {
+    "available": true,
+    "command": [
+      "D:\\Tools\\mysql-8.0.41\\bin\\mysql.exe",
+      "--version"
+    ],
+    "output": "D:\\Tools\\mysql-8.0.41\\bin\\mysql.exe  Ver 8.0.41 for Win64 on x86_64 (MySQL Community Server - GPL)"
+  },
+  "git": {
+    "head": "2107674a0fe10910851e85327ba4242adb9691ba",
+    "branch": "revision/softx-d-26-00931",
+    "phase1bCommit": "2107674",
+    "coreFreezeSha": "b41c1894f75561c8ef682062a5e6dab35c3916a7"
+  },
+  "benchmark": {
+    "database": "shm_em_reproduce_benchmark_reference",
+    "concurrency": 1,
+    "cachePolicy": "application steady-state/warm-cache; first call retained separately; OS page cache not flushed"
+  }
+}

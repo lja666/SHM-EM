@@ -1,0 +1,117 @@
+{
+  "schemaVersion": "shm-em-phase2a-scale-result-v1",
+  "database": "shm_em_reproduce_benchmark_scaling_s2",
+  "scale": "S2",
+  "targetCount": 1240,
+  "rowCount": 49600,
+  "persistence": {
+    "label": "S2",
+    "targetCount": 1240,
+    "rowCount": 49600,
+    "elapsedMs": 186431.7074,
+    "rowsPerSecond": 266.049,
+    "chunkRows": 2000,
+    "transactionMode": "autocommit per executemany chunk"
+  },
+  "integrity": {
+    "label": "S2",
+    "rowCount": 49600,
+    "generationMs": 4038.4727,
+    "verificationMs": 4100.8181,
+    "persistedResultHash": "44312aa5131ae573a721db90d718601f1d9730c1f142d37f79218fc4ee6d030b",
+    "persistedOutputHash": "abdbf81aa13dfde77c5efa018f5f346328520edd4dbf70ddf9b43000c86f6173",
+    "hashVersions": {
+      "result": "prediction-persisted-integrity-v1",
+      "output": "prediction-persisted-output-integrity-v1"
+    },
+    "independentRecomputationMatch": true
+  },
+  "databaseIntegrity": {
+    "rows": 49600,
+    "features": 1240,
+    "steps": 40,
+    "duplicateFeatureSteps": 0
+  },
+  "storageBefore": [
+    {
+      "TABLE_NAME": "em_prediction_batch",
+      "ENGINE": "InnoDB",
+      "TABLE_ROWS": 0,
+      "DATA_LENGTH": 16384,
+      "INDEX_LENGTH": 49152,
+      "DATA_FREE": 0
+    },
+    {
+      "TABLE_NAME": "em_prediction_execution_gate",
+      "ENGINE": "InnoDB",
+      "TABLE_ROWS": 0,
+      "DATA_LENGTH": 16384,
+      "INDEX_LENGTH": 49152,
+      "DATA_FREE": 0
+    },
+    {
+      "TABLE_NAME": "em_prediction_result",
+      "ENGINE": "InnoDB",
+      "TABLE_ROWS": 0,
+      "DATA_LENGTH": 16384,
+      "INDEX_LENGTH": 98304,
+      "DATA_FREE": 0
+    },
+    {
+      "TABLE_NAME": "em_prediction_run",
+      "ENGINE": "InnoDB",
+      "TABLE_ROWS": 0,
+      "DATA_LENGTH": 16384,
+      "INDEX_LENGTH": 81920,
+      "DATA_FREE": 0
+    }
+  ],
+  "storageAfter": [
+    {
+      "TABLE_NAME": "em_prediction_batch",
+      "ENGINE": "InnoDB",
+      "TABLE_ROWS": 1,
+      "DATA_LENGTH": 16384,
+      "INDEX_LENGTH": 49152,
+      "DATA_FREE": 0
+    },
+    {
+      "TABLE_NAME": "em_prediction_execution_gate",
+      "ENGINE": "InnoDB",
+      "TABLE_ROWS": 0,
+      "DATA_LENGTH": 16384,
+      "INDEX_LENGTH": 49152,
+      "DATA_FREE": 0
+    },
+    {
+      "TABLE_NAME": "em_prediction_result",
+      "ENGINE": "InnoDB",
+      "TABLE_ROWS": 48532,
+      "DATA_LENGTH": 18399232,
+      "INDEX_LENGTH": 21069824,
+      "DATA_FREE": 7340032
+    },
+    {
+      "TABLE_NAME": "em_prediction_run",
+      "ENGINE": "InnoDB",
+      "TABLE_ROWS": 1,
+      "DATA_LENGTH": 16384,
+      "INDEX_LENGTH": 81920,
+      "DATA_FREE": 0
+    }
+  ],
+  "api": null,
+  "boundary": {
+    "schemaVersion": "shm-em-phase2a-runtime-failure-v1",
+    "scale": "S2",
+    "databasePersistedRowCount": 49600,
+    "databaseTargetCount": 1240,
+    "fixtureValidBeforeApi": true,
+    "errorType": "TimeoutError",
+    "error": "timed out",
+    "stopRequired": true,
+    "stopReason": "A valid scaling workload could not complete the frozen backend/API measurement; production-core optimization is forbidden in Phase 2A"
+  },
+  "pass": false,
+  "stopRequired": true
+}

@@ -1,0 +1,295 @@
+{
+  "schemaVersion": "shm-em-phase2a-reference-result-v1",
+  "database": "shm_em_reproduce_benchmark_reference",
+  "startedAt": "2026-08-30T23:18:19.067687+08:00",
+  "finishedAt": "2026-08-30T23:30:01.313941+08:00",
+  "pitPre": {
+    "schemaVersion": "shm-em-phase2a-pitpre-v1",
+    "workload": {
+      "projectCode": "SHM_EM_PUBLIC_SAMPLE",
+      "models": 6,
+      "targets": 124,
+      "steps": 40,
+      "rows": 4960
+    },
+    "method": {
+      "cacheMode": "one in-process CachedModelRunner; model artifacts loaded once",
+      "firstRuns": 1,
+      "warmups": 5,
+      "measured": 30,
+      "concurrency": 1,
+      "overlapNote": "predictionWriteTotal includes engineering conversion and persisted-integrity hashing; the exclusive estimate subtracts these measured nested intervals"
+    },
+    "oneTimeSetup": {
+      "bootstrapConfigLoadMs": 0.9799,
+      "databaseContractLoadMs": 94.4774,
+      "modelLoadingCachePreparationMs": 1086.1242,
+      "pipelineInitializationMs": 3.1565
+    },
+    "components": {
+      "inputAssembly": {
+        "count": 30,
+        "medianMs": 5632.6997,
+        "p95Ms": 6260.9909,
+        "minMs": 4228.5782,
+        "maxMs": 6602.6082,
+        "meanMs": 5554.158837,
+        "stddevMs": 526.565271,
+        "outliersRemoved": 0
+      },
+      "allModelInference": {
+        "count": 30,
+        "medianMs": 5257.4835,
+        "p95Ms": 6604.4273,
+        "minMs": 4695.7909,
+        "maxMs": 7355.0127,
+        "meanMs": 5398.84693,
+        "stddevMs": 520.52733,
+        "outliersRemoved": 0
+      },
+      "engineeringConversion": {
+        "count": 30,
+        "medianMs": 2951.38585,
+        "p95Ms": 3544.938,
+        "minMs": 2811.0045,
+        "maxMs": 3690.0077,
+        "meanMs": 3046.871133,
+        "stddevMs": 231.171873,
+        "outliersRemoved": 0
+      },
+      "predictionWriteTotal": {
+        "count": 30,
+        "medianMs": 4833.83465,
+        "p95Ms": 5646.1759,
+        "minMs": 4531.9586,
+        "maxMs": 5873.0828,
+        "meanMs": 4934.655507,
+        "stddevMs": 327.70744,
+        "outliersRemoved": 0
+      },
+      "predictionPersistenceExclusiveEstimate": {
+        "count": 30,
+        "medianMs": 1352.79635,
+        "p95Ms": 1535.9144,
+        "minMs": 1084.3083,
+        "maxMs": 1791.9081,
+        "meanMs": 1352.743247,
+        "stddevMs": 128.1373,
+        "outliersRemoved": 0
+      },
+      "persistedIntegrityHash": {
+        "count": 30,
+        "medianMs": 531.5992,
+        "p95Ms": 693.2692,
+        "minMs": 435.5195,
+        "maxMs": 725.7455,
+        "meanMs": 535.041127,
+        "stddevMs": 64.668182,
+        "outliersRemoved": 0
+      },
+      "fullBatch": {
+        "count": 30,
+        "medianMs": 16778.35945,
+        "p95Ms": 18729.3258,
+        "minMs": 14554.8043,
+        "maxMs": 20547.2941,
+        "meanMs": 16878.07248,
+        "stddevMs": 1188.179011,
+        "outliersRemoved": 0
+      }
+    },
+    "perModelInference": {
+      "Pressure": {
+        "count": 30,
+        "medianMs": 841.78075,
+        "p95Ms": 1104.0462,
+        "minMs": 723.2669,
+        "maxMs": 1144.5909,
+        "meanMs": 858.700857,
+        "stddevMs": 92.76206,
+        "outliersRemoved": 0
+      },
+      "settlement": {
+        "count": 30,
+        "medianMs": 1076.1869,
+        "p95Ms": 1365.3432,
+        "minMs": 958.6447,
+        "maxMs": 1564.5092,
+        "meanMs": 1106.731857,
+        "stddevMs": 116.943834,
+        "outliersRemoved": 0
+      },
+      "Strain": {
+        "count": 30,
+        "medianMs": 815.9915,
+        "p95Ms": 1072.0324,
+        "minMs": 724.4329,
+        "maxMs": 1215.8305,
+        "meanMs": 846.601483,
+        "stddevMs": 95.077289,
+        "outliersRemoved": 0
+      },
+      "water": {
+        "count": 30,
+        "medianMs": 836.2119,
+        "p95Ms": 1005.2079,
+        "minMs": 759.9775,
+        "maxMs": 1177.3201,
+        "meanMs": 851.64381,
+        "stddevMs": 82.819994,
+        "outliersRemoved": 0
+      },
+      "XD": {
+        "count": 30,
+        "medianMs": 844.8993,
+        "p95Ms": 1031.929,
+        "minMs": 753.3531,
+        "maxMs": 1143.6299,
+        "meanMs": 873.131773,
+        "stddevMs": 79.102071,
+        "outliersRemoved": 0
+      },
+      "YD": {
+        "count": 30,
+        "medianMs": 844.5451,
+        "p95Ms": 1025.8686,
+        "minMs": 735.5639,
+        "maxMs": 1109.1321,
+        "meanMs": 862.03715,
+        "stddevMs": 74.539101,
+        "outliersRemoved": 0
+      }
+    },
+    "lastBatchId": 40,
+    "pass": true
+  },
+  "integrity": {
+    "schemaVersion": "shm-em-phase2a-integrity-v1",
+    "scope": "DB fetch plus cross-language canonical persisted-result and batch-output hash recomputation",
+    "firstMs": 341.8419,
+    "count": 30,
+    "medianMs": 437.4752,
+    "p95Ms": 644.7973,
+    "minMs": 409.4509,
+    "maxMs": 682.4359,
+    "meanMs": 474.076177,
+    "stddevMs": 77.490818,
+    "outliersRemoved": 0,
+    "allHashesMatch": true,
+    "pass": true
+  },
+  "backend": {
+    "schemaVersion": "shm-em-phase2a-backend-reference-v1",
+    "batchId": 40,
+    "method": {
+      "firstCalls": 1,
+      "warmups": 5,
+      "measured": 30,
+      "executeMeasured": 10,
+      "concurrency": 1
+    },
+    "operations": {
+      "gate-inspect": {
+        "operation": "gate-inspect",
+        "firstMs": 643.5644,
+        "count": 30,
+        "medianMs": 268.82065,
+        "p95Ms": 331.7781,
+        "minMs": 206.7355,
+        "maxMs": 338.9429,
+        "meanMs": 270.927447,
+        "stddevMs": 34.43566,
+        "outliersRemoved": 0
+      },
+      "gate-evaluate": {
+        "operation": "gate-evaluate",
+        "firstMs": 276.8081,
+        "count": 30,
+        "medianMs": 259.9317,
+        "p95Ms": 300.6417,
+        "minMs": 201.5934,
+        "maxMs": 305.5038,
+        "meanMs": 259.41647,
+        "stddevMs": 23.188522,
+        "outliersRemoved": 0
+      },
+      "future-state": {
+        "operation": "future-state",
+        "firstMs": 533.1783,
+        "count": 30,
+        "medianMs": 472.3416,
+        "p95Ms": 574.7606,
+        "minMs": 366.9855,
+        "maxMs": 739.2796,
+        "meanMs": 478.437293,
+        "stddevMs": 61.644569,
+        "outliersRemoved": 0
+      },
+      "series-single-target": {
+        "operation": "series-single-target",
+        "firstMs": 114.6851,
+        "count": 30,
+        "medianMs": 23.27815,
+        "p95Ms": 31.3956,
+        "minMs": 4.6506,
+        "maxMs": 31.6046,
+        "meanMs": 19.94956,
+        "stddevMs": 10.123027,
+        "outliersRemoved": 0
+      },
+      "series-full-batch": {
+        "operation": "series-full-batch",
+        "firstMs": 330.4491,
+        "count": 30,
+        "medianMs": 278.82345,
+        "p95Ms": 336.9315,
+        "minMs": 228.686,
+        "maxMs": 340.7872,
+        "meanMs": 285.44814,
+        "stddevMs": 26.379119,
+        "outliersRemoved": 0
+      },
+      "evaluate": {
+        "operation": "evaluate",
+        "firstMs": 350.3255,
+        "count": 30,
+        "medianMs": 269.46535,
+        "p95Ms": 313.3403,
+        "minMs": 183.5486,
+        "maxMs": 320.6789,
+        "meanMs": 267.099147,
+        "stddevMs": 33.935932,
+        "outliersRemoved": 0
+      },
+      "provenance-trace": {
+        "operation": "provenance-trace",
+        "firstMs": 7.4414,
+        "count": 30,
+        "medianMs": 2.57785,
+        "p95Ms": 20.6917,
+        "minMs": 1.8612,
+        "maxMs": 26.9031,
+        "meanMs": 5.641317,
+        "stddevMs": 6.766662,
+        "outliersRemoved": 0
+      },
+      "execute": {
+        "operation": "execute",
+        "count": 10,
+        "medianMs": 317.23755,
+        "p95Ms": 336.3605,
+        "minMs": 258.1653,
+        "maxMs": 336.3605,
+        "meanMs": 309.0366,
+        "stddevMs": 21.874956,
+        "outliersRemoved": 0,
+        "baselineIsolation": "same isolated DB; all append-only formal tables restored to recorded max-id/count baseline before each call"
+      }
+    },
+    "evaluateFormalSideEffects": 0,
+    "executeAllBaselinesRestored": true,
+    "executeAllValid": true,
+    "pass": true
+  },
+  "pass": true
+}

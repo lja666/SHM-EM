@@ -1,0 +1,53 @@
+{
+  "eventId": 30,
+  "formalStateAfter": {
+    "em_event_evidence_link": {
+      "count": 0,
+      "maxId": 0
+    },
+    "em_notification_delivery_log": {
+      "count": 0,
+      "maxId": 0
+    },
+    "em_event_response_step": {
+      "count": 4,
+      "maxId": 136
+    },
+    "em_event_prediction_link": {
+      "count": 1,
+      "maxId": 10
+    },
+    "em_event_metric_snapshot": {
+      "count": 0,
+      "maxId": 0
+    },
+    "em_report_instance": {
+      "count": 1,
+      "maxId": 11
+    },
+    "em_evidence_resource": {
+      "count": 0,
+      "maxId": 0
+    },
+    "em_notification_task": {
+      "count": 0,
+      "maxId": 0
+    },
+    "em_event_response_workflow": {
+      "count": 1,
+      "maxId": 34
+    },
+    "em_event_handling_log": {
+      "count": 0,
+      "maxId": 0
+    },
+    "em_monitoring_event": {
+      "count": 1,
+      "maxId": 30
+    },
+    "em_event_evaluation_run": {
+      "count": 37,
+      "maxId": 82
+    }
+  }
+}

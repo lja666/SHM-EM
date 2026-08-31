@@ -1,0 +1,9 @@
+{
+  "label": "S2",
+  "targetCount": 1240,
+  "rowCount": 49600,
+  "elapsedMs": 186431.7074,
+  "rowsPerSecond": 266.049,
+  "chunkRows": 2000,
+  "transactionMode": "autocommit per executemany chunk"
+}

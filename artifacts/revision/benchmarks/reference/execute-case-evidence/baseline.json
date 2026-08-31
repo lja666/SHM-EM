@@ -1,0 +1,55 @@
+{
+  "formalState": {
+    "em_event_evidence_link": {
+      "count": 0,
+      "maxId": 0
+    },
+    "em_notification_delivery_log": {
+      "count": 0,
+      "maxId": 0
+    },
+    "em_event_response_step": {
+      "count": 0,
+      "maxId": 0
+    },
+    "em_event_prediction_link": {
+      "count": 0,
+      "maxId": 0
+    },
+    "em_event_metric_snapshot": {
+      "count": 0,
+      "maxId": 0
+    },
+    "em_report_instance": {
+      "count": 0,
+      "maxId": 0
+    },
+    "em_evidence_resource": {
+      "count": 0,
+      "maxId": 0
+    },
+    "em_notification_task": {
+      "count": 0,
+      "maxId": 0
+    },
+    "em_event_response_workflow": {
+      "count": 0,
+      "maxId": 0
+    },
+    "em_event_handling_log": {
+      "count": 0,
+      "maxId": 0
+    },
+    "em_monitoring_event": {
+      "count": 0,
+      "maxId": 0
+    },
+    "em_event_evaluation_run": {
+      "count": 36,
+      "maxId": 72
+    }
+  },
+  "ruleId": 4,
+  "batchId": 40,
+  "repetitions": 10
+}

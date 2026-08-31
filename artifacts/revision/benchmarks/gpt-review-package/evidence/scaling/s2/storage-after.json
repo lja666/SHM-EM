@@ -1,0 +1,34 @@
+[
+  {
+    "TABLE_NAME": "em_prediction_batch",
+    "ENGINE": "InnoDB",
+    "TABLE_ROWS": 1,
+    "DATA_LENGTH": 16384,
+    "INDEX_LENGTH": 49152,
+    "DATA_FREE": 0
+  },
+  {
+    "TABLE_NAME": "em_prediction_execution_gate",
+    "ENGINE": "InnoDB",
+    "TABLE_ROWS": 0,
+    "DATA_LENGTH": 16384,
+    "INDEX_LENGTH": 49152,
+    "DATA_FREE": 0
+  },
+  {
+    "TABLE_NAME": "em_prediction_result",
+    "ENGINE": "InnoDB",
+    "TABLE_ROWS": 48532,
+    "DATA_LENGTH": 18399232,
+    "INDEX_LENGTH": 21069824,
+    "DATA_FREE": 7340032
+  },
+  {
+    "TABLE_NAME": "em_prediction_run",
+    "ENGINE": "InnoDB",
+    "TABLE_ROWS": 1,
+    "DATA_LENGTH": 16384,
+    "INDEX_LENGTH": 81920,
+    "DATA_FREE": 0
+  }
+]

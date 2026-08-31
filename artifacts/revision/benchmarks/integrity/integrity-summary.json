@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "shm-em-phase2a-integrity-v1",
+  "scope": "DB fetch plus cross-language canonical persisted-result and batch-output hash recomputation",
+  "firstMs": 341.8419,
+  "count": 30,
+  "medianMs": 437.4752,
+  "p95Ms": 644.7973,
+  "minMs": 409.4509,
+  "maxMs": 682.4359,
+  "meanMs": 474.076177,
+  "stddevMs": 77.490818,
+  "outliersRemoved": 0,
+  "allHashesMatch": true,
+  "pass": true
+}

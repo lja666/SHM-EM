@@ -1,0 +1,14 @@
+{
+  "referencePass": true,
+  "stopRequired": true,
+  "regressionsPass": true,
+  "frozenCorePass": true,
+  "phase2aManifestPass": true,
+  "reviewPackageManifestPass": true,
+  "reviewPackage": {
+    "path": "D:\\SpringBoot_Mybatis\\SHM-PIT\\SHM_EM_SOFTX_REVISION\\artifacts\\revision\\benchmarks\\SHM-EM_Phase2A_GPT_Review_Package.zip",
+    "bytes": 80387,
+    "sha256": "0523724e0c54cde11293e95ee9acfc931cc75e0a8c811d047f2e0fa7a385ecaf",
+    "manifestFileCount": 53
+  }
+}

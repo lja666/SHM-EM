@@ -1,0 +1,113 @@
+{
+  "schemaVersion": "shm-em-phase2a-backend-reference-v1",
+  "batchId": 40,
+  "method": {
+    "firstCalls": 1,
+    "warmups": 5,
+    "measured": 30,
+    "executeMeasured": 10,
+    "concurrency": 1
+  },
+  "operations": {
+    "gate-inspect": {
+      "operation": "gate-inspect",
+      "firstMs": 643.5644,
+      "count": 30,
+      "medianMs": 268.82065,
+      "p95Ms": 331.7781,
+      "minMs": 206.7355,
+      "maxMs": 338.9429,
+      "meanMs": 270.927447,
+      "stddevMs": 34.43566,
+      "outliersRemoved": 0
+    },
+    "gate-evaluate": {
+      "operation": "gate-evaluate",
+      "firstMs": 276.8081,
+      "count": 30,
+      "medianMs": 259.9317,
+      "p95Ms": 300.6417,
+      "minMs": 201.5934,
+      "maxMs": 305.5038,
+      "meanMs": 259.41647,
+      "stddevMs": 23.188522,
+      "outliersRemoved": 0
+    },
+    "future-state": {
+      "operation": "future-state",
+      "firstMs": 533.1783,
+      "count": 30,
+      "medianMs": 472.3416,
+      "p95Ms": 574.7606,
+      "minMs": 366.9855,
+      "maxMs": 739.2796,
+      "meanMs": 478.437293,
+      "stddevMs": 61.644569,
+      "outliersRemoved": 0
+    },
+    "series-single-target": {
+      "operation": "series-single-target",
+      "firstMs": 114.6851,
+      "count": 30,
+      "medianMs": 23.27815,
+      "p95Ms": 31.3956,
+      "minMs": 4.6506,
+      "maxMs": 31.6046,
+      "meanMs": 19.94956,
+      "stddevMs": 10.123027,
+      "outliersRemoved": 0
+    },
+    "series-full-batch": {
+      "operation": "series-full-batch",
+      "firstMs": 330.4491,
+      "count": 30,
+      "medianMs": 278.82345,
+      "p95Ms": 336.9315,
+      "minMs": 228.686,
+      "maxMs": 340.7872,
+      "meanMs": 285.44814,
+      "stddevMs": 26.379119,
+      "outliersRemoved": 0
+    },
+    "evaluate": {
+      "operation": "evaluate",
+      "firstMs": 350.3255,
+      "count": 30,
+      "medianMs": 269.46535,
+      "p95Ms": 313.3403,
+      "minMs": 183.5486,
+      "maxMs": 320.6789,
+      "meanMs": 267.099147,
+      "stddevMs": 33.935932,
+      "outliersRemoved": 0
+    },
+    "provenance-trace": {
+      "operation": "provenance-trace",
+      "firstMs": 7.4414,
+      "count": 30,
+      "medianMs": 2.57785,
+      "p95Ms": 20.6917,
+      "minMs": 1.8612,
+      "maxMs": 26.9031,
+      "meanMs": 5.641317,
+      "stddevMs": 6.766662,
+      "outliersRemoved": 0
+    },
+    "execute": {
+      "operation": "execute",
+      "count": 10,
+      "medianMs": 317.23755,
+      "p95Ms": 336.3605,
+      "minMs": 258.1653,
+      "maxMs": 336.3605,
+      "meanMs": 309.0366,
+      "stddevMs": 21.874956,
+      "outliersRemoved": 0,
+      "baselineIsolation": "same isolated DB; all append-only formal tables restored to recorded max-id/count baseline before each call"
+    }
+  },
+  "evaluateFormalSideEffects": 0,
+  "executeAllBaselinesRestored": true,
+  "executeAllValid": true,
+  "pass": true
+}

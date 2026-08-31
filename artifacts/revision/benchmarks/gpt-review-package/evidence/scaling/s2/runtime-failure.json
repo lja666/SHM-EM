@@ -1,0 +1,11 @@
+{
+  "schemaVersion": "shm-em-phase2a-runtime-failure-v1",
+  "scale": "S2",
+  "databasePersistedRowCount": 49600,
+  "databaseTargetCount": 1240,
+  "fixtureValidBeforeApi": true,
+  "errorType": "TimeoutError",
+  "error": "timed out",
+  "stopRequired": true,
+  "stopReason": "A valid scaling workload could not complete the frozen backend/API measurement; production-core optimization is forbidden in Phase 2A"
+}

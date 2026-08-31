@@ -1,0 +1,2 @@
+elapsedSeconds,thread,state,category,representativeFrame
+5.056,http-nio-5301-exec-2,RUNNABLE,jdbc-mysql-read,at com.mysql.cj.protocol.ReadAheadInputStream.fill(ReadAheadInputStream.java:107)

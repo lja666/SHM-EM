@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "shm-em-phase2a1-run-summary-v1",
+  "completedAt": "2026-08-31T02:20:00.386358+00:00",
+  "completedSections": [
+    "operation-order",
+    "sql-components",
+    "project-scope-control",
+    "fresh-reference-vs-s1",
+    "sub-50k-sweep"
+  ],
+  "executionStyle": "multiple resumable harness invocations; each Gate case used a fresh backend JVM",
+  "coreDiff": {
+    "baseline": "b41c1894f75561c8ef682062a5e6dab35c3916a7",
+    "paths": [
+      "src/backend/src/main",
+      "src/frontend/src",
+      "src/pit_pre/pit_pre",
+      ".gitattributes"
+    ],
+    "modifiedFiles": [],
+    "pass": true
+  }
+}

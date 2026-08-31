@@ -1,0 +1,17 @@
+operation,phase,repetition,elapsedMs,rowCount,pass
+full-series-first,first,1,747.4824,4960,True
+full-series-first,warmup,1,494.9704,4960,True
+full-series-first,warmup,2,412.7879,4960,True
+full-series-first,warmup,3,400.3235,4960,True
+full-series-first,warmup,4,490.4749,4960,True
+full-series-first,warmup,5,387.6853,4960,True
+full-series-first,measured,1,402.8476,4960,True
+full-series-first,measured,2,387.9898,4960,True
+full-series-first,measured,3,363.9198,4960,True
+full-series-first,measured,4,331.657,4960,True
+full-series-first,measured,5,328.2095,4960,True
+full-series-first,measured,6,316.1504,4960,True
+full-series-first,measured,7,341.2357,4960,True
+full-series-first,measured,8,354.651,4960,True
+full-series-first,measured,9,365.5676,4960,True
+full-series-first,measured,10,359.4792,4960,True

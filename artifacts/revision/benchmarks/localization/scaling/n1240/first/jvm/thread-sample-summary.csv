@@ -1,0 +1,6 @@
+elapsedSeconds,thread,state,category,representativeFrame
+5.071,http-nio-5305-exec-3,RUNNABLE,jdbc-mysql-read,at com.mysql.cj.protocol.ReadAheadInputStream.fill(ReadAheadInputStream.java:107)
+15.134,http-nio-5305-exec-3,RUNNABLE,jdbc-mysql-read,at com.mysql.cj.protocol.ReadAheadInputStream.fill(ReadAheadInputStream.java:107)
+30.369,http-nio-5305-exec-3,RUNNABLE,jdbc-mysql-read,at com.mysql.cj.protocol.ReadAheadInputStream.fill(ReadAheadInputStream.java:107)
+60.617,http-nio-5305-exec-3,RUNNABLE,jdbc-mysql-read,at com.mysql.cj.protocol.ReadAheadInputStream.fill(ReadAheadInputStream.java:107)
+120.303,http-nio-5305-exec-3,RUNNABLE,jdbc-mysql-read,at com.mysql.cj.protocol.ReadAheadInputStream.fill(ReadAheadInputStream.java:107)

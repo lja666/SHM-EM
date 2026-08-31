@@ -1,0 +1,23 @@
+client_elapsed_ms=3030.351300
+-> Limit: 50000 row(s)  (actual time=2728..2825 rows=49600 loops=1)
+    -> Sort: d.future_time, d.target_type, d.feature_code, d.step, limit input to 50000 row(s) per chunk  (actual time=2728..2818 rows=49600 loops=1)
+        -> Stream results  (cost=4.91e+6 rows=16.3e+6) (actual time=1.25..1273 rows=49600 loops=1)
+            -> Nested loop left join  (cost=4.91e+6 rows=16.3e+6) (actual time=1.23..679 rows=49600 loops=1)
+                -> Nested loop left join  (cost=3.28e+6 rows=16.3e+6) (actual time=1.22..638 rows=49600 loops=1)
+                    -> Left hash join (<hash>(f.feature_code)=<hash>(r.feature_code)), extra conditions: (f.feature_code = r.feature_code)  (cost=1.64e+6 rows=16.3e+6) (actual time=1.21..591 rows=49600 loops=1)
+                        -> Nested loop left join  (cost=6749 rows=12133) (actual time=0.105..513 rows=49600 loops=1)
+                            -> Nested loop left join  (cost=2502 rows=12133) (actual time=0.0972..473 rows=49600 loops=1)
+                                -> Left hash join (r.id = r.run_id)  (cost=1288 rows=12133) (actual time=0.0923..423 rows=49600 loops=1)
+                                    -> Nested loop left join  (cost=3269 rows=12133) (actual time=0.0719..389 rows=49600 loops=1)
+                                        -> Filter: (r.batch_id = 5)  (cost=2056 rows=12133) (actual time=0.0655..342 rows=49600 loops=1)
+                                            -> Index lookup on r using uk_em_prediction_source (project_id=2)  (cost=2056 rows=24266) (actual time=0.0649..322 rows=49600 loops=1)
+                                        -> Constant row from b  (cost=28.8e-6..28.8e-6 rows=1) (actual time=470e-6..526e-6 rows=1 loops=49600)
+                                    -> Hash
+                                        -> Table scan on r  (cost=0.0062 rows=1) (actual time=0.0085..0.0093 rows=1 loops=1)
+                                -> Constant row from b  (cost=28.8e-6..28.8e-6 rows=1) (actual time=490e-6..543e-6 rows=1 loops=49600)
+                            -> Single-row index lookup on m using PRIMARY (id=r.model_id)  (cost=0.25 rows=1) (actual time=414e-6..468e-6 rows=1 loops=49600)
+                        -> Hash
+                            -> Filter: ((f.enabled = 1) and (f.project_id = 2))  (cost=0.758 rows=1345) (actual time=0.116..0.774 rows=1240 loops=1)
+                                -> Table scan on f  (cost=0.758 rows=1345) (actual time=0.0295..0.652 rows=1404 loops=1)
+                    -> Single-row index lookup on s using PRIMARY (id=r.station_id)  (cost=186e-6 rows=1) (actual time=498e-6..550e-6 rows=1 loops=49600)
+                -> Single-row index lookup on i using PRIMARY (id=r.instrument_id)  (cost=186e-6 rows=1) (actual time=375e-6..430e-6 rows=1 loops=49600)

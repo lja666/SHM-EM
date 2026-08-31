@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "shm-em-phase2a1-fresh-comparison-v1",
+  "results": [
+    {
+      "label": "reference",
+      "workload": {
+        "database": "shm_em_reproduce_benchmark_reference",
+        "batchId": 40,
+        "projectId": 1,
+        "batchCode": "ROLLING_120M_20250101004202_RUN_20260830232819008787",
+        "runCount": 6,
+        "targetCount": 124,
+        "rowCount": 4960,
+        "featureCode": "dtu1_point1_settlement_value"
+      },
+      "operations": {
+        "gate-first": {
+          "operation": "gate-first",
+          "firstMs": 723.7235,
+          "count": 10,
+          "medianMs": 331.9719,
+          "p95Ms": 359.7925,
+          "minMs": 289.1243,
+          "maxMs": 359.7925,
+          "meanMs": 328.73167,
+          "stddevMs": 22.10272,
+          "outliersRemoved": 0,
+          "allValid": true
+        },
+        "full-series-first": {
+          "operation": "full-series-first",
+          "firstMs": 747.4824,
+          "count": 10,
+          "medianMs": 357.0651,
+          "p95Ms": 402.8476,
+          "minMs": 316.1504,
+          "maxMs": 402.8476,
+          "meanMs": 355.17076,
+          "stddevMs": 25.593406,
+          "outliersRemoved": 0,
+          "allValid": true
+        }
+      }
+    },
+    {
+      "label": "s1",
+      "workload": {
+        "database": "shm_em_reproduce_benchmark_scaling_s1",
+        "batchId": 5,
+        "projectId": 2,
+        "batchCode": "PHASE2A_S1_20260624100000",
+        "runCount": 1,
+        "targetCount": 124,
+        "rowCount": 4960,
+        "featureCode": "s1_target_00001"
+      },
+      "operations": {
+        "gate-first": {
+          "operation": "gate-first",
+          "firstMs": 2908.2109,
+          "count": 10,
+          "medianMs": 2332.95695,
+          "p95Ms": 2552.2621,
+          "minMs": 2105.7613,
+          "maxMs": 2552.2621,
+          "meanMs": 2363.22234,
+          "stddevMs": 139.378927,
+          "outliersRemoved": 0,
+          "allValid": true
+        },
+        "full-series-first": {
+          "operation": "full-series-first",
+          "firstMs": 2894.231,
+          "count": 10,
+          "medianMs": 2460.0867,
+          "p95Ms": 2557.4046,
+          "minMs": 2247.4683,
+          "maxMs": 2557.4046,
+          "meanMs": 2430.79312,
+          "stddevMs": 113.576342,
+          "outliersRemoved": 0,
+          "allValid": true
+        }
+      }
+    }
+  ]
+}

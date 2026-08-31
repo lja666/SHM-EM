@@ -1,0 +1,8 @@
+scale,database,targets,rows,viewQueryFirstMs,viewQueryMedianMs,viewQueryStatus,baseQueryFirstMs,baseQueryMedianMs,baseQueryStatus,featureQueryFirstMs,featureQueryMedianMs,featureQueryStatus,independentIntegrityMs,independentIntegrityRows
+reference,shm_em_reproduce_benchmark_reference,124,4960,681.4353,655.958,completed,278.204,300.1251,completed,13.0689,9.6529,completed,632.3139,4960
+s1,shm_em_reproduce_benchmark_scaling_s1,124,4960,2794.0361,2803.9848,completed,588.622,459.7658,completed,9.0053,8.0478,completed,559.3584,4960
+n248,shm_em_reproduce_benchmark_localization_0248,248,9920,9867.5432,10074.8711,completed,685.862,655.686,completed,13.8946,12.4045,completed,1094.8613,9920
+n496,shm_em_reproduce_benchmark_localization_0496,496,19840,36665.948,37255.7211,completed,1681.2709,1631.8258,completed,40.2488,33.8952,completed,3115.6318,19840
+n744,shm_em_reproduce_benchmark_localization_0744,744,29760,80061.2233,,completed,2744.3988,2852.4172,completed,73.6862,52.272,completed,4142.6368,29760
+n992,shm_em_reproduce_benchmark_localization_0992,992,39680,140812.2752,,completed,3012.636,2858.4775,completed,61.4921,48.5605,completed,4863.5468,39680
+s2,shm_em_reproduce_benchmark_scaling_s2,1240,49600,7268.2748,,timeout,3980.5557,4188.114,completed,92.0143,70.6529,completed,7419.9275,49600

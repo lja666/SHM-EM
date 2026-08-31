@@ -1,0 +1,182 @@
+[
+  {
+    "operation": "series-full-batch",
+    "elapsedMs": 5301.025,
+    "rowCount": 49600
+  },
+  {
+    "operation": "series-full-batch",
+    "elapsedMs": 4653.6897,
+    "rowCount": 49600
+  },
+  {
+    "operation": "series-full-batch",
+    "elapsedMs": 4173.3417,
+    "rowCount": 49600
+  },
+  {
+    "operation": "series-full-batch",
+    "elapsedMs": 4280.5746,
+    "rowCount": 49600
+  },
+  {
+    "operation": "series-full-batch",
+    "elapsedMs": 4393.3888,
+    "rowCount": 49600
+  },
+  {
+    "operation": "series-full-batch",
+    "elapsedMs": 4687.0487,
+    "rowCount": 49600
+  },
+  {
+    "operation": "series-full-batch",
+    "elapsedMs": 4371.7794,
+    "rowCount": 49600
+  },
+  {
+    "operation": "series-full-batch",
+    "elapsedMs": 4883.5382,
+    "rowCount": 49600
+  },
+  {
+    "operation": "series-full-batch",
+    "elapsedMs": 5293.4208,
+    "rowCount": 49600
+  },
+  {
+    "operation": "series-full-batch",
+    "elapsedMs": 4343.5072,
+    "rowCount": 49600
+  },
+  {
+    "operation": "series-full-batch",
+    "elapsedMs": 4214.7518,
+    "rowCount": 49600
+  },
+  {
+    "operation": "series-full-batch",
+    "elapsedMs": 4585.2508,
+    "rowCount": 49600
+  },
+  {
+    "operation": "series-full-batch",
+    "elapsedMs": 4632.5872,
+    "rowCount": 49600
+  },
+  {
+    "operation": "series-full-batch",
+    "elapsedMs": 4566.1673,
+    "rowCount": 49600
+  },
+  {
+    "operation": "series-full-batch",
+    "elapsedMs": 5757.1321,
+    "rowCount": 49600
+  },
+  {
+    "operation": "series-full-batch",
+    "elapsedMs": 4555.2021,
+    "rowCount": 49600
+  },
+  {
+    "operation": "series-full-batch",
+    "elapsedMs": 4440.0914,
+    "rowCount": 49600
+  },
+  {
+    "operation": "series-full-batch",
+    "elapsedMs": 4232.4606,
+    "rowCount": 49600
+  },
+  {
+    "operation": "series-full-batch",
+    "elapsedMs": 4674.4672,
+    "rowCount": 49600
+  },
+  {
+    "operation": "series-full-batch",
+    "elapsedMs": 4467.9061,
+    "rowCount": 49600
+  },
+  {
+    "operation": "series-full-batch",
+    "elapsedMs": 4561.7278,
+    "rowCount": 49600
+  },
+  {
+    "operation": "series-full-batch",
+    "elapsedMs": 4304.6158,
+    "rowCount": 49600
+  },
+  {
+    "operation": "series-full-batch",
+    "elapsedMs": 4370.0633,
+    "rowCount": 49600
+  },
+  {
+    "operation": "series-full-batch",
+    "elapsedMs": 4163.4851,
+    "rowCount": 49600
+  },
+  {
+    "operation": "series-full-batch",
+    "elapsedMs": 4531.6218,
+    "rowCount": 49600
+  },
+  {
+    "operation": "series-full-batch",
+    "elapsedMs": 4273.5511,
+    "rowCount": 49600
+  },
+  {
+    "operation": "series-full-batch",
+    "elapsedMs": 4237.4946,
+    "rowCount": 49600
+  },
+  {
+    "operation": "series-full-batch",
+    "elapsedMs": 3697.5254,
+    "rowCount": 49600
+  },
+  {
+    "operation": "series-full-batch",
+    "elapsedMs": 4294.7853,
+    "rowCount": 49600
+  },
+  {
+    "operation": "series-full-batch",
+    "elapsedMs": 4400.0779,
+    "rowCount": 49600
+  },
+  {
+    "operation": "series-full-batch",
+    "elapsedMs": 4100.4203,
+    "rowCount": 49600
+  },
+  {
+    "operation": "series-full-batch",
+    "elapsedMs": 4113.6229,
+    "rowCount": 49600
+  },
+  {
+    "operation": "series-full-batch",
+    "elapsedMs": 4269.4501,
+    "rowCount": 49600
+  },
+  {
+    "operation": "series-full-batch",
+    "elapsedMs": 4042.6568,
+    "rowCount": 49600
+  },
+  {
+    "operation": "series-full-batch",
+    "elapsedMs": 4607.0527,
+    "rowCount": 49600
+  },
+  {
+    "operation": "series-full-batch",
+    "elapsedMs": 4037.4185,
+    "rowCount": 49600
+  }
+]

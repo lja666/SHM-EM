@@ -1,0 +1,499 @@
+[
+  {
+    "scale": "reference",
+    "view": {
+      "status": "completed",
+      "firstMs": 681.4353,
+      "count": 3,
+      "medianMs": 655.958,
+      "p95Ms": 743.7042,
+      "minMs": 598.3014,
+      "maxMs": 743.7042,
+      "meanMs": 665.987867,
+      "stddevMs": 59.782619,
+      "outliersRemoved": 0,
+      "rowCounts": [
+        4960,
+        4960,
+        4960,
+        4960
+      ],
+      "completedRepetitions": 4
+    },
+    "base": {
+      "status": "completed",
+      "firstMs": 278.204,
+      "count": 3,
+      "medianMs": 300.1251,
+      "p95Ms": 309.7849,
+      "minMs": 295.4746,
+      "maxMs": 309.7849,
+      "meanMs": 301.794867,
+      "stddevMs": 5.960272,
+      "outliersRemoved": 0,
+      "rowCounts": [
+        4960,
+        4960,
+        4960,
+        4960
+      ],
+      "completedRepetitions": 4
+    },
+    "feature": {
+      "status": "completed",
+      "firstMs": 13.0689,
+      "count": 3,
+      "medianMs": 9.6529,
+      "p95Ms": 9.8208,
+      "minMs": 9.5448,
+      "maxMs": 9.8208,
+      "meanMs": 9.672833,
+      "stddevMs": 0.113555,
+      "outliersRemoved": 0,
+      "rowCounts": [
+        164,
+        164,
+        164,
+        164
+      ],
+      "completedRepetitions": 4
+    },
+    "hashes": [
+      {
+        "runId": 235,
+        "rows": 560,
+        "sha256": "0f0092b22976bc5c3cb99adaaa6514dc20308543a70e83e4db3a1431b5838609",
+        "elapsedMs": 75.1864
+      },
+      {
+        "runId": 236,
+        "rows": 400,
+        "sha256": "639a44c7579fd575b7217568c11a97dfd1d663d6e6755d1e4532d0013f277494",
+        "elapsedMs": 56.3847
+      },
+      {
+        "runId": 237,
+        "rows": 560,
+        "sha256": "d51daed68053efe4f61a46d0bce67f5f8ce19ff7e8fb02f38c20b8fc6adce550",
+        "elapsedMs": 76.1029
+      },
+      {
+        "runId": 238,
+        "rows": 80,
+        "sha256": "f2c083b0266a584eca6f49c138d39dcc2d605e8642616f632a53d9237942f3ec",
+        "elapsedMs": 10.9368
+      },
+      {
+        "runId": 239,
+        "rows": 1680,
+        "sha256": "2f0717e068826e1b64b3d6031ac629b0e0fdd43a9867fb5aea0ce0b8e41712fb",
+        "elapsedMs": 210.3417
+      },
+      {
+        "runId": 240,
+        "rows": 1680,
+        "sha256": "ecf3320bc8e810af561e2ecaf33eb5cae7e8e96f9f1e9dc24e2281c551361b65",
+        "elapsedMs": 203.3614
+      }
+    ]
+  },
+  {
+    "scale": "s1",
+    "view": {
+      "status": "completed",
+      "firstMs": 2794.0361,
+      "count": 3,
+      "medianMs": 2803.9848,
+      "p95Ms": 2812.2468,
+      "minMs": 2540.1861,
+      "maxMs": 2812.2468,
+      "meanMs": 2718.8059,
+      "stddevMs": 126.348301,
+      "outliersRemoved": 0,
+      "rowCounts": [
+        4960,
+        4960,
+        4960,
+        4960
+      ],
+      "completedRepetitions": 4
+    },
+    "base": {
+      "status": "completed",
+      "firstMs": 588.622,
+      "count": 3,
+      "medianMs": 459.7658,
+      "p95Ms": 468.2954,
+      "minMs": 324.3621,
+      "maxMs": 468.2954,
+      "meanMs": 417.474433,
+      "stddevMs": 65.932382,
+      "outliersRemoved": 0,
+      "rowCounts": [
+        4960,
+        4960,
+        4960,
+        4960
+      ],
+      "completedRepetitions": 4
+    },
+    "feature": {
+      "status": "completed",
+      "firstMs": 9.0053,
+      "count": 3,
+      "medianMs": 8.0478,
+      "p95Ms": 8.0914,
+      "minMs": 7.2571,
+      "maxMs": 8.0914,
+      "meanMs": 7.798767,
+      "stddevMs": 0.38343,
+      "outliersRemoved": 0,
+      "rowCounts": [
+        124,
+        124,
+        124,
+        124
+      ],
+      "completedRepetitions": 4
+    },
+    "hashes": [
+      {
+        "runId": 25,
+        "rows": 4960,
+        "sha256": "c045e73c168e531b0c08a5e00562aacc574945c85e0ce82e0869862b50a0ed0f",
+        "elapsedMs": 559.3584
+      }
+    ]
+  },
+  {
+    "scale": "n248",
+    "view": {
+      "status": "completed",
+      "firstMs": 9867.5432,
+      "count": 3,
+      "medianMs": 10074.8711,
+      "p95Ms": 10203.1553,
+      "minMs": 9993.1739,
+      "maxMs": 10203.1553,
+      "meanMs": 10090.4001,
+      "stddevMs": 86.424956,
+      "outliersRemoved": 0,
+      "rowCounts": [
+        9920,
+        9920,
+        9920,
+        9920
+      ],
+      "completedRepetitions": 4
+    },
+    "base": {
+      "status": "completed",
+      "firstMs": 685.862,
+      "count": 3,
+      "medianMs": 655.686,
+      "p95Ms": 696.4931,
+      "minMs": 589.9669,
+      "maxMs": 696.4931,
+      "meanMs": 647.382,
+      "stddevMs": 43.883749,
+      "outliersRemoved": 0,
+      "rowCounts": [
+        9920,
+        9920,
+        9920,
+        9920
+      ],
+      "completedRepetitions": 4
+    },
+    "feature": {
+      "status": "completed",
+      "firstMs": 13.8946,
+      "count": 3,
+      "medianMs": 12.4045,
+      "p95Ms": 12.7674,
+      "minMs": 11.509,
+      "maxMs": 12.7674,
+      "meanMs": 12.226967,
+      "stddevMs": 0.528855,
+      "outliersRemoved": 0,
+      "rowCounts": [
+        248,
+        248,
+        248,
+        248
+      ],
+      "completedRepetitions": 4
+    },
+    "hashes": [
+      {
+        "runId": 25,
+        "rows": 9920,
+        "sha256": "33927c5e4c6948dcdd1640cd197d417b73834637b785f10019d7f37d92ff897f",
+        "elapsedMs": 1094.8613
+      }
+    ]
+  },
+  {
+    "scale": "n496",
+    "view": {
+      "status": "completed",
+      "firstMs": 36665.948,
+      "count": 3,
+      "medianMs": 37255.7211,
+      "p95Ms": 37286.3178,
+      "minMs": 36468.0574,
+      "maxMs": 37286.3178,
+      "meanMs": 37003.365433,
+      "stddevMs": 378.725985,
+      "outliersRemoved": 0,
+      "rowCounts": [
+        19840,
+        19840,
+        19840,
+        19840
+      ],
+      "completedRepetitions": 4
+    },
+    "base": {
+      "status": "completed",
+      "firstMs": 1681.2709,
+      "count": 3,
+      "medianMs": 1631.8258,
+      "p95Ms": 1699.3315,
+      "minMs": 1451.5396,
+      "maxMs": 1699.3315,
+      "meanMs": 1594.2323,
+      "stddevMs": 104.594964,
+      "outliersRemoved": 0,
+      "rowCounts": [
+        19840,
+        19840,
+        19840,
+        19840
+      ],
+      "completedRepetitions": 4
+    },
+    "feature": {
+      "status": "completed",
+      "firstMs": 40.2488,
+      "count": 3,
+      "medianMs": 33.8952,
+      "p95Ms": 35.4836,
+      "minMs": 32.6613,
+      "maxMs": 35.4836,
+      "meanMs": 34.013367,
+      "stddevMs": 1.155225,
+      "outliersRemoved": 0,
+      "rowCounts": [
+        496,
+        496,
+        496,
+        496
+      ],
+      "completedRepetitions": 4
+    },
+    "hashes": [
+      {
+        "runId": 25,
+        "rows": 19840,
+        "sha256": "30b99640081fa8f3b5a4ad88a43c2fb8694f4cfe0f103ae520f7933a3c2ecc91",
+        "elapsedMs": 3115.6318
+      }
+    ]
+  },
+  {
+    "scale": "n744",
+    "view": {
+      "status": "completed",
+      "firstMs": 80061.2233,
+      "count": 0,
+      "medianMs": null,
+      "p95Ms": null,
+      "minMs": null,
+      "maxMs": null,
+      "meanMs": null,
+      "stddevMs": null,
+      "rowCounts": [
+        29760
+      ],
+      "completedRepetitions": 1
+    },
+    "base": {
+      "status": "completed",
+      "firstMs": 2744.3988,
+      "count": 3,
+      "medianMs": 2852.4172,
+      "p95Ms": 3445.0666,
+      "minMs": 2472.5913,
+      "maxMs": 3445.0666,
+      "meanMs": 2923.358367,
+      "stddevMs": 400.167914,
+      "outliersRemoved": 0,
+      "rowCounts": [
+        29760,
+        29760,
+        29760,
+        29760
+      ],
+      "completedRepetitions": 4
+    },
+    "feature": {
+      "status": "completed",
+      "firstMs": 73.6862,
+      "count": 3,
+      "medianMs": 52.272,
+      "p95Ms": 56.7705,
+      "minMs": 43.6396,
+      "maxMs": 56.7705,
+      "meanMs": 50.894033,
+      "stddevMs": 5.4485,
+      "outliersRemoved": 0,
+      "rowCounts": [
+        744,
+        744,
+        744,
+        744
+      ],
+      "completedRepetitions": 4
+    },
+    "hashes": [
+      {
+        "runId": 25,
+        "rows": 29760,
+        "sha256": "adaca2f76d52bff48ba3283c987acd68fce8a22d66ea824e5488fda4a5c9e495",
+        "elapsedMs": 4142.6368
+      }
+    ]
+  },
+  {
+    "scale": "n992",
+    "view": {
+      "status": "completed",
+      "firstMs": 140812.2752,
+      "count": 0,
+      "medianMs": null,
+      "p95Ms": null,
+      "minMs": null,
+      "maxMs": null,
+      "meanMs": null,
+      "stddevMs": null,
+      "rowCounts": [
+        39680
+      ],
+      "completedRepetitions": 1
+    },
+    "base": {
+      "status": "completed",
+      "firstMs": 3012.636,
+      "count": 3,
+      "medianMs": 2858.4775,
+      "p95Ms": 2905.6811,
+      "minMs": 2851.2582,
+      "maxMs": 2905.6811,
+      "meanMs": 2871.8056,
+      "stddevMs": 24.134232,
+      "outliersRemoved": 0,
+      "rowCounts": [
+        39680,
+        39680,
+        39680,
+        39680
+      ],
+      "completedRepetitions": 4
+    },
+    "feature": {
+      "status": "completed",
+      "firstMs": 61.4921,
+      "count": 3,
+      "medianMs": 48.5605,
+      "p95Ms": 52.317,
+      "minMs": 47.529,
+      "maxMs": 52.317,
+      "meanMs": 49.468833,
+      "stddevMs": 2.057513,
+      "outliersRemoved": 0,
+      "rowCounts": [
+        992,
+        992,
+        992,
+        992
+      ],
+      "completedRepetitions": 4
+    },
+    "hashes": [
+      {
+        "runId": 25,
+        "rows": 39680,
+        "sha256": "496a6b76dd9f54bf2529a9322980fd2388978b4893367edbdff2a27323a562c9",
+        "elapsedMs": 4863.5468
+      }
+    ]
+  },
+  {
+    "scale": "s2",
+    "view": {
+      "status": "timeout",
+      "errorType": "OperationalError",
+      "error": "(3024, 'Query execution was interrupted, maximum statement execution time exceeded')",
+      "elapsedMs": 180054.0587,
+      "firstMs": 7268.2748,
+      "count": 0,
+      "medianMs": null,
+      "p95Ms": null,
+      "minMs": null,
+      "maxMs": null,
+      "meanMs": null,
+      "stddevMs": null,
+      "rowCounts": [
+        49600
+      ],
+      "completedRepetitions": 1
+    },
+    "base": {
+      "status": "completed",
+      "firstMs": 3980.5557,
+      "count": 3,
+      "medianMs": 4188.114,
+      "p95Ms": 4517.3598,
+      "minMs": 4041.5098,
+      "maxMs": 4517.3598,
+      "meanMs": 4248.994533,
+      "stddevMs": 198.977612,
+      "outliersRemoved": 0,
+      "rowCounts": [
+        49600,
+        49600,
+        49600,
+        49600
+      ],
+      "completedRepetitions": 4
+    },
+    "feature": {
+      "status": "completed",
+      "firstMs": 92.0143,
+      "count": 3,
+      "medianMs": 70.6529,
+      "p95Ms": 75.2199,
+      "minMs": 68.4651,
+      "maxMs": 75.2199,
+      "meanMs": 71.445967,
+      "stddevMs": 2.814077,
+      "outliersRemoved": 0,
+      "rowCounts": [
+        1240,
+        1240,
+        1240,
+        1240
+      ],
+      "completedRepetitions": 4
+    },
+    "hashes": [
+      {
+        "runId": 25,
+        "rows": 49600,
+        "sha256": "44312aa5131ae573a721db90d718601f1d9730c1f142d37f79218fc4ee6d030b",
+        "elapsedMs": 7419.9275
+      }
+    ]
+  }
+]

@@ -1,0 +1,8 @@
+scale,database,targets,rows,status,firstMs,medianMs,p95Ms,completedRepetitions
+n248,shm_em_reproduce_benchmark_localization_0248,248,9920,completed,9785.8109,9851.765,10049.5587,4
+n496,shm_em_reproduce_benchmark_localization_0496,496,19840,completed,2569.4733,36990.7806,37009.0512,4
+n744,shm_em_reproduce_benchmark_localization_0744,744,29760,completed,4359.0224,4089.4319,4843.8861,4
+n992,shm_em_reproduce_benchmark_localization_0992,992,39680,completed,5641.2343,6283.7004,7506.8037,4
+reference,shm_em_reproduce_benchmark_reference,124,4960,completed,514.5429,558.5956,564.0353,4
+s1,shm_em_reproduce_benchmark_scaling_s1,124,4960,completed,2886.608,2613.6712,2681.4563,4
+s2,shm_em_reproduce_benchmark_scaling_s2,1240,49600,completed,6541.5039,6925.5853,7387.2569,4

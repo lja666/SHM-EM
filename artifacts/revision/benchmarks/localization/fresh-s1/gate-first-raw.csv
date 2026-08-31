@@ -1,0 +1,17 @@
+operation,phase,repetition,elapsedMs,rowCount,pass
+gate-first,first,1,2908.2109,4960,True
+gate-first,warmup,1,2460.5228,4960,True
+gate-first,warmup,2,2629.7076,4960,True
+gate-first,warmup,3,2440.3757,4960,True
+gate-first,warmup,4,2444.6221,4960,True
+gate-first,warmup,5,2420.0804,4960,True
+gate-first,measured,1,2214.8353,4960,True
+gate-first,measured,2,2552.2621,4960,True
+gate-first,measured,3,2325.2285,4960,True
+gate-first,measured,4,2542.8349,4960,True
+gate-first,measured,5,2293.8826,4960,True
+gate-first,measured,6,2489.5593,4960,True
+gate-first,measured,7,2340.6854,4960,True
+gate-first,measured,8,2298.6949,4960,True
+gate-first,measured,9,2468.4791,4960,True
+gate-first,measured,10,2105.7613,4960,True

@@ -1,0 +1,16 @@
+{
+  "database": "shm_em_reproduce_benchmark_scaling_s2",
+  "capturedAt": "2026-08-31T02:06:43.166515+00:00",
+  "scope": "disposable benchmark database only",
+  "connections": [
+    {
+      "connectionId": 20939,
+      "command": "Query",
+      "timeSeconds": 181,
+      "state": "executing",
+      "info": "SELECT d.*, r.result_hash AS run_result_hash, b.output_hash AS batch_output_hash\n        FROM em_prediction_display d\n        LEFT JOIN em_prediction_run r ON r.id = d.run_id\n        LEFT JOIN em_prediction_batch b ON b.id = d.batch_id\n         WHERE  d.batch_id = 5 \n        ORDER BY d.future_time ASC, d.target_type ASC, d.feature_code ASC, d.step ASC\n        LIMIT 50000",
+      "status": "killed",
+      "error": null
+    }
+  ]
+}

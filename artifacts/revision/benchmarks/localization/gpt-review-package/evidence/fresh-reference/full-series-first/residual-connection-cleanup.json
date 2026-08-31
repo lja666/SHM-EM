@@ -1,0 +1,6 @@
+{
+  "database": "shm_em_reproduce_benchmark_reference",
+  "capturedAt": "2026-08-31T01:53:27.431741+00:00",
+  "scope": "disposable benchmark database only",
+  "connections": []
+}

@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "shm-em-phase2a1-operation-order-v1",
+  "workload": {
+    "database": "shm_em_reproduce_benchmark_scaling_s2",
+    "batchId": 5,
+    "projectId": 2,
+    "batchCode": "PHASE2A_S2_20260624100000",
+    "runCount": 1,
+    "targetCount": 1240,
+    "rowCount": 49600,
+    "featureCode": "s2_target_00001"
+  },
+  "cases": [
+    {
+      "case": "D01-gate-first",
+      "freshProcess": true,
+      "singleTargetCallsBeforeGate": 0,
+      "fullSeriesCallsBeforeGate": 0,
+      "preparationElapsedMs": 0,
+      "preparationCompletedCalls": 0,
+      "preparationError": null,
+      "gateStatus": "timeout",
+      "gateElapsedMs": 180028.5128,
+      "maximumRssBytes": 562225152,
+      "threadDominantCategory": "jdbc-mysql-read"
+    },
+    {
+      "case": "D02-one-full-series-then-gate",
+      "freshProcess": true,
+      "singleTargetCallsBeforeGate": 0,
+      "fullSeriesCallsBeforeGate": 1,
+      "preparationElapsedMs": 4885.7297,
+      "preparationCompletedCalls": 1,
+      "preparationError": null,
+      "gateStatus": "timeout",
+      "gateElapsedMs": 180028.105,
+      "maximumRssBytes": 627679232,
+      "threadDominantCategory": "jdbc-mysql-read"
+    },
+    {
+      "case": "D03-36-full-series-then-gate",
+      "freshProcess": true,
+      "singleTargetCallsBeforeGate": 0,
+      "fullSeriesCallsBeforeGate": 36,
+      "preparationElapsedMs": 160512.9001,
+      "preparationCompletedCalls": 36,
+      "preparationError": null,
+      "gateStatus": "timeout",
+      "gateElapsedMs": 180039.6137,
+      "maximumRssBytes": 1751265280,
+      "threadDominantCategory": "jdbc-mysql-read"
+    },
+    {
+      "case": "D04-36-single-and-36-full-then-gate",
+      "freshProcess": true,
+      "singleTargetCallsBeforeGate": 36,
+      "fullSeriesCallsBeforeGate": 36,
+      "preparationElapsedMs": 161580.3993,
+      "preparationCompletedCalls": 72,
+      "preparationError": null,
+      "gateStatus": "timeout",
+      "gateElapsedMs": 180028.261,
+      "maximumRssBytes": 1486655488,
+      "threadDominantCategory": "jdbc-mysql-read"
+    }
+  ]
+}

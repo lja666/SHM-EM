@@ -1,0 +1,41 @@
+{
+  "label": "reference",
+  "workload": {
+    "database": "shm_em_reproduce_benchmark_reference",
+    "batchId": 40,
+    "projectId": 1,
+    "batchCode": "ROLLING_120M_20250101004202_RUN_20260830232819008787",
+    "runCount": 6,
+    "targetCount": 124,
+    "rowCount": 4960,
+    "featureCode": "dtu1_point1_settlement_value"
+  },
+  "operations": {
+    "gate-first": {
+      "operation": "gate-first",
+      "firstMs": 723.7235,
+      "count": 10,
+      "medianMs": 331.9719,
+      "p95Ms": 359.7925,
+      "minMs": 289.1243,
+      "maxMs": 359.7925,
+      "meanMs": 328.73167,
+      "stddevMs": 22.10272,
+      "outliersRemoved": 0,
+      "allValid": true
+    },
+    "full-series-first": {
+      "operation": "full-series-first",
+      "firstMs": 747.4824,
+      "count": 10,
+      "medianMs": 357.0651,
+      "p95Ms": 402.8476,
+      "minMs": 316.1504,
+      "maxMs": 402.8476,
+      "meanMs": 355.17076,
+      "stddevMs": 25.593406,
+      "outliersRemoved": 0,
+      "allValid": true
+    }
+  }
+}

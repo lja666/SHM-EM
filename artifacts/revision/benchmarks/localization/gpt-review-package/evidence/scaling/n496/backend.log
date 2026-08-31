@@ -1,0 +1,23 @@
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::               (v2.6.13)
+
+2026-08-31 09:57:11.325  INFO 43920 --- [           main] mybatis.iem.em.ShmEmApplication          : Starting ShmEmApplication using Java 1.8.0_482 on LJA with PID 43920 (D:\SpringBoot_Mybatis\SHM-PIT\SHM_EM_SOFTX_REVISION\src\backend\target\SHM-EM-1.0.0.jar started by nlfdz in C:\Users\nlfdz\AppData\Local\Temp\shm-em-phase2a-6v2xedw5\sweep-496)
+2026-08-31 09:57:11.330  INFO 43920 --- [           main] mybatis.iem.em.ShmEmApplication          : The following 1 profile is active: "reproduce"
+2026-08-31 09:57:14.359  INFO 43920 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 5302 (http)
+2026-08-31 09:57:14.378  INFO 43920 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-08-31 09:57:14.378  INFO 43920 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.68]
+2026-08-31 09:57:14.635  INFO 43920 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-08-31 09:57:14.636  INFO 43920 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3229 ms
+2026-08-31 09:57:14.872  INFO 43920 --- [           main] c.a.d.s.b.a.DruidDataSourceAutoConfigure : Init DruidDataSource
+2026-08-31 09:57:15.305  INFO 43920 --- [           main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2026-08-31 09:57:17.364  INFO 43920 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 5302 (http) with context path ''
+2026-08-31 09:57:17.385  INFO 43920 --- [           main] mybatis.iem.em.ShmEmApplication          : Started ShmEmApplication in 6.704 seconds (JVM running for 7.415)
+2026-08-31 09:57:17.577  INFO 43920 --- [nio-5302-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-08-31 09:57:17.577  INFO 43920 --- [nio-5302-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-08-31 09:57:17.578  INFO 43920 --- [nio-5302-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms

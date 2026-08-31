@@ -1,0 +1,102 @@
+elapsedSeconds,activeConnections,queryConnections,states,error
+0.001,1,0,Sleep::,
+1.019,1,1,"Query:executing:SELECT d.*, r.result_hash AS run_result_hash, b.output_hash AS batch_output_hash
+        FROM em_prediction_display d
+        LEFT JOIN em_prediction_run r ON r",
+2.037,1,1,"Query:executing:SELECT d.*, r.result_hash AS run_result_hash, b.output_hash AS batch_output_hash
+        FROM em_prediction_display d
+        LEFT JOIN em_prediction_run r ON r",
+3.049,1,1,"Query:executing:SELECT d.*, r.result_hash AS run_result_hash, b.output_hash AS batch_output_hash
+        FROM em_prediction_display d
+        LEFT JOIN em_prediction_run r ON r",
+4.063,1,1,"Query:executing:SELECT d.*, r.result_hash AS run_result_hash, b.output_hash AS batch_output_hash
+        FROM em_prediction_display d
+        LEFT JOIN em_prediction_run r ON r",
+5.074,1,1,"Query:executing:SELECT d.*, r.result_hash AS run_result_hash, b.output_hash AS batch_output_hash
+        FROM em_prediction_display d
+        LEFT JOIN em_prediction_run r ON r",
+7.055,1,1,"Query:executing:SELECT d.*, r.result_hash AS run_result_hash, b.output_hash AS batch_output_hash
+        FROM em_prediction_display d
+        LEFT JOIN em_prediction_run r ON r",
+8.073,1,1,"Query:executing:SELECT d.*, r.result_hash AS run_result_hash, b.output_hash AS batch_output_hash
+        FROM em_prediction_display d
+        LEFT JOIN em_prediction_run r ON r",
+9.087,1,1,"Query:executing:SELECT d.*, r.result_hash AS run_result_hash, b.output_hash AS batch_output_hash
+        FROM em_prediction_display d
+        LEFT JOIN em_prediction_run r ON r",
+10.102,1,1,"Query:executing:SELECT d.*, r.result_hash AS run_result_hash, b.output_hash AS batch_output_hash
+        FROM em_prediction_display d
+        LEFT JOIN em_prediction_run r ON r",
+11.119,1,1,"Query:executing:SELECT d.*, r.result_hash AS run_result_hash, b.output_hash AS batch_output_hash
+        FROM em_prediction_display d
+        LEFT JOIN em_prediction_run r ON r",
+12.129,1,1,"Query:executing:SELECT d.*, r.result_hash AS run_result_hash, b.output_hash AS batch_output_hash
+        FROM em_prediction_display d
+        LEFT JOIN em_prediction_run r ON r",
+13.14,1,1,"Query:executing:SELECT d.*, r.result_hash AS run_result_hash, b.output_hash AS batch_output_hash
+        FROM em_prediction_display d
+        LEFT JOIN em_prediction_run r ON r",
+14.15,1,1,"Query:executing:SELECT d.*, r.result_hash AS run_result_hash, b.output_hash AS batch_output_hash
+        FROM em_prediction_display d
+        LEFT JOIN em_prediction_run r ON r",
+15.163,1,1,"Query:executing:SELECT d.*, r.result_hash AS run_result_hash, b.output_hash AS batch_output_hash
+        FROM em_prediction_display d
+        LEFT JOIN em_prediction_run r ON r",
+17.079,1,1,"Query:executing:SELECT d.*, r.result_hash AS run_result_hash, b.output_hash AS batch_output_hash
+        FROM em_prediction_display d
+        LEFT JOIN em_prediction_run r ON r",
+18.088,1,1,"Query:executing:SELECT d.*, r.result_hash AS run_result_hash, b.output_hash AS batch_output_hash
+        FROM em_prediction_display d
+        LEFT JOIN em_prediction_run r ON r",
+19.102,1,1,"Query:executing:SELECT d.*, r.result_hash AS run_result_hash, b.output_hash AS batch_output_hash
+        FROM em_prediction_display d
+        LEFT JOIN em_prediction_run r ON r",
+20.114,1,1,"Query:executing:SELECT d.*, r.result_hash AS run_result_hash, b.output_hash AS batch_output_hash
+        FROM em_prediction_display d
+        LEFT JOIN em_prediction_run r ON r",
+21.133,1,1,"Query:executing:SELECT d.*, r.result_hash AS run_result_hash, b.output_hash AS batch_output_hash
+        FROM em_prediction_display d
+        LEFT JOIN em_prediction_run r ON r",
+22.142,1,1,"Query:executing:SELECT d.*, r.result_hash AS run_result_hash, b.output_hash AS batch_output_hash
+        FROM em_prediction_display d
+        LEFT JOIN em_prediction_run r ON r",
+23.154,1,1,"Query:executing:SELECT d.*, r.result_hash AS run_result_hash, b.output_hash AS batch_output_hash
+        FROM em_prediction_display d
+        LEFT JOIN em_prediction_run r ON r",
+24.168,1,1,"Query:executing:SELECT d.*, r.result_hash AS run_result_hash, b.output_hash AS batch_output_hash
+        FROM em_prediction_display d
+        LEFT JOIN em_prediction_run r ON r",
+25.182,1,1,"Query:executing:SELECT d.*, r.result_hash AS run_result_hash, b.output_hash AS batch_output_hash
+        FROM em_prediction_display d
+        LEFT JOIN em_prediction_run r ON r",
+26.194,1,1,"Query:executing:SELECT d.*, r.result_hash AS run_result_hash, b.output_hash AS batch_output_hash
+        FROM em_prediction_display d
+        LEFT JOIN em_prediction_run r ON r",
+27.208,1,1,"Query:executing:SELECT d.*, r.result_hash AS run_result_hash, b.output_hash AS batch_output_hash
+        FROM em_prediction_display d
+        LEFT JOIN em_prediction_run r ON r",
+28.221,1,1,"Query:executing:SELECT d.*, r.result_hash AS run_result_hash, b.output_hash AS batch_output_hash
+        FROM em_prediction_display d
+        LEFT JOIN em_prediction_run r ON r",
+29.238,1,1,"Query:executing:SELECT d.*, r.result_hash AS run_result_hash, b.output_hash AS batch_output_hash
+        FROM em_prediction_display d
+        LEFT JOIN em_prediction_run r ON r",
+30.261,1,1,"Query:executing:SELECT d.*, r.result_hash AS run_result_hash, b.output_hash AS batch_output_hash
+        FROM em_prediction_display d
+        LEFT JOIN em_prediction_run r ON r",
+32.237,1,1,"Query:executing:SELECT d.*, r.result_hash AS run_result_hash, b.output_hash AS batch_output_hash
+        FROM em_prediction_display d
+        LEFT JOIN em_prediction_run r ON r",
+33.259,1,1,"Query:executing:SELECT d.*, r.result_hash AS run_result_hash, b.output_hash AS batch_output_hash
+        FROM em_prediction_display d
+        LEFT JOIN em_prediction_run r ON r",
+34.274,1,1,"Query:executing:SELECT d.*, r.result_hash AS run_result_hash, b.output_hash AS batch_output_hash
+        FROM em_prediction_display d
+        LEFT JOIN em_prediction_run r ON r",
+35.287,1,1,"Query:executing:SELECT d.*, r.result_hash AS run_result_hash, b.output_hash AS batch_output_hash
+        FROM em_prediction_display d
+        LEFT JOIN em_prediction_run r ON r",
+36.295,1,1,"Query:executing:SELECT d.*, r.result_hash AS run_result_hash, b.output_hash AS batch_output_hash
+        FROM em_prediction_display d
+        LEFT JOIN em_prediction_run r ON r",
+37.323,1,0,Sleep::,

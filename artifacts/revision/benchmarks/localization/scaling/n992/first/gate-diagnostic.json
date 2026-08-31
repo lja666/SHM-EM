@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "shm-em-phase2a1-gate-diagnostic-v1",
+  "capturedAt": "2026-08-31T02:03:34.121559+00:00",
+  "workload": {
+    "database": "shm_em_reproduce_benchmark_localization_0992",
+    "batchId": 5,
+    "projectId": 2,
+    "batchCode": "PHASE2A_L0992_20260624100000",
+    "runCount": 1,
+    "targetCount": 992,
+    "rowCount": 39680,
+    "featureCode": "l0992_target_00001"
+  },
+  "timeoutSeconds": 180,
+  "jvmPid": 32016,
+  "request": {
+    "status": "completed",
+    "elapsedMs": 136207.9589,
+    "actualPointCount": 39680,
+    "resultIntegrityValid": true,
+    "executionEligible": true,
+    "issues": []
+  },
+  "wallElapsedSeconds": 136.543081,
+  "diagnosticThresholdsCaptured": [
+    5,
+    15,
+    30,
+    60,
+    120
+  ],
+  "threadCategoryCounts": {
+    "jdbc-mysql-read": 5
+  },
+  "memorySampleCount": 130,
+  "mysqlProcesslistSampleCount": 130
+}

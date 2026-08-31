@@ -1,0 +1,30 @@
+{
+  "performanceSchemaEnabled": true,
+  "consumers": [
+    {
+      "NAME": "events_statements_cpu",
+      "ENABLED": "NO"
+    },
+    {
+      "NAME": "events_statements_current",
+      "ENABLED": "YES"
+    },
+    {
+      "NAME": "events_statements_history",
+      "ENABLED": "YES"
+    },
+    {
+      "NAME": "events_statements_history_long",
+      "ENABLED": "NO"
+    },
+    {
+      "NAME": "statements_digest",
+      "ENABLED": "YES"
+    }
+  ],
+  "digestRows": 10000,
+  "digestCapacity": 10000,
+  "digestCapacitySaturated": true,
+  "matchingScalingDigests": [],
+  "interpretation": "Digest evidence for this run is unavailable because the server-wide digest table was already at capacity; per-second SHOW FULL PROCESSLIST samples and EXPLAIN ANALYZE remain the runtime SQL evidence."
+}

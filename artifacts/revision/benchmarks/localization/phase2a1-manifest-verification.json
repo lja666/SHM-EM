@@ -1,0 +1,8 @@
+{
+  "schemaVersion": "shm-em-phase2a1-manifest-verification-v1",
+  "verifiedAt": "2026-08-31T02:20:02.408895+00:00",
+  "manifestSha256": "190fb91b0d6dc704c7aa110f344420ec0440148e176c5ed3c5ea10c197301818",
+  "checkedFiles": 259,
+  "mismatches": [],
+  "pass": true
+}

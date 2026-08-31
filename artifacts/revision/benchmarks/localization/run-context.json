@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "shm-em-phase2a1-run-context-v1",
+  "startedAt": "2026-08-31T02:09:20.389222+00:00",
+  "sections": [
+    "control"
+  ],
+  "gateTimeoutSeconds": 180,
+  "gateResultQueryLimit": 50000,
+  "coreDiff": {
+    "baseline": "b41c1894f75561c8ef682062a5e6dab35c3916a7",
+    "paths": [
+      "src/backend/src/main",
+      "src/frontend/src",
+      "src/pit_pre/pit_pre",
+      ".gitattributes"
+    ],
+    "modifiedFiles": [],
+    "pass": true
+  },
+  "backendJar": "D:\\SpringBoot_Mybatis\\SHM-PIT\\SHM_EM_SOFTX_REVISION\\src\\backend\\target\\SHM-EM-1.0.0.jar",
+  "java": "C:\\Users\\nlfdz\\.jdks\\temurin-1.8.0_482\\bin\\java.exe"
+}

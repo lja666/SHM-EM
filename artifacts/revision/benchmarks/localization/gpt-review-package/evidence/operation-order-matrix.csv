@@ -1,0 +1,5 @@
+case,freshProcess,singleTargetCallsBeforeGate,fullSeriesCallsBeforeGate,preparationCompletedCalls,preparationElapsedMs,preparationError,gateStatus,gateElapsedMs,maximumRssBytes,threadDominantCategory
+D01-gate-first,True,0,0,0,0,,timeout,180028.5128,562225152,jdbc-mysql-read
+D02-one-full-series-then-gate,True,0,1,1,4885.7297,,timeout,180028.105,627679232,jdbc-mysql-read
+D03-36-full-series-then-gate,True,0,36,36,160512.9001,,timeout,180039.6137,1751265280,jdbc-mysql-read
+D04-36-single-and-36-full-then-gate,True,36,36,72,161580.3993,,timeout,180028.261,1486655488,jdbc-mysql-read

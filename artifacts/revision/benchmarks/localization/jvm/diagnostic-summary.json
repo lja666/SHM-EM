@@ -1,0 +1,22 @@
+{
+  "threadSamples": 114,
+  "threadCategories": {
+    "jdbc-mysql-read": 114
+  },
+  "timeoutScenarios": [
+    "fresh-s2/D01-gate-first",
+    "fresh-s2/D02-one-full-series-then-gate",
+    "fresh-s2/D03-36-full-series-then-gate",
+    "fresh-s2/D04-36-single-and-36-full-then-gate",
+    "gpt-review-package/evidence/fresh-s2/D01-gate-first",
+    "gpt-review-package/evidence/fresh-s2/D02-one-full-series-then-gate",
+    "gpt-review-package/evidence/fresh-s2/D03-36-full-series-then-gate",
+    "gpt-review-package/evidence/fresh-s2/D04-36-single-and-36-full-then-gate",
+    "gpt-review-package/evidence/scaling/n1240/first",
+    "scaling/n1240/first"
+  ],
+  "timeoutProcesslistSamples": 2586,
+  "timeoutSamplesWithActiveQuery": 2571,
+  "maximumObservedRssBytes": 1751265280,
+  "maximumObservedGcTimeDeltaSeconds": 0.0
+}

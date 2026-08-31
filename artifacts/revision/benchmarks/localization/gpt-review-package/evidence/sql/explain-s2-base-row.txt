@@ -1,0 +1,4 @@
+client_elapsed_ms=1584.676600
+-> Limit: 50000 row(s)  (cost=3269 rows=24266) (actual time=1457..1506 rows=49600 loops=1)
+    -> Sort: em_prediction_result.future_time, em_prediction_result.target_type, em_prediction_result.feature_code, em_prediction_result.step, limit input to 50000 row(s) per chunk  (cost=3269 rows=24266) (actual time=1457..1500 rows=49600 loops=1)
+        -> Index lookup on em_prediction_result using idx_em_prediction_result_batch_feature (batch_id=5)  (cost=3269 rows=24266) (actual time=0.0921..273 rows=49600 loops=1)

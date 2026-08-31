@@ -1,0 +1,139 @@
+{
+  "sqlImports": [
+    {
+      "file": "00_SHM_EM_complete_schema.sql",
+      "sha256": "00d93b1471e531a8fa3777fb968cb8bb5d97e3fa7448928c5e20d5b7fe73ed01",
+      "elapsedSeconds": 2.720057,
+      "exitCode": 0,
+      "outputTail": []
+    },
+    {
+      "file": "01_SHM_EM_conversion_operators.sql",
+      "sha256": "96f09846a92e5e93d389120f6eec5ff3487c1f2d86c54108a7eca8b4f38fac90",
+      "elapsedSeconds": 0.215789,
+      "exitCode": 0,
+      "outputTail": []
+    },
+    {
+      "file": "02_SHM_EM_public_sample.sql",
+      "sha256": "04bcd00847b74db6c1227fd6b49c6fe6b427e2b896567af8f7b9240944444e7f",
+      "elapsedSeconds": 0.727868,
+      "exitCode": 0,
+      "outputTail": []
+    },
+    {
+      "file": "03_SHM_EM_public_validation.sql",
+      "sha256": "f10beadac94b4c7a4443785de76d5e6027fdc0f435b4e274e6f6e10d827b056e",
+      "elapsedSeconds": 0.342838,
+      "exitCode": 0,
+      "outputTail": [
+        "check_item\tvalue",
+        "monitoring_point_count_expected_9\t9",
+        "check_item\tvalue",
+        "station_record_count_expected_73\t73",
+        "check_item\tvalue",
+        "sensor_record_count_expected_74\t74",
+        "check_item\tvalue",
+        "acquisition_module_count_expected_17\t17",
+        "check_item\tvalue",
+        "dtu_count_expected_6\t6",
+        "check_item\tvalue",
+        "model_count_expected_6\t6",
+        "check_item\tvalue",
+        "feature_count_expected_164\t164",
+        "check_item\tvalue",
+        "prediction_target_count_expected_124\t124",
+        "check_item\tvalue",
+        "maximum_history_steps_expected_16\t16",
+        "check_item\tvalue",
+        "public_observation_rows_expected_2464\t2464",
+        "check_item\tvalue",
+        "displacement_rows_expected_1344\t1344",
+        "check_item\tvalue",
+        "earth_pressure_rows_expected_448\t448",
+        "check_item\tvalue",
+        "water_level_rows_expected_32\t32",
+        "check_item\tvalue",
+        "static_level_rows_expected_640\t640",
+        "check_item\tvalue",
+        "mapped_features_without_source_rows_expected_0\t0",
+        "check_item\tvalue",
+        "acceleration_samples_expected_0\t0",
+        "check_item\tvalue",
+        "preloaded_operational_records_expected_0\t0",
+        "check_item\tvalue",
+        "non_anonymized_object_codes_expected_0\t0",
+        "check_item\tvalue",
+        "incomplete_model_artifact_contract_expected_0\t0",
+        "check_item\tvalue",
+        "prediction_display_engineering_columns_expected_10\t10"
+      ]
+    },
+    {
+      "file": "04_SHM_EM_persisted_prediction_integrity.sql",
+      "sha256": "348222e900bb151a93336e29b46f8182af95f644df4ba523af400ae8f87bf0b5",
+      "elapsedSeconds": 0.304053,
+      "exitCode": 0,
+      "outputTail": [
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1"
+      ]
+    }
+  ],
+  "fixture": {
+    "label": "L0248",
+    "projectId": 2,
+    "modelId": 45,
+    "modelCode": "PHASE2A_L0248_MODEL",
+    "modelVersion": "fixture-v1",
+    "targetType": "phase2a_l0248_pressure",
+    "targetCount": 248,
+    "rowCount": 9920,
+    "stationCount": 10,
+    "instrumentCount": 10,
+    "ruleId": 11,
+    "batchId": 5,
+    "runId": 25
+  },
+  "baseTime": "2026-06-24T10:00:00",
+  "persistence": {
+    "label": "L0248",
+    "targetCount": 248,
+    "rowCount": 9920,
+    "elapsedMs": 33071.5004,
+    "rowsPerSecond": 299.956,
+    "chunkRows": 2000,
+    "transactionMode": "autocommit per executemany chunk"
+  },
+  "integrity": {
+    "label": "L0248",
+    "rowCount": 9920,
+    "generationMs": 1539.1867,
+    "verificationMs": 1412.3469,
+    "persistedResultHash": "33927c5e4c6948dcdd1640cd197d417b73834637b785f10019d7f37d92ff897f",
+    "persistedOutputHash": "5f3c55a16db55ccb6d6ee62395e89de5e714ac01597d3ac186c93c930051eacb",
+    "hashVersions": {
+      "result": "prediction-persisted-integrity-v1",
+      "output": "prediction-persisted-output-integrity-v1"
+    },
+    "independentRecomputationMatch": true
+  },
+  "discoveredWorkload": {
+    "database": "shm_em_reproduce_benchmark_localization_0248",
+    "batchId": 5,
+    "projectId": 2,
+    "batchCode": "PHASE2A_L0248_20260624100000",
+    "runCount": 1,
+    "targetCount": 248,
+    "rowCount": 9920,
+    "featureCode": "l0248_target_00001"
+  }
+}

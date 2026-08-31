@@ -1,0 +1,32 @@
+[
+  {
+    "Id": 5,
+    "User": "event_scheduler",
+    "Host": "localhost",
+    "db": null,
+    "Command": "Daemon",
+    "Time": 256167,
+    "State": "Waiting on empty queue",
+    "Info": null
+  },
+  {
+    "Id": 20922,
+    "User": "root",
+    "Host": "localhost:65292",
+    "db": "shm_em_reproduce_benchmark_scaling_s1",
+    "Command": "Sleep",
+    "Time": 3,
+    "State": "",
+    "Info": null
+  },
+  {
+    "Id": 20923,
+    "User": "root",
+    "Host": "localhost:65293",
+    "db": "shm_em_reproduce_benchmark_scaling_s1",
+    "Command": "Query",
+    "Time": 0,
+    "State": "init",
+    "Info": "SHOW FULL PROCESSLIST"
+  }
+]

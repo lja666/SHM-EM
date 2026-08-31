@@ -1,0 +1,8 @@
+scale,database,targets,rows,baseQueryFirstMs,baseQueryMedianMs
+reference,shm_em_reproduce_benchmark_reference,124,4960,278.204,300.1251
+s1,shm_em_reproduce_benchmark_scaling_s1,124,4960,588.622,459.7658
+n248,shm_em_reproduce_benchmark_localization_0248,248,9920,685.862,655.686
+n496,shm_em_reproduce_benchmark_localization_0496,496,19840,1681.2709,1631.8258
+n744,shm_em_reproduce_benchmark_localization_0744,744,29760,2744.3988,2852.4172
+n992,shm_em_reproduce_benchmark_localization_0992,992,39680,3012.636,2858.4775
+s2,shm_em_reproduce_benchmark_scaling_s2,1240,49600,3980.5557,4188.114

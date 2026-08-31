@@ -1,0 +1,73 @@
+{
+  "schemaVersion": "shm-em-phase2a1-scaling-sweep-v1",
+  "fixedSteps": 40,
+  "gateResultQueryLimit": 50000,
+  "rows": [
+    {
+      "targets": 124,
+      "rows": 4960,
+      "database": "shm_em_reproduce_benchmark_scaling_s1",
+      "firstStatus": "completed",
+      "firstMs": 2696.9332,
+      "measuredCount": 3,
+      "medianMs": 2506.1048,
+      "p95Ms": 2652.7497,
+      "stopPoint": false
+    },
+    {
+      "targets": 248,
+      "rows": 9920,
+      "database": "shm_em_reproduce_benchmark_localization_0248",
+      "firstStatus": "completed",
+      "firstMs": 9921.5274,
+      "measuredCount": 3,
+      "medianMs": 9756.1954,
+      "p95Ms": 10056.2061,
+      "stopPoint": false
+    },
+    {
+      "targets": 496,
+      "rows": 19840,
+      "database": "shm_em_reproduce_benchmark_localization_0496",
+      "firstStatus": "completed",
+      "firstMs": 37544.4828,
+      "measuredCount": 3,
+      "medianMs": 35816.0754,
+      "p95Ms": 36181.2983,
+      "stopPoint": false
+    },
+    {
+      "targets": 744,
+      "rows": 29760,
+      "database": "shm_em_reproduce_benchmark_localization_0744",
+      "firstStatus": "completed",
+      "firstMs": 75821.5819,
+      "measuredCount": 0,
+      "medianMs": null,
+      "p95Ms": null,
+      "stopPoint": false
+    },
+    {
+      "targets": 992,
+      "rows": 39680,
+      "database": "shm_em_reproduce_benchmark_localization_0992",
+      "firstStatus": "completed",
+      "firstMs": 136207.9589,
+      "measuredCount": 0,
+      "medianMs": null,
+      "p95Ms": null,
+      "stopPoint": false
+    },
+    {
+      "targets": 1240,
+      "rows": 49600,
+      "database": "shm_em_reproduce_benchmark_scaling_s2",
+      "firstStatus": "timeout",
+      "firstMs": 180034.1286,
+      "measuredCount": 0,
+      "medianMs": null,
+      "p95Ms": null,
+      "stopPoint": true
+    }
+  ]
+}

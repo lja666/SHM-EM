@@ -1,0 +1,32 @@
+[
+  {
+    "Id": 5,
+    "User": "event_scheduler",
+    "Host": "localhost",
+    "db": null,
+    "Command": "Daemon",
+    "Time": 256413,
+    "State": "Waiting on empty queue",
+    "Info": null
+  },
+  {
+    "Id": 20932,
+    "User": "root",
+    "Host": "localhost:59300",
+    "db": "shm_em_reproduce_benchmark_localization_0744",
+    "Command": "Query",
+    "Time": 30,
+    "State": "executing",
+    "Info": "SELECT d.*, r.result_hash AS run_result_hash, b.output_hash AS batch_output_hash\n        FROM em_prediction_display d\n        LEFT JOIN em_prediction_run r ON r.id = d.run_id\n        LEFT JOIN em_prediction_batch b ON b.id = d.batch_id\n         WHERE  d.batch_id = 5 \n        ORDER BY d.future_time ASC, d.target_type ASC, d.feature_code ASC, d.step ASC\n        LIMIT 50000"
+  },
+  {
+    "Id": 20933,
+    "User": "root",
+    "Host": "localhost:59301",
+    "db": "shm_em_reproduce_benchmark_localization_0744",
+    "Command": "Query",
+    "Time": 0,
+    "State": "init",
+    "Info": "SHOW FULL PROCESSLIST"
+  }
+]

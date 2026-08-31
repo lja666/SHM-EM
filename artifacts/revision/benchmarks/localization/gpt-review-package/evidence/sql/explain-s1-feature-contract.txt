@@ -1,0 +1,3 @@
+client_elapsed_ms=3.469900
+-> Limit: 50000 row(s)  (cost=15.6 rows=124) (actual time=0.0486..0.48 rows=124 loops=1)
+    -> Index lookup on em_prediction_feature_mapping using idx_em_prediction_feature_target (project_id=2), with index condition: (em_prediction_feature_mapping.enabled = 1)  (cost=15.6 rows=124) (actual time=0.0473..0.468 rows=124 loops=1)

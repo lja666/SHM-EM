@@ -73,6 +73,7 @@ public class PredictionExecutionGateServiceImpl implements PredictionExecutionGa
         List<PredictionFeatureMapping> features = contractFeatures(batch.getProjectId());
         List<PredictionRun> runs = safe(predictionMapper.selectRunsByBatch(batchId));
         PredictionQuery resultQuery = new PredictionQuery();
+        resultQuery.setProjectId(batch.getProjectId());
         resultQuery.setBatchId(batchId);
         resultQuery.setLimit(50000);
         List<PredictionDisplay> results = safe(predictionMapper.selectSeries(resultQuery, 50000));

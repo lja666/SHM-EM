@@ -13,6 +13,7 @@ import mybatis.iem.em.modules.engineering.infrastructure.mapper.PredictionExecut
 import mybatis.iem.em.modules.engineering.infrastructure.mapper.PredictionMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
 
 import java.time.LocalDateTime;
 import java.math.BigDecimal;
@@ -20,12 +21,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class PredictionExecutionGateServiceImplTest {
@@ -128,6 +132,19 @@ public class PredictionExecutionGateServiceImplTest {
         assertFalse(gate.getTimelineValid());
         assertFalse(gate.getExecutionEligible());
         assertTrue(gate.getMissingFeatures().stream().anyMatch(value -> value.contains(missingFeature.getFeatureCode())));
+    }
+
+    @Test
+    public void scopesResultLookupToTheBatchProjectWithoutChangingTheLimit() {
+        stubValidSeries();
+
+        service.inspect(1L, PredictionExecutionMode.REPLAY, batch.getBaseTime());
+
+        ArgumentCaptor<PredictionQuery> query = ArgumentCaptor.forClass(PredictionQuery.class);
+        verify(predictionMapper).selectSeries(query.capture(), eq(50000));
+        assertEquals(batch.getProjectId(), query.getValue().getProjectId());
+        assertEquals(batch.getId(), query.getValue().getBatchId());
+        assertEquals(Integer.valueOf(50000), query.getValue().getLimit());
     }
 
     @Test

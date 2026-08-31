@@ -1,0 +1,283 @@
+{
+  "schemaVersion": "shm-em-data-model-contract-export-v1",
+  "contractVersion": "pit_pre_contract_v1",
+  "featureMappingVersion": "pit_pre_v1",
+  "project": {
+    "id": 1,
+    "code": "SHM_EM_PUBLIC_SAMPLE",
+    "name": "SHM-EM Public Reproduction Sample"
+  },
+  "timeline": {
+    "predictionMode": "rolling",
+    "expectedSteps": 40,
+    "timeStepMinutes": 3,
+    "horizonMinutes": 120,
+    "sharedBaseTimeRequired": true
+  },
+  "models": [
+    {
+      "id": 8,
+      "code": "settlement",
+      "name": "PIT_PRE settlement rolling forecast model",
+      "type": "rolling_forecast",
+      "version": "pit_pre_v1",
+      "targetType": "settlement",
+      "targetMetricCode": "static_level_value_mm",
+      "requiredHistoryRows": 12,
+      "expectedSteps": 40,
+      "timeStepMinutes": 3,
+      "maxOperationalAgeMinutes": 15,
+      "inputFeatureCount": 50,
+      "outputTargetCount": 10,
+      "artifactUri": "models/settlement_predict/best_model_settlement_optuna.pth",
+      "artifactHash": "3c18be8ae8fcdb1f8c740e8d0bf1c3e8775a5c0d1d11994d4360be1213c7ad40",
+      "preprocessorUri": "models/settlement_predict/preprocessor.joblib",
+      "preprocessorHash": "78b070dd1fbd6006b3254b60fb328a36f7748a401baca51d114586f5f9cc3e10",
+      "inferenceScriptHash": "3d347f2da9230937e664a98cfd5386035469bc0bd57002a8032f1fd64a61c0f2",
+      "bestParamsHash": "697bf5d27284caceec55875ede19cab5b42dec49026ccda1be304707ff230801",
+      "runtimeManifestHash": "302a869bca69d40846cab5fad8d681f176220058e724b3699b4c74fbc3e09ed0",
+      "environmentDigest": "5a2ec34259bee668cdfd19897f799280cac40087aece8b7d6e6d15fcf44a569d",
+      "inputSchemaHash": "5c2f6f0f2351b15675fc223b36043729b1e7f8ab0bd08caa891593672daa65f1",
+      "bundleHash": "c9a3dc8775b31696f64e211e6d4a0dbd02b3112c11bb68c3a1e70e8a9d0a2b12",
+      "runtimeConfig": {
+        "scriptPath": "./models/settlement_predict/predict_settlement_future_fixed_best_params_annotated.py",
+        "schemaVersion": "pit_pre_v1",
+        "bestParamsPath": "./models/settlement_predict/best_params.json",
+        "predictionMode": "rolling",
+        "timeStepMinutes": 3,
+        "runtimeManifestPath": "./runtime-manifest.json",
+        "maxPredictionSeconds": 60,
+        "predictionHorizonMinutes": 120,
+        "targetMeasurementSemantics": "Raw static-level measurement."
+      }
+    }
+  ],
+  "features": [
+    {
+      "id": 1069,
+      "modelId": 8,
+      "modelCode": "settlement",
+      "modelVersion": "pit_pre_v1",
+      "order": 115,
+      "featureCode": "dtu1_point1_settlement_value",
+      "featureName": "dtu1_point1_settlement_value",
+      "featureLabel": "DTU 1 Static level point 1 / Raw level",
+      "trainingFeatureCode": "1point1settlement_value",
+      "featureGroup": "settlement",
+      "targetType": "settlement",
+      "stationId": 4,
+      "instrumentId": 4,
+      "sourceRegistryCode": "SHM_EM_PUBLIC_SAMPLE_STATIC_LEVEL",
+      "sourceMetricCode": "static_level_value_mm",
+      "sourceField": "metric_value",
+      "sourceValueColumn": "raw_value",
+      "inputValueMode": "RAW",
+      "rawUnit": "mm",
+      "engineeringUnit": "mm",
+      "required": true,
+      "predictionTarget": true,
+      "transformation": {
+        "featureOperatorCode": null,
+        "stationConversionOperatorCode": "identity",
+        "outputConversionOperatorCode": "static_level_reference_compensation",
+        "outputConversionVersion": "static-level-v2-positive-20260713",
+        "transform": null
+      },
+      "window": {
+        "type": null,
+        "sizeSeconds": null
+      },
+      "metadata": null
+    },
+    {
+      "id": 1070,
+      "modelId": 8,
+      "modelCode": "settlement",
+      "modelVersion": "pit_pre_v1",
+      "order": 116,
+      "featureCode": "dtu1_point1_settlement_baseline_value",
+      "featureName": "dtu1_point1_settlement_baseline_value",
+      "featureLabel": "DTU 1 Static level point 1 / Baseline level",
+      "trainingFeatureCode": "1point1settlementbaseline_value",
+      "featureGroup": "settlement",
+      "targetType": "settlement",
+      "stationId": 4,
+      "instrumentId": 4,
+      "sourceRegistryCode": "SHM_EM_PUBLIC_SAMPLE_STATIC_LEVEL",
+      "sourceMetricCode": "static_level_value_mm",
+      "sourceField": "baseline_value",
+      "sourceValueColumn": "baseline_value",
+      "inputValueMode": "RAW",
+      "rawUnit": "mm",
+      "engineeringUnit": "mm",
+      "required": true,
+      "predictionTarget": false,
+      "transformation": {
+        "featureOperatorCode": null,
+        "stationConversionOperatorCode": "identity",
+        "outputConversionOperatorCode": "static_level_reference_compensation",
+        "outputConversionVersion": "static-level-v2-positive-20260713",
+        "transform": null
+      },
+      "window": {
+        "type": null,
+        "sizeSeconds": null
+      },
+      "metadata": null
+    },
+    {
+      "id": 1071,
+      "modelId": 8,
+      "modelCode": "settlement",
+      "modelVersion": "pit_pre_v1",
+      "order": 117,
+      "featureCode": "dtu1_point1_settlement_delta_value",
+      "featureName": "dtu1_point1_settlement_delta_value",
+      "featureLabel": "DTU 1 Static level point 1 / Settlement delta",
+      "trainingFeatureCode": "1point1settlementdelta_value",
+      "featureGroup": "settlement",
+      "targetType": "settlement",
+      "stationId": 4,
+      "instrumentId": 4,
+      "sourceRegistryCode": "SHM_EM_PUBLIC_SAMPLE_STATIC_LEVEL",
+      "sourceMetricCode": "ground_settlement",
+      "sourceField": "metric_value",
+      "sourceValueColumn": "raw_value",
+      "inputValueMode": "RAW",
+      "rawUnit": "mm",
+      "engineeringUnit": "mm",
+      "required": true,
+      "predictionTarget": false,
+      "transformation": {
+        "featureOperatorCode": null,
+        "stationConversionOperatorCode": "identity",
+        "outputConversionOperatorCode": "static_level_reference_compensation",
+        "outputConversionVersion": "static-level-v2-positive-20260713",
+        "transform": null
+      },
+      "window": {
+        "type": null,
+        "sizeSeconds": null
+      },
+      "metadata": null
+    },
+    {
+      "id": 1072,
+      "modelId": 8,
+      "modelCode": "settlement",
+      "modelVersion": "pit_pre_v1",
+      "order": 118,
+      "featureCode": "dtu1_point1_settlement_aux_value",
+      "featureName": "dtu1_point1_settlement_aux_value",
+      "featureLabel": "DTU 1 Static level point 1 / Auxiliary level",
+      "trainingFeatureCode": "1point1settlementdata2_value",
+      "featureGroup": "settlement",
+      "targetType": "settlement",
+      "stationId": 4,
+      "instrumentId": 4,
+      "sourceRegistryCode": "SHM_EM_PUBLIC_SAMPLE_STATIC_LEVEL",
+      "sourceMetricCode": "static_level_aux_mm",
+      "sourceField": "metric_value",
+      "sourceValueColumn": "raw_value",
+      "inputValueMode": "RAW",
+      "rawUnit": "mm",
+      "engineeringUnit": "mm",
+      "required": true,
+      "predictionTarget": false,
+      "transformation": {
+        "featureOperatorCode": null,
+        "stationConversionOperatorCode": "identity",
+        "outputConversionOperatorCode": "static_level_reference_compensation",
+        "outputConversionVersion": "static-level-v2-positive-20260713",
+        "transform": null
+      },
+      "window": {
+        "type": null,
+        "sizeSeconds": null
+      },
+      "metadata": null
+    }
+  ],
+  "targets": [
+    {
+      "modelId": 8,
+      "modelCode": "settlement",
+      "targetType": "settlement",
+      "featureCode": "dtu1_point1_settlement_value",
+      "trainingFeatureCode": "1point1settlement_value",
+      "stationId": 4,
+      "instrumentId": 4,
+      "engineeringUnit": "mm",
+      "outputConversionOperatorCode": "static_level_reference_compensation",
+      "outputConversionVersion": "static-level-v2-positive-20260713"
+    },
+    {
+      "modelId": 8,
+      "modelCode": "settlement",
+      "targetType": "settlement",
+      "featureCode": "dtu1_point2_settlement_value",
+      "trainingFeatureCode": "1point2settlement_value",
+      "stationId": 2,
+      "instrumentId": 5,
+      "engineeringUnit": "mm",
+      "outputConversionOperatorCode": "static_level_reference_compensation",
+      "outputConversionVersion": "static-level-v2-positive-20260713"
+    }
+  ],
+  "runtime": {
+    "schemaVersion": "pit_pre_runtime_v1",
+    "python": "3.10",
+    "executionDevice": "cpu",
+    "environment": {
+      "type": "native",
+      "supportedOperatingSystems": [
+        "Windows 10 or later"
+      ],
+      "setup": "requirements.lock.txt"
+    },
+    "dependencyLock": "requirements.lock.txt",
+    "dependencies": {
+      "joblib": "1.5.3",
+      "numpy": "2.2.6",
+      "pandas": "2.3.3",
+      "PyMySQL": "1.1.2",
+      "scikit-learn": "1.7.2",
+      "torch": "2.11.0"
+    },
+    "runtimeCapture": "Each prediction run stores this manifest hash and the effective package versions in input_snapshot_json.",
+    "manifestHash": "302a869bca69d40846cab5fad8d681f176220058e724b3699b4c74fbc3e09ed0"
+  },
+  "validation": {
+    "featureOrder": "globally contiguous from 1 across enabled required model-input mappings",
+    "inputSchemaHash": "5c2f6f0f2351b15675fc223b36043729b1e7f8ab0bd08caa891593672daa65f1",
+    "missingRequiredFeature": "REJECT_BEFORE_INFERENCE",
+    "duplicateTrainingFeatureCode": "REJECT_CONTRACT_LOAD",
+    "artifactOrPreprocessorHashMismatch": "REJECT_CONTRACT_LOAD",
+    "runtimeManifestOrBundleHashMismatch": "REJECT_CONTRACT_LOAD",
+    "unsupportedPredictionMode": "REJECT_CONTRACT_LOAD",
+    "incompleteOrMisalignedTimeline": "REJECT_EXECUTION_GATE",
+    "unitOrEngineeringConversionFailure": "REJECT_RULE_EVALUATION_OR_EXECUTION",
+    "executePolicy": "RECHECK_LATEST_PERSISTED_GATE_BEFORE_FORMAL_SIDE_EFFECTS"
+  },
+  "sourceOfTruth": {
+    "database": "shm_em_reproduce_benchmark_reference",
+    "tables": [
+      "em_prediction_model",
+      "em_prediction_feature_mapping",
+      "em_station_metric",
+      "em_metric"
+    ],
+    "runtimeManifest": "src/pit_pre/runtime-manifest.json",
+    "contractLoader": "src/pit_pre/pit_pre/contract.py"
+  },
+  "finalCoreFreezeV3": "eaa7d85a0b4921ab2f6e54234cff09aee6a30c8f",
+  "generatedAt": "2026-08-31T13:36:00.658195+00:00",
+  "compactExample": {
+    "modelCountShown": 1,
+    "modelCountInFullContract": 6,
+    "featuresShown": 4,
+    "featuresInFullContract": 164,
+    "targetsShown": 2,
+    "targetsInFullContract": 124
+  }
+}

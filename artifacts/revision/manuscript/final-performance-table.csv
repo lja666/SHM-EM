@@ -1,0 +1,20 @@
+﻿section,operation,workload,samples,medianMs,p95Ms,singleElapsedMs,source,note
+Reference workflow,Full six-model prediction batch,"6 models, 124 targets, 40 steps",30,16778.35945,18729.3258,,artifacts/revision/benchmarks/reference/pitpre-summary.json,"One process, concurrency 1; model artifacts cached."
+Reference workflow,Input assembly,"6 models, 124 targets, 40 steps",30,5632.6997,6260.9909,,artifacts/revision/benchmarks/reference/pitpre-summary.json,"One process, concurrency 1; model artifacts cached."
+Reference workflow,All-model inference,"6 models, 124 targets, 40 steps",30,5257.4835,6604.4273,,artifacts/revision/benchmarks/reference/pitpre-summary.json,"One process, concurrency 1; model artifacts cached."
+Reference workflow,Engineering conversion,"6 models, 124 targets, 40 steps",30,2951.38585,3544.938,,artifacts/revision/benchmarks/reference/pitpre-summary.json,"One process, concurrency 1; model artifacts cached."
+Reference workflow,Prediction persistence (exclusive estimate),"6 models, 124 targets, 40 steps",30,1352.79635,1535.9144,,artifacts/revision/benchmarks/reference/pitpre-summary.json,"One process, concurrency 1; model artifacts cached."
+Reference workflow,Persisted-integrity hashing,"6 models, 124 targets, 40 steps",30,531.5992,693.2692,,artifacts/revision/benchmarks/reference/pitpre-summary.json,"One process, concurrency 1; model artifacts cached."
+Reference workflow,Execution Gate inspection,"4,960 persisted prediction rows",30,343.12905,407.1003,,artifacts/revision/benchmarks/route-p/scaling-sweep-v2-summary.json,Final corrected production benchmark after project-and-batch query scoping.
+Reference workflow,Project Future State,public reference case,30,472.3416,574.7606,,artifacts/revision/benchmarks/reference/backend-summary.json,Concurrency 1.
+Reference workflow,Single-target joint series,public reference case,30,23.27815,31.3956,,artifacts/revision/benchmarks/reference/backend-summary.json,Concurrency 1.
+Reference workflow,Full-batch joint series,public reference case,30,278.82345,336.9315,,artifacts/revision/benchmarks/reference/backend-summary.json,Concurrency 1.
+Reference workflow,Rule Evaluate,public reference case,30,269.46535,313.3403,,artifacts/revision/benchmarks/reference/backend-summary.json,Concurrency 1.
+Reference workflow,Rule Execute,public reference case,10,317.23755,336.3605,,artifacts/revision/benchmarks/reference/backend-summary.json,Concurrency 1; Execute uses baseline restoration between calls.
+Reference workflow,Event provenance trace,public reference case,30,2.57785,20.6917,,artifacts/revision/benchmarks/reference/backend-summary.json,Concurrency 1.
+Tenfold Gate stress,Gate stress S1,"4,960 rows; 124 targets; 40 steps",10,2406.9393,2666.8043,,artifacts/revision/benchmarks/route-p/scaling-sweep-v2-summary.json,Synthetic functional stress endpoint; no linear-scaling claim.
+Tenfold Gate stress,Gate stress S2,"49,600 rows; 1,240 targets; 40 steps",10,3603.3823,3843.1739,,artifacts/revision/benchmarks/route-p/scaling-sweep-v2-summary.json,Synthetic functional stress endpoint; no linear-scaling claim.
+MySQL characterization,Prediction persistence S1,"4,960 rows",1,,,16131.5955,artifacts/revision/benchmarks/scaling/scaling-summary.json,"307.471 rows/s; autocommit per 2,000-row executemany chunk."
+MySQL characterization,Independent integrity verification S1,"4,960 rows",1,,,316.7463,artifacts/revision/benchmarks/scaling/scaling-summary.json,Independent recomputation matched the persisted hash.
+MySQL characterization,Prediction persistence S2,"49,600 rows",1,,,186431.7074,artifacts/revision/benchmarks/scaling/scaling-summary.json,"266.049 rows/s; autocommit per 2,000-row executemany chunk."
+MySQL characterization,Independent integrity verification S2,"49,600 rows",1,,,4100.8181,artifacts/revision/benchmarks/scaling/scaling-summary.json,Independent recomputation matched the persisted hash.

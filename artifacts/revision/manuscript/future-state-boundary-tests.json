@@ -1,0 +1,64 @@
+{
+  "schemaVersion": "shm-em-future-state-boundary-tests-v1",
+  "source": "Maven Surefire XML for ProjectFutureStateServiceImplTest",
+  "productionAlgorithmModified": false,
+  "cases": [
+    {
+      "test": "aggregatesConsecutiveForecastRiskAndKeepsObservedRiskSeparate",
+      "boundaries": [
+        "one-step does not satisfy a two-step threshold",
+        "consecutive-step exceedance",
+        "observed/forecast separation",
+        "earliest exceedance"
+      ],
+      "status": "PASS",
+      "seconds": 0.006
+    },
+    {
+      "test": "rejectsPolicyHashDriftBeforeAggregation",
+      "boundaries": [
+        "policy version/hash integrity"
+      ],
+      "status": "PASS",
+      "seconds": 0.002
+    },
+    {
+      "test": "leavesFeatureUnassessedWhenNoApplicableRuleExists",
+      "boundaries": [
+        "no applicable rule",
+        "unassessed target"
+      ],
+      "status": "PASS",
+      "seconds": 0.004
+    },
+    {
+      "test": "distinguishesStrictAndInclusiveExactThresholds",
+      "boundaries": [
+        "exact threshold",
+        "operator boundary"
+      ],
+      "status": "PASS",
+      "seconds": 0.007
+    },
+    {
+      "test": "aggregatesMultipleTargetsAndStationsByHighestSeverityAndEarliestTime",
+      "boundaries": [
+        "multi-target station",
+        "multi-station project",
+        "severity ordering",
+        "earliest exceedance tie"
+      ],
+      "status": "PASS",
+      "seconds": 0.006
+    },
+    {
+      "test": "producesDeterministicStateHashForEquivalentInput",
+      "boundaries": [
+        "deterministic state hash"
+      ],
+      "status": "PASS",
+      "seconds": 0.037
+    }
+  ],
+  "pass": true
+}

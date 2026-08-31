@@ -1,0 +1,238 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/lja666/SHM-EM/blob/main/docs/revision/examples/data-model-contract.schema.json",
+  "title": "SHM-EM persisted prediction contract export",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "contractVersion",
+    "project",
+    "timeline",
+    "models",
+    "features",
+    "targets",
+    "runtime",
+    "validation"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "shm-em-data-model-contract-export-v1"
+    },
+    "contractVersion": {
+      "type": "string",
+      "minLength": 1
+    },
+    "featureMappingVersion": {
+      "type": "string",
+      "minLength": 1
+    },
+    "project": {
+      "type": "object",
+      "required": [
+        "id",
+        "code"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "code": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
+    "timeline": {
+      "type": "object",
+      "required": [
+        "predictionMode",
+        "expectedSteps",
+        "timeStepMinutes",
+        "horizonMinutes"
+      ],
+      "properties": {
+        "predictionMode": {
+          "const": "rolling"
+        },
+        "expectedSteps": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "timeStepMinutes": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "horizonMinutes": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "additionalProperties": true
+    },
+    "models": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "code",
+          "version",
+          "targetType",
+          "requiredHistoryRows",
+          "expectedSteps",
+          "timeStepMinutes",
+          "artifactHash",
+          "preprocessorHash",
+          "inferenceScriptHash",
+          "runtimeManifestHash",
+          "inputSchemaHash",
+          "bundleHash"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "code": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          },
+          "targetType": {
+            "type": "string"
+          },
+          "requiredHistoryRows": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "expectedSteps": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "timeStepMinutes": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "artifactHash": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "preprocessorHash": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "inferenceScriptHash": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "runtimeManifestHash": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "inputSchemaHash": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "bundleHash": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "features": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "modelId",
+          "modelCode",
+          "order",
+          "featureCode",
+          "trainingFeatureCode",
+          "sourceRegistryCode",
+          "sourceMetricCode",
+          "sourceValueColumn",
+          "inputValueMode",
+          "required",
+          "predictionTarget"
+        ],
+        "properties": {
+          "modelId": {
+            "type": "integer"
+          },
+          "modelCode": {
+            "type": "string"
+          },
+          "order": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "featureCode": {
+            "type": "string",
+            "minLength": 1
+          },
+          "trainingFeatureCode": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sourceRegistryCode": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sourceMetricCode": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sourceValueColumn": {
+            "type": "string",
+            "minLength": 1
+          },
+          "inputValueMode": {
+            "enum": [
+              "RAW",
+              "ENGINEERING"
+            ]
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "predictionTarget": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "targets": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "runtime": {
+      "type": "object"
+    },
+    "validation": {
+      "type": "object"
+    },
+    "sourceOfTruth": {
+      "type": "object"
+    },
+    "generatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "finalCoreFreezeV3": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "compactExample": {
+      "type": "object"
+    }
+  }
+}

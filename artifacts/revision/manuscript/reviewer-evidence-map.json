@@ -1,0 +1,259 @@
+{
+  "schemaVersion": "shm-em-reviewer-evidence-map-v1",
+  "reviewerItems": 27,
+  "entries": [
+    {
+      "reviewerItem": "R1-0",
+      "topic": "Overall revision scope",
+      "status": "EVIDENCE_COMPLETE",
+      "evidence": [
+        "artifacts/revision/manuscript/MANUSCRIPT_EVIDENCE_BLUEPRINT.md"
+      ],
+      "nextAction": "Use the evidence-first revision structure."
+    },
+    {
+      "reviewerItem": "R1-1",
+      "topic": "Reuse/generalization beyond one excavation",
+      "status": "EVIDENCE_COMPLETE",
+      "evidence": [
+        "artifacts/revision/benchmarks/route-p/phase1b-regression/PHASE1B_COMPLETION_REPORT.md"
+      ],
+      "nextAction": "Report the synthetic second configuration as functional reuse evidence, not external validation."
+    },
+    {
+      "reviewerItem": "R1-2",
+      "topic": "Software effectiveness and quantitative runtime",
+      "status": "EVIDENCE_COMPLETE",
+      "evidence": [
+        "artifacts/revision/manuscript/final-performance-table.md"
+      ],
+      "nextAction": "Insert the compact final table."
+    },
+    {
+      "reviewerItem": "R1-3",
+      "topic": "Evaluate/Execute failure-path safety",
+      "status": "EVIDENCE_COMPLETE",
+      "evidence": [
+        "artifacts/revision/benchmarks/route-p/failure-regression/failure-matrix-v2.md"
+      ],
+      "nextAction": "Summarize P00/F01-F12/I01-I02 and side-effect isolation."
+    },
+    {
+      "reviewerItem": "R1-4",
+      "topic": "Novelty versus Predictive-SHM",
+      "status": "DOCUMENTATION_PENDING",
+      "evidence": [
+        "artifacts/revision/manuscript/claim-gap-matrix-final.md"
+      ],
+      "nextAction": "Complete the related-software comparison in the manuscript response."
+    },
+    {
+      "reviewerItem": "R1-5",
+      "topic": "Versioned data-model contract",
+      "status": "EVIDENCE_COMPLETE",
+      "evidence": [
+        "docs/revision/DATA_MODEL_CONTRACT_SPEC.md",
+        "docs/revision/examples/data-model-contract.example.json"
+      ],
+      "nextAction": "Cite the formal contract and compact real example."
+    },
+    {
+      "reviewerItem": "R1-6",
+      "topic": "Project Future State definition",
+      "status": "EVIDENCE_COMPLETE",
+      "evidence": [
+        "docs/revision/PROJECT_FUTURE_STATE_SPEC.md",
+        "docs/revision/PROJECT_FUTURE_STATE_ALGORITHM.md",
+        "artifacts/revision/manuscript/future-state-boundary-tests.json"
+      ],
+      "nextAction": "Include the algorithm and boundary semantics."
+    },
+    {
+      "reviewerItem": "R1-7",
+      "topic": "Six-model configuration",
+      "status": "EVIDENCE_COMPLETE",
+      "evidence": [
+        "docs/revision/MODEL_CONFIG_SUMMARY.md",
+        "artifacts/revision/manuscript/model-config-summary.json"
+      ],
+      "nextAction": "Use the database- and artifact-derived model table."
+    },
+    {
+      "reviewerItem": "R1-8",
+      "topic": "Point-forecast limitation",
+      "status": "LIMITATION_ONLY",
+      "evidence": [
+        "artifacts/revision/manuscript/claim-gap-matrix-final.md"
+      ],
+      "nextAction": "State that uncertainty quantification is not implemented."
+    },
+    {
+      "reviewerItem": "R1-9",
+      "topic": "Runtime scalability",
+      "status": "EVIDENCE_COMPLETE",
+      "evidence": [
+        "artifacts/revision/manuscript/final-performance-table.md"
+      ],
+      "nextAction": "Report reference and tenfold stress without linear-scaling language."
+    },
+    {
+      "reviewerItem": "R1-10",
+      "topic": "MySQL scalability",
+      "status": "EVIDENCE_COMPLETE",
+      "evidence": [
+        "artifacts/revision/benchmarks/scaling/scaling-summary.json",
+        "artifacts/revision/manuscript/final-performance-table.md"
+      ],
+      "nextAction": "Report persistence, integrity, retrieval, and the 50,000-row Gate boundary."
+    },
+    {
+      "reviewerItem": "R1-11",
+      "topic": "Deployment security",
+      "status": "DOCUMENTATION_PENDING",
+      "evidence": [
+        "artifacts/revision/manuscript/claim-gap-matrix-final.md"
+      ],
+      "nextAction": "Add the deployment-security limitation and recommended reverse-proxy/authentication controls."
+    },
+    {
+      "reviewerItem": "R1-12",
+      "topic": "Windows-centric reproduction",
+      "status": "DOCUMENTATION_PENDING",
+      "evidence": [
+        "artifacts/revision/manuscript/claim-gap-matrix-final.md"
+      ],
+      "nextAction": "Document the validated Windows path and list Linux portability as unverified."
+    },
+    {
+      "reviewerItem": "R1-13",
+      "topic": "Validation/evaluation/execution eligibility figure",
+      "status": "MANUSCRIPT_PENDING",
+      "evidence": [
+        "artifacts/revision/manuscript/MANUSCRIPT_EVIDENCE_BLUEPRINT.md"
+      ],
+      "nextAction": "Redraw the workflow with distinct validation, Evaluate, and Execute boundaries."
+    },
+    {
+      "reviewerItem": "R1-14",
+      "topic": "Screenshots as scientific evidence",
+      "status": "MANUSCRIPT_PENDING",
+      "evidence": [
+        "artifacts/revision/manuscript/MANUSCRIPT_EVIDENCE_BLUEPRINT.md"
+      ],
+      "nextAction": "Replace screenshot-heavy evidence with tables, algorithm, and provenance trace."
+    },
+    {
+      "reviewerItem": "R1-15",
+      "topic": "Unsupported impact claims",
+      "status": "MANUSCRIPT_PENDING",
+      "evidence": [
+        "artifacts/revision/manuscript/claim-gap-matrix-final.md"
+      ],
+      "nextAction": "Narrow claims to demonstrated behavior."
+    },
+    {
+      "reviewerItem": "R1-16",
+      "topic": "Software testing summary",
+      "status": "EVIDENCE_COMPLETE",
+      "evidence": [
+        "artifacts/revision/manuscript/software-test-summary.md"
+      ],
+      "nextAction": "Insert family-level counts without a double-counted global total."
+    },
+    {
+      "reviewerItem": "R1-17",
+      "topic": "Concrete provenance demonstration",
+      "status": "EVIDENCE_COMPLETE",
+      "evidence": [
+        "docs/revision/PROVENANCE_TRACE_EXAMPLE.md",
+        "artifacts/revision/manuscript/provenance-trace-final.json"
+      ],
+      "nextAction": "Present one complete observation/contract/batch/Gate/rule/event/evidence chain."
+    },
+    {
+      "reviewerItem": "R1-18",
+      "topic": "OGC SensorThings relationship",
+      "status": "DOCUMENTATION_PENDING",
+      "evidence": [
+        "artifacts/revision/manuscript/claim-gap-matrix-final.md"
+      ],
+      "nextAction": "Add a precise interoperability comparison and avoid claiming conformance."
+    },
+    {
+      "reviewerItem": "R1-19",
+      "topic": "Repeated contribution text",
+      "status": "MANUSCRIPT_PENDING",
+      "evidence": [
+        "artifacts/revision/manuscript/MANUSCRIPT_EVIDENCE_BLUEPRINT.md"
+      ],
+      "nextAction": "Compress repeated contribution statements during manuscript revision."
+    },
+    {
+      "reviewerItem": "R2-1",
+      "topic": "Predictive-SHM difference and empirical comparison",
+      "status": "DOCUMENTATION_PENDING",
+      "evidence": [
+        "artifacts/revision/manuscript/final-performance-table.md",
+        "artifacts/revision/manuscript/claim-gap-matrix-final.md"
+      ],
+      "nextAction": "Add a claim-level comparison; do not invent a cross-system runtime benchmark."
+    },
+    {
+      "reviewerItem": "R2-2",
+      "topic": "Related-framework comparison table",
+      "status": "DOCUMENTATION_PENDING",
+      "evidence": [
+        "artifacts/revision/manuscript/MANUSCRIPT_EVIDENCE_BLUEPRINT.md"
+      ],
+      "nextAction": "Build the manuscript comparison table from verifiable published capabilities."
+    },
+    {
+      "reviewerItem": "R2-3",
+      "topic": "Missing/dropped rolling-window data",
+      "status": "EVIDENCE_COMPLETE",
+      "evidence": [
+        "docs/revision/DATA_MODEL_CONTRACT_SPEC.md",
+        "artifacts/revision/benchmarks/route-p/failure-regression/failure-matrix-v2.md"
+      ],
+      "nextAction": "Describe fail-closed missing-data and freshness behavior."
+    },
+    {
+      "reviewerItem": "R3-1",
+      "topic": "MySQL and data-access abstraction",
+      "status": "DOCUMENTATION_PENDING",
+      "evidence": [
+        "artifacts/revision/manuscript/final-performance-table.md",
+        "artifacts/revision/manuscript/claim-gap-matrix-final.md"
+      ],
+      "nextAction": "Document current MySQL characterization and the bounded adapter seam without claiming an implemented alternative backend."
+    },
+    {
+      "reviewerItem": "R3-2",
+      "topic": "Security pattern",
+      "status": "DOCUMENTATION_PENDING",
+      "evidence": [
+        "artifacts/revision/manuscript/claim-gap-matrix-final.md"
+      ],
+      "nextAction": "Add deployment boundary and security recommendations."
+    },
+    {
+      "reviewerItem": "R3-3",
+      "topic": "Asynchronous sampling, latency, missing points",
+      "status": "EVIDENCE_COMPLETE",
+      "evidence": [
+        "docs/revision/DATA_MODEL_CONTRACT_SPEC.md",
+        "artifacts/revision/benchmarks/route-p/failure-regression/failure-matrix-v2.md"
+      ],
+      "nextAction": "Explain canonical alignment, freshness policy, and fail-closed Gate behavior."
+    },
+    {
+      "reviewerItem": "R3-4",
+      "topic": "Linux/Docker portability",
+      "status": "LIMITATION_ONLY",
+      "evidence": [
+        "artifacts/revision/manuscript/claim-gap-matrix-final.md"
+      ],
+      "nextAction": "State that this release validates native Windows reproduction and does not claim Docker/Linux validation."
+    }
+  ]
+}

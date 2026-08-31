@@ -1,0 +1,273 @@
+{
+  "schemaVersion": "shm-em-phase2b-manifest-v1",
+  "generatedAtUtc": "2026-08-31T17:09:10.931549+00:00",
+  "finalCoreFreezeV3": "eaa7d85a0b4921ab2f6e54234cff09aee6a30c8f",
+  "evidencePreparationHead": "b883921a0edd9a63aeda4a1eaf4547f827a768b5",
+  "gates": [
+    {
+      "id": "P2B-01",
+      "status": "PASS",
+      "evidence": [
+        "artifacts/revision/reuse/core-freeze-v3-commit.txt",
+        "artifacts/revision/reuse/core-freeze-lineage.json"
+      ],
+      "detail": "Performance-Corrected Final Core Freeze v3 is recorded and unchanged."
+    },
+    {
+      "id": "P2B-02",
+      "status": "PASS",
+      "evidence": [
+        "artifacts/revision/manuscript/data-model-contract-export.json",
+        "docs/revision/examples/data-model-contract.example.json",
+        "docs/revision/examples/data-model-contract.schema.json"
+      ],
+      "detail": "The compact example validates against its schema and is derived from the authoritative exported contract."
+    },
+    {
+      "id": "P2B-03",
+      "status": "PASS",
+      "evidence": [
+        "docs/revision/PROJECT_FUTURE_STATE_ALGORITHM.md",
+        "artifacts/revision/manuscript/future-state-boundary-tests.json"
+      ],
+      "detail": "Future State pseudocode is paired with six passing code-level boundary cases."
+    },
+    {
+      "id": "P2B-04",
+      "status": "PASS",
+      "evidence": [
+        "artifacts/revision/manuscript/software-test-summary.json",
+        "artifacts/revision/manuscript/software-test-summary.md"
+      ],
+      "detail": "The automated final summary reports independent families and forbids a double-counted global total."
+    },
+    {
+      "id": "P2B-05",
+      "status": "PASS",
+      "evidence": [
+        "artifacts/revision/manuscript/provenance-trace-final.json",
+        "docs/revision/PROVENANCE_TRACE_EXAMPLE.md"
+      ],
+      "detail": "One restored formal-event run links rule, batch, run, Gate, 40-step forecast, event, and evidence state."
+    },
+    {
+      "id": "P2B-06",
+      "status": "PASS",
+      "evidence": [
+        "artifacts/revision/manuscript/model-config-summary.json",
+        "docs/revision/MODEL_CONFIG_SUMMARY.md"
+      ],
+      "detail": "All six model summaries are artifact/database derived and every recorded hash check passes."
+    },
+    {
+      "id": "P2B-07",
+      "status": "PASS",
+      "evidence": [
+        "artifacts/revision/manuscript/final-performance-table.csv",
+        "artifacts/revision/benchmarks/route-p/scaling-sweep-v2-summary.json"
+      ],
+      "detail": "The final table uses the single authorized corrected Gate benchmark."
+    },
+    {
+      "id": "P2B-08",
+      "status": "PASS",
+      "evidence": [
+        "artifacts/revision/manuscript/PERFORMANCE_EVIDENCE_SELECTION.md"
+      ],
+      "detail": "Intermediate nonmonotonic and localization evidence is explicitly diagnostic-only."
+    },
+    {
+      "id": "P2B-09",
+      "status": "PASS",
+      "evidence": [
+        "artifacts/revision/manuscript/reviewer-evidence-map.json",
+        "artifacts/revision/manuscript/reviewer-evidence-map.md"
+      ],
+      "detail": "All 27 headings from the three-reviewer strategy are mapped."
+    },
+    {
+      "id": "P2B-10",
+      "status": "PASS",
+      "evidence": [
+        "artifacts/revision/manuscript/production-core-diff-since-freeze-v3.txt",
+        "artifacts/revision/manuscript/production-core-worktree-diff.txt"
+      ],
+      "detail": "No production-core content differs from Final Core Freeze v3."
+    }
+  ],
+  "allGatesPass": true,
+  "files": [
+    {
+      "path": "docs/revision/DATA_MODEL_CONTRACT_SPEC.md",
+      "bytes": 7958,
+      "sha256": "567866483a57dc26f65edeae6883121309e7a6e69acdc36ee17aee2406720ba3"
+    },
+    {
+      "path": "tools/revision/export_data_model_contract.py",
+      "bytes": 20583,
+      "sha256": "b5cf0f99f392accc6530e9683cf4730d6af5565402d59b24d1d7029410753150"
+    },
+    {
+      "path": "docs/revision/examples/data-model-contract.example.json",
+      "bytes": 10319,
+      "sha256": "8a3b4a7218de4d92d8acbd0f793bec0dc75d293104057ff52db19edc21f217c0"
+    },
+    {
+      "path": "docs/revision/examples/data-model-contract.schema.json",
+      "bytes": 5394,
+      "sha256": "359e9ac5ab4c1b4562112803c8049553d90ca246bef44657135ca795684445d6"
+    },
+    {
+      "path": "artifacts/revision/manuscript/data-model-contract-export.json",
+      "bytes": 256237,
+      "sha256": "ed1b0561ffa66bdb73546fea08ae8caf12103038f2f4c3861e743d76fb945f4e"
+    },
+    {
+      "path": "docs/revision/PROJECT_FUTURE_STATE_SPEC.md",
+      "bytes": 7590,
+      "sha256": "3fbdbcf93d0d3a8e88169b435df6e20ba5938ebb4999cc095c07ae804d0f3f72"
+    },
+    {
+      "path": "docs/revision/PROJECT_FUTURE_STATE_ALGORITHM.md",
+      "bytes": 4425,
+      "sha256": "b92ede4a923e8db96c6fb0e7f6d842accba660da895fc38c7b0e9d26971f4796"
+    },
+    {
+      "path": "artifacts/revision/manuscript/future-state-boundary-tests.json",
+      "bytes": 1656,
+      "sha256": "a91f663bb80260c7b20050775e5bcfd08f6ab929441bca7c1fe0572d14c480f2"
+    },
+    {
+      "path": "tools/revision/run_phase2b_regression.py",
+      "bytes": 3506,
+      "sha256": "7dfc9f21668ec5d1de768863543471d6340c8b4f39a974175e3afcdaa6ca27f4"
+    },
+    {
+      "path": "tools/revision/collect_final_test_summary.py",
+      "bytes": 11412,
+      "sha256": "8c0fb0d528da72b95d1239db1628174f02ed5f8b19a5b54ceec57463d2830506"
+    },
+    {
+      "path": "artifacts/revision/manuscript/phase2b-final-regression.json",
+      "bytes": 18326,
+      "sha256": "343ea570f6e8473520fc2387d0306b451884104664affe6d614ed31e59e3acf5"
+    },
+    {
+      "path": "artifacts/revision/manuscript/software-test-summary.json",
+      "bytes": 41981,
+      "sha256": "a9bbb097c2febd47fd3753134d78811bc29fff4af9aceff63cb87084e78d113f"
+    },
+    {
+      "path": "artifacts/revision/manuscript/software-test-summary.csv",
+      "bytes": 1151,
+      "sha256": "436b991c8d0db712d54b7b08eeaabb1737f22605dc19bedaea2ba5a6e4b6a8a9"
+    },
+    {
+      "path": "artifacts/revision/manuscript/software-test-summary.md",
+      "bytes": 1815,
+      "sha256": "c176d9b4fdc77bff67351b35bb9caa044a39b007af88b561c5d665f910ffc6d3"
+    },
+    {
+      "path": "tools/revision/export_provenance_trace.py",
+      "bytes": 12675,
+      "sha256": "90d90aa0041fa066d2943476f4fb243be5c2e3d9d07f11bc5af1be8f72827d42"
+    },
+    {
+      "path": "docs/revision/PROVENANCE_TRACE_EXAMPLE.md",
+      "bytes": 2413,
+      "sha256": "251af2f1c9639419804c3cc5fd99588c82a935a512f7aa4c007d4b0560fad094"
+    },
+    {
+      "path": "artifacts/revision/manuscript/provenance-trace-final.json",
+      "bytes": 25211,
+      "sha256": "3adf3733a1251a1db0b3dcd1c787adf3e36c47e942a0fd13b2aeb82d9db7aa82"
+    },
+    {
+      "path": "artifacts/revision/manuscript/provenance-trace-final.md",
+      "bytes": 2413,
+      "sha256": "251af2f1c9639419804c3cc5fd99588c82a935a512f7aa4c007d4b0560fad094"
+    },
+    {
+      "path": "tools/revision/export_model_config_summary.py",
+      "bytes": 13283,
+      "sha256": "3471e93d5d838200e836903462b3b01b0b1d7a71c0e31dc0f9c7a64eed6813c3"
+    },
+    {
+      "path": "docs/revision/MODEL_CONFIG_SUMMARY.md",
+      "bytes": 2251,
+      "sha256": "7916881b1061f6e79eb1ace9936aed4fb033c5573748ccc7f5476f7f6290caf6"
+    },
+    {
+      "path": "artifacts/revision/manuscript/model-config-summary.json",
+      "bytes": 16729,
+      "sha256": "20c4d428f31d42d14007b03d83f93e03ca6a3235eb004a0b047dd3c048a6691b"
+    },
+    {
+      "path": "tools/revision/build_phase2b_manuscript_evidence.py",
+      "bytes": 22227,
+      "sha256": "eca05f962af28a39bfa5faa2a20df0ca6fe177a895e0a4d3ccf9bca7bc750dc4"
+    },
+    {
+      "path": "artifacts/revision/manuscript/PERFORMANCE_EVIDENCE_SELECTION.md",
+      "bytes": 1532,
+      "sha256": "06b550529c1bbce29f7ea6b932812f8cb5f6eac9bcab4ab83482684846c2cf37"
+    },
+    {
+      "path": "artifacts/revision/manuscript/final-performance-table.csv",
+      "bytes": 3917,
+      "sha256": "0927721b707f3f7c99482a955bc9ace5b0bb47fdb09171e4f8e0cb4e9d07ff66"
+    },
+    {
+      "path": "artifacts/revision/manuscript/final-performance-table.md",
+      "bytes": 2406,
+      "sha256": "9e8531b1b6a81687ef34d8506be05443df458e5d708f0f9c4c8bb17cfeb76907"
+    },
+    {
+      "path": "artifacts/revision/manuscript/reviewer-evidence-map.json",
+      "bytes": 9407,
+      "sha256": "bfcd30d6de75b331aaed03fab7c8e21a6bd991bdbf7d5a9e24d1d42117cf8a6c"
+    },
+    {
+      "path": "artifacts/revision/manuscript/reviewer-evidence-map.md",
+      "bytes": 6060,
+      "sha256": "6eae032c3d48ca04f03bd3624754164607d00757cdd674d365cf75933cf74ec2"
+    },
+    {
+      "path": "artifacts/revision/manuscript/claim-gap-matrix-final.md",
+      "bytes": 3617,
+      "sha256": "71022742b8c4b7f7a5b06417ee7829bd01fc272fb59c9b21c649fd4865f573aa"
+    },
+    {
+      "path": "artifacts/revision/manuscript/MANUSCRIPT_EVIDENCE_BLUEPRINT.md",
+      "bytes": 2919,
+      "sha256": "e874a08fa2c77e528d76a1ed785e02ca094a87436b631a57e32e9438623f22d8"
+    },
+    {
+      "path": "tools/revision/finalize_phase2b_evidence.py",
+      "bytes": 14386,
+      "sha256": "bbd9779c808bdd7e6e31cc649ac5a39c6b5423c9039bc231f878e750f7e41bbb"
+    },
+    {
+      "path": "artifacts/revision/reuse/core-freeze-v3-commit.txt",
+      "bytes": 41,
+      "sha256": "e075353673a673e47486c9d869a56f218e7f66041f27292aeb75a1b4e7b65461"
+    },
+    {
+      "path": "artifacts/revision/reuse/core-freeze-lineage.json",
+      "bytes": 1244,
+      "sha256": "79c53f517c509909c4c498845cfcc0874f2bc2bc67d95e7dc933209fa07e6659"
+    },
+    {
+      "path": "artifacts/revision/manuscript/production-core-diff-since-freeze-v3.txt",
+      "bytes": 5,
+      "sha256": "51cfd463b6af8a57b3380487f986abf10f137073e9be453e44a7e9a5b4c0e72b"
+    },
+    {
+      "path": "artifacts/revision/manuscript/production-core-worktree-diff.txt",
+      "bytes": 5,
+      "sha256": "51cfd463b6af8a57b3380487f986abf10f137073e9be453e44a7e9a5b4c0e72b"
+    }
+  ],
+  "stopRequired": true,
+  "nextDecisionOwner": "GPT review"
+}

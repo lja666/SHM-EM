@@ -1,0 +1,7 @@
+﻿id,name,cases,passed,status,evidence,countingScope
+BACKEND_SUREFIRE,Backend unit/service/API tests,55,55,PASS,src/backend/target/surefire-reports/TEST-*.xml,unique Maven testcase executions in the final run
+PIT_PRE_UNITTEST,PIT_PRE contract/alignment/integrity tests,13,13,PASS,artifacts/revision/manuscript/phase2b-final-regression.json,test methods in src/pit_pre/tests; status from the Phase 2B final unittest run
+FAILURE_MATRIX,Negative and persisted-integrity matrix,15,15,PASS,artifacts/revision/benchmarks/route-p/failure-regression/failure-matrix-v2.json,"P00, F01-F12, I01-I02 once each"
+PHASE1B_E2E,Second-configuration end-to-end acceptance,7,7,PASS,artifacts/revision/benchmarks/route-p/phase1b-regression.json,B9-B15 acceptance checks for one workflow
+FRONTEND_VALIDATION,Frontend typecheck and production build,2,2,PASS,artifacts/revision/manuscript/phase2b-final-regression.json,vue-tsc type checking followed by the Vite production bundle in npm run build
+REFERENCE_E2E,Public reference end-to-end reproduction,1,1,PASS,artifacts/revision/benchmarks/reference/reference-summary.json,one complete six-model reference workflow

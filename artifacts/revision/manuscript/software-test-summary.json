@@ -1,0 +1,533 @@
+{
+  "schemaVersion": "shm-em-software-test-summary-v1",
+  "finalCoreFreezeV3": "eaa7d85a0b4921ab2f6e54234cff09aee6a30c8f",
+  "families": [
+    {
+      "id": "BACKEND_SUREFIRE",
+      "name": "Backend unit/service/API tests",
+      "cases": 55,
+      "passed": 55,
+      "status": "PASS",
+      "evidence": "src/backend/target/surefire-reports/TEST-*.xml",
+      "countingScope": "unique Maven testcase executions in the final run"
+    },
+    {
+      "id": "PIT_PRE_UNITTEST",
+      "name": "PIT_PRE contract/alignment/integrity tests",
+      "cases": 13,
+      "passed": 13,
+      "status": "PASS",
+      "evidence": "artifacts/revision/manuscript/phase2b-final-regression.json",
+      "countingScope": "test methods in src/pit_pre/tests; status from the Phase 2B final unittest run"
+    },
+    {
+      "id": "FAILURE_MATRIX",
+      "name": "Negative and persisted-integrity matrix",
+      "cases": 15,
+      "passed": 15,
+      "status": "PASS",
+      "evidence": "artifacts/revision/benchmarks/route-p/failure-regression/failure-matrix-v2.json",
+      "countingScope": "P00, F01-F12, I01-I02 once each"
+    },
+    {
+      "id": "PHASE1B_E2E",
+      "name": "Second-configuration end-to-end acceptance",
+      "cases": 7,
+      "passed": 7,
+      "status": "PASS",
+      "evidence": "artifacts/revision/benchmarks/route-p/phase1b-regression.json",
+      "countingScope": "B9-B15 acceptance checks for one workflow"
+    },
+    {
+      "id": "FRONTEND_VALIDATION",
+      "name": "Frontend typecheck and production build",
+      "cases": 2,
+      "passed": 2,
+      "status": "PASS",
+      "evidence": "artifacts/revision/manuscript/phase2b-final-regression.json",
+      "countingScope": "vue-tsc type checking followed by the Vite production bundle in npm run build"
+    },
+    {
+      "id": "REFERENCE_E2E",
+      "name": "Public reference end-to-end reproduction",
+      "cases": 1,
+      "passed": 1,
+      "status": "PASS",
+      "evidence": "artifacts/revision/benchmarks/reference/reference-summary.json",
+      "countingScope": "one complete six-model reference workflow"
+    }
+  ],
+  "backend": {
+    "tests": 55,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "passed": 55,
+    "suiteFiles": 13,
+    "pass": true,
+    "cases": [
+      {
+        "suite": "mybatis.iem.em.ApiSmokeTest",
+        "name": "lowFrequencyObservationEndpointUsesRegistryCode",
+        "status": "PASS",
+        "seconds": 2.084,
+        "report": "src/backend/target/surefire-reports/TEST-mybatis.iem.em.ApiSmokeTest.xml"
+      },
+      {
+        "suite": "mybatis.iem.em.ApiSmokeTest",
+        "name": "projectEndpointReturnsUnifiedResponse",
+        "status": "PASS",
+        "seconds": 0.042,
+        "report": "src/backend/target/surefire-reports/TEST-mybatis.iem.em.ApiSmokeTest.xml"
+      },
+      {
+        "suite": "mybatis.iem.em.ApiSmokeTest",
+        "name": "predictionGateEndpointExposesReplayEligibility",
+        "status": "PASS",
+        "seconds": 0.049,
+        "report": "src/backend/target/surefire-reports/TEST-mybatis.iem.em.ApiSmokeTest.xml"
+      },
+      {
+        "suite": "mybatis.iem.em.ApiSmokeTest",
+        "name": "accelerationWaveformEndpointUsesRegistryCode",
+        "status": "PASS",
+        "seconds": 0.026,
+        "report": "src/backend/target/surefire-reports/TEST-mybatis.iem.em.ApiSmokeTest.xml"
+      },
+      {
+        "suite": "mybatis.iem.em.ApiSmokeTest",
+        "name": "ruleEvaluationEndpointIsSeparatedFromRuleCatalog",
+        "status": "PASS",
+        "seconds": 0.087,
+        "report": "src/backend/target/surefire-reports/TEST-mybatis.iem.em.ApiSmokeTest.xml"
+      },
+      {
+        "suite": "mybatis.iem.em.ApiSmokeTest",
+        "name": "projectFutureStateEndpointExposesExecutionDecision",
+        "status": "PASS",
+        "seconds": 0.031,
+        "report": "src/backend/target/surefire-reports/TEST-mybatis.iem.em.ApiSmokeTest.xml"
+      },
+      {
+        "suite": "mybatis.iem.em.EventNotificationDecisionPolicyTest",
+        "name": "prefersWorseningReminderBeforePersistentReminder",
+        "status": "PASS",
+        "seconds": 0.007,
+        "report": "src/backend/target/surefire-reports/TEST-mybatis.iem.em.EventNotificationDecisionPolicyTest.xml"
+      },
+      {
+        "suite": "mybatis.iem.em.EventNotificationDecisionPolicyTest",
+        "name": "createsTransitionForSignificantWorseningAfterCooldown",
+        "status": "PASS",
+        "seconds": 0.001,
+        "report": "src/backend/target/surefire-reports/TEST-mybatis.iem.em.EventNotificationDecisionPolicyTest.xml"
+      },
+      {
+        "suite": "mybatis.iem.em.EventNotificationDecisionPolicyTest",
+        "name": "suppressesUnchangedLevelInsideCooldown",
+        "status": "PASS",
+        "seconds": 0.002,
+        "report": "src/backend/target/surefire-reports/TEST-mybatis.iem.em.EventNotificationDecisionPolicyTest.xml"
+      },
+      {
+        "suite": "mybatis.iem.em.EventNotificationDecisionPolicyTest",
+        "name": "treatsNormalToWarningAsNewWarning",
+        "status": "PASS",
+        "seconds": 0.001,
+        "report": "src/backend/target/surefire-reports/TEST-mybatis.iem.em.EventNotificationDecisionPolicyTest.xml"
+      },
+      {
+        "suite": "mybatis.iem.em.EventNotificationDecisionPolicyTest",
+        "name": "normalizesAndDeduplicatesEmailRecipients",
+        "status": "PASS",
+        "seconds": 0.004,
+        "report": "src/backend/target/surefire-reports/TEST-mybatis.iem.em.EventNotificationDecisionPolicyTest.xml"
+      },
+      {
+        "suite": "mybatis.iem.em.EventNotificationDecisionPolicyTest",
+        "name": "createsRecoveryTransition",
+        "status": "PASS",
+        "seconds": 0.001,
+        "report": "src/backend/target/surefire-reports/TEST-mybatis.iem.em.EventNotificationDecisionPolicyTest.xml"
+      },
+      {
+        "suite": "mybatis.iem.em.EventNotificationDecisionPolicyTest",
+        "name": "remindsForPersistentWarningAfterConfiguredWindow",
+        "status": "PASS",
+        "seconds": 0.0,
+        "report": "src/backend/target/surefire-reports/TEST-mybatis.iem.em.EventNotificationDecisionPolicyTest.xml"
+      },
+      {
+        "suite": "mybatis.iem.em.EventNotificationDecisionPolicyTest",
+        "name": "createsTransitionForFirstWarning",
+        "status": "PASS",
+        "seconds": 0.0,
+        "report": "src/backend/target/surefire-reports/TEST-mybatis.iem.em.EventNotificationDecisionPolicyTest.xml"
+      },
+      {
+        "suite": "mybatis.iem.em.MetricRuleEventEngineTest",
+        "name": "evaluatesEachMonitoringObjectIndependently",
+        "status": "PASS",
+        "seconds": 0.028,
+        "report": "src/backend/target/surefire-reports/TEST-mybatis.iem.em.MetricRuleEventEngineTest.xml"
+      },
+      {
+        "suite": "mybatis.iem.em.MetricRuleEventEngineTest",
+        "name": "evaluatesRateOfChangeRules",
+        "status": "PASS",
+        "seconds": 0.001,
+        "report": "src/backend/target/surefire-reports/TEST-mybatis.iem.em.MetricRuleEventEngineTest.xml"
+      },
+      {
+        "suite": "mybatis.iem.em.MetricRuleEventEngineTest",
+        "name": "createsForecastEventProvenanceFromPredictionSeries",
+        "status": "PASS",
+        "seconds": 0.006,
+        "report": "src/backend/target/surefire-reports/TEST-mybatis.iem.em.MetricRuleEventEngineTest.xml"
+      },
+      {
+        "suite": "mybatis.iem.em.MetricRuleEventEngineTest",
+        "name": "createsStableEventCodeForSameRuleAndInputWindow",
+        "status": "PASS",
+        "seconds": 0.002,
+        "report": "src/backend/target/surefire-reports/TEST-mybatis.iem.em.MetricRuleEventEngineTest.xml"
+      },
+      {
+        "suite": "mybatis.iem.em.MetricRuleEventEngineTest",
+        "name": "requiresConfiguredConsecutiveMatches",
+        "status": "PASS",
+        "seconds": 0.001,
+        "report": "src/backend/target/surefire-reports/TEST-mybatis.iem.em.MetricRuleEventEngineTest.xml"
+      },
+      {
+        "suite": "mybatis.iem.em.MetricRuleEventEngineTest",
+        "name": "evaluatesPercentOfBaselineRules",
+        "status": "PASS",
+        "seconds": 0.001,
+        "report": "src/backend/target/surefire-reports/TEST-mybatis.iem.em.MetricRuleEventEngineTest.xml"
+      },
+      {
+        "suite": "mybatis.iem.em.modules.engineering.application.service.impl.EngineeringConversionServiceImplTest",
+        "name": "appliesLaboratoryInitialErrorAndInstallationOffset",
+        "status": "PASS",
+        "seconds": 0.002,
+        "report": "src/backend/target/surefire-reports/TEST-mybatis.iem.em.modules.engineering.application.service.impl.EngineeringConversionServiceImplTest.xml"
+      },
+      {
+        "suite": "mybatis.iem.em.modules.engineering.application.service.impl.EngineeringConversionServiceImplTest",
+        "name": "neverFallsBackToRawWhenPrerequisiteIsMissing",
+        "status": "PASS",
+        "seconds": 0.001,
+        "report": "src/backend/target/surefire-reports/TEST-mybatis.iem.em.modules.engineering.application.service.impl.EngineeringConversionServiceImplTest.xml"
+      },
+      {
+        "suite": "mybatis.iem.em.modules.engineering.application.service.impl.EngineeringConversionServiceImplTest",
+        "name": "convertsDisplacementXWithZeroInitialValue",
+        "status": "PASS",
+        "seconds": 0.0,
+        "report": "src/backend/target/surefire-reports/TEST-mybatis.iem.em.modules.engineering.application.service.impl.EngineeringConversionServiceImplTest.xml"
+      },
+      {
+        "suite": "mybatis.iem.em.modules.engineering.application.service.impl.EngineeringConversionServiceImplTest",
+        "name": "separatesPitElevationAndCumulativeChange",
+        "status": "PASS",
+        "seconds": 0.0,
+        "report": "src/backend/target/surefire-reports/TEST-mybatis.iem.em.modules.engineering.application.service.impl.EngineeringConversionServiceImplTest.xml"
+      },
+      {
+        "suite": "mybatis.iem.em.modules.engineering.application.service.impl.EngineeringConversionServiceImplTest",
+        "name": "convertsDisplacementYWithCalibratedInitialValue",
+        "status": "PASS",
+        "seconds": 0.001,
+        "report": "src/backend/target/surefire-reports/TEST-mybatis.iem.em.modules.engineering.application.service.impl.EngineeringConversionServiceImplTest.xml"
+      },
+      {
+        "suite": "mybatis.iem.em.modules.engineering.application.service.impl.EngineeringConversionServiceImplTest",
+        "name": "compensatesStaticLevelAgainstReferencePoint",
+        "status": "PASS",
+        "seconds": 0.0,
+        "report": "src/backend/target/surefire-reports/TEST-mybatis.iem.em.modules.engineering.application.service.impl.EngineeringConversionServiceImplTest.xml"
+      },
+      {
+        "suite": "mybatis.iem.em.modules.engineering.application.service.impl.EventResponseOrchestratorTest",
+        "name": "completesWorkflowWithGeneratedReportWhenNotificationsAreSuppressed",
+        "status": "PASS",
+        "seconds": 0.104,
+        "report": "src/backend/target/surefire-reports/TEST-mybatis.iem.em.modules.engineering.application.service.impl.EventResponseOrchestratorTest.xml"
+      },
+      {
+        "suite": "mybatis.iem.em.modules.engineering.application.service.impl.MetricRuleEventEngineEngineeringTest",
+        "name": "rejectsThresholdUnitThatDoesNotMatchEngineeringUnit",
+        "status": "PASS",
+        "seconds": 0.002,
+        "report": "src/backend/target/surefire-reports/TEST-mybatis.iem.em.modules.engineering.application.service.impl.MetricRuleEventEngineEngineeringTest.xml"
+      },
+      {
+        "suite": "mybatis.iem.em.modules.engineering.application.service.impl.MetricRuleEventEngineEngineeringTest",
+        "name": "eventSnapshotCarriesRawEngineeringAndVersionedFormula",
+        "status": "PASS",
+        "seconds": 0.0,
+        "report": "src/backend/target/surefire-reports/TEST-mybatis.iem.em.modules.engineering.application.service.impl.MetricRuleEventEngineEngineeringTest.xml"
+      },
+      {
+        "suite": "mybatis.iem.em.modules.engineering.application.service.impl.PersistedPredictionIntegrityHashServiceTest",
+        "name": "matchesTheSharedPythonFixture",
+        "status": "PASS",
+        "seconds": 0.049,
+        "report": "src/backend/target/surefire-reports/TEST-mybatis.iem.em.modules.engineering.application.service.impl.PersistedPredictionIntegrityHashServiceTest.xml"
+      },
+      {
+        "suite": "mybatis.iem.em.modules.engineering.application.service.impl.PredictionExecutionGateServiceImplTest",
+        "name": "rejectsEngineeringValueMutation",
+        "status": "PASS",
+        "seconds": 0.074,
+        "report": "src/backend/target/surefire-reports/TEST-mybatis.iem.em.modules.engineering.application.service.impl.PredictionExecutionGateServiceImplTest.xml"
+      },
+      {
+        "suite": "mybatis.iem.em.modules.engineering.application.service.impl.PredictionExecutionGateServiceImplTest",
+        "name": "acceptsRecomputedIntegrityBeforeSemanticUnitValidation",
+        "status": "PASS",
+        "seconds": 0.012,
+        "report": "src/backend/target/surefire-reports/TEST-mybatis.iem.em.modules.engineering.application.service.impl.PredictionExecutionGateServiceImplTest.xml"
+      },
+      {
+        "suite": "mybatis.iem.em.modules.engineering.application.service.impl.PredictionExecutionGateServiceImplTest",
+        "name": "rechecksRowsAfterAValidEvaluation",
+        "status": "PASS",
+        "seconds": 0.011,
+        "report": "src/backend/target/surefire-reports/TEST-mybatis.iem.em.modules.engineering.application.service.impl.PredictionExecutionGateServiceImplTest.xml"
+      },
+      {
+        "suite": "mybatis.iem.em.modules.engineering.application.service.impl.PredictionExecutionGateServiceImplTest",
+        "name": "rejectsUnsupportedIntegrityHashVersion",
+        "status": "PASS",
+        "seconds": 0.007,
+        "report": "src/backend/target/surefire-reports/TEST-mybatis.iem.em.modules.engineering.application.service.impl.PredictionExecutionGateServiceImplTest.xml"
+      },
+      {
+        "suite": "mybatis.iem.em.modules.engineering.application.service.impl.PredictionExecutionGateServiceImplTest",
+        "name": "rejectsPersistedPredictionValueMutation",
+        "status": "PASS",
+        "seconds": 0.005,
+        "report": "src/backend/target/surefire-reports/TEST-mybatis.iem.em.modules.engineering.application.service.impl.PredictionExecutionGateServiceImplTest.xml"
+      },
+      {
+        "suite": "mybatis.iem.em.modules.engineering.application.service.impl.PredictionExecutionGateServiceImplTest",
+        "name": "replayUsesScenarioTimeWhileOperationalUsesWallClockPolicy",
+        "status": "PASS",
+        "seconds": 0.01,
+        "report": "src/backend/target/surefire-reports/TEST-mybatis.iem.em.modules.engineering.application.service.impl.PredictionExecutionGateServiceImplTest.xml"
+      },
+      {
+        "suite": "mybatis.iem.em.modules.engineering.application.service.impl.PredictionExecutionGateServiceImplTest",
+        "name": "rejectsBatchAggregateMismatch",
+        "status": "PASS",
+        "seconds": 0.007,
+        "report": "src/backend/target/surefire-reports/TEST-mybatis.iem.em.modules.engineering.application.service.impl.PredictionExecutionGateServiceImplTest.xml"
+      },
+      {
+        "suite": "mybatis.iem.em.modules.engineering.application.service.impl.PredictionExecutionGateServiceImplTest",
+        "name": "rejectsLegacyBatchWithoutPersistedIntegrityHash",
+        "status": "PASS",
+        "seconds": 0.006,
+        "report": "src/backend/target/surefire-reports/TEST-mybatis.iem.em.modules.engineering.application.service.impl.PredictionExecutionGateServiceImplTest.xml"
+      },
+      {
+        "suite": "mybatis.iem.em.modules.engineering.application.service.impl.PredictionExecutionGateServiceImplTest",
+        "name": "rejectsAContractFeatureMissingFromResults",
+        "status": "PASS",
+        "seconds": 0.007,
+        "report": "src/backend/target/surefire-reports/TEST-mybatis.iem.em.modules.engineering.application.service.impl.PredictionExecutionGateServiceImplTest.xml"
+      },
+      {
+        "suite": "mybatis.iem.em.modules.engineering.application.service.impl.PredictionExecutionGateServiceImplTest",
+        "name": "rejectsUnitMutationWithStaleHash",
+        "status": "PASS",
+        "seconds": 0.004,
+        "report": "src/backend/target/surefire-reports/TEST-mybatis.iem.em.modules.engineering.application.service.impl.PredictionExecutionGateServiceImplTest.xml"
+      },
+      {
+        "suite": "mybatis.iem.em.modules.engineering.application.service.impl.PredictionExecutionGateServiceImplTest",
+        "name": "scopesResultLookupToTheBatchProjectWithoutChangingTheLimit",
+        "status": "PASS",
+        "seconds": 0.006,
+        "report": "src/backend/target/surefire-reports/TEST-mybatis.iem.em.modules.engineering.application.service.impl.PredictionExecutionGateServiceImplTest.xml"
+      },
+      {
+        "suite": "mybatis.iem.em.modules.engineering.application.service.impl.PredictionServiceImplTest",
+        "name": "preservesObservationRegistryProvenanceInJointSeries",
+        "status": "PASS",
+        "seconds": 0.015,
+        "report": "src/backend/target/surefire-reports/TEST-mybatis.iem.em.modules.engineering.application.service.impl.PredictionServiceImplTest.xml"
+      },
+      {
+        "suite": "mybatis.iem.em.modules.engineering.application.service.impl.PredictionServiceImplTest",
+        "name": "latestSelectsOneDeterministicBatchBeforeReadingResults",
+        "status": "PASS",
+        "seconds": 0.001,
+        "report": "src/backend/target/surefire-reports/TEST-mybatis.iem.em.modules.engineering.application.service.impl.PredictionServiceImplTest.xml"
+      },
+      {
+        "suite": "mybatis.iem.em.modules.engineering.application.service.impl.ProjectContextServiceImplTest",
+        "name": "usesDeclaredFieldPointCountWithoutHidingInternalStationRecordCount",
+        "status": "PASS",
+        "seconds": 0.058,
+        "report": "src/backend/target/surefire-reports/TEST-mybatis.iem.em.modules.engineering.application.service.impl.ProjectContextServiceImplTest.xml"
+      },
+      {
+        "suite": "mybatis.iem.em.modules.engineering.application.service.impl.ProjectFutureStateServiceImplTest",
+        "name": "producesDeterministicStateHashForEquivalentInput",
+        "status": "PASS",
+        "seconds": 0.037,
+        "report": "src/backend/target/surefire-reports/TEST-mybatis.iem.em.modules.engineering.application.service.impl.ProjectFutureStateServiceImplTest.xml"
+      },
+      {
+        "suite": "mybatis.iem.em.modules.engineering.application.service.impl.ProjectFutureStateServiceImplTest",
+        "name": "aggregatesMultipleTargetsAndStationsByHighestSeverityAndEarliestTime",
+        "status": "PASS",
+        "seconds": 0.006,
+        "report": "src/backend/target/surefire-reports/TEST-mybatis.iem.em.modules.engineering.application.service.impl.ProjectFutureStateServiceImplTest.xml"
+      },
+      {
+        "suite": "mybatis.iem.em.modules.engineering.application.service.impl.ProjectFutureStateServiceImplTest",
+        "name": "aggregatesConsecutiveForecastRiskAndKeepsObservedRiskSeparate",
+        "status": "PASS",
+        "seconds": 0.006,
+        "report": "src/backend/target/surefire-reports/TEST-mybatis.iem.em.modules.engineering.application.service.impl.ProjectFutureStateServiceImplTest.xml"
+      },
+      {
+        "suite": "mybatis.iem.em.modules.engineering.application.service.impl.ProjectFutureStateServiceImplTest",
+        "name": "rejectsPolicyHashDriftBeforeAggregation",
+        "status": "PASS",
+        "seconds": 0.002,
+        "report": "src/backend/target/surefire-reports/TEST-mybatis.iem.em.modules.engineering.application.service.impl.ProjectFutureStateServiceImplTest.xml"
+      },
+      {
+        "suite": "mybatis.iem.em.modules.engineering.application.service.impl.ProjectFutureStateServiceImplTest",
+        "name": "leavesFeatureUnassessedWhenNoApplicableRuleExists",
+        "status": "PASS",
+        "seconds": 0.004,
+        "report": "src/backend/target/surefire-reports/TEST-mybatis.iem.em.modules.engineering.application.service.impl.ProjectFutureStateServiceImplTest.xml"
+      },
+      {
+        "suite": "mybatis.iem.em.modules.engineering.application.service.impl.ProjectFutureStateServiceImplTest",
+        "name": "distinguishesStrictAndInclusiveExactThresholds",
+        "status": "PASS",
+        "seconds": 0.007,
+        "report": "src/backend/target/surefire-reports/TEST-mybatis.iem.em.modules.engineering.application.service.impl.ProjectFutureStateServiceImplTest.xml"
+      },
+      {
+        "suite": "mybatis.iem.em.modules.engineering.application.service.impl.ReproductionExecutionPolicyTest",
+        "name": "rejectsARegularApplicationDatabase",
+        "status": "PASS",
+        "seconds": 0.008,
+        "report": "src/backend/target/surefire-reports/TEST-mybatis.iem.em.modules.engineering.application.service.impl.ReproductionExecutionPolicyTest.xml"
+      },
+      {
+        "suite": "mybatis.iem.em.modules.engineering.application.service.impl.ReproductionExecutionPolicyTest",
+        "name": "acceptsOnlyAnIsolatedDatabaseWithNotificationsDisabled",
+        "status": "PASS",
+        "seconds": 0.002,
+        "report": "src/backend/target/surefire-reports/TEST-mybatis.iem.em.modules.engineering.application.service.impl.ReproductionExecutionPolicyTest.xml"
+      },
+      {
+        "suite": "mybatis.iem.em.ObservationRoutingServiceImplTest",
+        "name": "acceptsAccelerationSensorPartition",
+        "status": "PASS",
+        "seconds": 0.004,
+        "report": "src/backend/target/surefire-reports/TEST-mybatis.iem.em.ObservationRoutingServiceImplTest.xml"
+      },
+      {
+        "suite": "mybatis.iem.em.ObservationRoutingServiceImplTest",
+        "name": "acceptsTypedObservationTable",
+        "status": "PASS",
+        "seconds": 0.001,
+        "report": "src/backend/target/surefire-reports/TEST-mybatis.iem.em.ObservationRoutingServiceImplTest.xml"
+      },
+      {
+        "suite": "mybatis.iem.em.ObservationRoutingServiceImplTest",
+        "name": "rejectsUnsafeRegisteredTableName",
+        "status": "PASS",
+        "seconds": 0.002,
+        "report": "src/backend/target/surefire-reports/TEST-mybatis.iem.em.ObservationRoutingServiceImplTest.xml"
+      }
+    ]
+  },
+  "pitPreInventory": {
+    "files": 3,
+    "cases": 13,
+    "caseIds": [
+      "test_alignment_diagnostics.py::test_alignment_diagnostics_do_not_change_values",
+      "test_alignment_diagnostics.py::test_alignment_policy_metadata_is_persisted",
+      "test_alignment_diagnostics.py::test_alignment_stage_attribution",
+      "test_alignment_diagnostics.py::test_boundary_extension_attribution",
+      "test_alignment_diagnostics.py::test_builder_uses_one_asof_merge_per_feature",
+      "test_alignment_diagnostics.py::test_quality_summary_counts_match_cells",
+      "test_contract.py::test_bootstrap_file_rejects_runtime_or_model_settings",
+      "test_contract.py::test_loads_runtime_and_models_only_from_database_contract",
+      "test_contract.py::test_rejects_feature_schema_drift",
+      "test_contract.py::test_rejects_inference_script_drift",
+      "test_persisted_integrity.py::test_cross_language_fixture_hashes",
+      "test_persisted_integrity.py::test_decision_facing_value_change_changes_hash",
+      "test_persisted_integrity.py::test_row_order_does_not_change_hash"
+    ]
+  },
+  "doubleCountingPolicy": "No global case total; family scopes overlap and are reported independently.",
+  "allFamiliesPass": true,
+  "finalRegression": {
+    "schemaVersion": "shm-em-phase2b-final-regression-v1",
+    "finalCoreFreezeV3": "eaa7d85a0b4921ab2f6e54234cff09aee6a30c8f",
+    "generatedAtUtc": "2026-08-31T17:01:04.756952+00:00",
+    "checks": [
+      {
+        "id": "BACKEND_MAVEN_TEST_PACKAGE",
+        "command": [
+          "mvn.cmd",
+          "-q",
+          "test",
+          "package"
+        ],
+        "workingDirectory": "src/backend",
+        "startedAtUtc": "2026-08-31T17:00:18.924672+00:00",
+        "durationSeconds": 20.542,
+        "exitCode": 0,
+        "pass": true,
+        "outputTail": ".c.ProjectController:\n\t{GET [/api/em/projects/{id}]}: get(Long)\n\t{GET [/api/em/projects/{id}/context]}: context(Long)\n\t{GET [/api/em/projects]}: list(Long,Integer)\n\t{GET [/api/em/projects/{id}/object-tree]}: objectTree(Long)\n\t{GET [/api/em/projects/overview]}: overview()\n\t{GET [/api/em/projects/{id}/future-state]}: futureState(Long,Long,Integer,PredictionExecutionMode,LocalDateTime)\n01:00:34.681 [main] DEBUG _org.springframework.web.servlet.HandlerMapping.Mappings - \n\tm.i.e.m.e.a.c.PredictionController:\n\t{GET [/api/em/predictions/latest]}: latest(PredictionQuery)\n\t{GET [/api/em/predictions/features]}: features(PredictionQuery)\n\t{GET [/api/em/predictions/events/{eventId}/trace]}: eventTrace(Long)\n\t{GET [/api/em/predictions/batches]}: batches(PredictionQuery)\n\t{GET [/api/em/predictions/models]}: models(PredictionQuery)\n\t{GET [/api/em/predictions/batches/{batchId}]}: batchDetail(Long)\n\t{GET [/api/em/predictions/batches/{batchId}/runs]}: runs(Long)\n\t{GET [/api/em/predictions/series]}: series(PredictionQuery)\n\t{GET [/api/em/predictions/batches/{batchId}/execution-gate]}: executionGate(Long,String,LocalDateTime)\n\t{GET [/api/em/predictions/batches/{batchId}/execution-gate/latest]}: latestExecutionGate(Long,String)\n\t{POST [/api/em/predictions/batches/{batchId}/execution-gate/evaluate]}: evaluateExecutionGate(Long,String,LocalDateTime)\n01:00:34.682 [main] DEBUG _org.springframework.web.servlet.HandlerMapping.Mappings - \n\tm.i.e.m.e.a.c.LowFrequencyObservationController:\n\t{GET [/api/em/observations/low-frequency]}: list(ObservationQuery)\n\t{POST [/api/em/observations/low-frequency/query]}: query(ObservationQuery)\n\t{POST [/api/em/observations/low-frequency/timeseries]}: timeseries(ObservationQuery)\n01:00:34.682 [main] DEBUG _org.springframework.web.servlet.HandlerMapping.Mappings - \n\tm.i.e.m.e.a.c.AccelerationWaveformController:\n\t{GET [/api/em/acceleration]}: list(ObservationQuery)\n\t{POST [/api/em/acceleration/waveform]}: waveform(ObservationQuery)\n01:00:34.683 [main] DEBUG _org.springframework.web.servlet.HandlerMapping.Mappings - \n\tm.i.e.m.e.a.c.ProjectRuleController:\n\t{GET [/api/em/projects/{projectId}/rules/{ruleId}]}: get(Long,Long)\n\t{POST [/api/em/projects/{projectId}/rules/{ruleId}/execute]}: execute(Long,Long,RuleEvaluationRequest)\n\t{GET [/api/em/projects/{projectId}/rules]}: list(Long,Integer)\n\t{POST [/api/em/projects/{projectId}/rules/{ruleId}/evaluate]}: evaluate(Long,Long,RuleEvaluationRequest)\n\t{POST [/api/em/projects/{projectId}/rules/evaluate]}: evaluateCustom(Long,RuleEvaluationRequest)\n\t{POST [/api/em/projects/{projectId}/rules/execute]}: executeCustom(Long,RuleEvaluationRequest)\n01:00:34.683 [main] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - 28 mappings in org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping\n01:00:34.689 [main] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice\n01:00:34.691 [main] DEBUG org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver - ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice\n01:00:34.691 [main] INFO org.springframework.mock.web.MockServletContext - Initializing Spring TestDispatcherServlet ''\n01:00:34.692 [main] INFO org.springframework.test.web.servlet.TestDispatcherServlet - Initializing Servlet ''\n01:00:34.692 [main] DEBUG org.springframework.test.web.servlet.TestDispatcherServlet - Detected AcceptHeaderLocaleResolver\n01:00:34.692 [main] DEBUG org.springframework.test.web.servlet.TestDispatcherServlet - Detected FixedThemeResolver\n01:00:34.692 [main] DEBUG org.springframework.test.web.servlet.TestDispatcherServlet - Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@834831b\n01:00:34.692 [main] DEBUG org.springframework.test.web.servlet.TestDispatcherServlet - Detected org.springframework.web.servlet.support.SessionFlashMapManager@234a8f27\n01:00:34.692 [main] DEBUG org.springframework.test.web.servlet.TestDispatcherServlet - enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data\n01:00:34.692 [main] INFO org.springframework.test.web.servlet.TestDispatcherServlet - Completed initialization in 0 ms\n01:00:34.692 [main] DEBUG org.springframework.test.web.servlet.TestDispatcherServlet - POST \"/api/em/projects/1/rules/evaluate\", parameters={}\n01:00:34.693 [main] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to mybatis.iem.em.modules.engineering.api.controller.ProjectRuleController#evaluateCustom(Long, RuleEvaluationRequest)\n01:00:34.755 [main] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor - Read \"application/json\" to [RuleEvaluationRequest(ruleId=null, projectId=null, stationIds=null, instrumentIds=null, instrumentTy (truncated)...]\n01:00:34.756 [main] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]\n01:00:34.756 [main] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor - Writing [ApiResponse(code=0, message=success, data={eventCount=1, runId=11})]\n01:00:34.762 [main] DEBUG org.springframework.test.web.servlet.TestDispatcherServlet - Completed 200 OK\n01:00:34.762 [main] DEBUG com.jayway.jsonpath.internal.path.CompiledPath - Evaluating path: $['code']\n01:00:34.762 [main] DEBUG com.jayway.jsonpath.internal.path.CompiledPath - Evaluating path: $['data']['eventCount']\n01:00:34.766 [main] DEBUG _org.springframework.web.servlet.HandlerMapping.Mappings - \n\tm.i.e.m.e.a.c.ProjectController:\n\t{GET [/api/em/projects/{id}]}: get(Long)\n\t{GET [/api/em/projects/{id}/context]}: context(Long)\n\t{GET [/api/em/projects]}: list(Long,Integer)\n\t{GET [/api/em/projects/{id}/object-tree]}: objectTree(Long)\n\t{GET [/api/em/projects/overview]}: overview()\n\t{GET [/api/em/projects/{id}/future-state]}: futureState(Long,Long,Integer,PredictionExecutionMode,LocalDateTime)\n01:00:34.767 [main] DEBUG _org.springframework.web.servlet.HandlerMapping.Mappings - \n\tm.i.e.m.e.a.c.PredictionController:\n\t{GET [/api/em/predictions/latest]}: latest(PredictionQuery)\n\t{GET [/api/em/predictions/features]}: features(PredictionQuery)\n\t{GET [/api/em/predictions/events/{eventId}/trace]}: eventTrace(Long)\n\t{GET [/api/em/predictions/batches]}: batches(PredictionQuery)\n\t{GET [/api/em/predictions/models]}: models(PredictionQuery)\n\t{GET [/api/em/predictions/batches/{batchId}]}: batchDetail(Long)\n\t{GET [/api/em/predictions/batches/{batchId}/runs]}: runs(Long)\n\t{GET [/api/em/predictions/series]}: series(PredictionQuery)\n\t{GET [/api/em/predictions/batches/{batchId}/execution-gate]}: executionGate(Long,String,LocalDateTime)\n\t{GET [/api/em/predictions/batches/{batchId}/execution-gate/latest]}: latestExecutionGate(Long,String)\n\t{POST [/api/em/predictions/batches/{batchId}/execution-gate/evaluate]}: evaluateExecutionGate(Long,String,LocalDateTime)\n01:00:34.767 [main] DEBUG _org.springframework.web.servlet.HandlerMapping.Mappings - \n\tm.i.e.m.e.a.c.LowFrequencyObservationController:\n\t{GET [/api/em/observations/low-frequency]}: list(ObservationQuery)\n\t{POST [/api/em/observations/low-frequency/query]}: query(ObservationQuery)\n\t{POST [/api/em/observations/low-frequency/timeseries]}: timeseries(ObservationQuery)\n01:00:34.768 [main] DEBUG _org.springframework.web.servlet.HandlerMapping.Mappings - \n\tm.i.e.m.e.a.c.AccelerationWaveformController:\n\t{GET [/api/em/acceleration]}: list(ObservationQuery)\n\t{POST [/api/em/acceleration/waveform]}: waveform(ObservationQuery)\n01:00:34.768 [main] DEBUG _org.springframework.web.servlet.HandlerMapping.Mappings - \n\tm.i.e.m.e.a.c.ProjectRuleController:\n\t{GET [/api/em/projects/{projectId}/rules/{ruleId}]}: get(Long,Long)\n\t{POST [/api/em/projects/{projectId}/rules/{ruleId}/execute]}: execute(Long,Long,RuleEvaluationRequest)\n\t{GET [/api/em/projects/{projectId}/rules]}: list(Long,Integer)\n\t{POST [/api/em/projects/{projectId}/rules/{ruleId}/evaluate]}: evaluate(Long,Long,RuleEvaluationRequest)\n\t{POST [/api/em/projects/{projectId}/rules/evaluate]}: evaluateCustom(Long,RuleEvaluationRequest)\n\t{POST [/api/em/projects/{projectId}/rules/execute]}: executeCustom(Long,RuleEvaluationRequest)\n01:00:34.768 [main] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - 28 mappings in org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping\n01:00:34.774 [main] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice\n01:00:34.777 [main] DEBUG org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver - ControllerAdvice beans: 0 @ExceptionHandler, 1 ResponseBodyAdvice\n01:00:34.777 [main] INFO org.springframework.mock.web.MockServletContext - Initializing Spring TestDispatcherServlet ''\n01:00:34.777 [main] INFO org.springframework.test.web.servlet.TestDispatcherServlet - Initializing Servlet ''\n01:00:34.777 [main] DEBUG org.springframework.test.web.servlet.TestDispatcherServlet - Detected AcceptHeaderLocaleResolver\n01:00:34.777 [main] DEBUG org.springframework.test.web.servlet.TestDispatcherServlet - Detected FixedThemeResolver\n01:00:34.777 [main] DEBUG org.springframework.test.web.servlet.TestDispatcherServlet - Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@351e414e\n01:00:34.777 [main] DEBUG org.springframework.test.web.servlet.TestDispatcherServlet - Detected org.springframework.web.servlet.support.SessionFlashMapManager@6fd77352\n01:00:34.777 [main] DEBUG org.springframework.test.web.servlet.TestDispatcherServlet - enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data\n01:00:34.777 [main] INFO org.springframework.test.web.servlet.TestDispatcherServlet - Completed initialization in 0 ms\n01:00:34.779 [main] DEBUG org.springframework.test.web.servlet.TestDispatcherServlet - GET \"/api/em/projects/1/future-state\", parameters={masked}\n01:00:34.780 [main] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping - Mapped to mybatis.iem.em.modules.engineering.api.controller.ProjectController#futureState(Long, Long, Integer, PredictionExecutionMode, LocalDateTime)\n01:00:34.784 [main] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]\n01:00:34.785 [main] DEBUG org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor - Writing [ApiResponse(code=0, message=success, data=ProjectFutureState(projectId=1, batchId=7, batchCode=null, (truncated)...]\n01:00:34.793 [main] DEBUG org.springframework.test.web.servlet.TestDispatcherServlet - Completed 200 OK\n01:00:34.794 [main] DEBUG com.jayway.jsonpath.internal.path.CompiledPath - Evaluating path: $['code']\n01:00:34.794 [main] DEBUG com.jayway.jsonpath.internal.path.CompiledPath - Evaluating path: $['data']['batchId']\n01:00:34.794 [main] DEBUG com.jayway.jsonpath.internal.path.CompiledPath - Evaluating path: $['data']['executionMode']\n01:00:34.794 [main] DEBUG com.jayway.jsonpath.internal.path.CompiledPath - Evaluating path: $['data']['executionEligible']\n01:00:34.794 [main] DEBUG com.jayway.jsonpath.internal.path.CompiledPath - Evaluating path: $['data']['executionGate']['id']\n01:00:35.354 [main] DEBUG org.springframework.mock.env.MockEnvironment - Activating profiles [reproduce]\n01:00:35.361 [main] DEBUG org.springframework.mock.env.MockEnvironment - Activating profiles [reproduce]"
+      },
+      {
+        "id": "PIT_PRE_UNITTEST",
+        "command": [
+          "python.exe",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_*.py"
+        ],
+        "workingDirectory": "src/pit_pre",
+        "startedAtUtc": "2026-08-31T17:00:39.465720+00:00",
+        "durationSeconds": 1.477,
+        "exitCode": 0,
+        "pass": true,
+        "outputTail": ".............\n----------------------------------------------------------------------\nRan 13 tests in 0.124s\n\nOK"
+      },
+      {
+        "id": "FRONTEND_PRODUCTION_BUILD",
+        "command": [
+          "npm.cmd",
+          "run",
+          "build"
+        ],
+        "workingDirectory": "src/frontend",
+        "startedAtUtc": "2026-08-31T17:00:40.942957+00:00",
+        "durationSeconds": 23.814,
+        "exitCode": 0,
+        "pass": true,
+        "outputTail": "> shm-em-frontend@1.0.0 build\n> vue-tsc --noEmit && vite build\n\nvite v6.4.3 building for production...\ntransforming...\n✓ 2317 modules transformed.\nrendering chunks...\ncomputing gzip size...\ndist/index.html                                      0.93 kB │ gzip:   0.41 kB\ndist/assets/UnifiedSeriesChart-tMoFl-pi.css          0.08 kB │ gzip:   0.09 kB\ndist/assets/PredictionBatchBadge-DMJ5lC2X.css        0.78 kB │ gzip:   0.38 kB\ndist/assets/PredictionEvidenceDrawer-CtBYruvY.css    1.17 kB │ gzip:   0.45 kB\ndist/assets/RiskIndicator-D2Y6UeSf.css               1.88 kB │ gzip:   0.64 kB\ndist/assets/ProjectSettings-DbLT2fQ8.css             1.98 kB │ gzip:   0.61 kB\ndist/assets/PredictionRuns-C3Q9kJR6.css              5.08 kB │ gzip:   1.21 kB\ndist/assets/ResponseWorkflow-s4Jt05vr.css            5.93 kB │ gzip:   1.39 kB\ndist/assets/ProjectWorkspace-BgzfLGoS.css            9.57 kB │ gzip:   2.31 kB\ndist/assets/LowFrequencyBrowse-C4P_grrl.css          9.78 kB │ gzip:   1.95 kB\ndist/assets/ProjectTopology-PE0fX0fp.css            11.23 kB │ gzip:   2.46 kB\ndist/assets/index-DmT3g1QH.css                      11.86 kB │ gzip:   3.25 kB\ndist/assets/EventCenter-35TOjOs9.css                18.85 kB │ gzip:   3.01 kB\ndist/assets/ProjectCatalog-BUct4xLw.css             26.32 kB │ gzip:   5.05 kB\ndist/assets/vendor-element-CudmXO5w.css            357.50 kB │ gzip:  47.82 kB\ndist/assets/pit-point-layout-1dooM6ZP.js             0.05 kB │ gzip:   0.07 kB\ndist/assets/observation-dmGf3rSE.js                  0.14 kB │ gzip:   0.15 kB\ndist/assets/event-CNW3A7o8.js                        0.16 kB │ gzip:   0.16 kB\ndist/assets/project-WSvtXLdN.js                      0.39 kB │ gzip:   0.20 kB\ndist/assets/eventRule-CGvKrXoB.js                    0.62 kB │ gzip:   0.28 kB\ndist/assets/prediction-BW5BHTx0.js                   0.69 kB │ gzip:   0.25 kB\ndist/assets/http-CFpbk6tx.js                         0.81 kB │ gzip:   0.47 kB\ndist/assets/useProjectContext-DjRxcQ-m.js            1.00 kB │ gzip:   0.49 kB\ndist/assets/RiskIndicator-B7lUoFKQ.js                1.10 kB │ gzip:   0.65 kB\ndist/assets/PredictionBatchBadge-BMK8Z7nM.js         1.14 kB │ gzip:   0.71 kB\ndist/assets/UnifiedSeriesChart-BrYCXgAr.js           3.10 kB │ gzip:   1.42 kB\ndist/assets/ProjectSettings-D-zkXbs6.js              5.12 kB │ gzip:   1.97 kB\ndist/assets/PredictionEvidenceDrawer-C3VYI6AK.js     5.35 kB │ gzip:   1.90 kB\ndist/assets/PredictionRuns-C9pAxdAR.js              12.20 kB │ gzip:   4.11 kB\ndist/assets/index-DnpOQPV3.js                       13.31 kB │ gzip:   5.07 kB\ndist/assets/ProjectWorkspace-BFvyNjWG.js            16.39 kB │ gzip:   5.68 kB\ndist/assets/ProjectTopology-BA3X47Wa.js             19.24 kB │ gzip:   6.57 kB\ndist/assets/ProjectCatalog-BGjC_7fC.js              20.91 kB │ gzip:   6.80 kB\ndist/assets/vendor-vue-DJLdQGEq.js                  29.58 kB │ gzip:  11.77 kB\ndist/assets/ResponseWorkflow-DDdYp6b5.js            31.42 kB │ gzip:   9.18 kB\ndist/assets/vendor-element-icons-DvmlmQVM.js        31.45 kB │ gzip:   7.86 kB\ndist/assets/EventCenter-CsnBepLl.js                 33.19 kB │ gzip:  10.58 kB\ndist/assets/LowFrequencyBrowse-BM1FsjBn.js          36.46 kB │ gzip:  11.55 kB\ndist/assets/vendor-http-DhXgJQ-f.js                 46.09 kB │ gzip:  17.77 kB\ndist/assets/vendor-zrender-Cwq_Bx77.js             175.78 kB │ gzip:  58.35 kB\ndist/assets/vendor-runtime-cIOAUzNh.js             197.66 kB │ gzip:  73.54 kB\ndist/assets/vendor-echarts-Cy8JglfO.js             420.11 kB │ gzip: 143.00 kB\ndist/assets/vendor-element-3zF5WeGX.js             787.48 kB │ gzip: 250.05 kB\n✓ built in 14.05s\n\nnode_modules/element-plus/node_modules/@vueuse/core/dist/index.js (3362:0): A comment\n\n\"/* #__PURE__ */\"\n\nin \"node_modules/element-plus/node_modules/@vueuse/core/dist/index.js\" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.\nnode_modules/element-plus/node_modules/@vueuse/core/dist/index.js (5780:22): A comment\n\n\"/* #__PURE__ */\"\n\nin \"node_modules/element-plus/node_modules/@vueuse/core/dist/index.js\" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.\n\n(!) Some chunks are larger than 500 kB after minification. Consider:\n- Using dynamic import() to code-split the application\n- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks\n- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit."
+      }
+    ],
+    "pass": true
+  }
+}

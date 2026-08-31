@@ -1,0 +1,31 @@
+# Reviewer Evidence Map
+
+| Item | Topic | Status | Primary evidence | Next action |
+|---|---|---|---|---|
+| R1-0 | Overall revision scope | EVIDENCE_COMPLETE | `artifacts/revision/manuscript/MANUSCRIPT_EVIDENCE_BLUEPRINT.md` | Use the evidence-first revision structure. |
+| R1-1 | Reuse/generalization beyond one excavation | EVIDENCE_COMPLETE | `artifacts/revision/benchmarks/route-p/phase1b-regression/PHASE1B_COMPLETION_REPORT.md` | Report the synthetic second configuration as functional reuse evidence, not external validation. |
+| R1-2 | Software effectiveness and quantitative runtime | EVIDENCE_COMPLETE | `artifacts/revision/manuscript/final-performance-table.md` | Insert the compact final table. |
+| R1-3 | Evaluate/Execute failure-path safety | EVIDENCE_COMPLETE | `artifacts/revision/benchmarks/route-p/failure-regression/failure-matrix-v2.md` | Summarize P00/F01-F12/I01-I02 and side-effect isolation. |
+| R1-4 | Novelty versus Predictive-SHM | DOCUMENTATION_PENDING | `artifacts/revision/manuscript/claim-gap-matrix-final.md` | Complete the related-software comparison in the manuscript response. |
+| R1-5 | Versioned data-model contract | EVIDENCE_COMPLETE | `docs/revision/DATA_MODEL_CONTRACT_SPEC.md`<br>`docs/revision/examples/data-model-contract.example.json` | Cite the formal contract and compact real example. |
+| R1-6 | Project Future State definition | EVIDENCE_COMPLETE | `docs/revision/PROJECT_FUTURE_STATE_SPEC.md`<br>`docs/revision/PROJECT_FUTURE_STATE_ALGORITHM.md`<br>`artifacts/revision/manuscript/future-state-boundary-tests.json` | Include the algorithm and boundary semantics. |
+| R1-7 | Six-model configuration | EVIDENCE_COMPLETE | `docs/revision/MODEL_CONFIG_SUMMARY.md`<br>`artifacts/revision/manuscript/model-config-summary.json` | Use the database- and artifact-derived model table. |
+| R1-8 | Point-forecast limitation | LIMITATION_ONLY | `artifacts/revision/manuscript/claim-gap-matrix-final.md` | State that uncertainty quantification is not implemented. |
+| R1-9 | Runtime scalability | EVIDENCE_COMPLETE | `artifacts/revision/manuscript/final-performance-table.md` | Report reference and tenfold stress without linear-scaling language. |
+| R1-10 | MySQL scalability | EVIDENCE_COMPLETE | `artifacts/revision/benchmarks/scaling/scaling-summary.json`<br>`artifacts/revision/manuscript/final-performance-table.md` | Report persistence, integrity, retrieval, and the 50,000-row Gate boundary. |
+| R1-11 | Deployment security | DOCUMENTATION_PENDING | `artifacts/revision/manuscript/claim-gap-matrix-final.md` | Add the deployment-security limitation and recommended reverse-proxy/authentication controls. |
+| R1-12 | Windows-centric reproduction | DOCUMENTATION_PENDING | `artifacts/revision/manuscript/claim-gap-matrix-final.md` | Document the validated Windows path and list Linux portability as unverified. |
+| R1-13 | Validation/evaluation/execution eligibility figure | MANUSCRIPT_PENDING | `artifacts/revision/manuscript/MANUSCRIPT_EVIDENCE_BLUEPRINT.md` | Redraw the workflow with distinct validation, Evaluate, and Execute boundaries. |
+| R1-14 | Screenshots as scientific evidence | MANUSCRIPT_PENDING | `artifacts/revision/manuscript/MANUSCRIPT_EVIDENCE_BLUEPRINT.md` | Replace screenshot-heavy evidence with tables, algorithm, and provenance trace. |
+| R1-15 | Unsupported impact claims | MANUSCRIPT_PENDING | `artifacts/revision/manuscript/claim-gap-matrix-final.md` | Narrow claims to demonstrated behavior. |
+| R1-16 | Software testing summary | EVIDENCE_COMPLETE | `artifacts/revision/manuscript/software-test-summary.md` | Insert family-level counts without a double-counted global total. |
+| R1-17 | Concrete provenance demonstration | EVIDENCE_COMPLETE | `docs/revision/PROVENANCE_TRACE_EXAMPLE.md`<br>`artifacts/revision/manuscript/provenance-trace-final.json` | Present one complete observation/contract/batch/Gate/rule/event/evidence chain. |
+| R1-18 | OGC SensorThings relationship | DOCUMENTATION_PENDING | `artifacts/revision/manuscript/claim-gap-matrix-final.md` | Add a precise interoperability comparison and avoid claiming conformance. |
+| R1-19 | Repeated contribution text | MANUSCRIPT_PENDING | `artifacts/revision/manuscript/MANUSCRIPT_EVIDENCE_BLUEPRINT.md` | Compress repeated contribution statements during manuscript revision. |
+| R2-1 | Predictive-SHM difference and empirical comparison | DOCUMENTATION_PENDING | `artifacts/revision/manuscript/final-performance-table.md`<br>`artifacts/revision/manuscript/claim-gap-matrix-final.md` | Add a claim-level comparison; do not invent a cross-system runtime benchmark. |
+| R2-2 | Related-framework comparison table | DOCUMENTATION_PENDING | `artifacts/revision/manuscript/MANUSCRIPT_EVIDENCE_BLUEPRINT.md` | Build the manuscript comparison table from verifiable published capabilities. |
+| R2-3 | Missing/dropped rolling-window data | EVIDENCE_COMPLETE | `docs/revision/DATA_MODEL_CONTRACT_SPEC.md`<br>`artifacts/revision/benchmarks/route-p/failure-regression/failure-matrix-v2.md` | Describe fail-closed missing-data and freshness behavior. |
+| R3-1 | MySQL and data-access abstraction | DOCUMENTATION_PENDING | `artifacts/revision/manuscript/final-performance-table.md`<br>`artifacts/revision/manuscript/claim-gap-matrix-final.md` | Document current MySQL characterization and the bounded adapter seam without claiming an implemented alternative backend. |
+| R3-2 | Security pattern | DOCUMENTATION_PENDING | `artifacts/revision/manuscript/claim-gap-matrix-final.md` | Add deployment boundary and security recommendations. |
+| R3-3 | Asynchronous sampling, latency, missing points | EVIDENCE_COMPLETE | `docs/revision/DATA_MODEL_CONTRACT_SPEC.md`<br>`artifacts/revision/benchmarks/route-p/failure-regression/failure-matrix-v2.md` | Explain canonical alignment, freshness policy, and fail-closed Gate behavior. |
+| R3-4 | Linux/Docker portability | LIMITATION_ONLY | `artifacts/revision/manuscript/claim-gap-matrix-final.md` | State that this release validates native Windows reproduction and does not claim Docker/Linux validation. |

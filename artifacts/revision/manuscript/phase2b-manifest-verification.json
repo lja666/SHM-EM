@@ -1,0 +1,13 @@
+{
+  "schemaVersion": "shm-em-phase2b-verification-v1",
+  "manifestSha256": "8809278338c9024a285778beab5844dca4f7de9d88ad2ca3bcb45ea8f0936bea",
+  "package": {
+    "path": "artifacts/revision/manuscript/SHM-EM_Phase2B_GPT_Review_Package.zip",
+    "bytes": 103705,
+    "sha256": "c905e30d383f1ece844045ca29f9406c19ccacd43b4a153a561b2e2bd36e90be",
+    "allGatesPass": true
+  },
+  "gateCount": 10,
+  "passedGateCount": 10,
+  "pass": true
+}

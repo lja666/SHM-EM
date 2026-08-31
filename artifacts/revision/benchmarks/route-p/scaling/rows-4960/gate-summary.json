@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "shm-em-phase2a2-gate-benchmark-v1",
+  "workload": "rows-4960",
+  "database": "shm_em_reproduce_benchmark_scaling_s1",
+  "rows": 4960,
+  "targets": 124,
+  "steps": 40,
+  "firstMs": 2705.1053,
+  "measured": {
+    "count": 10,
+    "medianMs": 2428.54135,
+    "p95Ms": 2557.1189,
+    "minMs": 2288.9819,
+    "maxMs": 2557.1189,
+    "meanMs": 2424.32617,
+    "stddevMs": 85.718819,
+    "outliersRemoved": 0
+  },
+  "allCallsValid": true,
+  "pass": true
+}

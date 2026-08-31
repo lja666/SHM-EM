@@ -1,0 +1,17 @@
+{
+  "fault": "one required feature mapping disabled",
+  "mapping": {
+    "id": 1282,
+    "feature_code": "bridge_dtu2_point3_settlement_temperature_value",
+    "training_feature_code": "2point3settlementtemperature_value",
+    "feature_order": 164
+  },
+  "expectedStage": "database model-contract validation before inference",
+  "exitCode": 1,
+  "diagnostic": "ValueError: Input schema hash mismatch for Pressure: contract=5c2f6f0f2351b15675fc223b36043729b1e7f8ab0bd08caa891593672daa65f1, currentMapping=67debdf4d6ae4117d7620ec62de3db78cddaed490d85b48cb3813f8d65d53209",
+  "batchCountBefore": 0,
+  "batchCountAfter": 0,
+  "successfulBatchCreated": false,
+  "mappingRestored": true,
+  "pass": true
+}

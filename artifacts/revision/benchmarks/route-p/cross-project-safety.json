@@ -1,0 +1,167 @@
+{
+  "schemaVersion": "shm-em-phase2a2-cross-project-safety-v1",
+  "database": "shm_em_reproduce_benchmark_route_p_cross_project",
+  "mutation": {
+    "resultId": 193221,
+    "batchId": 40,
+    "originalProjectId": 1,
+    "movedProjectId": 10000,
+    "integrityMetadataRecomputed": false
+  },
+  "gate": {
+    "httpStatus": 200,
+    "body": {
+      "code": 0,
+      "message": "success",
+      "data": {
+        "batchId": 40,
+        "projectId": 1,
+        "batchCode": "ROLLING_120M_20250101004202_RUN_20260830232819008787",
+        "executionMode": "REPRODUCTION",
+        "referenceTime": "2025-01-01T00:42:02",
+        "contractVersion": "pit_pre_contract_v1",
+        "contractFingerprint": "f191eb390ea2219caf33790ae8e144778af463e7c42b83295d0edcdeb96c276f",
+        "expectedModelCount": 6,
+        "actualModelCount": 6,
+        "successfulModelCount": 6,
+        "expectedFeatureCount": 124,
+        "actualFeatureCount": 124,
+        "expectedSteps": 40,
+        "expectedPointCount": 4960,
+        "actualPointCount": 4959,
+        "missingPointCount": 1,
+        "invalidTimestampCount": 0,
+        "qualityIssueCount": 0,
+        "baseTimeAgeMinutes": 0,
+        "maxAgeMinutes": 120,
+        "modelSetValid": true,
+        "featureSetValid": true,
+        "timelineValid": false,
+        "qualityValid": true,
+        "artifactHashValid": true,
+        "freshnessValid": true,
+        "resultIntegrityValid": false,
+        "executionEligible": false,
+        "gateHash": "d7ed6066250b4c7176d934f694d8dc602886f5197444f6b907813a730ff4b034",
+        "evaluatedAt": "2026-08-31T11:11:05.318",
+        "issues": [
+          "The required 40-step prediction timeline is incomplete",
+          "Persisted result integrity mismatch for model Pressure@pit_pre_v1",
+          "Persisted batch output integrity mismatch"
+        ],
+        "missingModels": [],
+        "unexpectedModels": [],
+        "missingFeatures": [],
+        "unexpectedFeatures": [],
+        "missingTimelinePoints": [
+          "Pressure@pit_pre_v1:point1_0.12Pressure_value:step-1"
+        ],
+        "targets": [
+          {
+            "targetType": "Pressure",
+            "featureCount": 14,
+            "expectedPointCount": 560,
+            "actualPointCount": 559,
+            "missingPointCount": 1,
+            "completenessPercent": 99.8,
+            "complete": false,
+            "coveredSteps": 40,
+            "qualityIssueCount": 0,
+            "missingPoints": [
+              "point1_0.12Pressure_value:1"
+            ]
+          },
+          {
+            "targetType": "settlement",
+            "featureCount": 10,
+            "expectedPointCount": 400,
+            "actualPointCount": 400,
+            "missingPointCount": 0,
+            "completenessPercent": 100.0,
+            "complete": true,
+            "coveredSteps": 40,
+            "qualityIssueCount": 0,
+            "missingPoints": []
+          },
+          {
+            "targetType": "Strain",
+            "featureCount": 14,
+            "expectedPointCount": 560,
+            "actualPointCount": 560,
+            "missingPointCount": 0,
+            "completenessPercent": 100.0,
+            "complete": true,
+            "coveredSteps": 40,
+            "qualityIssueCount": 0,
+            "missingPoints": []
+          },
+          {
+            "targetType": "water",
+            "featureCount": 2,
+            "expectedPointCount": 80,
+            "actualPointCount": 80,
+            "missingPointCount": 0,
+            "completenessPercent": 100.0,
+            "complete": true,
+            "coveredSteps": 40,
+            "qualityIssueCount": 0,
+            "missingPoints": []
+          },
+          {
+            "targetType": "XD",
+            "featureCount": 42,
+            "expectedPointCount": 1680,
+            "actualPointCount": 1680,
+            "missingPointCount": 0,
+            "completenessPercent": 100.0,
+            "complete": true,
+            "coveredSteps": 40,
+            "qualityIssueCount": 0,
+            "missingPoints": []
+          },
+          {
+            "targetType": "YD",
+            "featureCount": 42,
+            "expectedPointCount": 1680,
+            "actualPointCount": 1680,
+            "missingPointCount": 0,
+            "completenessPercent": 100.0,
+            "complete": true,
+            "coveredSteps": 40,
+            "qualityIssueCount": 0,
+            "missingPoints": []
+          }
+        ]
+      }
+    }
+  },
+  "execute": {
+    "httpStatus": 400,
+    "body": {
+      "code": 400,
+      "message": "Prediction batch is not eligible for formal event execution: The required 40-step prediction timeline is incomplete, Persisted result integrity mismatch for model Pressure@pit_pre_v1, Persisted batch output integrity mismatch"
+    }
+  },
+  "formalCountsBefore": {
+    "em_monitoring_event": 0,
+    "em_event_response_workflow": 0,
+    "em_event_prediction_link": 0,
+    "em_event_metric_snapshot": 0,
+    "em_event_evidence_link": 0
+  },
+  "formalCountsAfter": {
+    "em_monitoring_event": 0,
+    "em_event_response_workflow": 0,
+    "em_event_prediction_link": 0,
+    "em_event_metric_snapshot": 0,
+    "em_event_evidence_link": 0
+  },
+  "formalDeltas": {
+    "em_monitoring_event": 0,
+    "em_event_response_workflow": 0,
+    "em_event_prediction_link": 0,
+    "em_event_metric_snapshot": 0,
+    "em_event_evidence_link": 0
+  },
+  "pass": true
+}

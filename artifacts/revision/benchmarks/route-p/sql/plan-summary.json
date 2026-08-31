@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "shm-em-phase2a2-sql-plan-v1",
+  "queryScope": "d.project_id = ? AND d.batch_id = ?",
+  "mapperProjectPredicatePresent": true,
+  "results": [
+    {
+      "workload": "s1",
+      "elapsedMs": 2275.6021,
+      "usesProjectAndBatchScope": true
+    },
+    {
+      "workload": "s2",
+      "elapsedMs": 2815.4219,
+      "usesProjectAndBatchScope": true
+    }
+  ],
+  "pass": true
+}

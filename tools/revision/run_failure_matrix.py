@@ -1088,6 +1088,7 @@ def resolve_args() -> argparse.Namespace:
     parser.add_argument("--app-password", default=os.environ.get("MYSQL_PASSWORD"))
     parser.add_argument("--phase-label", choices=["phase1a", "phase1a1"], default="phase1a1")
     parser.add_argument("--baseline-database")
+    parser.add_argument("--evidence-root", type=Path)
     parser.add_argument("--backend-port", type=int, default=5192)
     parser.add_argument("--backend-start-timeout", type=int, default=90)
     parser.add_argument("--pit-pre-timeout", type=int, default=300)
@@ -1111,9 +1112,13 @@ def resolve_args() -> argparse.Namespace:
     args.manifest_name = "phase1a1-manifest-v2.json" if args.phase_label == "phase1a1" else "phase1a-manifest.json"
     args.backend_root = repo_root / "src" / "backend"
     args.pit_pre_root = repo_root / "src" / "pit_pre"
-    args.evidence_root = (repo_root / "artifacts" / "revision" / "phase1a_1" / "failure-path-v2"
-                          if args.phase_label == "phase1a1"
-                          else repo_root / "artifacts" / "revision" / "failure-path")
+    default_evidence_root = (repo_root / "artifacts" / "revision" / "phase1a_1" / "failure-path-v2"
+                             if args.phase_label == "phase1a1"
+                             else repo_root / "artifacts" / "revision" / "failure-path")
+    args.evidence_root = (args.evidence_root or default_evidence_root).resolve()
+    allowed_evidence_root = (repo_root / "artifacts" / "revision").resolve()
+    if not args.evidence_root.is_relative_to(allowed_evidence_root):
+        parser.error("Evidence root must stay under artifacts/revision")
     args.runtime_root = Path(tempfile.mkdtemp(prefix=f"shm-em-{args.phase_label}-"))
     jars = sorted(
         (args.backend_root / "target").glob("*.jar"),

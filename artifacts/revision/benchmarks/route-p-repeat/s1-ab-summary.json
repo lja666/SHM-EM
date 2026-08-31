@@ -1,0 +1,112 @@
+{
+  "schemaVersion": "shm-em-phase2a2r-ab-summary-v1",
+  "workload": "s1",
+  "variants": {
+    "A": {
+      "measuredCalls": 20,
+      "latency": {
+        "count": 20,
+        "medianMs": 2318.36465,
+        "p95Ms": 2415.0793,
+        "minMs": 2040.9735,
+        "maxMs": 2456.999,
+        "meanMs": 2283.157555,
+        "stddevMs": 121.241883,
+        "outliersRemoved": 0
+      },
+      "allFunctionalValid": true,
+      "gateSignatures": [
+        "16e06a715d783c320d251cd89c1ea192f262a59536abd3224f848fa213e601fe"
+      ]
+    },
+    "B": {
+      "measuredCalls": 20,
+      "latency": {
+        "count": 20,
+        "medianMs": 2422.252,
+        "p95Ms": 2608.1753,
+        "minMs": 2292.5876,
+        "maxMs": 2635.8485,
+        "meanMs": 2437.94128,
+        "stddevMs": 98.50549,
+        "outliersRemoved": 0
+      },
+      "allFunctionalValid": true,
+      "gateSignatures": [
+        "16e06a715d783c320d251cd89c1ea192f262a59536abd3224f848fa213e601fe"
+      ]
+    }
+  },
+  "pairedBlocks": [
+    {
+      "block": 1,
+      "medianAms": 2366.8181,
+      "medianBms": 2472.5476,
+      "medianRatioBA": 1.044672
+    },
+    {
+      "block": 2,
+      "medianAms": 2231.3758,
+      "medianBms": 2404.2854,
+      "medianRatioBA": 1.07749
+    }
+  ],
+  "pooledMedianRatioBA": 1.044811,
+  "pooledP95RatioBA": 1.079954,
+  "absoluteMedianDeltaMs": 103.88735,
+  "functionalEquivalence": true,
+  "processes": [
+    {
+      "workload": "s1",
+      "variant": "A",
+      "block": 1,
+      "order": 1,
+      "jvmPid": 45688,
+      "startedAt": "2026-08-31T04:00:42.177593+00:00",
+      "startupMs": 7919.2064,
+      "firstRequestMs": 2822.6093,
+      "rssBeforeBytes": 571822080,
+      "rssAfterBytes": 559722496,
+      "backendLog": "C:\\Users\\nlfdz\\AppData\\Local\\Temp\\shm-em-phase2a-9lk8b2c9\\s1-block-1-1-A\\backend-5199.log"
+    },
+    {
+      "workload": "s1",
+      "variant": "B",
+      "block": 1,
+      "order": 2,
+      "jvmPid": 23284,
+      "startedAt": "2026-08-31T04:01:22.449066+00:00",
+      "startupMs": 8462.2734,
+      "firstRequestMs": 3056.8354,
+      "rssBeforeBytes": 570331136,
+      "rssAfterBytes": 549658624,
+      "backendLog": "C:\\Users\\nlfdz\\AppData\\Local\\Temp\\shm-em-phase2a-9lk8b2c9\\s1-block-1-2-B\\backend-5199.log"
+    },
+    {
+      "workload": "s1",
+      "variant": "B",
+      "block": 2,
+      "order": 1,
+      "jvmPid": 22596,
+      "startedAt": "2026-08-31T04:02:04.866825+00:00",
+      "startupMs": 8878.3946,
+      "firstRequestMs": 2707.8376,
+      "rssBeforeBytes": 580284416,
+      "rssAfterBytes": 556982272,
+      "backendLog": "C:\\Users\\nlfdz\\AppData\\Local\\Temp\\shm-em-phase2a-9lk8b2c9\\s1-block-2-1-B\\backend-5199.log"
+    },
+    {
+      "workload": "s1",
+      "variant": "A",
+      "block": 2,
+      "order": 2,
+      "jvmPid": 45268,
+      "startedAt": "2026-08-31T04:02:45.693798+00:00",
+      "startupMs": 8248.4344,
+      "firstRequestMs": 2627.0864,
+      "rssBeforeBytes": 564330496,
+      "rssAfterBytes": 555876352,
+      "backendLog": "C:\\Users\\nlfdz\\AppData\\Local\\Temp\\shm-em-phase2a-9lk8b2c9\\s1-block-2-2-A\\backend-5199.log"
+    }
+  ]
+}

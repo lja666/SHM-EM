@@ -1,0 +1,159 @@
+{
+  "schemaVersion": "shm-em-phase2a-api-progress-v1",
+  "events": [
+    {
+      "operation": "gate-inspect",
+      "phase": "first",
+      "repetition": 1,
+      "status": "completed",
+      "startedAt": "2026-08-31T04:20:04.032286+00:00",
+      "workload": "rows-49600",
+      "targetCount": 1240,
+      "finishedAt": "2026-08-31T04:20:08.616441+00:00",
+      "elapsedMs": 4581.0749
+    },
+    {
+      "operation": "gate-inspect",
+      "phase": "warmup",
+      "repetition": 1,
+      "status": "completed",
+      "startedAt": "2026-08-31T04:20:08.618568+00:00",
+      "workload": "rows-49600",
+      "targetCount": 1240,
+      "finishedAt": "2026-08-31T04:20:12.398674+00:00",
+      "elapsedMs": 3778.5829
+    },
+    {
+      "operation": "gate-inspect",
+      "phase": "warmup",
+      "repetition": 2,
+      "status": "completed",
+      "startedAt": "2026-08-31T04:20:12.401676+00:00",
+      "workload": "rows-49600",
+      "targetCount": 1240,
+      "finishedAt": "2026-08-31T04:20:16.170861+00:00",
+      "elapsedMs": 3767.2407
+    },
+    {
+      "operation": "gate-inspect",
+      "phase": "warmup",
+      "repetition": 3,
+      "status": "completed",
+      "startedAt": "2026-08-31T04:20:16.172404+00:00",
+      "workload": "rows-49600",
+      "targetCount": 1240,
+      "finishedAt": "2026-08-31T04:20:19.844102+00:00",
+      "elapsedMs": 3668.5276
+    },
+    {
+      "operation": "gate-inspect",
+      "phase": "measured",
+      "repetition": 1,
+      "status": "completed",
+      "startedAt": "2026-08-31T04:20:19.846101+00:00",
+      "workload": "rows-49600",
+      "targetCount": 1240,
+      "finishedAt": "2026-08-31T04:20:23.576978+00:00",
+      "elapsedMs": 3729.8291
+    },
+    {
+      "operation": "gate-inspect",
+      "phase": "measured",
+      "repetition": 2,
+      "status": "completed",
+      "startedAt": "2026-08-31T04:20:23.579020+00:00",
+      "workload": "rows-49600",
+      "targetCount": 1240,
+      "finishedAt": "2026-08-31T04:20:27.184134+00:00",
+      "elapsedMs": 3603.3802
+    },
+    {
+      "operation": "gate-inspect",
+      "phase": "measured",
+      "repetition": 3,
+      "status": "completed",
+      "startedAt": "2026-08-31T04:20:27.186166+00:00",
+      "workload": "rows-49600",
+      "targetCount": 1240,
+      "finishedAt": "2026-08-31T04:20:30.712060+00:00",
+      "elapsedMs": 3524.115
+    },
+    {
+      "operation": "gate-inspect",
+      "phase": "measured",
+      "repetition": 4,
+      "status": "completed",
+      "startedAt": "2026-08-31T04:20:30.714039+00:00",
+      "workload": "rows-49600",
+      "targetCount": 1240,
+      "finishedAt": "2026-08-31T04:20:34.296048+00:00",
+      "elapsedMs": 3580.7767
+    },
+    {
+      "operation": "gate-inspect",
+      "phase": "measured",
+      "repetition": 5,
+      "status": "completed",
+      "startedAt": "2026-08-31T04:20:34.298043+00:00",
+      "workload": "rows-49600",
+      "targetCount": 1240,
+      "finishedAt": "2026-08-31T04:20:37.851422+00:00",
+      "elapsedMs": 3552.043
+    },
+    {
+      "operation": "gate-inspect",
+      "phase": "measured",
+      "repetition": 6,
+      "status": "completed",
+      "startedAt": "2026-08-31T04:20:37.853384+00:00",
+      "workload": "rows-49600",
+      "targetCount": 1240,
+      "finishedAt": "2026-08-31T04:20:41.525793+00:00",
+      "elapsedMs": 3669.7929
+    },
+    {
+      "operation": "gate-inspect",
+      "phase": "measured",
+      "repetition": 7,
+      "status": "completed",
+      "startedAt": "2026-08-31T04:20:41.527820+00:00",
+      "workload": "rows-49600",
+      "targetCount": 1240,
+      "finishedAt": "2026-08-31T04:20:44.962615+00:00",
+      "elapsedMs": 3433.9655
+    },
+    {
+      "operation": "gate-inspect",
+      "phase": "measured",
+      "repetition": 8,
+      "status": "completed",
+      "startedAt": "2026-08-31T04:20:44.964612+00:00",
+      "workload": "rows-49600",
+      "targetCount": 1240,
+      "finishedAt": "2026-08-31T04:20:48.204821+00:00",
+      "elapsedMs": 3239.1271
+    },
+    {
+      "operation": "gate-inspect",
+      "phase": "measured",
+      "repetition": 9,
+      "status": "completed",
+      "startedAt": "2026-08-31T04:20:48.206848+00:00",
+      "workload": "rows-49600",
+      "targetCount": 1240,
+      "finishedAt": "2026-08-31T04:20:51.683995+00:00",
+      "elapsedMs": 3476.1482
+    },
+    {
+      "operation": "gate-inspect",
+      "phase": "measured",
+      "repetition": 10,
+      "status": "completed",
+      "startedAt": "2026-08-31T04:20:51.684995+00:00",
+      "workload": "rows-49600",
+      "targetCount": 1240,
+      "finishedAt": "2026-08-31T04:20:55.052518+00:00",
+      "elapsedMs": 3365.2375
+    }
+  ]
+}

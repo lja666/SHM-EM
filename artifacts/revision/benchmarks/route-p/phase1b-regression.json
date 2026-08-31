@@ -1,0 +1,80 @@
+{
+  "schemaVersion": "shm-em-phase2a2-phase1b-regression-v1",
+  "originalHarnessPass": false,
+  "expectedLegacyFreezeCheckFailures": {
+    "B4": {
+      "pass": false,
+      "evidence": "frozen backend diff = 0"
+    },
+    "B7": {
+      "pass": false,
+      "evidence": "event workflow core diff = 0"
+    }
+  },
+  "functionalCheckIds": [
+    "B9",
+    "B10",
+    "B11",
+    "B12",
+    "B13",
+    "B14",
+    "B15"
+  ],
+  "functionalChecks": {
+    "B9": {
+      "pass": true,
+      "evidence": "two-model PIT_PRE prediction = 1,120 rows"
+    },
+    "B10": {
+      "pass": true,
+      "evidence": "Gate resultIntegrityValid=true"
+    },
+    "B11": {
+      "pass": true,
+      "evidence": "Future State eligible and assessed"
+    },
+    "B12": {
+      "pass": true,
+      "evidence": "Evaluate candidate with zero formal side effects"
+    },
+    "B13": {
+      "pass": true,
+      "evidence": "formal event, workflow, four steps, provenance"
+    },
+    "B14": {
+      "pass": true,
+      "evidence": "missing mapping rejected before inference"
+    },
+    "B15": {
+      "pass": true,
+      "evidence": "frontend build, project routes, and joint series API pass"
+    }
+  },
+  "functionalPass": true,
+  "predictionRows": 1120,
+  "resultIntegrityValid": true,
+  "executionEligible": true,
+  "futureStateEligible": true,
+  "evaluateFormalDeltas": {
+    "events": 0,
+    "responseWorkflows": 0,
+    "responseSteps": 0,
+    "predictionLinks": 0,
+    "reports": 0,
+    "evidenceLinks": 0,
+    "metricSnapshots": 0,
+    "evidenceResources": 0
+  },
+  "executeFormalDeltas": {
+    "events": 1,
+    "responseWorkflows": 1,
+    "responseSteps": 4,
+    "predictionLinks": 1,
+    "reports": 0,
+    "evidenceLinks": 0,
+    "metricSnapshots": 0,
+    "evidenceResources": 0
+  },
+  "reportGenerationRequired": false,
+  "interpretation": "B4/B7 retain the Phase 1B zero-core-diff contract and therefore fail under the explicitly authorized one-line Route P correction. B9-B15 are the Phase 2A.2 functional reuse criteria."
+}

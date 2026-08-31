@@ -1,0 +1,131 @@
+{
+  "schemaVersion": "shm-em-phase2a2-hash-regression-v1",
+  "before": {
+    "predictionPayloadSha256": "81e4662e6a0099a8f8f399d111ff72979308619c1185492bd56f453a866def3f",
+    "batch": {
+      "id": 40,
+      "project_id": 1,
+      "batch_code": "ROLLING_120M_20250101004202_RUN_20260830232819008787",
+      "input_hash": "d48674617d31b292e2f299af2f53ee8ae225b6db1df27911ee8f5073fdb21811",
+      "output_hash": "e1d1a5a739fcc7637fc707757c3dace02d6a9e13c2cc0776910f850e2fa29475",
+      "persisted_output_hash": "4f7cd7527ff8de37bb9809f24185bb6da88661c9aa4a3f7299091be443bd47c3",
+      "persisted_output_hash_version": "prediction-persisted-output-integrity-v1"
+    },
+    "runs": [
+      {
+        "id": 235,
+        "model_code": "Pressure",
+        "model_version": "pit_pre_v1",
+        "result_hash": "dc0217eac3ef954fa711a8da358f41822c5a1389f861ea82ce3885a64e3c4563",
+        "persisted_result_hash": "0f0092b22976bc5c3cb99adaaa6514dc20308543a70e83e4db3a1431b5838609",
+        "persisted_result_hash_version": "prediction-persisted-integrity-v1"
+      },
+      {
+        "id": 236,
+        "model_code": "settlement",
+        "model_version": "pit_pre_v1",
+        "result_hash": "1d61f270c6ad12b3b4808ee818028aa01d1d843287ad66a985f1f76e71430fcf",
+        "persisted_result_hash": "639a44c7579fd575b7217568c11a97dfd1d663d6e6755d1e4532d0013f277494",
+        "persisted_result_hash_version": "prediction-persisted-integrity-v1"
+      },
+      {
+        "id": 237,
+        "model_code": "Strain",
+        "model_version": "pit_pre_v1",
+        "result_hash": "b97846b44ab721fe3bfd8225e5961b3cdb9fa6f48f7add5910c02d9b63fd08db",
+        "persisted_result_hash": "d51daed68053efe4f61a46d0bce67f5f8ce19ff7e8fb02f38c20b8fc6adce550",
+        "persisted_result_hash_version": "prediction-persisted-integrity-v1"
+      },
+      {
+        "id": 238,
+        "model_code": "water",
+        "model_version": "pit_pre_v1",
+        "result_hash": "814a610299e2584ce2a20f918809dc595c1915300db76b06882cecb0990bb971",
+        "persisted_result_hash": "f2c083b0266a584eca6f49c138d39dcc2d605e8642616f632a53d9237942f3ec",
+        "persisted_result_hash_version": "prediction-persisted-integrity-v1"
+      },
+      {
+        "id": 239,
+        "model_code": "XD",
+        "model_version": "pit_pre_v1",
+        "result_hash": "93959b14158cdd194241401f139ff7b97143fe95951c7823ed11cb42c6f0aab2",
+        "persisted_result_hash": "2f0717e068826e1b64b3d6031ac629b0e0fdd43a9867fb5aea0ce0b8e41712fb",
+        "persisted_result_hash_version": "prediction-persisted-integrity-v1"
+      },
+      {
+        "id": 240,
+        "model_code": "YD",
+        "model_version": "pit_pre_v1",
+        "result_hash": "0e51c66d6a06bca8b1157ad5e022f2220a8d44509db64d980e972808350afaec",
+        "persisted_result_hash": "ecf3320bc8e810af561e2ecaf33eb5cae7e8e96f9f1e9dc24e2281c551361b65",
+        "persisted_result_hash_version": "prediction-persisted-integrity-v1"
+      }
+    ]
+  },
+  "after": {
+    "predictionPayloadSha256": "81e4662e6a0099a8f8f399d111ff72979308619c1185492bd56f453a866def3f",
+    "batch": {
+      "id": 40,
+      "project_id": 1,
+      "batch_code": "ROLLING_120M_20250101004202_RUN_20260830232819008787",
+      "input_hash": "d48674617d31b292e2f299af2f53ee8ae225b6db1df27911ee8f5073fdb21811",
+      "output_hash": "e1d1a5a739fcc7637fc707757c3dace02d6a9e13c2cc0776910f850e2fa29475",
+      "persisted_output_hash": "4f7cd7527ff8de37bb9809f24185bb6da88661c9aa4a3f7299091be443bd47c3",
+      "persisted_output_hash_version": "prediction-persisted-output-integrity-v1"
+    },
+    "runs": [
+      {
+        "id": 235,
+        "model_code": "Pressure",
+        "model_version": "pit_pre_v1",
+        "result_hash": "dc0217eac3ef954fa711a8da358f41822c5a1389f861ea82ce3885a64e3c4563",
+        "persisted_result_hash": "0f0092b22976bc5c3cb99adaaa6514dc20308543a70e83e4db3a1431b5838609",
+        "persisted_result_hash_version": "prediction-persisted-integrity-v1"
+      },
+      {
+        "id": 236,
+        "model_code": "settlement",
+        "model_version": "pit_pre_v1",
+        "result_hash": "1d61f270c6ad12b3b4808ee818028aa01d1d843287ad66a985f1f76e71430fcf",
+        "persisted_result_hash": "639a44c7579fd575b7217568c11a97dfd1d663d6e6755d1e4532d0013f277494",
+        "persisted_result_hash_version": "prediction-persisted-integrity-v1"
+      },
+      {
+        "id": 237,
+        "model_code": "Strain",
+        "model_version": "pit_pre_v1",
+        "result_hash": "b97846b44ab721fe3bfd8225e5961b3cdb9fa6f48f7add5910c02d9b63fd08db",
+        "persisted_result_hash": "d51daed68053efe4f61a46d0bce67f5f8ce19ff7e8fb02f38c20b8fc6adce550",
+        "persisted_result_hash_version": "prediction-persisted-integrity-v1"
+      },
+      {
+        "id": 238,
+        "model_code": "water",
+        "model_version": "pit_pre_v1",
+        "result_hash": "814a610299e2584ce2a20f918809dc595c1915300db76b06882cecb0990bb971",
+        "persisted_result_hash": "f2c083b0266a584eca6f49c138d39dcc2d605e8642616f632a53d9237942f3ec",
+        "persisted_result_hash_version": "prediction-persisted-integrity-v1"
+      },
+      {
+        "id": 239,
+        "model_code": "XD",
+        "model_version": "pit_pre_v1",
+        "result_hash": "93959b14158cdd194241401f139ff7b97143fe95951c7823ed11cb42c6f0aab2",
+        "persisted_result_hash": "2f0717e068826e1b64b3d6031ac629b0e0fdd43a9867fb5aea0ce0b8e41712fb",
+        "persisted_result_hash_version": "prediction-persisted-integrity-v1"
+      },
+      {
+        "id": 240,
+        "model_code": "YD",
+        "model_version": "pit_pre_v1",
+        "result_hash": "0e51c66d6a06bca8b1157ad5e022f2220a8d44509db64d980e972808350afaec",
+        "persisted_result_hash": "ecf3320bc8e810af561e2ecaf33eb5cae7e8e96f9f1e9dc24e2281c551361b65",
+        "persisted_result_hash_version": "prediction-persisted-integrity-v1"
+      }
+    ]
+  },
+  "predictionPayloadUnchanged": true,
+  "legacyHashesUnchanged": true,
+  "persistedIntegrityHashesUnchanged": true,
+  "pass": true
+}

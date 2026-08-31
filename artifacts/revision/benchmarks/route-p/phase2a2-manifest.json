@@ -1,0 +1,77 @@
+{
+  "schemaVersion": "shm-em-phase2a2-manifest-v1",
+  "generatedAt": "2026-08-31T03:15:57.776696+00:00",
+  "fileCountExcludingManifestAndReviewPackage": 14,
+  "files": [
+    {
+      "path": "cross-project-safety.json",
+      "bytes": 5375,
+      "sha256": "c0e6dd262e9ad01fca3d8e8a258f24225205fd712bd532c7d33eead602716b9f"
+    },
+    {
+      "path": "hash-baseline.json",
+      "bytes": 2750,
+      "sha256": "2c6acda9f6b7b555c7198385b91eb748b777751fc7777d4e45648e8d1816aae1"
+    },
+    {
+      "path": "performance-stop.json",
+      "bytes": 655,
+      "sha256": "6a32a1c01646bbcb5e5571cde7fc143a491751fba97a22a8f48e3035415f5cb2"
+    },
+    {
+      "path": "phase2a2-completion-summary.json",
+      "bytes": 2550,
+      "sha256": "3a170b6e09e04be2677cdb458a3594b5fef249f373ef91c67de8f59aafec5029"
+    },
+    {
+      "path": "PHASE2A2_COMPLETION_REPORT.md",
+      "bytes": 1120,
+      "sha256": "dc67c7de75883da59576eb88806b9be76bc74dd1abac642352ac492632e9cbf3"
+    },
+    {
+      "path": "production-core-diff.json",
+      "bytes": 2363,
+      "sha256": "b34a6b3d08dba8c79bad0fbf9a22b2491ee8d35c341c90ef4400892d2e555983"
+    },
+    {
+      "path": "reference/backend-log.txt",
+      "bytes": 2542,
+      "sha256": "440671d5b550fecf9de8067eb7dab9780b8b475e11da900b41a56582d8ee503b"
+    },
+    {
+      "path": "reference/gate-raw.csv",
+      "bytes": 2682,
+      "sha256": "5cd71f0a0a3f1069225003f858f1dfcbca8e863d1d6a653a91f418b33cc96e92"
+    },
+    {
+      "path": "reference/gate-summary.json",
+      "bytes": 464,
+      "sha256": "7ab1285d7f156657e8064567402769363339edc980159794691ced64494a81aa"
+    },
+    {
+      "path": "reference/progress.json",
+      "bytes": 11708,
+      "sha256": "56f429e91240f816040b9adfb8016be1d47a48ab6a8aefd304b6c6b429701333"
+    },
+    {
+      "path": "result-set-equivalence.json",
+      "bytes": 10107,
+      "sha256": "afabedf2385f3d70f5d1c38225ac0ae39059f4d73d26b79701726a5e083adf9e"
+    },
+    {
+      "path": "route-p-change.md",
+      "bytes": 514,
+      "sha256": "5ca8c283687fe1ee6bbd9f26207bef89dc4effd1dae867649cf2c7a76aac14ea"
+    },
+    {
+      "path": "route-p-validation-summary.json",
+      "bytes": 18327,
+      "sha256": "e572399c3c768ed4a3f915335b1ee6606d6ea3d35db2389411672e152a18a8ab"
+    },
+    {
+      "path": "workloads.json",
+      "bytes": 1071,
+      "sha256": "cd20bcce95a355b7241692e41d06ca1311b7622f035448380c6706e7cddb6e3a"
+    }
+  ]
+}

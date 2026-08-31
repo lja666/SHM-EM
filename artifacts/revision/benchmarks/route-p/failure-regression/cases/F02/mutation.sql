@@ -1,0 +1,1 @@
+-- No data mutation. OPERATIONAL wall-clock freshness is the single fault.

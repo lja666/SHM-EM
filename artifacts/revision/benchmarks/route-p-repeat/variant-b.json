@@ -1,0 +1,24 @@
+{
+  "name": "Route P",
+  "commit": null,
+  "head": "84c13fa6081f72b37483b475903c7b22e1a8b92d",
+  "routePAssignmentPresent": true,
+  "productionFixCommitted": false,
+  "productionDiff": [
+    "diff --git a/src/backend/src/main/java/mybatis/iem/em/modules/engineering/application/service/impl/PredictionExecutionGateServiceImpl.java b/src/backend/src/main/java/mybatis/iem/em/modules/engineering/application/service/impl/PredictionExecutionGateServiceImpl.java",
+    "index f33d507..536e96e 100644",
+    "--- a/src/backend/src/main/java/mybatis/iem/em/modules/engineering/application/service/impl/PredictionExecutionGateServiceImpl.java",
+    "+++ b/src/backend/src/main/java/mybatis/iem/em/modules/engineering/application/service/impl/PredictionExecutionGateServiceImpl.java",
+    "@@ -73,6 +73,7 @@ public class PredictionExecutionGateServiceImpl implements PredictionExecutionGa",
+    "         List<PredictionFeatureMapping> features = contractFeatures(batch.getProjectId());",
+    "         List<PredictionRun> runs = safe(predictionMapper.selectRunsByBatch(batchId));",
+    "         PredictionQuery resultQuery = new PredictionQuery();",
+    "+        resultQuery.setProjectId(batch.getProjectId());",
+    "         resultQuery.setBatchId(batchId);",
+    "         resultQuery.setLimit(50000);",
+    "         List<PredictionDisplay> results = safe(predictionMapper.selectSeries(resultQuery, 50000));"
+  ],
+  "jarPath": "C:\\Users\\nlfdz\\AppData\\Local\\Temp\\shm-em-phase2a-9lk8b2c9\\variants\\routeP-B.jar",
+  "jarBytes": 57837937,
+  "jarSha256": "a9f8293f7fe8804dd3ac0774a18e8d95a5486f6917483acc0cb88097f8171e3a"
+}

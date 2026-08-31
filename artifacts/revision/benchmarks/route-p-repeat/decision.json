@@ -1,0 +1,16 @@
+{
+  "schemaVersion": "shm-em-phase2a2r-decision-v1",
+  "referenceDecision": "PASS",
+  "referenceRatioBA": 0.978579,
+  "referenceAbsoluteMedianDeltaMs": -7.45335,
+  "referenceBlocksAtOrBelow1_20": 4,
+  "referenceBlocksBSlower": 2,
+  "phase1bGuardrailPass": true,
+  "phase1bRoutePMedianMs": 681.94675,
+  "phase1bRoutePP95Ms": 755.7189,
+  "phase1bRatioBA": 1.005783,
+  "s1SanityRatioBA": 1.044811,
+  "pass": true,
+  "next": "CONTINUE_PHASE2A2",
+  "productionFixCommitted": false
+}

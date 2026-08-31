@@ -1,0 +1,7 @@
+{
+  "pitPre": {
+    "exitCode": 0,
+    "stdout": "PIT_PRE run mode: mode=rolling, effective_rolling=True, horizon_minutes=120\nPressure: output_rows=560, inserted_rows=560, elapsed_seconds=13.95\nsettlement: output_rows=400, inserted_rows=400, elapsed_seconds=15.04\nStrain: output_rows=560, inserted_rows=560, elapsed_seconds=15.34\nwater: output_rows=80, inserted_rows=80, elapsed_seconds=15.49\nXD: output_rows=1680, inserted_rows=1680, elapsed_seconds=16.72\nYD: output_rows=1680, inserted_rows=1680, elapsed_seconds=17.94\n",
+    "stderr": ""
+  }
+}

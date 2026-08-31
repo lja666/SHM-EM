@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "shm-em-phase2a2-performance-stop-v1",
+  "trigger": "RP-08_REFERENCE_GATE_REGRESSION_LINE",
+  "baselineMedianMs": 268.82065,
+  "stopMultiplier": 1.25,
+  "stopLineMs": 336.025813,
+  "observedMedianMs": 381.39375,
+  "observedP95Ms": 554.6694,
+  "ratioToBaseline": 1.418767,
+  "allCallsFunctionallyValid": true,
+  "stopRequired": true,
+  "prohibitedFollowOnActionsObserved": false,
+  "notRunAfterStop": [
+    "S1/S2 fresh Gate performance",
+    "sub-50k scaling sweep",
+    "corrected S1/S2 EXPLAIN ANALYZE",
+    "P00/F01-F12/I01-I02 matrix",
+    "Phase 1B synthetic bridge rerun",
+    "final hash regression"
+  ]
+}

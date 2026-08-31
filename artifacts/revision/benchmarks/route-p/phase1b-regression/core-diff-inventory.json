@@ -1,0 +1,32 @@
+{
+  "baseline": "b41c1894f75561c8ef682062a5e6dab35c3916a7",
+  "freezeRecordCommit": "3a1b4fc5990b28929c78f46f93a5deaae85140bf",
+  "frozenPaths": [
+    "src/backend/src/main",
+    "src/frontend/src",
+    "src/pit_pre/pit_pre",
+    ".gitattributes"
+  ],
+  "frozenFilesModified": [
+    "src/backend/src/main/java/mybatis/iem/em/modules/engineering/application/service/impl/PredictionExecutionGateServiceImpl.java"
+  ],
+  "coreBackendFilesModified": 1,
+  "coreFrontendFilesModified": 0,
+  "pitPreCoreFilesModified": 0,
+  "eventWorkflowFilesModified": 1,
+  "existingSourceTablesAltered": [],
+  "existingSourceTableSchemaChangeCount": 0,
+  "phase1bStatusEntries": [
+    " M tools/revision/run_phase1b_reuse_validation.py"
+  ],
+  "inheritedEolIndexEntries": [
+    " M src/pit_pre/models/Pressure__predict/predict_Pressure_future_fixed_best_params_annotated.py",
+    " M src/pit_pre/models/Strain__predict/predict_Strain_future_fixed_best_params_annotated.py",
+    " M src/pit_pre/models/XD__predict/predict_XD_future_direct_comment_enhanced.py",
+    " M src/pit_pre/models/YD__predict/predict_YD_future_direct.py",
+    " M src/pit_pre/models/settlement_predict/predict_settlement_future_fixed_best_params_annotated.py",
+    " M src/pit_pre/models/water__predict/predict_water_future_fixed_best_params_annotated.py",
+    " M src/pit_pre/requirements.lock.txt"
+  ],
+  "pass": false
+}

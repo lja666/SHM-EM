@@ -1,0 +1,41 @@
+{
+  "reference": {
+    "database": "shm_em_reproduce_benchmark_reference",
+    "batchId": 40,
+    "projectId": 1,
+    "batchCode": "ROLLING_120M_20250101004202_RUN_20260830232819008787",
+    "runCount": 6,
+    "targetCount": 124,
+    "rowCount": 4960,
+    "featureCode": "dtu1_point1_settlement_value"
+  },
+  "s1": {
+    "database": "shm_em_reproduce_benchmark_scaling_s1",
+    "batchId": 5,
+    "projectId": 2,
+    "batchCode": "PHASE2A_S1_20260624100000",
+    "runCount": 1,
+    "targetCount": 124,
+    "rowCount": 4960,
+    "featureCode": "s1_target_00001"
+  },
+  "s2": {
+    "database": "shm_em_reproduce_benchmark_scaling_s2",
+    "batchId": 5,
+    "projectId": 2,
+    "batchCode": "PHASE2A_S2_20260624100000",
+    "runCount": 1,
+    "targetCount": 1240,
+    "rowCount": 49600,
+    "featureCode": "s2_target_00001"
+  },
+  "phase1b": {
+    "database": "shm_em_reproduce_phase1b_bridge",
+    "batchId": 5,
+    "projectId": 2,
+    "batchCode": "ROLLING_120M_20260624100000_RUN_20260830155918449739",
+    "runCount": 2,
+    "targetCount": 28,
+    "rowCount": 1120
+  }
+}

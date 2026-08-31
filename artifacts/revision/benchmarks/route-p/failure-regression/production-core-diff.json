@@ -1,0 +1,37 @@
+{
+  "head": "84c13fa6081f72b37483b475903c7b22e1a8b92d",
+  "branch": "revision/softx-d-26-00931",
+  "coreFreezeCommit": "df39ffb2b57d16cfdca419adf2492959fcc0931c",
+  "freezeRecordCommit": "6ea8ec64ed456fc7ea503e365107c1b3db82737a",
+  "frozenPaths": [
+    "src/backend/src/main",
+    "src/frontend",
+    "src/pit_pre/pit_pre",
+    ".gitattributes"
+  ],
+  "frozenProductionCoreDiff": [
+    "src/backend/src/main/java/mybatis/iem/em/modules/engineering/application/service/impl/PredictionExecutionGateServiceImpl.java"
+  ],
+  "gitDiffNameOnly": [
+    "src/backend/src/main/java/mybatis/iem/em/modules/engineering/application/service/impl/PredictionExecutionGateServiceImpl.java",
+    "src/backend/src/test/java/mybatis/iem/em/modules/engineering/application/service/impl/PredictionExecutionGateServiceImplTest.java",
+    "tools/revision/run_failure_matrix.py",
+    "tools/revision/run_phase1b_reuse_validation.py"
+  ],
+  "gitStatusShort": [
+    " M src/backend/src/main/java/mybatis/iem/em/modules/engineering/application/service/impl/PredictionExecutionGateServiceImpl.java",
+    " M src/backend/src/test/java/mybatis/iem/em/modules/engineering/application/service/impl/PredictionExecutionGateServiceImplTest.java",
+    " M src/pit_pre/models/Pressure__predict/predict_Pressure_future_fixed_best_params_annotated.py",
+    " M src/pit_pre/models/Strain__predict/predict_Strain_future_fixed_best_params_annotated.py",
+    " M src/pit_pre/models/XD__predict/predict_XD_future_direct_comment_enhanced.py",
+    " M src/pit_pre/models/YD__predict/predict_YD_future_direct.py",
+    " M src/pit_pre/models/settlement_predict/predict_settlement_future_fixed_best_params_annotated.py",
+    " M src/pit_pre/models/water__predict/predict_water_future_fixed_best_params_annotated.py",
+    " M src/pit_pre/requirements.lock.txt",
+    " M tools/revision/run_failure_matrix.py",
+    " M tools/revision/run_phase1b_reuse_validation.py",
+    "?? tools/revision/finalize_phase2a2_evidence.py",
+    "?? tools/revision/run_route_p_ab_repeat.py",
+    "?? tools/revision/run_route_p_validation.py"
+  ]
+}

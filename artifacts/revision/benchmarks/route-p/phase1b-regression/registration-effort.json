@@ -1,0 +1,19 @@
+{
+  "newProjectRecords": 1,
+  "newStations": 3,
+  "newInstruments": 12,
+  "newStationMetricBindings": 26,
+  "newObservationRegistryMappings": 4,
+  "newFeatureMappings": 164,
+  "newModelRegistrations": 2,
+  "newRuleRecords": 1,
+  "newConfigurationSqlFiles": 1,
+  "newModelFixtureFiles": 0,
+  "newDocumentationFiles": 2,
+  "newRevisionTools": 2,
+  "configurationSqlLines": 462,
+  "coreSourceFilesModified": 1,
+  "existingSourceTableSchemaChanges": 0,
+  "manualStepsRequired": 1,
+  "manualStep": "run tools/revision/run_phase1b_reuse_validation.py with an isolated database password"
+}

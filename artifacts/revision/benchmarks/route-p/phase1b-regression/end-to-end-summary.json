@@ -1,0 +1,1169 @@
+{
+  "schemaVersion": "shm-em-phase1b-summary-v1",
+  "finalCoreFreezeV2": "b41c1894f75561c8ef682062a5e6dab35c3916a7",
+  "phase1bCommitted": false,
+  "configuration": {
+    "project": {
+      "id": 2,
+      "project_code": "SHM_EM_SYNTH_BRIDGE",
+      "project_name": "SHM-EM Synthetic Bridge Reuse Fixture",
+      "infrastructure_type": "bridge",
+      "scenario_label": "phase1b_cross_configuration_reuse",
+      "location_text": "Synthetic software-validation site",
+      "longitude": null,
+      "latitude": null,
+      "coordinate_system": "local_layout",
+      "coordinate_source": "synthetic_fixture",
+      "coordinate_quality": "validated_fixture",
+      "map_provider": null,
+      "spatial_context_json": "{\"fixtureScope\": \"software_reuse_only\", \"stationCount\": 3, \"stationTopology\": [\"west_pier\", \"midspan\", \"east_pier\"], \"predictiveAccuracyClaim\": false}",
+      "description": "Synthetic non-excavation configuration for validating SHM-EM registration, prediction, gating, event, response, and provenance reuse.",
+      "start_time": null,
+      "end_time": null,
+      "status": "active",
+      "created_at": "2026-08-31 12:26:53",
+      "updated_at": "2026-08-31 12:26:53"
+    },
+    "counts": {
+      "stations": 3,
+      "instruments": 12,
+      "stationMetrics": 26,
+      "registries": 4,
+      "models": 2,
+      "features": 164,
+      "predictionTargets": "28",
+      "rules": 1
+    },
+    "models": [
+      {
+        "model_code": "Pressure",
+        "target_type": "Pressure",
+        "required_history_rows": 13,
+        "expected_steps": 40,
+        "time_step_minutes": 3,
+        "input_schema_hash": "5c2f6f0f2351b15675fc223b36043729b1e7f8ab0bd08caa891593672daa65f1",
+        "artifact_hash": "aef1d20d99b94607b22ded3c37c2a75300c2441db50b9fa005018fb163e1a31c",
+        "preprocessor_hash": "3a0db327bd99be620380b4fb4a280f734325bd4767788bb5d8d7242980fe7183",
+        "artifact_bundle_hash": "ccf75dd1a15df36869486022eac8f47e5d1846e94e50490cf7c9903f852fd99c"
+      },
+      {
+        "model_code": "Strain",
+        "target_type": "Strain",
+        "required_history_rows": 13,
+        "expected_steps": 40,
+        "time_step_minutes": 3,
+        "input_schema_hash": "5c2f6f0f2351b15675fc223b36043729b1e7f8ab0bd08caa891593672daa65f1",
+        "artifact_hash": "687acb1a44f79f9566e2e677f33478addd66c83a9e300f32666674f7d2cdc694",
+        "preprocessor_hash": "6660a92d879f1774bae92619392f95219927608584c6f3c72e6ce1f7c77b71df",
+        "artifact_bundle_hash": "8a5b23617c265ea5da22e368ab1a5d69414d96f63244fdb4f0633798f085328e"
+      }
+    ],
+    "registries": [
+      {
+        "registry_code": "SHM_EM_SYNTH_BRIDGE_DISPLACEMENT",
+        "instrument_type": "displacement",
+        "physical_table_name": "em_obs_displacement",
+        "storage_mode": "type_table"
+      },
+      {
+        "registry_code": "SHM_EM_SYNTH_BRIDGE_EARTH_PRESSURE",
+        "instrument_type": "earth_pressure",
+        "physical_table_name": "em_obs_earth_pressure",
+        "storage_mode": "type_table"
+      },
+      {
+        "registry_code": "SHM_EM_SYNTH_BRIDGE_PRESSURE_WATER_LEVEL",
+        "instrument_type": "pressure_water_level",
+        "physical_table_name": "em_obs_pressure_water_level",
+        "storage_mode": "type_table"
+      },
+      {
+        "registry_code": "SHM_EM_SYNTH_BRIDGE_STATIC_LEVEL",
+        "instrument_type": "static_level",
+        "physical_table_name": "em_obs_static_level",
+        "storage_mode": "type_table"
+      }
+    ],
+    "metricComposition": [
+      {
+        "feature_group": "Pressure",
+        "source_metric_code": "earth_pressure_p",
+        "feature_count": 14,
+        "prediction_target_count": "14"
+      },
+      {
+        "feature_group": "settlement",
+        "source_metric_code": "ground_settlement",
+        "feature_count": 10,
+        "prediction_target_count": "0"
+      },
+      {
+        "feature_group": "settlement",
+        "source_metric_code": "static_level_aux_mm",
+        "feature_count": 10,
+        "prediction_target_count": "0"
+      },
+      {
+        "feature_group": "settlement",
+        "source_metric_code": "static_level_temperature_c",
+        "feature_count": 10,
+        "prediction_target_count": "0"
+      },
+      {
+        "feature_group": "settlement",
+        "source_metric_code": "static_level_value_mm",
+        "feature_count": 20,
+        "prediction_target_count": "0"
+      },
+      {
+        "feature_group": "Strain",
+        "source_metric_code": "earth_pressure_strain_ue",
+        "feature_count": 14,
+        "prediction_target_count": "14"
+      },
+      {
+        "feature_group": "water",
+        "source_metric_code": "pressure_water_level_mm",
+        "feature_count": 2,
+        "prediction_target_count": "0"
+      },
+      {
+        "feature_group": "XD",
+        "source_metric_code": "displacement_tilt_x_deg",
+        "feature_count": 42,
+        "prediction_target_count": "0"
+      },
+      {
+        "feature_group": "YD",
+        "source_metric_code": "displacement_tilt_y_deg",
+        "feature_count": 42,
+        "prediction_target_count": "0"
+      }
+    ],
+    "scope": "software-reuse fixture; no cross-domain predictive-accuracy claim"
+  },
+  "negativeOnboarding": {
+    "fault": "one required feature mapping disabled",
+    "mapping": {
+      "id": 1282,
+      "feature_code": "bridge_dtu2_point3_settlement_temperature_value",
+      "training_feature_code": "2point3settlementtemperature_value",
+      "feature_order": 164
+    },
+    "expectedStage": "database model-contract validation before inference",
+    "exitCode": 1,
+    "diagnostic": "ValueError: Input schema hash mismatch for Pressure: contract=5c2f6f0f2351b15675fc223b36043729b1e7f8ab0bd08caa891593672daa65f1, currentMapping=67debdf4d6ae4117d7620ec62de3db78cddaed490d85b48cb3813f8d65d53209",
+    "batchCountBefore": 0,
+    "batchCountAfter": 0,
+    "successfulBatchCreated": false,
+    "mappingRestored": true,
+    "pass": true
+  },
+  "prediction": {
+    "batch": {
+      "id": 5,
+      "batch_code": "ROLLING_120M_20260624100000_RUN_20260831122704696917",
+      "project_id": 2,
+      "base_time": "2026-06-24 10:00:00",
+      "time_step_minutes": 3,
+      "horizon_minutes": 120,
+      "rolling_steps": 40,
+      "model_count": 2,
+      "feature_count": 28,
+      "pipeline_version": "pit_pre_contract_v1",
+      "feature_mapping_version": "pit_pre_v1",
+      "input_hash": "9d052e69312f5e7d40afdaa8d8c7ff51e087fe021ff96e703d301e82be0deb93",
+      "output_hash": "99d64ac0817113535871b4d87a046efc6e343a0ba1d8d023d8949bdbfc2e37a0",
+      "persisted_output_hash": "33bf77f693738f67dd0897b1db486f5c24c0b8966a896ab73c2c979096562fd6",
+      "persisted_output_hash_version": "prediction-persisted-output-integrity-v1",
+      "status": "success",
+      "message": null,
+      "started_at": "2026-08-31 12:27:04.697000",
+      "finished_at": "2026-08-31 12:27:14.803000",
+      "created_at": "2026-08-31 12:27:13",
+      "updated_at": "2026-08-31 12:27:14"
+    },
+    "runs": [
+      {
+        "id": 25,
+        "model_id": 46,
+        "model_code": "Pressure",
+        "model_version": "pit_pre_v1",
+        "status": "success",
+        "result_hash": "63a69536feed2ab4746f4d895ccfb270ed2ecde044d201ef96305cc034ddcfba",
+        "persisted_result_hash": "a75dcb9ee888baaef03494cb1edbd969ff8eeb07c76fba377281692755bcefb4",
+        "persisted_result_hash_version": "prediction-persisted-integrity-v1",
+        "persisted_rows": 560,
+        "target_count": 14,
+        "minimum_step": 1,
+        "maximum_step": 40,
+        "covered_steps": 40,
+        "first_future_time": "2026-06-24 10:03:00",
+        "last_future_time": "2026-06-24 12:00:00"
+      },
+      {
+        "id": 26,
+        "model_id": 45,
+        "model_code": "Strain",
+        "model_version": "pit_pre_v1",
+        "status": "success",
+        "result_hash": "5c5ec3399396a238173c7170fff8a41a5a7b4fe222def58b4f108ed970e7dba2",
+        "persisted_result_hash": "2132b6fa399ce1a9fbb9408bc02eefcb51283b92ba1396b592f180a4eb6ed1b9",
+        "persisted_result_hash_version": "prediction-persisted-integrity-v1",
+        "persisted_rows": 560,
+        "target_count": 14,
+        "minimum_step": 1,
+        "maximum_step": 40,
+        "covered_steps": 40,
+        "first_future_time": "2026-06-24 10:03:00",
+        "last_future_time": "2026-06-24 12:00:00"
+      }
+    ],
+    "totalPersistedRows": 1120,
+    "allRunsSuccessful": true,
+    "allRunsIntegrityProtected": true,
+    "batchIntegrityProtected": true
+  },
+  "gate": {
+    "id": 1,
+    "batchId": 5,
+    "projectId": 2,
+    "batchCode": "ROLLING_120M_20260624100000_RUN_20260831122704696917",
+    "executionMode": "REPRODUCTION",
+    "referenceTime": "2026-06-24T10:00:00",
+    "contractVersion": "pit_pre_contract_v1",
+    "contractFingerprint": "a9e73ee02eafbe654a1c01d5013ea43f05d60b311bb8b36a50ba96960821616e",
+    "expectedModelCount": 2,
+    "actualModelCount": 2,
+    "successfulModelCount": 2,
+    "expectedFeatureCount": 28,
+    "actualFeatureCount": 28,
+    "expectedSteps": 40,
+    "expectedPointCount": 1120,
+    "actualPointCount": 1120,
+    "missingPointCount": 0,
+    "invalidTimestampCount": 0,
+    "qualityIssueCount": 0,
+    "baseTimeAgeMinutes": 0,
+    "maxAgeMinutes": 120,
+    "modelSetValid": true,
+    "featureSetValid": true,
+    "timelineValid": true,
+    "qualityValid": true,
+    "artifactHashValid": true,
+    "freshnessValid": true,
+    "resultIntegrityValid": true,
+    "executionEligible": true,
+    "gateHash": "10efc21f0c26a96f3f172de82b0848cb88a35aa0526b241da482befd55a6dd1f",
+    "evaluatedAt": "2026-08-31T12:27:23.792",
+    "issues": [],
+    "missingModels": [],
+    "unexpectedModels": [],
+    "missingFeatures": [],
+    "unexpectedFeatures": [],
+    "missingTimelinePoints": [],
+    "targets": [
+      {
+        "targetType": "Pressure",
+        "featureCount": 14,
+        "expectedPointCount": 560,
+        "actualPointCount": 560,
+        "missingPointCount": 0,
+        "completenessPercent": 100.0,
+        "complete": true,
+        "coveredSteps": 40,
+        "qualityIssueCount": 0,
+        "missingPoints": []
+      },
+      {
+        "targetType": "Strain",
+        "featureCount": 14,
+        "expectedPointCount": 560,
+        "actualPointCount": 560,
+        "missingPointCount": 0,
+        "completenessPercent": 100.0,
+        "complete": true,
+        "coveredSteps": 40,
+        "qualityIssueCount": 0,
+        "missingPoints": []
+      }
+    ]
+  },
+  "futureState": {
+    "projectId": 2,
+    "batchId": 5,
+    "batchCode": "ROLLING_120M_20260624100000_RUN_20260831122704696917",
+    "baseTime": "2026-06-24T10:00:00",
+    "horizonMinutes": 120,
+    "executionMode": "REPRODUCTION",
+    "executionEligible": true,
+    "executionBlockers": [],
+    "aggregationPolicyVersion": "1.0.0",
+    "aggregationPolicyCode": "PROJECT_MAX_OBSERVED_FORECAST",
+    "aggregationPolicyHash": "e06ff4a2fe14c764a601bf315b64fff2a4ce433a9930ed4b4d6c1a5c934eda62",
+    "stateHash": "e5952a476f25c30902bdb5e40b27f42cb3c33d377878ff72c0d39bb265a1dee6",
+    "observedRiskLevel": "normal",
+    "openObservedEventCount": 0,
+    "forecastRiskLevel": "yellow",
+    "overallRiskLevel": "yellow",
+    "earliestExceedanceTime": "2026-06-24T10:09:00",
+    "assessedFeatureCount": 14,
+    "unassessedFeatureCount": 14,
+    "executionGate": {
+      "batchId": 5,
+      "projectId": 2,
+      "batchCode": "ROLLING_120M_20260624100000_RUN_20260831122704696917",
+      "executionMode": "REPRODUCTION",
+      "referenceTime": "2026-06-24T10:00:00",
+      "contractVersion": "pit_pre_contract_v1",
+      "contractFingerprint": "a9e73ee02eafbe654a1c01d5013ea43f05d60b311bb8b36a50ba96960821616e",
+      "expectedModelCount": 2,
+      "actualModelCount": 2,
+      "successfulModelCount": 2,
+      "expectedFeatureCount": 28,
+      "actualFeatureCount": 28,
+      "expectedSteps": 40,
+      "expectedPointCount": 1120,
+      "actualPointCount": 1120,
+      "missingPointCount": 0,
+      "invalidTimestampCount": 0,
+      "qualityIssueCount": 0,
+      "baseTimeAgeMinutes": 0,
+      "maxAgeMinutes": 120,
+      "modelSetValid": true,
+      "featureSetValid": true,
+      "timelineValid": true,
+      "qualityValid": true,
+      "artifactHashValid": true,
+      "freshnessValid": true,
+      "resultIntegrityValid": true,
+      "executionEligible": true,
+      "gateHash": "10efc21f0c26a96f3f172de82b0848cb88a35aa0526b241da482befd55a6dd1f",
+      "evaluatedAt": "2026-08-31T12:27:24.674",
+      "issues": [],
+      "missingModels": [],
+      "unexpectedModels": [],
+      "missingFeatures": [],
+      "unexpectedFeatures": [],
+      "missingTimelinePoints": [],
+      "targets": [
+        {
+          "targetType": "Pressure",
+          "featureCount": 14,
+          "expectedPointCount": 560,
+          "actualPointCount": 560,
+          "missingPointCount": 0,
+          "completenessPercent": 100.0,
+          "complete": true,
+          "coveredSteps": 40,
+          "qualityIssueCount": 0,
+          "missingPoints": []
+        },
+        {
+          "targetType": "Strain",
+          "featureCount": 14,
+          "expectedPointCount": 560,
+          "actualPointCount": 560,
+          "missingPointCount": 0,
+          "completenessPercent": 100.0,
+          "complete": true,
+          "coveredSteps": 40,
+          "qualityIssueCount": 0,
+          "missingPoints": []
+        }
+      ]
+    },
+    "targets": [
+      {
+        "targetType": "Pressure",
+        "featureCount": 14,
+        "assessedFeatureCount": 14,
+        "warningCount": 14,
+        "alarmCount": 0,
+        "riskLevel": "yellow",
+        "minPredictedValue": -989.20800781,
+        "maxPredictedValue": 1924.16503906,
+        "governingValue": 1924.16503906,
+        "governingThreshold": -1000.0,
+        "thresholdDistance": 2924.16503906,
+        "peakValue": 1924.16503906,
+        "unit": "MPa",
+        "firstExceedanceTime": "2026-06-24T10:09:00"
+      },
+      {
+        "targetType": "Strain",
+        "featureCount": 14,
+        "assessedFeatureCount": 0,
+        "warningCount": 0,
+        "alarmCount": 0,
+        "riskLevel": "unassessed",
+        "minPredictedValue": -22.74855804,
+        "maxPredictedValue": 230.02865601,
+        "governingValue": 62.63587189,
+        "thresholdDistance": 0,
+        "peakValue": 62.63587189,
+        "unit": "με"
+      }
+    ],
+    "stations": [
+      {
+        "stationId": 74,
+        "stationName": "West Pier",
+        "riskLevel": "yellow",
+        "contributors": [
+          {
+            "featureCode": "bridge_point1_0.12Pressure_value",
+            "featureLabel": "Synthetic bridge fixture / Borehole 1 / 0.12 m / Earth pressure",
+            "targetType": "Pressure",
+            "metricCode": "earth_pressure_p",
+            "predictedValue": -452.28631592,
+            "unit": "MPa",
+            "thresholdValue": -1000.0,
+            "operator": ">=",
+            "riskLevel": "yellow",
+            "riskRank": 10,
+            "firstExceedanceTime": "2026-06-24T10:09:00",
+            "ruleCode": "BRIDGE_PRESSURE_WORKFLOW_FIXTURE"
+          },
+          {
+            "featureCode": "bridge_point1_3.12Pressure_value",
+            "featureLabel": "Synthetic bridge fixture / Borehole 1 / 3.12 m / Earth pressure",
+            "targetType": "Pressure",
+            "metricCode": "earth_pressure_p",
+            "predictedValue": 555.83709717,
+            "unit": "MPa",
+            "thresholdValue": -1000.0,
+            "operator": ">=",
+            "riskLevel": "yellow",
+            "riskRank": 10,
+            "firstExceedanceTime": "2026-06-24T10:09:00",
+            "ruleCode": "BRIDGE_PRESSURE_WORKFLOW_FIXTURE"
+          },
+          {
+            "featureCode": "bridge_point1_6.12Pressure_value",
+            "featureLabel": "Synthetic bridge fixture / Borehole 1 / 6.12 m / Earth pressure",
+            "targetType": "Pressure",
+            "metricCode": "earth_pressure_p",
+            "predictedValue": 154.78356934,
+            "unit": "MPa",
+            "thresholdValue": -1000.0,
+            "operator": ">=",
+            "riskLevel": "yellow",
+            "riskRank": 10,
+            "firstExceedanceTime": "2026-06-24T10:09:00",
+            "ruleCode": "BRIDGE_PRESSURE_WORKFLOW_FIXTURE"
+          },
+          {
+            "featureCode": "bridge_point2_2.2Pressure_value",
+            "featureLabel": "Synthetic bridge fixture / Borehole 2 / 2.2 m / Earth pressure",
+            "targetType": "Pressure",
+            "metricCode": "earth_pressure_p",
+            "predictedValue": 27.55033875,
+            "unit": "MPa",
+            "thresholdValue": -1000.0,
+            "operator": ">=",
+            "riskLevel": "yellow",
+            "riskRank": 10,
+            "firstExceedanceTime": "2026-06-24T10:09:00",
+            "ruleCode": "BRIDGE_PRESSURE_WORKFLOW_FIXTURE"
+          },
+          {
+            "featureCode": "bridge_point2_5.2Pressure_value",
+            "featureLabel": "Synthetic bridge fixture / Borehole 2 / 5.2 m / Earth pressure",
+            "targetType": "Pressure",
+            "metricCode": "earth_pressure_p",
+            "predictedValue": 762.5458374,
+            "unit": "MPa",
+            "thresholdValue": -1000.0,
+            "operator": ">=",
+            "riskLevel": "yellow",
+            "riskRank": 10,
+            "firstExceedanceTime": "2026-06-24T10:09:00",
+            "ruleCode": "BRIDGE_PRESSURE_WORKFLOW_FIXTURE"
+          }
+        ]
+      },
+      {
+        "stationId": 75,
+        "stationName": "Midspan",
+        "riskLevel": "yellow",
+        "contributors": [
+          {
+            "featureCode": "bridge_point1_2.12Pressure_value",
+            "featureLabel": "Synthetic bridge fixture / Borehole 1 / 2.12 m / Earth pressure",
+            "targetType": "Pressure",
+            "metricCode": "earth_pressure_p",
+            "predictedValue": 686.92285156,
+            "unit": "MPa",
+            "thresholdValue": -1000.0,
+            "operator": ">=",
+            "riskLevel": "yellow",
+            "riskRank": 10,
+            "firstExceedanceTime": "2026-06-24T10:09:00",
+            "ruleCode": "BRIDGE_PRESSURE_WORKFLOW_FIXTURE"
+          },
+          {
+            "featureCode": "bridge_point1_5.12Pressure_value",
+            "featureLabel": "Synthetic bridge fixture / Borehole 1 / 5.12 m / Earth pressure",
+            "targetType": "Pressure",
+            "metricCode": "earth_pressure_p",
+            "predictedValue": 53.39351654,
+            "unit": "MPa",
+            "thresholdValue": -1000.0,
+            "operator": ">=",
+            "riskLevel": "yellow",
+            "riskRank": 10,
+            "firstExceedanceTime": "2026-06-24T10:09:00",
+            "ruleCode": "BRIDGE_PRESSURE_WORKFLOW_FIXTURE"
+          },
+          {
+            "featureCode": "bridge_point2_1.2Pressure_value",
+            "featureLabel": "Synthetic bridge fixture / Borehole 2 / 1.2 m / Earth pressure",
+            "targetType": "Pressure",
+            "metricCode": "earth_pressure_p",
+            "predictedValue": -615.04718018,
+            "unit": "MPa",
+            "thresholdValue": -1000.0,
+            "operator": ">=",
+            "riskLevel": "yellow",
+            "riskRank": 10,
+            "firstExceedanceTime": "2026-06-24T10:09:00",
+            "ruleCode": "BRIDGE_PRESSURE_WORKFLOW_FIXTURE"
+          },
+          {
+            "featureCode": "bridge_point2_4.2Pressure_value",
+            "featureLabel": "Synthetic bridge fixture / Borehole 2 / 4.2 m / Earth pressure",
+            "targetType": "Pressure",
+            "metricCode": "earth_pressure_p",
+            "predictedValue": 591.39752197,
+            "unit": "MPa",
+            "thresholdValue": -1000.0,
+            "operator": ">=",
+            "riskLevel": "yellow",
+            "riskRank": 10,
+            "firstExceedanceTime": "2026-06-24T10:09:00",
+            "ruleCode": "BRIDGE_PRESSURE_WORKFLOW_FIXTURE"
+          }
+        ]
+      },
+      {
+        "stationId": 76,
+        "stationName": "East Pier",
+        "riskLevel": "yellow",
+        "contributors": [
+          {
+            "featureCode": "bridge_point1_1.12Pressure_value",
+            "featureLabel": "Synthetic bridge fixture / Borehole 1 / 1.12 m / Earth pressure",
+            "targetType": "Pressure",
+            "metricCode": "earth_pressure_p",
+            "predictedValue": 252.10231018,
+            "unit": "MPa",
+            "thresholdValue": -1000.0,
+            "operator": ">=",
+            "riskLevel": "yellow",
+            "riskRank": 10,
+            "firstExceedanceTime": "2026-06-24T10:09:00",
+            "ruleCode": "BRIDGE_PRESSURE_WORKFLOW_FIXTURE"
+          },
+          {
+            "featureCode": "bridge_point1_4.12Pressure_value",
+            "featureLabel": "Synthetic bridge fixture / Borehole 1 / 4.12 m / Earth pressure",
+            "targetType": "Pressure",
+            "metricCode": "earth_pressure_p",
+            "predictedValue": -74.86330414,
+            "unit": "MPa",
+            "thresholdValue": -1000.0,
+            "operator": ">=",
+            "riskLevel": "yellow",
+            "riskRank": 10,
+            "firstExceedanceTime": "2026-06-24T10:09:00",
+            "ruleCode": "BRIDGE_PRESSURE_WORKFLOW_FIXTURE"
+          },
+          {
+            "featureCode": "bridge_point2_0.2Pressure_value",
+            "featureLabel": "Synthetic bridge fixture / Borehole 2 / 0.2 m / Earth pressure",
+            "targetType": "Pressure",
+            "metricCode": "earth_pressure_p",
+            "predictedValue": 948.60681152,
+            "unit": "MPa",
+            "thresholdValue": -1000.0,
+            "operator": ">=",
+            "riskLevel": "yellow",
+            "riskRank": 10,
+            "firstExceedanceTime": "2026-06-24T10:09:00",
+            "ruleCode": "BRIDGE_PRESSURE_WORKFLOW_FIXTURE"
+          },
+          {
+            "featureCode": "bridge_point2_3.2Pressure_value",
+            "featureLabel": "Synthetic bridge fixture / Borehole 2 / 3.2 m / Earth pressure",
+            "targetType": "Pressure",
+            "metricCode": "earth_pressure_p",
+            "predictedValue": -71.50701904,
+            "unit": "MPa",
+            "thresholdValue": -1000.0,
+            "operator": ">=",
+            "riskLevel": "yellow",
+            "riskRank": 10,
+            "firstExceedanceTime": "2026-06-24T10:09:00",
+            "ruleCode": "BRIDGE_PRESSURE_WORKFLOW_FIXTURE"
+          },
+          {
+            "featureCode": "bridge_point2_6.2Pressure_value",
+            "featureLabel": "Synthetic bridge fixture / Borehole 2 / 6.2 m / Earth pressure",
+            "targetType": "Pressure",
+            "metricCode": "earth_pressure_p",
+            "predictedValue": 440.18099976,
+            "unit": "MPa",
+            "thresholdValue": -1000.0,
+            "operator": ">=",
+            "riskLevel": "yellow",
+            "riskRank": 10,
+            "firstExceedanceTime": "2026-06-24T10:09:00",
+            "ruleCode": "BRIDGE_PRESSURE_WORKFLOW_FIXTURE"
+          }
+        ]
+      }
+    ],
+    "timeline": [
+      {
+        "step": 1,
+        "horizonMinutes": 3,
+        "futureTime": "2026-06-24T10:03:00",
+        "riskLevel": "normal",
+        "exceedingFeatureCount": 0
+      },
+      {
+        "step": 2,
+        "horizonMinutes": 6,
+        "futureTime": "2026-06-24T10:06:00",
+        "riskLevel": "normal",
+        "exceedingFeatureCount": 0
+      },
+      {
+        "step": 3,
+        "horizonMinutes": 9,
+        "futureTime": "2026-06-24T10:09:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 4,
+        "horizonMinutes": 12,
+        "futureTime": "2026-06-24T10:12:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 5,
+        "horizonMinutes": 15,
+        "futureTime": "2026-06-24T10:15:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 6,
+        "horizonMinutes": 18,
+        "futureTime": "2026-06-24T10:18:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 7,
+        "horizonMinutes": 21,
+        "futureTime": "2026-06-24T10:21:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 8,
+        "horizonMinutes": 24,
+        "futureTime": "2026-06-24T10:24:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 9,
+        "horizonMinutes": 27,
+        "futureTime": "2026-06-24T10:27:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 10,
+        "horizonMinutes": 30,
+        "futureTime": "2026-06-24T10:30:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 11,
+        "horizonMinutes": 33,
+        "futureTime": "2026-06-24T10:33:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 12,
+        "horizonMinutes": 36,
+        "futureTime": "2026-06-24T10:36:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 13,
+        "horizonMinutes": 39,
+        "futureTime": "2026-06-24T10:39:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 14,
+        "horizonMinutes": 42,
+        "futureTime": "2026-06-24T10:42:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 15,
+        "horizonMinutes": 45,
+        "futureTime": "2026-06-24T10:45:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 16,
+        "horizonMinutes": 48,
+        "futureTime": "2026-06-24T10:48:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 17,
+        "horizonMinutes": 51,
+        "futureTime": "2026-06-24T10:51:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 18,
+        "horizonMinutes": 54,
+        "futureTime": "2026-06-24T10:54:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 19,
+        "horizonMinutes": 57,
+        "futureTime": "2026-06-24T10:57:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 20,
+        "horizonMinutes": 60,
+        "futureTime": "2026-06-24T11:00:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 21,
+        "horizonMinutes": 63,
+        "futureTime": "2026-06-24T11:03:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 22,
+        "horizonMinutes": 66,
+        "futureTime": "2026-06-24T11:06:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 23,
+        "horizonMinutes": 69,
+        "futureTime": "2026-06-24T11:09:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 24,
+        "horizonMinutes": 72,
+        "futureTime": "2026-06-24T11:12:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 25,
+        "horizonMinutes": 75,
+        "futureTime": "2026-06-24T11:15:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 26,
+        "horizonMinutes": 78,
+        "futureTime": "2026-06-24T11:18:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 27,
+        "horizonMinutes": 81,
+        "futureTime": "2026-06-24T11:21:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 28,
+        "horizonMinutes": 84,
+        "futureTime": "2026-06-24T11:24:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 29,
+        "horizonMinutes": 87,
+        "futureTime": "2026-06-24T11:27:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 30,
+        "horizonMinutes": 90,
+        "futureTime": "2026-06-24T11:30:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 31,
+        "horizonMinutes": 93,
+        "futureTime": "2026-06-24T11:33:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 32,
+        "horizonMinutes": 96,
+        "futureTime": "2026-06-24T11:36:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 33,
+        "horizonMinutes": 99,
+        "futureTime": "2026-06-24T11:39:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 34,
+        "horizonMinutes": 102,
+        "futureTime": "2026-06-24T11:42:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 35,
+        "horizonMinutes": 105,
+        "futureTime": "2026-06-24T11:45:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 36,
+        "horizonMinutes": 108,
+        "futureTime": "2026-06-24T11:48:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 37,
+        "horizonMinutes": 111,
+        "futureTime": "2026-06-24T11:51:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 38,
+        "horizonMinutes": 114,
+        "futureTime": "2026-06-24T11:54:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 39,
+        "horizonMinutes": 117,
+        "futureTime": "2026-06-24T11:57:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 40,
+        "horizonMinutes": 120,
+        "futureTime": "2026-06-24T12:00:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      }
+    ]
+  },
+  "evaluateFormalDeltas": {
+    "events": 0,
+    "responseWorkflows": 0,
+    "responseSteps": 0,
+    "predictionLinks": 0,
+    "reports": 0,
+    "evidenceLinks": 0,
+    "metricSnapshots": 0,
+    "evidenceResources": 0
+  },
+  "executeFormalDeltas": {
+    "events": 1,
+    "responseWorkflows": 1,
+    "responseSteps": 4,
+    "predictionLinks": 1,
+    "reports": 0,
+    "evidenceLinks": 0,
+    "metricSnapshots": 0,
+    "evidenceResources": 0
+  },
+  "eventId": 21,
+  "workflowId": 25,
+  "provenanceLinkId": 1,
+  "responseWorkflowOutcome": {
+    "instantiated": true,
+    "workflowStatus": "completed",
+    "stepStatuses": {
+      "RULE_TRIGGER": "completed",
+      "NOTIFICATION": "suppressed",
+      "REPORT_GENERATION": "failed",
+      "EVIDENCE_ARCHIVE": "completed"
+    },
+    "reportsCreated": 0,
+    "acceptanceBoundary": "Report-generation success is not an acceptance criterion for the cross-configuration reuse experiment and is not claimed."
+  },
+  "provenanceClaimBoundary": "Event Trace resolves the event to the prediction batch/run and immutable model/input metadata; persisted-result integrity is independently revalidated by the execution Gate.",
+  "frontend": {
+    "sourceModified": false,
+    "dependencyInstall": {
+      "command": [],
+      "exitCode": 0,
+      "elapsedSeconds": 0,
+      "outputTail": [
+        "Existing npm dependency tree reused."
+      ],
+      "pass": true,
+      "skipped": true
+    },
+    "build": {
+      "command": [
+        "npm.cmd",
+        "run",
+        "build"
+      ],
+      "exitCode": 0,
+      "elapsedSeconds": 24.099,
+      "outputTail": [
+        "",
+        "> shm-em-frontend@1.0.0 build",
+        "> vue-tsc --noEmit && vite build",
+        "",
+        "vite v6.4.3 building for production...",
+        "transforming...",
+        "node_modules/element-plus/node_modules/@vueuse/core/dist/index.js (3362:0): A comment",
+        "",
+        "\"/* #__PURE__ */\"",
+        "",
+        "in \"node_modules/element-plus/node_modules/@vueuse/core/dist/index.js\" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.",
+        "node_modules/element-plus/node_modules/@vueuse/core/dist/index.js (5780:22): A comment",
+        "",
+        "\"/* #__PURE__ */\"",
+        "",
+        "in \"node_modules/element-plus/node_modules/@vueuse/core/dist/index.js\" contains an annotation that Rollup cannot interpret due to the position of the comment. The comment will be removed to avoid issues.",
+        "✓ 2317 modules transformed.",
+        "rendering chunks...",
+        "computing gzip size...",
+        "dist/index.html                                      0.93 kB │ gzip:   0.41 kB",
+        "dist/assets/UnifiedSeriesChart-tMoFl-pi.css          0.08 kB │ gzip:   0.09 kB",
+        "dist/assets/PredictionBatchBadge-DMJ5lC2X.css        0.78 kB │ gzip:   0.38 kB",
+        "dist/assets/PredictionEvidenceDrawer-CtBYruvY.css    1.17 kB │ gzip:   0.45 kB",
+        "dist/assets/RiskIndicator-D2Y6UeSf.css               1.88 kB │ gzip:   0.64 kB",
+        "dist/assets/ProjectSettings-DbLT2fQ8.css             1.98 kB │ gzip:   0.61 kB",
+        "dist/assets/PredictionRuns-C3Q9kJR6.css              5.08 kB │ gzip:   1.21 kB",
+        "dist/assets/ResponseWorkflow-s4Jt05vr.css            5.93 kB │ gzip:   1.39 kB",
+        "dist/assets/ProjectWorkspace-BgzfLGoS.css            9.57 kB │ gzip:   2.31 kB",
+        "dist/assets/LowFrequencyBrowse-C4P_grrl.css          9.78 kB │ gzip:   1.95 kB",
+        "dist/assets/ProjectTopology-PE0fX0fp.css            11.23 kB │ gzip:   2.46 kB",
+        "dist/assets/index-DmT3g1QH.css                      11.86 kB │ gzip:   3.25 kB",
+        "dist/assets/EventCenter-35TOjOs9.css                18.85 kB │ gzip:   3.01 kB",
+        "dist/assets/ProjectCatalog-BUct4xLw.css             26.32 kB │ gzip:   5.05 kB",
+        "dist/assets/vendor-element-CudmXO5w.css            357.50 kB │ gzip:  47.82 kB",
+        "dist/assets/pit-point-layout-1dooM6ZP.js             0.05 kB │ gzip:   0.07 kB",
+        "dist/assets/observation-dmGf3rSE.js                  0.14 kB │ gzip:   0.15 kB",
+        "dist/assets/event-CNW3A7o8.js                        0.16 kB │ gzip:   0.16 kB",
+        "dist/assets/project-WSvtXLdN.js                      0.39 kB │ gzip:   0.20 kB",
+        "dist/assets/eventRule-CGvKrXoB.js                    0.62 kB │ gzip:   0.28 kB",
+        "dist/assets/prediction-BW5BHTx0.js                   0.69 kB │ gzip:   0.25 kB",
+        "dist/assets/http-CFpbk6tx.js                         0.81 kB │ gzip:   0.47 kB",
+        "dist/assets/useProjectContext-DjRxcQ-m.js            1.00 kB │ gzip:   0.49 kB",
+        "dist/assets/RiskIndicator-B7lUoFKQ.js                1.10 kB │ gzip:   0.65 kB",
+        "dist/assets/PredictionBatchBadge-BMK8Z7nM.js         1.14 kB │ gzip:   0.71 kB",
+        "dist/assets/UnifiedSeriesChart-BrYCXgAr.js           3.10 kB │ gzip:   1.42 kB",
+        "dist/assets/ProjectSettings-D-zkXbs6.js              5.12 kB │ gzip:   1.97 kB",
+        "dist/assets/PredictionEvidenceDrawer-C3VYI6AK.js     5.35 kB │ gzip:   1.90 kB",
+        "dist/assets/PredictionRuns-C9pAxdAR.js              12.20 kB │ gzip:   4.11 kB",
+        "dist/assets/index-DnpOQPV3.js                       13.31 kB │ gzip:   5.07 kB",
+        "dist/assets/ProjectWorkspace-BFvyNjWG.js            16.39 kB │ gzip:   5.68 kB",
+        "dist/assets/ProjectTopology-BA3X47Wa.js             19.24 kB │ gzip:   6.57 kB",
+        "dist/assets/ProjectCatalog-BGjC_7fC.js              20.91 kB │ gzip:   6.80 kB",
+        "dist/assets/vendor-vue-DJLdQGEq.js                  29.58 kB │ gzip:  11.77 kB",
+        "dist/assets/ResponseWorkflow-DDdYp6b5.js            31.42 kB │ gzip:   9.18 kB",
+        "dist/assets/vendor-element-icons-DvmlmQVM.js        31.45 kB │ gzip:   7.86 kB",
+        "dist/assets/EventCenter-CsnBepLl.js                 33.19 kB │ gzip:  10.58 kB",
+        "dist/assets/LowFrequencyBrowse-BM1FsjBn.js          36.46 kB │ gzip:  11.55 kB",
+        "dist/assets/vendor-http-DhXgJQ-f.js                 46.09 kB │ gzip:  17.77 kB",
+        "dist/assets/vendor-zrender-Cwq_Bx77.js             175.78 kB │ gzip:  58.35 kB",
+        "dist/assets/vendor-runtime-cIOAUzNh.js             197.66 kB │ gzip:  73.54 kB",
+        "dist/assets/vendor-echarts-Cy8JglfO.js             420.11 kB │ gzip: 143.00 kB",
+        "dist/assets/vendor-element-3zF5WeGX.js             787.48 kB │ gzip: 250.05 kB",
+        "",
+        "(!) Some chunks are larger than 500 kB after minification. Consider:",
+        "- Using dynamic import() to code-split the application",
+        "- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks",
+        "- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.",
+        "✓ built in 14.30s"
+      ],
+      "pass": true
+    },
+    "routeTemplateChecks": {
+      "/projects/:projectId/overview": true,
+      "/projects/:projectId/data/low-frequency": true,
+      "/projects/:projectId/predictions": true,
+      "/projects/:projectId/events": true,
+      "/projects/:projectId/response/workflows": true
+    },
+    "resolvedRoutes": [
+      "/projects/2/overview",
+      "/projects/2/data/low-frequency",
+      "/projects/2/predictions",
+      "/projects/2/events",
+      "/projects/2/response/workflows"
+    ],
+    "pass": true
+  },
+  "coreDiff": {
+    "baseline": "b41c1894f75561c8ef682062a5e6dab35c3916a7",
+    "freezeRecordCommit": "3a1b4fc5990b28929c78f46f93a5deaae85140bf",
+    "frozenPaths": [
+      "src/backend/src/main",
+      "src/frontend/src",
+      "src/pit_pre/pit_pre",
+      ".gitattributes"
+    ],
+    "frozenFilesModified": [
+      "src/backend/src/main/java/mybatis/iem/em/modules/engineering/application/service/impl/PredictionExecutionGateServiceImpl.java"
+    ],
+    "coreBackendFilesModified": 1,
+    "coreFrontendFilesModified": 0,
+    "pitPreCoreFilesModified": 0,
+    "eventWorkflowFilesModified": 1,
+    "existingSourceTablesAltered": [],
+    "existingSourceTableSchemaChangeCount": 0,
+    "phase1bStatusEntries": [
+      " M tools/revision/run_phase1b_reuse_validation.py"
+    ],
+    "inheritedEolIndexEntries": [
+      " M src/pit_pre/models/Pressure__predict/predict_Pressure_future_fixed_best_params_annotated.py",
+      " M src/pit_pre/models/Strain__predict/predict_Strain_future_fixed_best_params_annotated.py",
+      " M src/pit_pre/models/XD__predict/predict_XD_future_direct_comment_enhanced.py",
+      " M src/pit_pre/models/YD__predict/predict_YD_future_direct.py",
+      " M src/pit_pre/models/settlement_predict/predict_settlement_future_fixed_best_params_annotated.py",
+      " M src/pit_pre/models/water__predict/predict_water_future_fixed_best_params_annotated.py",
+      " M src/pit_pre/requirements.lock.txt"
+    ],
+    "pass": false
+  },
+  "registrationEffort": {
+    "newProjectRecords": 1,
+    "newStations": 3,
+    "newInstruments": 12,
+    "newStationMetricBindings": 26,
+    "newObservationRegistryMappings": 4,
+    "newFeatureMappings": 164,
+    "newModelRegistrations": 2,
+    "newRuleRecords": 1,
+    "newConfigurationSqlFiles": 1,
+    "newModelFixtureFiles": 0,
+    "newDocumentationFiles": 2,
+    "newRevisionTools": 2,
+    "configurationSqlLines": 462,
+    "coreSourceFilesModified": 1,
+    "existingSourceTableSchemaChanges": 0,
+    "manualStepsRequired": 1,
+    "manualStep": "run tools/revision/run_phase1b_reuse_validation.py with an isolated database password"
+  },
+  "acceptanceChecks": {
+    "B1": {
+      "pass": true,
+      "evidence": "Final Core Freeze v2 fixed"
+    },
+    "B2": {
+      "pass": true,
+      "evidence": "non-excavation bridge configuration"
+    },
+    "B3": {
+      "pass": true,
+      "evidence": "software fixture scope documented"
+    },
+    "B4": {
+      "pass": false,
+      "evidence": "frozen backend diff = 0"
+    },
+    "B5": {
+      "pass": true,
+      "evidence": "frozen frontend diff = 0"
+    },
+    "B6": {
+      "pass": true,
+      "evidence": "PIT_PRE core diff = 0"
+    },
+    "B7": {
+      "pass": false,
+      "evidence": "event workflow core diff = 0"
+    },
+    "B8": {
+      "pass": true,
+      "evidence": "no ALTER em_obs_*"
+    },
+    "B9": {
+      "pass": true,
+      "evidence": "two-model PIT_PRE prediction = 1,120 rows"
+    },
+    "B10": {
+      "pass": true,
+      "evidence": "Gate resultIntegrityValid=true"
+    },
+    "B11": {
+      "pass": true,
+      "evidence": "Future State eligible and assessed"
+    },
+    "B12": {
+      "pass": true,
+      "evidence": "Evaluate candidate with zero formal side effects"
+    },
+    "B13": {
+      "pass": true,
+      "evidence": "formal event, workflow, four steps, provenance"
+    },
+    "B14": {
+      "pass": true,
+      "evidence": "missing mapping rejected before inference"
+    },
+    "B15": {
+      "pass": true,
+      "evidence": "frontend build, project routes, and joint series API pass"
+    }
+  },
+  "pass": false,
+  "stop": "STOP_FOR_GPT_REVIEW"
+}

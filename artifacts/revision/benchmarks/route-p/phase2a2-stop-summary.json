@@ -1,0 +1,89 @@
+{
+  "schemaVersion": "shm-em-phase2a2-completion-v1",
+  "status": "STOPPED_FOR_GPT_REVIEW",
+  "stopReason": "RP-08 reference Gate median exceeded the authorized 25% regression line",
+  "resultSetEquivalencePass": true,
+  "crossProjectSafetyPass": true,
+  "productionCoreDiffPass": true,
+  "referenceGate": {
+    "schemaVersion": "shm-em-phase2a2-gate-benchmark-v1",
+    "workload": "reference",
+    "database": "shm_em_reproduce_benchmark_reference",
+    "rows": 4960,
+    "targets": 124,
+    "steps": 40,
+    "firstMs": 891.6647,
+    "measured": {
+      "count": 30,
+      "medianMs": 381.39375,
+      "p95Ms": 554.6694,
+      "minMs": 284.5427,
+      "maxMs": 559.7329,
+      "meanMs": 390.04948,
+      "stddevMs": 73.195679,
+      "outliersRemoved": 0
+    },
+    "allCallsValid": true,
+    "pass": true
+  },
+  "acceptanceGates": {
+    "RP-01": {
+      "status": "PASS",
+      "evidence": "checkpoint 84c13fa"
+    },
+    "RP-02": {
+      "status": "PASS",
+      "evidence": "one projectId assignment; production-core-diff.json"
+    },
+    "RP-03": {
+      "status": "PASS",
+      "evidence": "4/4 valid workloads equivalent"
+    },
+    "RP-04": {
+      "status": "PASS",
+      "evidence": "moved row blocked; formal event delta 0"
+    },
+    "RP-05": {
+      "status": "NOT_RUN_STOP",
+      "evidence": "blocked by RP-08 stop line"
+    },
+    "RP-06": {
+      "status": "NOT_RUN_STOP",
+      "evidence": "blocked by RP-08 stop line"
+    },
+    "RP-07": {
+      "status": "NOT_RUN_STOP",
+      "evidence": "final hash regression blocked by RP-08 stop line"
+    },
+    "RP-08": {
+      "status": "STOP",
+      "evidence": "median 381.393750 ms > 336.025813 ms"
+    },
+    "RP-09": {
+      "status": "NOT_RUN_STOP",
+      "evidence": "S2 benchmark not authorized after RP-08 stop"
+    },
+    "RP-10": {
+      "status": "NOT_RUN_STOP",
+      "evidence": "scaling sweep not authorized after RP-08 stop"
+    },
+    "RP-11": {
+      "status": "NOT_RUN_STOP",
+      "evidence": "EXPLAIN rerun not authorized after RP-08 stop"
+    },
+    "RP-12": {
+      "status": "PASS",
+      "evidence": "50,000 cap remains in production source and unit test"
+    },
+    "RP-13": {
+      "status": "PARTIAL",
+      "evidence": "backend tests/package PASS; PIT_PRE/frontend not rerun after stop"
+    },
+    "RP-14": {
+      "status": "PASS",
+      "evidence": "phase2a2-manifest-verification.json"
+    }
+  },
+  "productionFixCommitted": false,
+  "nextDecisionOwner": "GPT review"
+}

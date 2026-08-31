@@ -721,6 +721,7 @@ def resolve_args() -> argparse.Namespace:
     parser.add_argument("--admin-user", default="root")
     parser.add_argument("--admin-password", default=os.environ.get("DB_ADMIN_PASSWORD"))
     parser.add_argument("--database", default="shm_em_reproduce_phase1b_bridge")
+    parser.add_argument("--evidence-root", type=Path)
     parser.add_argument("--backend-port", type=int, default=5195)
     parser.add_argument("--backend-start-timeout", type=int, default=90)
     parser.add_argument("--pit-pre-timeout", type=int, default=300)
@@ -738,7 +739,7 @@ def resolve_args() -> argparse.Namespace:
     args.backend_root = repo_root / "src/backend"
     args.frontend_root = repo_root / "src/frontend"
     args.pit_pre_root = repo_root / "src/pit_pre"
-    args.evidence_root = repo_root / "artifacts/revision/reuse-v2"
+    args.evidence_root = (args.evidence_root or repo_root / "artifacts/revision/reuse-v2").resolve()
     args.runtime_root = Path(tempfile.mkdtemp(prefix="shm-em-phase1b-"))
     jars = sorted(
         (args.backend_root / "target").glob("*.jar"),

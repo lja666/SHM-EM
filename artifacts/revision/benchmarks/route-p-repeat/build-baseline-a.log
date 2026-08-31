@@ -1,0 +1,4 @@
+command: D:\Tools\apache-maven-3.9.16\bin\mvn.cmd -q -DskipTests clean package
+cwd: C:\Users\nlfdz\AppData\Local\Temp\shm-em-route-p-a-q5856z_l\src\backend
+elapsedSeconds: 67.815899
+exitCode: 0

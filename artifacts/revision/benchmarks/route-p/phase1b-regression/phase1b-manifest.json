@@ -1,0 +1,118 @@
+{
+  "schemaVersion": "shm-em-phase1b-evidence-v1",
+  "finalCoreFreezeV2": "b41c1894f75561c8ef682062a5e6dab35c3916a7",
+  "generatedAt": "2026-08-31T12:27:52",
+  "fileCount": 22,
+  "files": [
+    {
+      "path": "api-registration-and-series.json",
+      "size": 98618,
+      "sha256": "10f9b77d3027b0ba23830fbd5c3e9e00b4d7880e57ec7ed0f6e880ca257484b5"
+    },
+    {
+      "path": "backend-log-tail.txt",
+      "size": 2521,
+      "sha256": "f3946188805e425ce4ac62ac7d21413a5d088286cfdd27e496dbcf5ed498eac3"
+    },
+    {
+      "path": "configuration-inventory.csv",
+      "size": 420,
+      "sha256": "d3a516091ffa3cfb3051384e72aa581d96e32f4be98f28484df1e50eea564dad"
+    },
+    {
+      "path": "core-diff-inventory.json",
+      "size": 1375,
+      "sha256": "10159fcaaef58f16d5991c8d71fb7aeb795d370024ecf42477f16c10e8b7d84e"
+    },
+    {
+      "path": "core-diff-inventory.md",
+      "size": 287,
+      "sha256": "b80984e1789ca16da8380bc38f437d2d857420cb18f6770a4e73cd486849c795"
+    },
+    {
+      "path": "end-to-end-summary.json",
+      "size": 41265,
+      "sha256": "fca541d890c14048ed3ab54f86a76c41ee7d1f03e72d3b8017fa9420b0794dc2"
+    },
+    {
+      "path": "evaluate.json",
+      "size": 8542,
+      "sha256": "14add00401f7cb61342807e0730c63a30145fad33e363cd33d13575420f84715"
+    },
+    {
+      "path": "execute.json",
+      "size": 17609,
+      "sha256": "e1d3d07cb67fc0c2aa7d257fdc3b1e1514ef1f80ea423f5895c3ff8e57516a90"
+    },
+    {
+      "path": "frontend-validation.json",
+      "size": 6150,
+      "sha256": "741fd3d50dcaedfdeaf7109e5d9e223049fa46a9dada781669f5c1f8689fd7ce"
+    },
+    {
+      "path": "future-state.json",
+      "size": 19736,
+      "sha256": "34909ef4b55e4dc4532a99dc806cee4431def041fbae59ffa596c4c55f695e0e"
+    },
+    {
+      "path": "gate.json",
+      "size": 1988,
+      "sha256": "7b731507bdc825fc974eca22cc9a1ab9feaa7426db11f8c2bed7a7c0596ff787"
+    },
+    {
+      "path": "model-fixture-card.md",
+      "size": 1256,
+      "sha256": "986ade1f9237eb16312ca3d9c959420f2a0a938281d0a49d57a8e7efdb4cffb9"
+    },
+    {
+      "path": "negative-onboarding-case.json",
+      "size": 699,
+      "sha256": "a39e162883b2e7b7608669ca86878d5852712032086af581fbd76629bae54fbe"
+    },
+    {
+      "path": "PHASE1B_COMPLETION_REPORT.md",
+      "size": 2239,
+      "sha256": "0b13464f2b9faff10cae3edb51e4e689998f663dcf99404e35fca391e5cdd47f"
+    },
+    {
+      "path": "pit-pre-run.json",
+      "size": 535,
+      "sha256": "8879274edc5b1e3e70aa9e5d16a02dcd9126a680fdebf111b84d02bc3e824245"
+    },
+    {
+      "path": "prediction-summary.json",
+      "size": 2393,
+      "sha256": "451596752a53cd36a2e46ce5b8a5617a1eb908d955339ac05c23b4669ce77dff"
+    },
+    {
+      "path": "provenance-trace.json",
+      "size": 9254,
+      "sha256": "1319b7a6d5a96d880ee8a800eb73cb374a642ad139e08a958ba037c3a15b7bc2"
+    },
+    {
+      "path": "registration-effort.json",
+      "size": 583,
+      "sha256": "07bc6871891d4159094713b54a04d9a605d9a1ab45a5d0c97b749687dab29f97"
+    },
+    {
+      "path": "regression-tests.json",
+      "size": 10760,
+      "sha256": "28d7ea9aa0585d88105944312e2bd8738333568e50b1f01ca726d1937e3f6e71"
+    },
+    {
+      "path": "second-configuration-manifest.json",
+      "size": 4750,
+      "sha256": "b3ac08d6de367050e5dd5a44a232b63f8c59f967e3078bf91e21667bb272d5a3"
+    },
+    {
+      "path": "second-configuration-spec.md",
+      "size": 2813,
+      "sha256": "49bb345f5f79bcd33cf02a157010882ee6ab6cc1e83d7dabe72f44e3989adee5"
+    },
+    {
+      "path": "sql-imports.json",
+      "size": 1357,
+      "sha256": "5b467b3dd5c6d4bdc0e0e6d75271b1fb17b7b9498ea027bda997817a1fdd2146"
+    }
+  ]
+}

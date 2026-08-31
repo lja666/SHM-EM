@@ -1,0 +1,7 @@
+workload,targets,steps,rows,firstMs,allCallsValid,pass,completedUnder180Seconds
+rows-4960,124,40,4960,2705.1053,True,True,True
+rows-9920,248,40,9920,9623.0945,True,True,True
+rows-19840,496,40,19840,36346.2407,True,True,True
+rows-29760,744,40,29760,2726.7188,True,True,True
+rows-39680,992,40,39680,3667.0532,True,True,True
+rows-49600,1240,40,49600,4581.0749,True,True,True

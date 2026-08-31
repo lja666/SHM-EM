@@ -1,0 +1,204 @@
+{
+  "schemaVersion": "shm-em-phase2a2-performance-summary-v1",
+  "reference": {
+    "schemaVersion": "shm-em-phase2a2-gate-benchmark-v1",
+    "workload": "reference",
+    "database": "shm_em_reproduce_benchmark_reference",
+    "rows": 4960,
+    "targets": 124,
+    "steps": 40,
+    "firstMs": 934.5609,
+    "measured": {
+      "count": 30,
+      "medianMs": 343.12905,
+      "p95Ms": 407.1003,
+      "minMs": 305.7285,
+      "maxMs": 459.4043,
+      "meanMs": 351.24613,
+      "stddevMs": 33.973394,
+      "outliersRemoved": 0
+    },
+    "allCallsValid": true,
+    "pass": true
+  },
+  "referenceCrossSessionAnomaly": true,
+  "controlledABDecision": "D:\\SpringBoot_Mybatis\\SHM-PIT\\SHM_EM_SOFTX_REVISION\\artifacts\\revision\\benchmarks\\route-p-repeat\\decision.json",
+  "controlledABPass": true,
+  "s1": {
+    "schemaVersion": "shm-em-phase2a2-gate-benchmark-v1",
+    "workload": "s1",
+    "database": "shm_em_reproduce_benchmark_scaling_s1",
+    "rows": 4960,
+    "targets": 124,
+    "steps": 40,
+    "firstMs": 2902.0955,
+    "measured": {
+      "count": 10,
+      "medianMs": 2406.9393,
+      "p95Ms": 2666.8043,
+      "minMs": 2298.9749,
+      "maxMs": 2666.8043,
+      "meanMs": 2426.58285,
+      "stddevMs": 122.459985,
+      "outliersRemoved": 0
+    },
+    "allCallsValid": true,
+    "pass": true
+  },
+  "s2": {
+    "schemaVersion": "shm-em-phase2a2-gate-benchmark-v1",
+    "workload": "s2",
+    "database": "shm_em_reproduce_benchmark_scaling_s2",
+    "rows": 49600,
+    "targets": 1240,
+    "steps": 40,
+    "firstMs": 4476.7744,
+    "measured": {
+      "count": 10,
+      "medianMs": 3603.3823,
+      "p95Ms": 3843.1739,
+      "minMs": 3293.6276,
+      "maxMs": 3843.1739,
+      "meanMs": 3549.75535,
+      "stddevMs": 174.839096,
+      "outliersRemoved": 0
+    },
+    "allCallsValid": true,
+    "pass": true
+  },
+  "scaling": [
+    {
+      "schemaVersion": "shm-em-phase2a2-gate-benchmark-v1",
+      "workload": "rows-4960",
+      "database": "shm_em_reproduce_benchmark_scaling_s1",
+      "rows": 4960,
+      "targets": 124,
+      "steps": 40,
+      "firstMs": 2705.1053,
+      "measured": {
+        "count": 10,
+        "medianMs": 2428.54135,
+        "p95Ms": 2557.1189,
+        "minMs": 2288.9819,
+        "maxMs": 2557.1189,
+        "meanMs": 2424.32617,
+        "stddevMs": 85.718819,
+        "outliersRemoved": 0
+      },
+      "allCallsValid": true,
+      "pass": true,
+      "completedUnder180Seconds": true
+    },
+    {
+      "schemaVersion": "shm-em-phase2a2-gate-benchmark-v1",
+      "workload": "rows-9920",
+      "database": "shm_em_reproduce_benchmark_localization_0248",
+      "rows": 9920,
+      "targets": 248,
+      "steps": 40,
+      "firstMs": 9623.0945,
+      "measured": {
+        "count": 10,
+        "medianMs": 9127.39735,
+        "p95Ms": 9460.4911,
+        "minMs": 8715.3007,
+        "maxMs": 9460.4911,
+        "meanMs": 9109.65456,
+        "stddevMs": 235.038796,
+        "outliersRemoved": 0
+      },
+      "allCallsValid": true,
+      "pass": true,
+      "completedUnder180Seconds": true
+    },
+    {
+      "schemaVersion": "shm-em-phase2a2-gate-benchmark-v1",
+      "workload": "rows-19840",
+      "database": "shm_em_reproduce_benchmark_localization_0496",
+      "rows": 19840,
+      "targets": 496,
+      "steps": 40,
+      "firstMs": 36346.2407,
+      "measured": {
+        "count": 10,
+        "medianMs": 35052.3485,
+        "p95Ms": 36749.7728,
+        "minMs": 33461.16,
+        "maxMs": 36749.7728,
+        "meanMs": 35149.22734,
+        "stddevMs": 813.182583,
+        "outliersRemoved": 0
+      },
+      "allCallsValid": true,
+      "pass": true,
+      "completedUnder180Seconds": true
+    },
+    {
+      "schemaVersion": "shm-em-phase2a2-gate-benchmark-v1",
+      "workload": "rows-29760",
+      "database": "shm_em_reproduce_benchmark_localization_0744",
+      "rows": 29760,
+      "targets": 744,
+      "steps": 40,
+      "firstMs": 2726.7188,
+      "measured": {
+        "count": 10,
+        "medianMs": 2167.0987,
+        "p95Ms": 2302.8973,
+        "minMs": 1874.2685,
+        "maxMs": 2302.8973,
+        "meanMs": 2123.70305,
+        "stddevMs": 136.75688,
+        "outliersRemoved": 0
+      },
+      "allCallsValid": true,
+      "pass": true,
+      "completedUnder180Seconds": true
+    },
+    {
+      "schemaVersion": "shm-em-phase2a2-gate-benchmark-v1",
+      "workload": "rows-39680",
+      "database": "shm_em_reproduce_benchmark_localization_0992",
+      "rows": 39680,
+      "targets": 992,
+      "steps": 40,
+      "firstMs": 3667.0532,
+      "measured": {
+        "count": 10,
+        "medianMs": 2782.96835,
+        "p95Ms": 3076.0388,
+        "minMs": 2470.4935,
+        "maxMs": 3076.0388,
+        "meanMs": 2769.62286,
+        "stddevMs": 178.500802,
+        "outliersRemoved": 0
+      },
+      "allCallsValid": true,
+      "pass": true,
+      "completedUnder180Seconds": true
+    },
+    {
+      "schemaVersion": "shm-em-phase2a2-gate-benchmark-v1",
+      "workload": "rows-49600",
+      "database": "shm_em_reproduce_benchmark_scaling_s2",
+      "rows": 49600,
+      "targets": 1240,
+      "steps": 40,
+      "firstMs": 4581.0749,
+      "measured": {
+        "count": 10,
+        "medianMs": 3538.079,
+        "p95Ms": 3729.8291,
+        "minMs": 3239.1271,
+        "maxMs": 3729.8291,
+        "meanMs": 3517.44152,
+        "stddevMs": 137.933459,
+        "outliersRemoved": 0
+      },
+      "allCallsValid": true,
+      "pass": true,
+      "completedUnder180Seconds": true
+    }
+  ],
+  "pass": true
+}

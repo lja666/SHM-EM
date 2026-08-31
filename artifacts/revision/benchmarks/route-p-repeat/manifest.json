@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "shm-em-phase2a2r-manifest-v1",
+  "generatedAt": "2026-08-31T04:03:16.074173+00:00",
+  "files": [
+    {
+      "path": "build-baseline-a.log",
+      "bytes": 194,
+      "sha256": "ddb4aaa9fe4963e4879faf7a3fdc45475f62a0b66825afc299894d6fd8c7ad42"
+    },
+    {
+      "path": "build-routeP-b.log",
+      "bytes": 186,
+      "sha256": "e98496d00eed90974db898bbcb0917d9883d3420c63f23b61b6625deb8ae3b66"
+    },
+    {
+      "path": "decision.json",
+      "bytes": 478,
+      "sha256": "aae73714cda2275d35e6fb082954bd9379223eb2b556d47a23b337dcaa48b80b"
+    },
+    {
+      "path": "environment.json",
+      "bytes": 3432,
+      "sha256": "0e5839521b007ddf0bce2fda1044c7dc69e4a80bc561b18f9b73a3efdaf39195"
+    },
+    {
+      "path": "methodology.md",
+      "bytes": 494,
+      "sha256": "d48ece73364e514a9e51b1b42c91947c0f8e835ac0ab22bcc25af0ee19c6fdc6"
+    },
+    {
+      "path": "phase1b-ab-raw.csv",
+      "bytes": 15182,
+      "sha256": "7a840be52d7420a719c5b255ef59cc09993fc7968589f21cee695264cc35b9de"
+    },
+    {
+      "path": "phase1b-ab-summary.json",
+      "bytes": 3145,
+      "sha256": "3f9f481832dc25286321d05498e17b94f5d2e4613c26cc3782e4937386325762"
+    },
+    {
+      "path": "phase1b-processes.json",
+      "bytes": 1645,
+      "sha256": "5bd7f0a7196072c556b34ecfa6644cde54c2815314b8776ed53e0d41c6ad0546"
+    },
+    {
+      "path": "reference-ab-raw.csv",
+      "bytes": 23900,
+      "sha256": "ebf069cb8493aaffb6b35a46fccbfeb570372c18e3018c08ce8d1fbb903dc5ba"
+    },
+    {
+      "path": "reference-ab-summary.json",
+      "bytes": 5164,
+      "sha256": "c4b3399ba631a45961a51e4c7199b43bdb6df8539dd791a4dbb42c2644b3b170"
+    },
+    {
+      "path": "reference-processes.json",
+      "bytes": 3314,
+      "sha256": "82cbe2833d9741067a4718311a9984590060f0e65838f1f08956a24c040706e5"
+    },
+    {
+      "path": "s1-ab-raw.csv",
+      "bytes": 8411,
+      "sha256": "1503cb6dbc0c673d57689baa13e4e9f3faef880a2e113924514827cf2e664f44"
+    },
+    {
+      "path": "s1-ab-summary.json",
+      "bytes": 3116,
+      "sha256": "24bac1d1301465b2969d3433826cff77983b77baafb12f039b3400677701304e"
+    },
+    {
+      "path": "s1-processes.json",
+      "bytes": 1607,
+      "sha256": "76ae9ac38aab66077b42146f3bf976a8b945085d7f69809afbba3d5c817a36be"
+    },
+    {
+      "path": "variant-a.json",
+      "bytes": 330,
+      "sha256": "4d6672481a9846d3f89dd26c6fc1a2c23b46b8facefdcbc1a33ab42e08e8a089"
+    },
+    {
+      "path": "variant-b.json",
+      "bytes": 1624,
+      "sha256": "2f2a799005a4bb7722519d45cac691e15844b4277e84ca70070d7d2162c37b06"
+    }
+  ],
+  "fileCountExcludingManifest": 16
+}

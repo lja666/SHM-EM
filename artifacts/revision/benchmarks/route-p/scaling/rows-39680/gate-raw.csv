@@ -1,0 +1,15 @@
+operation,phase,repetition,elapsedMs,httpCode,workload,targetCount,rowCount,resultIntegrityValid,executionEligible,pass
+gate-inspect,first,1,3667.0532,200,rows-39680,992,39680,True,True,True
+gate-inspect,warmup,1,2766.5336,200,rows-39680,992,39680,True,True,True
+gate-inspect,warmup,2,3220.608,200,rows-39680,992,39680,True,True,True
+gate-inspect,warmup,3,3294.7085,200,rows-39680,992,39680,True,True,True
+gate-inspect,measured,1,2852.4308,200,rows-39680,992,39680,True,True,True
+gate-inspect,measured,2,2678.3321,200,rows-39680,992,39680,True,True,True
+gate-inspect,measured,3,3076.0388,200,rows-39680,992,39680,True,True,True
+gate-inspect,measured,4,2773.6656,200,rows-39680,992,39680,True,True,True
+gate-inspect,measured,5,2922.2011,200,rows-39680,992,39680,True,True,True
+gate-inspect,measured,6,2478.7796,200,rows-39680,992,39680,True,True,True
+gate-inspect,measured,7,2878.3504,200,rows-39680,992,39680,True,True,True
+gate-inspect,measured,8,2470.4935,200,rows-39680,992,39680,True,True,True
+gate-inspect,measured,9,2783.6596,200,rows-39680,992,39680,True,True,True
+gate-inspect,measured,10,2782.2771,200,rows-39680,992,39680,True,True,True

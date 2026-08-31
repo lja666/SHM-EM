@@ -1,0 +1,887 @@
+{
+  "schemaVersion": "shm-em-phase2a2-final-manifest-v1",
+  "generatedAt": "2026-08-31T05:16:00.424812+00:00",
+  "fileCountExcludingManifestAndPackages": 176,
+  "files": [
+    {
+      "path": "cross-project-safety.json",
+      "bytes": 5375,
+      "sha256": "c0e6dd262e9ad01fca3d8e8a258f24225205fd712bd532c7d33eead602716b9f"
+    },
+    {
+      "path": "failure-regression/cases/F01/api-response.json",
+      "bytes": 4621,
+      "sha256": "b4a4d93ef752e065825e50ec96729cc46439059c8d94dc1e9221f61bbcd4d3ca"
+    },
+    {
+      "path": "failure-regression/cases/F01/case-summary.json",
+      "bytes": 1526,
+      "sha256": "b4b5da7bc29ca11f83d8636198545648dc9100ca529aabb4e7fa79926cddb4b6"
+    },
+    {
+      "path": "failure-regression/cases/F01/gate.json",
+      "bytes": 3913,
+      "sha256": "e473f309051a3ecc02dd0be0595a6d3a186ff2ad7403deb54754aed5b0f9f5a1"
+    },
+    {
+      "path": "failure-regression/cases/F01/mutation.sql",
+      "bytes": 86,
+      "sha256": "a72155962fd3f5b738bce6d68cea5efcd779bfb1e70f63dac8384d71b30a330e"
+    },
+    {
+      "path": "failure-regression/cases/F01/state-after.json",
+      "bytes": 7311,
+      "sha256": "f86d9f0099f6f57cda3792e74fb42c26f5efc665d73a822740776305a5ae477a"
+    },
+    {
+      "path": "failure-regression/cases/F01/state-before.json",
+      "bytes": 7311,
+      "sha256": "f206d96be409f3fb6eb4a4c074d612efb3dee9b9895dbf4dae9fe71a2714729a"
+    },
+    {
+      "path": "failure-regression/cases/F02/api-response.json",
+      "bytes": 4244,
+      "sha256": "e7d684737c6bd3b3da73149edd65f9d3ced22539e43813d075e56c7da3713da6"
+    },
+    {
+      "path": "failure-regression/cases/F02/case-summary.json",
+      "bytes": 1277,
+      "sha256": "c9968b97055236bd2989048c461556b8ea50d349d2578ebd1c116395b6758f6c"
+    },
+    {
+      "path": "failure-regression/cases/F02/gate.json",
+      "bytes": 3661,
+      "sha256": "8be50c85259b068e22ddf1c39a9126bebeed057a925b0dea95d57888d4f85b42"
+    },
+    {
+      "path": "failure-regression/cases/F02/mutation.sql",
+      "bytes": 75,
+      "sha256": "40d92e1178e9140e1b792805372fda9ed9eb0c1e46710e2fa225bfc022a4d64c"
+    },
+    {
+      "path": "failure-regression/cases/F02/state-after.json",
+      "bytes": 7311,
+      "sha256": "7b35c6b59c959a4e86ae229b5a426ecc71bc3f9b7341d33640289acf089f9291"
+    },
+    {
+      "path": "failure-regression/cases/F02/state-before.json",
+      "bytes": 7311,
+      "sha256": "b505961eaaf3a431013f0e4a74ecb84c82ccef6dea0d6fe608a9fc2bcc828822"
+    },
+    {
+      "path": "failure-regression/cases/F03/api-response.json",
+      "bytes": 4238,
+      "sha256": "b952e105fff3d811edc6260e9b24f9101a1460f2ab0c1073b699202fb2ffc43c"
+    },
+    {
+      "path": "failure-regression/cases/F03/case-summary.json",
+      "bytes": 1340,
+      "sha256": "69d405fd4b3f46c640553270b659825e1f1216c9fa45510bebde5293ec1c2a54"
+    },
+    {
+      "path": "failure-regression/cases/F03/gate.json",
+      "bytes": 3654,
+      "sha256": "9224344939de689424f0b095c15ab04d798868177d8feedb87fdb4ad0f7bc612"
+    },
+    {
+      "path": "failure-regression/cases/F03/mutation.sql",
+      "bytes": 123,
+      "sha256": "3ce22d279920d9c9d65f3c55cd429975a5de5e7d505f48bd530687fc826c0ead"
+    },
+    {
+      "path": "failure-regression/cases/F03/state-after.json",
+      "bytes": 7311,
+      "sha256": "424373a4192497ba6959ae216c35faf7fda0d552a1c0c269c45b8a801905e020"
+    },
+    {
+      "path": "failure-regression/cases/F03/state-before.json",
+      "bytes": 7311,
+      "sha256": "b7e834491b34c8d0ceac813ea9dde218f12854de64cb7e19f2ac9c07f71100b2"
+    },
+    {
+      "path": "failure-regression/cases/F04/api-response.json",
+      "bytes": 9505,
+      "sha256": "efcdd3856823a840ab4e9950a4de638abf438e6c0b161f39a7a0a3acf571cf9e"
+    },
+    {
+      "path": "failure-regression/cases/F04/case-summary.json",
+      "bytes": 1646,
+      "sha256": "baed649f70938211641a55640044fd6f8c4d91f63138679de0107eb6a8706ed3"
+    },
+    {
+      "path": "failure-regression/cases/F04/gate.json",
+      "bytes": 8591,
+      "sha256": "55aa17f5730b20c174d3c6aa78f768885db3807c7c3f6f52181998f20a35b424"
+    },
+    {
+      "path": "failure-regression/cases/F04/mutation.sql",
+      "bytes": 110,
+      "sha256": "9971b6db177fdabb2b62aeb1be29a68b45d619863c3838cd0ea8c1f5b8b0b198"
+    },
+    {
+      "path": "failure-regression/cases/F04/state-after.json",
+      "bytes": 7311,
+      "sha256": "a2d5647f15239c8b6555285c97d4b227c77a513fc6bac826a0c73bf61f42b4de"
+    },
+    {
+      "path": "failure-regression/cases/F04/state-before.json",
+      "bytes": 7311,
+      "sha256": "ee2552c064170419e44f49167b50900048f486671398e99ad90918155c6c26fc"
+    },
+    {
+      "path": "failure-regression/cases/F05/api-response.json",
+      "bytes": 4143,
+      "sha256": "457255ecae7edb77f64ee7b0c3ede153ab71d83bd6c69f4e733a978bf4483c9b"
+    },
+    {
+      "path": "failure-regression/cases/F05/case-summary.json",
+      "bytes": 1353,
+      "sha256": "507f82efe1aefa537cfd44b526c5b803d043c754aaa1f18e51e90378137513af"
+    },
+    {
+      "path": "failure-regression/cases/F05/gate.json",
+      "bytes": 3583,
+      "sha256": "c48f352566c0a48ed47ccb7ec918e5b60feb3a6740f75dc2294984709f52040e"
+    },
+    {
+      "path": "failure-regression/cases/F05/mutation.sql",
+      "bytes": 213,
+      "sha256": "bf96bad235b988c308614ea32ab6a4b735ce9e009d1a3d3e7cf7c82b41dfd6e6"
+    },
+    {
+      "path": "failure-regression/cases/F05/state-after.json",
+      "bytes": 7311,
+      "sha256": "b49aba37e344e4b4780473008c6479a12f6fd485d73fb41b6326f6976aa683f2"
+    },
+    {
+      "path": "failure-regression/cases/F05/state-before.json",
+      "bytes": 7311,
+      "sha256": "83eee4fd535f6d4ac17d95016238dda88ea3920bc116b27636f4507067d37690"
+    },
+    {
+      "path": "failure-regression/cases/F06/api-response.json",
+      "bytes": 4247,
+      "sha256": "f10706128e47f09512f46b91ec1562bed207aa6cf76c52583f38cb578689c0fd"
+    },
+    {
+      "path": "failure-regression/cases/F06/case-summary.json",
+      "bytes": 1344,
+      "sha256": "caf6ba30622561ac0d34cf29ba8bd7636310518356e0a93c150d5019a08cb689"
+    },
+    {
+      "path": "failure-regression/cases/F06/gate.json",
+      "bytes": 3659,
+      "sha256": "3d2eac115fc52e3f98bee1c9d0b0ef996a3688c5f419a89a97635a6411ebe0e3"
+    },
+    {
+      "path": "failure-regression/cases/F06/mutation.sql",
+      "bytes": 127,
+      "sha256": "a067751b446917f220aab00965f1999389dc14ffe511a1ae17bf259fef086b7f"
+    },
+    {
+      "path": "failure-regression/cases/F06/state-after.json",
+      "bytes": 7311,
+      "sha256": "69503979c8bb5aa2b7212daf461878a6bfe09a3a029a3d04472f6dd0c2f39cea"
+    },
+    {
+      "path": "failure-regression/cases/F06/state-before.json",
+      "bytes": 7311,
+      "sha256": "b7db5b8088b1203ffefb4d894a42fe69d433ca7098a70e8c633fa85cc791ec3a"
+    },
+    {
+      "path": "failure-regression/cases/F07/api-response.json",
+      "bytes": 4510,
+      "sha256": "ad4221a96ed21afdb4144c22155c1c92ba490d68e99c2b55af7552b05c36ce10"
+    },
+    {
+      "path": "failure-regression/cases/F07/case-summary.json",
+      "bytes": 1560,
+      "sha256": "be70c9c98889437e8dcecfc3de156035b0c62f9beb617bcaa7a50c74327f6f6f"
+    },
+    {
+      "path": "failure-regression/cases/F07/gate.json",
+      "bytes": 3799,
+      "sha256": "fd287c6557f8645bab1ef52bd5dff121a6e936f120598ae80744c5427946b2ea"
+    },
+    {
+      "path": "failure-regression/cases/F07/mutation.sql",
+      "bytes": 102,
+      "sha256": "9b891dd3d2ec437ee52b884060e0e80295c6473591e16f99ead76b3bd8964371"
+    },
+    {
+      "path": "failure-regression/cases/F07/state-after.json",
+      "bytes": 7311,
+      "sha256": "c9bef4e42755f9a2ff0fd0e55ad44f6dc7e8a620a40f4393c203b2dda65304e1"
+    },
+    {
+      "path": "failure-regression/cases/F07/state-before.json",
+      "bytes": 7311,
+      "sha256": "4109d2c0cb7269f52f0568811c296649d311f55b9b474b6833c3aa517d9d1cb7"
+    },
+    {
+      "path": "failure-regression/cases/F08/api-response.json",
+      "bytes": 4235,
+      "sha256": "27476e3c9df54de74f68a77bcf13db0b605de0e5ba7a8b52a7dd030ca6dfc7e6"
+    },
+    {
+      "path": "failure-regression/cases/F08/case-summary.json",
+      "bytes": 1270,
+      "sha256": "91777c85aa09cb6e769807bad7c028e40863036a3db55fc60201ed1a1e915873"
+    },
+    {
+      "path": "failure-regression/cases/F08/gate.json",
+      "bytes": 3653,
+      "sha256": "3186456807a02ef4c3ecad4fa63fc1123b426ef1609fafe87510a4f69a0322a8"
+    },
+    {
+      "path": "failure-regression/cases/F08/mutation.sql",
+      "bytes": 70,
+      "sha256": "0c80a7af570ce8e6ab837034f1275fda6c1761da726b5085f45adaef5fb77f80"
+    },
+    {
+      "path": "failure-regression/cases/F08/state-after.json",
+      "bytes": 7310,
+      "sha256": "20192126619691d3fb738dc56f546bd65e25613b6798261a4caa988be7e53181"
+    },
+    {
+      "path": "failure-regression/cases/F08/state-before.json",
+      "bytes": 7311,
+      "sha256": "218b964430515d6c1b4a536c61d3b183df607b4c664d4b9e738631122f733f1d"
+    },
+    {
+      "path": "failure-regression/cases/F09/api-response.json",
+      "bytes": 4366,
+      "sha256": "60c43a39ca38edc7f587f8ec0b2dd1b27df997b6dbaf4b0eee43e3f97c36aff2"
+    },
+    {
+      "path": "failure-regression/cases/F09/case-summary.json",
+      "bytes": 1614,
+      "sha256": "89e58efa6494243c4df6c3f4a5a7940ac9cd7b5df0290ed0f698d07645c04482"
+    },
+    {
+      "path": "failure-regression/cases/F09/gate.json",
+      "bytes": 3722,
+      "sha256": "912908ba1870099c149f5c7b1ab32f90b21f3a0b27ccdb026e5874e1c5fb3df6"
+    },
+    {
+      "path": "failure-regression/cases/F09/mutation.sql",
+      "bytes": 259,
+      "sha256": "d53808a6000e383f8af84c72dffe1f23d9316540e9252c293800a396f5a08d4a"
+    },
+    {
+      "path": "failure-regression/cases/F09/state-after.json",
+      "bytes": 7311,
+      "sha256": "81b895b1530a2c464f14d9c1d75755ad795e32cc85a6c7fb1367c38489ba8ce5"
+    },
+    {
+      "path": "failure-regression/cases/F09/state-before.json",
+      "bytes": 7311,
+      "sha256": "9bcc1ad5696b33510fdcf0f17284aa6166375f5cf5ea0f873641f42dbc79080d"
+    },
+    {
+      "path": "failure-regression/cases/F10/api-response.json",
+      "bytes": 4494,
+      "sha256": "188eacb806bc91115d2a21a1c0be9878cb18b0b41b1b720358df600c8088b03a"
+    },
+    {
+      "path": "failure-regression/cases/F10/case-summary.json",
+      "bytes": 1558,
+      "sha256": "d91b874a13164090f0089aac0fead5d7cbd82a45519d256609d7299bdbe0a631"
+    },
+    {
+      "path": "failure-regression/cases/F10/gate.json",
+      "bytes": 3791,
+      "sha256": "0a24728c337ad3dde050d3187a1a9020a1fe146744b67afb77573c930a3bbff7"
+    },
+    {
+      "path": "failure-regression/cases/F10/mutation.sql",
+      "bytes": 106,
+      "sha256": "3aa97cb499eaf86f089c174bc7a813c7997e74eb7caef0a0d75b51f206e95f72"
+    },
+    {
+      "path": "failure-regression/cases/F10/state-after.json",
+      "bytes": 7311,
+      "sha256": "4328f7a17bff7bc4d6e99668fc35ccdfe28330c596ea5dce77675c171455fdc1"
+    },
+    {
+      "path": "failure-regression/cases/F10/state-before.json",
+      "bytes": 7311,
+      "sha256": "ebcd572b33afedcc4f1e4e7c43c023bfb3e54d63c46963bb26c1f60cca13d4b2"
+    },
+    {
+      "path": "failure-regression/cases/F11/api-response.json",
+      "bytes": 4188,
+      "sha256": "da948f2a48e33a16ef344282100da36261756d86538bb6686c5f31aec24bff49"
+    },
+    {
+      "path": "failure-regression/cases/F11/case-summary.json",
+      "bytes": 1216,
+      "sha256": "908cd5963674689fea5ca3afc592bff04134602d1046c8ca1ca8682e62f95028"
+    },
+    {
+      "path": "failure-regression/cases/F11/gate.json",
+      "bytes": 3629,
+      "sha256": "29ba2b807719b67c4cbc5461f0c4682f0771b364a34594d5c3ab03fcf40b104b"
+    },
+    {
+      "path": "failure-regression/cases/F11/mutation.sql",
+      "bytes": 59,
+      "sha256": "7ac70f046e02cc941a706a9ed33cb2dfda361d62bfa064fea900a076223c55e1"
+    },
+    {
+      "path": "failure-regression/cases/F11/state-after.json",
+      "bytes": 7310,
+      "sha256": "af03cf09096c98f1f9769fb9053137e9021e7a3defe39ece04a28368ea2acd72"
+    },
+    {
+      "path": "failure-regression/cases/F11/state-before.json",
+      "bytes": 7311,
+      "sha256": "a8a48e9a37841ec09ec1c499e80bf0169d367b83eea0eb6946d6e8f9f1be1fe1"
+    },
+    {
+      "path": "failure-regression/cases/F12/api-response.json",
+      "bytes": 14856,
+      "sha256": "39639f4427177537b5ccc337167fa077499926aa3f1461796cc23cf11c4ed566"
+    },
+    {
+      "path": "failure-regression/cases/F12/case-summary.json",
+      "bytes": 1582,
+      "sha256": "4d7abb065b90c93aeea19125ec2dab76dbe7d5b21afacccba1465183f77ff08a"
+    },
+    {
+      "path": "failure-regression/cases/F12/gate.json",
+      "bytes": 3706,
+      "sha256": "4e59828e98b7ff5fc8a443a839de13eacc253e7a99ab3ce5e4dcd9a7bb6a7a04"
+    },
+    {
+      "path": "failure-regression/cases/F12/mutation.sql",
+      "bytes": 190,
+      "sha256": "14f24b455f3fd97b6f06d01824f77bf66630432369ae223710f99aa72de4b339"
+    },
+    {
+      "path": "failure-regression/cases/F12/state-after.json",
+      "bytes": 7311,
+      "sha256": "e3b12d2709bd180f8ca5863c4f358b1200964af81c0b42731b3532dcaef25098"
+    },
+    {
+      "path": "failure-regression/cases/F12/state-before.json",
+      "bytes": 7311,
+      "sha256": "8d917d930269e1a8c794a274bd947128353ad6a03558e9ff84ec540411b644c2"
+    },
+    {
+      "path": "failure-regression/cases/I01/api-response.json",
+      "bytes": 554,
+      "sha256": "b964228316f73bdaa0d86c7ec1216bbec51fb173614d96afc9fa70c09918afaf"
+    },
+    {
+      "path": "failure-regression/cases/I01/case-summary.json",
+      "bytes": 1245,
+      "sha256": "bbbf352b11b324ac06842a4f4be8ec2cb8d70c38597269e089dea558e986735a"
+    },
+    {
+      "path": "failure-regression/cases/I01/gate.json",
+      "bytes": 83,
+      "sha256": "349fd699064d0b5a52136ffb069c7a8bdb26e2fea740366c257017854cfba996"
+    },
+    {
+      "path": "failure-regression/cases/I01/mutation.sql",
+      "bytes": 98,
+      "sha256": "84f9929a7a1b0f63e51b926bc89d25424eaceb5a2fa414e5cfde92ae05dfccc7"
+    },
+    {
+      "path": "failure-regression/cases/I01/state-after.json",
+      "bytes": 9751,
+      "sha256": "a76198e2345db4059870c2be97f4c9f0740e6ab9dbddbed730c6abcae39bf133"
+    },
+    {
+      "path": "failure-regression/cases/I01/state-before.json",
+      "bytes": 9803,
+      "sha256": "96fcc984c9dac39eafab77d680bd9a1b1e395a9a6377b656b0fdeb8fbd0137e1"
+    },
+    {
+      "path": "failure-regression/cases/I02/api-response.json",
+      "bytes": 1819,
+      "sha256": "4d1497f987e9fc3b079cefc1d78ed366db9f5c4580f4cda8019948c57cbeeb4d"
+    },
+    {
+      "path": "failure-regression/cases/I02/case-summary.json",
+      "bytes": 1255,
+      "sha256": "be87f2c2c0dab3176c4cf2bb6ed81fa16a3e4b72adb4bb642100e617214cdac3"
+    },
+    {
+      "path": "failure-regression/cases/I02/gate.json",
+      "bytes": 83,
+      "sha256": "349fd699064d0b5a52136ffb069c7a8bdb26e2fea740366c257017854cfba996"
+    },
+    {
+      "path": "failure-regression/cases/I02/mutation.sql",
+      "bytes": 130,
+      "sha256": "f7695420a9444f976199381c19c79751e4d4549985d7b667cb0812030937637c"
+    },
+    {
+      "path": "failure-regression/cases/I02/state-after.json",
+      "bytes": 7410,
+      "sha256": "d15ffcd1008968445a32e8c75dc7ea33e9b89d67841fe8e399a70fbad767e4b3"
+    },
+    {
+      "path": "failure-regression/cases/I02/state-before.json",
+      "bytes": 9803,
+      "sha256": "24240b56b29ed359a1aeb36642afbb458b21356f2834c53be21229e73026bf8f"
+    },
+    {
+      "path": "failure-regression/cases/P00/api-response.json",
+      "bytes": 35691,
+      "sha256": "3bef73fe475cb737460a63462570f9918605875bd34ee99b03524b83db2bb0c1"
+    },
+    {
+      "path": "failure-regression/cases/P00/case-summary.json",
+      "bytes": 1148,
+      "sha256": "846ac04978e4c3640c7cd519db6edfc07a2747cc3b0c0347d8fd207553554798"
+    },
+    {
+      "path": "failure-regression/cases/P00/gate.json",
+      "bytes": 3583,
+      "sha256": "f2c12c8e329d1164255f4143b0448e92d7c5955ff3d2471e2aa8e9992a592078"
+    },
+    {
+      "path": "failure-regression/cases/P00/mutation.sql",
+      "bytes": 40,
+      "sha256": "1e39aea44bce1ce06b250b2e66b8482c8d5476e04029eb22ef148e0e54e27b62"
+    },
+    {
+      "path": "failure-regression/cases/P00/state-after.json",
+      "bytes": 7311,
+      "sha256": "93466f1b523ead4e6ecd14c12f532cdf34a6e49691fdf8c068ed0c7198cc8bec"
+    },
+    {
+      "path": "failure-regression/cases/P00/state-before.json",
+      "bytes": 7311,
+      "sha256": "3d63dd498f41860217df6aed652752aac3ffdd5bc8cc8ebb02e82e6a678c9b9d"
+    },
+    {
+      "path": "failure-regression/failure-matrix-v2.csv",
+      "bytes": 8208,
+      "sha256": "d1158ad2811f2226d9d72dd5b1e57d5da0ee33bb464634622b9a6d34a201d604"
+    },
+    {
+      "path": "failure-regression/failure-matrix-v2.json",
+      "bytes": 22092,
+      "sha256": "b6e92d18562444194f65ea05d09896e958ebfbbc9997abafe6e863663d6bdcf6"
+    },
+    {
+      "path": "failure-regression/failure-matrix-v2.md",
+      "bytes": 2109,
+      "sha256": "4b46c8a55847e0a893f06ea5de02876dd047b496dd9e5d03f18e7c8eca672f06"
+    },
+    {
+      "path": "failure-regression/phase1a1-manifest-v2.json",
+      "bytes": 21523,
+      "sha256": "83fa3d8488d6453a1101a33824d73da7446fb4b2253c6993a527010b4d19edd7"
+    },
+    {
+      "path": "failure-regression/production-core-diff.json",
+      "bytes": 2078,
+      "sha256": "90700daef5deb0fed9ecb13e91af825923c12429c0c42bcb43ba5619fba9adf3"
+    },
+    {
+      "path": "hash-baseline.json",
+      "bytes": 2750,
+      "sha256": "2c6acda9f6b7b555c7198385b91eb748b777751fc7777d4e45648e8d1816aae1"
+    },
+    {
+      "path": "hash-regression.json",
+      "bytes": 5961,
+      "sha256": "13a335c68b7bdd6abc381fecbdfb13f22c4319c7adcd2effaf904f865cc15574"
+    },
+    {
+      "path": "performance-stop.json",
+      "bytes": 655,
+      "sha256": "6a32a1c01646bbcb5e5571cde7fc143a491751fba97a22a8f48e3035415f5cb2"
+    },
+    {
+      "path": "phase1b-regression/api-registration-and-series.json",
+      "bytes": 98618,
+      "sha256": "10f9b77d3027b0ba23830fbd5c3e9e00b4d7880e57ec7ed0f6e880ca257484b5"
+    },
+    {
+      "path": "phase1b-regression/backend-log-tail.txt",
+      "bytes": 2521,
+      "sha256": "f3946188805e425ce4ac62ac7d21413a5d088286cfdd27e496dbcf5ed498eac3"
+    },
+    {
+      "path": "phase1b-regression/configuration-inventory.csv",
+      "bytes": 420,
+      "sha256": "d3a516091ffa3cfb3051384e72aa581d96e32f4be98f28484df1e50eea564dad"
+    },
+    {
+      "path": "phase1b-regression/core-diff-inventory.json",
+      "bytes": 1375,
+      "sha256": "10159fcaaef58f16d5991c8d71fb7aeb795d370024ecf42477f16c10e8b7d84e"
+    },
+    {
+      "path": "phase1b-regression/core-diff-inventory.md",
+      "bytes": 287,
+      "sha256": "b80984e1789ca16da8380bc38f437d2d857420cb18f6770a4e73cd486849c795"
+    },
+    {
+      "path": "phase1b-regression/end-to-end-summary.json",
+      "bytes": 41265,
+      "sha256": "fca541d890c14048ed3ab54f86a76c41ee7d1f03e72d3b8017fa9420b0794dc2"
+    },
+    {
+      "path": "phase1b-regression/evaluate.json",
+      "bytes": 8542,
+      "sha256": "14add00401f7cb61342807e0730c63a30145fad33e363cd33d13575420f84715"
+    },
+    {
+      "path": "phase1b-regression/execute.json",
+      "bytes": 17609,
+      "sha256": "e1d3d07cb67fc0c2aa7d257fdc3b1e1514ef1f80ea423f5895c3ff8e57516a90"
+    },
+    {
+      "path": "phase1b-regression/frontend-validation.json",
+      "bytes": 6150,
+      "sha256": "741fd3d50dcaedfdeaf7109e5d9e223049fa46a9dada781669f5c1f8689fd7ce"
+    },
+    {
+      "path": "phase1b-regression/future-state.json",
+      "bytes": 19736,
+      "sha256": "34909ef4b55e4dc4532a99dc806cee4431def041fbae59ffa596c4c55f695e0e"
+    },
+    {
+      "path": "phase1b-regression/gate.json",
+      "bytes": 1988,
+      "sha256": "7b731507bdc825fc974eca22cc9a1ab9feaa7426db11f8c2bed7a7c0596ff787"
+    },
+    {
+      "path": "phase1b-regression/model-fixture-card.md",
+      "bytes": 1256,
+      "sha256": "986ade1f9237eb16312ca3d9c959420f2a0a938281d0a49d57a8e7efdb4cffb9"
+    },
+    {
+      "path": "phase1b-regression/negative-onboarding-case.json",
+      "bytes": 699,
+      "sha256": "a39e162883b2e7b7608669ca86878d5852712032086af581fbd76629bae54fbe"
+    },
+    {
+      "path": "phase1b-regression/phase1b-manifest.json",
+      "bytes": 3627,
+      "sha256": "f6e0d4c43727ae62221edc9cd154aecaeaf86289b3204487f1420bbff9603a24"
+    },
+    {
+      "path": "phase1b-regression/PHASE1B_COMPLETION_REPORT.md",
+      "bytes": 2239,
+      "sha256": "0b13464f2b9faff10cae3edb51e4e689998f663dcf99404e35fca391e5cdd47f"
+    },
+    {
+      "path": "phase1b-regression/pit-pre-run.json",
+      "bytes": 535,
+      "sha256": "8879274edc5b1e3e70aa9e5d16a02dcd9126a680fdebf111b84d02bc3e824245"
+    },
+    {
+      "path": "phase1b-regression/prediction-summary.json",
+      "bytes": 2393,
+      "sha256": "451596752a53cd36a2e46ce5b8a5617a1eb908d955339ac05c23b4669ce77dff"
+    },
+    {
+      "path": "phase1b-regression/provenance-trace.json",
+      "bytes": 9254,
+      "sha256": "1319b7a6d5a96d880ee8a800eb73cb374a642ad139e08a958ba037c3a15b7bc2"
+    },
+    {
+      "path": "phase1b-regression/registration-effort.json",
+      "bytes": 583,
+      "sha256": "07bc6871891d4159094713b54a04d9a605d9a1ab45a5d0c97b749687dab29f97"
+    },
+    {
+      "path": "phase1b-regression/regression-tests.json",
+      "bytes": 10760,
+      "sha256": "28d7ea9aa0585d88105944312e2bd8738333568e50b1f01ca726d1937e3f6e71"
+    },
+    {
+      "path": "phase1b-regression/second-configuration-manifest.json",
+      "bytes": 4750,
+      "sha256": "b3ac08d6de367050e5dd5a44a232b63f8c59f967e3078bf91e21667bb272d5a3"
+    },
+    {
+      "path": "phase1b-regression/second-configuration-spec.md",
+      "bytes": 2813,
+      "sha256": "49bb345f5f79bcd33cf02a157010882ee6ab6cc1e83d7dabe72f44e3989adee5"
+    },
+    {
+      "path": "phase1b-regression/sql-imports.json",
+      "bytes": 1357,
+      "sha256": "5b467b3dd5c6d4bdc0e0e6d75271b1fb17b7b9498ea027bda997817a1fdd2146"
+    },
+    {
+      "path": "phase1b-regression.json",
+      "bytes": 2082,
+      "sha256": "f0211c11348e86bee5b5951033334c10e22877092fa9358c1eef71c6fbe82a4f"
+    },
+    {
+      "path": "phase2a2-completion-summary.json",
+      "bytes": 6813,
+      "sha256": "fca8d1d7c12494b8e72a8dc36ee4c4371bee699cb6c8242904936cbae9ba50e0"
+    },
+    {
+      "path": "phase2a2-manifest-verification.json",
+      "bytes": 130,
+      "sha256": "9afc07f868de2e48084fe8cd2ce5d0cbf1e1f73162cf6320105ed0bdfe2d9b52"
+    },
+    {
+      "path": "phase2a2-manifest.json",
+      "bytes": 2478,
+      "sha256": "2eb42366fa1fdd7024cd47583ce6ba02f9bafa7313f8b2e1d7c0cafa16ee3c51"
+    },
+    {
+      "path": "phase2a2-stop-summary.json",
+      "bytes": 2550,
+      "sha256": "3a170b6e09e04be2677cdb458a3594b5fef249f373ef91c67de8f59aafec5029"
+    },
+    {
+      "path": "PHASE2A2_COMPLETION_REPORT.md",
+      "bytes": 770,
+      "sha256": "a20e2874d79be1263ee65cf9d7533d1b130876e34908b06d52480f12f6ba737d"
+    },
+    {
+      "path": "PHASE2A2_STOP_REPORT.md",
+      "bytes": 1120,
+      "sha256": "dc67c7de75883da59576eb88806b9be76bc74dd1abac642352ac492632e9cbf3"
+    },
+    {
+      "path": "production-core-diff.json",
+      "bytes": 1907,
+      "sha256": "de3e7bdfa57a34eb29c162ab6f47480374b5f8831f34d98a0296365ae3a0661f"
+    },
+    {
+      "path": "reference/backend-log.txt",
+      "bytes": 2541,
+      "sha256": "90db23990c4dc0cb523c62bf314eddc57d3915aa7933dce3f0d80f50737970e3"
+    },
+    {
+      "path": "reference/gate-raw.csv",
+      "bytes": 2682,
+      "sha256": "77741b2de08fa32314e0014ab3a63d75df6708b1d31ed38abaf4a4e338cba9c9"
+    },
+    {
+      "path": "reference/gate-summary.json",
+      "bytes": 464,
+      "sha256": "ba4ffdd5a02c55c2986027d20ca8aab7f85b2e769e34f3183d944f6685e4ae72"
+    },
+    {
+      "path": "reference/progress.json",
+      "bytes": 23342,
+      "sha256": "94b9d44d002ed5f2d50694ff4d593fdfda054e8f430ee3ef8aa0861a60638eac"
+    },
+    {
+      "path": "result-set-equivalence.json",
+      "bytes": 10107,
+      "sha256": "afabedf2385f3d70f5d1c38225ac0ae39059f4d73d26b79701726a5e083adf9e"
+    },
+    {
+      "path": "route-p-change.md",
+      "bytes": 514,
+      "sha256": "5ca8c283687fe1ee6bbd9f26207bef89dc4effd1dae867649cf2c7a76aac14ea"
+    },
+    {
+      "path": "route-p-validation-summary.json",
+      "bytes": 13426,
+      "sha256": "0ba02bd47e658d123927d2a984cba681ddfc1e788e566b273435d5cc23d16777"
+    },
+    {
+      "path": "s1/backend-log.txt",
+      "bytes": 2535,
+      "sha256": "d7014ea802e23ae644ebdd2a1f881627156dd51ef463e1b1d8c1c45ee7bef922"
+    },
+    {
+      "path": "s1/gate-raw.csv",
+      "bytes": 1017,
+      "sha256": "2ecb132e5dca6a547afad8790f52afae419a444ecb20a1c15205681075829165"
+    },
+    {
+      "path": "s1/gate-summary.json",
+      "bytes": 464,
+      "sha256": "178be576a232c41560740740d7efbe7ae7443900533a5b1cfcb7ae8fc340c817"
+    },
+    {
+      "path": "s1/progress.json",
+      "bytes": 4499,
+      "sha256": "94ae0054fe50cea3496d080c2bf69e25272ece1cf00f5b0e3c9aecb1a3fd88eb"
+    },
+    {
+      "path": "s2/backend-log.txt",
+      "bytes": 2535,
+      "sha256": "f82e57912d22f72e568a061316b62abf5d039f42304a31deeed48afb39fed373"
+    },
+    {
+      "path": "s2/gate-raw.csv",
+      "bytes": 1047,
+      "sha256": "c0c60608f6546fbc02f325faf3e8f80e515d062298e0ec99e102dde641d95e46"
+    },
+    {
+      "path": "s2/gate-summary.json",
+      "bytes": 466,
+      "sha256": "a323f1e6d48d51f60af9c31b1a0f1a25c39e55376cbd73a5422163f9fbd32073"
+    },
+    {
+      "path": "s2/progress.json",
+      "bytes": 4515,
+      "sha256": "5517e396042f257130931b593bc1469f4612cb715daf6185629aed33df70dfcd"
+    },
+    {
+      "path": "scaling/rows-19840/backend-log.txt",
+      "bytes": 2543,
+      "sha256": "05377892849c8a227829eaf3442ebcf2b901673efccd1ec69adf4efb15ccb1f7"
+    },
+    {
+      "path": "scaling/rows-19840/gate-raw.csv",
+      "bytes": 1159,
+      "sha256": "4ee17cee4fb73f685c8da123e29747a953932806cf69e94a9795d3ecf50ae3de"
+    },
+    {
+      "path": "scaling/rows-19840/gate-summary.json",
+      "bytes": 484,
+      "sha256": "799d998624178c874b38554969733b673b4a08ca63c28fdcf4c557aa90feaece"
+    },
+    {
+      "path": "scaling/rows-19840/progress.json",
+      "bytes": 4627,
+      "sha256": "0e4b9fbae173292d1991be8d74979c2732771f61b5c98a33d1ac634c72c78c4f"
+    },
+    {
+      "path": "scaling/rows-29760/backend-log.txt",
+      "bytes": 2543,
+      "sha256": "0fd0bb18d6c1105dd5124922daba1eccbd46a68f881cde6082e4ede4760c81bb"
+    },
+    {
+      "path": "scaling/rows-29760/gate-raw.csv",
+      "bytes": 1146,
+      "sha256": "d322a0e0b7696f1cc06ef3e4470e0969f9d7da9b418d38db426e9f4d5f027281"
+    },
+    {
+      "path": "scaling/rows-29760/gate-summary.json",
+      "bytes": 479,
+      "sha256": "d4f4025bed8e6523a44b585ff9689fc87fdd9e35303ac01f3c58b37f0312266f"
+    },
+    {
+      "path": "scaling/rows-29760/progress.json",
+      "bytes": 4614,
+      "sha256": "dd00bfea9ad34560e0159c95240de6969d84e3db21fe8240feca34f70af334f4"
+    },
+    {
+      "path": "scaling/rows-39680/backend-log.txt",
+      "bytes": 2543,
+      "sha256": "a44818f735da1b1e5bb866c5ef4a9109bd78b51df94198c7ae39251068c6d6f7"
+    },
+    {
+      "path": "scaling/rows-39680/gate-raw.csv",
+      "bytes": 1147,
+      "sha256": "93769368329df9318f8deb8eebd04836cd52a8ceda5dd9856a6d462e7b19230b"
+    },
+    {
+      "path": "scaling/rows-39680/gate-summary.json",
+      "bytes": 481,
+      "sha256": "885e417d881f72598e3b6ca28f369d97a344a87c3fabf400dd5ca7871ad586c0"
+    },
+    {
+      "path": "scaling/rows-39680/progress.json",
+      "bytes": 4615,
+      "sha256": "7a9ece8192bdb113b2569541069eac96ce9285584c451b258ce131ff10e788a2"
+    },
+    {
+      "path": "scaling/rows-4960/backend-log.txt",
+      "bytes": 2542,
+      "sha256": "12ebaf971227b60f4d87c8110b58b6ac5d52af06bf3465bbbc0290b30215cfbf"
+    },
+    {
+      "path": "scaling/rows-4960/gate-raw.csv",
+      "bytes": 1120,
+      "sha256": "86272445d23e261d4d20324978efd860f24b68e70433390b0b29b6d30e2f9f4c"
+    },
+    {
+      "path": "scaling/rows-4960/gate-summary.json",
+      "bytes": 471,
+      "sha256": "e0cb5b01a2f5720174609447a04d6a4e8ff89dd1bdce345deafa79d9ca112db9"
+    },
+    {
+      "path": "scaling/rows-4960/progress.json",
+      "bytes": 4602,
+      "sha256": "b2129de9b7e2e0ea1c9d24f770eb1c0d4469481aab154a456b52d7d4db57afde"
+    },
+    {
+      "path": "scaling/rows-49600/backend-log.txt",
+      "bytes": 2543,
+      "sha256": "c13bed439ed8d236d32123f5bc2b11a78568414d7de2c2113807c2878d85b77e"
+    },
+    {
+      "path": "scaling/rows-49600/gate-raw.csv",
+      "bytes": 1160,
+      "sha256": "85cb1176b0821b15dd6d20dd04df3b659b6b35b1f8ca0e1f0a2936d0a2910f77"
+    },
+    {
+      "path": "scaling/rows-49600/gate-summary.json",
+      "bytes": 473,
+      "sha256": "02e52f7929f948bbd308cbab85057995f861d4c1b2f4f6d13e63a4e1d57d1f59"
+    },
+    {
+      "path": "scaling/rows-49600/progress.json",
+      "bytes": 4628,
+      "sha256": "4726fbb4ec9835fb0d4bc1b0e89582de9be41e17887731187a934da339b930ac"
+    },
+    {
+      "path": "scaling/rows-9920/backend-log.txt",
+      "bytes": 2542,
+      "sha256": "864696a97236b58db6f53743c984e9d358b2f2cab123cc52be0ba2d6f17c1977"
+    },
+    {
+      "path": "scaling/rows-9920/gate-raw.csv",
+      "bytes": 1119,
+      "sha256": "39ab1c653aa9888cbb1592c07ac53689f1a462e670232f3aa3e25591541021a0"
+    },
+    {
+      "path": "scaling/rows-9920/gate-summary.json",
+      "bytes": 479,
+      "sha256": "50b23f5f78fa19063415a8fe9bdb24fa2410595464b7b3ecb30a27801a58388f"
+    },
+    {
+      "path": "scaling/rows-9920/progress.json",
+      "bytes": 4601,
+      "sha256": "c175d0b74c61e74710a8c09b9c28279130cd5d79f85584b25f34c81a563bd0c5"
+    },
+    {
+      "path": "scaling-sweep-v2-summary.json",
+      "bytes": 5480,
+      "sha256": "68766061c781f1f099def7a3dedaf82014d99d784f1ab3efc3c4d9332eb5b245"
+    },
+    {
+      "path": "scaling-sweep-v2.csv",
+      "bytes": 372,
+      "sha256": "ebde6676c90ffdbf092484839df095c69de94ffa2619983f08b397f565a0a824"
+    },
+    {
+      "path": "sql/explain-s1-corrected.txt",
+      "bytes": 2688,
+      "sha256": "79d73cdc708341456805f1a55326c9872892ae46499a96f168022d77bdd8f218"
+    },
+    {
+      "path": "sql/explain-s2-corrected.txt",
+      "bytes": 2782,
+      "sha256": "45f95e7d36330426da2b7357b7384b81ee5b81de2f0c85d60d2d0a48ed97ac8d"
+    },
+    {
+      "path": "sql/plan-summary.json",
+      "bytes": 396,
+      "sha256": "496a7791ac04c10fa54c4744354c2387b0cc6b4c1057732b509c36c6d324d8b4"
+    },
+    {
+      "path": "sql/plan-summary.md",
+      "bytes": 155,
+      "sha256": "b4e0580f1f4dd60dc99bfc8af6a495b477d6ec92b2897d579c10bffc4e47f0d0"
+    },
+    {
+      "path": "workloads.json",
+      "bytes": 1071,
+      "sha256": "cd20bcce95a355b7241692e41d06ca1311b7622f035448380c6706e7cddb6e3a"
+    }
+  ]
+}

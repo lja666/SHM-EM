@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "shm-em-phase2a2-production-core-diff-v2",
+  "head": "84c13fa6081f72b37483b475903c7b22e1a8b92d",
+  "phase2a1Checkpoint": "84c13fa6081f72b37483b475903c7b22e1a8b92d",
+  "productionMainFilesModified": [
+    "src/backend/src/main/java/mybatis/iem/em/modules/engineering/application/service/impl/PredictionExecutionGateServiceImpl.java"
+  ],
+  "approvedProductionFile": "src/backend/src/main/java/mybatis/iem/em/modules/engineering/application/service/impl/PredictionExecutionGateServiceImpl.java",
+  "approvedAssignmentCount": 1,
+  "limit50000StillPresent": true,
+  "productionFixCommitted": false,
+  "productionDiff": [
+    "diff --git a/src/backend/src/main/java/mybatis/iem/em/modules/engineering/application/service/impl/PredictionExecutionGateServiceImpl.java b/src/backend/src/main/java/mybatis/iem/em/modules/engineering/application/service/impl/PredictionExecutionGateServiceImpl.java",
+    "index f33d507..536e96e 100644",
+    "--- a/src/backend/src/main/java/mybatis/iem/em/modules/engineering/application/service/impl/PredictionExecutionGateServiceImpl.java",
+    "+++ b/src/backend/src/main/java/mybatis/iem/em/modules/engineering/application/service/impl/PredictionExecutionGateServiceImpl.java",
+    "@@ -73,6 +73,7 @@ public class PredictionExecutionGateServiceImpl implements PredictionExecutionGa",
+    "         List<PredictionFeatureMapping> features = contractFeatures(batch.getProjectId());",
+    "         List<PredictionRun> runs = safe(predictionMapper.selectRunsByBatch(batchId));",
+    "         PredictionQuery resultQuery = new PredictionQuery();",
+    "+        resultQuery.setProjectId(batch.getProjectId());",
+    "         resultQuery.setBatchId(batchId);",
+    "         resultQuery.setLimit(50000);",
+    "         List<PredictionDisplay> results = safe(predictionMapper.selectSeries(resultQuery, 50000));"
+  ],
+  "pass": true
+}

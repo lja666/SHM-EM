@@ -1,0 +1,4 @@
+command: D:\Tools\apache-maven-3.9.16\bin\mvn.cmd -q -DskipTests clean package
+cwd: D:\SpringBoot_Mybatis\SHM-PIT\SHM_EM_SOFTX_REVISION\src\backend
+elapsedSeconds: 42.177352
+exitCode: 0

@@ -1,0 +1,622 @@
+{
+  "code": 0,
+  "message": "success",
+  "data": {
+    "projectId": 2,
+    "batchId": 5,
+    "batchCode": "ROLLING_120M_20260624100000_RUN_20260831122704696917",
+    "baseTime": "2026-06-24T10:00:00",
+    "horizonMinutes": 120,
+    "executionMode": "REPRODUCTION",
+    "executionEligible": true,
+    "executionBlockers": [],
+    "aggregationPolicyVersion": "1.0.0",
+    "aggregationPolicyCode": "PROJECT_MAX_OBSERVED_FORECAST",
+    "aggregationPolicyHash": "e06ff4a2fe14c764a601bf315b64fff2a4ce433a9930ed4b4d6c1a5c934eda62",
+    "stateHash": "e5952a476f25c30902bdb5e40b27f42cb3c33d377878ff72c0d39bb265a1dee6",
+    "observedRiskLevel": "normal",
+    "openObservedEventCount": 0,
+    "forecastRiskLevel": "yellow",
+    "overallRiskLevel": "yellow",
+    "earliestExceedanceTime": "2026-06-24T10:09:00",
+    "assessedFeatureCount": 14,
+    "unassessedFeatureCount": 14,
+    "executionGate": {
+      "batchId": 5,
+      "projectId": 2,
+      "batchCode": "ROLLING_120M_20260624100000_RUN_20260831122704696917",
+      "executionMode": "REPRODUCTION",
+      "referenceTime": "2026-06-24T10:00:00",
+      "contractVersion": "pit_pre_contract_v1",
+      "contractFingerprint": "a9e73ee02eafbe654a1c01d5013ea43f05d60b311bb8b36a50ba96960821616e",
+      "expectedModelCount": 2,
+      "actualModelCount": 2,
+      "successfulModelCount": 2,
+      "expectedFeatureCount": 28,
+      "actualFeatureCount": 28,
+      "expectedSteps": 40,
+      "expectedPointCount": 1120,
+      "actualPointCount": 1120,
+      "missingPointCount": 0,
+      "invalidTimestampCount": 0,
+      "qualityIssueCount": 0,
+      "baseTimeAgeMinutes": 0,
+      "maxAgeMinutes": 120,
+      "modelSetValid": true,
+      "featureSetValid": true,
+      "timelineValid": true,
+      "qualityValid": true,
+      "artifactHashValid": true,
+      "freshnessValid": true,
+      "resultIntegrityValid": true,
+      "executionEligible": true,
+      "gateHash": "10efc21f0c26a96f3f172de82b0848cb88a35aa0526b241da482befd55a6dd1f",
+      "evaluatedAt": "2026-08-31T12:27:24.674",
+      "issues": [],
+      "missingModels": [],
+      "unexpectedModels": [],
+      "missingFeatures": [],
+      "unexpectedFeatures": [],
+      "missingTimelinePoints": [],
+      "targets": [
+        {
+          "targetType": "Pressure",
+          "featureCount": 14,
+          "expectedPointCount": 560,
+          "actualPointCount": 560,
+          "missingPointCount": 0,
+          "completenessPercent": 100.0,
+          "complete": true,
+          "coveredSteps": 40,
+          "qualityIssueCount": 0,
+          "missingPoints": []
+        },
+        {
+          "targetType": "Strain",
+          "featureCount": 14,
+          "expectedPointCount": 560,
+          "actualPointCount": 560,
+          "missingPointCount": 0,
+          "completenessPercent": 100.0,
+          "complete": true,
+          "coveredSteps": 40,
+          "qualityIssueCount": 0,
+          "missingPoints": []
+        }
+      ]
+    },
+    "targets": [
+      {
+        "targetType": "Pressure",
+        "featureCount": 14,
+        "assessedFeatureCount": 14,
+        "warningCount": 14,
+        "alarmCount": 0,
+        "riskLevel": "yellow",
+        "minPredictedValue": -989.20800781,
+        "maxPredictedValue": 1924.16503906,
+        "governingValue": 1924.16503906,
+        "governingThreshold": -1000.0,
+        "thresholdDistance": 2924.16503906,
+        "peakValue": 1924.16503906,
+        "unit": "MPa",
+        "firstExceedanceTime": "2026-06-24T10:09:00"
+      },
+      {
+        "targetType": "Strain",
+        "featureCount": 14,
+        "assessedFeatureCount": 0,
+        "warningCount": 0,
+        "alarmCount": 0,
+        "riskLevel": "unassessed",
+        "minPredictedValue": -22.74855804,
+        "maxPredictedValue": 230.02865601,
+        "governingValue": 62.63587189,
+        "thresholdDistance": 0,
+        "peakValue": 62.63587189,
+        "unit": "με"
+      }
+    ],
+    "stations": [
+      {
+        "stationId": 74,
+        "stationName": "West Pier",
+        "riskLevel": "yellow",
+        "contributors": [
+          {
+            "featureCode": "bridge_point1_0.12Pressure_value",
+            "featureLabel": "Synthetic bridge fixture / Borehole 1 / 0.12 m / Earth pressure",
+            "targetType": "Pressure",
+            "metricCode": "earth_pressure_p",
+            "predictedValue": -452.28631592,
+            "unit": "MPa",
+            "thresholdValue": -1000.0,
+            "operator": ">=",
+            "riskLevel": "yellow",
+            "riskRank": 10,
+            "firstExceedanceTime": "2026-06-24T10:09:00",
+            "ruleCode": "BRIDGE_PRESSURE_WORKFLOW_FIXTURE"
+          },
+          {
+            "featureCode": "bridge_point1_3.12Pressure_value",
+            "featureLabel": "Synthetic bridge fixture / Borehole 1 / 3.12 m / Earth pressure",
+            "targetType": "Pressure",
+            "metricCode": "earth_pressure_p",
+            "predictedValue": 555.83709717,
+            "unit": "MPa",
+            "thresholdValue": -1000.0,
+            "operator": ">=",
+            "riskLevel": "yellow",
+            "riskRank": 10,
+            "firstExceedanceTime": "2026-06-24T10:09:00",
+            "ruleCode": "BRIDGE_PRESSURE_WORKFLOW_FIXTURE"
+          },
+          {
+            "featureCode": "bridge_point1_6.12Pressure_value",
+            "featureLabel": "Synthetic bridge fixture / Borehole 1 / 6.12 m / Earth pressure",
+            "targetType": "Pressure",
+            "metricCode": "earth_pressure_p",
+            "predictedValue": 154.78356934,
+            "unit": "MPa",
+            "thresholdValue": -1000.0,
+            "operator": ">=",
+            "riskLevel": "yellow",
+            "riskRank": 10,
+            "firstExceedanceTime": "2026-06-24T10:09:00",
+            "ruleCode": "BRIDGE_PRESSURE_WORKFLOW_FIXTURE"
+          },
+          {
+            "featureCode": "bridge_point2_2.2Pressure_value",
+            "featureLabel": "Synthetic bridge fixture / Borehole 2 / 2.2 m / Earth pressure",
+            "targetType": "Pressure",
+            "metricCode": "earth_pressure_p",
+            "predictedValue": 27.55033875,
+            "unit": "MPa",
+            "thresholdValue": -1000.0,
+            "operator": ">=",
+            "riskLevel": "yellow",
+            "riskRank": 10,
+            "firstExceedanceTime": "2026-06-24T10:09:00",
+            "ruleCode": "BRIDGE_PRESSURE_WORKFLOW_FIXTURE"
+          },
+          {
+            "featureCode": "bridge_point2_5.2Pressure_value",
+            "featureLabel": "Synthetic bridge fixture / Borehole 2 / 5.2 m / Earth pressure",
+            "targetType": "Pressure",
+            "metricCode": "earth_pressure_p",
+            "predictedValue": 762.5458374,
+            "unit": "MPa",
+            "thresholdValue": -1000.0,
+            "operator": ">=",
+            "riskLevel": "yellow",
+            "riskRank": 10,
+            "firstExceedanceTime": "2026-06-24T10:09:00",
+            "ruleCode": "BRIDGE_PRESSURE_WORKFLOW_FIXTURE"
+          }
+        ]
+      },
+      {
+        "stationId": 75,
+        "stationName": "Midspan",
+        "riskLevel": "yellow",
+        "contributors": [
+          {
+            "featureCode": "bridge_point1_2.12Pressure_value",
+            "featureLabel": "Synthetic bridge fixture / Borehole 1 / 2.12 m / Earth pressure",
+            "targetType": "Pressure",
+            "metricCode": "earth_pressure_p",
+            "predictedValue": 686.92285156,
+            "unit": "MPa",
+            "thresholdValue": -1000.0,
+            "operator": ">=",
+            "riskLevel": "yellow",
+            "riskRank": 10,
+            "firstExceedanceTime": "2026-06-24T10:09:00",
+            "ruleCode": "BRIDGE_PRESSURE_WORKFLOW_FIXTURE"
+          },
+          {
+            "featureCode": "bridge_point1_5.12Pressure_value",
+            "featureLabel": "Synthetic bridge fixture / Borehole 1 / 5.12 m / Earth pressure",
+            "targetType": "Pressure",
+            "metricCode": "earth_pressure_p",
+            "predictedValue": 53.39351654,
+            "unit": "MPa",
+            "thresholdValue": -1000.0,
+            "operator": ">=",
+            "riskLevel": "yellow",
+            "riskRank": 10,
+            "firstExceedanceTime": "2026-06-24T10:09:00",
+            "ruleCode": "BRIDGE_PRESSURE_WORKFLOW_FIXTURE"
+          },
+          {
+            "featureCode": "bridge_point2_1.2Pressure_value",
+            "featureLabel": "Synthetic bridge fixture / Borehole 2 / 1.2 m / Earth pressure",
+            "targetType": "Pressure",
+            "metricCode": "earth_pressure_p",
+            "predictedValue": -615.04718018,
+            "unit": "MPa",
+            "thresholdValue": -1000.0,
+            "operator": ">=",
+            "riskLevel": "yellow",
+            "riskRank": 10,
+            "firstExceedanceTime": "2026-06-24T10:09:00",
+            "ruleCode": "BRIDGE_PRESSURE_WORKFLOW_FIXTURE"
+          },
+          {
+            "featureCode": "bridge_point2_4.2Pressure_value",
+            "featureLabel": "Synthetic bridge fixture / Borehole 2 / 4.2 m / Earth pressure",
+            "targetType": "Pressure",
+            "metricCode": "earth_pressure_p",
+            "predictedValue": 591.39752197,
+            "unit": "MPa",
+            "thresholdValue": -1000.0,
+            "operator": ">=",
+            "riskLevel": "yellow",
+            "riskRank": 10,
+            "firstExceedanceTime": "2026-06-24T10:09:00",
+            "ruleCode": "BRIDGE_PRESSURE_WORKFLOW_FIXTURE"
+          }
+        ]
+      },
+      {
+        "stationId": 76,
+        "stationName": "East Pier",
+        "riskLevel": "yellow",
+        "contributors": [
+          {
+            "featureCode": "bridge_point1_1.12Pressure_value",
+            "featureLabel": "Synthetic bridge fixture / Borehole 1 / 1.12 m / Earth pressure",
+            "targetType": "Pressure",
+            "metricCode": "earth_pressure_p",
+            "predictedValue": 252.10231018,
+            "unit": "MPa",
+            "thresholdValue": -1000.0,
+            "operator": ">=",
+            "riskLevel": "yellow",
+            "riskRank": 10,
+            "firstExceedanceTime": "2026-06-24T10:09:00",
+            "ruleCode": "BRIDGE_PRESSURE_WORKFLOW_FIXTURE"
+          },
+          {
+            "featureCode": "bridge_point1_4.12Pressure_value",
+            "featureLabel": "Synthetic bridge fixture / Borehole 1 / 4.12 m / Earth pressure",
+            "targetType": "Pressure",
+            "metricCode": "earth_pressure_p",
+            "predictedValue": -74.86330414,
+            "unit": "MPa",
+            "thresholdValue": -1000.0,
+            "operator": ">=",
+            "riskLevel": "yellow",
+            "riskRank": 10,
+            "firstExceedanceTime": "2026-06-24T10:09:00",
+            "ruleCode": "BRIDGE_PRESSURE_WORKFLOW_FIXTURE"
+          },
+          {
+            "featureCode": "bridge_point2_0.2Pressure_value",
+            "featureLabel": "Synthetic bridge fixture / Borehole 2 / 0.2 m / Earth pressure",
+            "targetType": "Pressure",
+            "metricCode": "earth_pressure_p",
+            "predictedValue": 948.60681152,
+            "unit": "MPa",
+            "thresholdValue": -1000.0,
+            "operator": ">=",
+            "riskLevel": "yellow",
+            "riskRank": 10,
+            "firstExceedanceTime": "2026-06-24T10:09:00",
+            "ruleCode": "BRIDGE_PRESSURE_WORKFLOW_FIXTURE"
+          },
+          {
+            "featureCode": "bridge_point2_3.2Pressure_value",
+            "featureLabel": "Synthetic bridge fixture / Borehole 2 / 3.2 m / Earth pressure",
+            "targetType": "Pressure",
+            "metricCode": "earth_pressure_p",
+            "predictedValue": -71.50701904,
+            "unit": "MPa",
+            "thresholdValue": -1000.0,
+            "operator": ">=",
+            "riskLevel": "yellow",
+            "riskRank": 10,
+            "firstExceedanceTime": "2026-06-24T10:09:00",
+            "ruleCode": "BRIDGE_PRESSURE_WORKFLOW_FIXTURE"
+          },
+          {
+            "featureCode": "bridge_point2_6.2Pressure_value",
+            "featureLabel": "Synthetic bridge fixture / Borehole 2 / 6.2 m / Earth pressure",
+            "targetType": "Pressure",
+            "metricCode": "earth_pressure_p",
+            "predictedValue": 440.18099976,
+            "unit": "MPa",
+            "thresholdValue": -1000.0,
+            "operator": ">=",
+            "riskLevel": "yellow",
+            "riskRank": 10,
+            "firstExceedanceTime": "2026-06-24T10:09:00",
+            "ruleCode": "BRIDGE_PRESSURE_WORKFLOW_FIXTURE"
+          }
+        ]
+      }
+    ],
+    "timeline": [
+      {
+        "step": 1,
+        "horizonMinutes": 3,
+        "futureTime": "2026-06-24T10:03:00",
+        "riskLevel": "normal",
+        "exceedingFeatureCount": 0
+      },
+      {
+        "step": 2,
+        "horizonMinutes": 6,
+        "futureTime": "2026-06-24T10:06:00",
+        "riskLevel": "normal",
+        "exceedingFeatureCount": 0
+      },
+      {
+        "step": 3,
+        "horizonMinutes": 9,
+        "futureTime": "2026-06-24T10:09:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 4,
+        "horizonMinutes": 12,
+        "futureTime": "2026-06-24T10:12:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 5,
+        "horizonMinutes": 15,
+        "futureTime": "2026-06-24T10:15:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 6,
+        "horizonMinutes": 18,
+        "futureTime": "2026-06-24T10:18:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 7,
+        "horizonMinutes": 21,
+        "futureTime": "2026-06-24T10:21:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 8,
+        "horizonMinutes": 24,
+        "futureTime": "2026-06-24T10:24:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 9,
+        "horizonMinutes": 27,
+        "futureTime": "2026-06-24T10:27:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 10,
+        "horizonMinutes": 30,
+        "futureTime": "2026-06-24T10:30:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 11,
+        "horizonMinutes": 33,
+        "futureTime": "2026-06-24T10:33:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 12,
+        "horizonMinutes": 36,
+        "futureTime": "2026-06-24T10:36:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 13,
+        "horizonMinutes": 39,
+        "futureTime": "2026-06-24T10:39:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 14,
+        "horizonMinutes": 42,
+        "futureTime": "2026-06-24T10:42:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 15,
+        "horizonMinutes": 45,
+        "futureTime": "2026-06-24T10:45:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 16,
+        "horizonMinutes": 48,
+        "futureTime": "2026-06-24T10:48:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 17,
+        "horizonMinutes": 51,
+        "futureTime": "2026-06-24T10:51:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 18,
+        "horizonMinutes": 54,
+        "futureTime": "2026-06-24T10:54:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 19,
+        "horizonMinutes": 57,
+        "futureTime": "2026-06-24T10:57:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 20,
+        "horizonMinutes": 60,
+        "futureTime": "2026-06-24T11:00:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 21,
+        "horizonMinutes": 63,
+        "futureTime": "2026-06-24T11:03:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 22,
+        "horizonMinutes": 66,
+        "futureTime": "2026-06-24T11:06:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 23,
+        "horizonMinutes": 69,
+        "futureTime": "2026-06-24T11:09:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 24,
+        "horizonMinutes": 72,
+        "futureTime": "2026-06-24T11:12:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 25,
+        "horizonMinutes": 75,
+        "futureTime": "2026-06-24T11:15:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 26,
+        "horizonMinutes": 78,
+        "futureTime": "2026-06-24T11:18:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 27,
+        "horizonMinutes": 81,
+        "futureTime": "2026-06-24T11:21:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 28,
+        "horizonMinutes": 84,
+        "futureTime": "2026-06-24T11:24:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 29,
+        "horizonMinutes": 87,
+        "futureTime": "2026-06-24T11:27:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 30,
+        "horizonMinutes": 90,
+        "futureTime": "2026-06-24T11:30:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 31,
+        "horizonMinutes": 93,
+        "futureTime": "2026-06-24T11:33:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 32,
+        "horizonMinutes": 96,
+        "futureTime": "2026-06-24T11:36:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 33,
+        "horizonMinutes": 99,
+        "futureTime": "2026-06-24T11:39:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 34,
+        "horizonMinutes": 102,
+        "futureTime": "2026-06-24T11:42:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 35,
+        "horizonMinutes": 105,
+        "futureTime": "2026-06-24T11:45:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 36,
+        "horizonMinutes": 108,
+        "futureTime": "2026-06-24T11:48:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 37,
+        "horizonMinutes": 111,
+        "futureTime": "2026-06-24T11:51:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 38,
+        "horizonMinutes": 114,
+        "futureTime": "2026-06-24T11:54:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 39,
+        "horizonMinutes": 117,
+        "futureTime": "2026-06-24T11:57:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      },
+      {
+        "step": 40,
+        "horizonMinutes": 120,
+        "futureTime": "2026-06-24T12:00:00",
+        "riskLevel": "yellow",
+        "exceedingFeatureCount": 14
+      }
+    ]
+  }
+}

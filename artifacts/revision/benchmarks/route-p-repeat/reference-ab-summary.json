@@ -1,0 +1,176 @@
+{
+  "schemaVersion": "shm-em-phase2a2r-ab-summary-v1",
+  "workload": "reference",
+  "variants": {
+    "A": {
+      "measuredCalls": 60,
+      "latency": {
+        "count": 60,
+        "medianMs": 347.9392,
+        "p95Ms": 412.3058,
+        "minMs": 293.0951,
+        "maxMs": 453.644,
+        "meanMs": 353.132705,
+        "stddevMs": 33.718312,
+        "outliersRemoved": 0
+      },
+      "allFunctionalValid": true,
+      "gateSignatures": [
+        "7b78a12985c3821fcae3f7a0434ddfe3b274235c288a7294c24ddc8afb3484f3"
+      ]
+    },
+    "B": {
+      "measuredCalls": 60,
+      "latency": {
+        "count": 60,
+        "medianMs": 340.48585,
+        "p95Ms": 424.7747,
+        "minMs": 255.5187,
+        "maxMs": 483.6832,
+        "meanMs": 347.816447,
+        "stddevMs": 43.951568,
+        "outliersRemoved": 0
+      },
+      "allFunctionalValid": true,
+      "gateSignatures": [
+        "7b78a12985c3821fcae3f7a0434ddfe3b274235c288a7294c24ddc8afb3484f3"
+      ]
+    }
+  },
+  "pairedBlocks": [
+    {
+      "block": 1,
+      "medianAms": 351.9047,
+      "medianBms": 373.2988,
+      "medianRatioBA": 1.060795
+    },
+    {
+      "block": 2,
+      "medianAms": 345.1797,
+      "medianBms": 325.8688,
+      "medianRatioBA": 0.944056
+    },
+    {
+      "block": 3,
+      "medianAms": 348.2177,
+      "medianBms": 346.3504,
+      "medianRatioBA": 0.994638
+    },
+    {
+      "block": 4,
+      "medianAms": 329.2954,
+      "medianBms": 334.6446,
+      "medianRatioBA": 1.016244
+    }
+  ],
+  "pooledMedianRatioBA": 0.978579,
+  "pooledP95RatioBA": 1.030242,
+  "absoluteMedianDeltaMs": -7.45335,
+  "functionalEquivalence": true,
+  "processes": [
+    {
+      "workload": "reference",
+      "variant": "A",
+      "block": 1,
+      "order": 1,
+      "jvmPid": 43964,
+      "startedAt": "2026-08-31T03:56:54.914602+00:00",
+      "startupMs": 7756.8899,
+      "firstRequestMs": 774.3678,
+      "rssBeforeBytes": 525176832,
+      "rssAfterBytes": 653987840,
+      "backendLog": "C:\\Users\\nlfdz\\AppData\\Local\\Temp\\shm-em-phase2a-9lk8b2c9\\reference-block-1-1-A\\backend-5199.log"
+    },
+    {
+      "workload": "reference",
+      "variant": "B",
+      "block": 1,
+      "order": 2,
+      "jvmPid": 20988,
+      "startedAt": "2026-08-31T03:57:10.933238+00:00",
+      "startupMs": 8361.2341,
+      "firstRequestMs": 812.2688,
+      "rssBeforeBytes": 565592064,
+      "rssAfterBytes": 640937984,
+      "backendLog": "C:\\Users\\nlfdz\\AppData\\Local\\Temp\\shm-em-phase2a-9lk8b2c9\\reference-block-1-2-B\\backend-5199.log"
+    },
+    {
+      "workload": "reference",
+      "variant": "B",
+      "block": 2,
+      "order": 1,
+      "jvmPid": 38756,
+      "startedAt": "2026-08-31T03:57:27.249575+00:00",
+      "startupMs": 8222.4056,
+      "firstRequestMs": 827.8144,
+      "rssBeforeBytes": 615206912,
+      "rssAfterBytes": 840847360,
+      "backendLog": "C:\\Users\\nlfdz\\AppData\\Local\\Temp\\shm-em-phase2a-9lk8b2c9\\reference-block-2-1-B\\backend-5199.log"
+    },
+    {
+      "workload": "reference",
+      "variant": "A",
+      "block": 2,
+      "order": 2,
+      "jvmPid": 10172,
+      "startedAt": "2026-08-31T03:57:42.066198+00:00",
+      "startupMs": 7728.6475,
+      "firstRequestMs": 750.1801,
+      "rssBeforeBytes": 558342144,
+      "rssAfterBytes": 641355776,
+      "backendLog": "C:\\Users\\nlfdz\\AppData\\Local\\Temp\\shm-em-phase2a-9lk8b2c9\\reference-block-2-2-A\\backend-5199.log"
+    },
+    {
+      "workload": "reference",
+      "variant": "A",
+      "block": 3,
+      "order": 1,
+      "jvmPid": 23656,
+      "startedAt": "2026-08-31T03:57:57.385325+00:00",
+      "startupMs": 7780.7465,
+      "firstRequestMs": 763.0133,
+      "rssBeforeBytes": 579883008,
+      "rssAfterBytes": 635846656,
+      "backendLog": "C:\\Users\\nlfdz\\AppData\\Local\\Temp\\shm-em-phase2a-9lk8b2c9\\reference-block-3-1-A\\backend-5199.log"
+    },
+    {
+      "workload": "reference",
+      "variant": "B",
+      "block": 3,
+      "order": 2,
+      "jvmPid": 40528,
+      "startedAt": "2026-08-31T03:58:12.713021+00:00",
+      "startupMs": 7708.2489,
+      "firstRequestMs": 690.0178,
+      "rssBeforeBytes": 569729024,
+      "rssAfterBytes": 623267840,
+      "backendLog": "C:\\Users\\nlfdz\\AppData\\Local\\Temp\\shm-em-phase2a-9lk8b2c9\\reference-block-3-2-B\\backend-5199.log"
+    },
+    {
+      "workload": "reference",
+      "variant": "B",
+      "block": 4,
+      "order": 1,
+      "jvmPid": 5128,
+      "startedAt": "2026-08-31T03:58:28.696317+00:00",
+      "startupMs": 8399.3502,
+      "firstRequestMs": 824.2028,
+      "rssBeforeBytes": 611266560,
+      "rssAfterBytes": 841281536,
+      "backendLog": "C:\\Users\\nlfdz\\AppData\\Local\\Temp\\shm-em-phase2a-9lk8b2c9\\reference-block-4-1-B\\backend-5199.log"
+    },
+    {
+      "workload": "reference",
+      "variant": "A",
+      "block": 4,
+      "order": 2,
+      "jvmPid": 28356,
+      "startedAt": "2026-08-31T03:58:43.922559+00:00",
+      "startupMs": 7752.0241,
+      "firstRequestMs": 710.7859,
+      "rssBeforeBytes": 576405504,
+      "rssAfterBytes": 624140288,
+      "backendLog": "C:\\Users\\nlfdz\\AppData\\Local\\Temp\\shm-em-phase2a-9lk8b2c9\\reference-block-4-2-A\\backend-5199.log"
+    }
+  ]
+}

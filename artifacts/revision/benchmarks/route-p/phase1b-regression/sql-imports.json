@@ -1,0 +1,44 @@
+[
+  {
+    "path": "sql/shm_em_database/00_SHM_EM_complete_schema.sql",
+    "sha256": "00d93b1471e531a8fa3777fb968cb8bb5d97e3fa7448928c5e20d5b7fe73ed01",
+    "exitCode": 0,
+    "elapsedSeconds": 2.891,
+    "pass": true
+  },
+  {
+    "path": "sql/shm_em_database/01_SHM_EM_conversion_operators.sql",
+    "sha256": "96f09846a92e5e93d389120f6eec5ff3487c1f2d86c54108a7eca8b4f38fac90",
+    "exitCode": 0,
+    "elapsedSeconds": 0.124,
+    "pass": true
+  },
+  {
+    "path": "sql/shm_em_database/02_SHM_EM_public_sample.sql",
+    "sha256": "04bcd00847b74db6c1227fd6b49c6fe6b427e2b896567af8f7b9240944444e7f",
+    "exitCode": 0,
+    "elapsedSeconds": 0.583,
+    "pass": true
+  },
+  {
+    "path": "sql/shm_em_database/03_SHM_EM_public_validation.sql",
+    "sha256": "f10beadac94b4c7a4443785de76d5e6027fdc0f435b4e274e6f6e10d827b056e",
+    "exitCode": 0,
+    "elapsedSeconds": 0.136,
+    "pass": true
+  },
+  {
+    "path": "sql/shm_em_database/04_SHM_EM_persisted_prediction_integrity.sql",
+    "sha256": "348222e900bb151a93336e29b46f8182af95f644df4ba523af400ae8f87bf0b5",
+    "exitCode": 0,
+    "elapsedSeconds": 0.135,
+    "pass": true
+  },
+  {
+    "path": "sql/shm_em_database/revision/phase1b_synthetic_bridge.sql",
+    "sha256": "dd534e3bd1f90fb2dd911e8852f23d1f3e45201a6fc57a2d4e2cf8d801643135",
+    "exitCode": 0,
+    "elapsedSeconds": 0.248,
+    "pass": true
+  }
+]

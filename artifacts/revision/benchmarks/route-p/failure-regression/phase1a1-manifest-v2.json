@@ -1,0 +1,512 @@
+{
+  "schemaVersion": "shm-em-phase1a1-manifest-v1",
+  "generatedAt": "2026-08-31T04:26:11.755238+00:00",
+  "coreFreezeCommit": "df39ffb2b57d16cfdca419adf2492959fcc0931c",
+  "freezeRecordCommit": "6ea8ec64ed456fc7ea503e365107c1b3db82737a",
+  "sourceBranch": "revision/softx-d-26-00931",
+  "positiveControlPassed": true,
+  "caseCount": 15,
+  "passedCount": 15,
+  "failedCount": 0,
+  "discoveryGapCount": 0,
+  "formalSideEffectTables": [
+    "em_monitoring_event",
+    "em_event_response_workflow",
+    "em_event_response_step",
+    "em_report_instance",
+    "em_notification_task",
+    "em_event_prediction_link",
+    "em_event_evidence_link",
+    "em_event_metric_snapshot",
+    "em_evidence_resource",
+    "em_event_state_transition",
+    "em_event_notification_state",
+    "em_notification_delivery_log",
+    "em_event_handling_log"
+  ],
+  "auditTables": [
+    "em_prediction_execution_gate",
+    "em_event_evaluation_run",
+    "em_audit_log"
+  ],
+  "isolatedDatabasePattern": "^shm_em_reproduce_phase1a1_[A-Za-z0-9_]+$",
+  "baselineDatabase": "shm_em_reproduce_phase1a1_base",
+  "backendTests": {
+    "skipped": true
+  },
+  "pitPreTests": {
+    "skipped": true
+  },
+  "artifacts": [
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/F01/api-response.json",
+      "bytes": 4621,
+      "sha256": "b4a4d93ef752e065825e50ec96729cc46439059c8d94dc1e9221f61bbcd4d3ca"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/F01/case-summary.json",
+      "bytes": 1526,
+      "sha256": "b4b5da7bc29ca11f83d8636198545648dc9100ca529aabb4e7fa79926cddb4b6"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/F01/gate.json",
+      "bytes": 3913,
+      "sha256": "e473f309051a3ecc02dd0be0595a6d3a186ff2ad7403deb54754aed5b0f9f5a1"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/F01/mutation.sql",
+      "bytes": 86,
+      "sha256": "a72155962fd3f5b738bce6d68cea5efcd779bfb1e70f63dac8384d71b30a330e"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/F01/state-after.json",
+      "bytes": 7311,
+      "sha256": "f86d9f0099f6f57cda3792e74fb42c26f5efc665d73a822740776305a5ae477a"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/F01/state-before.json",
+      "bytes": 7311,
+      "sha256": "f206d96be409f3fb6eb4a4c074d612efb3dee9b9895dbf4dae9fe71a2714729a"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/F02/api-response.json",
+      "bytes": 4244,
+      "sha256": "e7d684737c6bd3b3da73149edd65f9d3ced22539e43813d075e56c7da3713da6"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/F02/case-summary.json",
+      "bytes": 1277,
+      "sha256": "c9968b97055236bd2989048c461556b8ea50d349d2578ebd1c116395b6758f6c"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/F02/gate.json",
+      "bytes": 3661,
+      "sha256": "8be50c85259b068e22ddf1c39a9126bebeed057a925b0dea95d57888d4f85b42"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/F02/mutation.sql",
+      "bytes": 75,
+      "sha256": "40d92e1178e9140e1b792805372fda9ed9eb0c1e46710e2fa225bfc022a4d64c"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/F02/state-after.json",
+      "bytes": 7311,
+      "sha256": "7b35c6b59c959a4e86ae229b5a426ecc71bc3f9b7341d33640289acf089f9291"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/F02/state-before.json",
+      "bytes": 7311,
+      "sha256": "b505961eaaf3a431013f0e4a74ecb84c82ccef6dea0d6fe608a9fc2bcc828822"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/F03/api-response.json",
+      "bytes": 4238,
+      "sha256": "b952e105fff3d811edc6260e9b24f9101a1460f2ab0c1073b699202fb2ffc43c"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/F03/case-summary.json",
+      "bytes": 1340,
+      "sha256": "69d405fd4b3f46c640553270b659825e1f1216c9fa45510bebde5293ec1c2a54"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/F03/gate.json",
+      "bytes": 3654,
+      "sha256": "9224344939de689424f0b095c15ab04d798868177d8feedb87fdb4ad0f7bc612"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/F03/mutation.sql",
+      "bytes": 123,
+      "sha256": "3ce22d279920d9c9d65f3c55cd429975a5de5e7d505f48bd530687fc826c0ead"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/F03/state-after.json",
+      "bytes": 7311,
+      "sha256": "424373a4192497ba6959ae216c35faf7fda0d552a1c0c269c45b8a801905e020"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/F03/state-before.json",
+      "bytes": 7311,
+      "sha256": "b7e834491b34c8d0ceac813ea9dde218f12854de64cb7e19f2ac9c07f71100b2"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/F04/api-response.json",
+      "bytes": 9505,
+      "sha256": "efcdd3856823a840ab4e9950a4de638abf438e6c0b161f39a7a0a3acf571cf9e"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/F04/case-summary.json",
+      "bytes": 1646,
+      "sha256": "baed649f70938211641a55640044fd6f8c4d91f63138679de0107eb6a8706ed3"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/F04/gate.json",
+      "bytes": 8591,
+      "sha256": "55aa17f5730b20c174d3c6aa78f768885db3807c7c3f6f52181998f20a35b424"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/F04/mutation.sql",
+      "bytes": 110,
+      "sha256": "9971b6db177fdabb2b62aeb1be29a68b45d619863c3838cd0ea8c1f5b8b0b198"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/F04/state-after.json",
+      "bytes": 7311,
+      "sha256": "a2d5647f15239c8b6555285c97d4b227c77a513fc6bac826a0c73bf61f42b4de"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/F04/state-before.json",
+      "bytes": 7311,
+      "sha256": "ee2552c064170419e44f49167b50900048f486671398e99ad90918155c6c26fc"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/F05/api-response.json",
+      "bytes": 4143,
+      "sha256": "457255ecae7edb77f64ee7b0c3ede153ab71d83bd6c69f4e733a978bf4483c9b"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/F05/case-summary.json",
+      "bytes": 1353,
+      "sha256": "507f82efe1aefa537cfd44b526c5b803d043c754aaa1f18e51e90378137513af"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/F05/gate.json",
+      "bytes": 3583,
+      "sha256": "c48f352566c0a48ed47ccb7ec918e5b60feb3a6740f75dc2294984709f52040e"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/F05/mutation.sql",
+      "bytes": 213,
+      "sha256": "bf96bad235b988c308614ea32ab6a4b735ce9e009d1a3d3e7cf7c82b41dfd6e6"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/F05/state-after.json",
+      "bytes": 7311,
+      "sha256": "b49aba37e344e4b4780473008c6479a12f6fd485d73fb41b6326f6976aa683f2"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/F05/state-before.json",
+      "bytes": 7311,
+      "sha256": "83eee4fd535f6d4ac17d95016238dda88ea3920bc116b27636f4507067d37690"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/F06/api-response.json",
+      "bytes": 4247,
+      "sha256": "f10706128e47f09512f46b91ec1562bed207aa6cf76c52583f38cb578689c0fd"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/F06/case-summary.json",
+      "bytes": 1344,
+      "sha256": "caf6ba30622561ac0d34cf29ba8bd7636310518356e0a93c150d5019a08cb689"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/F06/gate.json",
+      "bytes": 3659,
+      "sha256": "3d2eac115fc52e3f98bee1c9d0b0ef996a3688c5f419a89a97635a6411ebe0e3"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/F06/mutation.sql",
+      "bytes": 127,
+      "sha256": "a067751b446917f220aab00965f1999389dc14ffe511a1ae17bf259fef086b7f"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/F06/state-after.json",
+      "bytes": 7311,
+      "sha256": "69503979c8bb5aa2b7212daf461878a6bfe09a3a029a3d04472f6dd0c2f39cea"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/F06/state-before.json",
+      "bytes": 7311,
+      "sha256": "b7db5b8088b1203ffefb4d894a42fe69d433ca7098a70e8c633fa85cc791ec3a"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/F07/api-response.json",
+      "bytes": 4510,
+      "sha256": "ad4221a96ed21afdb4144c22155c1c92ba490d68e99c2b55af7552b05c36ce10"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/F07/case-summary.json",
+      "bytes": 1560,
+      "sha256": "be70c9c98889437e8dcecfc3de156035b0c62f9beb617bcaa7a50c74327f6f6f"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/F07/gate.json",
+      "bytes": 3799,
+      "sha256": "fd287c6557f8645bab1ef52bd5dff121a6e936f120598ae80744c5427946b2ea"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/F07/mutation.sql",
+      "bytes": 102,
+      "sha256": "9b891dd3d2ec437ee52b884060e0e80295c6473591e16f99ead76b3bd8964371"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/F07/state-after.json",
+      "bytes": 7311,
+      "sha256": "c9bef4e42755f9a2ff0fd0e55ad44f6dc7e8a620a40f4393c203b2dda65304e1"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/F07/state-before.json",
+      "bytes": 7311,
+      "sha256": "4109d2c0cb7269f52f0568811c296649d311f55b9b474b6833c3aa517d9d1cb7"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/F08/api-response.json",
+      "bytes": 4235,
+      "sha256": "27476e3c9df54de74f68a77bcf13db0b605de0e5ba7a8b52a7dd030ca6dfc7e6"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/F08/case-summary.json",
+      "bytes": 1270,
+      "sha256": "91777c85aa09cb6e769807bad7c028e40863036a3db55fc60201ed1a1e915873"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/F08/gate.json",
+      "bytes": 3653,
+      "sha256": "3186456807a02ef4c3ecad4fa63fc1123b426ef1609fafe87510a4f69a0322a8"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/F08/mutation.sql",
+      "bytes": 70,
+      "sha256": "0c80a7af570ce8e6ab837034f1275fda6c1761da726b5085f45adaef5fb77f80"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/F08/state-after.json",
+      "bytes": 7310,
+      "sha256": "20192126619691d3fb738dc56f546bd65e25613b6798261a4caa988be7e53181"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/F08/state-before.json",
+      "bytes": 7311,
+      "sha256": "218b964430515d6c1b4a536c61d3b183df607b4c664d4b9e738631122f733f1d"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/F09/api-response.json",
+      "bytes": 4366,
+      "sha256": "60c43a39ca38edc7f587f8ec0b2dd1b27df997b6dbaf4b0eee43e3f97c36aff2"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/F09/case-summary.json",
+      "bytes": 1614,
+      "sha256": "89e58efa6494243c4df6c3f4a5a7940ac9cd7b5df0290ed0f698d07645c04482"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/F09/gate.json",
+      "bytes": 3722,
+      "sha256": "912908ba1870099c149f5c7b1ab32f90b21f3a0b27ccdb026e5874e1c5fb3df6"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/F09/mutation.sql",
+      "bytes": 259,
+      "sha256": "d53808a6000e383f8af84c72dffe1f23d9316540e9252c293800a396f5a08d4a"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/F09/state-after.json",
+      "bytes": 7311,
+      "sha256": "81b895b1530a2c464f14d9c1d75755ad795e32cc85a6c7fb1367c38489ba8ce5"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/F09/state-before.json",
+      "bytes": 7311,
+      "sha256": "9bcc1ad5696b33510fdcf0f17284aa6166375f5cf5ea0f873641f42dbc79080d"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/F10/api-response.json",
+      "bytes": 4494,
+      "sha256": "188eacb806bc91115d2a21a1c0be9878cb18b0b41b1b720358df600c8088b03a"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/F10/case-summary.json",
+      "bytes": 1558,
+      "sha256": "d91b874a13164090f0089aac0fead5d7cbd82a45519d256609d7299bdbe0a631"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/F10/gate.json",
+      "bytes": 3791,
+      "sha256": "0a24728c337ad3dde050d3187a1a9020a1fe146744b67afb77573c930a3bbff7"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/F10/mutation.sql",
+      "bytes": 106,
+      "sha256": "3aa97cb499eaf86f089c174bc7a813c7997e74eb7caef0a0d75b51f206e95f72"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/F10/state-after.json",
+      "bytes": 7311,
+      "sha256": "4328f7a17bff7bc4d6e99668fc35ccdfe28330c596ea5dce77675c171455fdc1"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/F10/state-before.json",
+      "bytes": 7311,
+      "sha256": "ebcd572b33afedcc4f1e4e7c43c023bfb3e54d63c46963bb26c1f60cca13d4b2"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/F11/api-response.json",
+      "bytes": 4188,
+      "sha256": "da948f2a48e33a16ef344282100da36261756d86538bb6686c5f31aec24bff49"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/F11/case-summary.json",
+      "bytes": 1216,
+      "sha256": "908cd5963674689fea5ca3afc592bff04134602d1046c8ca1ca8682e62f95028"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/F11/gate.json",
+      "bytes": 3629,
+      "sha256": "29ba2b807719b67c4cbc5461f0c4682f0771b364a34594d5c3ab03fcf40b104b"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/F11/mutation.sql",
+      "bytes": 59,
+      "sha256": "7ac70f046e02cc941a706a9ed33cb2dfda361d62bfa064fea900a076223c55e1"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/F11/state-after.json",
+      "bytes": 7310,
+      "sha256": "af03cf09096c98f1f9769fb9053137e9021e7a3defe39ece04a28368ea2acd72"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/F11/state-before.json",
+      "bytes": 7311,
+      "sha256": "a8a48e9a37841ec09ec1c499e80bf0169d367b83eea0eb6946d6e8f9f1be1fe1"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/F12/api-response.json",
+      "bytes": 14856,
+      "sha256": "39639f4427177537b5ccc337167fa077499926aa3f1461796cc23cf11c4ed566"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/F12/case-summary.json",
+      "bytes": 1582,
+      "sha256": "4d7abb065b90c93aeea19125ec2dab76dbe7d5b21afacccba1465183f77ff08a"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/F12/gate.json",
+      "bytes": 3706,
+      "sha256": "4e59828e98b7ff5fc8a443a839de13eacc253e7a99ab3ce5e4dcd9a7bb6a7a04"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/F12/mutation.sql",
+      "bytes": 190,
+      "sha256": "14f24b455f3fd97b6f06d01824f77bf66630432369ae223710f99aa72de4b339"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/F12/state-after.json",
+      "bytes": 7311,
+      "sha256": "e3b12d2709bd180f8ca5863c4f358b1200964af81c0b42731b3532dcaef25098"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/F12/state-before.json",
+      "bytes": 7311,
+      "sha256": "8d917d930269e1a8c794a274bd947128353ad6a03558e9ff84ec540411b644c2"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/I01/api-response.json",
+      "bytes": 554,
+      "sha256": "b964228316f73bdaa0d86c7ec1216bbec51fb173614d96afc9fa70c09918afaf"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/I01/case-summary.json",
+      "bytes": 1245,
+      "sha256": "bbbf352b11b324ac06842a4f4be8ec2cb8d70c38597269e089dea558e986735a"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/I01/gate.json",
+      "bytes": 83,
+      "sha256": "349fd699064d0b5a52136ffb069c7a8bdb26e2fea740366c257017854cfba996"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/I01/mutation.sql",
+      "bytes": 98,
+      "sha256": "84f9929a7a1b0f63e51b926bc89d25424eaceb5a2fa414e5cfde92ae05dfccc7"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/I01/state-after.json",
+      "bytes": 9751,
+      "sha256": "a76198e2345db4059870c2be97f4c9f0740e6ab9dbddbed730c6abcae39bf133"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/I01/state-before.json",
+      "bytes": 9803,
+      "sha256": "96fcc984c9dac39eafab77d680bd9a1b1e395a9a6377b656b0fdeb8fbd0137e1"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/I02/api-response.json",
+      "bytes": 1819,
+      "sha256": "4d1497f987e9fc3b079cefc1d78ed366db9f5c4580f4cda8019948c57cbeeb4d"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/I02/case-summary.json",
+      "bytes": 1255,
+      "sha256": "be87f2c2c0dab3176c4cf2bb6ed81fa16a3e4b72adb4bb642100e617214cdac3"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/I02/gate.json",
+      "bytes": 83,
+      "sha256": "349fd699064d0b5a52136ffb069c7a8bdb26e2fea740366c257017854cfba996"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/I02/mutation.sql",
+      "bytes": 130,
+      "sha256": "f7695420a9444f976199381c19c79751e4d4549985d7b667cb0812030937637c"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/I02/state-after.json",
+      "bytes": 7410,
+      "sha256": "d15ffcd1008968445a32e8c75dc7ea33e9b89d67841fe8e399a70fbad767e4b3"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/I02/state-before.json",
+      "bytes": 9803,
+      "sha256": "24240b56b29ed359a1aeb36642afbb458b21356f2834c53be21229e73026bf8f"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/P00/api-response.json",
+      "bytes": 35691,
+      "sha256": "3bef73fe475cb737460a63462570f9918605875bd34ee99b03524b83db2bb0c1"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/P00/case-summary.json",
+      "bytes": 1148,
+      "sha256": "846ac04978e4c3640c7cd519db6edfc07a2747cc3b0c0347d8fd207553554798"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/P00/gate.json",
+      "bytes": 3583,
+      "sha256": "f2c12c8e329d1164255f4143b0448e92d7c5955ff3d2471e2aa8e9992a592078"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/P00/mutation.sql",
+      "bytes": 40,
+      "sha256": "1e39aea44bce1ce06b250b2e66b8482c8d5476e04029eb22ef148e0e54e27b62"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/P00/state-after.json",
+      "bytes": 7311,
+      "sha256": "93466f1b523ead4e6ecd14c12f532cdf34a6e49691fdf8c068ed0c7198cc8bec"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/cases/P00/state-before.json",
+      "bytes": 7311,
+      "sha256": "3d63dd498f41860217df6aed652752aac3ffdd5bc8cc8ebb02e82e6a678c9b9d"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/failure-matrix-v2.csv",
+      "bytes": 8208,
+      "sha256": "d1158ad2811f2226d9d72dd5b1e57d5da0ee33bb464634622b9a6d34a201d604"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/failure-matrix-v2.json",
+      "bytes": 22092,
+      "sha256": "b6e92d18562444194f65ea05d09896e958ebfbbc9997abafe6e863663d6bdcf6"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/failure-matrix-v2.md",
+      "bytes": 2109,
+      "sha256": "4b46c8a55847e0a893f06ea5de02876dd047b496dd9e5d03f18e7c8eca672f06"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/production-core-diff.json",
+      "bytes": 2078,
+      "sha256": "90700daef5deb0fed9ecb13e91af825923c12429c0c42bcb43ba5619fba9adf3"
+    }
+  ]
+}

@@ -88,3 +88,24 @@ exposes both representations; it does not depend on a private migration file.
 Run `03_SHM_EM_public_validation.sql` after initialization. The complete
 restricted case uses the same schema but supplies external data, calibration,
 and validation SQL as described in `sql/shm_em_database/README.md`.
+
+## Storage Boundary
+
+The logical observation contract is the project/station/instrument/metric
+registry and its engineering-value provenance. The public release implements
+that contract with approved, allowlisted MySQL tables resolved through
+`em_observation_table_registry`; it does not accept arbitrary physical table
+names. MyBatis mappings, JDBC/MySQL connection behavior, SQL views, JSON
+functions, and the current schema are implementation-specific.
+
+Integrating TimescaleDB, InfluxDB, or another time-series store would require a
+new repository/adapter that returns the same logical observation and
+`MetricSeriesPoint` semantics, plus conformance tests for ordering, time zones,
+units, conversion provenance, and rule inputs. No alternative database adapter
+is implemented or experimentally validated in this release. See
+`docs/revision/STORAGE_ADAPTER_BOUNDARY.md`.
+
+The execution Gate currently inspects at most 50,000 prediction-display rows.
+That is an application implementation boundary, not a measured MySQL capacity
+limit. The validated reference contains 4,960 rows; a 49,600-row synthetic
+workload was used only as functional stress evidence.

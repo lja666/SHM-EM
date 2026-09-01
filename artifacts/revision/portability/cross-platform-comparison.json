@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "shm-em-phase2c-cross-platform-comparison-v1",
+  "windowsBaseline": {
+    "finalCoreFreezeV3": "eaa7d85a0b4921ab2f6e54234cff09aee6a30c8f",
+    "source": "public dataset manifest and Phase 2B model-config summary"
+  },
+  "linuxDocker": {
+    "source": "artifacts/revision/portability/linux-reference-reproduction.json",
+    "executionEnvironment": "Docker Compose Linux containers"
+  },
+  "hashes": {
+    "input": {
+      "windowsExpected": "d48674617d31b292e2f299af2f53ee8ae225b6db1df27911ee8f5073fdb21811",
+      "linuxActual": "d48674617d31b292e2f299af2f53ee8ae225b6db1df27911ee8f5073fdb21811"
+    },
+    "normalizedOutput": {
+      "windowsExpected": "e1d1a5a739fcc7637fc707757c3dace02d6a9e13c2cc0776910f850e2fa29475",
+      "linuxActual": "828a440e5cc9429d05b16980ad2c3381cf0d6bb45f606ff9a72c02053c443aac"
+    }
+  },
+  "stateHashComparison": {
+    "status": "NOT_COMPARABLE_BY_DESIGN",
+    "reason": "Project Future State stateHash includes batch identity; cross-environment batch identifiers differ. Logical risks and eligibility are compared instead."
+  },
+  "checks": {
+    "modelContractHashes": true,
+    "modelCount": true,
+    "targetCount": true,
+    "predictionSteps": true,
+    "resultCount": true,
+    "inputHashExact": true,
+    "normalizedOutputHashExact": false,
+    "gateLogicalState": true,
+    "futureStateLogicalState": true,
+    "evaluateSemantics": true,
+    "executeProvenanceSemantics": true
+  },
+  "exactPredictionReproduction": false,
+  "pass": false,
+  "toleranceApplied": false
+}

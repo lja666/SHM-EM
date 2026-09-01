@@ -1,0 +1,235 @@
+{
+  "schemaVersion": "shm-em-phase2c-linux-reference-reproduction-v1",
+  "capturedAtUtc": "2026-09-01T03:01:53.385792+00:00",
+  "executionEnvironment": "Docker Compose Linux containers",
+  "database": "shm_em_reproduce_phase2c",
+  "projectCode": "SHM_EM_PUBLIC_SAMPLE",
+  "batchId": 5,
+  "batchCode": "ROLLING_120M_20250101004202_RUN_20260901030023829547",
+  "modelCount": 6,
+  "targetCount": 124,
+  "predictionSteps": 40,
+  "resultCount": 4960,
+  "predictionInputHash": "d48674617d31b292e2f299af2f53ee8ae225b6db1df27911ee8f5073fdb21811",
+  "expectedPredictionInputHash": "d48674617d31b292e2f299af2f53ee8ae225b6db1df27911ee8f5073fdb21811",
+  "predictionOutputHash": "828a440e5cc9429d05b16980ad2c3381cf0d6bb45f606ff9a72c02053c443aac",
+  "expectedPredictionOutputHash": "e1d1a5a739fcc7637fc707757c3dace02d6a9e13c2cc0776910f850e2fa29475",
+  "models": [
+    {
+      "modelCode": "Pressure",
+      "artifactHash": "aef1d20d99b94607b22ded3c37c2a75300c2441db50b9fa005018fb163e1a31c",
+      "preprocessorHash": "3a0db327bd99be620380b4fb4a280f734325bd4767788bb5d8d7242980fe7183",
+      "inferenceScriptHash": "a087cbb6ce3ae205bbfcb561d636579508b864f495cc95de4d42dae165c0977b",
+      "inputSchemaHash": "5c2f6f0f2351b15675fc223b36043729b1e7f8ab0bd08caa891593672daa65f1",
+      "runtimeManifestHash": "302a869bca69d40846cab5fad8d681f176220058e724b3699b4c74fbc3e09ed0",
+      "requiredHistoryRows": 13
+    },
+    {
+      "modelCode": "settlement",
+      "artifactHash": "3c18be8ae8fcdb1f8c740e8d0bf1c3e8775a5c0d1d11994d4360be1213c7ad40",
+      "preprocessorHash": "78b070dd1fbd6006b3254b60fb328a36f7748a401baca51d114586f5f9cc3e10",
+      "inferenceScriptHash": "3d347f2da9230937e664a98cfd5386035469bc0bd57002a8032f1fd64a61c0f2",
+      "inputSchemaHash": "5c2f6f0f2351b15675fc223b36043729b1e7f8ab0bd08caa891593672daa65f1",
+      "runtimeManifestHash": "302a869bca69d40846cab5fad8d681f176220058e724b3699b4c74fbc3e09ed0",
+      "requiredHistoryRows": 12
+    },
+    {
+      "modelCode": "Strain",
+      "artifactHash": "687acb1a44f79f9566e2e677f33478addd66c83a9e300f32666674f7d2cdc694",
+      "preprocessorHash": "6660a92d879f1774bae92619392f95219927608584c6f3c72e6ce1f7c77b71df",
+      "inferenceScriptHash": "b41d0e55ef58d04bb6a90ce224a55b5180c2794f1debd18a863ba4f1309cd8fd",
+      "inputSchemaHash": "5c2f6f0f2351b15675fc223b36043729b1e7f8ab0bd08caa891593672daa65f1",
+      "runtimeManifestHash": "302a869bca69d40846cab5fad8d681f176220058e724b3699b4c74fbc3e09ed0",
+      "requiredHistoryRows": 13
+    },
+    {
+      "modelCode": "water",
+      "artifactHash": "f3d3bb389db4efeb59a76cf6d6421b1ac1f72749779eb00404a1ea154cc1efee",
+      "preprocessorHash": "c28aa693d73085d9ff5996fc8e0b5e4011f232c5d81b1b7acec1014912473256",
+      "inferenceScriptHash": "d4f30c8e0c57dbeb37987249ed45657c60e5d50b5eda8b587cf8e266d95a72be",
+      "inputSchemaHash": "5c2f6f0f2351b15675fc223b36043729b1e7f8ab0bd08caa891593672daa65f1",
+      "runtimeManifestHash": "302a869bca69d40846cab5fad8d681f176220058e724b3699b4c74fbc3e09ed0",
+      "requiredHistoryRows": 13
+    },
+    {
+      "modelCode": "XD",
+      "artifactHash": "6a1b376e0390e5d0470ff7ee7bc54032565f42b2768ede36c5b931546b716cd9",
+      "preprocessorHash": "ac01c13899e0f647758cb65fd1ba9a04e3560569a66fa2c82f0d2a4ec394a54b",
+      "inferenceScriptHash": "3c4c4fd5724cb4de4c1ee6cc7e2ce64364837569877648a29c35b67d7aae10d7",
+      "inputSchemaHash": "5c2f6f0f2351b15675fc223b36043729b1e7f8ab0bd08caa891593672daa65f1",
+      "runtimeManifestHash": "302a869bca69d40846cab5fad8d681f176220058e724b3699b4c74fbc3e09ed0",
+      "requiredHistoryRows": 12
+    },
+    {
+      "modelCode": "YD",
+      "artifactHash": "ad586b1219bc7399ce486a7196216017a563b9c5a4f5f4be6d4eb3e0d1ccf543",
+      "preprocessorHash": "49020979b1cd086fa6ed093c68ea496063327b6c37ccb8f42305635ac914eff1",
+      "inferenceScriptHash": "96afa649deb323be7a4962312ff0846616315d03f43357a37a4222d81a8327e3",
+      "inputSchemaHash": "5c2f6f0f2351b15675fc223b36043729b1e7f8ab0bd08caa891593672daa65f1",
+      "runtimeManifestHash": "302a869bca69d40846cab5fad8d681f176220058e724b3699b4c74fbc3e09ed0",
+      "requiredHistoryRows": 16
+    }
+  ],
+  "gate": {
+    "resultIntegrityValid": true,
+    "executionEligible": true,
+    "actualPointCount": 4960,
+    "expectedPointCount": 4960,
+    "persistedRunHashCount": 6,
+    "gateHash": "889e94ae55a53046985d8e44adc9039437ef898c979ac033324f65a265f1491c"
+  },
+  "futureState": {
+    "stateHash": "ed92d30cb32bb62355b4da8fdf447269dc23720eebfcba28885fbc35fa627c78",
+    "aggregationPolicyHash": "e06ff4a2fe14c764a601bf315b64fff2a4ce433a9930ed4b4d6c1a5c934eda62",
+    "observedRisk": null,
+    "forecastRisk": null
+  },
+  "evaluate": {
+    "eventCount": 1,
+    "formalStateBefore": {
+      "events": 0,
+      "notifications": 0,
+      "responses": 0,
+      "reports": 0,
+      "links": 0
+    },
+    "formalStateAfter": {
+      "events": 0,
+      "notifications": 0,
+      "responses": 0,
+      "reports": 0,
+      "links": 0
+    }
+  },
+  "execute": {
+    "eventId": 21,
+    "eventCode": "FEVT-4-f097c24e2375f5d0f4fa",
+    "predictionGateId": 1,
+    "predictionGateMode": "REPRODUCTION",
+    "formalStateAfter": {
+      "events": 1,
+      "notifications": 0,
+      "responses": 1,
+      "reports": 1,
+      "links": 1
+    },
+    "predictionLinkCount": 1,
+    "responseWorkflowCount": 1,
+    "responseStepCount": 4,
+    "reportCount": 1,
+    "notificationCount": 0
+  },
+  "composeServices": [
+    {
+      "Command": "\"java -jar /app/shm-…\"",
+      "CreatedAt": "2026-09-01 10:59:57 +0800 CST",
+      "ExitCode": 0,
+      "Health": "healthy",
+      "ID": "fcbf0f19dc39",
+      "Image": "shm-em-reproduction-backend",
+      "Labels": "com.docker.compose.depends_on=pitpre:service_completed_successfully:false,mysql:service_healthy:false,com.docker.compose.image=sha256:bd87ff79899f0fa2efda329a3f22bd4d6ac953c780b6422705bf1701c101b825,com.docker.compose.oneoff=False,com.docker.compose.project=shm-em-reproduction,com.docker.compose.project.config_files=D:\\SpringBoot_Mybatis\\SHM-PIT\\SHM_EM_SOFTX_REVISION\\compose.yaml,desktop.docker.io/ports.scheme=v2,com.docker.compose.project.working_dir=D:\\SpringBoot_Mybatis\\SHM-PIT\\SHM_EM_SOFTX_REVISION,com.docker.compose.service=backend,com.docker.compose.version=5.1.3,desktop.docker.io/ports/5101/tcp=127.0.0.1:5111,org.opencontainers.image.version=22.04,com.docker.compose.config-hash=4ecbbebc7b13141ff61bdae31959abdc69e1aae4d2b36d2d09bd3f2b62188d7f,com.docker.compose.container-number=1",
+      "LocalVolumes": "0",
+      "Mounts": "",
+      "Name": "shm-em-reproduction-backend-1",
+      "Names": "shm-em-reproduction-backend-1",
+      "Networks": "shm-em-reproduction_shm-em",
+      "Ports": "127.0.0.1:5111->5101/tcp",
+      "Project": "shm-em-reproduction",
+      "Publishers": [
+        {
+          "URL": "127.0.0.1",
+          "TargetPort": 5101,
+          "PublishedPort": 5111,
+          "Protocol": "tcp"
+        }
+      ],
+      "RunningFor": "About a minute ago",
+      "Service": "backend",
+      "Size": "0B",
+      "State": "running",
+      "Status": "Up About a minute (healthy)"
+    },
+    {
+      "Command": "\"/docker-entrypoint.…\"",
+      "CreatedAt": "2026-09-01 10:59:58 +0800 CST",
+      "ExitCode": 0,
+      "Health": "healthy",
+      "ID": "3d896d7208c3",
+      "Image": "shm-em-reproduction-frontend",
+      "Labels": "com.docker.compose.project.working_dir=D:\\SpringBoot_Mybatis\\SHM-PIT\\SHM_EM_SOFTX_REVISION,com.docker.compose.service=frontend,maintainer=NGINX Docker Maintainers <docker-maint@nginx.com>,com.docker.compose.config-hash=e3fc56f13c61d181f3a51b35bc99581d688325a652527ea525f05f7084b5105b,com.docker.compose.container-number=1,com.docker.compose.depends_on=backend:service_healthy:false,com.docker.compose.version=5.1.3,desktop.docker.io/ports.scheme=v2,desktop.docker.io/ports/8080/tcp=127.0.0.1:5176,com.docker.compose.image=sha256:5c8564d632f235aa55f0ee852d67edde380bfc9902113b901c771eb2d3054082,com.docker.compose.oneoff=False,com.docker.compose.project=shm-em-reproduction,com.docker.compose.project.config_files=D:\\SpringBoot_Mybatis\\SHM-PIT\\SHM_EM_SOFTX_REVISION\\compose.yaml",
+      "LocalVolumes": "0",
+      "Mounts": "",
+      "Name": "shm-em-reproduction-frontend-1",
+      "Names": "shm-em-reproduction-frontend-1",
+      "Networks": "shm-em-reproduction_shm-em",
+      "Ports": "127.0.0.1:5176->8080/tcp",
+      "Project": "shm-em-reproduction",
+      "Publishers": [
+        {
+          "URL": "127.0.0.1",
+          "TargetPort": 8080,
+          "PublishedPort": 5176,
+          "Protocol": "tcp"
+        }
+      ],
+      "RunningFor": "About a minute ago",
+      "Service": "frontend",
+      "Size": "0B",
+      "State": "running",
+      "Status": "Up About a minute (healthy)"
+    },
+    {
+      "Command": "\"docker-entrypoint.s…\"",
+      "CreatedAt": "2026-09-01 10:59:57 +0800 CST",
+      "ExitCode": 0,
+      "Health": "healthy",
+      "ID": "ef88886d0b36",
+      "Image": "docker.m.daocloud.io/library/mysql:8.4",
+      "Labels": "desktop.docker.io/binds/2/Source=D:\\SpringBoot_Mybatis\\SHM-PIT\\SHM_EM_SOFTX_REVISION\\sql\\shm_em_database\\00_SHM_EM_complete_schema.sql,com.docker.compose.oneoff=False,com.docker.compose.version=5.1.3,desktop.docker.io/binds/4/Source=D:\\SpringBoot_Mybatis\\SHM-PIT\\SHM_EM_SOFTX_REVISION\\sql\\shm_em_database\\02_SHM_EM_public_sample.sql,desktop.docker.io/binds/5/Source=D:\\SpringBoot_Mybatis\\SHM-PIT\\SHM_EM_SOFTX_REVISION\\sql\\shm_em_database\\03_SHM_EM_public_validation.sql,desktop.docker.io/ports.scheme=v2,com.docker.compose.config-hash=5365d79912b161a511ecfd58953a4e3f34a25ffd14fc366f2da539d3cbf593d8,com.docker.compose.project.config_files=D:\\SpringBoot_Mybatis\\SHM-PIT\\SHM_EM_SOFTX_REVISION\\compose.yaml,desktop.docker.io/binds/1/SourceKind=hostFile,desktop.docker.io/binds/2/SourceKind=hostFile,desktop.docker.io/binds/4/Target=/opt/shm-em/sql/02_SHM_EM_public_sample.sql,desktop.docker.io/binds/5/SourceKind=hostFile,desktop.docker.io/binds/5/Target=/opt/shm-em/sql/03_SHM_EM_public_validation.sql,desktop.docker.io/binds/1/Target=/docker-entrypoint-initdb.d/10-shm-em-init.sql,com.docker.compose.container-number=1,com.docker.compose.depends_on=,com.docker.compose.image=sha256:b3b90af2a6552ae30c266fdb7d5dd55f3afb72404bb78d37fe8a23eb857fd3fb,com.docker.compose.project=shm-em-reproduction,com.docker.compose.project.working_dir=D:\\SpringBoot_Mybatis\\SHM-PIT\\SHM_EM_SOFTX_REVISION,com.docker.compose.service=mysql,desktop.docker.io/binds/3/SourceKind=hostFile,desktop.docker.io/binds/1/Source=D:\\SpringBoot_Mybatis\\SHM-PIT\\SHM_EM_SOFTX_REVISION\\scripts\\docker-init-mysql.sql,desktop.docker.io/binds/2/Target=/opt/shm-em/sql/00_SHM_EM_complete_schema.sql,desktop.docker.io/binds/3/Source=D:\\SpringBoot_Mybatis\\SHM-PIT\\SHM_EM_SOFTX_REVISION\\sql\\shm_em_database\\01_SHM_EM_conversion_operators.sql,desktop.docker.io/binds/3/Target=/opt/shm-em/sql/01_SHM_EM_conversion_operators.sql,desktop.docker.io/binds/4/SourceKind=hostFile",
+      "LocalVolumes": "1",
+      "Mounts": "/run/desktop/m…,/run/desktop/m…,shm-em-reprodu…,/run/desktop/m…,/run/desktop/m…,/run/desktop/m…",
+      "Name": "shm-em-reproduction-mysql-1",
+      "Names": "shm-em-reproduction-mysql-1",
+      "Networks": "shm-em-reproduction_shm-em",
+      "Ports": "3306/tcp, 33060/tcp",
+      "Project": "shm-em-reproduction",
+      "Publishers": [
+        {
+          "URL": "",
+          "TargetPort": 3306,
+          "PublishedPort": 0,
+          "Protocol": "tcp"
+        },
+        {
+          "URL": "",
+          "TargetPort": 33060,
+          "PublishedPort": 0,
+          "Protocol": "tcp"
+        }
+      ],
+      "RunningFor": "About a minute ago",
+      "Service": "mysql",
+      "Size": "0B",
+      "State": "running",
+      "Status": "Up About a minute (healthy)"
+    }
+  ],
+  "checks": {
+    "projectApi": true,
+    "modelSet": true,
+    "resultCompleteness": true,
+    "engineeringConversion": true,
+    "predictionInputHash": true,
+    "predictionOutputHash": false,
+    "persistedIntegrity": true,
+    "replayGate": true,
+    "futureState": true,
+    "evaluateCandidate": true,
+    "evaluateFormalSideEffectFree": true,
+    "executeFormalEvent": true,
+    "executeGate": true,
+    "responseEvidence": true,
+    "eventTrace": true
+  },
+  "pass": false
+}

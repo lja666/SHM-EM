@@ -1,0 +1,322 @@
+{
+  "schemaVersion": "shm-em-phase2c-cross-platform-numeric-difference-v1",
+  "capturedAtUtc": "2026-09-01T03:12:34.706204+00:00",
+  "comparisonBoundary": "Persisted DECIMAL prediction fields after model inference and engineering conversion",
+  "windowsBaseline": {
+    "databaseAlias": "shm_em_reproduce_benchmark_reference",
+    "batchId": 40,
+    "outputHash": "e1d1a5a739fcc7637fc707757c3dace02d6a9e13c2cc0776910f850e2fa29475"
+  },
+  "linuxDocker": {
+    "batchId": 5,
+    "outputHash": "828a440e5cc9429d05b16980ad2c3381cf0d6bb45f606ff9a72c02053c443aac"
+  },
+  "rowCoverage": {
+    "windows": 4960,
+    "linux": 4960,
+    "matched": 4960,
+    "missingOnLinux": 0,
+    "unexpectedOnLinux": 0
+  },
+  "fieldDifferences": {
+    "raw_predicted_value": {
+      "differingRows": 4104,
+      "maxAbsoluteDifference": "0.00122071",
+      "maxRelativeDifference": "0.3918730158730158730158730159"
+    },
+    "predicted_value": {
+      "differingRows": 4104,
+      "maxAbsoluteDifference": "0.00122071",
+      "maxRelativeDifference": "0.3918730158730158730158730159"
+    },
+    "engineering_value": {
+      "differingRows": 4114,
+      "maxAbsoluteDifference": "0.00285349",
+      "maxRelativeDifference": "0.3918730158730158730158730159"
+    },
+    "lower_bound": {
+      "differingRows": 0,
+      "maxAbsoluteDifference": "0",
+      "maxRelativeDifference": "0"
+    },
+    "upper_bound": {
+      "differingRows": 0,
+      "maxAbsoluteDifference": "0",
+      "maxRelativeDifference": "0"
+    },
+    "engineering_lower_bound": {
+      "differingRows": 0,
+      "maxAbsoluteDifference": "0",
+      "maxRelativeDifference": "0"
+    },
+    "engineering_upper_bound": {
+      "differingRows": 0,
+      "maxAbsoluteDifference": "0",
+      "maxRelativeDifference": "0"
+    },
+    "confidence": {
+      "differingRows": 0,
+      "maxAbsoluteDifference": "0",
+      "maxRelativeDifference": "0"
+    }
+  },
+  "modelDifferences": {
+    "Pressure": {
+      "differingValues": 1680,
+      "maxAbsoluteDifference": "0.00114107",
+      "maxRelativeDifference": "0.3918730158730158730158730159"
+    },
+    "Strain": {
+      "differingValues": 1497,
+      "maxAbsoluteDifference": "0.00004864",
+      "maxRelativeDifference": "0.00006700949854076242338849669533"
+    },
+    "XD": {
+      "differingValues": 3828,
+      "maxAbsoluteDifference": "0.00285349",
+      "maxRelativeDifference": "0.0005404438706075304463132916914"
+    },
+    "YD": {
+      "differingValues": 4509,
+      "maxAbsoluteDifference": "0.00012075",
+      "maxRelativeDifference": "0.00007644393718449426751821393131"
+    },
+    "settlement": {
+      "differingValues": 601,
+      "maxAbsoluteDifference": "0.00002289",
+      "maxRelativeDifference": "0.000002805288639953503927882674010"
+    },
+    "water": {
+      "differingValues": 207,
+      "maxAbsoluteDifference": "0.00122071",
+      "maxRelativeDifference": "4.421581405050691266852462047E-7"
+    }
+  },
+  "categoricalDifferenceCount": 0,
+  "largestPersistedDifferences": [
+    {
+      "modelCode": "XD",
+      "targetType": "XD",
+      "featureCode": "point5_0.5XD_value",
+      "step": 38,
+      "field": "engineering_value",
+      "windowsValue": "9.21411632",
+      "linuxValue": "9.21126283",
+      "absoluteDifference": "0.00285349",
+      "relativeDifference": "0.0003096867785146432794327910113"
+    },
+    {
+      "modelCode": "XD",
+      "targetType": "XD",
+      "featureCode": "point5_0.5XD_value",
+      "step": 40,
+      "field": "engineering_value",
+      "windowsValue": "9.13732798",
+      "linuxValue": "9.13447571",
+      "absoluteDifference": "0.00285227",
+      "relativeDifference": "0.0003121558081578242745752900073"
+    },
+    {
+      "modelCode": "XD",
+      "targetType": "XD",
+      "featureCode": "point5_0.5XD_value",
+      "step": 37,
+      "field": "engineering_value",
+      "windowsValue": "9.25786298",
+      "linuxValue": "9.25511054",
+      "absoluteDifference": "0.00275244",
+      "relativeDifference": "0.0002973083535526683718535657135"
+    },
+    {
+      "modelCode": "XD",
+      "targetType": "XD",
+      "featureCode": "point5_0.5XD_value",
+      "step": 39,
+      "field": "engineering_value",
+      "windowsValue": "9.17378056",
+      "linuxValue": "9.17118415",
+      "absoluteDifference": "0.00259641",
+      "relativeDifference": "0.0002830250825184333818423055892"
+    },
+    {
+      "modelCode": "XD",
+      "targetType": "XD",
+      "featureCode": "point5_0.5XD_value",
+      "step": 36,
+      "field": "engineering_value",
+      "windowsValue": "9.30411981",
+      "linuxValue": "9.30164400",
+      "absoluteDifference": "0.00247581",
+      "relativeDifference": "0.0002660982500826158213454906058"
+    },
+    {
+      "modelCode": "XD",
+      "targetType": "XD",
+      "featureCode": "point5_0.5XD_value",
+      "step": 35,
+      "field": "engineering_value",
+      "windowsValue": "9.35020821",
+      "linuxValue": "9.34784776",
+      "absoluteDifference": "0.00236045",
+      "relativeDifference": "0.0002524489238085105700549955989"
+    },
+    {
+      "modelCode": "XD",
+      "targetType": "XD",
+      "featureCode": "line2_point1_2.6XD_value",
+      "step": 40,
+      "field": "engineering_value",
+      "windowsValue": "11.04207785",
+      "linuxValue": "11.03979009",
+      "absoluteDifference": "0.00228776",
+      "relativeDifference": "0.0002071856430535852452806244252"
+    },
+    {
+      "modelCode": "XD",
+      "targetType": "XD",
+      "featureCode": "point5_0.5XD_value",
+      "step": 33,
+      "field": "engineering_value",
+      "windowsValue": "9.44247099",
+      "linuxValue": "9.44044668",
+      "absoluteDifference": "0.00202431",
+      "relativeDifference": "0.0002143835021726659284128761724"
+    },
+    {
+      "modelCode": "XD",
+      "targetType": "XD",
+      "featureCode": "line2_point1_2.6XD_value",
+      "step": 38,
+      "field": "engineering_value",
+      "windowsValue": "11.09731707",
+      "linuxValue": "11.09537650",
+      "absoluteDifference": "0.00194057",
+      "relativeDifference": "0.0001748683927618912307062701598"
+    },
+    {
+      "modelCode": "XD",
+      "targetType": "XD",
+      "featureCode": "line2_point1_2.6XD_value",
+      "step": 39,
+      "field": "engineering_value",
+      "windowsValue": "11.06830821",
+      "linuxValue": "11.06638019",
+      "absoluteDifference": "0.00192802",
+      "relativeDifference": "0.0001741928362871275699685272859"
+    },
+    {
+      "modelCode": "XD",
+      "targetType": "XD",
+      "featureCode": "point5_0.5XD_value",
+      "step": 34,
+      "field": "engineering_value",
+      "windowsValue": "9.39635680",
+      "linuxValue": "9.39443337",
+      "absoluteDifference": "0.00192343",
+      "relativeDifference": "0.0002046995490848112536552464674"
+    },
+    {
+      "modelCode": "XD",
+      "targetType": "XD",
+      "featureCode": "line2_point1_2.6XD_value",
+      "step": 36,
+      "field": "engineering_value",
+      "windowsValue": "11.16077333",
+      "linuxValue": "11.15893691",
+      "absoluteDifference": "0.00183642",
+      "relativeDifference": "0.0001645423615103560211808369376"
+    },
+    {
+      "modelCode": "XD",
+      "targetType": "XD",
+      "featureCode": "line2_point1_2.6XD_value",
+      "step": 35,
+      "field": "engineering_value",
+      "windowsValue": "11.19351951",
+      "linuxValue": "11.19188477",
+      "absoluteDifference": "0.00163474",
+      "relativeDifference": "0.0001460434315176353321958876900"
+    },
+    {
+      "modelCode": "XD",
+      "targetType": "XD",
+      "featureCode": "line2_point1_2.6XD_value",
+      "step": 37,
+      "field": "engineering_value",
+      "windowsValue": "11.12784620",
+      "linuxValue": "11.12625927",
+      "absoluteDifference": "0.00158693",
+      "relativeDifference": "0.0001426089084516642582641014575"
+    },
+    {
+      "modelCode": "XD",
+      "targetType": "XD",
+      "featureCode": "line2_point1_2.6XD_value",
+      "step": 33,
+      "field": "engineering_value",
+      "windowsValue": "11.25940902",
+      "linuxValue": "11.25799691",
+      "absoluteDifference": "0.00141211",
+      "relativeDifference": "0.0001254159963006655210754569426"
+    },
+    {
+      "modelCode": "XD",
+      "targetType": "XD",
+      "featureCode": "point5_0.5XD_value",
+      "step": 32,
+      "field": "engineering_value",
+      "windowsValue": "9.48629260",
+      "linuxValue": "9.48495173",
+      "absoluteDifference": "0.00134087",
+      "relativeDifference": "0.0001413481595539230995257304208"
+    },
+    {
+      "modelCode": "XD",
+      "targetType": "XD",
+      "featureCode": "point5_0.5XD_value",
+      "step": 31,
+      "field": "engineering_value",
+      "windowsValue": "9.52562647",
+      "linuxValue": "9.52431579",
+      "absoluteDifference": "0.00131068",
+      "relativeDifference": "0.0001375951496867796034836541307"
+    },
+    {
+      "modelCode": "XD",
+      "targetType": "XD",
+      "featureCode": "point5_0.5XD_value",
+      "step": 30,
+      "field": "engineering_value",
+      "windowsValue": "9.56428613",
+      "linuxValue": "9.56299011",
+      "absoluteDifference": "0.00129602",
+      "relativeDifference": "0.0001355061927658996124157151288"
+    },
+    {
+      "modelCode": "XD",
+      "targetType": "XD",
+      "featureCode": "line2_point1_2.6XD_value",
+      "step": 34,
+      "field": "engineering_value",
+      "windowsValue": "11.22607427",
+      "linuxValue": "11.22483888",
+      "absoluteDifference": "0.00123539",
+      "relativeDifference": "0.0001100464837740646802259219331"
+    },
+    {
+      "modelCode": "XD",
+      "targetType": "XD",
+      "featureCode": "point5_0.5XD_value",
+      "step": 12,
+      "field": "engineering_value",
+      "windowsValue": "9.44076920",
+      "linuxValue": "9.43954788",
+      "absoluteDifference": "0.00122132",
+      "relativeDifference": "0.0001293665774606586081990014119"
+    }
+  ],
+  "exactOutputHash": false,
+  "toleranceApplied": false,
+  "decision": "STOP_EXACT_CROSS_PLATFORM_REPRODUCTION",
+  "interpretation": "Persisted values are rounded to schema precision; pre-persistence floating differences below that precision cannot be reconstructed from the database."
+}

@@ -1,6 +1,6 @@
 # Reviewer Evidence Map
 
-| Item | Topic | Status | Primary evidence | Next action |
+| Reviewer item | Topic | Status | Evidence | Next action |
 |---|---|---|---|---|
 | R1-0 | Overall revision scope | EVIDENCE_COMPLETE | `artifacts/revision/manuscript/MANUSCRIPT_EVIDENCE_BLUEPRINT.md` | Use the evidence-first revision structure. |
 | R1-1 | Reuse/generalization beyond one excavation | EVIDENCE_COMPLETE | `artifacts/revision/benchmarks/route-p/phase1b-regression/PHASE1B_COMPLETION_REPORT.md` | Report the synthetic second configuration as functional reuse evidence, not external validation. |
@@ -13,8 +13,8 @@
 | R1-8 | Point-forecast limitation | LIMITATION_ONLY | `artifacts/revision/manuscript/claim-gap-matrix-final.md` | State that uncertainty quantification is not implemented. |
 | R1-9 | Runtime scalability | EVIDENCE_COMPLETE | `artifacts/revision/manuscript/final-performance-table.md` | Report reference and tenfold stress without linear-scaling language. |
 | R1-10 | MySQL scalability | EVIDENCE_COMPLETE | `artifacts/revision/benchmarks/scaling/scaling-summary.json`<br>`artifacts/revision/manuscript/final-performance-table.md` | Report persistence, integrity, retrieval, and the 50,000-row Gate boundary. |
-| R1-11 | Deployment security | DOCUMENTATION_PENDING | `artifacts/revision/manuscript/claim-gap-matrix-final.md` | Add the deployment-security limitation and recommended reverse-proxy/authentication controls. |
-| R1-12 | Windows-centric reproduction | DOCUMENTATION_PENDING | `artifacts/revision/manuscript/claim-gap-matrix-final.md` | Document the validated Windows path and list Linux portability as unverified. |
+| R1-11 | Deployment security | DOCUMENTATION_COMPLETE | `SECURITY.md`<br>`docs/revision/DEPLOYMENT_LIMITATIONS.md` | Report deployment guidance as documented controls, not implemented production authentication. |
+| R1-12 | Windows-centric reproduction | PARTIALLY_SUPPORTED | `artifacts/revision/portability/cross-platform-comparison.md`<br>`artifacts/revision/portability/portability-limitations.md` | Report that the Linux-container workflow completed logically, while exact normalized-output reproduction and native Ubuntu component validation remain unverified. |
 | R1-13 | Validation/evaluation/execution eligibility figure | MANUSCRIPT_PENDING | `artifacts/revision/manuscript/MANUSCRIPT_EVIDENCE_BLUEPRINT.md` | Redraw the workflow with distinct validation, Evaluate, and Execute boundaries. |
 | R1-14 | Screenshots as scientific evidence | MANUSCRIPT_PENDING | `artifacts/revision/manuscript/MANUSCRIPT_EVIDENCE_BLUEPRINT.md` | Replace screenshot-heavy evidence with tables, algorithm, and provenance trace. |
 | R1-15 | Unsupported impact claims | MANUSCRIPT_PENDING | `artifacts/revision/manuscript/claim-gap-matrix-final.md` | Narrow claims to demonstrated behavior. |
@@ -25,7 +25,7 @@
 | R2-1 | Predictive-SHM difference and empirical comparison | DOCUMENTATION_PENDING | `artifacts/revision/manuscript/final-performance-table.md`<br>`artifacts/revision/manuscript/claim-gap-matrix-final.md` | Add a claim-level comparison; do not invent a cross-system runtime benchmark. |
 | R2-2 | Related-framework comparison table | DOCUMENTATION_PENDING | `artifacts/revision/manuscript/MANUSCRIPT_EVIDENCE_BLUEPRINT.md` | Build the manuscript comparison table from verifiable published capabilities. |
 | R2-3 | Missing/dropped rolling-window data | EVIDENCE_COMPLETE | `docs/revision/DATA_MODEL_CONTRACT_SPEC.md`<br>`artifacts/revision/benchmarks/route-p/failure-regression/failure-matrix-v2.md` | Describe the registered temporal alignment/fill policy for partial gaps, and the fail-closed rejection when a required feature cannot produce a complete input window. |
-| R3-1 | MySQL and data-access abstraction | DOCUMENTATION_PENDING | `artifacts/revision/manuscript/final-performance-table.md`<br>`artifacts/revision/manuscript/claim-gap-matrix-final.md` | Document current MySQL characterization and the bounded adapter seam without claiming an implemented alternative backend. |
-| R3-2 | Security pattern | DOCUMENTATION_PENDING | `artifacts/revision/manuscript/claim-gap-matrix-final.md` | Add deployment boundary and security recommendations. |
+| R3-1 | MySQL and data-access abstraction | DOCUMENTATION_COMPLETE | `docs/revision/STORAGE_ADAPTER_BOUNDARY.md`<br>`docs/DATABASE.md` | Describe the logical registry, approved adapters, and MySQL-specific implementation without claiming another validated backend. |
+| R3-2 | Security pattern | DOCUMENTATION_COMPLETE | `SECURITY.md` | Report the recommended deployment pattern; do not claim an implemented authentication subsystem. |
 | R3-3 | Asynchronous sampling, latency, missing points | EVIDENCE_COMPLETE | `docs/revision/DATA_MODEL_CONTRACT_SPEC.md`<br>`artifacts/revision/benchmarks/route-p/failure-regression/failure-matrix-v2.md` | Explain the canonical temporal alignment policy, signed source-offset/fill diagnostics, required-input rejection, and the separate fail-closed freshness/execution Gate. |
-| R3-4 | Linux/Docker portability | LIMITATION_ONLY | `artifacts/revision/manuscript/claim-gap-matrix-final.md` | State that this release validates native Windows reproduction and does not claim Docker/Linux validation. |
+| R3-4 | Linux/Docker portability | PARTIALLY_SUPPORTED | `artifacts/revision/portability/linux-reference-reproduction.json`<br>`artifacts/revision/portability/cross-platform-comparison.md`<br>`artifacts/revision/portability/cross-platform-numeric-difference.json` | Disclose the exact output-hash mismatch and retain Windows as the validated exact-reproduction environment. |

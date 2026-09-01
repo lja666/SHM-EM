@@ -99,3 +99,17 @@ attachments, and prediction provenance. Generic attachments may reference
 images or videos supplied by an external acquisition system. The release does
 not include camera control, video streaming, snapshot scheduling, or media
 transcoding.
+
+## Deployment and Storage Boundaries
+
+The public runtime uses MySQL/MyBatis as the implemented persistence adapter.
+The logical registry and `MetricSeriesPoint` contracts isolate engineering
+semantics from API clients, but they do not make the current implementation
+database-agnostic. An alternative time-series backend must implement and test
+the adapter responsibilities documented in
+`docs/revision/STORAGE_ADAPTER_BOUNDARY.md`.
+
+The Compose deployment is a reproducibility environment, not a production
+security architecture. Production controls such as TLS, authentication, RBAC,
+network segmentation, and protected audit storage remain at the deployment
+boundary described in `SECURITY.md`.

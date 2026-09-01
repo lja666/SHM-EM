@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "shm-em-phase2c-ubuntu-ci-summary-v1",
+  "workflow": ".github/workflows/ci.yml",
+  "configuredMatrix": [
+    "windows-latest",
+    "ubuntu-latest"
+  ],
+  "components": [
+    "backend Maven tests/package",
+    "PIT_PRE unittest/compileall",
+    "frontend typecheck/build"
+  ],
+  "localResult": "NOT_EXECUTED",
+  "remoteCiResult": "NOT_CAPTURED",
+  "gateP2C03": "NOT_VERIFIED",
+  "claimBoundary": "Workflow configuration is not runtime evidence. No Ubuntu component PASS is claimed until a CI run or clean native run is captured."
+}

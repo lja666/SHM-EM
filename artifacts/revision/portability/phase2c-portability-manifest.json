@@ -1,0 +1,160 @@
+{
+  "schemaVersion": "shm-em-phase2c-portability-manifest-v1",
+  "generatedAtUtc": "2026-09-01T03:34:58.782853+00:00",
+  "finalCoreFreezeV3": "eaa7d85a0b4921ab2f6e54234cff09aee6a30c8f",
+  "evidenceHead": "f4f9ad25734a0b415e9a329c019d015d468909bb",
+  "decision": "STOP_EXACT_CROSS_PLATFORM_REPRODUCTION",
+  "productionCoreDiff": [],
+  "comparisonChecks": {
+    "modelContractHashes": true,
+    "modelCount": true,
+    "targetCount": true,
+    "predictionSteps": true,
+    "resultCount": true,
+    "inputHashExact": true,
+    "normalizedOutputHashExact": false,
+    "gateLogicalState": true,
+    "futureStateLogicalState": true,
+    "evaluateSemantics": true,
+    "executeProvenanceSemantics": true
+  },
+  "gates": [
+    {
+      "id": "P2C-01",
+      "pass": true,
+      "detail": "Final Core Freeze v3 unchanged"
+    },
+    {
+      "id": "P2C-02",
+      "pass": true,
+      "detail": "Frozen Windows validation retained"
+    },
+    {
+      "id": "P2C-03",
+      "pass": false,
+      "detail": "Ubuntu component validation not captured"
+    },
+    {
+      "id": "P2C-04",
+      "pass": true,
+      "detail": "Docker images built with component checks"
+    },
+    {
+      "id": "P2C-05",
+      "pass": true,
+      "detail": "Compose services reached expected healthy/completed states"
+    },
+    {
+      "id": "P2C-06",
+      "pass": false,
+      "detail": "Logical workflow completed, but exact normalized output hash differs"
+    },
+    {
+      "id": "P2C-07",
+      "pass": true,
+      "detail": "Cross-platform comparison and raw numeric difference artifacts complete"
+    },
+    {
+      "id": "P2C-08",
+      "pass": true,
+      "detail": "Runtime credentials are environment-only; bounded repository secret scan recorded"
+    },
+    {
+      "id": "P2C-09",
+      "pass": true,
+      "detail": "Deployment security guidance documented without implementing auth"
+    },
+    {
+      "id": "P2C-10",
+      "pass": true,
+      "detail": "Persisted-integrity security boundary stated accurately"
+    },
+    {
+      "id": "P2C-11",
+      "pass": true,
+      "detail": "Logical/adapter/MySQL storage layers distinguished"
+    },
+    {
+      "id": "P2C-12",
+      "pass": true,
+      "detail": "No alternative database conformance claim"
+    },
+    {
+      "id": "P2C-13",
+      "pass": true,
+      "detail": "50k Gate cap identified as application boundary"
+    },
+    {
+      "id": "P2C-14",
+      "pass": true,
+      "detail": "R2-3/R3-3 wording corrected"
+    },
+    {
+      "id": "P2C-15",
+      "pass": true,
+      "detail": "Production business-core diff is NONE"
+    }
+  ],
+  "gateSummary": {
+    "passed": 13,
+    "total": 15,
+    "allPass": false
+  },
+  "artifacts": [
+    {
+      "path": "artifacts/revision/portability/compose-services.json",
+      "bytes": 868,
+      "sha256": "cdadc04bfc9f1c52468aa2fddeb51132660f60ebeb5a3542e37a748e5dbc41ac"
+    },
+    {
+      "path": "artifacts/revision/portability/cross-platform-comparison.json",
+      "bytes": 1531,
+      "sha256": "733d8c0dc0d24d14435f27f8a6fbc2f80580b99ee76b089627d8f99789e47bd5"
+    },
+    {
+      "path": "artifacts/revision/portability/cross-platform-comparison.md",
+      "bytes": 929,
+      "sha256": "bdf8bb3d73b0e9f45a459e8d78df4dc08d587e1e57611a900fb52841667832ac"
+    },
+    {
+      "path": "artifacts/revision/portability/cross-platform-numeric-difference.json",
+      "bytes": 10077,
+      "sha256": "70176bc33eada65742de1966521b139c624d6ce4bc8ce5eb37ee8be020c2e5bb"
+    },
+    {
+      "path": "artifacts/revision/portability/docker-build-summary.json",
+      "bytes": 1225,
+      "sha256": "4a0779863682f0affa7343e7f75ad61a439022c2a270f5a3587c4845be64da1b"
+    },
+    {
+      "path": "artifacts/revision/portability/environment-linux.json",
+      "bytes": 541,
+      "sha256": "fb2412794443b817a57112be5717482e7360e19abac130dbb48a9d68479b8177"
+    },
+    {
+      "path": "artifacts/revision/portability/linux-reference-reproduction.json",
+      "bytes": 12257,
+      "sha256": "27783e1f6843755062f2c35f7b11aa050079b610f63e844fa3afa7160a961b72"
+    },
+    {
+      "path": "artifacts/revision/portability/PHASE2C_COMPLETION_REPORT.md",
+      "bytes": 1902,
+      "sha256": "b3c4d507e35b47ae574ffd83918acddd52c2cacd5ecd4eb98fc70d438d04f6c4"
+    },
+    {
+      "path": "artifacts/revision/portability/portability-limitations.md",
+      "bytes": 1467,
+      "sha256": "3d75ea2760dce96906254f2bbf1322c25993f01315ed90ac2d82f980686e8444"
+    },
+    {
+      "path": "artifacts/revision/portability/secret-scan-summary.json",
+      "bytes": 419,
+      "sha256": "53c0714fefc93afc17c8225c27de64db97a5367215e25ed69b910da41ed6d774"
+    },
+    {
+      "path": "artifacts/revision/portability/ubuntu-ci-summary.json",
+      "bytes": 552,
+      "sha256": "9d3444c88ea9692bb818050930d9a45c37f3197c7b7950fb4876e905988980e8"
+    }
+  ]
+}

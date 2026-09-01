@@ -109,20 +109,22 @@
     {
       "reviewerItem": "R1-11",
       "topic": "Deployment security",
-      "status": "DOCUMENTATION_PENDING",
+      "status": "DOCUMENTATION_COMPLETE",
       "evidence": [
-        "artifacts/revision/manuscript/claim-gap-matrix-final.md"
+        "SECURITY.md",
+        "docs/revision/DEPLOYMENT_LIMITATIONS.md"
       ],
-      "nextAction": "Add the deployment-security limitation and recommended reverse-proxy/authentication controls."
+      "nextAction": "Report deployment guidance as documented controls, not implemented production authentication."
     },
     {
       "reviewerItem": "R1-12",
       "topic": "Windows-centric reproduction",
-      "status": "DOCUMENTATION_PENDING",
+      "status": "PARTIALLY_SUPPORTED",
       "evidence": [
-        "artifacts/revision/manuscript/claim-gap-matrix-final.md"
+        "artifacts/revision/portability/cross-platform-comparison.md",
+        "artifacts/revision/portability/portability-limitations.md"
       ],
-      "nextAction": "Document the validated Windows path and list Linux portability as unverified."
+      "nextAction": "Report that the Linux-container workflow completed logically, while exact normalized-output reproduction and native Ubuntu component validation remain unverified."
     },
     {
       "reviewerItem": "R1-13",
@@ -220,21 +222,21 @@
     {
       "reviewerItem": "R3-1",
       "topic": "MySQL and data-access abstraction",
-      "status": "DOCUMENTATION_PENDING",
+      "status": "DOCUMENTATION_COMPLETE",
       "evidence": [
-        "artifacts/revision/manuscript/final-performance-table.md",
-        "artifacts/revision/manuscript/claim-gap-matrix-final.md"
+        "docs/revision/STORAGE_ADAPTER_BOUNDARY.md",
+        "docs/DATABASE.md"
       ],
-      "nextAction": "Document current MySQL characterization and the bounded adapter seam without claiming an implemented alternative backend."
+      "nextAction": "Describe the logical registry, approved adapters, and MySQL-specific implementation without claiming another validated backend."
     },
     {
       "reviewerItem": "R3-2",
       "topic": "Security pattern",
-      "status": "DOCUMENTATION_PENDING",
+      "status": "DOCUMENTATION_COMPLETE",
       "evidence": [
-        "artifacts/revision/manuscript/claim-gap-matrix-final.md"
+        "SECURITY.md"
       ],
-      "nextAction": "Add deployment boundary and security recommendations."
+      "nextAction": "Report the recommended deployment pattern; do not claim an implemented authentication subsystem."
     },
     {
       "reviewerItem": "R3-3",
@@ -249,11 +251,13 @@
     {
       "reviewerItem": "R3-4",
       "topic": "Linux/Docker portability",
-      "status": "LIMITATION_ONLY",
+      "status": "PARTIALLY_SUPPORTED",
       "evidence": [
-        "artifacts/revision/manuscript/claim-gap-matrix-final.md"
+        "artifacts/revision/portability/linux-reference-reproduction.json",
+        "artifacts/revision/portability/cross-platform-comparison.md",
+        "artifacts/revision/portability/cross-platform-numeric-difference.json"
       ],
-      "nextAction": "State that this release validates native Windows reproduction and does not claim Docker/Linux validation."
+      "nextAction": "Disclose the exact output-hash mismatch and retain Windows as the validated exact-reproduction environment."
     }
   ]
 }

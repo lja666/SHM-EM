@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "shm-em-phase2c-docker-build-summary-v1",
+  "result": "PASS",
+  "images": [
+    {
+      "name": "shm-em-reproduction-backend",
+      "id": "sha256:bd87ff79899f0fa2efda329a3f22bd4d6ac953c780b6422705bf1701c101b825",
+      "created": "2026-09-01T01:33:22.925793389Z",
+      "sizeBytes": 193290169,
+      "os": "linux",
+      "architecture": "amd64"
+    },
+    {
+      "name": "shm-em-reproduction-pitpre",
+      "id": "sha256:3d3479786477b3d774496d9e7e060a1c21b2afade9b0f33065103c5ea41dad99",
+      "created": "2026-09-01T01:55:15.017892318Z",
+      "sizeBytes": 375377441,
+      "os": "linux",
+      "architecture": "amd64"
+    },
+    {
+      "name": "shm-em-reproduction-frontend",
+      "id": "sha256:5c8564d632f235aa55f0ee852d67edde380bfc9902113b901c771eb2d3054082",
+      "created": "2026-09-01T01:14:22.605446912Z",
+      "sizeBytes": 24137092,
+      "os": "linux",
+      "architecture": "amd64"
+    }
+  ],
+  "buildStageChecks": {
+    "backendTests": "55/55 PASS",
+    "pitPreTests": "13/13 PASS",
+    "frontend": "typecheck and build PASS"
+  },
+  "note": "Counts are the test stages executed while constructing the recorded image IDs; this is Docker build evidence, not native Ubuntu CI evidence."
+}

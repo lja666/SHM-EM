@@ -6,7 +6,8 @@
 - Java 8 and Maven 3.8+
 - Node.js 20 and npm
 - Python 3.10 for PIT_PRE
-- Windows 10 or later with PowerShell 7
+- Windows 10 or later with PowerShell 7 for the native workflow, or Docker
+  Desktop / Docker Engine with Compose v2 for the container workflow
 
 ## Recommended Public Reproduction
 
@@ -83,6 +84,8 @@ database connection and working directory.
 ```powershell
 Push-Location src/pit_pre
 python -m pip install -r requirements.lock.txt
+# Required when the MySQL account uses caching_sha2_password:
+python -m pip install -r requirements-mysql-auth.lock.txt
 python -m unittest discover -s tests -v
 python -m pit_pre --config config.json --project-code SHM_EM_PUBLIC_SAMPLE
 Pop-Location
@@ -90,6 +93,42 @@ Pop-Location
 
 PIT_PRE validates model, preprocessor, inference, runtime, bundle, and feature-
 schema hashes before running.
+
+## Docker Compose Reproduction
+
+The Compose path initializes a disposable MySQL database, runs all six PIT_PRE
+models as a one-shot service, starts the backend and frontend, and exercises
+the complete reference workflow. It requires Bash, Python 3, Docker Engine,
+and Docker Compose v2; the application runtimes themselves execute in Linux
+containers. The validator is deliberately fail-closed: it also compares the
+normalized prediction-output hash with the frozen Windows baseline and exits
+nonzero when the hashes differ.
+
+```bash
+./scripts/reproduce-compose.sh
+```
+
+The script generates process-local database credentials unless they are
+provided explicitly, accepts only an isolated `shm_em_reproduce_*` database,
+uses readiness checks instead of a fixed startup sleep, and removes the stack
+and volume after validation. Set `SHM_EM_KEEP_COMPOSE=1` only for local
+inspection. On a restricted network, an operator may set an optional official-
+image mirror prefix without editing Compose:
+
+```bash
+export SHM_EM_DOCKERHUB_PREFIX=docker.m.daocloud.io/library/
+./scripts/reproduce-compose.sh
+```
+
+The default remains the official Docker Hub namespace. No restricted dataset,
+mail credential, map key, or host-specific path is built into the images.
+
+The Phase 2C container run reached the complete logical workflow with matching
+input and contract hashes, but its normalized prediction-output hash differed
+from the frozen Windows baseline. No tolerance was introduced. Therefore the
+native Windows procedure remains the validated exact-reproduction path; see
+`artifacts/revision/portability/portability-limitations.md` for the recorded
+cross-platform boundary.
 
 ## Optional Map
 

@@ -45,7 +45,7 @@ the public sample contains no acceleration waveform rows.
 | `src/frontend` | Vue 3, TypeScript, Element Plus, and ECharts workbench |
 | `src/pit_pre` | Database-contract-driven PyTorch inference runtime and public model bundles |
 | `sql/shm_em_database` | Schema, conversion operators, public sample, and validation |
-| `scripts` | Windows PowerShell initialization, startup, reproduction, and packaging |
+| `scripts` | Windows PowerShell reproduction, container diagnostics, startup, and packaging |
 | `docs` | Architecture, installation, reproducibility, model, data, and API documentation |
 
 Count definitions for field points, sensors, modules, DTUs, and internal
@@ -69,6 +69,11 @@ backend in `reproduce` mode, and verifies the forecast-event-response chain.
 The script refuses to reset a database outside the `shm_em_reproduce_*`
 namespace. Repeat runs require `-ForceReset`. The acceptance record is written
 to `artifacts/reproduction-windows.json` and excluded from release archives.
+
+An experimental Docker Compose path is documented in
+[`docs/INSTALLATION.md`](docs/INSTALLATION.md). It exercises the Linux-container
+workflow but does not currently satisfy the frozen exact cross-platform output-
+hash contract; it must not be cited as an exact Linux reproduction result.
 
 ## Local Installation
 

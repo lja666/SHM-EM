@@ -1,0 +1,215 @@
+{
+  "schemaVersion": "shm-em-final-manuscript-review-manifest-v1",
+  "generatedAtUtc": "2026-09-01T09:59:07.582952+00:00",
+  "submittedManuscriptAuthority": "SOFTX-D-26-00931.pdf",
+  "finalCoreFreezeV3": "eaa7d85a0b4921ab2f6e54234cff09aee6a30c8f",
+  "sourcePreparationHead": "bcc108982fb4b95e9af725e1e514c091804ef1f3",
+  "sourceFiles": [
+    "manuscript/SHM-EM_Revised_Manuscript_Source.md",
+    "manuscript/Response_to_Reviewers_Source.md",
+    "manuscript/Revision_Change_Map.md",
+    "manuscript/Final_Reviewer_Evidence_Map.md",
+    "manuscript/Final_Submission_Checklist.md"
+  ],
+  "validation": {
+    "pass": true,
+    "checkCount": 17,
+    "reviewerItemCount": 27,
+    "referenceCount": 30
+  },
+  "productionCoreDiff": "NONE",
+  "files": [
+    {
+      "path": "manuscript/SHM-EM_Revised_Manuscript_Source.md",
+      "bytes": 50650,
+      "sha256": "8ce84db2e49379cfaab91c037ccb9d8be45467ed72a4289c04dda5641d4c9776"
+    },
+    {
+      "path": "manuscript/Response_to_Reviewers_Source.md",
+      "bytes": 36769,
+      "sha256": "ccbab18e44690894adc68003e5aca25fe4e77756c82003fff8966e2f54cc9215"
+    },
+    {
+      "path": "manuscript/Revision_Change_Map.md",
+      "bytes": 7112,
+      "sha256": "3b05d8ae0339cd54c32f0e6aed1d7dbdd64a94bd5e6f64ad788a704194efaeed"
+    },
+    {
+      "path": "manuscript/Final_Reviewer_Evidence_Map.md",
+      "bytes": 4602,
+      "sha256": "0cbbb28226fd9a6ae27e52cc1439e8249d0e4b645370706ae4b930ae69ff6f3c"
+    },
+    {
+      "path": "manuscript/Final_Submission_Checklist.md",
+      "bytes": 4819,
+      "sha256": "2dc0ea8195da42cecbf544c1d16253b2eade740b7817ed50cb4589119c4310f7"
+    },
+    {
+      "path": "docs/revision/DATA_MODEL_CONTRACT_SPEC.md",
+      "bytes": 8446,
+      "sha256": "c77fb29031cea85112433ace860836aa0d015fddd84897443168ab14bb4f91b2"
+    },
+    {
+      "path": "docs/revision/PROJECT_FUTURE_STATE_ALGORITHM.md",
+      "bytes": 4425,
+      "sha256": "b92ede4a923e8db96c6fb0e7f6d842accba660da895fc38c7b0e9d26971f4796"
+    },
+    {
+      "path": "docs/revision/MODEL_CONFIG_SUMMARY.md",
+      "bytes": 2251,
+      "sha256": "7916881b1061f6e79eb1ace9936aed4fb033c5573748ccc7f5476f7f6290caf6"
+    },
+    {
+      "path": "docs/revision/PROVENANCE_TRACE_EXAMPLE.md",
+      "bytes": 2413,
+      "sha256": "251af2f1c9639419804c3cc5fd99588c82a935a512f7aa4c007d4b0560fad094"
+    },
+    {
+      "path": "docs/revision/RELATED_SOFTWARE_COMPARISON.md",
+      "bytes": 5992,
+      "sha256": "e59b680e215325d86c2c3838ea3380834f6de8d295cc7dc8875002b0dc857fa1"
+    },
+    {
+      "path": "docs/revision/SENSORTHINGS_POSITIONING.md",
+      "bytes": 2349,
+      "sha256": "882526b7556aa38fda7e998164cd485760f5afc55464c3d4381b31928b920e25"
+    },
+    {
+      "path": "docs/revision/STORAGE_ADAPTER_BOUNDARY.md",
+      "bytes": 3325,
+      "sha256": "229289fafd0220545ac2549320d1d247ef7087e555cb8f75c3153468479154ba"
+    },
+    {
+      "path": "docs/revision/figures/forecast-event-sequence.mmd",
+      "bytes": 2916,
+      "sha256": "dac2e83ef91d7e60133b13210c5469af484f24375732ef8c132d4a168ba81267"
+    },
+    {
+      "path": "SECURITY.md",
+      "bytes": 2498,
+      "sha256": "dbbb94e904acb8087c3e35c1239c27c6c6c7f752a31301aafcbd108265a72451"
+    },
+    {
+      "path": "compose.yaml",
+      "bytes": 3844,
+      "sha256": "1a9d6e76a49bda665aea62e774ac03f1720a704c351e60fe0cbcf986f8658e90"
+    },
+    {
+      "path": "src/backend/Dockerfile",
+      "bytes": 723,
+      "sha256": "80a441a36bac3f7cc68aed4fc12491b8fd5f4ec59d32e2f766608e6a009ebb34"
+    },
+    {
+      "path": "src/frontend/Dockerfile",
+      "bytes": 403,
+      "sha256": "eaa513498e8b3a3090edbf6c90992b226aad2efd75dda5a3b066195b027aed95"
+    },
+    {
+      "path": "src/pit_pre/Dockerfile",
+      "bytes": 1033,
+      "sha256": "391dad74b927eddfb305328cda96384e1e68b16c09b2cb3cbe22e29145c96ffc"
+    },
+    {
+      "path": "src/pit_pre/pit_pre/features.py",
+      "bytes": 23634,
+      "sha256": "17cf182e71c46f0d1adb2aeeb34da0c4e135f40dfcf777d4fe79dc5e85c04869"
+    },
+    {
+      "path": "src/pit_pre/pit_pre/pipeline.py",
+      "bytes": 11221,
+      "sha256": "7ce86e598b7fdee65666cea6b0e9b650184052caf1d0f1018ed992b814fd2763"
+    },
+    {
+      "path": "src/backend/src/main/java/mybatis/iem/em/modules/engineering/application/service/impl/PredictionExecutionGateServiceImpl.java",
+      "bytes": 35804,
+      "sha256": "b25f9b267c3837a982d7805ff7624431a6be1207a5a3f2b556b027e8609fd6e8"
+    },
+    {
+      "path": "src/backend/src/main/java/mybatis/iem/em/modules/engineering/application/service/impl/ProjectFutureStateServiceImpl.java",
+      "bytes": 33059,
+      "sha256": "a4ad9615ccc5e08f48868d707774809e2f6c254e3bbe962c11a02903e48983e9"
+    },
+    {
+      "path": "src/backend/src/main/java/mybatis/iem/em/modules/engineering/application/service/impl/MetricRuleEventEngine.java",
+      "bytes": 27069,
+      "sha256": "94ecb0cade538be43f8ab1b7f25ecc4a23cd806ae862a4181648ca83536ff26b"
+    },
+    {
+      "path": "artifacts/revision/manuscript/software-test-summary.md",
+      "bytes": 1899,
+      "sha256": "6b1f87b5c39c9ec9f65a7a58f1a05a8d3f9ddfabb3dbf091f8c14036a9e9e629"
+    },
+    {
+      "path": "artifacts/revision/manuscript/final-performance-table.md",
+      "bytes": 2406,
+      "sha256": "9e8531b1b6a81687ef34d8506be05443df458e5d708f0f9c4c8bb17cfeb76907"
+    },
+    {
+      "path": "artifacts/revision/manuscript/FINAL_LIMITATION_MATRIX.md",
+      "bytes": 3587,
+      "sha256": "e0b6fb62d8dcd9991f39fc54e84bbe210d8f7d28559feb2a626ce310c3724373"
+    },
+    {
+      "path": "artifacts/revision/manuscript/METADATA_C6_PROPOSED.md",
+      "bytes": 1670,
+      "sha256": "a72705ec09ecc2dbfbbe9f06c6e452f6c3b1b026984116dc1fe09aa4b05e5b38"
+    },
+    {
+      "path": "artifacts/revision/manuscript/related-software-comparison.md",
+      "bytes": 5992,
+      "sha256": "e59b680e215325d86c2c3838ea3380834f6de8d295cc7dc8875002b0dc857fa1"
+    },
+    {
+      "path": "artifacts/revision/manuscript/sequence-code-crosscheck.json",
+      "bytes": 3307,
+      "sha256": "944610b6df50d3eae82e5e3b1230c2a495c6ba1f1182548788b4f25abe9b8f45"
+    },
+    {
+      "path": "artifacts/revision/manuscript/model-config-summary.json",
+      "bytes": 16729,
+      "sha256": "20c4d428f31d42d14007b03d83f93e03ca6a3235eb004a0b047dd3c048a6691b"
+    },
+    {
+      "path": "artifacts/revision/manuscript/data-model-contract-export.json",
+      "bytes": 256237,
+      "sha256": "ed1b0561ffa66bdb73546fea08ae8caf12103038f2f4c3861e743d76fb945f4e"
+    },
+    {
+      "path": "artifacts/revision/manuscript/provenance-trace-final.json",
+      "bytes": 25211,
+      "sha256": "3adf3733a1251a1db0b3dcd1c787adf3e36c47e942a0fd13b2aeb82d9db7aa82"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/phase1b-regression.json",
+      "bytes": 2082,
+      "sha256": "f0211c11348e86bee5b5951033334c10e22877092fa9358c1eef71c6fbe82a4f"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/failure-matrix-v2.md",
+      "bytes": 2109,
+      "sha256": "4b46c8a55847e0a893f06ea5de02876dd047b496dd9e5d03f18e7c8eca672f06"
+    },
+    {
+      "path": "artifacts/revision/benchmarks/route-p/failure-regression/failure-matrix-v2.json",
+      "bytes": 22092,
+      "sha256": "b6e92d18562444194f65ea05d09896e958ebfbbc9997abafe6e863663d6bdcf6"
+    },
+    {
+      "path": "artifacts/revision/portability/cross-platform-comparison.json",
+      "bytes": 1531,
+      "sha256": "733d8c0dc0d24d14435f27f8a6fbc2f80580b99ee76b089627d8f99789e47bd5"
+    },
+    {
+      "path": "artifacts/revision/portability/cross-platform-numeric-difference.json",
+      "bytes": 10077,
+      "sha256": "70176bc33eada65742de1966521b139c624d6ce4bc8ce5eb37ee8be020c2e5bb"
+    },
+    {
+      "path": "artifacts/revision/portability/PHASE2C_COMPLETION_REPORT.md",
+      "bytes": 1902,
+      "sha256": "2cdcff1e94366020442eb9655885d948662e46119c4ea2ccd30cc6d75b822eac"
+    }
+  ],
+  "stopRequired": true,
+  "nextDecisionOwner": "GPT scientific-consistency review"
+}

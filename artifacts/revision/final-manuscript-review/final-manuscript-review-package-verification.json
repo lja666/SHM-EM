@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "shm-em-final-manuscript-review-package-verification-v1",
+  "sourcePreparationHead": "bcc108982fb4b95e9af725e1e514c091804ef1f3",
+  "canonicalZip": {
+    "path": "artifacts/revision/final-manuscript-review/SHM-EM_Final_Manuscript_GPT_Review_Package.zip",
+    "bytes": 127786,
+    "sha256": "407255d7c1d35c9f8382665cb0e06933a42738fdc41adf2288a2048fd8c0637a"
+  },
+  "directUploadDirectory": "artifacts/revision/final-manuscript-review/gpt-direct-upload-final-manuscript",
+  "directUploadFiles": [
+    {
+      "name": "final-manuscript-review-manifest.json",
+      "bytes": 7945,
+      "sha256": "ccf1eb3637f4f5c4abdc24de1bf236d45d43d026a35b7b8456fbe7a3e8e22342"
+    },
+    {
+      "name": "final-manuscript-source-validation.json",
+      "bytes": 3095,
+      "sha256": "d6f330577c3a342be5fbe8036bd48af01634bca5fdcddf616858f66771474b6b"
+    },
+    {
+      "name": "FINAL_MANUSCRIPT_COMPLETION_REPORT.md",
+      "bytes": 1457,
+      "sha256": "7fcb782eee6f8df313ef79846b228045fe26859e3c35e14b3b343cfb1c183dfc"
+    },
+    {
+      "name": "Final_Reviewer_Evidence_Map.md",
+      "bytes": 4602,
+      "sha256": "0cbbb28226fd9a6ae27e52cc1439e8249d0e4b645370706ae4b930ae69ff6f3c"
+    },
+    {
+      "name": "Final_Submission_Checklist.md",
+      "bytes": 4819,
+      "sha256": "2dc0ea8195da42cecbf544c1d16253b2eade740b7817ed50cb4589119c4310f7"
+    },
+    {
+      "name": "GPT_REVIEW_HANDOFF.md",
+      "bytes": 2260,
+      "sha256": "686acbc2b6a067f8a788b7e946792663f62ff8b0b47af7eb50cafdadae2631c6"
+    },
+    {
+      "name": "Response_to_Reviewers_Source.md",
+      "bytes": 36769,
+      "sha256": "ccbab18e44690894adc68003e5aca25fe4e77756c82003fff8966e2f54cc9215"
+    },
+    {
+      "name": "Revision_Change_Map.md",
+      "bytes": 7112,
+      "sha256": "3b05d8ae0339cd54c32f0e6aed1d7dbdd64a94bd5e6f64ad788a704194efaeed"
+    },
+    {
+      "name": "SHM-EM_Revised_Manuscript_Source.md",
+      "bytes": 50650,
+      "sha256": "8ce84db2e49379cfaab91c037ccb9d8be45467ed72a4289c04dda5641d4c9776"
+    }
+  ],
+  "handoffHashNote": "The ZIP-internal handoff uses a non-self-referential placeholder; the project-local and direct-upload handoffs report the ZIP hash.",
+  "pass": true
+}

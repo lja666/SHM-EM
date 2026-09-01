@@ -1,0 +1,617 @@
+{
+  "schemaVersion": "shm-em-model-dimension-reconciliation-v1",
+  "status": "PASS",
+  "decision": "CASE_A_ACTUAL_ALIGNED_INPUT_IS_114_OR_164",
+  "commonAlignedMatrixShape": [
+    16,
+    164
+  ],
+  "commonWideFeatureColumns": 164,
+  "models": [
+    {
+      "model": "YD",
+      "modelCode": "YD",
+      "historyRows": 16,
+      "commonWideFeatureColumns": 164,
+      "databaseModelFeatureMappingCount": 42,
+      "columnsPassedToPreprocessor": 114,
+      "runnerFrameShape": [
+        16,
+        114
+      ],
+      "scaledModelMatrixShape": [
+        16,
+        114
+      ],
+      "tensorShapesEnteringModel": {
+        "response": [
+          1,
+          10,
+          42
+        ],
+        "environment": [
+          1,
+          6,
+          2
+        ],
+        "contextual": [
+          1,
+          10,
+          112
+        ]
+      },
+      "internalBranchWidths": {
+        "response": 42,
+        "environment": 2,
+        "transformedFeatures": 112
+      },
+      "outputTargets": 42,
+      "interpretation": "The database model-feature mapping count identifies model-owned mappings/targets; it is not the frozen preprocessor input width.",
+      "evidence": {
+        "phase06Matrix": {
+          "path": "artifacts/revision/phase0_6/regression-input-matrix.json",
+          "shape": [
+            16,
+            114
+          ]
+        },
+        "preprocessor": {
+          "path": "src/pit_pre/models/YD__predict/preprocessor.joblib",
+          "sha256": "49020979b1cd086fa6ed093c68ea496063327b6c37ccb8f42305635ac914eff1",
+          "inputColumnCount": 114,
+          "targetColumnCount": 42
+        },
+        "inferenceScript": {
+          "path": "src/pit_pre/models/YD__predict/predict_YD_future_direct.py",
+          "sha256": "96afa649deb323be7a4962312ff0846616315d03f43357a37a4222d81a8327e3",
+          "scaleLine": 449,
+          "responseSliceLine": 467,
+          "contextSliceLine": 468,
+          "environmentSliceLine": 469
+        },
+        "cachedRunner": {
+          "path": "src/pit_pre/pit_pre/cached_model_runner.py",
+          "preprocessorValidationLine": 63,
+          "modelInvocationLine": 84
+        },
+        "weightDerivedArchitecture": {
+          "family": "TransformerCnn",
+          "transformerLayers": 1,
+          "dModel": 128,
+          "numHeads": 4,
+          "feedForwardHiddenDimension": 64,
+          "convolutionHiddenChannels": 32,
+          "kernelSize": 3,
+          "dropout": 0.055797544260816734,
+          "responseDimension": 42,
+          "environmentDimension": 2,
+          "contextualInputDimension": 112,
+          "attentionEmbeddingDimension": 128,
+          "cnnBranches": [
+            "response",
+            "environment",
+            "transformed_features",
+            "final_output"
+          ],
+          "historyWindowM": 10,
+          "directOutputChunkN": 3,
+          "lag": 6
+        }
+      },
+      "checks": {
+        "declaredHistoryCoversModelInput": true,
+        "phase06RunnerFrameMatchesDeclaredHistoryAndPreprocessorWidth": true,
+        "preprocessorInputHashMatchesSummary": true,
+        "scriptHashMatchesSummary": true,
+        "responseWidthMatchesTargets": true,
+        "environmentWidthMatchesArtifact": true,
+        "contextWidthMatchesArtifact": true
+      }
+    },
+    {
+      "model": "XD",
+      "modelCode": "XD",
+      "historyRows": 12,
+      "commonWideFeatureColumns": 164,
+      "databaseModelFeatureMappingCount": 42,
+      "columnsPassedToPreprocessor": 114,
+      "runnerFrameShape": [
+        12,
+        114
+      ],
+      "scaledModelMatrixShape": [
+        12,
+        114
+      ],
+      "tensorShapesEnteringModel": {
+        "response": [
+          1,
+          10,
+          42
+        ],
+        "environment": [
+          1,
+          2,
+          2
+        ],
+        "contextual": [
+          1,
+          10,
+          112
+        ]
+      },
+      "internalBranchWidths": {
+        "response": 42,
+        "environment": 2,
+        "transformedFeatures": 112
+      },
+      "outputTargets": 42,
+      "interpretation": "The database model-feature mapping count identifies model-owned mappings/targets; it is not the frozen preprocessor input width.",
+      "evidence": {
+        "phase06Matrix": {
+          "path": "artifacts/revision/phase0_6/regression-input-matrix.json",
+          "shape": [
+            12,
+            114
+          ]
+        },
+        "preprocessor": {
+          "path": "src/pit_pre/models/XD__predict/preprocessor.joblib",
+          "sha256": "ac01c13899e0f647758cb65fd1ba9a04e3560569a66fa2c82f0d2a4ec394a54b",
+          "inputColumnCount": 114,
+          "targetColumnCount": 42
+        },
+        "inferenceScript": {
+          "path": "src/pit_pre/models/XD__predict/predict_XD_future_direct_comment_enhanced.py",
+          "sha256": "3c4c4fd5724cb4de4c1ee6cc7e2ce64364837569877648a29c35b67d7aae10d7",
+          "scaleLine": 575,
+          "responseSliceLine": 598,
+          "contextSliceLine": 599,
+          "environmentSliceLine": 600
+        },
+        "cachedRunner": {
+          "path": "src/pit_pre/pit_pre/cached_model_runner.py",
+          "preprocessorValidationLine": 63,
+          "modelInvocationLine": 84
+        },
+        "weightDerivedArchitecture": {
+          "family": "TransformerCnn",
+          "transformerLayers": 1,
+          "dModel": 64,
+          "numHeads": 8,
+          "feedForwardHiddenDimension": 128,
+          "convolutionHiddenChannels": 64,
+          "kernelSize": 7,
+          "dropout": 0.23002952827050327,
+          "responseDimension": 42,
+          "environmentDimension": 2,
+          "contextualInputDimension": 112,
+          "attentionEmbeddingDimension": 64,
+          "cnnBranches": [
+            "response",
+            "environment",
+            "transformed_features",
+            "final_output"
+          ],
+          "historyWindowM": 10,
+          "directOutputChunkN": 3,
+          "lag": 2
+        }
+      },
+      "checks": {
+        "declaredHistoryCoversModelInput": true,
+        "phase06RunnerFrameMatchesDeclaredHistoryAndPreprocessorWidth": true,
+        "preprocessorInputHashMatchesSummary": true,
+        "scriptHashMatchesSummary": true,
+        "responseWidthMatchesTargets": true,
+        "environmentWidthMatchesArtifact": true,
+        "contextWidthMatchesArtifact": true
+      }
+    },
+    {
+      "model": "Strain",
+      "modelCode": "Strain",
+      "historyRows": 13,
+      "commonWideFeatureColumns": 164,
+      "databaseModelFeatureMappingCount": 14,
+      "columnsPassedToPreprocessor": 114,
+      "runnerFrameShape": [
+        13,
+        114
+      ],
+      "scaledModelMatrixShape": [
+        13,
+        114
+      ],
+      "tensorShapesEnteringModel": {
+        "response": [
+          1,
+          10,
+          14
+        ],
+        "environment": [
+          1,
+          3,
+          2
+        ],
+        "contextual": [
+          1,
+          10,
+          112
+        ]
+      },
+      "internalBranchWidths": {
+        "response": 14,
+        "environment": 2,
+        "transformedFeatures": 112
+      },
+      "outputTargets": 14,
+      "interpretation": "The database model-feature mapping count identifies model-owned mappings/targets; it is not the frozen preprocessor input width.",
+      "evidence": {
+        "phase06Matrix": {
+          "path": "artifacts/revision/phase0_6/regression-input-matrix.json",
+          "shape": [
+            13,
+            114
+          ]
+        },
+        "preprocessor": {
+          "path": "src/pit_pre/models/Strain__predict/preprocessor.joblib",
+          "sha256": "6660a92d879f1774bae92619392f95219927608584c6f3c72e6ce1f7c77b71df",
+          "inputColumnCount": 114,
+          "targetColumnCount": 14
+        },
+        "inferenceScript": {
+          "path": "src/pit_pre/models/Strain__predict/predict_Strain_future_fixed_best_params_annotated.py",
+          "sha256": "b41d0e55ef58d04bb6a90ce224a55b5180c2794f1debd18a863ba4f1309cd8fd",
+          "scaleLine": 606,
+          "responseSliceLine": 627,
+          "contextSliceLine": 628,
+          "environmentSliceLine": 629
+        },
+        "cachedRunner": {
+          "path": "src/pit_pre/pit_pre/cached_model_runner.py",
+          "preprocessorValidationLine": 63,
+          "modelInvocationLine": 84
+        },
+        "weightDerivedArchitecture": {
+          "family": "TransformerCnn",
+          "transformerLayers": 1,
+          "dModel": 96,
+          "numHeads": 4,
+          "feedForwardHiddenDimension": 64,
+          "convolutionHiddenChannels": 48,
+          "kernelSize": 5,
+          "dropout": 0.07680317420912611,
+          "responseDimension": 14,
+          "environmentDimension": 2,
+          "contextualInputDimension": 112,
+          "attentionEmbeddingDimension": 96,
+          "cnnBranches": [
+            "response",
+            "environment",
+            "transformed_features",
+            "final_output"
+          ],
+          "historyWindowM": 10,
+          "directOutputChunkN": 3,
+          "lag": 3
+        }
+      },
+      "checks": {
+        "declaredHistoryCoversModelInput": true,
+        "phase06RunnerFrameMatchesDeclaredHistoryAndPreprocessorWidth": true,
+        "preprocessorInputHashMatchesSummary": true,
+        "scriptHashMatchesSummary": true,
+        "responseWidthMatchesTargets": true,
+        "environmentWidthMatchesArtifact": true,
+        "contextWidthMatchesArtifact": true
+      }
+    },
+    {
+      "model": "Pressure",
+      "modelCode": "Pressure",
+      "historyRows": 13,
+      "commonWideFeatureColumns": 164,
+      "databaseModelFeatureMappingCount": 14,
+      "columnsPassedToPreprocessor": 114,
+      "runnerFrameShape": [
+        13,
+        114
+      ],
+      "scaledModelMatrixShape": [
+        12,
+        114
+      ],
+      "tensorShapesEnteringModel": {
+        "response": [
+          1,
+          10,
+          14
+        ],
+        "environment": [
+          1,
+          2,
+          2
+        ],
+        "contextual": [
+          1,
+          10,
+          112
+        ]
+      },
+      "internalBranchWidths": {
+        "response": 14,
+        "environment": 2,
+        "transformedFeatures": 112
+      },
+      "outputTargets": 14,
+      "interpretation": "The database model-feature mapping count identifies model-owned mappings/targets; it is not the frozen preprocessor input width.",
+      "evidence": {
+        "phase06Matrix": {
+          "path": "artifacts/revision/phase0_6/regression-input-matrix.json",
+          "shape": [
+            13,
+            114
+          ]
+        },
+        "preprocessor": {
+          "path": "src/pit_pre/models/Pressure__predict/preprocessor.joblib",
+          "sha256": "3a0db327bd99be620380b4fb4a280f734325bd4767788bb5d8d7242980fe7183",
+          "inputColumnCount": 114,
+          "targetColumnCount": 14
+        },
+        "inferenceScript": {
+          "path": "src/pit_pre/models/Pressure__predict/predict_Pressure_future_fixed_best_params_annotated.py",
+          "sha256": "a087cbb6ce3ae205bbfcb561d636579508b864f495cc95de4d42dae165c0977b",
+          "scaleLine": 351,
+          "responseSliceLine": 367,
+          "contextSliceLine": 368,
+          "environmentSliceLine": 369
+        },
+        "cachedRunner": {
+          "path": "src/pit_pre/pit_pre/cached_model_runner.py",
+          "preprocessorValidationLine": 63,
+          "modelInvocationLine": 84
+        },
+        "weightDerivedArchitecture": {
+          "family": "TransformerCnn",
+          "transformerLayers": 1,
+          "dModel": 64,
+          "numHeads": 1,
+          "feedForwardHiddenDimension": 64,
+          "convolutionHiddenChannels": 24,
+          "kernelSize": 3,
+          "dropout": 0.03492520686643473,
+          "responseDimension": 14,
+          "environmentDimension": 2,
+          "contextualInputDimension": 112,
+          "attentionEmbeddingDimension": 64,
+          "cnnBranches": [
+            "response",
+            "environment",
+            "transformed_features",
+            "final_output"
+          ],
+          "historyWindowM": 10,
+          "directOutputChunkN": 3,
+          "lag": 2
+        }
+      },
+      "checks": {
+        "declaredHistoryCoversModelInput": true,
+        "phase06RunnerFrameMatchesDeclaredHistoryAndPreprocessorWidth": true,
+        "preprocessorInputHashMatchesSummary": true,
+        "scriptHashMatchesSummary": true,
+        "responseWidthMatchesTargets": true,
+        "environmentWidthMatchesArtifact": true,
+        "contextWidthMatchesArtifact": true
+      }
+    },
+    {
+      "model": "Water",
+      "modelCode": "water",
+      "historyRows": 13,
+      "commonWideFeatureColumns": 164,
+      "databaseModelFeatureMappingCount": 2,
+      "columnsPassedToPreprocessor": 114,
+      "runnerFrameShape": [
+        13,
+        114
+      ],
+      "scaledModelMatrixShape": [
+        13,
+        114
+      ],
+      "tensorShapesEnteringModel": {
+        "response": [
+          1,
+          10,
+          2
+        ],
+        "environment": [
+          1,
+          3,
+          2
+        ],
+        "contextual": [
+          1,
+          10,
+          112
+        ]
+      },
+      "internalBranchWidths": {
+        "response": 2,
+        "environment": 2,
+        "transformedFeatures": 112
+      },
+      "outputTargets": 2,
+      "interpretation": "The database model-feature mapping count identifies model-owned mappings/targets; it is not the frozen preprocessor input width.",
+      "evidence": {
+        "phase06Matrix": {
+          "path": "artifacts/revision/phase0_6/regression-input-matrix.json",
+          "shape": [
+            13,
+            114
+          ]
+        },
+        "preprocessor": {
+          "path": "src/pit_pre/models/water__predict/preprocessor.joblib",
+          "sha256": "c28aa693d73085d9ff5996fc8e0b5e4011f232c5d81b1b7acec1014912473256",
+          "inputColumnCount": 114,
+          "targetColumnCount": 2
+        },
+        "inferenceScript": {
+          "path": "src/pit_pre/models/water__predict/predict_water_future_fixed_best_params_annotated.py",
+          "sha256": "d4f30c8e0c57dbeb37987249ed45657c60e5d50b5eda8b587cf8e266d95a72be",
+          "scaleLine": 515,
+          "responseSliceLine": 523,
+          "contextSliceLine": 524,
+          "environmentSliceLine": 525
+        },
+        "cachedRunner": {
+          "path": "src/pit_pre/pit_pre/cached_model_runner.py",
+          "preprocessorValidationLine": 63,
+          "modelInvocationLine": 84
+        },
+        "weightDerivedArchitecture": {
+          "family": "TransformerCnn",
+          "transformerLayers": 1,
+          "dModel": 96,
+          "numHeads": 1,
+          "feedForwardHiddenDimension": 128,
+          "convolutionHiddenChannels": 16,
+          "kernelSize": 3,
+          "dropout": 0.0016791138100246932,
+          "responseDimension": 2,
+          "environmentDimension": 2,
+          "contextualInputDimension": 112,
+          "attentionEmbeddingDimension": 96,
+          "cnnBranches": [
+            "response",
+            "environment",
+            "transformed_features",
+            "final_output"
+          ],
+          "historyWindowM": 10,
+          "directOutputChunkN": 3,
+          "lag": 3
+        }
+      },
+      "checks": {
+        "declaredHistoryCoversModelInput": true,
+        "phase06RunnerFrameMatchesDeclaredHistoryAndPreprocessorWidth": true,
+        "preprocessorInputHashMatchesSummary": true,
+        "scriptHashMatchesSummary": true,
+        "responseWidthMatchesTargets": true,
+        "environmentWidthMatchesArtifact": true,
+        "contextWidthMatchesArtifact": true
+      }
+    },
+    {
+      "model": "Settlement",
+      "modelCode": "settlement",
+      "historyRows": 12,
+      "commonWideFeatureColumns": 164,
+      "databaseModelFeatureMappingCount": 50,
+      "columnsPassedToPreprocessor": 164,
+      "runnerFrameShape": [
+        12,
+        164
+      ],
+      "scaledModelMatrixShape": [
+        12,
+        164
+      ],
+      "tensorShapesEnteringModel": {
+        "response": [
+          1,
+          10,
+          10
+        ],
+        "environment": [
+          1,
+          2,
+          2
+        ],
+        "contextual": [
+          1,
+          10,
+          162
+        ]
+      },
+      "internalBranchWidths": {
+        "response": 10,
+        "environment": 2,
+        "transformedFeatures": 162
+      },
+      "outputTargets": 10,
+      "interpretation": "The database model-feature mapping count identifies model-owned mappings/targets; it is not the frozen preprocessor input width.",
+      "evidence": {
+        "phase06Matrix": {
+          "path": "artifacts/revision/phase0_6/regression-input-matrix.json",
+          "shape": [
+            12,
+            164
+          ]
+        },
+        "preprocessor": {
+          "path": "src/pit_pre/models/settlement_predict/preprocessor.joblib",
+          "sha256": "78b070dd1fbd6006b3254b60fb328a36f7748a401baca51d114586f5f9cc3e10",
+          "inputColumnCount": 164,
+          "targetColumnCount": 10
+        },
+        "inferenceScript": {
+          "path": "src/pit_pre/models/settlement_predict/predict_settlement_future_fixed_best_params_annotated.py",
+          "sha256": "3d347f2da9230937e664a98cfd5386035469bc0bd57002a8032f1fd64a61c0f2",
+          "scaleLine": 606,
+          "responseSliceLine": 617,
+          "contextSliceLine": 618,
+          "environmentSliceLine": 619
+        },
+        "cachedRunner": {
+          "path": "src/pit_pre/pit_pre/cached_model_runner.py",
+          "preprocessorValidationLine": 63,
+          "modelInvocationLine": 84
+        },
+        "weightDerivedArchitecture": {
+          "family": "TransformerCnn",
+          "transformerLayers": 1,
+          "dModel": 96,
+          "numHeads": 8,
+          "feedForwardHiddenDimension": 256,
+          "convolutionHiddenChannels": 48,
+          "kernelSize": 5,
+          "dropout": 0.22295681752688232,
+          "responseDimension": 10,
+          "environmentDimension": 2,
+          "contextualInputDimension": 162,
+          "attentionEmbeddingDimension": 96,
+          "cnnBranches": [
+            "response",
+            "environment",
+            "transformed_features",
+            "final_output"
+          ],
+          "historyWindowM": 10,
+          "directOutputChunkN": 3,
+          "lag": 2
+        }
+      },
+      "checks": {
+        "declaredHistoryCoversModelInput": true,
+        "phase06RunnerFrameMatchesDeclaredHistoryAndPreprocessorWidth": true,
+        "preprocessorInputHashMatchesSummary": true,
+        "scriptHashMatchesSummary": true,
+        "responseWidthMatchesTargets": true,
+        "environmentWidthMatchesArtifact": true,
+        "contextWidthMatchesArtifact": true
+      }
+    }
+  ],
+  "sourceBoundary": {
+    "productionCoreModified": false,
+    "newInferenceExecuted": false,
+    "source": "Frozen preprocessors, model-weight-derived configuration, inference scripts, and Phase 0.6 matrices."
+  }
+}

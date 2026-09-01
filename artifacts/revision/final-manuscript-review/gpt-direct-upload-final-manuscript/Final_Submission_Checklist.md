@@ -12,7 +12,11 @@ This checklist separates completed source/evidence work from tasks that must wai
 - [x] M4: Docker output-hash mismatch, no tolerance, and row-wise artifact retained.
 - [x] Six models, 124 targets, 40 steps, and 4,960 reference rows used consistently.
 - [x] Common source window 16 steps and model-specific histories 12-16 steps distinguished.
-- [x] Model-specific input/target widths corrected to 42/42, 42/42, 14/14, 14/14, 2/2, and 50/10.
+- [x] Frozen aligned input/output widths reconciled as 114/42, 114/42, 114/14, 114/14, 114/2, and 164/10; database mapping counts are labelled separately.
+- [x] Pressure's 13-row runner window and 12-row (`m+lag`) scaled model window are distinguished.
+- [x] Evaluate audit persistence is explicit; unqualified “side-effect-free Evaluate” is removed.
+- [x] Generic CEP execution recheck and event-to-prediction provenance cells are `Not reported`.
+- [x] SensorThings reference [8] uses Part 1 Sensing v1.1, OGC 18-088.
 - [x] Gate reference median/p95 fixed at 343.129/407.100 ms.
 - [x] S1/S2 fixed at 4,960/49,600 rows and described as bounded endpoints.
 - [x] 50,000 rows described as a Gate application cap, not a MySQL limit.
@@ -56,15 +60,15 @@ This checklist separates completed source/evidence work from tasks that must wai
 
 ## F. Public-release synchronization before submission
 
-- [ ] Push Final Core Freeze v3 and manuscript/revision documentation to the public repository.
-- [ ] Decide whether to retain tag `v1.0.0` or create a revision release; make C1/C2/C7 consistent with that decision.
-- [ ] Ensure the fixed commit in metadata is publicly reachable.
-- [ ] Rebuild the public release archive from the final authorized commit.
-- [ ] Recalculate and insert the final release SHA-256 in Section 6 and repository documentation.
-- [ ] Confirm public sample and conceptual site plan carry CC BY 4.0 notices.
-- [ ] Confirm source code and model bundles carry MIT notices.
-- [ ] Confirm no private field data, credentials, map keys, operational identifiers, or generated local database files are tracked.
-- [ ] Verify every URL in metadata, data availability, citations, and reviewer evidence.
+- [x] Push Final Core Freeze v3 and manuscript/revision documentation to the public repository.
+- [x] Create immutable revision tag `v1.0.1` without moving submitted tag `v1.0.0`; make C1/C2/C7 consistent.
+- [x] Ensure the fixed commit in metadata is publicly reachable.
+- [x] Rebuild the public release archive from the immutable release commit.
+- [x] Recalculate and insert the final release SHA-256 in Section 6 and repository documentation.
+- [x] Confirm public sample and conceptual site plan carry CC BY 4.0 notices.
+- [x] Confirm source code and model bundles carry MIT notices.
+- [x] Confirm no private field data, credentials, map keys, operational identifiers, generated local database files, or manuscript working files occur in the release archive.
+- [x] Verify release, archive, checksum, repository, documentation, and cited DOI/standard URLs used by the final sources.
 
 ## G. Editorial submission package
 

@@ -9,16 +9,17 @@
 | Submitted location | Revised location | Change | Reason/evidence |
 |---|---|---|---|
 | Abstract | Abstract | Adds second configuration, 15-case matrix, runtime/provenance, and bounded Docker result; retains non-algorithm scope | R1-0, R1-1, R1-3, R1-9, R1-12 |
-| Metadata C2 | Metadata C2 | Replaces stale submitted fixed commit with Final Core Freeze v3 | Revision reproducibility boundary |
+| Metadata C1/C2/C7 | Metadata C1/C2/C7 | Synchronizes one immutable v1.0.1 release, fixed release commit, documentation tree, and archive checksum | Revision reproducibility boundary |
 | Metadata C6 | Metadata C6 | Adds exercised Docker/Linux logical path and explicit non-bitwise output boundary | Phase 2C evidence; R1-12, R3-4 |
 | Section 1 related work | Section 1 + Table 1 | Expands Predictive-SHM capabilities; adds SensorThings/CEP/Predictive-SHM/SHM-EM comparison | R1-4, R1-18, R2-1, R2-2 |
 | Three contributions repeated across sections | Section 1 list + mechanism/evidence/synthesis placements | Keeps exactly three contributions and removes repetition | R1-19 |
 | Section 2.1.1 | Section 2.1.1 | Clarifies logical model, approved adapters, and MySQL boundary | R3-1 |
 | Section 2.1.2 prose | Section 2.1.2 + Table 2 + Listing 1 | Adds real contract, version/hash rules, correct model dimensions, full-export pointer | R1-5, R1-7 |
 | Missing input behavior not explained | Section 2.1.2, “Missing and asynchronous observations” | Adds backward-asof, declared fill policy, signed offsets/diagnostics, unresolved-feature rejection, and separate freshness | R2-3, R3-3 |
-| Submitted model inputs stated as 114/164 | Table 2 | Corrects to model-specific 42/42/14/14/2/50 inputs and 42/42/14/14/2/10 targets; common pool remains 164 | Database/artifact-derived contract |
+| Earlier revision mislabelled database mapping counts as model inputs | Section 2.1.2; Table 2; Listing 1 | Restores frozen preprocessor input widths of 114 for five models and 164 for Settlement; distinguishes mapping counts and 42/42/14/14/2/10 output targets | Model-dimension reconciliation against preprocessors, scripts, weights, and Phase 0.6 matrices |
 | Section 2.1.3 descriptive Future State | Section 2.1.3 + Algorithm 1 | Adds code-derived deterministic aggregation, thresholds, streaks, risk, earliest time, state hash | R1-6 |
 | Section 2.1.4 mechanism prose | Section 2.1.4 + revised Fig. 3 | Separates contract/integrity validation, rule validation, Evaluate, Execute recheck, side effects, provenance | R1-3, R1-13 |
+| Unqualified “side-effect-free Evaluate” | Abstract; Sections 1, 2.1.4, 3.3, 4.3; Fig. 3 | States that Evaluate retains an audit run but creates no formal event, Gate, response, notification, report, evidence, or prediction link | Frozen Evaluate persistence reconciliation |
 | Section 2.1.5 | Section 2.1.5 | Adds precise provenance fields and generic-media-only boundary | R1-17; release scope |
 | Submitted Fig. 4, three pages | Revised Fig. 4, one composite | Reduces screenshots to one compact three-panel illustrative figure | R1-14 |
 | Section 2.3 | Section 2.3 | Adds Observation/Prediction input-source contract and unit semantics | Unified `MetricSeriesPoint` implementation |
@@ -43,6 +44,8 @@
 | M2 | Previous matrix label conflated P00 with failure cases | “15-case validation matrix comprising one positive control, 12 failure-path cases, and two input-availability controls”; expected blocked cases had zero side effects | Abstract, Tables 3/5, Sections 3.3/4.1, Response |
 | M3 | Two bridge models insufficiently scoped | “Two registered compatible model bundles, used solely as software-workflow fixtures, produced 1,120 forecast rows”; no bridge prediction validation | Sections 3.2/4.2, Response |
 | M4 | Risk of implying Linux equivalence | Normalized output hash differs; `exactPredictionReproduction=false`; `toleranceApplied=false`; row-wise artifact retained; max absolute difference 0.00285349 | Metadata C6, Sections 3.5/4.4, Response |
+| M5 | Database mapping counts were labelled as model inputs | Aligned inputs are 114/114/114/114/114/164; mapping counts and output widths are separate | Section 2.1.2, Table 2, Listing 1, Response R1-5/R1-7 |
+| M6 | Bare “side-effect-free Evaluate” hid audit persistence | Evaluate retains one audit run and has no formal business side effects | Abstract, Fig. 3, Sections 2.1.4/3.3/4.3, Response R1-3/R1-13 |
 
 ## Figure and table plan
 

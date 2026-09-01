@@ -1,57 +1,107 @@
 {
   "schemaVersion": "shm-em-final-manuscript-review-package-verification-v1",
-  "sourcePreparationHead": "bcc108982fb4b95e9af725e1e514c091804ef1f3",
+  "sourcePreparationHead": "9caa9c0b7e8b7204a0f8e4b44e8a963edb6d5dc6",
   "canonicalZip": {
     "path": "artifacts/revision/final-manuscript-review/SHM-EM_Final_Manuscript_GPT_Review_Package.zip",
-    "bytes": 127786,
-    "sha256": "407255d7c1d35c9f8382665cb0e06933a42738fdc41adf2288a2048fd8c0637a"
+    "bytes": 138528,
+    "sha256": "00832fdb358c8afb66b64317880c6c2aeeb7b3999662e4cd8d66eb23064540e6"
   },
   "directUploadDirectory": "artifacts/revision/final-manuscript-review/gpt-direct-upload-final-manuscript",
   "directUploadFiles": [
     {
+      "name": "EVALUATE_SIDE_EFFECT_RECONCILIATION.md",
+      "bytes": 3017,
+      "sha256": "78575f8621e7a749047859e3e826073413c1200c34d245e30131a220521a3eb1"
+    },
+    {
       "name": "final-manuscript-review-manifest.json",
-      "bytes": 7945,
-      "sha256": "ccf1eb3637f4f5c4abdc24de1bf236d45d43d026a35b7b8456fbe7a3e8e22342"
+      "bytes": 9131,
+      "sha256": "e6f723cb3813ea9ef71caba360884bd2ffaffc492292c8dd39da1566fb287ed1"
     },
     {
       "name": "final-manuscript-source-validation.json",
-      "bytes": 3095,
-      "sha256": "d6f330577c3a342be5fbe8036bd48af01634bca5fdcddf616858f66771474b6b"
+      "bytes": 4243,
+      "sha256": "73e953bc80b03a131e1ce891f9cc0eac9863282893067aadd3451ffd9f4077e4"
+    },
+    {
+      "name": "final-source-url-validation.json",
+      "bytes": 4267,
+      "sha256": "910292aea14ea493238447b53ebdb40b00ab1313128c4d507c7c6fc86c807ccc"
     },
     {
       "name": "FINAL_MANUSCRIPT_COMPLETION_REPORT.md",
-      "bytes": 1457,
-      "sha256": "7fcb782eee6f8df313ef79846b228045fe26859e3c35e14b3b343cfb1c183dfc"
+      "bytes": 1759,
+      "sha256": "56b41a285b1bbd4d4b0fac98ce1d501187dcf873b3a750cdc078e6a84d29695a"
     },
     {
       "name": "Final_Reviewer_Evidence_Map.md",
-      "bytes": 4602,
-      "sha256": "0cbbb28226fd9a6ae27e52cc1439e8249d0e4b645370706ae4b930ae69ff6f3c"
+      "bytes": 4734,
+      "sha256": "de615419b71edf2cc1dfdf6f9297edffcf1e587123be84b6ac6bfae4b325eb26"
     },
     {
       "name": "Final_Submission_Checklist.md",
-      "bytes": 4819,
-      "sha256": "2dc0ea8195da42cecbf544c1d16253b2eade740b7817ed50cb4589119c4310f7"
+      "bytes": 5313,
+      "sha256": "8fe78d25e63a7ae0a46f1c82f56a97e808785da96e8760d7111f7ea901359cde"
     },
     {
       "name": "GPT_REVIEW_HANDOFF.md",
-      "bytes": 2260,
-      "sha256": "686acbc2b6a067f8a788b7e946792663f62ff8b0b47af7eb50cafdadae2631c6"
+      "bytes": 2432,
+      "sha256": "0297304adfccd51af45d9e258773a0ec76328cec75dd778b32ebad8e0096292b"
+    },
+    {
+      "name": "model-config-summary.json",
+      "bytes": 17251,
+      "sha256": "6fdefd89f7851bd36c4170683562455eb4942773a1281ebdd7bf194821d3a76d"
+    },
+    {
+      "name": "model-dimension-reconciliation.json",
+      "bytes": 18853,
+      "sha256": "cf3797d5815a881436325b083f739d49b6c396da07a6a1fc6ad3cf5872072ebc"
+    },
+    {
+      "name": "MODEL_DIMENSION_RECONCILIATION.md",
+      "bytes": 4281,
+      "sha256": "2593b363b91c2b1025879d4aefa24c23c822fb1d346977ce538c9526c472a67d"
+    },
+    {
+      "name": "related-software-comparison.md",
+      "bytes": 6083,
+      "sha256": "f0aa63ada9f391d5d11e0e1a004e4615b81187fa6dd959602c645c948bfd62e7"
+    },
+    {
+      "name": "release-publication-verification.json",
+      "bytes": 1000,
+      "sha256": "b5baad6b6876456ca58a760df0ffb0e7c30962dc245c89b3afabdbb7d943bb76"
+    },
+    {
+      "name": "RELEASE_CHECKSUMS.md",
+      "bytes": 478,
+      "sha256": "8c4f369b8eb06393df756c8533e170252881aed07f0f4582222970ad688822d4"
     },
     {
       "name": "Response_to_Reviewers_Source.md",
-      "bytes": 36769,
-      "sha256": "ccbab18e44690894adc68003e5aca25fe4e77756c82003fff8966e2f54cc9215"
+      "bytes": 37469,
+      "sha256": "d5deb5fbfe295f4820ef43b08ff802140509e79caf726438a19114cef55c78b1"
     },
     {
       "name": "Revision_Change_Map.md",
-      "bytes": 7112,
-      "sha256": "3b05d8ae0339cd54c32f0e6aed1d7dbdd64a94bd5e6f64ad788a704194efaeed"
+      "bytes": 8026,
+      "sha256": "74e8bd5a8bee87e5000cafa9961fc2ebaa7100360bc1f20e19ef390cb342adb1"
+    },
+    {
+      "name": "SENSORTHINGS_POSITIONING.md",
+      "bytes": 2349,
+      "sha256": "212c70308c526603df972e923620e2bdeb01adf6410b78f7f4f603a8368aecdf"
+    },
+    {
+      "name": "sequence-code-crosscheck.json",
+      "bytes": 3543,
+      "sha256": "12d32dbc80740dfb0ce86c4d9ad7158e4ef929ed82d951f2aaef1c81f5166c62"
     },
     {
       "name": "SHM-EM_Revised_Manuscript_Source.md",
-      "bytes": 50650,
-      "sha256": "8ce84db2e49379cfaab91c037ccb9d8be45467ed72a4289c04dda5641d4c9776"
+      "bytes": 51734,
+      "sha256": "ce721781e81d88a9f2a6163f7ad5ef72c669824cd3b1f08de241c178cd2fd22f"
     }
   ],
   "handoffHashNote": "The ZIP-internal handoff uses a non-self-referential placeholder; the project-local and direct-upload handoffs report the ZIP hash.",

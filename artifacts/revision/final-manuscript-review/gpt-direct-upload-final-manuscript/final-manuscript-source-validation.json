@@ -1,8 +1,8 @@
 {
-  "schemaVersion": "shm-em-final-manuscript-source-validation-v1",
-  "generatedAtUtc": "2026-09-01T09:59:06.909223+00:00",
+  "schemaVersion": "shm-em-final-manuscript-source-validation-v2",
+  "generatedAtUtc": "2026-09-01T11:18:41.239473+00:00",
   "finalCoreFreezeV3": "eaa7d85a0b4921ab2f6e54234cff09aee6a30c8f",
-  "head": "bcc108982fb4b95e9af725e1e514c091804ef1f3",
+  "head": "9caa9c0b7e8b7204a0f8e4b44e8a963edb6d5dc6",
   "sourceFiles": [
     "manuscript/SHM-EM_Revised_Manuscript_Source.md",
     "manuscript/Response_to_Reviewers_Source.md",
@@ -56,7 +56,7 @@
     {
       "id": "FM-09",
       "status": "PASS",
-      "detail": "Model-specific history/input/target dimensions match the database-derived configuration."
+      "detail": "Model-specific history/aligned-input/target dimensions match frozen runtime evidence."
     },
     {
       "id": "FM-10",
@@ -97,6 +97,41 @@
       "id": "FM-17",
       "status": "PASS",
       "detail": "Required GPT stop precedes DOCX generation."
+    },
+    {
+      "id": "FM-18",
+      "status": "PASS",
+      "detail": "Manuscript dimensions match the model-dimension reconciliation artifact."
+    },
+    {
+      "id": "FM-19",
+      "status": "PASS",
+      "detail": "C1/C2/C7/Section 6 identify one tag, fixed commit, and verified release archive SHA-256."
+    },
+    {
+      "id": "FM-20",
+      "status": "PASS",
+      "detail": "Submitted immutable v1.0.0 still resolves locally and remotely to the original submitted commit."
+    },
+    {
+      "id": "FM-21",
+      "status": "PASS",
+      "detail": "Evaluate wording discloses audit persistence and limits the zero-side-effect claim to formal business records."
+    },
+    {
+      "id": "FM-22",
+      "status": "PASS",
+      "detail": "Generic CEP execution recheck and provenance cells are source-grounded as Not reported."
+    },
+    {
+      "id": "FM-23",
+      "status": "PASS",
+      "detail": "Reference 8 uses SensorThings Part 1 Sensing v1.1, OGC 18-088."
+    },
+    {
+      "id": "FM-24",
+      "status": "PASS",
+      "detail": "Public response letter contains no internal governance jargon."
     }
   ],
   "pass": true,

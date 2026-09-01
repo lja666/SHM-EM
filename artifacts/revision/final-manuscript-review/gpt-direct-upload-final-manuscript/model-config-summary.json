@@ -1,0 +1,458 @@
+{
+  "schemaVersion": "shm-em-model-config-summary-v1",
+  "finalCoreFreezeV3": "eaa7d85a0b4921ab2f6e54234cff09aee6a30c8f",
+  "contractVersion": "pit_pre_contract_v1",
+  "featureMappingVersion": "pit_pre_v1",
+  "runtime": {
+    "schemaVersion": "pit_pre_runtime_v1",
+    "python": "3.10",
+    "executionDevice": "cpu",
+    "environment": {
+      "type": "native",
+      "supportedOperatingSystems": [
+        "Windows 10 or later"
+      ],
+      "setup": "requirements.lock.txt"
+    },
+    "dependencyLock": "requirements.lock.txt",
+    "dependencies": {
+      "joblib": "1.5.3",
+      "numpy": "2.2.6",
+      "pandas": "2.3.3",
+      "PyMySQL": "1.1.2",
+      "scikit-learn": "1.7.2",
+      "torch": "2.11.0"
+    },
+    "runtimeCapture": "Each prediction run stores this manifest hash and the effective package versions in input_snapshot_json.",
+    "manifestHash": "302a869bca69d40846cab5fad8d681f176220058e724b3699b4c74fbc3e09ed0"
+  },
+  "models": [
+    {
+      "modelCode": "Pressure",
+      "modelVersion": "pit_pre_v1",
+      "targetType": "Pressure",
+      "requiredHistoryRows": 13,
+      "modelFeatureMappingCount": 14,
+      "alignedInputFeatureCount": 114,
+      "outputTargetCount": 14,
+      "futureSteps": 40,
+      "timeStepMinutes": 3,
+      "architecture": {
+        "family": "TransformerCnn",
+        "transformerLayers": 1,
+        "dModel": 64,
+        "numHeads": 1,
+        "feedForwardHiddenDimension": 64,
+        "convolutionHiddenChannels": 24,
+        "kernelSize": 3,
+        "dropout": 0.03492520686643473,
+        "responseDimension": 14,
+        "environmentDimension": 2,
+        "contextualInputDimension": 112,
+        "attentionEmbeddingDimension": 64,
+        "cnnBranches": [
+          "response",
+          "environment",
+          "transformed_features",
+          "final_output"
+        ],
+        "historyWindowM": 10,
+        "directOutputChunkN": 3,
+        "lag": 2
+      },
+      "parameterSource": {
+        "type": "best_params_file",
+        "path": "src/pit_pre/models/Pressure__predict/best_params.json",
+        "note": "Parameters not encoded by tensor shape are read from this hash-checked file."
+      },
+      "trainingParametersRecordedButNotUsedAsRuntimeClaims": {
+        "learning_rate": 0.0005326569274216093,
+        "batch_size": 64
+      },
+      "artifact": {
+        "path": "src/pit_pre/models/Pressure__predict/best_model_Pressure_optuna.pth",
+        "sha256": "aef1d20d99b94607b22ded3c37c2a75300c2441db50b9fa005018fb163e1a31c"
+      },
+      "preprocessor": {
+        "path": "src/pit_pre/models/Pressure__predict/preprocessor.joblib",
+        "sha256": "3a0db327bd99be620380b4fb4a280f734325bd4767788bb5d8d7242980fe7183"
+      },
+      "inferenceScript": {
+        "path": "src/pit_pre/models/Pressure__predict/predict_Pressure_future_fixed_best_params_annotated.py",
+        "sha256": "a087cbb6ce3ae205bbfcb561d636579508b864f495cc95de4d42dae165c0977b"
+      },
+      "inputSchemaHash": "5c2f6f0f2351b15675fc223b36043729b1e7f8ab0bd08caa891593672daa65f1",
+      "bundleHash": "ccf75dd1a15df36869486022eac8f47e5d1846e94e50490cf7c9903f852fd99c",
+      "runtimeManifestHash": "302a869bca69d40846cab5fad8d681f176220058e724b3699b4c74fbc3e09ed0",
+      "hashChecks": {
+        "artifactHash": true,
+        "preprocessorHash": true,
+        "inferenceScriptHash": true,
+        "runtimeManifestHash": true,
+        "bestParamsHash": true
+      },
+      "knownLimitations": [
+        "point forecasts only",
+        "CPU runtime captured by the current manifest",
+        "architecture summary does not claim forecasting accuracy or model generalization"
+      ]
+    },
+    {
+      "modelCode": "settlement",
+      "modelVersion": "pit_pre_v1",
+      "targetType": "settlement",
+      "requiredHistoryRows": 12,
+      "modelFeatureMappingCount": 50,
+      "alignedInputFeatureCount": 164,
+      "outputTargetCount": 10,
+      "futureSteps": 40,
+      "timeStepMinutes": 3,
+      "architecture": {
+        "family": "TransformerCnn",
+        "transformerLayers": 1,
+        "dModel": 96,
+        "numHeads": 8,
+        "feedForwardHiddenDimension": 256,
+        "convolutionHiddenChannels": 48,
+        "kernelSize": 5,
+        "dropout": 0.22295681752688232,
+        "responseDimension": 10,
+        "environmentDimension": 2,
+        "contextualInputDimension": 162,
+        "attentionEmbeddingDimension": 96,
+        "cnnBranches": [
+          "response",
+          "environment",
+          "transformed_features",
+          "final_output"
+        ],
+        "historyWindowM": 10,
+        "directOutputChunkN": 3,
+        "lag": 2
+      },
+      "parameterSource": {
+        "type": "best_params_file",
+        "path": "src/pit_pre/models/settlement_predict/best_params.json",
+        "note": "Parameters not encoded by tensor shape are read from this hash-checked file."
+      },
+      "trainingParametersRecordedButNotUsedAsRuntimeClaims": {
+        "learning_rate": 0.000457352093592702,
+        "batch_size": 64
+      },
+      "artifact": {
+        "path": "src/pit_pre/models/settlement_predict/best_model_settlement_optuna.pth",
+        "sha256": "3c18be8ae8fcdb1f8c740e8d0bf1c3e8775a5c0d1d11994d4360be1213c7ad40"
+      },
+      "preprocessor": {
+        "path": "src/pit_pre/models/settlement_predict/preprocessor.joblib",
+        "sha256": "78b070dd1fbd6006b3254b60fb328a36f7748a401baca51d114586f5f9cc3e10"
+      },
+      "inferenceScript": {
+        "path": "src/pit_pre/models/settlement_predict/predict_settlement_future_fixed_best_params_annotated.py",
+        "sha256": "3d347f2da9230937e664a98cfd5386035469bc0bd57002a8032f1fd64a61c0f2"
+      },
+      "inputSchemaHash": "5c2f6f0f2351b15675fc223b36043729b1e7f8ab0bd08caa891593672daa65f1",
+      "bundleHash": "c9a3dc8775b31696f64e211e6d4a0dbd02b3112c11bb68c3a1e70e8a9d0a2b12",
+      "runtimeManifestHash": "302a869bca69d40846cab5fad8d681f176220058e724b3699b4c74fbc3e09ed0",
+      "hashChecks": {
+        "artifactHash": true,
+        "preprocessorHash": true,
+        "inferenceScriptHash": true,
+        "runtimeManifestHash": true,
+        "bestParamsHash": true
+      },
+      "knownLimitations": [
+        "point forecasts only",
+        "CPU runtime captured by the current manifest",
+        "architecture summary does not claim forecasting accuracy or model generalization"
+      ]
+    },
+    {
+      "modelCode": "Strain",
+      "modelVersion": "pit_pre_v1",
+      "targetType": "Strain",
+      "requiredHistoryRows": 13,
+      "modelFeatureMappingCount": 14,
+      "alignedInputFeatureCount": 114,
+      "outputTargetCount": 14,
+      "futureSteps": 40,
+      "timeStepMinutes": 3,
+      "architecture": {
+        "family": "TransformerCnn",
+        "transformerLayers": 1,
+        "dModel": 96,
+        "numHeads": 4,
+        "feedForwardHiddenDimension": 64,
+        "convolutionHiddenChannels": 48,
+        "kernelSize": 5,
+        "dropout": 0.07680317420912611,
+        "responseDimension": 14,
+        "environmentDimension": 2,
+        "contextualInputDimension": 112,
+        "attentionEmbeddingDimension": 96,
+        "cnnBranches": [
+          "response",
+          "environment",
+          "transformed_features",
+          "final_output"
+        ],
+        "historyWindowM": 10,
+        "directOutputChunkN": 3,
+        "lag": 3
+      },
+      "parameterSource": {
+        "type": "best_params_file",
+        "path": "src/pit_pre/models/Strain__predict/best_params.json",
+        "note": "Parameters not encoded by tensor shape are read from this hash-checked file."
+      },
+      "trainingParametersRecordedButNotUsedAsRuntimeClaims": {
+        "learning_rate": 0.00035792395494525043,
+        "batch_size": 64
+      },
+      "artifact": {
+        "path": "src/pit_pre/models/Strain__predict/best_model_Strain_optuna.pth",
+        "sha256": "687acb1a44f79f9566e2e677f33478addd66c83a9e300f32666674f7d2cdc694"
+      },
+      "preprocessor": {
+        "path": "src/pit_pre/models/Strain__predict/preprocessor.joblib",
+        "sha256": "6660a92d879f1774bae92619392f95219927608584c6f3c72e6ce1f7c77b71df"
+      },
+      "inferenceScript": {
+        "path": "src/pit_pre/models/Strain__predict/predict_Strain_future_fixed_best_params_annotated.py",
+        "sha256": "b41d0e55ef58d04bb6a90ce224a55b5180c2794f1debd18a863ba4f1309cd8fd"
+      },
+      "inputSchemaHash": "5c2f6f0f2351b15675fc223b36043729b1e7f8ab0bd08caa891593672daa65f1",
+      "bundleHash": "8a5b23617c265ea5da22e368ab1a5d69414d96f63244fdb4f0633798f085328e",
+      "runtimeManifestHash": "302a869bca69d40846cab5fad8d681f176220058e724b3699b4c74fbc3e09ed0",
+      "hashChecks": {
+        "artifactHash": true,
+        "preprocessorHash": true,
+        "inferenceScriptHash": true,
+        "runtimeManifestHash": true,
+        "bestParamsHash": true
+      },
+      "knownLimitations": [
+        "point forecasts only",
+        "CPU runtime captured by the current manifest",
+        "architecture summary does not claim forecasting accuracy or model generalization"
+      ]
+    },
+    {
+      "modelCode": "water",
+      "modelVersion": "pit_pre_v1",
+      "targetType": "water",
+      "requiredHistoryRows": 13,
+      "modelFeatureMappingCount": 2,
+      "alignedInputFeatureCount": 114,
+      "outputTargetCount": 2,
+      "futureSteps": 40,
+      "timeStepMinutes": 3,
+      "architecture": {
+        "family": "TransformerCnn",
+        "transformerLayers": 1,
+        "dModel": 96,
+        "numHeads": 1,
+        "feedForwardHiddenDimension": 128,
+        "convolutionHiddenChannels": 16,
+        "kernelSize": 3,
+        "dropout": 0.0016791138100246932,
+        "responseDimension": 2,
+        "environmentDimension": 2,
+        "contextualInputDimension": 112,
+        "attentionEmbeddingDimension": 96,
+        "cnnBranches": [
+          "response",
+          "environment",
+          "transformed_features",
+          "final_output"
+        ],
+        "historyWindowM": 10,
+        "directOutputChunkN": 3,
+        "lag": 3
+      },
+      "parameterSource": {
+        "type": "best_params_file",
+        "path": "src/pit_pre/models/water__predict/best_params.json",
+        "note": "Parameters not encoded by tensor shape are read from this hash-checked file."
+      },
+      "trainingParametersRecordedButNotUsedAsRuntimeClaims": {
+        "learning_rate": 0.00022892884873870973,
+        "batch_size": 32
+      },
+      "artifact": {
+        "path": "src/pit_pre/models/water__predict/best_model_water_optuna.pth",
+        "sha256": "f3d3bb389db4efeb59a76cf6d6421b1ac1f72749779eb00404a1ea154cc1efee"
+      },
+      "preprocessor": {
+        "path": "src/pit_pre/models/water__predict/preprocessor.joblib",
+        "sha256": "c28aa693d73085d9ff5996fc8e0b5e4011f232c5d81b1b7acec1014912473256"
+      },
+      "inferenceScript": {
+        "path": "src/pit_pre/models/water__predict/predict_water_future_fixed_best_params_annotated.py",
+        "sha256": "d4f30c8e0c57dbeb37987249ed45657c60e5d50b5eda8b587cf8e266d95a72be"
+      },
+      "inputSchemaHash": "5c2f6f0f2351b15675fc223b36043729b1e7f8ab0bd08caa891593672daa65f1",
+      "bundleHash": "752d223ce9915ac38a136cbccdc34516a8f7e71b63d3925568544d736f3558eb",
+      "runtimeManifestHash": "302a869bca69d40846cab5fad8d681f176220058e724b3699b4c74fbc3e09ed0",
+      "hashChecks": {
+        "artifactHash": true,
+        "preprocessorHash": true,
+        "inferenceScriptHash": true,
+        "runtimeManifestHash": true,
+        "bestParamsHash": true
+      },
+      "knownLimitations": [
+        "point forecasts only",
+        "CPU runtime captured by the current manifest",
+        "architecture summary does not claim forecasting accuracy or model generalization"
+      ]
+    },
+    {
+      "modelCode": "XD",
+      "modelVersion": "pit_pre_v1",
+      "targetType": "XD",
+      "requiredHistoryRows": 12,
+      "modelFeatureMappingCount": 42,
+      "alignedInputFeatureCount": 114,
+      "outputTargetCount": 42,
+      "futureSteps": 40,
+      "timeStepMinutes": 3,
+      "architecture": {
+        "family": "TransformerCnn",
+        "transformerLayers": 1,
+        "dModel": 64,
+        "numHeads": 8,
+        "feedForwardHiddenDimension": 128,
+        "convolutionHiddenChannels": 64,
+        "kernelSize": 7,
+        "dropout": 0.23002952827050327,
+        "responseDimension": 42,
+        "environmentDimension": 2,
+        "contextualInputDimension": 112,
+        "attentionEmbeddingDimension": 64,
+        "cnnBranches": [
+          "response",
+          "environment",
+          "transformed_features",
+          "final_output"
+        ],
+        "historyWindowM": 10,
+        "directOutputChunkN": 3,
+        "lag": 2
+      },
+      "parameterSource": {
+        "type": "best_params_file",
+        "path": "src/pit_pre/models/XD__predict/best_params.json",
+        "note": "Parameters not encoded by tensor shape are read from this hash-checked file."
+      },
+      "trainingParametersRecordedButNotUsedAsRuntimeClaims": {
+        "learning_rate": 0.00031990275565713707,
+        "batch_size": 64
+      },
+      "artifact": {
+        "path": "src/pit_pre/models/XD__predict/best_model_XD_optuna.pth",
+        "sha256": "6a1b376e0390e5d0470ff7ee7bc54032565f42b2768ede36c5b931546b716cd9"
+      },
+      "preprocessor": {
+        "path": "src/pit_pre/models/XD__predict/preprocessor.joblib",
+        "sha256": "ac01c13899e0f647758cb65fd1ba9a04e3560569a66fa2c82f0d2a4ec394a54b"
+      },
+      "inferenceScript": {
+        "path": "src/pit_pre/models/XD__predict/predict_XD_future_direct_comment_enhanced.py",
+        "sha256": "3c4c4fd5724cb4de4c1ee6cc7e2ce64364837569877648a29c35b67d7aae10d7"
+      },
+      "inputSchemaHash": "5c2f6f0f2351b15675fc223b36043729b1e7f8ab0bd08caa891593672daa65f1",
+      "bundleHash": "af220f90ae2c868359dea5d991dc46ac3df1fa6727adcee48385fec2fe9457dc",
+      "runtimeManifestHash": "302a869bca69d40846cab5fad8d681f176220058e724b3699b4c74fbc3e09ed0",
+      "hashChecks": {
+        "artifactHash": true,
+        "preprocessorHash": true,
+        "inferenceScriptHash": true,
+        "runtimeManifestHash": true,
+        "bestParamsHash": true
+      },
+      "knownLimitations": [
+        "point forecasts only",
+        "CPU runtime captured by the current manifest",
+        "architecture summary does not claim forecasting accuracy or model generalization"
+      ]
+    },
+    {
+      "modelCode": "YD",
+      "modelVersion": "pit_pre_v1",
+      "targetType": "YD",
+      "requiredHistoryRows": 16,
+      "modelFeatureMappingCount": 42,
+      "alignedInputFeatureCount": 114,
+      "outputTargetCount": 42,
+      "futureSteps": 40,
+      "timeStepMinutes": 3,
+      "architecture": {
+        "family": "TransformerCnn",
+        "transformerLayers": 1,
+        "dModel": 128,
+        "numHeads": 4,
+        "feedForwardHiddenDimension": 64,
+        "convolutionHiddenChannels": 32,
+        "kernelSize": 3,
+        "dropout": 0.055797544260816734,
+        "responseDimension": 42,
+        "environmentDimension": 2,
+        "contextualInputDimension": 112,
+        "attentionEmbeddingDimension": 128,
+        "cnnBranches": [
+          "response",
+          "environment",
+          "transformed_features",
+          "final_output"
+        ],
+        "historyWindowM": 10,
+        "directOutputChunkN": 3,
+        "lag": 6
+      },
+      "parameterSource": {
+        "type": "script_fallback",
+        "path": "src/pit_pre/models/YD__predict/predict_YD_future_direct.py",
+        "note": "No independent best-parameter file is declared; explicit script values are reported."
+      },
+      "trainingParametersRecordedButNotUsedAsRuntimeClaims": {
+        "learning_rate": 0.00027010527749605503,
+        "batch_size": 64
+      },
+      "artifact": {
+        "path": "src/pit_pre/models/YD__predict/best_model_YD_custom_m10_n3.pth",
+        "sha256": "ad586b1219bc7399ce486a7196216017a563b9c5a4f5f4be6d4eb3e0d1ccf543"
+      },
+      "preprocessor": {
+        "path": "src/pit_pre/models/YD__predict/preprocessor.joblib",
+        "sha256": "49020979b1cd086fa6ed093c68ea496063327b6c37ccb8f42305635ac914eff1"
+      },
+      "inferenceScript": {
+        "path": "src/pit_pre/models/YD__predict/predict_YD_future_direct.py",
+        "sha256": "96afa649deb323be7a4962312ff0846616315d03f43357a37a4222d81a8327e3"
+      },
+      "inputSchemaHash": "5c2f6f0f2351b15675fc223b36043729b1e7f8ab0bd08caa891593672daa65f1",
+      "bundleHash": "98b8465071829275f00c82002df5a529b637c4114598fdb92659fbea1ca395fe",
+      "runtimeManifestHash": "302a869bca69d40846cab5fad8d681f176220058e724b3699b4c74fbc3e09ed0",
+      "hashChecks": {
+        "artifactHash": true,
+        "preprocessorHash": true,
+        "inferenceScriptHash": true,
+        "runtimeManifestHash": true,
+        "bestParamsHash": true
+      },
+      "knownLimitations": [
+        "point forecasts only",
+        "CPU runtime captured by the current manifest",
+        "architecture summary does not claim forecasting accuracy or model generalization"
+      ]
+    }
+  ],
+  "modelCount": 6,
+  "allHashChecksPass": true,
+  "source": {
+    "databaseDerivedContract": "artifacts/revision/manuscript/data-model-contract-export.json",
+    "weights": "Tensor dimensions loaded from each declared model artifact",
+    "nonTensorParameters": "Hash-checked best_params.json or explicit inference-script fallback"
+  }
+}

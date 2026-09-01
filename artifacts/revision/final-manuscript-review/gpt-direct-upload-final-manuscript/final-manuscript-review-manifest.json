@@ -1,9 +1,9 @@
 {
   "schemaVersion": "shm-em-final-manuscript-review-manifest-v1",
-  "generatedAtUtc": "2026-09-01T09:59:07.582952+00:00",
+  "generatedAtUtc": "2026-09-01T11:18:41.633138+00:00",
   "submittedManuscriptAuthority": "SOFTX-D-26-00931.pdf",
   "finalCoreFreezeV3": "eaa7d85a0b4921ab2f6e54234cff09aee6a30c8f",
-  "sourcePreparationHead": "bcc108982fb4b95e9af725e1e514c091804ef1f3",
+  "sourcePreparationHead": "9caa9c0b7e8b7204a0f8e4b44e8a963edb6d5dc6",
   "sourceFiles": [
     "manuscript/SHM-EM_Revised_Manuscript_Source.md",
     "manuscript/Response_to_Reviewers_Source.md",
@@ -13,7 +13,7 @@
   ],
   "validation": {
     "pass": true,
-    "checkCount": 17,
+    "checkCount": 24,
     "reviewerItemCount": 27,
     "referenceCount": 30
   },
@@ -21,33 +21,33 @@
   "files": [
     {
       "path": "manuscript/SHM-EM_Revised_Manuscript_Source.md",
-      "bytes": 50650,
-      "sha256": "8ce84db2e49379cfaab91c037ccb9d8be45467ed72a4289c04dda5641d4c9776"
+      "bytes": 51734,
+      "sha256": "ce721781e81d88a9f2a6163f7ad5ef72c669824cd3b1f08de241c178cd2fd22f"
     },
     {
       "path": "manuscript/Response_to_Reviewers_Source.md",
-      "bytes": 36769,
-      "sha256": "ccbab18e44690894adc68003e5aca25fe4e77756c82003fff8966e2f54cc9215"
+      "bytes": 37469,
+      "sha256": "d5deb5fbfe295f4820ef43b08ff802140509e79caf726438a19114cef55c78b1"
     },
     {
       "path": "manuscript/Revision_Change_Map.md",
-      "bytes": 7112,
-      "sha256": "3b05d8ae0339cd54c32f0e6aed1d7dbdd64a94bd5e6f64ad788a704194efaeed"
+      "bytes": 8026,
+      "sha256": "74e8bd5a8bee87e5000cafa9961fc2ebaa7100360bc1f20e19ef390cb342adb1"
     },
     {
       "path": "manuscript/Final_Reviewer_Evidence_Map.md",
-      "bytes": 4602,
-      "sha256": "0cbbb28226fd9a6ae27e52cc1439e8249d0e4b645370706ae4b930ae69ff6f3c"
+      "bytes": 4734,
+      "sha256": "de615419b71edf2cc1dfdf6f9297edffcf1e587123be84b6ac6bfae4b325eb26"
     },
     {
       "path": "manuscript/Final_Submission_Checklist.md",
-      "bytes": 4819,
-      "sha256": "2dc0ea8195da42cecbf544c1d16253b2eade740b7817ed50cb4589119c4310f7"
+      "bytes": 5313,
+      "sha256": "8fe78d25e63a7ae0a46f1c82f56a97e808785da96e8760d7111f7ea901359cde"
     },
     {
       "path": "docs/revision/DATA_MODEL_CONTRACT_SPEC.md",
-      "bytes": 8446,
-      "sha256": "c77fb29031cea85112433ace860836aa0d015fddd84897443168ab14bb4f91b2"
+      "bytes": 8726,
+      "sha256": "23b118e02444d97f2acee3affe1f46e1103483e9e788b69825fe62250c8d501e"
     },
     {
       "path": "docs/revision/PROJECT_FUTURE_STATE_ALGORITHM.md",
@@ -56,8 +56,8 @@
     },
     {
       "path": "docs/revision/MODEL_CONFIG_SUMMARY.md",
-      "bytes": 2251,
-      "sha256": "7916881b1061f6e79eb1ace9936aed4fb033c5573748ccc7f5476f7f6290caf6"
+      "bytes": 2639,
+      "sha256": "42ddb496d362b723b609a1511f31f17d4ec9b81d7bdba66ea3b10c3b7667b471"
     },
     {
       "path": "docs/revision/PROVENANCE_TRACE_EXAMPLE.md",
@@ -66,28 +66,33 @@
     },
     {
       "path": "docs/revision/RELATED_SOFTWARE_COMPARISON.md",
-      "bytes": 5992,
-      "sha256": "e59b680e215325d86c2c3838ea3380834f6de8d295cc7dc8875002b0dc857fa1"
+      "bytes": 6083,
+      "sha256": "f0aa63ada9f391d5d11e0e1a004e4615b81187fa6dd959602c645c948bfd62e7"
     },
     {
       "path": "docs/revision/SENSORTHINGS_POSITIONING.md",
       "bytes": 2349,
-      "sha256": "882526b7556aa38fda7e998164cd485760f5afc55464c3d4381b31928b920e25"
+      "sha256": "212c70308c526603df972e923620e2bdeb01adf6410b78f7f4f603a8368aecdf"
     },
     {
       "path": "docs/revision/STORAGE_ADAPTER_BOUNDARY.md",
       "bytes": 3325,
-      "sha256": "229289fafd0220545ac2549320d1d247ef7087e555cb8f75c3153468479154ba"
+      "sha256": "36d934297c70b54ac0ccce0f2bd5f45b6a99350b14e6c18eaf6acc1e57767724"
+    },
+    {
+      "path": "docs/RELEASE_CHECKSUMS.md",
+      "bytes": 478,
+      "sha256": "8c4f369b8eb06393df756c8533e170252881aed07f0f4582222970ad688822d4"
     },
     {
       "path": "docs/revision/figures/forecast-event-sequence.mmd",
-      "bytes": 2916,
-      "sha256": "dac2e83ef91d7e60133b13210c5469af484f24375732ef8c132d4a168ba81267"
+      "bytes": 2958,
+      "sha256": "2e2f4d8edf068de876a49043b83704035cabd07d5ab713277b13496ba8932f82"
     },
     {
       "path": "SECURITY.md",
       "bytes": 2498,
-      "sha256": "dbbb94e904acb8087c3e35c1239c27c6c6c7f752a31301aafcbd108265a72451"
+      "sha256": "2fc54ef9cdec2702ee3c193d8f18fb3f2fb04e5043af159c62164d86760759ca"
     },
     {
       "path": "compose.yaml",
@@ -97,7 +102,7 @@
     {
       "path": "src/backend/Dockerfile",
       "bytes": 723,
-      "sha256": "80a441a36bac3f7cc68aed4fc12491b8fd5f4ec59d32e2f766608e6a009ebb34"
+      "sha256": "0c53472e9c32fe750752e49f9fc7b4a9aeab8cb62274960db0782f8bcfec7b5e"
     },
     {
       "path": "src/frontend/Dockerfile",
@@ -156,23 +161,48 @@
     },
     {
       "path": "artifacts/revision/manuscript/related-software-comparison.md",
-      "bytes": 5992,
-      "sha256": "e59b680e215325d86c2c3838ea3380834f6de8d295cc7dc8875002b0dc857fa1"
+      "bytes": 6083,
+      "sha256": "f0aa63ada9f391d5d11e0e1a004e4615b81187fa6dd959602c645c948bfd62e7"
     },
     {
       "path": "artifacts/revision/manuscript/sequence-code-crosscheck.json",
-      "bytes": 3307,
-      "sha256": "944610b6df50d3eae82e5e3b1230c2a495c6ba1f1182548788b4f25abe9b8f45"
+      "bytes": 3543,
+      "sha256": "12d32dbc80740dfb0ce86c4d9ad7158e4ef929ed82d951f2aaef1c81f5166c62"
     },
     {
       "path": "artifacts/revision/manuscript/model-config-summary.json",
-      "bytes": 16729,
-      "sha256": "20c4d428f31d42d14007b03d83f93e03ca6a3235eb004a0b047dd3c048a6691b"
+      "bytes": 17251,
+      "sha256": "6fdefd89f7851bd36c4170683562455eb4942773a1281ebdd7bf194821d3a76d"
+    },
+    {
+      "path": "artifacts/revision/manuscript/MODEL_DIMENSION_RECONCILIATION.md",
+      "bytes": 4281,
+      "sha256": "2593b363b91c2b1025879d4aefa24c23c822fb1d346977ce538c9526c472a67d"
+    },
+    {
+      "path": "artifacts/revision/manuscript/model-dimension-reconciliation.json",
+      "bytes": 18853,
+      "sha256": "cf3797d5815a881436325b083f739d49b6c396da07a6a1fc6ad3cf5872072ebc"
+    },
+    {
+      "path": "artifacts/revision/manuscript/EVALUATE_SIDE_EFFECT_RECONCILIATION.md",
+      "bytes": 3017,
+      "sha256": "78575f8621e7a749047859e3e826073413c1200c34d245e30131a220521a3eb1"
+    },
+    {
+      "path": "artifacts/revision/final-manuscript-review/release-publication-verification.json",
+      "bytes": 1000,
+      "sha256": "b5baad6b6876456ca58a760df0ffb0e7c30962dc245c89b3afabdbb7d943bb76"
+    },
+    {
+      "path": "artifacts/revision/final-manuscript-review/final-source-url-validation.json",
+      "bytes": 4267,
+      "sha256": "910292aea14ea493238447b53ebdb40b00ab1313128c4d507c7c6fc86c807ccc"
     },
     {
       "path": "artifacts/revision/manuscript/data-model-contract-export.json",
-      "bytes": 256237,
-      "sha256": "ed1b0561ffa66bdb73546fea08ae8caf12103038f2f4c3861e743d76fb945f4e"
+      "bytes": 256513,
+      "sha256": "5cdb00281cdfad8901c8b2ab53478c34ab61424bb61325fa7c32803700eb7185"
     },
     {
       "path": "artifacts/revision/manuscript/provenance-trace-final.json",

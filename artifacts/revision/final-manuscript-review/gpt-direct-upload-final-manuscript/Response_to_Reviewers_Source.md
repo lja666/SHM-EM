@@ -5,7 +5,7 @@
 **Manuscript:** SHM-EM: A forecast-aware event management framework for heterogeneous engineering monitoring  
 **Manuscript number:** SOFTX-D-26-00931
 
-We thank the Editor and Reviewers for the constructive comments. We retained the software architecture and research-software positioning while substantially strengthening validation, specification, related-software positioning, portability evidence, and limitations. The revised manuscript does not introduce a new forecasting algorithm or claim forecasting superiority. Production business logic remains frozen at Final Core Freeze v3 (`eaa7d85a0b4921ab2f6e54234cff09aee6a30c8f`).
+We thank the Editor and Reviewers for the constructive comments. We retained the software architecture and research-software positioning while substantially strengthening validation, specification, related-software positioning, portability evidence, and limitations. The revised manuscript does not introduce a new forecasting algorithm or claim forecasting superiority. The revised software release retains a fixed production-core baseline.
 
 The principal additions are: (i) a real versioned contract example and verified six-model configuration; (ii) a code-derived Project Future State algorithm and controlled-transition sequence; (iii) a synthetic second configuration used solely as a software-reuse fixture; (iv) a 15-case validation matrix comprising one positive control, 12 failure-path cases, and two input-availability controls; (v) repeated runtime and bounded-scaling evidence; (vi) a concrete formal-event provenance trace; (vii) an exercised Docker/Linux logical reproduction path with its numerical non-identity reported explicitly; and (viii) a source-grounded related-software comparison.
 
@@ -41,7 +41,7 @@ We do not claim a new forecasting algorithm, improved forecasting accuracy, or a
 
 **Response**
 
-We added one synthetic bridge-monitoring configuration as a software-reuse fixture. It registers one project, three stations, 12 instruments, 26 metric bindings, four observation mappings, 164 feature mappings, two compatible model bundles, and one rule. Seven final functional checks (B9-B15) passed and 1,120 forecast rows were produced. Relative to Final Core Freeze v3, this configuration required zero frozen backend source changes, zero frozen front-end workflow source changes, zero PIT_PRE core changes, and zero alterations to existing observation-table schemas.
+We added one synthetic bridge-monitoring configuration as a software-reuse fixture. It registers one project, three stations, 12 instruments, 26 metric bindings, four observation mappings, 164 feature mappings, two compatible model bundles, and one rule. Seven end-to-end functional checks passed and 1,120 forecast rows were produced. Relative to the fixed revised production core, this configuration required zero backend business-source changes, zero front-end workflow-source changes, zero PIT_PRE core changes, and zero alterations to existing observation-table schemas.
 
 **Changes in manuscript**
 
@@ -49,7 +49,7 @@ New Section 3.2 and Table 4 report the registration inventory, outputs, function
 
 **Evidence**
 
-`artifacts/revision/benchmarks/route-p/phase1b-regression.json`; `artifacts/revision/benchmarks/route-p/phase1b-regression/`; Git diff relative to Final Core Freeze v3.
+`artifacts/revision/benchmarks/route-p/phase1b-regression.json`; `artifacts/revision/benchmarks/route-p/phase1b-regression/`; Git diff relative to the fixed revised production-core baseline.
 
 **Scope / non-claim**
 
@@ -85,7 +85,7 @@ The measurements characterize the reference implementation under documented sing
 
 **Response**
 
-We executed a 15-case validation matrix comprising one positive control (P00), 12 failure-path cases (F01-F12), and two input-availability controls (I01-I02) in isolated databases. It includes every requested fault. F09 exposed a persisted-integrity gap: stored hashes had to be recomputed from canonical rows rather than trusted as metadata. The authorized narrow correction added that revalidation. F12 then confirmed that mutation after Evaluate is detected by Execute's independent reload and Gate recheck. All cases expected to be blocked produced zero formal side effects.
+We executed a 15-case validation matrix comprising one positive control (P00), 12 failure-path cases (F01-F12), and two input-availability controls (I01-I02) in isolated databases. It includes every requested fault. F09 exposed a persisted-integrity gap: stored hashes had to be recomputed from canonical rows rather than trusted as metadata. A narrowly scoped correction added that revalidation. F12 then confirmed that mutation after Evaluate is detected by Execute's independent reload and Gate recheck. Evaluate retains one evaluation/audit run but has no formal business side effects: it creates no formal event, execution Gate, response workflow or step, notification, report, evidence, or prediction link. All cases expected to be blocked produced zero formal event, response-workflow, response-step, report, evidence, or prediction-link records.
 
 **Changes in manuscript**
 
@@ -133,7 +133,7 @@ We exported the authoritative database contract and added a compact real contrac
 
 **Changes in manuscript**
 
-Section 2.1.2, Table 2, and Listing 1 formalize the contract and distinguish the 164-feature common pool from each model's selected input width.
+Section 2.1.2, Table 2, and Listing 1 formalize the contract and distinguish the 164-feature common pool, each frozen preprocessor's 114- or 164-column aligned input, database model-feature mapping counts, and output targets.
 
 **Evidence**
 
@@ -173,15 +173,15 @@ Project Future State is deterministic rule-bound aggregation, not probabilistic 
 
 **Response**
 
-We added model-specific history, input and target counts, Transformer dimensions, attention heads, feed-forward dimensions, CNN channels/kernel, parameter source, and verified hashes. We corrected the submitted table's conflation of the common 164-feature pool with model-specific inputs.
+We reconciled model-specific history, aligned input and target counts against the frozen preprocessors, inference scripts, model-weight shapes, and Phase 0.6 numerical matrices. We also report Transformer dimensions, attention heads, feed-forward dimensions, CNN channels/kernel, parameter source, and verified hashes. The database mapping counts previously labelled as inputs are now identified separately.
 
 **Changes in manuscript**
 
-Table 2 reports the verified configuration: YD 42/42, XD 42/42, Strain 14/14, Pressure 14/14, Water 2/2, and Settlement 50/10 inputs/targets, with 12-16 history steps.
+Table 2 reports the verified aligned-input/output configuration: YD 114/42, XD 114/42, Strain 114/14, Pressure 114/14, Water 114/2, and Settlement 164/10, with 12-16 declared runner histories. Pressure declares 13 rows but its frozen script consumes the final 12 rows (`m=10`, `lag=2`).
 
 **Evidence**
 
-`docs/revision/MODEL_CONFIG_SUMMARY.md`; `artifacts/revision/manuscript/model-config-summary.json`; immutable model cards and hashes under `src/pit_pre/models/`.
+`artifacts/revision/manuscript/MODEL_DIMENSION_RECONCILIATION.md`; `artifacts/revision/manuscript/model-dimension-reconciliation.json`; `docs/revision/MODEL_CONFIG_SUMMARY.md`; immutable model cards and hashes under `src/pit_pre/models/`.
 
 **Scope / non-claim**
 
@@ -305,7 +305,7 @@ Windows remains the exact-output reference. The container result is reported onl
 
 **Response**
 
-We replaced the ambiguous mechanism flow with a code-crosschecked sequence. It separates contract/integrity validation, optional Future State inspection, rule semantic validation, side-effect-free Evaluate, Execute Gate recomputation/persistence, formal side effects, and provenance.
+We replaced the ambiguous mechanism flow with a code-crosschecked sequence. It separates contract/integrity validation, optional Future State inspection, rule semantic validation, Evaluate candidate calculation plus its audit-run insertion, Execute Gate recomputation/persistence, formal business side effects, and provenance.
 
 **Changes in manuscript**
 
@@ -415,7 +415,7 @@ We do not claim that every API directly exposes every persisted hash.
 
 **Response**
 
-We now describe SensorThings as a standardized observation/sensor Web model and the SHM-EM registry as a separate internal abstraction. A future adapter could map SensorThings entities and observations into the registry, but no endpoint, adapter, or conformance test exists in v1.0.0.
+We now describe SensorThings as a standardized observation/sensor Web model and the SHM-EM registry as a separate internal abstraction. A future adapter could map SensorThings entities and observations into the registry, but no endpoint, adapter, or conformance test exists in v1.0.1.
 
 **Changes in manuscript**
 
@@ -563,7 +563,7 @@ Section 4.4 summarizes these controls and retains the research-reference boundar
 
 **Scope / non-claim**
 
-These are deployment requirements, not controls implemented by v1.0.0.
+These are deployment requirements, not controls implemented by v1.0.1.
 
 ### R3-3. Asynchronous sampling, latency, and missing points
 

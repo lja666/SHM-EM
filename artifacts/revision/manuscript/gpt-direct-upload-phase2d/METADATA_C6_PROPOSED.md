@@ -10,4 +10,4 @@ Java 8/Maven 3.8+, MySQL 8.0+, Node.js 20+/npm, and Python 3.10 with locked depe
 
 ## Required accompanying limitation
 
-The Docker run reproduced six models, 124 targets, 40 steps, and 4,960 persisted rows with complete Gate, Future State, Evaluate, Execute, and provenance semantics. Its normalized output hash differed from the Windows reference; maximum persisted absolute difference was `0.00285349`, maximum relative difference was `0.3918730158730158730158730159`, and no tolerance was applied. Native Ubuntu-host validation was not separately captured.
+The Docker run reproduced six models, 124 targets, 40 steps, and 4,960 persisted rows with complete Gate, Future State, Evaluate, Execute, and provenance semantics. Its normalized output hash differed from the Windows reference (`exactPredictionReproduction=false`); maximum persisted absolute difference was `0.00285349`, maximum relative difference was `0.3918730158730158730158730159`, and no tolerance was applied (`toleranceApplied=false`). The full row-wise comparison artifact is retained in the repository. Native Ubuntu-host validation was not separately captured.

@@ -1,11 +1,11 @@
 {
   "schemaVersion": "shm-em-phase2d-review-package-verification-v1",
   "finalCoreFreezeV3": "eaa7d85a0b4921ab2f6e54234cff09aee6a30c8f",
-  "evidencePreparationHead": "4beb0ba6d1b630171fb55c835036ba4c17ce1813",
+  "evidencePreparationHead": "7f9648582c5d4c6bb01648664d74c3172e11da9a",
   "canonicalZip": {
     "path": "artifacts/revision/manuscript/SHM-EM_Phase2D_GPT_Review_Package.zip",
-    "bytes": 75801,
-    "sha256": "cc300d1d0f34b9e5c5061dc4e438b956f9bba21220207719cfd4c3a38e1fbc54",
+    "bytes": 76420,
+    "sha256": "2586f26e9b3962d60c8ba15ffd9cab948e7702e0a9860519f8ae13297fc26c89",
     "entries": 34
   },
   "directUploadDirectory": "artifacts/revision/manuscript/gpt-direct-upload-phase2d",
@@ -28,32 +28,32 @@
     {
       "name": "GPT_REVIEW_HANDOFF.md",
       "bytes": 1788,
-      "sha256": "da213323f4f870a2b41b827b48e974db92e6fd2346b09c52c35c50ca93bcd973"
+      "sha256": "beca8e8089c5e3cfa154dfee09c626122b01a60c8d647de7ac26583927d671f7"
     },
     {
       "name": "IMPACT_RESTRUCTURING_PLAN.md",
-      "bytes": 5737,
-      "sha256": "f721ccf00f9aa1cd96b5d9b4d489a8d55917c757981319727098066964fe5a46"
+      "bytes": 6021,
+      "sha256": "e9fe3fcaacde56cba16a8d5e5c085b87c9f68b9473d128e17f42e8d5c3eb9f1c"
     },
     {
       "name": "METADATA_C6_PROPOSED.md",
-      "bytes": 1536,
-      "sha256": "844e5bc753fcff264f05ba577bcf50669144cda6edf4f313cdcbb8f53d2330b7"
+      "bytes": 1670,
+      "sha256": "a72705ec09ecc2dbfbbe9f06c6e452f6c3b1b026984116dc1fe09aa4b05e5b38"
     },
     {
       "name": "phase2d-manifest.json",
       "bytes": 7573,
-      "sha256": "346cf39d3a3545e8da9a4d746ada8e8346934417cd0ad2c51d77a0ebfcb6344c"
+      "sha256": "194e930a34ee2098acc8f19641134756ad9f64ac2cba7617f21e9506beb25853"
     },
     {
       "name": "PHASE2D_COMPLETION_REPORT.md",
       "bytes": 2972,
-      "sha256": "22c7261dd65ccaa55de7b1cd2bad651aa73245440a77d864127a0ef5597a5bab"
+      "sha256": "a112d0820945c69feeee84a81d40fca85d5382b70aebcdbe94bf34aeb050a6d8"
     },
     {
       "name": "related-software-comparison.md",
-      "bytes": 5906,
-      "sha256": "b607b9ec7c7b87380e42c45abaf7836d5c02a4bef8a3d798014e1b40a87b8d56"
+      "bytes": 5992,
+      "sha256": "e59b680e215325d86c2c3838ea3380834f6de8d295cc7dc8875002b0dc857fa1"
     },
     {
       "name": "reviewer-evidence-map-final.md",
@@ -62,12 +62,12 @@
     },
     {
       "name": "REVIEWER_RESPONSE_FACTS.md",
-      "bytes": 18121,
-      "sha256": "cd3806a6c374e506a6404d7e3e035992cf9ad216728c4c4a25f93a3b9f00a822"
+      "bytes": 18315,
+      "sha256": "ebecc5e293e7c10b1ffb0fc1130510534ea18b9e40d3642e0b1ef1c889dfc6ee"
     }
   ],
   "manifestGateCount": 14,
   "allGatesPass": true,
   "handoffHashNote": "The external/project-local handoff reports the ZIP hash. The ZIP-internal handoff uses a non-self-referential placeholder.",
-  "externalHandoffSha256": "da213323f4f870a2b41b827b48e974db92e6fd2346b09c52c35c50ca93bcd973"
+  "externalHandoffSha256": "beca8e8089c5e3cfa154dfee09c626122b01a60c8d647de7ac26583927d671f7"
 }

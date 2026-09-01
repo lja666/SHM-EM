@@ -11,7 +11,7 @@ The table compares documented software responsibilities rather than ranking prod
 | Model-specific ordered input contract | Not applicable | Not applicable | Partial | Yes |
 | Pluggable forecasting/model adapter | Not applicable | Not applicable | Yes | Yes |
 | Artifact and input-schema hash validation | Not applicable | Not applicable | Not reported | Yes |
-| Shared prediction origin and future timeline | Not applicable | Not applicable | Partial | Yes |
+| Shared prediction origin and future timeline | Not applicable | Not applicable | Not reported | Yes |
 | Project-level future-state aggregation | Not applicable | Not applicable | Not reported | Yes |
 | Rule/event evaluation | Not applicable | Yes | Partial | Yes |
 | Side-effect-free candidate evaluation | Not applicable | Not reported | Not reported | Yes |
@@ -26,7 +26,7 @@ The table compares documented software responsibilities rather than ranking prod
 - **Model-specific ordered input contract:** Predictive-SHM adapters map ULDM views to model tensors; SHM-EM additionally persists versioned feature order, target bindings, units, transforms, and contract fingerprints.
 - **Pluggable forecasting/model adapter:** Predictive-SHM explicitly reports pluggable prediction and model adapters; SHM-EM registers model bundles and PIT_PRE adapters.
 - **Artifact and input-schema hash validation:** The Predictive-SHM publisher abstract does not report this control; SHM-EM verifies artifact, preprocessor, script, runtime-manifest, contract, and persisted-result hashes.
-- **Shared prediction origin and future timeline:** Predictive-SHM reports standardized timestamped forecasts; a synchronized multi-model project origin is not stated. SHM-EM validates one batch origin and a common 40-step timeline.
+- **Shared prediction origin and future timeline:** Predictive-SHM reports standardized timestamped forecasts, but the primary source does not explicitly describe a common multi-model prediction origin or project-level synchronized future timeline. SHM-EM validates one batch origin and a common 40-step timeline.
 - **Project-level future-state aggregation:** This is an SHM-EM domain mechanism that aggregates target, station, and project states under a versioned policy.
 - **Rule/event evaluation:** CEP is designed for stream conditions and event derivation; Predictive-SHM reports residual- and threshold-based alerting; SHM-EM evaluates observation or prediction series against versioned rules.
 - **Side-effect-free candidate evaluation:** SHM-EM Evaluate returns simulated candidates and creates no formal event, workflow, response step, or prediction link.

@@ -1,8 +1,8 @@
 {
   "schemaVersion": "shm-em-phase2d-manifest-v1",
-  "generatedAtUtc": "2026-09-01T05:49:33.239433+00:00",
+  "generatedAtUtc": "2026-09-01T09:29:38.876714+00:00",
   "finalCoreFreezeV3": "eaa7d85a0b4921ab2f6e54234cff09aee6a30c8f",
-  "evidencePreparationHead": "4beb0ba6d1b630171fb55c835036ba4c17ce1813",
+  "evidencePreparationHead": "7f9648582c5d4c6bb01648664d74c3172e11da9a",
   "phase": "Related Software Positioning, Figures, and Impact Restructuring",
   "gates": [
     {
@@ -127,18 +127,18 @@
   "files": [
     {
       "path": "tools/revision/build_phase2d_manuscript_evidence.py",
-      "bytes": 53947,
-      "sha256": "72125d54198f5605e2c8a315183e835ade22afb33012a4e0a151666e1d0c68ec"
+      "bytes": 54645,
+      "sha256": "84ffcd5e8cf6145e5495f5f3ec495c9278ff90d8dfaa9945147e9efe8f15de63"
     },
     {
       "path": "tools/revision/finalize_phase2d_evidence.py",
-      "bytes": 22388,
-      "sha256": "1e5e7ec4fb8a0f8de92ab6910f4b9c43d92b7ce341a0ab3bdba273a3b1a2718f"
+      "bytes": 22925,
+      "sha256": "6737bad923e4ae8e614acf7b4006727fece80a04c62b0c4860d290028129bbff"
     },
     {
       "path": "docs/revision/RELATED_SOFTWARE_COMPARISON.md",
-      "bytes": 5906,
-      "sha256": "b607b9ec7c7b87380e42c45abaf7836d5c02a4bef8a3d798014e1b40a87b8d56"
+      "bytes": 5992,
+      "sha256": "e59b680e215325d86c2c3838ea3380834f6de8d295cc7dc8875002b0dc857fa1"
     },
     {
       "path": "docs/revision/SENSORTHINGS_POSITIONING.md",
@@ -157,13 +157,13 @@
     },
     {
       "path": "artifacts/revision/manuscript/related-software-comparison.csv",
-      "bytes": 2805,
-      "sha256": "a833b676bec2c133345f6c7d29ecc3566444fdc76aeaf72e3c070c4a764ae67f"
+      "bytes": 2893,
+      "sha256": "aea50d87d1650cededbb30b339c9b727f486bc4c249cec55a9698b70b04ceb01"
     },
     {
       "path": "artifacts/revision/manuscript/related-software-comparison.md",
-      "bytes": 5906,
-      "sha256": "b607b9ec7c7b87380e42c45abaf7836d5c02a4bef8a3d798014e1b40a87b8d56"
+      "bytes": 5992,
+      "sha256": "e59b680e215325d86c2c3838ea3380834f6de8d295cc7dc8875002b0dc857fa1"
     },
     {
       "path": "artifacts/revision/manuscript/sequence-code-crosscheck.json",
@@ -177,8 +177,8 @@
     },
     {
       "path": "artifacts/revision/manuscript/IMPACT_RESTRUCTURING_PLAN.md",
-      "bytes": 5737,
-      "sha256": "f721ccf00f9aa1cd96b5d9b4d489a8d55917c757981319727098066964fe5a46"
+      "bytes": 6021,
+      "sha256": "e9fe3fcaacde56cba16a8d5e5c085b87c9f68b9473d128e17f42e8d5c3eb9f1c"
     },
     {
       "path": "artifacts/revision/manuscript/REPETITION_REDUCTION_MAP.md",
@@ -192,13 +192,13 @@
     },
     {
       "path": "artifacts/revision/manuscript/REVIEWER_RESPONSE_FACTS.md",
-      "bytes": 18121,
-      "sha256": "cd3806a6c374e506a6404d7e3e035992cf9ad216728c4c4a25f93a3b9f00a822"
+      "bytes": 18315,
+      "sha256": "ebecc5e293e7c10b1ffb0fc1130510534ea18b9e40d3642e0b1ef1c889dfc6ee"
     },
     {
       "path": "artifacts/revision/manuscript/METADATA_C6_PROPOSED.md",
-      "bytes": 1536,
-      "sha256": "844e5bc753fcff264f05ba577bcf50669144cda6edf4f313cdcbb8f53d2330b7"
+      "bytes": 1670,
+      "sha256": "a72705ec09ecc2dbfbbe9f06c6e452f6c3b1b026984116dc1fe09aa4b05e5b38"
     },
     {
       "path": "artifacts/revision/manuscript/reviewer-evidence-map-final.json",

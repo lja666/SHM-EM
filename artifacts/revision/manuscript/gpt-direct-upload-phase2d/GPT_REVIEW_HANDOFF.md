@@ -1,6 +1,6 @@
 # GPT Review Handoff: Phase 2D
 
-Please review Phase 2D at evidence-preparation commit `4beb0ba6d1b630171fb55c835036ba4c17ce1813` against Final Core Freeze v3 `eaa7d85a0b4921ab2f6e54234cff09aee6a30c8f`.
+Please review Phase 2D at evidence-preparation commit `7f9648582c5d4c6bb01648664d74c3172e11da9a` against Final Core Freeze v3 `eaa7d85a0b4921ab2f6e54234cff09aee6a30c8f`.
 
 ## Decision requested
 
@@ -21,7 +21,7 @@ Verify P2D-01 through P2D-14 and decide whether SHM-EM may enter **Final Manuscr
 
 - Canonical ZIP: `artifacts/revision/manuscript/SHM-EM_Phase2D_GPT_Review_Package.zip`
 - Direct-upload ordinary files: `artifacts/revision/manuscript/gpt-direct-upload-phase2d/`
-- Package SHA-256: `cc300d1d0f34b9e5c5061dc4e438b956f9bba21220207719cfd4c3a38e1fbc54`
+- Package SHA-256: `2586f26e9b3962d60c8ba15ffd9cab948e7702e0a9860519f8ae13297fc26c89`
 
 ## Required stop
 

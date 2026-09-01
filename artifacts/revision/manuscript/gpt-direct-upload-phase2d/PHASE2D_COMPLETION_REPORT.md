@@ -3,7 +3,7 @@
 ## Boundary
 
 - Final Core Freeze v3: `eaa7d85a0b4921ab2f6e54234cff09aee6a30c8f`
-- Phase 2D evidence-preparation HEAD: `4beb0ba6d1b630171fb55c835036ba4c17ce1813`
+- Phase 2D evidence-preparation HEAD: `7f9648582c5d4c6bb01648664d74c3172e11da9a`
 - Production business-core diff: **NONE**
 - Work performed: related-software positioning, figure sources/plans, evidence-driven Impact planning, limitations, reviewer facts, and final evidence mapping.
 - Work deliberately excluded: production algorithms, database changes, authentication, SensorThings implementation, models, tolerance rules, and further performance engineering.

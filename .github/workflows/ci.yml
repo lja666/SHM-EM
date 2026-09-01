@@ -9,8 +9,12 @@ on:
 
 jobs:
   frontend:
-    name: Frontend build
-    runs-on: windows-latest
+    name: Frontend build (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, ubuntu-latest]
     defaults:
       run:
         working-directory: src/frontend
@@ -26,8 +30,12 @@ jobs:
       - run: npm run build
 
   backend:
-    name: Backend tests
-    runs-on: windows-latest
+    name: Backend tests (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, ubuntu-latest]
     defaults:
       run:
         working-directory: src/backend
@@ -42,8 +50,12 @@ jobs:
       - run: mvn -DskipTests package
 
   prediction-runtime:
-    name: Prediction runtime tests
-    runs-on: windows-latest
+    name: Prediction runtime tests (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, ubuntu-latest]
     defaults:
       run:
         working-directory: src/pit_pre

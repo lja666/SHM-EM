@@ -1,0 +1,110 @@
+name: shm-em-reproduction
+
+services:
+  mysql:
+    image: ${SHM_EM_DOCKERHUB_PREFIX:-}mysql:8.4
+    environment:
+      MYSQL_DATABASE: ${SHM_EM_DATABASE:-shm_em_reproduce_compose}
+      MYSQL_USER: ${SHM_EM_MYSQL_USER:-shm_em_reproduce}
+      MYSQL_ROOT_PASSWORD: ${SHM_EM_MYSQL_ROOT_PASSWORD:?Set SHM_EM_MYSQL_ROOT_PASSWORD}
+      MYSQL_PASSWORD: ${SHM_EM_MYSQL_PASSWORD:?Set SHM_EM_MYSQL_PASSWORD}
+      TZ: Asia/Shanghai
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --default-time-zone=+08:00
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./scripts/docker-init-mysql.sql:/docker-entrypoint-initdb.d/10-shm-em-init.sql:ro
+      - ./sql/shm_em_database/00_SHM_EM_complete_schema.sql:/opt/shm-em/sql/00_SHM_EM_complete_schema.sql:ro
+      - ./sql/shm_em_database/01_SHM_EM_conversion_operators.sql:/opt/shm-em/sql/01_SHM_EM_conversion_operators.sql:ro
+      - ./sql/shm_em_database/02_SHM_EM_public_sample.sql:/opt/shm-em/sql/02_SHM_EM_public_sample.sql:ro
+      - ./sql/shm_em_database/03_SHM_EM_public_validation.sql:/opt/shm-em/sql/03_SHM_EM_public_validation.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping --host=127.0.0.1 --user=root --password=$${MYSQL_ROOT_PASSWORD} --silent"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 20s
+    networks: [shm-em]
+
+  pitpre:
+    build:
+      context: ./src/pit_pre
+      target: runtime
+      args:
+        DOCKERHUB_PREFIX: ${SHM_EM_DOCKERHUB_PREFIX:-}
+    environment:
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_USER: ${SHM_EM_MYSQL_USER:-shm_em_reproduce}
+      DB_PASSWORD: ${SHM_EM_MYSQL_PASSWORD:?Set SHM_EM_MYSQL_PASSWORD}
+      DB_NAME: ${SHM_EM_DATABASE:-shm_em_reproduce_compose}
+      SHM_EM_PROJECT_CODE: ${SHM_EM_PROJECT_CODE:-SHM_EM_PUBLIC_SAMPLE}
+    depends_on:
+      mysql:
+        condition: service_healthy
+    restart: "no"
+    networks: [shm-em]
+
+  backend:
+    build:
+      context: .
+      dockerfile: ./src/backend/Dockerfile
+      target: runtime
+      args:
+        DOCKERHUB_PREFIX: ${SHM_EM_DOCKERHUB_PREFIX:-}
+    environment:
+      DB_URL: jdbc:mysql://mysql:3306/${SHM_EM_DATABASE:-shm_em_reproduce_compose}?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true
+      DB_USERNAME: ${SHM_EM_MYSQL_USER:-shm_em_reproduce}
+      DB_PASSWORD: ${SHM_EM_MYSQL_PASSWORD:?Set SHM_EM_MYSQL_PASSWORD}
+      SERVER_PORT: 5101
+      SPRING_PROFILES_ACTIVE: reproduce
+      SHM_EM_NOTIFICATION_ENABLED: "false"
+      SHM_EM_NOTIFICATION_TASK_CREATE_ENABLED: "false"
+      SHM_EM_NOTIFICATION_SCHEDULER_ENABLED: "false"
+      SHM_EM_NOTIFICATION_MAIL_SEND_ENABLED: "false"
+      SHM_EM_RESPONSE_AUTOMATION_ENABLED: "false"
+      SHM_EM_REPRODUCTION_EXECUTE_ENABLED: "true"
+      REPORT_STORAGE_ROOT: /app/report-files
+      TZ: Asia/Shanghai
+    depends_on:
+      mysql:
+        condition: service_healthy
+      pitpre:
+        condition: service_completed_successfully
+    ports:
+      - "127.0.0.1:${SHM_EM_BACKEND_PORT:-5101}:5101"
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "--silent", "http://127.0.0.1:5101/api/em/projects/1"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 20s
+    networks: [shm-em]
+
+  frontend:
+    build:
+      context: ./src/frontend
+      target: runtime
+      args:
+        DOCKERHUB_PREFIX: ${SHM_EM_DOCKERHUB_PREFIX:-}
+    depends_on:
+      backend:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:${SHM_EM_FRONTEND_PORT:-5173}:8080"
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://127.0.0.1:8080/healthz"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
+    networks: [shm-em]
+
+volumes:
+  mysql-data:
+
+networks:
+  shm-em:
+    driver: bridge

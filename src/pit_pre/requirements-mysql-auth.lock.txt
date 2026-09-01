@@ -1,0 +1,2 @@
+# Deployment transport dependency for MySQL 8 caching_sha2_password authentication.
+cryptography==46.0.7

@@ -21,11 +21,6 @@ if ($restrictedFiles) {
   throw "Restricted data files must remain outside the public repository: $($restrictedFiles.FullName -join ', ')"
 }
 
-$unsupportedShellScripts = Get-ChildItem -LiteralPath $root -Recurse -File -Filter "*.sh" -Force -ErrorAction Stop
-if ($unsupportedShellScripts) {
-  throw "The Windows release must not contain unsupported Bash entry points: $($unsupportedShellScripts.FullName -join ', ')"
-}
-
 New-Item -ItemType Directory -Force -Path $output | Out-Null
 New-Item -ItemType Directory -Force -Path $staging | Out-Null
 try {
@@ -50,11 +45,6 @@ try {
     Where-Object { $restrictedFileNames -contains $_.Name }
   if ($stagedRestrictedFiles) {
     throw "Release staging contains restricted data files: $($stagedRestrictedFiles.FullName -join ', ')"
-  }
-
-  $stagedShellScripts = Get-ChildItem -LiteralPath $destination -Recurse -File -Filter "*.sh" -Force
-  if ($stagedShellScripts) {
-    throw "Release staging contains unsupported Bash entry points: $($stagedShellScripts.FullName -join ', ')"
   }
 
   if (Test-Path -LiteralPath $archive) { Remove-Item -LiteralPath $archive -Force }

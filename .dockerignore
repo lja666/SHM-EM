@@ -1,0 +1,7 @@
+**
+!src/backend/pom.xml
+!src/backend/src/
+!src/backend/src/**
+!src/pit_pre/tests/
+!src/pit_pre/tests/fixtures/
+!src/pit_pre/tests/fixtures/persisted-integrity-fixture.json

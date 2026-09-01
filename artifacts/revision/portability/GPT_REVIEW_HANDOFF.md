@@ -7,7 +7,7 @@ Review the Phase 2C exact cross-platform STOP. Do not infer a portability PASS a
 ## Baseline
 
 - Final Core Freeze v3: `eaa7d85a0b4921ab2f6e54234cff09aee6a30c8f`
-- Evidence HEAD: `f4f9ad25734a0b415e9a329c019d015d468909bb`
+- Evidence HEAD: `0d4d6c553017fc0745f5031ab1177bfd5341dd04`
 - Production business-core diff: **NONE**
 
 ## Result

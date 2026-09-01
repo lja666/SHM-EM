@@ -1,6 +1,6 @@
 {
   "schemaVersion": "shm-em-phase2c-linux-environment-v1",
-  "capturedAtUtc": "2026-09-01T03:34:55.803748+00:00",
+  "capturedAtUtc": "2026-09-01T03:37:01.941399+00:00",
   "scope": "Docker Desktop Linux containers on the local Phase 2C host",
   "dockerServer": {
     "version": "29.4.3",

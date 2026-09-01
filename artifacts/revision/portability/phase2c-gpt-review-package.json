@@ -1,0 +1,6 @@
+{
+  "path": "artifacts/revision/portability/SHM-EM_Phase2C_GPT_Review_Package.zip",
+  "bytes": 52481,
+  "sha256": "a7274f26374f13b7ee6ecf5a93ed03a06a21c57825fd5a03a05f5be575c7a397",
+  "decision": "STOP_EXACT_CROSS_PLATFORM_REPRODUCTION"
+}

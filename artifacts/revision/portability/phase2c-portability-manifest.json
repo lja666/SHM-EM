@@ -1,8 +1,8 @@
 {
   "schemaVersion": "shm-em-phase2c-portability-manifest-v1",
-  "generatedAtUtc": "2026-09-01T03:34:58.782853+00:00",
+  "generatedAtUtc": "2026-09-01T03:37:04.697651+00:00",
   "finalCoreFreezeV3": "eaa7d85a0b4921ab2f6e54234cff09aee6a30c8f",
-  "evidenceHead": "f4f9ad25734a0b415e9a329c019d015d468909bb",
+  "evidenceHead": "0d4d6c553017fc0745f5031ab1177bfd5341dd04",
   "decision": "STOP_EXACT_CROSS_PLATFORM_REPRODUCTION",
   "productionCoreDiff": [],
   "comparisonChecks": {
@@ -129,7 +129,7 @@
     {
       "path": "artifacts/revision/portability/environment-linux.json",
       "bytes": 541,
-      "sha256": "fb2412794443b817a57112be5717482e7360e19abac130dbb48a9d68479b8177"
+      "sha256": "c955b36e313b1ccdc9cfde6ab1d8c697c930f1cca6e4138546d0b91c83097380"
     },
     {
       "path": "artifacts/revision/portability/linux-reference-reproduction.json",
@@ -139,7 +139,7 @@
     {
       "path": "artifacts/revision/portability/PHASE2C_COMPLETION_REPORT.md",
       "bytes": 1902,
-      "sha256": "b3c4d507e35b47ae574ffd83918acddd52c2cacd5ecd4eb98fc70d438d04f6c4"
+      "sha256": "2cdcff1e94366020442eb9655885d948662e46119c4ea2ccd30cc6d75b822eac"
     },
     {
       "path": "artifacts/revision/portability/portability-limitations.md",

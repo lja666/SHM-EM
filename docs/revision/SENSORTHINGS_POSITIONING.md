@@ -4,7 +4,7 @@
 
 OGC SensorThings API Part 1: Sensing 1.1 provides an open, geospatially enabled interface for managing and retrieving observations and metadata from heterogeneous IoT sensor systems. Its sensing model includes Thing, Location, Datastream, Sensor, ObservedProperty, Observation, and FeatureOfInterest resources. A conformance claim requires the relevant normative Annex A tests.
 
-SHM-EM v1.0.0 does **not** implement a SensorThings API endpoint, a SensorThings ingestion adapter, or the OGC conformance tests. It therefore makes no claim of SensorThings API conformance or compatibility.
+SHM-EM v1.0.1 does **not** implement a SensorThings API endpoint, a SensorThings ingestion adapter, or the OGC conformance tests. It therefore makes no claim of SensorThings API conformance or compatibility.
 
 ## Relationship to SHM-EM
 

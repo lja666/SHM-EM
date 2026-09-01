@@ -23,11 +23,11 @@ authors:
   - family-names: "Yang"
     given-names: "Siran"
     affiliation: "Key Laboratory of Earthquake Engineering and Engineering Vibration, Institute of Engineering Mechanics, China Earthquake Administration; Key Laboratory of Earthquake Disaster Mitigation, Ministry of Emergency Management"
-version: "1.0.0"
-date-released: "2026-07-24"
+version: "1.0.1"
+date-released: "2026-09-01"
 license: MIT
 repository-code: "https://github.com/lja666/SHM-EM"
-url: "https://github.com/lja666/SHM-EM"
+url: "https://github.com/lja666/SHM-EM/releases/tag/v1.0.1"
 abstract: "SHM-EM connects heterogeneous engineering observations, frozen time-series prediction models, governed rule execution, formal events, response workflows, and traceable evidence through database-authoritative data-model contracts."
 keywords:
   - structural health monitoring

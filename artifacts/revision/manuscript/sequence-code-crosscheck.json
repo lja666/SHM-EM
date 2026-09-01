@@ -16,6 +16,11 @@
     },
     {
       "path": "src/backend/src/main/java/mybatis/iem/em/modules/engineering/application/service/impl/EventEvaluationServiceImpl.java",
+      "line": 325,
+      "claim": "Evaluate and Execute retain an evaluation/audit run"
+    },
+    {
+      "path": "src/backend/src/main/java/mybatis/iem/em/modules/engineering/application/service/impl/EventEvaluationServiceImpl.java",
       "line": 100,
       "claim": "Execute entry point"
     },

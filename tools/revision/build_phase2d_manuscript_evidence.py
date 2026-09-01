@@ -166,12 +166,12 @@ COMPARISON = [
         "basis": "CEP is designed for stream conditions and event derivation; Predictive-SHM reports residual- and threshold-based alerting; SHM-EM evaluates observation or prediction series against versioned rules.",
     },
     {
-        "capability": "Side-effect-free candidate evaluation",
+        "capability": "Candidate evaluation without formal business side effects",
         "OGC SensorThings": "Not applicable",
         "generic CEP": "Not reported",
         "Predictive-SHM": "Not reported",
         "SHM-EM": "Yes",
-        "basis": "SHM-EM Evaluate returns simulated candidates and creates no formal event, workflow, response step, or prediction link.",
+        "basis": "SHM-EM Evaluate retains an evaluation/audit run but creates no formal event, execution Gate, workflow, response step, notification, report, evidence, or prediction link.",
     },
     {
         "capability": "Rechecked formal execution",
@@ -256,7 +256,7 @@ Sources were checked on 2026-09-01. Machine-readable source notes and per-row ba
 
 OGC SensorThings API Part 1: Sensing 1.1 provides an open, geospatially enabled interface for managing and retrieving observations and metadata from heterogeneous IoT sensor systems. Its sensing model includes Thing, Location, Datastream, Sensor, ObservedProperty, Observation, and FeatureOfInterest resources. A conformance claim requires the relevant normative Annex A tests.
 
-SHM-EM v1.0.0 does **not** implement a SensorThings API endpoint, a SensorThings ingestion adapter, or the OGC conformance tests. It therefore makes no claim of SensorThings API conformance or compatibility.
+SHM-EM v1.0.1 does **not** implement a SensorThings API endpoint, a SensorThings ingestion adapter, or the OGC conformance tests. It therefore makes no claim of SensorThings API conformance or compatibility.
 
 ## Relationship to SHM-EM
 
@@ -316,7 +316,8 @@ def build_sequence(repo: Path, output: Path) -> None:
     Gate->>Gate: Validate execution eligibility without persisting a Gate record
     Gate-->>Rules: Eligibility and blockers
     Rules->>Rules: Validate units and rule semantics; compute simulated candidates
-    Rules-->>Operator: Candidate result (no formal event/workflow/link side effects)
+    Rules->>Store: Persist evaluation/audit run only
+    Rules-->>Operator: Candidate result (no formal business side effects)
 
     Operator->>Rules: Execute(rule, batch, executionMode)
     Rules->>Store: Reload rule and canonical engineering series
@@ -355,6 +356,7 @@ def build_sequence(repo: Path, output: Path) -> None:
         "anchors": [
             {"path": str(event_service.relative_to(repo)).replace("\\", "/"), "line": find_line(event_service, "public Map<String, Object> evaluate"), "claim": "Evaluate entry point"},
             {"path": str(event_service.relative_to(repo)).replace("\\", "/"), "line": find_line(event_service, "PredictionExecutionMode.REPLAY, false"), "claim": "Evaluate uses non-persisted REPLAY Gate inspection"},
+            {"path": str(event_service.relative_to(repo)).replace("\\", "/"), "line": find_line(event_service, "runMapper.insert(run)"), "claim": "Evaluate and Execute retain an evaluation/audit run"},
             {"path": str(event_service.relative_to(repo)).replace("\\", "/"), "line": find_line(event_service, "public Map<String, Object> execute"), "claim": "Execute entry point"},
             {"path": str(event_service.relative_to(repo)).replace("\\", "/"), "line": find_line(event_service, "requirePredictionExecutionEligible"), "claim": "Execute rechecks eligibility before formal evaluation"},
             {"path": str(event_service.relative_to(repo)).replace("\\", "/"), "line": find_line(event_service, "persistEvent(event)"), "claim": "Formal event persistence"},
@@ -555,7 +557,7 @@ FACTS = {
     "R1-15": ("Rewrote the Impact plan around measured reuse, failure, runtime, provenance, and limitations.", "Impact restructuring plan and claim-gap matrix.", "Replace Section 4.", "No universal no-code reuse, reliability improvement, or arbitrary deployment claim.", "Every proposed paragraph names its repository evidence."),
     "R1-16": ("Generated an explicit family-level software testing summary.", "Automated test-summary JSON/CSV/Markdown.", "Section 3 testing table.", "No double-counted global total or unsupported coverage percentage.", "55/55 backend, 13/13 PIT_PRE, a 15-case validation matrix (P00, F01-F12, I01-I02), 7/7 reuse, 2/2 frontend, and 1/1 reference reproduction."),
     "R1-17": ("Captured one formal event-to-input provenance chain and restored the isolated database afterward.", "Human-readable and machine-readable provenance trace.", "Section 3 provenance example and sequence caption.", "No claim that every API directly exposes every persisted hash.", "Event FEVT-4-f61b7667dcc01721aa2a -> rule v2 -> batch 40 -> run 236 -> settlement model/input hashes -> 40-step forecast -> Gate 1."),
-    "R1-18": ("Documented SensorThings as an upstream observation standard and the possible adapter boundary.", "SensorThings positioning document and related-software table.", "Related software and limitations.", "No SensorThings compatibility or conformance claim.", "No endpoint, adapter, or Annex A conformance test exists in v1.0.0."),
+    "R1-18": ("Documented SensorThings as an upstream observation standard and the possible adapter boundary.", "SensorThings positioning document and related-software table.", "Related software and limitations.", "No SensorThings compatibility or conformance claim.", "No endpoint, adapter, or Annex A conformance test exists in v1.0.1."),
     "R1-19": ("Mapped each contribution to one section-specific purpose and planned Figure 4 compression.", "Repetition reduction map and Figure 4 plan.", "Introduction, Sections 2-4, and Conclusion.", "No repeated mechanism definitions in Impact or Conclusion.", "Three contribution explanations become one statement, one mechanism definition, one evidence treatment, and one compact synthesis."),
     "R2-1": ("Differentiated Predictive-SHM factually and added SHM-EM software-layer empirical evidence.", "Primary-source comparison, runtime table, reuse inventory, and failure matrix.", "Introduction/related software and validation.", "No forecasting-accuracy or total-runtime contest between unlike software scopes.", "SHM-EM evaluation covers integration effort, Gate/runtime overhead, failure blocking, and provenance."),
     "R2-2": ("Added a concise table covering SensorThings, generic CEP, Predictive-SHM, and SHM-EM.", "12-dimension related-software table with source notes.", "Related software section.", "No inferred third-party `No` values.", "All 36 third-party capability cells are controlled vocabulary with explicit bases."),

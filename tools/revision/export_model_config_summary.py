@@ -11,6 +11,7 @@ from pathlib import Path
 import re
 from typing import Any
 
+import joblib
 import torch
 
 
@@ -95,16 +96,21 @@ def markdown(value: dict[str, Any]) -> str:
         "",
         "This file is generated from the database-derived contract, immutable bundle metadata, actual inference scripts, parameter files, runtime manifest, and model weight shapes. Parameters that cannot be independently recovered are not guessed.",
         "",
-        "| Model | History | Inputs | Targets | d_model | Heads | FF dim | CNN channels/kernel | Dropout | Params source | Hashes |",
-        "|---|---:|---:|---:|---:|---:|---:|---|---:|---|---|",
+        "| Model | History | Aligned inputs | Mapping count | Targets | Branch widths R/E/C | d_model | Heads | FF dim | CNN channels/kernel | Dropout | Params source | Hashes |",
+        "|---|---:|---:|---:|---:|---|---:|---:|---:|---|---:|---|---|",
     ]
     for model in value["models"]:
         architecture = model["architecture"]
         checks = model["hashChecks"]
         lines.append(
-            "| {code} | {history} | {inputs} | {targets} | {d_model} | {heads} | {ff} | {conv}/{kernel} | {dropout:.6f} | {source} | {hashes} |".format(
+            "| {code} | {history} | {inputs} | {mappings} | {targets} | {branches} | {d_model} | {heads} | {ff} | {conv}/{kernel} | {dropout:.6f} | {source} | {hashes} |".format(
                 code=model["modelCode"], history=model["requiredHistoryRows"],
-                inputs=model["inputFeatureCount"], targets=model["outputTargetCount"],
+                inputs=model["alignedInputFeatureCount"], mappings=model["modelFeatureMappingCount"],
+                targets=model["outputTargetCount"],
+                branches="{}/{}/{}".format(
+                    architecture["responseDimension"], architecture["environmentDimension"],
+                    architecture["contextualInputDimension"],
+                ),
                 d_model=architecture["dModel"], heads=architecture["numHeads"],
                 ff=architecture["feedForwardHiddenDimension"],
                 conv=architecture["convolutionHiddenChannels"], kernel=architecture["kernelSize"],
@@ -117,7 +123,7 @@ def markdown(value: dict[str, Any]) -> str:
             "",
             "## Shared deployed architecture",
             "",
-            "Every bundle uses one custom Transformer encoder layer followed by response, environment, and transformed-feature 1-D convolution branches and one final convolution. `d_model` is the attention input dimension. The deployed rolling pipeline persists 40 future steps at 3-minute intervals; the model-internal direct-output chunk is `n=3` and the historical response window is `m=10` where encoded by the script/parameter contract.",
+            "Every bundle uses one custom Transformer encoder layer followed by response, environment, and transformed-feature 1-D convolution branches and one final convolution. `Aligned inputs` is the frozen preprocessor column count (114 for five bundles and 164 for Settlement), not the model-owned database mapping count. `R/E/C` gives response, environment, and contextual transformed-feature widths. `d_model` is the attention embedding dimension. The deployed rolling pipeline persists 40 future steps at 3-minute intervals; the model-internal direct-output chunk is `n=3` and the historical response window is `m=10` where encoded by the script/parameter contract.",
             "",
             "The number of attention heads and dropout cannot be recovered uniquely from tensor shapes. They are therefore taken only from the checked best-parameter file, or from the inference script's explicit fallback contract for YD. YD is marked `script_fallback`; it has no separate best-parameter artifact.",
             "",
@@ -173,10 +179,13 @@ def main() -> int:
         response_shape = shape(state, "conv_response.conv1d.weight")
         env_shape = shape(state, "conv_env.conv1d.weight")
         transformed_shape = shape(state, "conv_trans.conv1d.weight")
+        projection_shape = shape(state, "trans_proj.weight")
         ff_shape = shape(state, "transformer.self_ff.0.weight")
-        if not all((response_shape, env_shape, transformed_shape, ff_shape)):
+        if not all((response_shape, env_shape, transformed_shape, projection_shape, ff_shape)):
             raise RuntimeError(f"Model {model['code']} lacks expected Transformer-CNN tensor keys")
-        d_model = transformed_shape[1]
+        d_model = projection_shape[0]
+        if transformed_shape[1] != d_model:
+            raise RuntimeError(f"Model {model['code']} attention/CNN dimensions do not match")
         architecture = {
             "family": "TransformerCnn",
             "transformerLayers": 1 if script_text.count("self.transformer = TransformerEncoderLayer(") == 1 else None,
@@ -188,13 +197,19 @@ def main() -> int:
             "dropout": float(params["dropout"]),
             "responseDimension": response_shape[1],
             "environmentDimension": env_shape[1],
-            "transformedFeatureDimension": transformed_shape[1],
+            "contextualInputDimension": projection_shape[1],
+            "attentionEmbeddingDimension": d_model,
             "cnnBranches": ["response", "environment", "transformed_features", "final_output"],
             "historyWindowM": int(params.get("fixed_m", params.get("m", script_default(script_text, "m") or 10))),
             "directOutputChunkN": int(params.get("fixed_n", params.get("n", literal_assignment(script, "FALLBACK_N") or script_default(script_text, "n") or 3))),
             "lag": int(params["lag"]),
         }
         model_features = [item for item in features if item["modelId"] == model["id"]]
+        preprocessor_data = joblib.load(preprocessor)
+        preprocessor_input_columns = list(preprocessor_data["input_columns"])
+        preprocessor_target_columns = list(preprocessor_data["target_columns"])
+        if len(preprocessor_target_columns) != sum(1 for item in model_features if item["predictionTarget"]):
+            raise RuntimeError(f"Model {model['code']} target mappings do not match frozen preprocessor")
         checks = {
             "artifactHash": sha256_file(artifact) == model["artifactHash"],
             "preprocessorHash": sha256_file(preprocessor) == model["preprocessorHash"],
@@ -213,7 +228,8 @@ def main() -> int:
                 "modelCode": model["code"], "modelVersion": model["version"],
                 "targetType": model["targetType"],
                 "requiredHistoryRows": model["requiredHistoryRows"],
-                "inputFeatureCount": len(model_features),
+                "modelFeatureMappingCount": len(model_features),
+                "alignedInputFeatureCount": len(preprocessor_input_columns),
                 "outputTargetCount": sum(1 for item in model_features if item["predictionTarget"]),
                 "futureSteps": model["expectedSteps"], "timeStepMinutes": model["timeStepMinutes"],
                 "architecture": architecture, "parameterSource": parameter_source,

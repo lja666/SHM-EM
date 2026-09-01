@@ -16,7 +16,7 @@ RUN mvn -q -DskipTests package
 FROM ${DOCKERHUB_PREFIX}eclipse-temurin:8-jre-jammy AS runtime
 RUN useradd --create-home --uid 10001 --shell /usr/sbin/nologin shm-em
 WORKDIR /app
-COPY --from=package /workspace/backend/target/SHM-EM-1.0.0.jar /app/shm-em.jar
+COPY --from=package /workspace/backend/target/SHM-EM-1.0.1.jar /app/shm-em.jar
 RUN mkdir -p /app/report-files && chown -R shm-em:shm-em /app
 USER shm-em
 EXPOSE 5101

@@ -1,11 +1,15 @@
 param(
-  [string]$Version = "1.0.0",
+  [string]$Version = "v1.0.1",
   [string]$OutputDirectory = "artifacts"
 )
 
 $ErrorActionPreference = "Stop"
 $root = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
-$output = [IO.Path]::GetFullPath((Join-Path $root $OutputDirectory))
+$output = if ([IO.Path]::IsPathRooted($OutputDirectory)) {
+  [IO.Path]::GetFullPath($OutputDirectory)
+} else {
+  [IO.Path]::GetFullPath((Join-Path $root $OutputDirectory))
+}
 $archive = Join-Path $output "SHM-EM-$Version.zip"
 $tempRoot = [IO.Path]::GetFullPath([IO.Path]::GetTempPath())
 $staging = Join-Path $tempRoot ("shm-em-release-" + [Guid]::NewGuid().ToString("N"))
@@ -27,11 +31,11 @@ try {
   $destination = Join-Path $staging "SHM-EM-$Version"
   New-Item -ItemType Directory -Force -Path $destination | Out-Null
   $excludedDirectories = @(
-    ".git", ".idea", ".shm-em-run", "artifacts", "node_modules", "target", "dist",
+    ".git", ".idea", ".shm-em-run", "artifacts", "manuscript", "node_modules", "target", "dist",
     "__pycache__", ".npm-cache", "logs", "runtime", "report-files"
   )
   $excludedFiles = @(
-    ".env", ".env.local", ".env.*.local", "config.json", "*.log", "*.tmp", "*.bak",
+    ".git", ".env", ".env.local", ".env.*.local", "config.json", "*.log", "*.tmp", "*.bak",
     "*.iml", "*.pyc", ".DS_Store"
   )
   $arguments = @($root, $destination, "/E", "/NFL", "/NDL", "/NJH", "/NJS", "/NP", "/R:1", "/W:1", "/XD")

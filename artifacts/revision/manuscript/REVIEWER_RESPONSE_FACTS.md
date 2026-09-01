@@ -170,7 +170,7 @@ This is a fact sheet for the next response-writing phase, not the final polished
 - **Evidence generated:** SensorThings positioning document and related-software table.
 - **Manuscript destination:** Related software and limitations.
 - **Deliberately not claimed:** No SensorThings compatibility or conformance claim.
-- **Key result:** No endpoint, adapter, or Annex A conformance test exists in v1.0.0.
+- **Key result:** No endpoint, adapter, or Annex A conformance test exists in v1.0.1.
 - **Repository evidence:** `artifacts/revision/manuscript/claim-gap-matrix-final.md`; `docs/revision/SENSORTHINGS_POSITIONING.md`; `docs/revision/RELATED_SOFTWARE_COMPARISON.md`
 
 ## R1-19 - Repeated contribution text

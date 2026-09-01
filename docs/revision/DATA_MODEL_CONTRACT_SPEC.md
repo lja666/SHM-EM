@@ -2,7 +2,7 @@
 
 ## Status and scope
 
-This document specifies the persisted observation-to-model contract implemented by SHM-EM at Performance-Corrected Final Core Freeze v3 (`eaa7d85a0b4921ab2f6e54234cff09aee6a30c8f`). It describes the current rolling point-forecast implementation; it does not define a generic training-data format or a probabilistic forecast contract.
+This document specifies the persisted observation-to-model contract in the fixed revised SHM-EM implementation. It describes the current rolling point-forecast implementation; it does not define a generic training-data format or a probabilistic forecast contract. Internal lineage to commit `eaa7d85a0b4921ab2f6e54234cff09aee6a30c8f` is retained in revision evidence.
 
 The machine-readable sources are:
 
@@ -48,7 +48,8 @@ The runtime selects mappings where `enabled=1`, `required=1`, and `featureRole=m
 - feature order is globally contiguous from 1 through 164;
 - every mapping is bound to an active `modelId`;
 - every `trainingFeatureCode` is non-empty and unique;
-- the exact training input columns are `time`, `time1`, followed by the 164 training feature codes in order;
+- the common aligned table contains `time`, `time1`, and 164 ordered training feature codes;
+- each frozen preprocessor declares the exact model input selection: 114 columns for YD, XD, Strain, Pressure, and Water, and 164 columns for Settlement;
 - the SHA-256 of the pipe-delimited ordered column list must equal every active model's `inputSchemaHash`.
 
 Each mapping records the logical feature code separately from the training-column code. This preserves engineering names such as `point1_0.8YD_value` while retaining the immutable column name used by the trained bundle.
@@ -85,7 +86,7 @@ SHM-EM fails closed at the following boundaries:
 | Failed engineering conversion or incompatible rule unit | Rule evaluation/execution is rejected |
 | State changes after Evaluate | Execute re-inspects the latest persisted batch and rejects before formal side effects |
 
-Evaluate is side-effect-free with respect to formal events and response workflows. Execute may create those records only after a fresh eligible gate result. This contract therefore covers both data assembly and the controlled transition from persisted forecasts to formal events.
+Evaluate retains one `em_event_evaluation_run` audit record but creates no formal event, execution Gate, response workflow/step, notification, report, evidence, or prediction link. Execute may create formal business records only after a fresh eligible Gate result. This contract therefore covers both data assembly and the controlled transition from persisted forecasts to formal events.
 
 ## Missing and asynchronous observations
 

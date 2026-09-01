@@ -18,7 +18,7 @@ project history and operational records remain outside the public repository.
 
 ## Release Baseline
 
-The 1.0.0 public artifact includes:
+The 1.0.1 public artifact includes:
 
 - metadata for 9 numbered field monitoring points and 74 sensor records,
   traceable to 17 acquisition modules and 6 DTUs; identifiers and location are
@@ -27,10 +27,10 @@ The 1.0.0 public artifact includes:
   waveform rows;
 - 2,464 low-frequency observations covering the longest required 16-step model
   input window;
-- six public frozen PyTorch model bundles with 164 ordered inputs;
+- six public fixed-version PyTorch model bundles built from a 164-feature common aligned pool; five frozen preprocessors select 114 columns and the Settlement preprocessor selects all 164;
 - 124 prediction targets over 40 synchronized three-minute steps;
 - deterministic generation of 4,960 engineering-value forecast results;
-- prediction gating, side-effect-free Evaluate, controlled Execute, event
+- prediction gating, candidate Evaluate with an audit record but no formal business side effects, controlled Execute, event
   provenance, response workflow, report, and evidence verification;
 - the public conceptual plan image used by the frontend.
 

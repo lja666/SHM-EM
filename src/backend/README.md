@@ -33,7 +33,7 @@ aggregation, and notification policy.
 - Project rules use `/api/em/projects/{projectId}/rules`.
 - Project events use `/api/em/projects/{projectId}/events`.
 - Event state actions remain under `/api/em/events/{eventId}`.
-- Authentication is not built into release 1.0.0; secure deployments must
+- Authentication is not built into release 1.0.1; secure deployments must
   enforce it at the infrastructure boundary.
 
 See `docs/ARCHITECTURE.md` and `docs/API.md` in the repository root.

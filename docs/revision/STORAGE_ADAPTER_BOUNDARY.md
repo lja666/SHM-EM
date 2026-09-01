@@ -70,4 +70,4 @@ A TimescaleDB, InfluxDB, or other time-series integration would need to:
 7. pass contract, conversion, rule, provenance, and cross-language hash tests.
 
 No alternative adapter or SensorThings conformance layer is implemented or
-validated in SHM-EM 1.0.0.
+validated in SHM-EM 1.0.1.

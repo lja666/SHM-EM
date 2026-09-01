@@ -1,6 +1,6 @@
 {
   "name": "shm-em-frontend",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "description": "A Vue 3 workbench for forecast-driven structural health monitoring workflows.",
   "type": "module",

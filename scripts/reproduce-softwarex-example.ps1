@@ -143,7 +143,7 @@ $checks = [ordered]@{
 }
 
 [ordered]@{
-  release = "SHM-EM 1.0.0"
+  release = "SHM-EM 1.0.1"
   projectCode = $project.data.projectCode
   predictionBatchId = [long]$latestBatchId
   batchCode = $batch.data.batch.batchCode

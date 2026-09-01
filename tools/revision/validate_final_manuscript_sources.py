@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import re
 import subprocess
@@ -12,6 +13,9 @@ from pathlib import Path
 
 
 FREEZE = "eaa7d85a0b4921ab2f6e54234cff09aee6a30c8f"
+SUBMITTED_TAG = "v1.0.0"
+SUBMITTED_COMMIT = "1d2ab45e516ef4167c6c4c4265da5b533b2eab78"
+RELEASE_TAG = "v1.0.1"
 CORE_PATHS = ("src/backend/src/main", "src/pit_pre/pit_pre", "src/frontend/src")
 SOURCE_FILES = (
     "SHM-EM_Revised_Manuscript_Source.md",
@@ -45,8 +49,23 @@ def git(repo: Path, *args: str) -> str:
     return result.stdout
 
 
+def git_optional(repo: Path, *args: str) -> str:
+    try:
+        return git(repo, *args)
+    except subprocess.CalledProcessError:
+        return ""
+
+
 def check(checks: list[dict[str, object]], identifier: str, passed: bool, detail: str) -> None:
     checks.append({"id": identifier, "status": "PASS" if passed else "FAIL", "detail": detail})
+
+
+def sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for block in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(block)
+    return digest.hexdigest()
 
 
 def main() -> int:
@@ -161,14 +180,14 @@ def main() -> int:
     check(checks, "FM-08", all(term.lower() in combined.lower() for term in numerical_terms), "Required final numerical anchors are present.")
 
     model_rows = (
-        "| YD | Deep horizontal displacement Y (mm) | 16 | 42 | 42 |",
-        "| XD | Deep horizontal displacement X (mm) | 12 | 42 | 42 |",
-        "| Strain | Earth-pressure strain (microstrain) | 13 | 14 | 14 |",
-        "| Pressure | Earth pressure (MPa) | 13 | 14 | 14 |",
-        "| Water | Groundwater elevation (m) | 13 | 2 | 2 |",
-        "| Settlement | Surface settlement (mm) | 12 | 50 | 10 |",
+        "| YD | Deep horizontal displacement Y (mm) | 16 | 114 | 42 |",
+        "| XD | Deep horizontal displacement X (mm) | 12 | 114 | 42 |",
+        "| Strain | Earth-pressure strain (microstrain) | 13 | 114 | 14 |",
+        "| Pressure | Earth pressure (MPa) | 13 | 114 | 14 |",
+        "| Water | Groundwater elevation (m) | 13 | 114 | 2 |",
+        "| Settlement | Surface settlement (mm) | 12 | 164 | 10 |",
     )
-    check(checks, "FM-09", all(row in manuscript for row in model_rows), "Model-specific history/input/target dimensions match the database-derived configuration.")
+    check(checks, "FM-09", all(row in manuscript for row in model_rows), "Model-specific history/aligned-input/target dimensions match frozen runtime evidence.")
 
     alignment_terms = (
         "backward-asof",
@@ -220,8 +239,101 @@ def main() -> int:
 
     check(checks, "FM-17", "- [ ] GPT confirms manuscript claims" in checklist and "Generate `Revised Manuscript Clean.docx`" in checklist, "Required GPT stop precedes DOCX generation.")
 
+    dimension_path = repo / "artifacts/revision/manuscript/model-dimension-reconciliation.json"
+    dimension_ok = False
+    if dimension_path.is_file():
+        dimensions = json.loads(dimension_path.read_text(encoding="utf-8"))
+        expected_dimensions = {
+            "YD": (16, 114, 42), "XD": (12, 114, 42),
+            "Strain": (13, 114, 14), "Pressure": (13, 114, 14),
+            "water": (13, 114, 2), "settlement": (12, 164, 10),
+        }
+        actual_dimensions = {
+            item["modelCode"]: (
+                item["historyRows"], item["columnsPassedToPreprocessor"], item["outputTargets"]
+            )
+            for item in dimensions.get("models", [])
+        }
+        dimension_ok = (
+            dimensions.get("status") == "PASS"
+            and dimensions.get("commonAlignedMatrixShape") == [16, 164]
+            and actual_dimensions == expected_dimensions
+            and all(all(item.get("checks", {}).values()) for item in dimensions.get("models", []))
+            and all(row in manuscript for row in model_rows)
+        )
+    check(checks, "FM-18", dimension_ok, "Manuscript dimensions match the model-dimension reconciliation artifact.")
+
+    c1 = re.search(r"^\| C1 \| Current code version \|\s*([^|]+?)\s*\|$", manuscript, flags=re.MULTILINE)
+    c2 = re.search(r"^\| C2 \|.*?/releases/tag/(v\d+\.\d+\.\d+).*?fixed commit:\s*`([0-9a-f]{40})`.*\|$", manuscript, flags=re.MULTILINE)
+    c7 = re.search(r"^\| C7 \|.*?/tree/(v\d+\.\d+\.\d+)/docs", manuscript, flags=re.MULTILINE)
+    section6 = manuscript.split("# 6. Data and software availability", 1)[-1].split("# Acknowledgements", 1)[0]
+    section6_tag = re.search(r"/releases/tag/(v\d+\.\d+\.\d+)", section6)
+    section6_commit = re.search(r"fixed release commit\s*`([0-9a-f]{40})`", section6)
+    section6_archive = re.search(r"`(SHM-EM-v1\.0\.1\.zip)`.*?SHA-256\s*`([0-9a-f]{64})`", section6, flags=re.DOTALL)
+    release_archive = repo / "artifacts/releases/SHM-EM-v1.0.1.zip"
+    tag_commit = ""
+    try:
+        tag_commit = git(repo, "rev-parse", f"{RELEASE_TAG}^{{}}").strip()
+    except subprocess.CalledProcessError:
+        pass
+    remote_release = git_optional(repo, "ls-remote", "origin", f"refs/tags/{RELEASE_TAG}^{{}}").strip().split()
+    archive_ok = bool(
+        section6_archive and release_archive.is_file()
+        and sha256(release_archive) == section6_archive.group(2)
+    )
+    release_metadata_ok = bool(
+        c1 and c1.group(1).strip() == RELEASE_TAG
+        and c2 and c2.group(1) == RELEASE_TAG
+        and c7 and c7.group(1) == RELEASE_TAG
+        and section6_tag and section6_tag.group(1) == RELEASE_TAG
+        and section6_commit and c2.group(2) == section6_commit.group(1)
+        and tag_commit and tag_commit == c2.group(2)
+        and bool(remote_release) and remote_release[0] == tag_commit
+        and archive_ok
+    )
+    check(checks, "FM-19", release_metadata_ok, "C1/C2/C7/Section 6 identify one tag, fixed commit, and verified release archive SHA-256.")
+
+    submitted_local = git_optional(repo, "rev-parse", f"{SUBMITTED_TAG}^{{}}").strip()
+    remote_submitted = git_optional(repo, "ls-remote", "origin", f"refs/tags/{SUBMITTED_TAG}^{{}}").strip().split()
+    submitted_unchanged = (
+        submitted_local == SUBMITTED_COMMIT
+        and bool(remote_submitted)
+        and remote_submitted[0] == SUBMITTED_COMMIT
+    )
+    check(checks, "FM-20", submitted_unchanged, "Submitted immutable v1.0.0 still resolves locally and remotely to the original submitted commit.")
+
+    bare_evaluate_terms = (
+        "side-effect-free Evaluate",
+        "Evaluate is side-effect free",
+        "Evaluate is side-effect-free",
+        "separates side-effect-free Evaluate",
+    )
+    evaluate_reconciliation = repo / "artifacts/revision/manuscript/EVALUATE_SIDE_EFFECT_RECONCILIATION.md"
+    evaluate_ok = (
+        evaluate_reconciliation.is_file()
+        and not any(term.lower() in (manuscript + "\n" + response).lower() for term in bare_evaluate_terms)
+        and "evaluation/audit run" in manuscript
+        and "no formal business side effects" in response
+    )
+    check(checks, "FM-21", evaluate_ok, "Evaluate wording discloses audit persistence and limits the zero-side-effect claim to formal business records.")
+
+    cep_rows = (
+        "| Execution-time eligibility recheck | Not applicable | Not reported | Not reported | Yes |",
+        "| Formal event-to-prediction provenance link | Not applicable | Not reported | Not reported | Yes |",
+    )
+    check(checks, "FM-22", all(row in manuscript for row in cep_rows), "Generic CEP execution recheck and provenance cells are source-grounded as Not reported.")
+
+    sensor_ref = "[8] Liang S, Khalafbeigi T, van der Schaaf H, editors. OGC SensorThings API Part 1: Sensing Version 1.1. OGC Implementation Standard 18-088."
+    check(checks, "FM-23", sensor_ref in manuscript and "15-078r6" not in manuscript, "Reference 8 uses SensorThings Part 1 Sensing v1.1, OGC 18-088.")
+
+    governance_terms = (
+        "authorized correction", "authorized narrow correction", "gpt", "final core freeze v3",
+        "performance-corrected frozen core",
+    )
+    check(checks, "FM-24", not any(term in response.lower() for term in governance_terms), "Public response letter contains no internal governance jargon.")
+
     result = {
-        "schemaVersion": "shm-em-final-manuscript-source-validation-v1",
+        "schemaVersion": "shm-em-final-manuscript-source-validation-v2",
         "generatedAtUtc": datetime.now(timezone.utc).isoformat(),
         "finalCoreFreezeV3": FREEZE,
         "head": git(repo, "rev-parse", "HEAD").strip(),

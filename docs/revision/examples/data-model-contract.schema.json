@@ -81,6 +81,8 @@
           "version",
           "targetType",
           "requiredHistoryRows",
+          "modelFeatureMappingCount",
+          "alignedInputFeatureCount",
           "expectedSteps",
           "timeStepMinutes",
           "artifactHash",
@@ -104,6 +106,14 @@
             "type": "string"
           },
           "requiredHistoryRows": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "modelFeatureMappingCount": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "alignedInputFeatureCount": {
             "type": "integer",
             "minimum": 1
           },

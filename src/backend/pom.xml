@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>Mybatis</groupId>
     <artifactId>SHM-EM</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <name>SHM-EM</name>
     <description>SHM-EM engineering monitoring backend</description>
     <properties>

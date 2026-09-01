@@ -32,7 +32,8 @@ sequenceDiagram
     Gate->>Gate: Validate execution eligibility without persisting a Gate record
     Gate-->>Rules: Eligibility and blockers
     Rules->>Rules: Validate units and rule semantics; compute simulated candidates
-    Rules-->>Operator: Candidate result (no formal event/workflow/link side effects)
+    Rules->>Store: Persist evaluation/audit run only
+    Rules-->>Operator: Candidate result (no formal business side effects)
 
     Operator->>Rules: Execute(rule, batch, executionMode)
     Rules->>Store: Reload rule and canonical engineering series

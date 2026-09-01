@@ -14,7 +14,7 @@ The table compares documented software responsibilities rather than ranking prod
 | Shared prediction origin and future timeline | Not applicable | Not applicable | Not reported | Yes |
 | Project-level future-state aggregation | Not applicable | Not applicable | Not reported | Yes |
 | Rule/event evaluation | Not applicable | Yes | Partial | Yes |
-| Side-effect-free candidate evaluation | Not applicable | Not reported | Not reported | Yes |
+| Candidate evaluation without formal business side effects | Not applicable | Not reported | Not reported | Yes |
 | Rechecked formal execution | Not applicable | Not reported | Not reported | Yes |
 | Persisted-result integrity revalidation | Not applicable | Not reported | Not reported | Yes |
 | Event-to-model/input provenance | Not applicable | Not reported | Not reported | Yes |
@@ -29,7 +29,7 @@ The table compares documented software responsibilities rather than ranking prod
 - **Shared prediction origin and future timeline:** Predictive-SHM reports standardized timestamped forecasts, but the primary source does not explicitly describe a common multi-model prediction origin or project-level synchronized future timeline. SHM-EM validates one batch origin and a common 40-step timeline.
 - **Project-level future-state aggregation:** This is an SHM-EM domain mechanism that aggregates target, station, and project states under a versioned policy.
 - **Rule/event evaluation:** CEP is designed for stream conditions and event derivation; Predictive-SHM reports residual- and threshold-based alerting; SHM-EM evaluates observation or prediction series against versioned rules.
-- **Side-effect-free candidate evaluation:** SHM-EM Evaluate returns simulated candidates and creates no formal event, workflow, response step, or prediction link.
+- **Candidate evaluation without formal business side effects:** SHM-EM Evaluate retains an evaluation/audit run but creates no formal event, execution Gate, workflow, response step, notification, report, evidence, or prediction link.
 - **Rechecked formal execution:** SHM-EM Execute recomputes and persists the execution Gate before formal rule evaluation and event creation.
 - **Persisted-result integrity revalidation:** SHM-EM independently recomputes persisted prediction-result integrity before formal execution.
 - **Event-to-model/input provenance:** SHM-EM links a formal event to its rule, Gate, batch, run, model/hash, input window/schema hash, and forecast snapshot.

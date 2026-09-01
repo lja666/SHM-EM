@@ -2,7 +2,7 @@
 
 ## Release Scope
 
-SHM-EM is a research reference implementation. Version 1.0.0 does not provide
+SHM-EM is a research reference implementation. Version 1.0.1 does not provide
 application-level authentication and does not claim production-grade
 application security. Keep the public reproduction on an isolated host and do
 not expose its API or MySQL service to an untrusted network.

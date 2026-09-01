@@ -1,6 +1,6 @@
 # Reproducibility
 
-SHM-EM 1.0.0 includes a de-identified minimum real-data window and a machine-
+SHM-EM 1.0.1 includes a de-identified minimum real-data window and a machine-
 checkable workflow. Public reproduction rebuilds the schema, loads the sample,
 runs six packaged models, and verifies engineering conversion, prediction
 hashes, execution gates, future-state aggregation, rule behavior, event
@@ -51,7 +51,7 @@ project dataset is not needed for software reproduction.
 | Prediction input hash | Matches dataset manifest |
 | Prediction output hash | Matches dataset manifest |
 | REPLAY execution gate and project future state | Eligible |
-| Evaluate | At least one candidate and no operational side effects |
+| Evaluate | At least one candidate; one audit run may be retained; no formal event, response, report, notification, Gate, or prediction-link records |
 | REPRODUCTION Execute | Creates event, gate link, response, and report |
 | Notification delivery | 0 tasks in isolated reproduction |
 | Event prediction trace | Present |

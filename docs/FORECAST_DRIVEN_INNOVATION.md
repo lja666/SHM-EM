@@ -37,7 +37,9 @@ horizon, and runtime policy. PIT_PRE accepts only database connectivity and a
 working directory from local JSON. Contract drift or artifact drift fails
 before inference.
 
-The release contract has 164 ordered inputs and 124 output targets. A complete
+The release contract has a 164-feature common aligned pool and 124 output targets.
+Five frozen preprocessors select 114 ordered columns and the Settlement
+preprocessor selects 164. A complete
 batch contains six successful model runs and 4,960 engineering forecast points
 (124 targets x 40 synchronized steps).
 

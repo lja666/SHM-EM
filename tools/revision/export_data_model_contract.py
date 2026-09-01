@@ -13,6 +13,7 @@ from pathlib import Path
 import subprocess
 from typing import Any
 
+import joblib
 import pymysql
 
 
@@ -138,6 +139,7 @@ def contract_schema() -> dict[str, Any]:
                     "type": "object",
                     "required": [
                         "id", "code", "version", "targetType", "requiredHistoryRows",
+                        "modelFeatureMappingCount", "alignedInputFeatureCount",
                         "expectedSteps", "timeStepMinutes", "artifactHash", "preprocessorHash",
                         "inferenceScriptHash", "runtimeManifestHash", "inputSchemaHash", "bundleHash",
                     ],
@@ -145,6 +147,8 @@ def contract_schema() -> dict[str, Any]:
                         "id": {"type": "integer"}, "code": {"type": "string"},
                         "version": {"type": "string"}, "targetType": {"type": "string"},
                         "requiredHistoryRows": {"type": "integer", "minimum": 1},
+                        "modelFeatureMappingCount": {"type": "integer", "minimum": 1},
+                        "alignedInputFeatureCount": {"type": "integer", "minimum": 1},
                         "expectedSteps": {"type": "integer", "minimum": 1},
                         "timeStepMinutes": {"type": "integer", "minimum": 1},
                         "artifactHash": hash_schema, "preprocessorHash": hash_schema,
@@ -314,6 +318,8 @@ def main() -> int:
     for item in model_rows:
         runtime_config = json_object(item["runtime_config_json"])
         model_features = [feature for feature in features if feature["modelId"] == int(item["id"])]
+        preprocessor_path = repo / "src/pit_pre" / str(item["preprocessor_uri"]).replace("\\", "/")
+        preprocessor_data = joblib.load(preprocessor_path)
         models.append(
             {
                 "id": int(item["id"]), "code": item["model_code"], "name": item["model_name"],
@@ -323,7 +329,8 @@ def main() -> int:
                 "expectedSteps": int(item["expected_steps"]),
                 "timeStepMinutes": int(item["time_step_minutes"]),
                 "maxOperationalAgeMinutes": int(item["max_operational_age_minutes"]),
-                "inputFeatureCount": len(model_features),
+                "modelFeatureMappingCount": len(model_features),
+                "alignedInputFeatureCount": len(preprocessor_data["input_columns"]),
                 "outputTargetCount": sum(1 for feature in model_features if feature["predictionTarget"]),
                 "artifactUri": item["artifact_uri"], "artifactHash": item["artifact_hash"],
                 "preprocessorUri": item["preprocessor_uri"], "preprocessorHash": item["preprocessor_hash"],

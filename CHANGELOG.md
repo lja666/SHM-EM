@@ -1,5 +1,20 @@
 # Changelog
 
+## 1.0.1 - 2026-09-01
+
+- Added Linux-container portability evidence and documented the observed
+  cross-platform numerical difference without introducing a tolerance.
+- Added source-grounded model-contract, runtime, failure-matrix, provenance,
+  related-software, security, and storage-boundary evidence for the SoftwareX
+  minor revision.
+- Corrected the public model-dimension description by distinguishing the
+  common aligned pool, per-model input matrices, mapping records, targets, and
+  temporal histories.
+- Clarified that Evaluate persists one audit run while creating no formal
+  event, response, notification, report, evidence, Gate, or prediction link.
+- Preserved the submitted `v1.0.0` tag and production core; this release changes
+  validation evidence, documentation, packaging, and publication metadata.
+
 ## 1.0.0 - 2026-07-20
 
 - Consolidated source code under `src/backend`, `src/frontend`, and

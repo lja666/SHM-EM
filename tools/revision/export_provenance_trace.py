@@ -24,7 +24,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--database", default="shm_em_reproduce_benchmark_reference")
     parser.add_argument("--backend-port", type=int, default=5201)
     parser.add_argument("--java", type=Path, default=Path("java"))
-    parser.add_argument("--backend-jar", type=Path, default=Path("src/backend/target/SHM-EM-1.0.0.jar"))
+    parser.add_argument("--backend-jar", type=Path, default=Path("src/backend/target/SHM-EM-1.0.1.jar"))
     parser.add_argument(
         "--output", type=Path,
         default=Path("artifacts/revision/manuscript/provenance-trace-final.json"),

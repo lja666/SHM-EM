@@ -215,7 +215,7 @@
         "docs/revision/DATA_MODEL_CONTRACT_SPEC.md",
         "artifacts/revision/benchmarks/route-p/failure-regression/failure-matrix-v2.md"
       ],
-      "nextAction": "Describe fail-closed missing-data and freshness behavior."
+      "nextAction": "Describe the registered temporal alignment/fill policy for partial gaps, and the fail-closed rejection when a required feature cannot produce a complete input window."
     },
     {
       "reviewerItem": "R3-1",
@@ -244,7 +244,7 @@
         "docs/revision/DATA_MODEL_CONTRACT_SPEC.md",
         "artifacts/revision/benchmarks/route-p/failure-regression/failure-matrix-v2.md"
       ],
-      "nextAction": "Explain canonical alignment, freshness policy, and fail-closed Gate behavior."
+      "nextAction": "Explain the canonical temporal alignment policy, signed source-offset/fill diagnostics, required-input rejection, and the separate fail-closed freshness/execution Gate."
     },
     {
       "reviewerItem": "R3-4",

@@ -1,8 +1,8 @@
 {
   "schemaVersion": "shm-em-phase2b-manifest-v1",
-  "generatedAtUtc": "2026-08-31T17:09:10.931549+00:00",
+  "generatedAtUtc": "2026-09-01T00:48:13.689264+00:00",
   "finalCoreFreezeV3": "eaa7d85a0b4921ab2f6e54234cff09aee6a30c8f",
-  "evidencePreparationHead": "b883921a0edd9a63aeda4a1eaf4547f827a768b5",
+  "evidencePreparationHead": "ffa4e2cfe6889f264fd59ae5d7fa4374d2302384",
   "gates": [
     {
       "id": "P2B-01",
@@ -204,8 +204,8 @@
     },
     {
       "path": "tools/revision/build_phase2b_manuscript_evidence.py",
-      "bytes": 22227,
-      "sha256": "eca05f962af28a39bfa5faa2a20df0ca6fe177a895e0a4d3ccf9bca7bc750dc4"
+      "bytes": 22427,
+      "sha256": "e3dec422c5227a65cf261410c8413af024b4aa04f0953d474c41da7171572f32"
     },
     {
       "path": "artifacts/revision/manuscript/PERFORMANCE_EVIDENCE_SELECTION.md",
@@ -224,13 +224,13 @@
     },
     {
       "path": "artifacts/revision/manuscript/reviewer-evidence-map.json",
-      "bytes": 9407,
-      "sha256": "bfcd30d6de75b331aaed03fab7c8e21a6bd991bdbf7d5a9e24d1d42117cf8a6c"
+      "bytes": 9607,
+      "sha256": "3db1a8aa7953fff40bd1ef266ac3eff2dbc98fb486c21066b80529fc8f3b9d78"
     },
     {
       "path": "artifacts/revision/manuscript/reviewer-evidence-map.md",
-      "bytes": 6060,
-      "sha256": "6eae032c3d48ca04f03bd3624754164607d00757cdd674d365cf75933cf74ec2"
+      "bytes": 6260,
+      "sha256": "fa1cade115d570dde2e4fdd844068c909b82885871d43a8bb4657470ee6a98d0"
     },
     {
       "path": "artifacts/revision/manuscript/claim-gap-matrix-final.md",

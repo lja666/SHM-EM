@@ -7,7 +7,7 @@ Review whether Phase 2B Formal Specification & Evidence Consolidation satisfies 
 ## Frozen core
 
 - Performance-Corrected Final Core Freeze v3: `eaa7d85a0b4921ab2f6e54234cff09aee6a30c8f`
-- Evidence preparation HEAD: `b883921a0edd9a63aeda4a1eaf4547f827a768b5`
+- Evidence preparation HEAD: `ffa4e2cfe6889f264fd59ae5d7fa4374d2302384`
 - Production-core diff since Freeze v3: **NONE**
 - Uncommitted production-core diff: **NONE**
 

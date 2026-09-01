@@ -88,7 +88,7 @@ SOURCES = [
         ),
         "doi": "10.1145/2187671.2187677",
         "url": "https://doi.org/10.1145/2187671.2187677",
-        "authorHostedPdf": "https://margara.faculty.polimi.it/papers/persys_book.pdf",
+        "authorHostedPdf": "https://margara.faculty.polimi.it/papers/survey.pdf",
         "claimsUsed": [
             "continuous processing of information flows",
             "pre-deployed processing rules and stream/window operations",

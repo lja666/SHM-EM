@@ -291,7 +291,7 @@ Metadata C6, Sections 3.5 and 4.4, and the availability/reproduction guidance no
 
 **Evidence**
 
-`docker-compose.yml`; `artifacts/revision/portability/cross-platform-comparison.json`; `artifacts/revision/portability/cross-platform-numeric-difference.json`; full row-wise comparison artifact.
+`compose.yaml`; `src/backend/Dockerfile`; `src/frontend/Dockerfile`; `src/pit_pre/Dockerfile`; `artifacts/revision/portability/cross-platform-comparison.json`; `artifacts/revision/portability/cross-platform-numeric-difference.json`; full row-wise comparison artifact.
 
 **Scope / non-claim**
 
@@ -603,7 +603,7 @@ Metadata C6 and Sections 3.5 and 4.4 report the positive portability evidence an
 
 **Evidence**
 
-`docker-compose.yml`; `artifacts/revision/portability/PHASE2C_COMPLETION_REPORT.md`; `artifacts/revision/portability/cross-platform-comparison.json`; `artifacts/revision/portability/cross-platform-numeric-difference.json`.
+`compose.yaml`; the three component Dockerfiles; `artifacts/revision/portability/PHASE2C_COMPLETION_REPORT.md`; `artifacts/revision/portability/cross-platform-comparison.json`; `artifacts/revision/portability/cross-platform-numeric-difference.json`.
 
 **Scope / non-claim**
 

@@ -60,15 +60,15 @@ This checklist separates completed source/evidence work from tasks that must wai
 
 ## F. Public-release synchronization before submission
 
-- [ ] Push Final Core Freeze v3 and manuscript/revision documentation to the public repository.
-- [ ] Create immutable revision tag `v1.0.1` without moving submitted tag `v1.0.0`; make C1/C2/C7 consistent.
-- [ ] Ensure the fixed commit in metadata is publicly reachable.
-- [ ] Rebuild the public release archive from the final authorized commit.
-- [ ] Recalculate and insert the final release SHA-256 in Section 6 and repository documentation.
-- [ ] Confirm public sample and conceptual site plan carry CC BY 4.0 notices.
-- [ ] Confirm source code and model bundles carry MIT notices.
-- [ ] Confirm no private field data, credentials, map keys, operational identifiers, or generated local database files are tracked.
-- [ ] Verify every URL in metadata, data availability, citations, and reviewer evidence.
+- [x] Push Final Core Freeze v3 and manuscript/revision documentation to the public repository.
+- [x] Create immutable revision tag `v1.0.1` without moving submitted tag `v1.0.0`; make C1/C2/C7 consistent.
+- [x] Ensure the fixed commit in metadata is publicly reachable.
+- [x] Rebuild the public release archive from the immutable release commit.
+- [x] Recalculate and insert the final release SHA-256 in Section 6 and repository documentation.
+- [x] Confirm public sample and conceptual site plan carry CC BY 4.0 notices.
+- [x] Confirm source code and model bundles carry MIT notices.
+- [x] Confirm no private field data, credentials, map keys, operational identifiers, generated local database files, or manuscript working files occur in the release archive.
+- [x] Verify release, archive, checksum, repository, documentation, and cited DOI/standard URLs used by the final sources.
 
 ## G. Editorial submission package
 

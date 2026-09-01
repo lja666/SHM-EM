@@ -23,13 +23,13 @@ Engineering-monitoring software often separates data acquisition, time-series fo
 
 | Nr | Code metadata description | Metadata |
 |---|---|---|
-| C1 | Current code version | v1.0.0 revision candidate |
-| C2 | Permanent link to code/repository used for this code version | <https://github.com/lja666/SHM-EM>; Final Core Freeze v3: `eaa7d85a0b4921ab2f6e54234cff09aee6a30c8f` |
+| C1 | Current code version | v1.0.1 |
+| C2 | Permanent link to code/repository used for this code version | <https://github.com/lja666/SHM-EM/releases/tag/v1.0.1> (fixed commit: `d7cba1419145e6c75fe69ad63172af5f5abe5028`) |
 | C3 | Legal code license | MIT License |
 | C4 | Code versioning system | Git |
 | C5 | Languages, tools, and services | Java 8; SQL; TypeScript; Python 3.10; Vue 3; Spring Boot 2.6.13; MyBatis 2.2.2; MySQL 8.4; PyTorch 2.11.0; Vite; ECharts; PowerShell 7; Docker Compose; OpenAPI |
 | C6 | Compilation requirements, operating environments, and dependencies | Back end: Java 8 and Maven 3.8+; database: MySQL 8.0+; front end: Node.js 20+ and npm; forecasting runtime: Python 3.10 with locked dependencies. Windows 10/11 with PowerShell 7 is the exact-output reference. The exercised Docker Compose Linux path reproduces component checks and the logical six-model-to-provenance workflow, but not a bitwise-identical normalized prediction-output hash. |
-| C7 | Developer documentation/manual | <https://github.com/lja666/SHM-EM/tree/v1.0.0/docs> (README, installation, reproduction, models, database, API, security, and data-availability documentation) |
+| C7 | Developer documentation/manual | <https://github.com/lja666/SHM-EM/tree/v1.0.1/docs> (README, installation, reproduction, models, database, API, security, and data-availability documentation) |
 | C8 | Support email | nlfdzlja@163.com |
 
 # 1. Motivation and significance
@@ -396,9 +396,9 @@ The evidence supports reproducible and auditable workflow integration for the te
 
 # 6. Data and software availability
 
-SHM-EM is available at <https://github.com/lja666/SHM-EM>. The source code and six fixed-version model bundles are licensed under the MIT License. The public de-identified sample and conceptual site plan are licensed under CC BY 4.0. The public sample supports engineering conversion, six-model inference, prediction gating, Project Future State construction, rule evaluation, controlled formal execution, response creation, and provenance reproduction; it is not an independent model-generalization dataset.
+SHM-EM v1.0.1 is available as an immutable release at <https://github.com/lja666/SHM-EM/releases/tag/v1.0.1>, fixed release commit `d7cba1419145e6c75fe69ad63172af5f5abe5028`. The release archive `SHM-EM-v1.0.1.zip` has SHA-256 `ea0973b7c82e06c3c8910ec36fcf2c3d47765a87d11552337a86c69de41a7cef`; the matching checksum sidecar is published with the archive. The source code and six fixed-version model bundles are licensed under the MIT License. The public de-identified sample and conceptual site plan are licensed under CC BY 4.0. The public sample supports engineering conversion, six-model inference, prediction gating, Project Future State construction, rule evaluation, controlled formal execution, response creation, and provenance reproduction; it is not an independent model-generalization dataset.
 
-The complete historical field data cannot be released because they include project location, original device identifiers, operational records, continuous monitoring series, and information subject to ownership and contractual restrictions. The repository documents the private-data boundary, the public subset selection, and the expected machine-readable outputs. Before final submission, the public tag/release asset and checksum must be synchronized with Final Core Freeze v3 and the revised documentation; this synchronization item is tracked in `manuscript/Final_Submission_Checklist.md`.
+The complete historical field data cannot be released because they include project location, original device identifiers, operational records, continuous monitoring series, and information subject to ownership and contractual restrictions. The repository documents the private-data boundary, the public subset selection, and the expected machine-readable outputs. The published archive contains the public sample, models, tests, and reproduction documentation but excludes the restricted field dataset, credentials, generated databases, local runtime state, and manuscript working files.
 
 # Acknowledgements
 

@@ -31,6 +31,7 @@ EVIDENCE_PATHS = (
     "docs/revision/RELATED_SOFTWARE_COMPARISON.md",
     "docs/revision/SENSORTHINGS_POSITIONING.md",
     "docs/revision/STORAGE_ADAPTER_BOUNDARY.md",
+    "docs/RELEASE_CHECKSUMS.md",
     "docs/revision/figures/forecast-event-sequence.mmd",
     "SECURITY.md",
     "compose.yaml",
@@ -52,6 +53,8 @@ EVIDENCE_PATHS = (
     "artifacts/revision/manuscript/MODEL_DIMENSION_RECONCILIATION.md",
     "artifacts/revision/manuscript/model-dimension-reconciliation.json",
     "artifacts/revision/manuscript/EVALUATE_SIDE_EFFECT_RECONCILIATION.md",
+    "artifacts/revision/final-manuscript-review/release-publication-verification.json",
+    "artifacts/revision/final-manuscript-review/final-source-url-validation.json",
     "artifacts/revision/manuscript/data-model-contract-export.json",
     "artifacts/revision/manuscript/provenance-trace-final.json",
     "artifacts/revision/benchmarks/route-p/phase1b-regression.json",
@@ -115,6 +118,14 @@ def completion_report(head: str, validation: dict[str, object]) -> str:
 - M3: second-configuration model bundles = software-workflow fixtures only.
 - M4: normalized output hash differs; `exactPredictionReproduction=false`; `toleranceApplied=false`; full row-wise comparison retained.
 
+## Immutable public release
+
+- Tag: `v1.0.1`.
+- Fixed release commit: `d7cba1419145e6c75fe69ad63172af5f5abe5028`.
+- Archive: `SHM-EM-v1.0.1.zip`.
+- SHA-256: `ea0973b7c82e06c3c8910ec36fcf2c3d47765a87d11552337a86c69de41a7cef`.
+- Submitted `v1.0.0` remains at `1d2ab45e516ef4167c6c4c4265da5b533b2eab78`.
+
 ## Required stop
 
 `STOP_FOR_GPT_FINAL_SCIENTIFIC_CONSISTENCY_REVIEW`
@@ -144,7 +155,7 @@ Determine whether the five Markdown sources are scientifically consistent and ma
 7. Runtime claims use the final table and do not imply linear scaling or a MySQL 50k limit.
 8. Portability retains normalized-output non-identity, no tolerance, full row-wise evidence, and Windows as exact-output reference.
 9. All 27 reviewer comments are answered with manuscript changes, evidence, and non-claim boundaries.
-10. No final release/tag/checksum is implied complete before the checklist synchronization step.
+10. C1/C2/C7 and Section 6 identify the same public `v1.0.1` tag, fixed commit, archive, and SHA-256 while the submitted `v1.0.0` tag remains unchanged.
 
 ## Stable project-local paths
 
@@ -250,6 +261,20 @@ def main() -> int:
     }
     for relative in SOURCE_PATHS:
         direct_map[repo / relative] = Path(relative).name
+    direct_evidence = {
+        "artifacts/revision/manuscript/MODEL_DIMENSION_RECONCILIATION.md": "MODEL_DIMENSION_RECONCILIATION.md",
+        "artifacts/revision/manuscript/model-dimension-reconciliation.json": "model-dimension-reconciliation.json",
+        "artifacts/revision/manuscript/EVALUATE_SIDE_EFFECT_RECONCILIATION.md": "EVALUATE_SIDE_EFFECT_RECONCILIATION.md",
+        "artifacts/revision/manuscript/model-config-summary.json": "model-config-summary.json",
+        "artifacts/revision/manuscript/sequence-code-crosscheck.json": "sequence-code-crosscheck.json",
+        "artifacts/revision/manuscript/related-software-comparison.md": "related-software-comparison.md",
+        "artifacts/revision/final-manuscript-review/release-publication-verification.json": "release-publication-verification.json",
+        "artifacts/revision/final-manuscript-review/final-source-url-validation.json": "final-source-url-validation.json",
+        "docs/revision/SENSORTHINGS_POSITIONING.md": "SENSORTHINGS_POSITIONING.md",
+        "docs/RELEASE_CHECKSUMS.md": "RELEASE_CHECKSUMS.md",
+    }
+    for relative, name in direct_evidence.items():
+        direct_map[repo / relative] = name
     for source, name in direct_map.items():
         shutil.copy2(source, direct / name)
 

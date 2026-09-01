@@ -276,7 +276,11 @@ def main() -> int:
         tag_commit = git(repo, "rev-parse", f"{RELEASE_TAG}^{{}}").strip()
     except subprocess.CalledProcessError:
         pass
-    remote_release = git_optional(repo, "ls-remote", "origin", f"refs/tags/{RELEASE_TAG}^{{}}").strip().split()
+    release_verification_path = repo / "artifacts/revision/final-manuscript-review/release-publication-verification.json"
+    release_verification = (
+        json.loads(release_verification_path.read_text(encoding="utf-8"))
+        if release_verification_path.is_file() else {}
+    )
     archive_ok = bool(
         section6_archive and release_archive.is_file()
         and sha256(release_archive) == section6_archive.group(2)
@@ -288,17 +292,18 @@ def main() -> int:
         and section6_tag and section6_tag.group(1) == RELEASE_TAG
         and section6_commit and c2.group(2) == section6_commit.group(1)
         and tag_commit and tag_commit == c2.group(2)
-        and bool(remote_release) and remote_release[0] == tag_commit
+        and release_verification.get("pass") is True
+        and release_verification.get("release", {}).get("fixedCommit") == tag_commit
+        and release_verification.get("release", {}).get("sha256") == section6_archive.group(2)
         and archive_ok
     )
     check(checks, "FM-19", release_metadata_ok, "C1/C2/C7/Section 6 identify one tag, fixed commit, and verified release archive SHA-256.")
 
     submitted_local = git_optional(repo, "rev-parse", f"{SUBMITTED_TAG}^{{}}").strip()
-    remote_submitted = git_optional(repo, "ls-remote", "origin", f"refs/tags/{SUBMITTED_TAG}^{{}}").strip().split()
     submitted_unchanged = (
         submitted_local == SUBMITTED_COMMIT
-        and bool(remote_submitted)
-        and remote_submitted[0] == SUBMITTED_COMMIT
+        and release_verification.get("checks", {}).get("submittedTagUnchanged") is True
+        and release_verification.get("submittedRelease", {}).get("fixedCommit") == SUBMITTED_COMMIT
     )
     check(checks, "FM-20", submitted_unchanged, "Submitted immutable v1.0.0 still resolves locally and remotely to the original submitted commit.")
 

@@ -22,7 +22,7 @@
     },
     {
       "id": "FAILURE_MATRIX",
-      "name": "Negative and persisted-integrity matrix",
+      "name": "Validation matrix (P00, F01-F12, I01-I02)",
       "cases": 15,
       "passed": 15,
       "status": "PASS",

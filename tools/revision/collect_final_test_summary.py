@@ -176,7 +176,7 @@ def main() -> int:
             "countingScope": "test methods in src/pit_pre/tests; status from the Phase 2B final unittest run",
         },
         {
-            "id": "FAILURE_MATRIX", "name": "Negative and persisted-integrity matrix",
+            "id": "FAILURE_MATRIX", "name": "Validation matrix (P00, F01-F12, I01-I02)",
             "cases": len(matrix), "passed": matrix_passed,
             "status": "PASS" if matrix_passed == len(matrix) == 15 else "FAIL",
             "evidence": "artifacts/revision/benchmarks/route-p/failure-regression/failure-matrix-v2.json",

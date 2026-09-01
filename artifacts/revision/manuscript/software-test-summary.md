@@ -6,7 +6,7 @@ Test families are reported as independent evidence scopes. The overall total is 
 |---|---:|---:|---|---|
 | Backend unit/service/API tests | 55 | 55 | PASS | `src/backend/target/surefire-reports/TEST-*.xml` |
 | PIT_PRE contract/alignment/integrity tests | 13 | 13 | PASS | `artifacts/revision/manuscript/phase2b-final-regression.json` |
-| Negative and persisted-integrity matrix | 15 | 15 | PASS | `artifacts/revision/benchmarks/route-p/failure-regression/failure-matrix-v2.json` |
+| Validation matrix (P00, F01-F12, I01-I02) | 15 | 15 | PASS | `artifacts/revision/benchmarks/route-p/failure-regression/failure-matrix-v2.json` |
 | Second-configuration end-to-end acceptance | 7 | 7 | PASS | `artifacts/revision/benchmarks/route-p/phase1b-regression.json` |
 | Frontend typecheck and production build | 2 | 2 | PASS | `artifacts/revision/manuscript/phase2b-final-regression.json` |
 | Public reference end-to-end reproduction | 1 | 1 | PASS | `artifacts/revision/benchmarks/reference/reference-summary.json` |

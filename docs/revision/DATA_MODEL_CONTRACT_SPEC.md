@@ -89,7 +89,9 @@ Evaluate is side-effect-free with respect to formal events and response workflow
 
 ## Missing and asynchronous observations
 
-The public reference policy does not silently impute a missing required feature. Input assembly aligns observations to the configured cadence and shared prediction origin; missing required values, timestamps outside the configured alignment tolerance, or an incomplete required history window are rejected before inference. Alignment diagnostics are persisted with the run input snapshot. This is a fail-closed software policy, not a claim that the forecasting model is robust to arbitrary sensor dropout.
+The public reference policy does not permit policy-free or unrecorded imputation. Input assembly first applies a backward-asof match within one configured cadence, then applies the declared linear interpolation and boundary-fill policy. The runtime records the alignment stage, signed source-time offsets, interpolation and boundary-extension counts, fill ratio, and gap summaries with each model input snapshot.
+
+A partial gap may therefore be resolved when the registered policy can form the complete required history window. If an entire required feature is unavailable, or any required value remains unresolved after the declared policy, input assembly rejects the run before inference. Operational freshness is evaluated separately by the execution Gate; a structurally complete batch may still fail closed when it is stale for its execution mode. These controls document deterministic software behavior and do not claim that the forecasting models are robust to arbitrary sensor dropout.
 
 ## Reproduction
 

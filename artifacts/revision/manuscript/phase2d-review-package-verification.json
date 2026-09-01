@@ -1,0 +1,73 @@
+{
+  "schemaVersion": "shm-em-phase2d-review-package-verification-v1",
+  "finalCoreFreezeV3": "eaa7d85a0b4921ab2f6e54234cff09aee6a30c8f",
+  "evidencePreparationHead": "4beb0ba6d1b630171fb55c835036ba4c17ce1813",
+  "canonicalZip": {
+    "path": "artifacts/revision/manuscript/SHM-EM_Phase2D_GPT_Review_Package.zip",
+    "bytes": 75801,
+    "sha256": "cc300d1d0f34b9e5c5061dc4e438b956f9bba21220207719cfd4c3a38e1fbc54",
+    "entries": 34
+  },
+  "directUploadDirectory": "artifacts/revision/manuscript/gpt-direct-upload-phase2d",
+  "directUploadFiles": [
+    {
+      "name": "FIGURE4_REDUCTION_PLAN.md",
+      "bytes": 2983,
+      "sha256": "15ea86e01f7772f04d6f3a8dc923d3c119d86494e3d65778cc307aa9be64cec5"
+    },
+    {
+      "name": "FINAL_LIMITATION_MATRIX.md",
+      "bytes": 3587,
+      "sha256": "e0b6fb62d8dcd9991f39fc54e84bbe210d8f7d28559feb2a626ce310c3724373"
+    },
+    {
+      "name": "forecast-event-sequence.mmd",
+      "bytes": 2916,
+      "sha256": "dac2e83ef91d7e60133b13210c5469af484f24375732ef8c132d4a168ba81267"
+    },
+    {
+      "name": "GPT_REVIEW_HANDOFF.md",
+      "bytes": 1788,
+      "sha256": "da213323f4f870a2b41b827b48e974db92e6fd2346b09c52c35c50ca93bcd973"
+    },
+    {
+      "name": "IMPACT_RESTRUCTURING_PLAN.md",
+      "bytes": 5737,
+      "sha256": "f721ccf00f9aa1cd96b5d9b4d489a8d55917c757981319727098066964fe5a46"
+    },
+    {
+      "name": "METADATA_C6_PROPOSED.md",
+      "bytes": 1536,
+      "sha256": "844e5bc753fcff264f05ba577bcf50669144cda6edf4f313cdcbb8f53d2330b7"
+    },
+    {
+      "name": "phase2d-manifest.json",
+      "bytes": 7573,
+      "sha256": "346cf39d3a3545e8da9a4d746ada8e8346934417cd0ad2c51d77a0ebfcb6344c"
+    },
+    {
+      "name": "PHASE2D_COMPLETION_REPORT.md",
+      "bytes": 2972,
+      "sha256": "22c7261dd65ccaa55de7b1cd2bad651aa73245440a77d864127a0ef5597a5bab"
+    },
+    {
+      "name": "related-software-comparison.md",
+      "bytes": 5906,
+      "sha256": "b607b9ec7c7b87380e42c45abaf7836d5c02a4bef8a3d798014e1b40a87b8d56"
+    },
+    {
+      "name": "reviewer-evidence-map-final.md",
+      "bytes": 8054,
+      "sha256": "b4064450a8d487275b75d2d5ed91480ab780bef5cd05431ac948dff9e94bbea4"
+    },
+    {
+      "name": "REVIEWER_RESPONSE_FACTS.md",
+      "bytes": 18121,
+      "sha256": "cd3806a6c374e506a6404d7e3e035992cf9ad216728c4c4a25f93a3b9f00a822"
+    }
+  ],
+  "manifestGateCount": 14,
+  "allGatesPass": true,
+  "handoffHashNote": "The external/project-local handoff reports the ZIP hash. The ZIP-internal handoff uses a non-self-referential placeholder.",
+  "externalHandoffSha256": "da213323f4f870a2b41b827b48e974db92e6fd2346b09c52c35c50ca93bcd973"
+}

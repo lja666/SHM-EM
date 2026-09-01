@@ -1,0 +1,217 @@
+{
+  "schemaVersion": "shm-em-phase2d-manifest-v1",
+  "generatedAtUtc": "2026-09-01T05:49:33.239433+00:00",
+  "finalCoreFreezeV3": "eaa7d85a0b4921ab2f6e54234cff09aee6a30c8f",
+  "evidencePreparationHead": "4beb0ba6d1b630171fb55c835036ba4c17ce1813",
+  "phase": "Related Software Positioning, Figures, and Impact Restructuring",
+  "gates": [
+    {
+      "id": "P2D-01",
+      "status": "PASS",
+      "evidence": [
+        "docs/revision/RELATED_SOFTWARE_COMPARISON.md",
+        "artifacts/revision/manuscript/related-software-sources.json"
+      ],
+      "detail": "Predictive-SHM differentiation is limited to source-grounded published capabilities."
+    },
+    {
+      "id": "P2D-02",
+      "status": "PASS",
+      "evidence": [
+        "artifacts/revision/manuscript/related-software-comparison.csv"
+      ],
+      "detail": "All third-party cells use the controlled vocabulary; no unsupported `No` appears."
+    },
+    {
+      "id": "P2D-03",
+      "status": "PASS",
+      "evidence": [
+        "docs/revision/SENSORTHINGS_POSITIONING.md"
+      ],
+      "detail": "The SensorThings adapter and conformance boundary is explicit."
+    },
+    {
+      "id": "P2D-04",
+      "status": "PASS",
+      "evidence": [
+        "docs/revision/RELATED_SOFTWARE_COMPARISON.md"
+      ],
+      "detail": "The CEP comparison recognizes generic stream/rule/event capabilities and makes no incapability claim."
+    },
+    {
+      "id": "P2D-05",
+      "status": "PASS",
+      "evidence": [
+        "docs/revision/figures/forecast-event-sequence.mmd",
+        "artifacts/revision/manuscript/sequence-code-crosscheck.json"
+      ],
+      "detail": "The sequence is anchored to the frozen source and does not make Future State an Execute precondition."
+    },
+    {
+      "id": "P2D-06",
+      "status": "PASS",
+      "evidence": [
+        "artifacts/revision/manuscript/FIGURE4_REDUCTION_PLAN.md"
+      ],
+      "detail": "Figure 4 has a concrete one-composite crop, layout, resolution, and caption plan."
+    },
+    {
+      "id": "P2D-07",
+      "status": "PASS",
+      "evidence": [
+        "artifacts/revision/manuscript/IMPACT_RESTRUCTURING_PLAN.md"
+      ],
+      "detail": "Every Impact subsection is evidence-linked and bounded."
+    },
+    {
+      "id": "P2D-08",
+      "status": "PASS",
+      "evidence": [
+        "artifacts/revision/manuscript/IMPACT_RESTRUCTURING_PLAN.md"
+      ],
+      "detail": "The second configuration is software-reuse evidence only."
+    },
+    {
+      "id": "P2D-09",
+      "status": "PASS",
+      "evidence": [
+        "artifacts/revision/manuscript/METADATA_C6_PROPOSED.md",
+        "artifacts/revision/manuscript/FINAL_LIMITATION_MATRIX.md"
+      ],
+      "detail": "The Phase 2C portability limitation is preserved without tolerance reinterpretation."
+    },
+    {
+      "id": "P2D-10",
+      "status": "PASS",
+      "evidence": [
+        "artifacts/revision/manuscript/FINAL_LIMITATION_MATRIX.md"
+      ],
+      "detail": "Point forecasts and the distinction between Gate eligibility and uncertainty are explicit."
+    },
+    {
+      "id": "P2D-11",
+      "status": "PASS",
+      "evidence": [
+        "artifacts/revision/manuscript/FINAL_LIMITATION_MATRIX.md"
+      ],
+      "detail": "The 50,000-row cap is classified as an application-level bounded-query safeguard."
+    },
+    {
+      "id": "P2D-12",
+      "status": "PASS",
+      "evidence": [
+        "artifacts/revision/manuscript/REPETITION_REDUCTION_MAP.md"
+      ],
+      "detail": "The repetition map covers all requested sections and all three recurring contributions."
+    },
+    {
+      "id": "P2D-13",
+      "status": "PASS",
+      "evidence": [
+        "artifacts/revision/manuscript/REVIEWER_RESPONSE_FACTS.md",
+        "artifacts/revision/manuscript/reviewer-evidence-map-final.md"
+      ],
+      "detail": "The fact sheet covers all 27 reviewer headings with explicit non-claims and results."
+    },
+    {
+      "id": "P2D-14",
+      "status": "PASS",
+      "evidence": [
+        "artifacts/revision/manuscript/phase2d-production-core-diff.txt",
+        "artifacts/revision/manuscript/phase2d-production-core-worktree-diff.txt"
+      ],
+      "detail": "Production core remains identical to Final Core Freeze v3."
+    }
+  ],
+  "allGatesPass": true,
+  "files": [
+    {
+      "path": "tools/revision/build_phase2d_manuscript_evidence.py",
+      "bytes": 53947,
+      "sha256": "72125d54198f5605e2c8a315183e835ade22afb33012a4e0a151666e1d0c68ec"
+    },
+    {
+      "path": "tools/revision/finalize_phase2d_evidence.py",
+      "bytes": 22388,
+      "sha256": "1e5e7ec4fb8a0f8de92ab6910f4b9c43d92b7ce341a0ab3bdba273a3b1a2718f"
+    },
+    {
+      "path": "docs/revision/RELATED_SOFTWARE_COMPARISON.md",
+      "bytes": 5906,
+      "sha256": "b607b9ec7c7b87380e42c45abaf7836d5c02a4bef8a3d798014e1b40a87b8d56"
+    },
+    {
+      "path": "docs/revision/SENSORTHINGS_POSITIONING.md",
+      "bytes": 2349,
+      "sha256": "882526b7556aa38fda7e998164cd485760f5afc55464c3d4381b31928b920e25"
+    },
+    {
+      "path": "docs/revision/figures/forecast-event-sequence.mmd",
+      "bytes": 2916,
+      "sha256": "dac2e83ef91d7e60133b13210c5469af484f24375732ef8c132d4a168ba81267"
+    },
+    {
+      "path": "artifacts/revision/manuscript/related-software-sources.json",
+      "bytes": 2480,
+      "sha256": "b82132a76aaca309fe5d7f351f720e88ae085b95ff1b1c644db33eda8945d1d5"
+    },
+    {
+      "path": "artifacts/revision/manuscript/related-software-comparison.csv",
+      "bytes": 2805,
+      "sha256": "a833b676bec2c133345f6c7d29ecc3566444fdc76aeaf72e3c070c4a764ae67f"
+    },
+    {
+      "path": "artifacts/revision/manuscript/related-software-comparison.md",
+      "bytes": 5906,
+      "sha256": "b607b9ec7c7b87380e42c45abaf7836d5c02a4bef8a3d798014e1b40a87b8d56"
+    },
+    {
+      "path": "artifacts/revision/manuscript/sequence-code-crosscheck.json",
+      "bytes": 3307,
+      "sha256": "944610b6df50d3eae82e5e3b1230c2a495c6ba1f1182548788b4f25abe9b8f45"
+    },
+    {
+      "path": "artifacts/revision/manuscript/FIGURE4_REDUCTION_PLAN.md",
+      "bytes": 2983,
+      "sha256": "15ea86e01f7772f04d6f3a8dc923d3c119d86494e3d65778cc307aa9be64cec5"
+    },
+    {
+      "path": "artifacts/revision/manuscript/IMPACT_RESTRUCTURING_PLAN.md",
+      "bytes": 5737,
+      "sha256": "f721ccf00f9aa1cd96b5d9b4d489a8d55917c757981319727098066964fe5a46"
+    },
+    {
+      "path": "artifacts/revision/manuscript/REPETITION_REDUCTION_MAP.md",
+      "bytes": 3506,
+      "sha256": "255c322a1bf0fb60233ed20ce278e915a15b17c75e02cf4269aae8ca4f99e69a"
+    },
+    {
+      "path": "artifacts/revision/manuscript/FINAL_LIMITATION_MATRIX.md",
+      "bytes": 3587,
+      "sha256": "e0b6fb62d8dcd9991f39fc54e84bbe210d8f7d28559feb2a626ce310c3724373"
+    },
+    {
+      "path": "artifacts/revision/manuscript/REVIEWER_RESPONSE_FACTS.md",
+      "bytes": 18121,
+      "sha256": "cd3806a6c374e506a6404d7e3e035992cf9ad216728c4c4a25f93a3b9f00a822"
+    },
+    {
+      "path": "artifacts/revision/manuscript/METADATA_C6_PROPOSED.md",
+      "bytes": 1536,
+      "sha256": "844e5bc753fcff264f05ba577bcf50669144cda6edf4f313cdcbb8f53d2330b7"
+    },
+    {
+      "path": "artifacts/revision/manuscript/reviewer-evidence-map-final.json",
+      "bytes": 11500,
+      "sha256": "5012c1791e4259154179de5c536d90834cdaa15cca6f4614a77fea979b9121c0"
+    },
+    {
+      "path": "artifacts/revision/manuscript/reviewer-evidence-map-final.md",
+      "bytes": 8054,
+      "sha256": "b4064450a8d487275b75d2d5ed91480ab780bef5cd05431ac948dff9e94bbea4"
+    }
+  ],
+  "productionCoreDiff": "NONE",
+  "stopRequired": true,
+  "nextDecisionOwner": "GPT review"
+}

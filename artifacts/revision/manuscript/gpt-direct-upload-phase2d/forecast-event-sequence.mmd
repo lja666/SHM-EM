@@ -1,0 +1,57 @@
+sequenceDiagram
+    autonumber
+    actor Operator
+    participant PIT_PRE as PIT_PRE forecast runner
+    participant Store as Registered data and forecast store
+    participant Gate as PredictionExecutionGateService
+    participant Future as ProjectFutureStateService
+    participant Rules as EventEvaluationService
+    participant Events as Formal event store
+    participant Response as Response orchestrator
+    participant Trace as Event trace API
+
+    Operator->>PIT_PRE: Start registered prediction batch
+    PIT_PRE->>Store: Read active observation/model contract
+    PIT_PRE->>Store: Persist batch, runs, point forecasts, and hashes
+
+    opt Project-level future-state view (independent read path)
+        Operator->>Future: Request Future State(batch, horizon, mode)
+        Future->>Gate: inspect(batch, mode, referenceTime)
+        Gate->>Store: Read contract, runs, results, and hashes
+        Gate->>Gate: Validate model/feature sets, timeline, quality, artifacts, persisted integrity, freshness
+        Gate-->>Future: Eligibility and blockers (not persisted)
+        Future->>Store: Read engineering forecast series, policy, thresholds, observed risk
+        Future->>Future: Aggregate target -> station -> project state
+        Future-->>Operator: Deterministic state and state hash
+    end
+
+    Operator->>Rules: Evaluate(rule, batch)
+    Rules->>Store: Load rule and canonical engineering series
+    Rules->>Gate: inspect(batch, REPLAY, referenceTime)
+    Gate->>Store: Re-read contract, runs, results, and hashes
+    Gate->>Gate: Validate execution eligibility without persisting a Gate record
+    Gate-->>Rules: Eligibility and blockers
+    Rules->>Rules: Validate units and rule semantics; compute simulated candidates
+    Rules-->>Operator: Candidate result (no formal event/workflow/link side effects)
+
+    Operator->>Rules: Execute(rule, batch, executionMode)
+    Rules->>Store: Reload rule and canonical engineering series
+    Rules->>Gate: evaluate(batch, mode, referenceTime)
+    Gate->>Store: Re-read and revalidate persisted prediction state
+    Gate->>Store: Persist the new Gate record
+    alt executionEligible is false
+        Gate-->>Rules: Blockers
+        Rules-->>Operator: Reject before formal-event side effects
+    else executionEligible is true
+        Gate-->>Rules: Eligible Gate identity
+        Rules->>Rules: Validate units and rule semantics; compute formal event candidate
+        Rules->>Events: Persist formal event
+        Rules->>Events: Persist event-to-batch/run/model/Gate link
+        Rules->>Response: Orchestrate response workflow
+        Response->>Events: Persist workflow, steps, report/evidence state
+        Rules-->>Operator: Formal execution result
+    end
+
+    Operator->>Trace: Request trace(event)
+    Trace->>Events: Resolve rule, Gate, batch, run, model/hash, input window, and forecast snapshot
+    Trace-->>Operator: Auditable provenance chain

@@ -8,7 +8,7 @@ This is a fact sheet for the next response-writing phase, not the final polished
 - **Evidence generated:** Contract, Future State, failure, reuse, runtime, provenance, and portability evidence packages.
 - **Manuscript destination:** Introduction revision summary and expanded validation section.
 - **Deliberately not claimed:** No new forecasting-algorithm comparison.
-- **Key result:** 55 backend tests; 13 PIT_PRE tests; 15 negative/integrity cases; 7 reuse checks.
+- **Key result:** 55 backend tests; 13 PIT_PRE tests; a 15-case validation matrix (P00, F01-F12, I01-I02); 7 reuse checks.
 - **Repository evidence:** `artifacts/revision/manuscript/MANUSCRIPT_EVIDENCE_BLUEPRINT.md`
 
 ## R1-1 - Reuse/generalization beyond one excavation
@@ -17,7 +17,7 @@ This is a fact sheet for the next response-writing phase, not the final polished
 - **Evidence generated:** Phase 1B functional B9-B15 regression on the performance-corrected frozen core.
 - **Manuscript destination:** Section 3 cross-configuration reuse and Section 4.2.
 - **Deliberately not claimed:** No external field validation or predictive generalization.
-- **Key result:** 3 stations, 12 instruments, 2 model fixtures, 1,120 forecast rows; B9-B15 = 7/7.
+- **Key result:** 3 stations, 12 instruments, 2 compatible model bundles used solely as software-workflow fixtures, 1,120 forecast rows; B9-B15 = 7/7.
 - **Repository evidence:** `artifacts/revision/benchmarks/route-p/phase1b-regression/PHASE1B_COMPLETION_REPORT.md`
 
 ## R1-2 - Software effectiveness and quantitative runtime
@@ -32,10 +32,10 @@ This is a fact sheet for the next response-writing phase, not the final polished
 ## R1-3 - Evaluate/Execute failure-path safety
 
 - **What changed:** Added isolated failure-path and persisted-integrity testing and rechecked execution eligibility.
-- **Evidence generated:** P00, F01-F12, and I01-I02 failure matrix.
+- **Evidence generated:** A 15-case validation matrix comprising one positive control, 12 failure-path cases, and two input-availability controls.
 - **Manuscript destination:** Section 3 failure-path validation and sequence figure.
 - **Deliberately not claimed:** No absolute safety claim beyond tested cases.
-- **Key result:** 15/15 cases passed; invalid states produced zero formal side effects.
+- **Key result:** All cases expected to be blocked produced zero formal side effects.
 - **Repository evidence:** `artifacts/revision/benchmarks/route-p/failure-regression/failure-matrix-v2.md`
 
 ## R1-4 - Novelty versus Predictive-SHM
@@ -152,7 +152,7 @@ This is a fact sheet for the next response-writing phase, not the final polished
 - **Evidence generated:** Automated test-summary JSON/CSV/Markdown.
 - **Manuscript destination:** Section 3 testing table.
 - **Deliberately not claimed:** No double-counted global total or unsupported coverage percentage.
-- **Key result:** 55/55 backend, 13/13 PIT_PRE, 15/15 negative, 7/7 reuse, 2/2 frontend, 1/1 reference reproduction.
+- **Key result:** 55/55 backend, 13/13 PIT_PRE, a 15-case validation matrix (P00, F01-F12, I01-I02), 7/7 reuse, 2/2 frontend, and 1/1 reference reproduction.
 - **Repository evidence:** `artifacts/revision/manuscript/software-test-summary.md`
 
 ## R1-17 - Concrete provenance demonstration

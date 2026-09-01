@@ -16,7 +16,7 @@ Source: `docs/revision/PROJECT_FUTURE_STATE_ALGORITHM.md`. Present canonical pol
 
 ## Table C: Software validation
 
-Source: `artifacts/revision/manuscript/software-test-summary.md`. Report test families separately: 55 backend tests, 13 PIT_PRE tests, 15 negative/integrity cases, 7 second-configuration checks, 2 frontend checks, and one reference reproduction. Do not sum overlapping families into a global total.
+Source: `artifacts/revision/manuscript/software-test-summary.md`. Report test families separately: 55 backend tests, 13 PIT_PRE tests, a 15-case validation matrix comprising one positive control, 12 failure-path cases, and two input-availability controls, 7 second-configuration checks, 2 frontend checks, and one reference reproduction. Do not sum overlapping families into a global total.
 
 ## Table D: Runtime and scalability characterization
 

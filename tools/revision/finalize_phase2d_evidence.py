@@ -121,7 +121,8 @@ def build_gates(repo: Path) -> tuple[list[dict[str, Any]], dict[str, str]]:
         gate(
             "P2D-01",
             len(comparison) == 12 and {"predictive-shm", "ogc-sensorthings-1.1", "generic-cep"} <= source_ids
-            and "publisher abstract" in related and "10.1016/j.softx.2026.102732" in related,
+            and "publisher abstract" in related and "10.1016/j.softx.2026.102732" in related
+            and next(row for row in comparison if row["capability"] == "Shared prediction origin and future timeline")["Predictive-SHM"] == "Not reported",
             ["docs/revision/RELATED_SOFTWARE_COMPARISON.md", "artifacts/revision/manuscript/related-software-sources.json"],
             "Predictive-SHM differentiation is limited to source-grounded published capabilities.",
         ),
@@ -162,13 +163,15 @@ def build_gates(repo: Path) -> tuple[list[dict[str, Any]], dict[str, str]]:
         gate(
             "P2D-07",
             impact.count("Evidence: `") >= 4 and "do not establish production throughput or linear scalability" in impact
-            and "not forecasting accuracy" in impact,
+            and "not interpreted as bridge-domain predictive validation" in impact
+            and "15-case validation matrix comprising one positive control" in impact,
             ["artifacts/revision/manuscript/IMPACT_RESTRUCTURING_PLAN.md"],
             "Every Impact subsection is evidence-linked and bounded.",
         ),
         gate(
             "P2D-08",
-            "not forecasting accuracy, cross-domain predictive generalization" in impact
+            "used solely as software-workflow fixtures" in impact
+            and "not interpreted as bridge-domain predictive validation or cross-domain forecasting accuracy" in impact
             and "one independently registered synthetic" in impact,
             ["artifacts/revision/manuscript/IMPACT_RESTRUCTURING_PLAN.md"],
             "The second configuration is software-reuse evidence only.",
@@ -176,6 +179,8 @@ def build_gates(repo: Path) -> tuple[list[dict[str, Any]], dict[str, str]]:
         gate(
             "P2D-09",
             "did not produce a bitwise-identical" in metadata and "0.00285349" in metadata
+            and "exactPredictionReproduction=false" in metadata and "toleranceApplied=false" in metadata
+            and "full row-wise comparison artifact" in metadata
             and "no tolerance was applied" in metadata and "native ubuntu-host validation was not separately captured" in metadata.lower(),
             ["artifacts/revision/manuscript/METADATA_C6_PROPOSED.md", "artifacts/revision/manuscript/FINAL_LIMITATION_MATRIX.md"],
             "The Phase 2C portability limitation is preserved without tolerance reinterpretation.",

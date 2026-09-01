@@ -1,0 +1,282 @@
+{
+  "schemaVersion": "shm-em-reviewer-evidence-map-final-v1",
+  "reviewerItems": 27,
+  "phase": "Phase 2D manuscript preparation",
+  "finalCoreFreezeV3": "eaa7d85a0b4921ab2f6e54234cff09aee6a30c8f",
+  "entries": [
+    {
+      "reviewerItem": "R1-0",
+      "topic": "Overall revision scope",
+      "status": "EVIDENCE_COMPLETE",
+      "evidence": [
+        "artifacts/revision/manuscript/MANUSCRIPT_EVIDENCE_BLUEPRINT.md"
+      ],
+      "nextAction": "Insert the prepared evidence and bounded wording during Final Manuscript Revision + Response."
+    },
+    {
+      "reviewerItem": "R1-1",
+      "topic": "Reuse/generalization beyond one excavation",
+      "status": "EVIDENCE_COMPLETE",
+      "evidence": [
+        "artifacts/revision/benchmarks/route-p/phase1b-regression/PHASE1B_COMPLETION_REPORT.md"
+      ],
+      "nextAction": "Insert the prepared evidence and bounded wording during Final Manuscript Revision + Response."
+    },
+    {
+      "reviewerItem": "R1-2",
+      "topic": "Software effectiveness and quantitative runtime",
+      "status": "EVIDENCE_COMPLETE",
+      "evidence": [
+        "artifacts/revision/manuscript/final-performance-table.md"
+      ],
+      "nextAction": "Insert the prepared evidence and bounded wording during Final Manuscript Revision + Response."
+    },
+    {
+      "reviewerItem": "R1-3",
+      "topic": "Evaluate/Execute failure-path safety",
+      "status": "EVIDENCE_COMPLETE",
+      "evidence": [
+        "artifacts/revision/benchmarks/route-p/failure-regression/failure-matrix-v2.md"
+      ],
+      "nextAction": "Insert the prepared evidence and bounded wording during Final Manuscript Revision + Response."
+    },
+    {
+      "reviewerItem": "R1-4",
+      "topic": "Novelty versus Predictive-SHM",
+      "status": "DOCUMENTATION_COMPLETE",
+      "evidence": [
+        "artifacts/revision/manuscript/claim-gap-matrix-final.md",
+        "docs/revision/RELATED_SOFTWARE_COMPARISON.md",
+        "artifacts/revision/manuscript/related-software-comparison.csv"
+      ],
+      "nextAction": "Insert the prepared evidence and bounded wording during Final Manuscript Revision + Response."
+    },
+    {
+      "reviewerItem": "R1-5",
+      "topic": "Versioned data-model contract",
+      "status": "EVIDENCE_COMPLETE",
+      "evidence": [
+        "docs/revision/DATA_MODEL_CONTRACT_SPEC.md",
+        "docs/revision/examples/data-model-contract.example.json"
+      ],
+      "nextAction": "Insert the prepared evidence and bounded wording during Final Manuscript Revision + Response."
+    },
+    {
+      "reviewerItem": "R1-6",
+      "topic": "Project Future State definition",
+      "status": "EVIDENCE_COMPLETE",
+      "evidence": [
+        "docs/revision/PROJECT_FUTURE_STATE_SPEC.md",
+        "docs/revision/PROJECT_FUTURE_STATE_ALGORITHM.md",
+        "artifacts/revision/manuscript/future-state-boundary-tests.json"
+      ],
+      "nextAction": "Insert the prepared evidence and bounded wording during Final Manuscript Revision + Response."
+    },
+    {
+      "reviewerItem": "R1-7",
+      "topic": "Six-model configuration",
+      "status": "EVIDENCE_COMPLETE",
+      "evidence": [
+        "docs/revision/MODEL_CONFIG_SUMMARY.md",
+        "artifacts/revision/manuscript/model-config-summary.json"
+      ],
+      "nextAction": "Insert the prepared evidence and bounded wording during Final Manuscript Revision + Response."
+    },
+    {
+      "reviewerItem": "R1-8",
+      "topic": "Point-forecast limitation",
+      "status": "LIMITATION_DOCUMENTED",
+      "evidence": [
+        "artifacts/revision/manuscript/claim-gap-matrix-final.md",
+        "artifacts/revision/manuscript/FINAL_LIMITATION_MATRIX.md"
+      ],
+      "nextAction": "Insert the prepared evidence and bounded wording during Final Manuscript Revision + Response."
+    },
+    {
+      "reviewerItem": "R1-9",
+      "topic": "Runtime scalability",
+      "status": "EVIDENCE_COMPLETE",
+      "evidence": [
+        "artifacts/revision/manuscript/final-performance-table.md"
+      ],
+      "nextAction": "Insert the prepared evidence and bounded wording during Final Manuscript Revision + Response."
+    },
+    {
+      "reviewerItem": "R1-10",
+      "topic": "MySQL scalability",
+      "status": "EVIDENCE_COMPLETE",
+      "evidence": [
+        "artifacts/revision/benchmarks/scaling/scaling-summary.json",
+        "artifacts/revision/manuscript/final-performance-table.md"
+      ],
+      "nextAction": "Insert the prepared evidence and bounded wording during Final Manuscript Revision + Response."
+    },
+    {
+      "reviewerItem": "R1-11",
+      "topic": "Deployment security",
+      "status": "DOCUMENTATION_COMPLETE",
+      "evidence": [
+        "SECURITY.md",
+        "docs/revision/DEPLOYMENT_LIMITATIONS.md"
+      ],
+      "nextAction": "Insert the prepared evidence and bounded wording during Final Manuscript Revision + Response."
+    },
+    {
+      "reviewerItem": "R1-12",
+      "topic": "Windows-centric reproduction",
+      "status": "PARTIALLY_SUPPORTED_DOCUMENTED",
+      "evidence": [
+        "artifacts/revision/portability/cross-platform-comparison.md",
+        "artifacts/revision/portability/portability-limitations.md",
+        "artifacts/revision/manuscript/METADATA_C6_PROPOSED.md"
+      ],
+      "nextAction": "Insert the prepared evidence and bounded wording during Final Manuscript Revision + Response."
+    },
+    {
+      "reviewerItem": "R1-13",
+      "topic": "Validation/evaluation/execution eligibility figure",
+      "status": "FIGURE_SOURCE_COMPLETE",
+      "evidence": [
+        "artifacts/revision/manuscript/MANUSCRIPT_EVIDENCE_BLUEPRINT.md",
+        "docs/revision/figures/forecast-event-sequence.mmd",
+        "artifacts/revision/manuscript/sequence-code-crosscheck.json"
+      ],
+      "nextAction": "Insert the prepared evidence and bounded wording during Final Manuscript Revision + Response."
+    },
+    {
+      "reviewerItem": "R1-14",
+      "topic": "Screenshots as scientific evidence",
+      "status": "REDUCTION_PLAN_COMPLETE",
+      "evidence": [
+        "artifacts/revision/manuscript/MANUSCRIPT_EVIDENCE_BLUEPRINT.md",
+        "artifacts/revision/manuscript/FIGURE4_REDUCTION_PLAN.md"
+      ],
+      "nextAction": "Insert the prepared evidence and bounded wording during Final Manuscript Revision + Response."
+    },
+    {
+      "reviewerItem": "R1-15",
+      "topic": "Unsupported impact claims",
+      "status": "MANUSCRIPT_PLAN_COMPLETE",
+      "evidence": [
+        "artifacts/revision/manuscript/claim-gap-matrix-final.md",
+        "artifacts/revision/manuscript/IMPACT_RESTRUCTURING_PLAN.md"
+      ],
+      "nextAction": "Insert the prepared evidence and bounded wording during Final Manuscript Revision + Response."
+    },
+    {
+      "reviewerItem": "R1-16",
+      "topic": "Software testing summary",
+      "status": "EVIDENCE_COMPLETE",
+      "evidence": [
+        "artifacts/revision/manuscript/software-test-summary.md"
+      ],
+      "nextAction": "Insert the prepared evidence and bounded wording during Final Manuscript Revision + Response."
+    },
+    {
+      "reviewerItem": "R1-17",
+      "topic": "Concrete provenance demonstration",
+      "status": "EVIDENCE_COMPLETE",
+      "evidence": [
+        "docs/revision/PROVENANCE_TRACE_EXAMPLE.md",
+        "artifacts/revision/manuscript/provenance-trace-final.json"
+      ],
+      "nextAction": "Insert the prepared evidence and bounded wording during Final Manuscript Revision + Response."
+    },
+    {
+      "reviewerItem": "R1-18",
+      "topic": "OGC SensorThings relationship",
+      "status": "DOCUMENTATION_COMPLETE",
+      "evidence": [
+        "artifacts/revision/manuscript/claim-gap-matrix-final.md",
+        "docs/revision/SENSORTHINGS_POSITIONING.md",
+        "docs/revision/RELATED_SOFTWARE_COMPARISON.md"
+      ],
+      "nextAction": "Insert the prepared evidence and bounded wording during Final Manuscript Revision + Response."
+    },
+    {
+      "reviewerItem": "R1-19",
+      "topic": "Repeated contribution text",
+      "status": "REDUCTION_PLAN_COMPLETE",
+      "evidence": [
+        "artifacts/revision/manuscript/MANUSCRIPT_EVIDENCE_BLUEPRINT.md",
+        "artifacts/revision/manuscript/REPETITION_REDUCTION_MAP.md"
+      ],
+      "nextAction": "Insert the prepared evidence and bounded wording during Final Manuscript Revision + Response."
+    },
+    {
+      "reviewerItem": "R2-1",
+      "topic": "Predictive-SHM difference and empirical comparison",
+      "status": "DOCUMENTATION_COMPLETE",
+      "evidence": [
+        "artifacts/revision/manuscript/final-performance-table.md",
+        "artifacts/revision/manuscript/claim-gap-matrix-final.md",
+        "docs/revision/RELATED_SOFTWARE_COMPARISON.md",
+        "artifacts/revision/manuscript/IMPACT_RESTRUCTURING_PLAN.md"
+      ],
+      "nextAction": "Insert the prepared evidence and bounded wording during Final Manuscript Revision + Response."
+    },
+    {
+      "reviewerItem": "R2-2",
+      "topic": "Related-framework comparison table",
+      "status": "DOCUMENTATION_COMPLETE",
+      "evidence": [
+        "artifacts/revision/manuscript/MANUSCRIPT_EVIDENCE_BLUEPRINT.md",
+        "artifacts/revision/manuscript/related-software-comparison.md",
+        "artifacts/revision/manuscript/related-software-comparison.csv"
+      ],
+      "nextAction": "Insert the prepared evidence and bounded wording during Final Manuscript Revision + Response."
+    },
+    {
+      "reviewerItem": "R2-3",
+      "topic": "Missing/dropped rolling-window data",
+      "status": "EVIDENCE_COMPLETE",
+      "evidence": [
+        "docs/revision/DATA_MODEL_CONTRACT_SPEC.md",
+        "artifacts/revision/benchmarks/route-p/failure-regression/failure-matrix-v2.md"
+      ],
+      "nextAction": "Insert the prepared evidence and bounded wording during Final Manuscript Revision + Response."
+    },
+    {
+      "reviewerItem": "R3-1",
+      "topic": "MySQL and data-access abstraction",
+      "status": "DOCUMENTATION_COMPLETE",
+      "evidence": [
+        "docs/revision/STORAGE_ADAPTER_BOUNDARY.md",
+        "docs/DATABASE.md"
+      ],
+      "nextAction": "Insert the prepared evidence and bounded wording during Final Manuscript Revision + Response."
+    },
+    {
+      "reviewerItem": "R3-2",
+      "topic": "Security pattern",
+      "status": "DOCUMENTATION_COMPLETE",
+      "evidence": [
+        "SECURITY.md"
+      ],
+      "nextAction": "Insert the prepared evidence and bounded wording during Final Manuscript Revision + Response."
+    },
+    {
+      "reviewerItem": "R3-3",
+      "topic": "Asynchronous sampling, latency, missing points",
+      "status": "EVIDENCE_COMPLETE",
+      "evidence": [
+        "docs/revision/DATA_MODEL_CONTRACT_SPEC.md",
+        "artifacts/revision/benchmarks/route-p/failure-regression/failure-matrix-v2.md"
+      ],
+      "nextAction": "Insert the prepared evidence and bounded wording during Final Manuscript Revision + Response."
+    },
+    {
+      "reviewerItem": "R3-4",
+      "topic": "Linux/Docker portability",
+      "status": "SUBSTANTIALLY_ADDRESSED_WITH_LIMITATION",
+      "evidence": [
+        "artifacts/revision/portability/linux-reference-reproduction.json",
+        "artifacts/revision/portability/cross-platform-comparison.md",
+        "artifacts/revision/portability/cross-platform-numeric-difference.json",
+        "artifacts/revision/manuscript/METADATA_C6_PROPOSED.md",
+        "artifacts/revision/manuscript/FINAL_LIMITATION_MATRIX.md"
+      ],
+      "nextAction": "Insert the prepared evidence and bounded wording during Final Manuscript Revision + Response."
+    }
+  ]
+}

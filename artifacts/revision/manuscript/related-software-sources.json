@@ -1,0 +1,50 @@
+{
+  "accessed": "2026-09-01",
+  "sources": [
+    {
+      "id": "predictive-shm",
+      "type": "journal article",
+      "citation": "S. Yang, M. Li, J. Liao, J. Wang, D. Zhao, Z. Li, and Z. Wang, Predictive-SHM: An open-source, extensible software toolkit for multi-sensor structural health monitoring and time-series prediction, SoftwareX 35 (2026) 102732.",
+      "doi": "10.1016/j.softx.2026.102732",
+      "url": "https://doi.org/10.1016/j.softx.2026.102732",
+      "publisherPage": "https://www.sciencedirect.com/science/article/pii/S2352711026002244",
+      "claimsUsed": [
+        "multi-source ingestion and unified preprocessing",
+        "metadata-driven registration and model adapters",
+        "ULDM-to-model-tensor mapping",
+        "standardized timestamped forecasts",
+        "residual- and threshold-based alerting"
+      ],
+      "evidenceBoundary": "Only capabilities explicitly stated by the publisher abstract are marked Yes or Partial.",
+      "accessed": "2026-09-01"
+    },
+    {
+      "id": "ogc-sensorthings-1.1",
+      "type": "official implementation standard",
+      "citation": "OGC SensorThings API Part 1: Sensing Version 1.1, OGC 18-088, 2021.",
+      "url": "https://docs.ogc.org/is/18-088/18-088.html",
+      "claimsUsed": [
+        "open and unified access to observations and metadata from heterogeneous IoT sensor systems",
+        "Thing, Location, Datastream, Sensor, ObservedProperty, Observation, and FeatureOfInterest entities",
+        "conformance requires the relevant normative Annex A tests"
+      ],
+      "evidenceBoundary": "SHM-EM has not implemented or run those conformance tests.",
+      "accessed": "2026-09-01"
+    },
+    {
+      "id": "generic-cep",
+      "type": "peer-reviewed survey",
+      "citation": "G. Cugola and A. Margara, Processing flows of information: From data stream to complex event processing, ACM Computing Surveys 44(3) (2012) Article 15.",
+      "doi": "10.1145/2187671.2187677",
+      "url": "https://doi.org/10.1145/2187671.2187677",
+      "authorHostedPdf": "https://margara.faculty.polimi.it/papers/persys_book.pdf",
+      "claimsUsed": [
+        "continuous processing of information flows",
+        "pre-deployed processing rules and stream/window operations",
+        "condition and event-pattern recognition leading to derived events"
+      ],
+      "evidenceBoundary": "Generic CEP is a paradigm, not one fixed implementation or SHM-specific product.",
+      "accessed": "2026-09-01"
+    }
+  ]
+}

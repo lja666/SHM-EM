@@ -1,0 +1,64 @@
+{
+  "schemaVersion": "shm-em-phase2d-sequence-crosscheck-v1",
+  "finalCoreFreezeV3": "eaa7d85a0b4921ab2f6e54234cff09aee6a30c8f",
+  "diagram": "docs/revision/figures/forecast-event-sequence.mmd",
+  "futureStateIsIndependentReadPath": true,
+  "anchors": [
+    {
+      "path": "src/backend/src/main/java/mybatis/iem/em/modules/engineering/application/service/impl/EventEvaluationServiceImpl.java",
+      "line": 75,
+      "claim": "Evaluate entry point"
+    },
+    {
+      "path": "src/backend/src/main/java/mybatis/iem/em/modules/engineering/application/service/impl/EventEvaluationServiceImpl.java",
+      "line": 80,
+      "claim": "Evaluate uses non-persisted REPLAY Gate inspection"
+    },
+    {
+      "path": "src/backend/src/main/java/mybatis/iem/em/modules/engineering/application/service/impl/EventEvaluationServiceImpl.java",
+      "line": 100,
+      "claim": "Execute entry point"
+    },
+    {
+      "path": "src/backend/src/main/java/mybatis/iem/em/modules/engineering/application/service/impl/EventEvaluationServiceImpl.java",
+      "line": 111,
+      "claim": "Execute rechecks eligibility before formal evaluation"
+    },
+    {
+      "path": "src/backend/src/main/java/mybatis/iem/em/modules/engineering/application/service/impl/EventEvaluationServiceImpl.java",
+      "line": 119,
+      "claim": "Formal event persistence"
+    },
+    {
+      "path": "src/backend/src/main/java/mybatis/iem/em/modules/engineering/application/service/impl/EventEvaluationServiceImpl.java",
+      "line": 120,
+      "claim": "Formal event-to-prediction linkage"
+    },
+    {
+      "path": "src/backend/src/main/java/mybatis/iem/em/modules/engineering/application/service/impl/PredictionExecutionGateServiceImpl.java",
+      "line": 58,
+      "claim": "Gate evaluate calls inspect then persists the record"
+    },
+    {
+      "path": "src/backend/src/main/java/mybatis/iem/em/modules/engineering/application/service/impl/PredictionExecutionGateServiceImpl.java",
+      "line": 98,
+      "claim": "Persisted-result integrity validation"
+    },
+    {
+      "path": "src/backend/src/main/java/mybatis/iem/em/modules/engineering/application/service/impl/ProjectFutureStateServiceImpl.java",
+      "line": 87,
+      "claim": "Future State reports a non-persisted Gate inspection"
+    },
+    {
+      "path": "src/backend/src/main/java/mybatis/iem/em/modules/engineering/application/service/impl/MetricRuleEventEngine.java",
+      "line": 146,
+      "claim": "Rule unit validation occurs in the rule engine"
+    }
+  ],
+  "sourceHashes": {
+    "src/backend/src/main/java/mybatis/iem/em/modules/engineering/application/service/impl/EventEvaluationServiceImpl.java": "26c193de15da9ad38943246db60c33b826dacbea6d6c6ec53c39e5ab4476c929",
+    "src/backend/src/main/java/mybatis/iem/em/modules/engineering/application/service/impl/PredictionExecutionGateServiceImpl.java": "b25f9b267c3837a982d7805ff7624431a6be1207a5a3f2b556b027e8609fd6e8",
+    "src/backend/src/main/java/mybatis/iem/em/modules/engineering/application/service/impl/ProjectFutureStateServiceImpl.java": "a4ad9615ccc5e08f48868d707774809e2f6c254e3bbe962c11a02903e48983e9",
+    "src/backend/src/main/java/mybatis/iem/em/modules/engineering/application/service/impl/MetricRuleEventEngine.java": "94ecb0cade538be43f8ab1b7f25ecc4a23cd806ae862a4181648ca83536ff26b"
+  }
+}

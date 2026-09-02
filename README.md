@@ -120,7 +120,7 @@ Public database inputs are applied in this order:
   versioned engineering values.
 - `em_prediction_model` and `em_prediction_feature_mapping` are the
   authoritative model contract.
-- `Evaluate` is side-effect free. `Execute` creates formal events only after a
+- `Evaluate` retains an audit record but creates no formal business side effects. `Execute` creates formal events only after a
   persisted prediction gate passes.
 - `OPERATIONAL` uses wall-clock freshness; `REPLAY` and isolated
   `REPRODUCTION` use scenario-time policies.

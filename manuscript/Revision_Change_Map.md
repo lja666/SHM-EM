@@ -34,7 +34,7 @@
 | “Reuse does not require changes ...” | “In the synthetic second-configuration experiment ...” | Replaces universal claim with measured experiment-specific result | R1-1, R1-15 |
 | Limited limitations paragraph | Section 4.4 | Adds point forecasts, 50k app cap, MySQL-only, no TSDB/SensorThings, security, portability, synthetic-fixture, adapter/model scope | R1-8, R1-10-12, R1-18, R3-1-4 |
 | Conclusions | Conclusions | Synthesizes three mechanisms and evidence; states non-claims | All reviewers |
-| Data/software availability | Section 6 | Retains partial-public-data boundary; adds release synchronization requirement | Reproducibility and confidentiality |
+| Data/software availability | Section 6 | Retains partial-public-data boundary and records the completed immutable v1.0.1 release, fixed commit, archive, and checksum | Reproducibility and confidentiality |
 
 ## Mandatory wording corrections
 
@@ -64,9 +64,14 @@
 | Table 6 | `final-performance-table.md` | Add selected runtime and bounded-scaling evidence |
 | Table 7 | `provenance-trace-final.json` | Add concrete provenance trace |
 
-## Deferred until scientific-consistency approval
+## Completed before scientific-consistency approval
+
+- Public `v1.0.1` tag and fixed release commit.
+- Public release archive and checksum sidecar.
+- C1/C2/C7 and Section 6 release-metadata synchronization.
+
+## Authorized final-document work
 
 - Clean and marked DOCX generation.
 - Final figure rendering/composition and journal layout.
-- Public tag/release asset and checksum synchronization.
-- Editorial line/page references, which require stable DOCX pagination.
+- Editorial line/page references after stable DOCX pagination.

@@ -39,6 +39,10 @@ def parse_args() -> argparse.Namespace:
         "--output",
         default="artifacts/revision/final-manuscript-review/final-manuscript-source-validation.json",
     )
+    parser.add_argument(
+        "--validated-source-head",
+        help="Reviewed source commit whose five manuscript files must match the current worktree.",
+    )
     return parser.parse_args()
 
 
@@ -77,6 +81,13 @@ def main() -> int:
     checks: list[dict[str, object]] = []
 
     paths = [source_root / name for name in SOURCE_FILES]
+    validated_source_head = args.validated_source_head or git(repo, "rev-parse", "HEAD").strip()
+    source_relatives = [str(path.relative_to(repo)).replace("\\", "/") for path in paths]
+    source_diff = git(repo, "diff", "--name-only", validated_source_head, "--", *source_relatives).strip()
+    if source_diff:
+        raise RuntimeError(
+            f"Current manuscript sources differ from validated source head {validated_source_head}: {source_diff}"
+        )
     check(checks, "FM-01", all(path.is_file() for path in paths), "All five authorized Markdown source files exist.")
     if not all(path.is_file() for path in paths):
         output.write_text(json.dumps({"checks": checks, "pass": False}, indent=2) + "\n", encoding="utf-8")
@@ -342,7 +353,8 @@ def main() -> int:
         "generatedAtUtc": datetime.now(timezone.utc).isoformat(),
         "finalCoreFreezeV3": FREEZE,
         "head": git(repo, "rev-parse", "HEAD").strip(),
-        "sourceFiles": [str(path.relative_to(repo)).replace("\\", "/") for path in paths],
+        "validatedSourceHead": validated_source_head,
+        "sourceFiles": source_relatives,
         "reviewerItemCount": len(response_ids),
         "referenceCount": len(reference_ids),
         "checks": checks,

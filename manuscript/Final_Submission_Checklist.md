@@ -42,21 +42,21 @@ This checklist separates completed source/evidence work from tasks that must wai
 
 ## D. Required GPT stop/review
 
-- [ ] GPT confirms manuscript claims match repository evidence.
-- [ ] GPT confirms contribution novelty and related-software language are scientifically fair.
-- [ ] GPT confirms all reviewer comments are answered without overclaiming.
-- [ ] GPT confirms table/figure numbering and proposed structure are coherent.
-- [ ] GPT authorizes final DOCX generation.
+- [x] GPT confirms manuscript claims match repository evidence.
+- [x] GPT confirms contribution novelty and related-software language are scientifically fair.
+- [x] GPT confirms all reviewer comments are answered without overclaiming.
+- [x] GPT confirms table/figure numbering and proposed structure are coherent.
+- [x] GPT authorizes final DOCX generation.
 
 ## E. After GPT approval only
 
-- [ ] Render revised Fig. 3 from the code-crosschecked Mermaid source.
-- [ ] Produce the compact three-panel Fig. 4 at publication resolution.
-- [ ] Correct Fig. 5 model dimensions/labels.
-- [ ] Generate `Revised Manuscript Clean.docx`.
-- [ ] Generate `Revised Manuscript Marked.docx` against the submitted PDF text baseline.
-- [ ] Generate `Response to Reviewers.docx` with final page/line references.
-- [ ] Render all DOCX files to PDF/PNG and inspect every page for overflow, broken tables, image clarity, and reference formatting.
+- [x] Render revised Fig. 3 from the code-crosschecked Mermaid source.
+- [x] Produce the compact three-panel Fig. 4 at publication resolution.
+- [x] Correct Fig. 5 model dimensions/labels.
+- [x] Generate `Revised Manuscript Clean.docx`.
+- [x] Generate `Revised Manuscript Marked.docx` against the submitted PDF text baseline.
+- [x] Generate `Response to Reviewers.docx` with final page/line references.
+- [x] Render all DOCX files to PDF/PNG and inspect every page for overflow, broken tables, image clarity, and reference formatting.
 
 ## F. Public-release synchronization before submission
 
@@ -72,11 +72,11 @@ This checklist separates completed source/evidence work from tasks that must wai
 
 ## G. Editorial submission package
 
-- [ ] Clean revised manuscript.
-- [ ] Marked revised manuscript.
-- [ ] Point-by-point response letter.
-- [ ] Revised figures as separate high-resolution files if required.
-- [ ] Updated metadata table and declaration statements.
+- [x] Clean revised manuscript.
+- [x] Marked revised manuscript.
+- [x] Point-by-point response letter.
+- [x] Revised figures as separate high-resolution PNG and SVG files.
+- [x] Updated metadata table and declaration statements.
 - [ ] Final author names, affiliations, funding numbers, corresponding email, and acknowledgements checked by all authors.
 - [ ] Software/data availability wording approved by the data owner.
 - [ ] Submission deadline and Editorial Manager file naming requirements checked.

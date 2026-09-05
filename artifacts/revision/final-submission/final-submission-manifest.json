@@ -1,0 +1,139 @@
+{
+  "schemaVersion": "shm-em-final-submission-manifest-v1",
+  "generatedAtUtc": "2026-09-05T04:56:27.847397+00:00",
+  "generationBaseHead": "ddee5953d410793a5391c07f08a027d65793d2c0",
+  "branch": "revision/softx-d-26-00931",
+  "reviewedSourceHead": "9caa9c0b7e8b7204a0f8e4b44e8a963edb6d5dc6",
+  "finalCoreFreezeV3": "eaa7d85a0b4921ab2f6e54234cff09aee6a30c8f",
+  "productionCoreDiff": "NONE",
+  "release": {
+    "tag": "v1.0.1",
+    "commit": "d7cba1419145e6c75fe69ad63172af5f5abe5028",
+    "archiveSha256": "ea0973b7c82e06c3c8910ec36fcf2c3d47765a87d11552337a86c69de41a7cef"
+  },
+  "sourceValidation": "24/24 PASS",
+  "reviewerItems": 27,
+  "references": 30,
+  "artifacts": [
+    {
+      "path": "artifacts/revision/final-submission/SHM-EM_SoftwareX_Revised_Clean.docx",
+      "bytes": 17338731,
+      "sha256": "484dae4dc03d1ad6ace8870a976a8409889777053e8ffcc7bb512c0e612ee391"
+    },
+    {
+      "path": "artifacts/revision/final-submission/SHM-EM_SoftwareX_Revised_Marked.docx",
+      "bytes": 17841483,
+      "sha256": "8f207816c143c6a0bde90ce1c16bcca2f1900b78c13af12769f38d89284d7c17"
+    },
+    {
+      "path": "artifacts/revision/final-submission/Response_to_Reviewers.docx",
+      "bytes": 6173441,
+      "sha256": "1c3af3415a1f8d02d052c8a7a89c923bc4ba89792891222d7f54965b0e18073e"
+    },
+    {
+      "path": "artifacts/revision/final-submission/SHM-EM_SoftwareX_Revised_Clean.pdf",
+      "bytes": 1202222,
+      "sha256": "fb54077dd8eab04c848c1226a1888c681a8a42abb756b2ed6b6e427e6b9a05bd",
+      "pages": 19
+    },
+    {
+      "path": "artifacts/revision/final-submission/SHM-EM_SoftwareX_Revised_Marked.pdf",
+      "bytes": 1210294,
+      "sha256": "670a29ad67a4527b2135ac15d7b739b1391cf5af982b47657ca03b75ae2c2649",
+      "pages": 19
+    },
+    {
+      "path": "artifacts/revision/final-submission/Response_to_Reviewers.pdf",
+      "bytes": 313372,
+      "sha256": "2a91ca262b74cff8f31b5533250a4634e1c0ea5b1a9ea779de9564eb3b4481f3",
+      "pages": 12
+    },
+    {
+      "path": "artifacts/revision/final-submission/figures/Fig3_Forecast_to_Event_Sequence.png",
+      "bytes": 481248,
+      "sha256": "75353df10108cdcfd0361328d794686662d29fcac12d611052e3f1396cadc136",
+      "pixels": {
+        "width": 4200,
+        "height": 2550
+      }
+    },
+    {
+      "path": "artifacts/revision/final-submission/figures/Fig3_Forecast_to_Event_Sequence.svg",
+      "bytes": 13741,
+      "sha256": "92aa0aea26a8a7cf4dfb42846ddd2ddabcd4fb1025653b7f1383348de3bd9067"
+    },
+    {
+      "path": "artifacts/revision/final-submission/figures/Fig4_Task_Oriented_Interface_Composite.png",
+      "bytes": 4404556,
+      "sha256": "f57524f4759636e2f4669c212e571cb61538023f22dc35d903ae027d4b52e5de",
+      "pixels": {
+        "width": 4200,
+        "height": 2400
+      }
+    },
+    {
+      "path": "artifacts/revision/final-submission/figures/Fig4_Task_Oriented_Interface_Composite.svg",
+      "bytes": 4755851,
+      "sha256": "e415b8a2f149cf95350aeaf544d17812d96524007e9fb2fe9ed9f3e7533985e0"
+    },
+    {
+      "path": "artifacts/revision/final-submission/figures/Fig5_Public_Reference_Workflow.png",
+      "bytes": 4251388,
+      "sha256": "91f5bef95c2c7c3da11d60251f5d35eb838edccb183d01bc6acf673eee5a92ea",
+      "pixels": {
+        "width": 4200,
+        "height": 3000
+      }
+    },
+    {
+      "path": "artifacts/revision/final-submission/figures/Fig5_Public_Reference_Workflow.svg",
+      "bytes": 4296361,
+      "sha256": "1d757806aa73abc6fc9d199fc3fcfd0ec0622fb2a99b144ba3532cd3d1a77092"
+    },
+    {
+      "path": "artifacts/revision/final-submission/final-manuscript-source-validation-v2.json",
+      "bytes": 4313,
+      "sha256": "8997f292e71f1abce04a23ee53564186394f7acc1916c4b1c0fc1ecb0e852370"
+    },
+    {
+      "path": "artifacts/revision/final-submission/Final_Submission_Checklist.md",
+      "bytes": 5313,
+      "sha256": "2a3fc8fdf499e5887ab8c4bf392872c583d7995c0d028d25a00c820e1d67d114"
+    },
+    {
+      "path": "artifacts/revision/final-submission/reviewer-page-line-references.json",
+      "bytes": 1196,
+      "sha256": "80f700d5b18d399ffea45592e6ede1a985fdc7f07305601ad088c0cd51ed1f35"
+    },
+    {
+      "path": "artifacts/revision/final-submission/submitted-baseline-verification.json",
+      "bytes": 752,
+      "sha256": "e7c85eee10191d132d76ebeed3c71e2047f6d10a747753794cba34d6d21244f0"
+    },
+    {
+      "path": "artifacts/revision/final-submission/FINAL_SUBMISSION_COMPLETION_REPORT.md",
+      "bytes": 3446,
+      "sha256": "c05a0b124106fd0f44113057e22839d40a9d2e9d2932896a6f025bc54073aece"
+    },
+    {
+      "path": "artifacts/revision/final-submission/GPT_REVIEW_HANDOFF.md",
+      "bytes": 1213,
+      "sha256": "3b7ae004f14d3231bb88e5bf65e4bd3fd2f39e64f3445f1790a390d14e1b59f7"
+    },
+    {
+      "path": "manuscript/SHM-EM_Revised_Manuscript_Source.md",
+      "bytes": 51734,
+      "sha256": "ce721781e81d88a9f2a6163f7ad5ef72c669824cd3b1f08de241c178cd2fd22f"
+    },
+    {
+      "path": "manuscript/Response_to_Reviewers_Source.md",
+      "bytes": 37469,
+      "sha256": "d5deb5fbfe295f4820ef43b08ff802140509e79caf726438a19114cef55c78b1"
+    },
+    {
+      "path": "manuscript/Revision_Change_Map.md",
+      "bytes": 8198,
+      "sha256": "2890dba643470f1fef2f884c0c3976e278628e52016ccce4867c63e51351498f"
+    }
+  ]
+}

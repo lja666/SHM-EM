@@ -1,0 +1,129 @@
+{
+  "schemaVersion": "shm-em-ai-figure-provenance-v1",
+  "scope": "Final SoftwareX revision figures 1-5",
+  "versionPolicy": "Exact model/build identifiers are reported only when retained by project logs or source metadata. None were retained for these figure operations; no version has been inferred.",
+  "figures": [
+    {
+      "figure": 1,
+      "sourceMaterial": [
+        "Final manuscript contribution definitions",
+        "Repository revision evidence"
+      ],
+      "aiTools": [
+        {
+          "service": "OpenAI Codex",
+          "modelVersion": null,
+          "modelVersionStatus": "NOT_RETAINED"
+        }
+      ],
+      "howAiAssisted": "Drafted the explanatory layout and the deterministic SVG-generating code.",
+      "notAiGenerated": "No generated-image pixels were used in the final figure; it is rendered from archived JavaScript/SVG instructions.",
+      "humanVerification": "Authors checked the labels and relationships against the final manuscript and revision evidence.",
+      "finalDeterministicSource": "tools/revision/generate_final_figures.js",
+      "finalDeterministicSourceSha256": "7d01f8732df0b63625f0a52a920087f8d87e30b4f793c0a887c325bdb9e0cdf2"
+    },
+    {
+      "figure": 2,
+      "sourceMaterial": [
+        "Released SHM-EM architecture",
+        "Storage-boundary and software-description evidence"
+      ],
+      "aiTools": [
+        {
+          "service": "OpenAI Codex",
+          "modelVersion": null,
+          "modelVersionStatus": "NOT_RETAINED"
+        }
+      ],
+      "howAiAssisted": "Drafted the four-layer architecture layout and its deterministic SVG-generating code.",
+      "notAiGenerated": "No generated-image pixels were used in the final figure.",
+      "humanVerification": "Authors checked all components and boundaries against the released software and documented adapter scope.",
+      "finalDeterministicSource": "tools/revision/generate_final_figures.js",
+      "finalDeterministicSourceSha256": "7d01f8732df0b63625f0a52a920087f8d87e30b4f793c0a887c325bdb9e0cdf2"
+    },
+    {
+      "figure": 3,
+      "sourceMaterial": [
+        "docs/revision/figures/forecast-event-sequence.mmd",
+        "Failure-path regression and provenance evidence"
+      ],
+      "sourceMaterialSha256": {
+        "docs/revision/figures/forecast-event-sequence.mmd": "2e2f4d8edf068de876a49043b83704035cabd07d5ab713277b13496ba8932f82"
+      },
+      "aiTools": [
+        {
+          "service": "OpenAI Codex",
+          "modelVersion": null,
+          "modelVersionStatus": "NOT_RETAINED"
+        }
+      ],
+      "howAiAssisted": "Drafted the sequence layout and deterministic SVG-generating code from the code-crosschecked sequence source.",
+      "notAiGenerated": "No generated-image pixels were used in the final figure.",
+      "humanVerification": "Authors checked the displayed sequence against the implementation, failure matrix, and provenance trace.",
+      "finalDeterministicSource": "tools/revision/generate_final_figures.js",
+      "finalDeterministicSourceSha256": "7d01f8732df0b63625f0a52a920087f8d87e30b4f793c0a887c325bdb9e0cdf2"
+    },
+    {
+      "figure": 4,
+      "sourceMaterial": [
+        {
+          "name": "Fig4_User_Interfaces_(a).png",
+          "sha256": "af91eb34c113d9cdf919225c55ad85cb064011a2bb99d67739abaef465e45469"
+        },
+        {
+          "name": "Fig4_User_Interfaces_(b).png",
+          "sha256": "7f550467f0198c0494e23c85f0981a639a16cf902fcd25548b9680822ea9dcc2"
+        },
+        {
+          "name": "Fig4_User_Interfaces_(c).png",
+          "sha256": "8502ad81720d4c61f0806531a5971e46c7517a64e15c684dd0f60099c4d9b235"
+        }
+      ],
+      "aiTools": [
+        {
+          "service": "OpenAI Codex",
+          "modelVersion": null,
+          "modelVersionStatus": "NOT_RETAINED"
+        },
+        {
+          "service": "OpenAI image editing",
+          "modelVersion": null,
+          "modelVersionStatus": "NOT_RETAINED"
+        }
+      ],
+      "howAiAssisted": "Codex implemented deterministic cropping and composition. Panel (a), derived from a real SHM-EM capture, also received AI-assisted removal of Chinese labels from the embedded conceptual plan and resolution enhancement.",
+      "notAiGenerated": "The UI state, charts, tables, values, and panels originate from SHM-EM application captures; panels (b) and (c) were not synthetic UI generations.",
+      "humanVerification": "Authors checked the displayed application content after composition.",
+      "finalDeterministicSource": "tools/revision/generate_final_figures.js",
+      "finalDeterministicSourceSha256": "7d01f8732df0b63625f0a52a920087f8d87e30b4f793c0a887c325bdb9e0cdf2"
+    },
+    {
+      "figure": 5,
+      "sourceMaterial": [
+        {
+          "name": "Fig5_Reference_Workflow.png",
+          "sha256": "bfbe8d2335902d6c36a1266245284d90f75df7d241b56638e870d633bebd6e61",
+          "provenanceEvidence": "Byte-identical to ChatGPT Image 2026-07-25 11_10_30 (5).png"
+        },
+        "Final model-dimension, validation, runtime, and provenance evidence"
+      ],
+      "aiTools": [
+        {
+          "service": "OpenAI ChatGPT image generation",
+          "modelVersion": null,
+          "modelVersionStatus": "NOT_RETAINED"
+        },
+        {
+          "service": "OpenAI Codex",
+          "modelVersion": null,
+          "modelVersionStatus": "NOT_RETAINED"
+        }
+      ],
+      "howAiAssisted": "ChatGPT image generation produced the source conceptual reference-case panel. Codex implemented the final deterministic crop, corrected contract/reproduction panels, and composition.",
+      "notAiGenerated": "The reported model dimensions, counts, validation outcomes, and runtime scope were taken from repository evidence rather than inferred by an image model.",
+      "humanVerification": "Authors checked all technical labels and reported values against the final evidence package.",
+      "finalDeterministicSource": "tools/revision/generate_final_figures.js",
+      "finalDeterministicSourceSha256": "7d01f8732df0b63625f0a52a920087f8d87e30b4f793c0a887c325bdb9e0cdf2"
+    }
+  ]
+}

@@ -1,12 +1,16 @@
 {
-  "schemaVersion": "shm-em-final-author-editorial-checks-v1",
-  "FS-07": {
+  "schemaVersion": "shm-em-final-author-editorial-checks-v2",
+  "FS-07A": {
     "status": "PENDING_AUTHOR_CONFIRMATION",
-    "detail": "Confirm whether competing-interest and CRediT declarations are complete in the manuscript or Editorial Manager. Do not infer author roles."
+    "detail": "The corresponding author must confirm whether any competing interests exist before a declaration is entered."
+  },
+  "FS-07B": {
+    "status": "PENDING_AUTHOR_CONFIRMATION",
+    "detail": "All authors must confirm their CRediT roles; roles must not be inferred from author order."
   },
   "FS-08": {
     "status": "PENDING_AUTHOR_CONFIRMATION",
-    "detail": "All authors must confirm names, affiliations, funding, correspondence, and acknowledgements."
+    "detail": "All authors must confirm names, affiliations, funding, correspondence, acknowledgements, and any funding-role statement before submission."
   },
   "FS-09": {
     "status": "PENDING_DATA_OWNER_CONFIRMATION",

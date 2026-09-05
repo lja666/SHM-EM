@@ -250,6 +250,8 @@ Table 7 summarizes one formal event trace; the complete 40-step chain is machine
 
 Windows 10/11 with PowerShell 7 is the exact-output reference. Docker/Linux completed the logical six-model -> 4,960 results -> Gate -> Future State -> Evaluate -> Execute -> provenance path, with structural target/step and contract hashes matching. Its normalized output hash differed (`exactPredictionReproduction=false`); maximum absolute difference was 0.00285349, `toleranceApplied=false`, and the full row-wise comparison is retained. Native Ubuntu-host execution was not captured.
 
+Revision-stage code edits assisted by OpenAI Codex (model/version unrecorded) were human-reviewed and subjected to the regression and reproduction checks reported here.
+
 # 4. Impact
 
 ## 4.1 Reproducible and auditable forecast integration
@@ -284,7 +286,7 @@ The authors thank the members of the research group for their contributions to s
 
 # Declaration of generative AI and AI-assisted technologies in the manuscript preparation process
 
-During preparation and revision, the authors used OpenAI ChatGPT and Codex for manuscript organization, language editing, software-code review, test and documentation preparation, and consistency checking. The authors reviewed, edited, and validated all AI-assisted outputs. AI-assisted code changes were human-reviewed and checked by the regression and reproduction procedures reported here. The authors take full responsibility for the publication's content.
+During preparation and revision, the authors used OpenAI ChatGPT and Codex for manuscript organization, language editing, explanatory-figure drafting/layout, software-code review, test and documentation preparation, and consistency checking. The authors reviewed, edited, and validated all AI-assisted outputs and take full responsibility for the publication's content.
 
 # References
 

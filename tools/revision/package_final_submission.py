@@ -31,6 +31,7 @@ PAGE_REFS = FINAL / "reviewer-page-line-references.json"
 PAGE_REF_VERIFICATION = FINAL / "reviewer-page-line-references-verification.json"
 ARTWORK_MANIFEST = FIGURES / "submission-artwork-manifest.json"
 MANUAL_CHECKS = ROOT / "manuscript" / "Final_Author_Editorial_Checks.json"
+AI_PROVENANCE = FINAL / "AI_FIGURE_PROVENANCE.json"
 HIGHLIGHTS_SOURCE = ROOT / "manuscript" / "Highlights.md"
 RESPONSE_SOURCE = ROOT / "manuscript" / "Response_to_Reviewers_Source.md"
 
@@ -238,7 +239,7 @@ def build_completion_report(
 
 ## Decision
 
-The automated SoftwareX compliance-correction phase is complete and ready for the final GPT upload-readiness audit. The package is intentionally **HOLD_FOR_MANUAL_CONFIRMATION**, because FS-07 through FS-10 remain author-, data-owner-, or Editorial-Manager-owned decisions. No frozen production-core source changed and no new scientific experiment was run.
+The automated SoftwareX compliance-correction phase is complete and ready for the final GPT upload-readiness audit. The package is intentionally **HOLD_FOR_MANUAL_CONFIRMATION**, because FS-07A, FS-07B, and FS-08 through FS-10 remain author-, data-owner-, or Editorial-Manager-owned decisions. No frozen production-core source changed and no new scientific experiment was run.
 
 ## Locked anchors
 
@@ -251,12 +252,13 @@ The automated SoftwareX compliance-correction phase is complete and ready for th
 
 ## SoftwareX compliance result
 
-- Strict clean-DOCX word count: **{compliance['strictWordCount']}** (limit 3,000; internal target 2,900)
+- Strict clean-DOCX word count: **{compliance['strictWordCount']}** (limit 3,000; post-disclosure target 2,950)
 - Final manuscript figures: **5**
 - AI-use declaration: immediately before References
 - Submission artwork: Fig. 1-3 one-page vector PDF; Fig. 4-5 TIFF at 609.6 effective dpi
 - Reviewer locations: {response_locations['expectedItems']}/27 source anchors and rendered final locations verified
 - Highlights: {highlights['bulletCount']} bullets; character counts {highlights['characterCounts']}
+- AI disclosure: Fig. 1-Fig. 5 provenance/captions and the Section 3.5 code-method statement verified
 
 ## Final document set
 
@@ -276,12 +278,13 @@ Automated checks also confirm the actual submitted DOCX/PDF baseline, all 27 fin
 
 ## Mandatory manual stop gates
 
-- FS-07: confirm competing-interest and CRediT handling.
+- FS-07A: confirm the competing-interest declaration.
+- FS-07B: all authors confirm their CRediT roles.
 - FS-08: all authors confirm names, affiliations, funding, correspondence, and acknowledgements.
 - FS-09: data owner approves the public/restricted data-availability wording.
 - FS-10: corresponding author checks deadline, item types, and filenames in Editorial Manager.
 
-The package must not be labelled submission-ready until those four gates are explicitly closed.
+The package must not be labelled submission-ready until those five gates are explicitly closed.
 """
 
 
@@ -314,8 +317,16 @@ def main() -> int:
     if compliance.get("submissionStatus") != "HOLD_FOR_MANUAL_CONFIRMATION":
         raise RuntimeError("The package must retain the manual-confirmation hold.")
     pending_manual = [key for key, value in manual_checks.items() if key.startswith("FS-") and value["status"].startswith("PENDING")]
-    if pending_manual != ["FS-07", "FS-08", "FS-09", "FS-10"]:
+    if pending_manual != ["FS-07A", "FS-07B", "FS-08", "FS-09", "FS-10"]:
         raise RuntimeError(f"Unexpected manual gate state: {pending_manual}")
+
+    automated_gate_status = {
+        item["id"]: item["status"] for item in compliance.get("automatedGates", [])
+    }
+    ai_disclosure_pass = all(
+        automated_gate_status.get(identifier) == "PASS"
+        for identifier in ("FS-11", "FS-12", "FS-13", "FS-14")
+    )
 
     core_diff = production_core_diff()
     if core_diff:
@@ -332,6 +343,7 @@ def main() -> int:
         "submissionArtwork": artwork["pass"],
         "sourceValidation": validation.get("pass", False),
         "softwareXAutomatedCompliance": compliance.get("automatedPass", False),
+        "aiDisclosureAndPostDisclosureChecks": ai_disclosure_pass,
         "productionCoreDiffEmpty": not core_diff,
     }
     if not all(checks.values()):
@@ -352,7 +364,7 @@ def main() -> int:
 
 `AUTOMATED_COMPLIANCE_PASS / HOLD_FOR_MANUAL_CONFIRMATION`
 
-Perform the final upload-readiness audit of the SoftwareX minor-revision package. Do not infer that FS-07 through FS-10 are complete.
+Perform the final upload-readiness audit of the SoftwareX minor-revision package. Do not infer that FS-07A, FS-07B, or FS-08 through FS-10 are complete.
 
 ## Review first
 
@@ -368,6 +380,7 @@ Perform the final upload-readiness audit of the SoftwareX minor-revision package
 10. `reviewer-page-line-references-verification.json`
 11. `submission-artwork-manifest.json` and Fig. 1-Fig. 5 submission files
 12. `Final_Author_Editorial_Checks.json`
+13. `AI_FIGURE_PROVENANCE.json`
 
 ## Audit questions
 
@@ -376,8 +389,10 @@ Perform the final upload-readiness audit of the SoftwareX minor-revision package
 - Are all 27 response locations supported by the 13-page clean manuscript?
 - Does accepting all tracked revisions produce the clean manuscript exactly?
 - Are Fig. 1-3 vector PDF and Fig. 4-5 TIFF at at least 500 dpi?
+- Do all final captions and the general declaration accurately reflect `AI_FIGURE_PROVENANCE.json`?
+- Does Section 3.5 disclose revision-stage AI-assisted code editing and human/regression review?
 - Are all scientific claims, release anchors, and non-claims still consistent?
-- Are FS-07 through FS-10 clearly left for the responsible humans?
+- Are FS-07A, FS-07B, and FS-08 through FS-10 clearly left for the responsible humans?
 
 ## Locked boundaries
 
@@ -405,7 +420,7 @@ The review directory and ZIP are generated only under `artifacts/revision/final-
     ]
     deliverables = [
         *canonical.values(), *figure_files, ARTWORK_MANIFEST, VALIDATION, COMPLIANCE, PAGE_REFS,
-        PAGE_REF_VERIFICATION, verification_path, report_path, handoff_path,
+        PAGE_REF_VERIFICATION, verification_path, report_path, handoff_path, AI_PROVENANCE,
         SUBMISSION / "Final_Submission_Checklist.md", MANUAL_CHECKS, HIGHLIGHTS_SOURCE,
         ROOT / "manuscript" / "SHM-EM_Revised_Manuscript_Source.md", RESPONSE_SOURCE,
         ROOT / "manuscript" / "Revision_Change_Map.md", ROOT / "manuscript" / "Final_Reviewer_Evidence_Map.md",

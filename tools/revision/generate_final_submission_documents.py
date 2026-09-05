@@ -41,27 +41,27 @@ BLACK = "172033"
 FIGURES = {
     1: (
         FINAL_FIGURES / "Fig1_Research_Gap_and_Workflow.png",
-        "Fig. 1. Research gaps, the SHM-EM software boundary, and the forecast-aware user workflow.",
+        "Fig. 1. Research gaps, the SHM-EM software boundary, and the forecast-aware user workflow. OpenAI Codex (model/version unrecorded) assisted layout; authors verified content.",
         Mm(165),
     ),
     2: (
         FINAL_FIGURES / "Fig2_Software_Architecture.png",
-        "Fig. 2. Four-layer SHM-EM architecture. MySQL is the validated reference persistence implementation; the observation registry and service interfaces define the storage-adapter extension boundary.",
+        "Fig. 2. Four-layer SHM-EM architecture. MySQL is the validated reference persistence implementation; registry and service interfaces define the storage-adapter boundary. OpenAI Codex (model/version unrecorded) assisted layout; authors checked the software boundaries.",
         Mm(165),
     ),
     3: (
         FINAL_FIGURES / "Fig3_Forecast_to_Event_Sequence.png",
-        "Fig. 3. Controlled sequence from persisted forecasts through optional Project Future State inspection, audited Evaluate, independently gated Execute, and formal provenance.",
+        "Fig. 3. Controlled sequence from persisted forecasts through optional Project Future State inspection, audited Evaluate, independently gated Execute, and formal provenance. OpenAI Codex (model/version unrecorded) assisted layout; authors checked the code-derived sequence.",
         Mm(175),
     ),
     4: (
         FINAL_FIGURES / "Fig4_Task_Oriented_Interface_Composite.png",
-        "Fig. 4. Task-oriented interface views of SHM-EM: (a) project-level observed and forecast risk, (b) a joint engineering-valued observation/forecast series, and (c) prediction-batch completeness and execution eligibility. The interface is illustrative; quantitative validation is reported in the contract, failure-path, runtime, reuse, and provenance evidence.",
+        "Fig. 4. SHM-EM views of (a) project risk, (b) a joint observation/forecast series, and (c) batch completeness and eligibility. OpenAI Codex (model/version unrecorded) assisted cropping/composition; panels derive from application captures, with AI-assisted label removal/upscaling in (a). Authors verified displayed content.",
         Mm(175),
     ),
     5: (
         FINAL_FIGURES / "Fig5_Public_Reference_Workflow.png",
-        "Fig. 5. Public reference case, verified six-model contract, common temporal frame, and end-to-end reproduction checks.",
+        "Fig. 5. Public reference case, six-model contract, common timeline, and reproduction checks. The left conceptual panel used OpenAI ChatGPT image generation (model/version unrecorded); OpenAI Codex assisted composition. Authors verified technical labels.",
         Mm(175),
     ),
 }

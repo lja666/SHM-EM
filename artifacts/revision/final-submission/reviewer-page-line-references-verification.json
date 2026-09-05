@@ -1,48 +1,48 @@
 {
   "schemaVersion": "shm-em-reviewer-page-line-verification-v1",
-  "generatedAtUtc": "2026-09-05T08:23:52.140436+00:00",
+  "generatedAtUtc": "2026-09-05T13:59:21.048214+00:00",
   "method": "Section anchors and continuous Word line numbers extracted from the final clean PDF",
   "cleanPdf": {
     "path": "artifacts\\revision\\final-submission\\pdf\\SHM-EM_Revised_Manuscript_Clean.pdf",
-    "sha256": "9590408058d594599ba3f6f8c56b8d0e2037a2fbd0acdcc6e0c3e11428986e67",
+    "sha256": "3659c6ba45da0feffd0c40ef27f84950871a682d889e01029bea70f19f318f48",
     "pages": 13
   },
   "cleanDocx": {
     "path": "artifacts\\revision\\final-submission\\docx\\SHM-EM_Revised_Manuscript_Clean.docx",
-    "sha256": "98b3eb12ff935a489d787b57391da886b0a4bda3e852471234e4d6a323d37f2b"
+    "sha256": "b5fb87fafd4280703169724f75e114c1012677a7157e90a5d55febf239293c9f"
   },
   "reviewerItemCount": 27,
   "sectionStarts": {
     "abstract": 9,
     "metadata": 23,
     "motivation": 25,
-    "users": 51,
-    "software": 56,
-    "architecture": 57,
-    "objects": 67,
-    "contract": 74,
-    "missing": 89,
-    "future_state": 95,
-    "transition": 105,
-    "response": 115,
-    "functions": 121,
-    "rules": 130,
-    "validation": 135,
-    "public_case": 140,
-    "reuse": 149,
-    "failure": 157,
-    "runtime": 165,
-    "provenance": 172,
-    "impact": 181,
-    "impact_integration": 182,
-    "impact_reuse": 187,
-    "impact_transition": 191,
-    "limitations": 196,
-    "conclusions": 205,
-    "availability": 211,
-    "acknowledgements": 219,
-    "ai_declaration": 225,
-    "references": 232
+    "users": 52,
+    "software": 57,
+    "architecture": 58,
+    "objects": 69,
+    "contract": 76,
+    "missing": 91,
+    "future_state": 97,
+    "transition": 107,
+    "response": 118,
+    "functions": 124,
+    "rules": 133,
+    "validation": 138,
+    "public_case": 143,
+    "reuse": 154,
+    "failure": 162,
+    "runtime": 170,
+    "provenance": 177,
+    "impact": 188,
+    "impact_integration": 189,
+    "impact_reuse": 194,
+    "impact_transition": 198,
+    "limitations": 203,
+    "conclusions": 212,
+    "availability": 218,
+    "acknowledgements": 226,
+    "ai_declaration": 232,
+    "references": 238
   },
   "resolvedRanges": {
     "R1-0": [
@@ -59,8 +59,8 @@
         "endSection": "provenance",
         "startPage": 3,
         "endPage": 10,
-        "startLine": 56,
-        "endLine": 180
+        "startLine": 57,
+        "endLine": 187
       }
     ],
     "R1-1": [
@@ -69,16 +69,16 @@
         "endSection": "reuse",
         "startPage": 8,
         "endPage": 9,
-        "startLine": 149,
-        "endLine": 156
+        "startLine": 154,
+        "endLine": 161
       },
       {
         "startSection": "impact_reuse",
         "endSection": "impact_reuse",
         "startPage": 11,
         "endPage": 11,
-        "startLine": 187,
-        "endLine": 190
+        "startLine": 194,
+        "endLine": 197
       }
     ],
     "R1-2": [
@@ -87,8 +87,8 @@
         "endSection": "provenance",
         "startPage": 7,
         "endPage": 10,
-        "startLine": 135,
-        "endLine": 180
+        "startLine": 138,
+        "endLine": 187
       }
     ],
     "R1-3": [
@@ -97,16 +97,16 @@
         "endSection": "transition",
         "startPage": 6,
         "endPage": 6,
-        "startLine": 105,
-        "endLine": 114
+        "startLine": 107,
+        "endLine": 117
       },
       {
         "startSection": "failure",
         "endSection": "failure",
         "startPage": 9,
         "endPage": 9,
-        "startLine": 157,
-        "endLine": 164
+        "startLine": 162,
+        "endLine": 169
       }
     ],
     "R1-4": [
@@ -116,7 +116,7 @@
         "startPage": 2,
         "endPage": 3,
         "startLine": 25,
-        "endLine": 50
+        "endLine": 51
       }
     ],
     "R1-5": [
@@ -125,8 +125,8 @@
         "endSection": "missing",
         "startPage": 4,
         "endPage": 5,
-        "startLine": 74,
-        "endLine": 94
+        "startLine": 76,
+        "endLine": 96
       }
     ],
     "R1-6": [
@@ -135,8 +135,8 @@
         "endSection": "future_state",
         "startPage": 5,
         "endPage": 5,
-        "startLine": 95,
-        "endLine": 104
+        "startLine": 97,
+        "endLine": 106
       }
     ],
     "R1-7": [
@@ -145,8 +145,8 @@
         "endSection": "contract",
         "startPage": 4,
         "endPage": 5,
-        "startLine": 74,
-        "endLine": 88
+        "startLine": 76,
+        "endLine": 90
       }
     ],
     "R1-8": [
@@ -155,16 +155,16 @@
         "endSection": "future_state",
         "startPage": 5,
         "endPage": 5,
-        "startLine": 95,
-        "endLine": 104
+        "startLine": 97,
+        "endLine": 106
       },
       {
         "startSection": "limitations",
         "endSection": "conclusions",
         "startPage": 11,
         "endPage": 11,
-        "startLine": 196,
-        "endLine": 210
+        "startLine": 203,
+        "endLine": 217
       }
     ],
     "R1-9": [
@@ -173,8 +173,8 @@
         "endSection": "runtime",
         "startPage": 9,
         "endPage": 10,
-        "startLine": 165,
-        "endLine": 171
+        "startLine": 170,
+        "endLine": 176
       }
     ],
     "R1-10": [
@@ -183,16 +183,16 @@
         "endSection": "runtime",
         "startPage": 9,
         "endPage": 10,
-        "startLine": 165,
-        "endLine": 171
+        "startLine": 170,
+        "endLine": 176
       },
       {
         "startSection": "limitations",
         "endSection": "limitations",
         "startPage": 11,
         "endPage": 11,
-        "startLine": 196,
-        "endLine": 204
+        "startLine": 203,
+        "endLine": 211
       }
     ],
     "R1-11": [
@@ -201,8 +201,8 @@
         "endSection": "limitations",
         "startPage": 11,
         "endPage": 11,
-        "startLine": 196,
-        "endLine": 204
+        "startLine": 203,
+        "endLine": 211
       }
     ],
     "R1-12": [
@@ -211,16 +211,16 @@
         "endSection": "provenance",
         "startPage": 10,
         "endPage": 10,
-        "startLine": 172,
-        "endLine": 180
+        "startLine": 177,
+        "endLine": 187
       },
       {
         "startSection": "limitations",
         "endSection": "limitations",
         "startPage": 11,
         "endPage": 11,
-        "startLine": 196,
-        "endLine": 204
+        "startLine": 203,
+        "endLine": 211
       }
     ],
     "R1-13": [
@@ -229,8 +229,8 @@
         "endSection": "transition",
         "startPage": 6,
         "endPage": 6,
-        "startLine": 105,
-        "endLine": 114
+        "startLine": 107,
+        "endLine": 117
       }
     ],
     "R1-14": [
@@ -239,8 +239,8 @@
         "endSection": "functions",
         "startPage": 6,
         "endPage": 7,
-        "startLine": 121,
-        "endLine": 129
+        "startLine": 124,
+        "endLine": 132
       }
     ],
     "R1-15": [
@@ -249,16 +249,16 @@
         "endSection": "reuse",
         "startPage": 8,
         "endPage": 9,
-        "startLine": 149,
-        "endLine": 156
+        "startLine": 154,
+        "endLine": 161
       },
       {
         "startSection": "impact_integration",
         "endSection": "limitations",
         "startPage": 10,
         "endPage": 11,
-        "startLine": 182,
-        "endLine": 204
+        "startLine": 189,
+        "endLine": 211
       }
     ],
     "R1-16": [
@@ -267,8 +267,8 @@
         "endSection": "validation",
         "startPage": 7,
         "endPage": 8,
-        "startLine": 135,
-        "endLine": 139
+        "startLine": 138,
+        "endLine": 142
       }
     ],
     "R1-17": [
@@ -277,8 +277,8 @@
         "endSection": "provenance",
         "startPage": 10,
         "endPage": 10,
-        "startLine": 172,
-        "endLine": 180
+        "startLine": 177,
+        "endLine": 187
       }
     ],
     "R1-18": [
@@ -288,15 +288,15 @@
         "startPage": 2,
         "endPage": 3,
         "startLine": 25,
-        "endLine": 50
+        "endLine": 51
       },
       {
         "startSection": "limitations",
         "endSection": "limitations",
         "startPage": 11,
         "endPage": 11,
-        "startLine": 196,
-        "endLine": 204
+        "startLine": 203,
+        "endLine": 211
       }
     ],
     "R1-19": [
@@ -306,15 +306,15 @@
         "startPage": 2,
         "endPage": 3,
         "startLine": 25,
-        "endLine": 50
+        "endLine": 51
       },
       {
         "startSection": "conclusions",
         "endSection": "conclusions",
         "startPage": 11,
         "endPage": 11,
-        "startLine": 205,
-        "endLine": 210
+        "startLine": 212,
+        "endLine": 217
       }
     ],
     "R2-1": [
@@ -324,15 +324,15 @@
         "startPage": 2,
         "endPage": 3,
         "startLine": 25,
-        "endLine": 50
+        "endLine": 51
       },
       {
         "startSection": "validation",
         "endSection": "provenance",
         "startPage": 7,
         "endPage": 10,
-        "startLine": 135,
-        "endLine": 180
+        "startLine": 138,
+        "endLine": 187
       }
     ],
     "R2-2": [
@@ -342,7 +342,7 @@
         "startPage": 2,
         "endPage": 3,
         "startLine": 25,
-        "endLine": 50
+        "endLine": 51
       }
     ],
     "R2-3": [
@@ -351,16 +351,16 @@
         "endSection": "missing",
         "startPage": 5,
         "endPage": 5,
-        "startLine": 89,
-        "endLine": 94
+        "startLine": 91,
+        "endLine": 96
       },
       {
         "startSection": "failure",
         "endSection": "failure",
         "startPage": 9,
         "endPage": 9,
-        "startLine": 157,
-        "endLine": 164
+        "startLine": 162,
+        "endLine": 169
       }
     ],
     "R3-1": [
@@ -369,24 +369,24 @@
         "endSection": "objects",
         "startPage": 3,
         "endPage": 4,
-        "startLine": 57,
-        "endLine": 73
+        "startLine": 58,
+        "endLine": 75
       },
       {
         "startSection": "runtime",
         "endSection": "runtime",
         "startPage": 9,
         "endPage": 10,
-        "startLine": 165,
-        "endLine": 171
+        "startLine": 170,
+        "endLine": 176
       },
       {
         "startSection": "limitations",
         "endSection": "limitations",
         "startPage": 11,
         "endPage": 11,
-        "startLine": 196,
-        "endLine": 204
+        "startLine": 203,
+        "endLine": 211
       }
     ],
     "R3-2": [
@@ -395,8 +395,8 @@
         "endSection": "limitations",
         "startPage": 11,
         "endPage": 11,
-        "startLine": 196,
-        "endLine": 204
+        "startLine": 203,
+        "endLine": 211
       }
     ],
     "R3-3": [
@@ -405,8 +405,8 @@
         "endSection": "missing",
         "startPage": 4,
         "endPage": 5,
-        "startLine": 74,
-        "endLine": 94
+        "startLine": 76,
+        "endLine": 96
       }
     ],
     "R3-4": [
@@ -415,16 +415,16 @@
         "endSection": "provenance",
         "startPage": 10,
         "endPage": 10,
-        "startLine": 172,
-        "endLine": 180
+        "startLine": 177,
+        "endLine": 187
       },
       {
         "startSection": "limitations",
         "endSection": "limitations",
         "startPage": 11,
         "endPage": 11,
-        "startLine": 196,
-        "endLine": 204
+        "startLine": 203,
+        "endLine": 211
       }
     ]
   },

@@ -89,7 +89,12 @@ This checklist separates completed source/evidence work from tasks that must wai
 - [x] FS-04 COMPLETE_ARTWORK_SET: separate Fig. 1-Fig. 5 submission files are generated.
 - [x] FS-05 ARTWORK_FORMAT: Fig. 1-Fig. 3 PDF; Fig. 4-Fig. 5 TIFF at at least 500 dpi.
 - [x] FS-06 RESPONSE_PAGE_LINE_REFERENCES: all 27 locations are recomputed from the final clean manuscript.
-- [ ] FS-07 DECLARATION_CHECK: author/Editorial Manager confirmation required for competing interest and CRediT.
-- [ ] FS-08 FINAL_AUTHOR_CHECK: all authors must confirm identity, funding, correspondence, and acknowledgements.
+- [ ] FS-07A COMPETING_INTEREST_CONFIRMED: corresponding author confirmation is required.
+- [ ] FS-07B CRediT_ROLES_CONFIRMED: all authors must confirm their actual roles.
+- [ ] FS-08 FINAL_AUTHOR_CHECK: all authors must confirm identity, funding, funding-role wording, correspondence, and acknowledgements.
 - [ ] FS-09 DATA_OWNER_CHECK: data owner approval remains required.
 - [ ] FS-10 EM_UPLOAD_CHECK: final deadline, item types, and filenames remain to be checked.
+- [x] FS-11 AI_FIGURE_DISCLOSURE: figure provenance, caption-level disclosures, and the general declaration are complete.
+- [x] FS-12 AI_CODE_METHOD_DISCLOSURE: Section 3.5 records revision-stage AI-assisted code editing and human/regression review.
+- [x] FS-13 POST_AI_WORDCOUNT: the regenerated clean manuscript remains within the 3000-word limit.
+- [x] FS-14 POST_AI_PAGE_LINE_MAP: all 27 locations are regenerated and verified after the disclosure edits.

@@ -1,14 +1,14 @@
 {
-  "schemaVersion": "shm-em-final-submission-compliance-v1",
-  "generatedAtUtc": "2026-09-05T09:03:54.036790+00:00",
+  "schemaVersion": "shm-em-final-submission-compliance-v2",
+  "generatedAtUtc": "2026-09-05T14:12:53.724701+00:00",
   "countBasis": "Final clean DOCX: artifacts\\revision\\final-submission\\docx\\SHM-EM_Revised_Manuscript_Clean.docx",
-  "strictWordCount": 2747,
-  "sourcePreflightWordCount": 2737,
+  "strictWordCount": 2795,
+  "sourcePreflightWordCount": 2796,
   "automatedGates": [
     {
       "id": "FS-01",
       "status": "PASS",
-      "detail": "Strict count 2747; source preflight 2737; recommended target <=2900: True."
+      "detail": "Strict count 2795; source preflight 2796; post-disclosure target <=2950: True."
     },
     {
       "id": "FS-02",
@@ -34,18 +34,43 @@
       "id": "FS-06",
       "status": "PASS",
       "detail": "Page/line map contains 27 ordered references and is bound to the final clean DOCX: True."
+    },
+    {
+      "id": "FS-11",
+      "status": "PASS",
+      "detail": "AI figure provenance covers Fig. 1-5; each caption discloses the applicable tool/use and author verification; the general declaration includes figure assistance."
+    },
+    {
+      "id": "FS-12",
+      "status": "PASS",
+      "detail": "Section 3.5 discloses revision-stage AI-assisted code editing, human review, and regression/reproduction checking."
+    },
+    {
+      "id": "FS-13",
+      "status": "PASS",
+      "detail": "Post-disclosure strict count is 2795 words (target <=2950: True)."
+    },
+    {
+      "id": "FS-14",
+      "status": "PASS",
+      "detail": "Post-disclosure page/line map contains and verifies 27 reviewer locations."
     }
   ],
   "manualGates": [
     {
-      "id": "FS-07",
+      "id": "FS-07A",
       "status": "PENDING_AUTHOR_CONFIRMATION",
-      "detail": "Confirm whether competing-interest and CRediT declarations are complete in the manuscript or Editorial Manager. Do not infer author roles."
+      "detail": "The corresponding author must confirm whether any competing interests exist before a declaration is entered."
+    },
+    {
+      "id": "FS-07B",
+      "status": "PENDING_AUTHOR_CONFIRMATION",
+      "detail": "All authors must confirm their CRediT roles; roles must not be inferred from author order."
     },
     {
       "id": "FS-08",
       "status": "PENDING_AUTHOR_CONFIRMATION",
-      "detail": "All authors must confirm names, affiliations, funding, correspondence, and acknowledgements."
+      "detail": "All authors must confirm names, affiliations, funding, correspondence, acknowledgements, and any funding-role statement before submission."
     },
     {
       "id": "FS-09",

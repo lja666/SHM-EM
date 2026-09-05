@@ -4,7 +4,7 @@
 
 `AUTOMATED_COMPLIANCE_PASS / HOLD_FOR_MANUAL_CONFIRMATION`
 
-Perform the final upload-readiness audit of the SoftwareX minor-revision package. Do not infer that FS-07 through FS-10 are complete.
+Perform the final upload-readiness audit of the SoftwareX minor-revision package. Do not infer that FS-07A, FS-07B, or FS-08 through FS-10 are complete.
 
 ## Review first
 
@@ -20,6 +20,7 @@ Perform the final upload-readiness audit of the SoftwareX minor-revision package
 10. `reviewer-page-line-references-verification.json`
 11. `submission-artwork-manifest.json` and Fig. 1-Fig. 5 submission files
 12. `Final_Author_Editorial_Checks.json`
+13. `AI_FIGURE_PROVENANCE.json`
 
 ## Audit questions
 
@@ -28,8 +29,10 @@ Perform the final upload-readiness audit of the SoftwareX minor-revision package
 - Are all 27 response locations supported by the 13-page clean manuscript?
 - Does accepting all tracked revisions produce the clean manuscript exactly?
 - Are Fig. 1-3 vector PDF and Fig. 4-5 TIFF at at least 500 dpi?
+- Do all final captions and the general declaration accurately reflect `AI_FIGURE_PROVENANCE.json`?
+- Does Section 3.5 disclose revision-stage AI-assisted code editing and human/regression review?
 - Are all scientific claims, release anchors, and non-claims still consistent?
-- Are FS-07 through FS-10 clearly left for the responsible humans?
+- Are FS-07A, FS-07B, and FS-08 through FS-10 clearly left for the responsible humans?
 
 ## Locked boundaries
 

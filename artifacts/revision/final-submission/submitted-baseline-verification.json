@@ -18,15 +18,15 @@
     "reason": "Keep the English marked manuscript focused on substantive content changes."
   },
   "trackedRevisionCounts": {
-    "ins": 783,
+    "ins": 786,
     "del": 359,
     "moveFrom": 7,
     "moveTo": 7
   },
   "cleanMarkedFinalViewTokenSequenceEqual": true,
   "cleanMarkedDocxFinalViewTokenCounts": {
-    "clean": 4356,
-    "marked": 4356
+    "clean": 4409,
+    "marked": 4409
   },
   "pass": true,
   "responseLocations": {
@@ -58,6 +58,7 @@
     "submissionArtwork": true,
     "sourceValidation": true,
     "softwareXAutomatedCompliance": true,
+    "aiDisclosureAndPostDisclosureChecks": true,
     "productionCoreDiffEmpty": true
   }
 }

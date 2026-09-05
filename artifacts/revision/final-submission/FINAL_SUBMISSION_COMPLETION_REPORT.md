@@ -2,7 +2,7 @@
 
 ## Decision
 
-The automated SoftwareX compliance-correction phase is complete and ready for the final GPT upload-readiness audit. The package is intentionally **HOLD_FOR_MANUAL_CONFIRMATION**, because FS-07 through FS-10 remain author-, data-owner-, or Editorial-Manager-owned decisions. No frozen production-core source changed and no new scientific experiment was run.
+The automated SoftwareX compliance-correction phase is complete and ready for the final GPT upload-readiness audit. The package is intentionally **HOLD_FOR_MANUAL_CONFIRMATION**, because FS-07A, FS-07B, and FS-08 through FS-10 remain author-, data-owner-, or Editorial-Manager-owned decisions. No frozen production-core source changed and no new scientific experiment was run.
 
 ## Locked anchors
 
@@ -15,12 +15,13 @@ The automated SoftwareX compliance-correction phase is complete and ready for th
 
 ## SoftwareX compliance result
 
-- Strict clean-DOCX word count: **2747** (limit 3,000; internal target 2,900)
+- Strict clean-DOCX word count: **2795** (limit 3,000; post-disclosure target 2,950)
 - Final manuscript figures: **5**
 - AI-use declaration: immediately before References
 - Submission artwork: Fig. 1-3 one-page vector PDF; Fig. 4-5 TIFF at 609.6 effective dpi
 - Reviewer locations: 27/27 source anchors and rendered final locations verified
 - Highlights: 4 bullets; character counts [78, 75, 77, 76]
+- AI disclosure: Fig. 1-Fig. 5 provenance/captions and the Section 3.5 code-method statement verified
 
 ## Final document set
 
@@ -30,7 +31,7 @@ The automated SoftwareX compliance-correction phase is complete and ready for th
 - `Highlights.docx/pdf` (1 page)
 - five separate submission artwork files plus editable PNG/SVG auxiliaries
 
-The marked manuscript contains 783 insertions, 359 deletions, 7 move-from elements, and 7 move-to elements. Formatting and header/footer differences are excluded, so localized Word formatting balloons and duplicate page-number revisions are absent. Its accepted-revision token sequence is identical to the clean manuscript: `true`.
+The marked manuscript contains 786 insertions, 359 deletions, 7 move-from elements, and 7 move-to elements. Formatting and header/footer differences are excluded, so localized Word formatting balloons and duplicate page-number revisions are absent. Its accepted-revision token sequence is identical to the clean manuscript: `true`.
 
 ## Rendering and integrity QA
 
@@ -40,9 +41,10 @@ Automated checks also confirm the actual submitted DOCX/PDF baseline, all 27 fin
 
 ## Mandatory manual stop gates
 
-- FS-07: confirm competing-interest and CRediT handling.
+- FS-07A: confirm the competing-interest declaration.
+- FS-07B: all authors confirm their CRediT roles.
 - FS-08: all authors confirm names, affiliations, funding, correspondence, and acknowledgements.
 - FS-09: data owner approves the public/restricted data-availability wording.
 - FS-10: corresponding author checks deadline, item types, and filenames in Editorial Manager.
 
-The package must not be labelled submission-ready until those four gates are explicitly closed.
+The package must not be labelled submission-ready until those five gates are explicitly closed.

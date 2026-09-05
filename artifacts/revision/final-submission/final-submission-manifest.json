@@ -1,9 +1,16 @@
 {
-  "schemaVersion": "shm-em-final-submission-manifest-v1",
-  "generatedAtUtc": "2026-09-05T04:56:27.847397+00:00",
-  "generationBaseHead": "ddee5953d410793a5391c07f08a027d65793d2c0",
+  "schemaVersion": "shm-em-final-submission-manifest-v2",
+  "generatedAtUtc": "2026-09-05T09:03:57.176123+00:00",
+  "generationBaseHead": "dd113a8b4b83813dae6cd4e2c5a5b84f0f864bec",
   "branch": "revision/softx-d-26-00931",
-  "reviewedSourceHead": "9caa9c0b7e8b7204a0f8e4b44e8a963edb6d5dc6",
+  "sourceHashes": {
+    "manuscript/SHM-EM_Revised_Manuscript_Source.md": "e54fe54e9eec7a0bda9de85584739657a2f6c17a77aa1e3dd551cc927f562e21",
+    "manuscript/Response_to_Reviewers_Source.md": "9951437a1a3c8b25a083f1f98582d762dc88537641fe4b3535e7efd73272e5ca",
+    "manuscript/Revision_Change_Map.md": "926df9cd918d6483e5b7bd3371fb2624d0626dbc782e2ea978e0d90e205134d6",
+    "manuscript/Final_Reviewer_Evidence_Map.md": "467846fa580d0f78a65b10e614e4b58f82aaee3be38bc822f0f7325f9474b2ed",
+    "manuscript/Final_Submission_Checklist.md": "054acb5cf921ce14e496ac162637031e8805e34cc577273f23a5a497d318736b",
+    "manuscript/Highlights.md": "ac9b4061ccd7ecb56ea592d4f65c6dbd7e861b2510113aa7dc2aa90192282392"
+  },
   "finalCoreFreezeV3": "eaa7d85a0b4921ab2f6e54234cff09aee6a30c8f",
   "productionCoreDiff": "NONE",
   "release": {
@@ -11,42 +18,116 @@
     "commit": "d7cba1419145e6c75fe69ad63172af5f5abe5028",
     "archiveSha256": "ea0973b7c82e06c3c8910ec36fcf2c3d47765a87d11552337a86c69de41a7cef"
   },
+  "strictWordCount": 2747,
   "sourceValidation": "24/24 PASS",
   "reviewerItems": 27,
   "references": 30,
+  "automatedChecks": {
+    "submittedBaselineAndMarkedManuscript": true,
+    "responsePageLineLocations": true,
+    "highlights": true,
+    "submissionArtwork": true,
+    "sourceValidation": true,
+    "softwareXAutomatedCompliance": true,
+    "productionCoreDiffEmpty": true
+  },
+  "submissionStatus": "HOLD_FOR_MANUAL_CONFIRMATION",
+  "pendingManualGates": [
+    "FS-07",
+    "FS-08",
+    "FS-09",
+    "FS-10"
+  ],
   "artifacts": [
     {
-      "path": "artifacts/revision/final-submission/SHM-EM_SoftwareX_Revised_Clean.docx",
-      "bytes": 17338731,
-      "sha256": "484dae4dc03d1ad6ace8870a976a8409889777053e8ffcc7bb512c0e612ee391"
+      "path": "artifacts/revision/final-submission/submission/SHM-EM_SoftwareX_Revised_Clean.docx",
+      "bytes": 15801679,
+      "sha256": "98b3eb12ff935a489d787b57391da886b0a4bda3e852471234e4d6a323d37f2b"
     },
     {
-      "path": "artifacts/revision/final-submission/SHM-EM_SoftwareX_Revised_Marked.docx",
-      "bytes": 17841483,
-      "sha256": "8f207816c143c6a0bde90ce1c16bcca2f1900b78c13af12769f38d89284d7c17"
+      "path": "artifacts/revision/final-submission/submission/SHM-EM_SoftwareX_Revised_Marked.docx",
+      "bytes": 16396026,
+      "sha256": "11da2864431cc0a00738a38250c0b37f24803dee5053ef6cfdea3168b471ad74"
     },
     {
-      "path": "artifacts/revision/final-submission/Response_to_Reviewers.docx",
-      "bytes": 6173441,
-      "sha256": "1c3af3415a1f8d02d052c8a7a89c923bc4ba89792891222d7f54965b0e18073e"
+      "path": "artifacts/revision/final-submission/submission/Response_to_Reviewers.docx",
+      "bytes": 6173433,
+      "sha256": "a2d3f01e248d0ddfe02e081bc1a3aa0a115cfd7c339451b2f53fa11f8ebb8ee4"
     },
     {
-      "path": "artifacts/revision/final-submission/SHM-EM_SoftwareX_Revised_Clean.pdf",
-      "bytes": 1202222,
-      "sha256": "fb54077dd8eab04c848c1226a1888c681a8a42abb756b2ed6b6e427e6b9a05bd",
-      "pages": 19
+      "path": "artifacts/revision/final-submission/submission/Highlights.docx",
+      "bytes": 11464,
+      "sha256": "c4372e22bae6cd4bb651eeee1b43bf5aff5706b9b6e508330d559705133ed9f3"
     },
     {
-      "path": "artifacts/revision/final-submission/SHM-EM_SoftwareX_Revised_Marked.pdf",
-      "bytes": 1210294,
-      "sha256": "670a29ad67a4527b2135ac15d7b739b1391cf5af982b47657ca03b75ae2c2649",
-      "pages": 19
+      "path": "artifacts/revision/final-submission/submission/SHM-EM_SoftwareX_Revised_Clean.pdf",
+      "bytes": 1026172,
+      "sha256": "9590408058d594599ba3f6f8c56b8d0e2037a2fbd0acdcc6e0c3e11428986e67",
+      "pages": 13
     },
     {
-      "path": "artifacts/revision/final-submission/Response_to_Reviewers.pdf",
-      "bytes": 313372,
-      "sha256": "2a91ca262b74cff8f31b5533250a4634e1c0ea5b1a9ea779de9564eb3b4481f3",
+      "path": "artifacts/revision/final-submission/submission/SHM-EM_SoftwareX_Revised_Marked.pdf",
+      "bytes": 2379987,
+      "sha256": "9437c51d5ee9098eb40b07f90d2490bcbf24bb674d51dba970b2967c2448303f",
+      "pages": 24
+    },
+    {
+      "path": "artifacts/revision/final-submission/submission/Response_to_Reviewers.pdf",
+      "bytes": 319299,
+      "sha256": "807b3183e1144ebf07f82373bee2a8b7526e29638c959e65cbaf5803a105ac3c",
       "pages": 12
+    },
+    {
+      "path": "artifacts/revision/final-submission/submission/Highlights.pdf",
+      "bytes": 95999,
+      "sha256": "caeb47be88de5497da6435a6cd098dcd4e8977c8b4eb3c63bb8dca1f78d47212",
+      "pages": 1
+    },
+    {
+      "path": "artifacts/revision/final-submission/figures/Fig1_Research_Gap_and_Workflow.pdf",
+      "bytes": 61837,
+      "sha256": "c27a9013d25433207684ed8bd69996ec945d9f922e3c959a058f2550be072762",
+      "pages": 1
+    },
+    {
+      "path": "artifacts/revision/final-submission/figures/Fig1_Research_Gap_and_Workflow.png",
+      "bytes": 466126,
+      "sha256": "ae71269ed071b0d45408419a1ad2fae7638bd213f44b326e38a8bf069b228501",
+      "pixels": {
+        "width": 4200,
+        "height": 2100
+      }
+    },
+    {
+      "path": "artifacts/revision/final-submission/figures/Fig1_Research_Gap_and_Workflow.svg",
+      "bytes": 11604,
+      "sha256": "d8e4cdfcc494bd55f815f5ba003dd6939ead2dc7401666f0ffee4f4284618514"
+    },
+    {
+      "path": "artifacts/revision/final-submission/figures/Fig2_Software_Architecture.pdf",
+      "bytes": 69143,
+      "sha256": "c83c9f992a787f68fc054161bec7d74814a379833f158ff1c1fe9b0c40afc38e",
+      "pages": 1
+    },
+    {
+      "path": "artifacts/revision/final-submission/figures/Fig2_Software_Architecture.png",
+      "bytes": 401249,
+      "sha256": "c31231138f4aa76838f323637ea2f000299e68cf0612d725e50dd72ef7320ff4",
+      "pixels": {
+        "width": 4200,
+        "height": 2500
+      }
+    },
+    {
+      "path": "artifacts/revision/final-submission/figures/Fig2_Software_Architecture.svg",
+      "bytes": 14122,
+      "sha256": "7877a286bc48721f651c38b14ec34ec37d2cee68cc1d656c5a0e20ee9e3ab8f1"
+    },
+    {
+      "path": "artifacts/revision/final-submission/figures/Fig3_Forecast_to_Event_Sequence.pdf",
+      "bytes": 63716,
+      "sha256": "d3801d04456124437d1889e53f799b99354489196b24cf8e5a403aacf592c55f",
+      "pages": 1
     },
     {
       "path": "artifacts/revision/final-submission/figures/Fig3_Forecast_to_Event_Sequence.png",
@@ -63,6 +144,15 @@
       "sha256": "92aa0aea26a8a7cf4dfb42846ddd2ddabcd4fb1025653b7f1383348de3bd9067"
     },
     {
+      "path": "artifacts/revision/final-submission/figures/Fig4_Task_Oriented_Interface_Composite.tiff",
+      "bytes": 4747762,
+      "sha256": "dc3318ab23d5cfc60c0d1537db53970049d8c9b5b7e27b21b00e0e4952a1985b",
+      "pixels": {
+        "width": 4200,
+        "height": 2400
+      }
+    },
+    {
       "path": "artifacts/revision/final-submission/figures/Fig4_Task_Oriented_Interface_Composite.png",
       "bytes": 4404556,
       "sha256": "f57524f4759636e2f4669c212e571cb61538023f22dc35d903ae027d4b52e5de",
@@ -75,6 +165,15 @@
       "path": "artifacts/revision/final-submission/figures/Fig4_Task_Oriented_Interface_Composite.svg",
       "bytes": 4755851,
       "sha256": "e415b8a2f149cf95350aeaf544d17812d96524007e9fb2fe9ed9f3e7533985e0"
+    },
+    {
+      "path": "artifacts/revision/final-submission/figures/Fig5_Public_Reference_Workflow.tiff",
+      "bytes": 5310174,
+      "sha256": "dbc981b339b319f159a214a22587432c3581b41a804dbf46e623a164f15529e0",
+      "pixels": {
+        "width": 4200,
+        "height": 3000
+      }
     },
     {
       "path": "artifacts/revision/final-submission/figures/Fig5_Public_Reference_Workflow.png",
@@ -91,49 +190,79 @@
       "sha256": "1d757806aa73abc6fc9d199fc3fcfd0ec0622fb2a99b144ba3532cd3d1a77092"
     },
     {
-      "path": "artifacts/revision/final-submission/final-manuscript-source-validation-v2.json",
-      "bytes": 4313,
-      "sha256": "8997f292e71f1abce04a23ee53564186394f7acc1916c4b1c0fc1ecb0e852370"
+      "path": "artifacts/revision/final-submission/figures/submission-artwork-manifest.json",
+      "bytes": 2161,
+      "sha256": "d70234e1423afa0032b5564026adfa7b84b049a049e8b3209bfafb6810710138"
     },
     {
-      "path": "artifacts/revision/final-submission/Final_Submission_Checklist.md",
-      "bytes": 5313,
-      "sha256": "2a3fc8fdf499e5887ab8c4bf392872c583d7995c0d028d25a00c820e1d67d114"
+      "path": "artifacts/revision/final-submission/final-manuscript-source-validation-v3.json",
+      "bytes": 4328,
+      "sha256": "3baeeb217b145a642efc82259c926f67c928ba0e5d551798deba6fcba7bf4833"
+    },
+    {
+      "path": "artifacts/revision/final-submission/final-submission-compliance.json",
+      "bytes": 2193,
+      "sha256": "904a6880316ae15630c55ef2ec2d253355831a0d5a50a7d56ab334db12c73515"
     },
     {
       "path": "artifacts/revision/final-submission/reviewer-page-line-references.json",
-      "bytes": 1196,
-      "sha256": "80f700d5b18d399ffea45592e6ede1a985fdc7f07305601ad088c0cd51ed1f35"
+      "bytes": 1282,
+      "sha256": "0495d27f2d14d8863b8c94a698e87d88dbeba64717fc426aa540dda4650d9cab"
+    },
+    {
+      "path": "artifacts/revision/final-submission/reviewer-page-line-references-verification.json",
+      "bytes": 9979,
+      "sha256": "bab04fb63caf385b179d7a278cd0f135501e7bc2c3c480e1cab1793e423b0bf0"
     },
     {
       "path": "artifacts/revision/final-submission/submitted-baseline-verification.json",
-      "bytes": 752,
-      "sha256": "e7c85eee10191d132d76ebeed3c71e2047f6d10a747753794cba34d6d21244f0"
+      "bytes": 1875,
+      "sha256": "3f4bdfe8817e18655860adf15e7de32e663f542da0694ad384a3356536289dfd"
     },
     {
       "path": "artifacts/revision/final-submission/FINAL_SUBMISSION_COMPLETION_REPORT.md",
-      "bytes": 3446,
-      "sha256": "c05a0b124106fd0f44113057e22839d40a9d2e9d2932896a6f025bc54073aece"
+      "bytes": 3083,
+      "sha256": "c0aea75060e65c0abeec9bff647a19964d047b2067e33cda785024e12314cfca"
     },
     {
       "path": "artifacts/revision/final-submission/GPT_REVIEW_HANDOFF.md",
-      "bytes": 1213,
-      "sha256": "3b7ae004f14d3231bb88e5bf65e4bd3fd2f39e64f3445f1790a390d14e1b59f7"
+      "bytes": 1915,
+      "sha256": "46907b7b729346c44e87b5305f4ce8caec1907a1be036f1c8dc25656934cf2db"
+    },
+    {
+      "path": "artifacts/revision/final-submission/submission/Final_Submission_Checklist.md",
+      "bytes": 6301,
+      "sha256": "054acb5cf921ce14e496ac162637031e8805e34cc577273f23a5a497d318736b"
+    },
+    {
+      "path": "manuscript/Final_Author_Editorial_Checks.json",
+      "bytes": 792,
+      "sha256": "ee8b8ce2246bdf92cbf7ab54c2cc19ecc589ff528dceb1c57ea5d874ea88b0ae"
+    },
+    {
+      "path": "manuscript/Highlights.md",
+      "bytes": 332,
+      "sha256": "ac9b4061ccd7ecb56ea592d4f65c6dbd7e861b2510113aa7dc2aa90192282392"
     },
     {
       "path": "manuscript/SHM-EM_Revised_Manuscript_Source.md",
-      "bytes": 51734,
-      "sha256": "ce721781e81d88a9f2a6163f7ad5ef72c669824cd3b1f08de241c178cd2fd22f"
+      "bytes": 31439,
+      "sha256": "e54fe54e9eec7a0bda9de85584739657a2f6c17a77aa1e3dd551cc927f562e21"
     },
     {
       "path": "manuscript/Response_to_Reviewers_Source.md",
-      "bytes": 37469,
-      "sha256": "d5deb5fbfe295f4820ef43b08ff802140509e79caf726438a19114cef55c78b1"
+      "bytes": 37535,
+      "sha256": "9951437a1a3c8b25a083f1f98582d762dc88537641fe4b3535e7efd73272e5ca"
     },
     {
       "path": "manuscript/Revision_Change_Map.md",
-      "bytes": 8198,
-      "sha256": "2890dba643470f1fef2f884c0c3976e278628e52016ccce4867c63e51351498f"
+      "bytes": 8323,
+      "sha256": "926df9cd918d6483e5b7bd3371fb2624d0626dbc782e2ea978e0d90e205134d6"
+    },
+    {
+      "path": "manuscript/Final_Reviewer_Evidence_Map.md",
+      "bytes": 4804,
+      "sha256": "467846fa580d0f78a65b10e614e4b58f82aaee3be38bc822f0f7325f9474b2ed"
     }
   ]
 }

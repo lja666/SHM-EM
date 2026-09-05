@@ -1,24 +1,63 @@
 {
-  "schemaVersion": "shm-em-submitted-baseline-verification-v1",
+  "schemaVersion": "shm-em-submitted-baseline-verification-v2",
   "submittedPdf": {
+    "path": "E:\\01_工力所\\03 文章\\01 廖吉安\\05 SoftwareX\\SOFTX-D-26-00931.pdf",
     "sha256": "6f0c002e08af7719ce9732dc70303c4e499263042b3249ba10c559ca9bc0f507",
     "pages": 23
   },
   "submittedDocx": {
+    "path": "E:\\01_工力所\\03 文章\\01 廖吉安\\05 SoftwareX\\SHM-EM_SoftwareX-v1.0.docx",
     "sha256": "edc35ceb909b6ebe5a34ceaf1bc12c16691379920a443fe4fbabe8ba152c9a5b"
   },
   "submittedDocxUniqueTokenCoverageInSubmittedPdf": 0.993488,
   "markedComparisonBaseline": "Actual submitted manuscript DOCX verified against the Editorial Manager PDF text.",
+  "comparisonSettings": {
+    "granularity": "word",
+    "formattingCompared": false,
+    "headersFootersCompared": false,
+    "reason": "Keep the English marked manuscript focused on substantive content changes."
+  },
   "trackedRevisionCounts": {
-    "ins": 1248,
-    "del": 435,
-    "moveFrom": 4,
-    "moveTo": 4
+    "ins": 783,
+    "del": 359,
+    "moveFrom": 7,
+    "moveTo": 7
   },
   "cleanMarkedFinalViewTokenSequenceEqual": true,
   "cleanMarkedDocxFinalViewTokenCounts": {
-    "clean": 7073,
-    "marked": 7073
+    "clean": 4356,
+    "marked": 4356
   },
-  "pass": true
+  "pass": true,
+  "responseLocations": {
+    "expectedItems": 27,
+    "missingItemAnchorsFromResponseSource": [],
+    "missingFromResponseDocx": [],
+    "pass": true
+  },
+  "highlights": {
+    "bulletCount": 4,
+    "characterCounts": [
+      78,
+      75,
+      77,
+      76
+    ],
+    "allPresentInDocx": true,
+    "pass": true
+  },
+  "artwork": {
+    "artworkCount": 5,
+    "issues": [],
+    "pass": true
+  },
+  "packageChecks": {
+    "submittedBaselineAndMarkedManuscript": true,
+    "responsePageLineLocations": true,
+    "highlights": true,
+    "submissionArtwork": true,
+    "sourceValidation": true,
+    "softwareXAutomatedCompliance": true,
+    "productionCoreDiffEmpty": true
+  }
 }

@@ -1,0 +1,60 @@
+{
+  "schemaVersion": "shm-em-submission-artwork-v1",
+  "finalWidthMm": 175,
+  "policy": {
+    "vector": "PDF generated from editable SVG source",
+    "hybridRaster": "TIFF at >=500 dpi at final physical width"
+  },
+  "artifacts": [
+    {
+      "name": "Fig1_Research_Gap_and_Workflow",
+      "submissionFormat": "PDF",
+      "path": "artifacts/revision/final-submission/figures/Fig1_Research_Gap_and_Workflow.pdf",
+      "physicalWidthMm": 175,
+      "physicalHeightMm": 87.5,
+      "sha256": "c27a9013d25433207684ed8bd69996ec945d9f922e3c959a058f2550be072762"
+    },
+    {
+      "name": "Fig2_Software_Architecture",
+      "submissionFormat": "PDF",
+      "path": "artifacts/revision/final-submission/figures/Fig2_Software_Architecture.pdf",
+      "physicalWidthMm": 175,
+      "physicalHeightMm": 104.167,
+      "sha256": "c83c9f992a787f68fc054161bec7d74814a379833f158ff1c1fe9b0c40afc38e"
+    },
+    {
+      "name": "Fig3_Forecast_to_Event_Sequence",
+      "submissionFormat": "PDF",
+      "path": "artifacts/revision/final-submission/figures/Fig3_Forecast_to_Event_Sequence.pdf",
+      "physicalWidthMm": 175,
+      "physicalHeightMm": 106.25,
+      "sha256": "d3801d04456124437d1889e53f799b99354489196b24cf8e5a403aacf592c55f"
+    },
+    {
+      "name": "Fig4_Task_Oriented_Interface_Composite",
+      "submissionFormat": "TIFF",
+      "path": "artifacts/revision/final-submission/figures/Fig4_Task_Oriented_Interface_Composite.tiff",
+      "pixels": {
+        "width": 4200,
+        "height": 2400
+      },
+      "physicalWidthMm": 175,
+      "effectiveDpiAtFinalWidth": 609.6,
+      "embeddedDensityDpi": 610,
+      "sha256": "dc3318ab23d5cfc60c0d1537db53970049d8c9b5b7e27b21b00e0e4952a1985b"
+    },
+    {
+      "name": "Fig5_Public_Reference_Workflow",
+      "submissionFormat": "TIFF",
+      "path": "artifacts/revision/final-submission/figures/Fig5_Public_Reference_Workflow.tiff",
+      "pixels": {
+        "width": 4200,
+        "height": 3000
+      },
+      "physicalWidthMm": 175,
+      "effectiveDpiAtFinalWidth": 609.6,
+      "embeddedDensityDpi": 610,
+      "sha256": "dbc981b339b319f159a214a22587432c3581b41a804dbf46e623a164f15529e0"
+    }
+  ]
+}

@@ -1,0 +1,432 @@
+{
+  "schemaVersion": "shm-em-reviewer-page-line-verification-v1",
+  "generatedAtUtc": "2026-09-05T08:23:52.140436+00:00",
+  "method": "Section anchors and continuous Word line numbers extracted from the final clean PDF",
+  "cleanPdf": {
+    "path": "artifacts\\revision\\final-submission\\pdf\\SHM-EM_Revised_Manuscript_Clean.pdf",
+    "sha256": "9590408058d594599ba3f6f8c56b8d0e2037a2fbd0acdcc6e0c3e11428986e67",
+    "pages": 13
+  },
+  "cleanDocx": {
+    "path": "artifacts\\revision\\final-submission\\docx\\SHM-EM_Revised_Manuscript_Clean.docx",
+    "sha256": "98b3eb12ff935a489d787b57391da886b0a4bda3e852471234e4d6a323d37f2b"
+  },
+  "reviewerItemCount": 27,
+  "sectionStarts": {
+    "abstract": 9,
+    "metadata": 23,
+    "motivation": 25,
+    "users": 51,
+    "software": 56,
+    "architecture": 57,
+    "objects": 67,
+    "contract": 74,
+    "missing": 89,
+    "future_state": 95,
+    "transition": 105,
+    "response": 115,
+    "functions": 121,
+    "rules": 130,
+    "validation": 135,
+    "public_case": 140,
+    "reuse": 149,
+    "failure": 157,
+    "runtime": 165,
+    "provenance": 172,
+    "impact": 181,
+    "impact_integration": 182,
+    "impact_reuse": 187,
+    "impact_transition": 191,
+    "limitations": 196,
+    "conclusions": 205,
+    "availability": 211,
+    "acknowledgements": 219,
+    "ai_declaration": 225,
+    "references": 232
+  },
+  "resolvedRanges": {
+    "R1-0": [
+      {
+        "startSection": "abstract",
+        "endSection": "abstract",
+        "startPage": 1,
+        "endPage": 1,
+        "startLine": 9,
+        "endLine": 22
+      },
+      {
+        "startSection": "software",
+        "endSection": "provenance",
+        "startPage": 3,
+        "endPage": 10,
+        "startLine": 56,
+        "endLine": 180
+      }
+    ],
+    "R1-1": [
+      {
+        "startSection": "reuse",
+        "endSection": "reuse",
+        "startPage": 8,
+        "endPage": 9,
+        "startLine": 149,
+        "endLine": 156
+      },
+      {
+        "startSection": "impact_reuse",
+        "endSection": "impact_reuse",
+        "startPage": 11,
+        "endPage": 11,
+        "startLine": 187,
+        "endLine": 190
+      }
+    ],
+    "R1-2": [
+      {
+        "startSection": "validation",
+        "endSection": "provenance",
+        "startPage": 7,
+        "endPage": 10,
+        "startLine": 135,
+        "endLine": 180
+      }
+    ],
+    "R1-3": [
+      {
+        "startSection": "transition",
+        "endSection": "transition",
+        "startPage": 6,
+        "endPage": 6,
+        "startLine": 105,
+        "endLine": 114
+      },
+      {
+        "startSection": "failure",
+        "endSection": "failure",
+        "startPage": 9,
+        "endPage": 9,
+        "startLine": 157,
+        "endLine": 164
+      }
+    ],
+    "R1-4": [
+      {
+        "startSection": "motivation",
+        "endSection": "motivation",
+        "startPage": 2,
+        "endPage": 3,
+        "startLine": 25,
+        "endLine": 50
+      }
+    ],
+    "R1-5": [
+      {
+        "startSection": "contract",
+        "endSection": "missing",
+        "startPage": 4,
+        "endPage": 5,
+        "startLine": 74,
+        "endLine": 94
+      }
+    ],
+    "R1-6": [
+      {
+        "startSection": "future_state",
+        "endSection": "future_state",
+        "startPage": 5,
+        "endPage": 5,
+        "startLine": 95,
+        "endLine": 104
+      }
+    ],
+    "R1-7": [
+      {
+        "startSection": "contract",
+        "endSection": "contract",
+        "startPage": 4,
+        "endPage": 5,
+        "startLine": 74,
+        "endLine": 88
+      }
+    ],
+    "R1-8": [
+      {
+        "startSection": "future_state",
+        "endSection": "future_state",
+        "startPage": 5,
+        "endPage": 5,
+        "startLine": 95,
+        "endLine": 104
+      },
+      {
+        "startSection": "limitations",
+        "endSection": "conclusions",
+        "startPage": 11,
+        "endPage": 11,
+        "startLine": 196,
+        "endLine": 210
+      }
+    ],
+    "R1-9": [
+      {
+        "startSection": "runtime",
+        "endSection": "runtime",
+        "startPage": 9,
+        "endPage": 10,
+        "startLine": 165,
+        "endLine": 171
+      }
+    ],
+    "R1-10": [
+      {
+        "startSection": "runtime",
+        "endSection": "runtime",
+        "startPage": 9,
+        "endPage": 10,
+        "startLine": 165,
+        "endLine": 171
+      },
+      {
+        "startSection": "limitations",
+        "endSection": "limitations",
+        "startPage": 11,
+        "endPage": 11,
+        "startLine": 196,
+        "endLine": 204
+      }
+    ],
+    "R1-11": [
+      {
+        "startSection": "limitations",
+        "endSection": "limitations",
+        "startPage": 11,
+        "endPage": 11,
+        "startLine": 196,
+        "endLine": 204
+      }
+    ],
+    "R1-12": [
+      {
+        "startSection": "provenance",
+        "endSection": "provenance",
+        "startPage": 10,
+        "endPage": 10,
+        "startLine": 172,
+        "endLine": 180
+      },
+      {
+        "startSection": "limitations",
+        "endSection": "limitations",
+        "startPage": 11,
+        "endPage": 11,
+        "startLine": 196,
+        "endLine": 204
+      }
+    ],
+    "R1-13": [
+      {
+        "startSection": "transition",
+        "endSection": "transition",
+        "startPage": 6,
+        "endPage": 6,
+        "startLine": 105,
+        "endLine": 114
+      }
+    ],
+    "R1-14": [
+      {
+        "startSection": "functions",
+        "endSection": "functions",
+        "startPage": 6,
+        "endPage": 7,
+        "startLine": 121,
+        "endLine": 129
+      }
+    ],
+    "R1-15": [
+      {
+        "startSection": "reuse",
+        "endSection": "reuse",
+        "startPage": 8,
+        "endPage": 9,
+        "startLine": 149,
+        "endLine": 156
+      },
+      {
+        "startSection": "impact_integration",
+        "endSection": "limitations",
+        "startPage": 10,
+        "endPage": 11,
+        "startLine": 182,
+        "endLine": 204
+      }
+    ],
+    "R1-16": [
+      {
+        "startSection": "validation",
+        "endSection": "validation",
+        "startPage": 7,
+        "endPage": 8,
+        "startLine": 135,
+        "endLine": 139
+      }
+    ],
+    "R1-17": [
+      {
+        "startSection": "provenance",
+        "endSection": "provenance",
+        "startPage": 10,
+        "endPage": 10,
+        "startLine": 172,
+        "endLine": 180
+      }
+    ],
+    "R1-18": [
+      {
+        "startSection": "motivation",
+        "endSection": "motivation",
+        "startPage": 2,
+        "endPage": 3,
+        "startLine": 25,
+        "endLine": 50
+      },
+      {
+        "startSection": "limitations",
+        "endSection": "limitations",
+        "startPage": 11,
+        "endPage": 11,
+        "startLine": 196,
+        "endLine": 204
+      }
+    ],
+    "R1-19": [
+      {
+        "startSection": "motivation",
+        "endSection": "motivation",
+        "startPage": 2,
+        "endPage": 3,
+        "startLine": 25,
+        "endLine": 50
+      },
+      {
+        "startSection": "conclusions",
+        "endSection": "conclusions",
+        "startPage": 11,
+        "endPage": 11,
+        "startLine": 205,
+        "endLine": 210
+      }
+    ],
+    "R2-1": [
+      {
+        "startSection": "motivation",
+        "endSection": "motivation",
+        "startPage": 2,
+        "endPage": 3,
+        "startLine": 25,
+        "endLine": 50
+      },
+      {
+        "startSection": "validation",
+        "endSection": "provenance",
+        "startPage": 7,
+        "endPage": 10,
+        "startLine": 135,
+        "endLine": 180
+      }
+    ],
+    "R2-2": [
+      {
+        "startSection": "motivation",
+        "endSection": "motivation",
+        "startPage": 2,
+        "endPage": 3,
+        "startLine": 25,
+        "endLine": 50
+      }
+    ],
+    "R2-3": [
+      {
+        "startSection": "missing",
+        "endSection": "missing",
+        "startPage": 5,
+        "endPage": 5,
+        "startLine": 89,
+        "endLine": 94
+      },
+      {
+        "startSection": "failure",
+        "endSection": "failure",
+        "startPage": 9,
+        "endPage": 9,
+        "startLine": 157,
+        "endLine": 164
+      }
+    ],
+    "R3-1": [
+      {
+        "startSection": "architecture",
+        "endSection": "objects",
+        "startPage": 3,
+        "endPage": 4,
+        "startLine": 57,
+        "endLine": 73
+      },
+      {
+        "startSection": "runtime",
+        "endSection": "runtime",
+        "startPage": 9,
+        "endPage": 10,
+        "startLine": 165,
+        "endLine": 171
+      },
+      {
+        "startSection": "limitations",
+        "endSection": "limitations",
+        "startPage": 11,
+        "endPage": 11,
+        "startLine": 196,
+        "endLine": 204
+      }
+    ],
+    "R3-2": [
+      {
+        "startSection": "limitations",
+        "endSection": "limitations",
+        "startPage": 11,
+        "endPage": 11,
+        "startLine": 196,
+        "endLine": 204
+      }
+    ],
+    "R3-3": [
+      {
+        "startSection": "contract",
+        "endSection": "missing",
+        "startPage": 4,
+        "endPage": 5,
+        "startLine": 74,
+        "endLine": 94
+      }
+    ],
+    "R3-4": [
+      {
+        "startSection": "provenance",
+        "endSection": "provenance",
+        "startPage": 10,
+        "endPage": 10,
+        "startLine": 172,
+        "endLine": 180
+      },
+      {
+        "startSection": "limitations",
+        "endSection": "limitations",
+        "startPage": 11,
+        "endPage": 11,
+        "startLine": 196,
+        "endLine": 204
+      }
+    ]
+  },
+  "pass": true
+}

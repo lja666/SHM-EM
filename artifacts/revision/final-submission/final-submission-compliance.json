@@ -1,0 +1,64 @@
+{
+  "schemaVersion": "shm-em-final-submission-compliance-v1",
+  "generatedAtUtc": "2026-09-05T09:03:54.036790+00:00",
+  "countBasis": "Final clean DOCX: artifacts\\revision\\final-submission\\docx\\SHM-EM_Revised_Manuscript_Clean.docx",
+  "strictWordCount": 2747,
+  "sourcePreflightWordCount": 2737,
+  "automatedGates": [
+    {
+      "id": "FS-01",
+      "status": "PASS",
+      "detail": "Strict count 2747; source preflight 2737; recommended target <=2900: True."
+    },
+    {
+      "id": "FS-02",
+      "status": "PASS",
+      "detail": "Final manuscript figure count: 5."
+    },
+    {
+      "id": "FS-03",
+      "status": "PASS",
+      "detail": "Required AI declaration is immediately before References in the source."
+    },
+    {
+      "id": "FS-04",
+      "status": "PASS",
+      "detail": "Separate submission artwork present: {1: True, 2: True, 3: True, 4: True, 5: True}."
+    },
+    {
+      "id": "FS-05",
+      "status": "PASS",
+      "detail": "Fig. 1-3 use PDF; Fig. 4-5 use TIFF submission copies."
+    },
+    {
+      "id": "FS-06",
+      "status": "PASS",
+      "detail": "Page/line map contains 27 ordered references and is bound to the final clean DOCX: True."
+    }
+  ],
+  "manualGates": [
+    {
+      "id": "FS-07",
+      "status": "PENDING_AUTHOR_CONFIRMATION",
+      "detail": "Confirm whether competing-interest and CRediT declarations are complete in the manuscript or Editorial Manager. Do not infer author roles."
+    },
+    {
+      "id": "FS-08",
+      "status": "PENDING_AUTHOR_CONFIRMATION",
+      "detail": "All authors must confirm names, affiliations, funding, correspondence, and acknowledgements."
+    },
+    {
+      "id": "FS-09",
+      "status": "PENDING_DATA_OWNER_CONFIRMATION",
+      "detail": "The data owner must approve the final public/restricted data-availability wording."
+    },
+    {
+      "id": "FS-10",
+      "status": "PENDING_EDITORIAL_MANAGER_CHECK",
+      "detail": "Confirm revision deadline, upload item types, and final filenames in Editorial Manager."
+    }
+  ],
+  "automatedPass": true,
+  "submissionReady": false,
+  "submissionStatus": "HOLD_FOR_MANUAL_CONFIRMATION"
+}

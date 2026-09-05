@@ -26,11 +26,6 @@ DEFAULT_TEMPLATE = (
     if os.environ.get("SHM_EM_SUBMITTED_TEMPLATE")
     else None
 )
-DEFAULT_SUBMITTED_FIGURES = (
-    Path(os.environ["SHM_EM_SUBMITTED_FIGURES"])
-    if os.environ.get("SHM_EM_SUBMITTED_FIGURES")
-    else None
-)
 FINAL_FIGURES = ROOT / "artifacts" / "revision" / "final-submission" / "figures"
 
 BLUE = "0B3C82"
@@ -45,12 +40,12 @@ BLACK = "172033"
 
 FIGURES = {
     1: (
-        Path("Fig1_Workflow.png"),
+        FINAL_FIGURES / "Fig1_Research_Gap_and_Workflow.png",
         "Fig. 1. Research gaps, the SHM-EM software boundary, and the forecast-aware user workflow.",
         Mm(165),
     ),
     2: (
-        Path("Fig2_Architecture.png"),
+        FINAL_FIGURES / "Fig2_Software_Architecture.png",
         "Fig. 2. Four-layer SHM-EM architecture. MySQL is the validated reference persistence implementation; the observation registry and service interfaces define the storage-adapter extension boundary.",
         Mm(165),
     ),
@@ -538,30 +533,55 @@ def build_document(
     document.save(str(output))
 
 
+def build_highlights(source: Path, output: Path, template: Path) -> None:
+    document = Document(str(template))
+    clear_body(document)
+    document.core_properties.title = "Highlights"
+    document.core_properties.subject = "SoftwareX revised manuscript highlights"
+    document.core_properties.author = "Ji'an Liao; Zifa Wang; Dengke Zhao; Jianming Wang; Zhaoyan Li; Siran Yang"
+    normal = document.styles["Normal"]
+    normal.font.name = "Times New Roman"
+    normal.font.size = Pt(11)
+    normal._element.rPr.rFonts.set(qn("w:eastAsia"), "Times New Roman")
+    title = document.add_paragraph()
+    title.alignment = WD_ALIGN_PARAGRAPH.LEFT
+    title_run = title.add_run("Highlights")
+    title_run.font.name = "Times New Roman"
+    title_run.font.size = Pt(16)
+    title_run.bold = True
+    title_run.font.color.rgb = RGBColor(0, 0, 0)
+    for line in source.read_text(encoding="utf-8").splitlines():
+        if not line.startswith("- "):
+            continue
+        paragraph = document.add_paragraph()
+        paragraph.paragraph_format.left_indent = Mm(6)
+        paragraph.paragraph_format.first_line_indent = Mm(-4)
+        paragraph.paragraph_format.space_after = Pt(6)
+        run = paragraph.add_run("• " + line[2:])
+        run.font.name = "Times New Roman"
+        run.font.size = Pt(11)
+    for section in document.sections:
+        reset_footer(section.footer, include_page_number=False)
+        reset_footer(section.first_page_footer, include_page_number=False)
+        reset_footer(section.even_page_footer, include_page_number=False)
+    output.parent.mkdir(parents=True, exist_ok=True)
+    document.save(str(output))
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--kind", choices=("manuscript", "response"), required=True)
+    parser.add_argument("--kind", choices=("manuscript", "response", "highlights"), required=True)
     parser.add_argument("--source", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--template", type=Path, default=DEFAULT_TEMPLATE)
-    parser.add_argument("--submitted-figures-dir", type=Path, default=DEFAULT_SUBMITTED_FIGURES)
     parser.add_argument("--page-refs", type=Path)
     args = parser.parse_args()
     if args.template is None:
         parser.error("Provide --template or set SHM_EM_SUBMITTED_TEMPLATE.")
-    if args.kind == "manuscript" and args.submitted_figures_dir is None:
-        parser.error("Provide --submitted-figures-dir or set SHM_EM_SUBMITTED_FIGURES.")
-    if args.submitted_figures_dir is not None:
-        FIGURES[1] = (
-            args.submitted_figures_dir / "Fig1_Workflow.png",
-            FIGURES[1][1],
-            FIGURES[1][2],
-        )
-        FIGURES[2] = (
-            args.submitted_figures_dir / "Fig2_Architecture.png",
-            FIGURES[2][1],
-            FIGURES[2][2],
-        )
+    if args.kind == "highlights":
+        build_highlights(args.source, args.output, args.template)
+        print(args.output)
+        return
     page_refs = None
     if args.page_refs:
         page_refs = json.loads(args.page_refs.read_text(encoding="utf-8"))

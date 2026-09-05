@@ -98,6 +98,136 @@ function flowBox(x, y, w, h, title, detail, options = {}) {
     ${detail ? svgText(x + 30, y + 112, detail, { size: 31, weight: 400, fill: detailFill, lineHeight: 40 }) : ""}`;
 }
 
+async function buildFigure1() {
+  const width = 4200;
+  const height = 2100;
+  let body = "";
+
+  const panels = [
+    { x: 60, w: 1180, label: "A", title: "Fragmented monitoring workflow", color: C.orange, fill: C.paleOrange },
+    { x: 1280, w: 1500, label: "B", title: "SHM-EM software boundary", color: C.navy, fill: C.paleBlue },
+    { x: 2820, w: 1320, label: "C", title: "Auditable engineering workflow", color: C.teal, fill: C.paleTeal },
+  ];
+  for (const panel of panels) {
+    body += roundedRect(panel.x, 55, panel.w, 1980, { fill: panel.fill, stroke: panel.color, strokeWidth: 6, radius: 24 });
+    body += circleLabel(panel.x + 75, 130, panel.label, panel.color);
+    body += svgText(panel.x + 150, 147, panel.title, { size: 47, weight: 700, fill: panel.color });
+  }
+
+  const leftX = 155;
+  body += flowBox(leftX, 290, 990, 265, "Heterogeneous observations", ["Displacement, settlement, pressure,", "water level, strain, and vibration"], { stroke: C.orange, fill: C.white });
+  body += arrow(650, 555, 650, 685, C.orange);
+  body += flowBox(leftX, 695, 990, 265, "Project-bound model scripts", ["Implicit feature order, units,", "identifiers, and temporal assumptions"], { stroke: C.orange, fill: C.white });
+  body += arrow(650, 960, 650, 1090, C.orange);
+  body += flowBox(leftX, 1100, 990, 265, "Disconnected alerts", ["Forecasts visualized without an", "audited formal-event boundary"], { stroke: C.red, fill: C.white });
+  body += roundedRect(leftX, 1510, 990, 325, { fill: C.white, stroke: C.red, strokeWidth: 5, radius: 18 });
+  body += svgText(650, 1585, "Software gap", { size: 42, weight: 700, fill: C.red, anchor: "middle" });
+  body += svgText(650, 1650, ["How can persisted forecasts become", "contextualized, inspectable, and", "conditionally executable records?"], { size: 33, fill: C.ink, anchor: "middle", lineHeight: 44 });
+
+  const centreX = 1380;
+  const mechanismRows = [
+    ["1", "Versioned engineering-semantic contract", ["Ordered features and targets", "Units, transformations, artifacts, hashes"], C.navy],
+    ["2", "Synchronized Project Future State", ["One base time and future timeline", "Observed and forecast risk remain distinct"], C.teal],
+    ["3", "Controlled forecast-to-event transition", ["Audited Evaluate; independently gated Execute", "Formal event, response, and provenance"], C.blue],
+  ];
+  let mechanismY = 300;
+  for (const [label, title, detail, color] of mechanismRows) {
+    body += roundedRect(centreX, mechanismY, 1300, 360, { fill: C.white, stroke: color, strokeWidth: 6, radius: 20 });
+    body += circleLabel(centreX + 80, mechanismY + 90, label, color);
+    body += svgText(centreX + 155, mechanismY + 83, title, { size: 39, weight: 700, fill: color });
+    body += svgText(centreX + 155, mechanismY + 155, detail, { size: 32, fill: C.ink, lineHeight: 44 });
+    mechanismY += 470;
+  }
+  body += roundedRect(centreX, 1720, 1300, 180, { fill: C.white, stroke: C.line, strokeWidth: 4, radius: 18 });
+  body += svgText(centreX + 650, 1792, "Backend-controlled formal side-effect boundary", { size: 34, weight: 700, fill: C.navy, anchor: "middle" });
+  body += svgText(centreX + 650, 1845, "Forecasting algorithm remains outside the contribution claim", { size: 29, fill: C.muted, anchor: "middle" });
+
+  const rightX = 2915;
+  const workflow = [
+    ["Configure", "Objects, sources, rules"],
+    ["Forecast", "Persist one versioned batch"],
+    ["Inspect", "Completeness, series, Future State"],
+    ["Evaluate", "Candidate plus audit run"],
+    ["Execute", "Fresh Gate and rule recheck"],
+    ["Respond and trace", "Formal records and evidence"],
+  ];
+  let workflowY = 280;
+  workflow.forEach(([title, detail], index) => {
+    const color = index < 2 ? C.navy : index < 4 ? C.blue : C.teal;
+    body += flowBox(rightX, workflowY, 1130, 215, `${index + 1}  ${title}`, detail, { stroke: color, fill: C.white });
+    if (index < workflow.length - 1) body += arrow(rightX + 565, workflowY + 215, rightX + 565, workflowY + 250, color);
+    workflowY += 260;
+  });
+  body += roundedRect(rightX, 1880, 1130, 100, { fill: C.white, stroke: C.teal, strokeWidth: 4, radius: 16 });
+  body += svgText(rightX + 565, 1944, "Blocked eligibility produces no formal event side effects", { size: 29, weight: 700, fill: C.teal, anchor: "middle" });
+
+  await saveSvgAndPng("Fig1_Research_Gap_and_Workflow", frame(width, height, body));
+}
+
+async function buildFigure2() {
+  const width = 4200;
+  const height = 2500;
+  let body = "";
+
+  body += svgText(120, 105, "SHM-EM four-layer architecture", { size: 58, weight: 700, fill: C.navy });
+  body += svgText(4080, 105, "Validated implementation and explicit extension boundary", { size: 34, fill: C.muted, anchor: "end" });
+
+  const layers = [
+    { y: 180, h: 390, label: "1", title: "Presentation", color: C.blue, fill: C.paleBlue, boxes: [
+      ["Project Workspace", "Observed and forecast risk"], ["Observation & Prediction", "Joint engineering-valued series"],
+      ["Prediction Runs", "Batch and Gate status"], ["Rules, Events & Response", "Evaluate, Execute, evidence"],
+    ] },
+    { y: 650, h: 500, label: "2", title: "Application services", color: C.teal, fill: C.paleTeal, boxes: [
+      ["Observation registry", "Approved source routing"], ["Engineering conversion", "Raw to engineering values"],
+      ["Prediction Gate", "Contract and integrity"], ["Project Future State", "Synchronized risk"],
+      ["Rule and event services", "Formal transition"], ["Response and provenance", "Workflow and trace"],
+    ] },
+    { y: 1230, h: 430, label: "3", title: "Forecast runtime", color: C.orange, fill: C.paleOrange, boxes: [
+      ["Database contract loader", "Models, features, targets"], ["Input alignment", "16-step common window"],
+      ["Six fixed model adapters", "Model histories 12-16"], ["Output conversion", "124 targets x 40 steps"],
+    ] },
+    { y: 1740, h: 600, label: "4", title: "Reference persistence", color: C.navy, fill: C.paleBlue, boxes: [
+      ["Monitoring data", "Objects, registry, observations"], ["Forecast evidence", "Contracts, batches, runs, results"],
+      ["Decision records", "Rules, Gates, events, responses"], ["Audit evidence", "Hashes, links, reports, attachments"],
+    ] },
+  ];
+
+  for (const layer of layers) {
+    body += roundedRect(80, layer.y, 3520, layer.h, { fill: layer.fill, stroke: layer.color, strokeWidth: 6, radius: 22 });
+    body += circleLabel(165, layer.y + 85, layer.label, layer.color);
+    body += svgText(245, layer.y + 100, layer.title, { size: 48, weight: 700, fill: layer.color });
+    const cols = layer.boxes.length;
+    const gap = 28;
+    const contentX = 220;
+    const contentW = 3260;
+    const boxW = (contentW - gap * (cols - 1)) / cols;
+    const boxY = layer.y + 165;
+    const boxH = layer.h - 220;
+    layer.boxes.forEach(([title, detail], index) => {
+      const x = contentX + index * (boxW + gap);
+      body += roundedRect(x, boxY, boxW, boxH, { fill: C.white, stroke: C.line, strokeWidth: 4, radius: 16 });
+      body += svgText(x + boxW / 2, boxY + 70, title, { size: cols > 4 ? 31 : 35, weight: 700, fill: C.ink, anchor: "middle" });
+      body += svgText(x + boxW / 2, boxY + 125, detail, { size: cols > 4 ? 27 : 29, fill: C.muted, anchor: "middle" });
+    });
+  }
+
+  body += arrow(1840, 570, 1840, 635, C.blue);
+  body += arrow(1840, 1150, 1840, 1215, C.teal);
+  body += arrow(1840, 1660, 1840, 1725, C.orange);
+
+  body += roundedRect(3660, 180, 460, 2160, { fill: C.white, stroke: C.teal, strokeWidth: 6, radius: 22, dash: "22 16" });
+  body += svgText(3890, 280, "Extension boundary", { size: 40, weight: 700, fill: C.teal, anchor: "middle" });
+  body += svgText(3890, 390, ["Registry and service", "interfaces isolate", "physical storage", "and external adapters."], { size: 32, fill: C.ink, anchor: "middle", lineHeight: 46 });
+  body += arrow(3650, 900, 3530, 900, C.teal, true);
+  body += arrow(3650, 2010, 3530, 2010, C.teal, true);
+  body += roundedRect(3720, 1180, 340, 390, { fill: C.paleOrange, stroke: C.orange, strokeWidth: 4, radius: 18 });
+  body += svgText(3890, 1260, "Validated", { size: 37, weight: 700, fill: C.orange, anchor: "middle" });
+  body += svgText(3890, 1330, ["MySQL 8", "reference", "implementation"], { size: 32, fill: C.ink, anchor: "middle", lineHeight: 45 });
+  body += svgText(3890, 1780, ["No alternative", "time-series database", "or SensorThings", "adapter is claimed."], { size: 31, fill: C.muted, anchor: "middle", lineHeight: 44 });
+
+  await saveSvgAndPng("Fig2_Software_Architecture", frame(width, height, body));
+}
+
 async function buildFigure3() {
   const width = 4200;
   const height = 2550;
@@ -311,10 +441,14 @@ async function buildFigure5() {
 }
 
 async function main() {
+  await buildFigure1();
+  await buildFigure2();
   await buildFigure3();
   await buildFigure4();
   await buildFigure5();
   for (const name of [
+    "Fig1_Research_Gap_and_Workflow",
+    "Fig2_Software_Architecture",
     "Fig3_Forecast_to_Event_Sequence",
     "Fig4_Task_Oriented_Interface_Composite",
     "Fig5_Public_Reference_Workflow",

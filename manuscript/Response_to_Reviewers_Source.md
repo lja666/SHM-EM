@@ -129,7 +129,7 @@ Third-party cells use *Not reported* rather than inferring absence. No cross-sys
 
 **Response**
 
-We exported the authoritative database contract and added a compact real contract extract with timeline, model, feature order, source, raw/engineering units, required/target roles, conversion operator/version, and hashes. We also documented versioning, validation, and fail-closed behavior.
+We exported the authoritative database contract and added a compact manuscript extract with timeline, model dimensions, one ordered feature with raw/engineering units, and an input-schema hash. The repository retains the complete source, role, transformation, conversion, validation, version, and fail-closed fields.
 
 **Changes in manuscript**
 
@@ -483,7 +483,7 @@ We do not compare Predictive-SHM and SHM-EM forecasting accuracy or total runtim
 
 **Response**
 
-We added a 12-dimension table covering OGC SensorThings, generic CEP, Predictive-SHM, and SHM-EM. Source notes explain every row.
+We added a compact eight-dimension table covering OGC SensorThings, generic CEP, Predictive-SHM, and SHM-EM. The repository retains the full comparison and source notes.
 
 **Changes in manuscript**
 

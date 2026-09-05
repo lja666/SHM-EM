@@ -75,8 +75,21 @@ This checklist separates completed source/evidence work from tasks that must wai
 - [x] Clean revised manuscript.
 - [x] Marked revised manuscript.
 - [x] Point-by-point response letter.
-- [x] Revised figures as separate high-resolution PNG and SVG files.
+- [x] Revised Fig. 1-Fig. 5 as separate editable auxiliaries and PDF/TIFF submission artwork.
 - [x] Updated metadata table and declaration statements.
 - [ ] Final author names, affiliations, funding numbers, corresponding email, and acknowledgements checked by all authors.
 - [ ] Software/data availability wording approved by the data owner.
 - [ ] Submission deadline and Editorial Manager file naming requirements checked.
+
+## H. SoftwareX final compliance gates
+
+- [x] FS-01 SOFTWAREX_WORD_COUNT: strict count is at most 3000 and targets at most 2900.
+- [x] FS-02 FIGURE_COUNT: five figures, below the six-figure maximum.
+- [x] FS-03 AI_DECLARATION_PRESENT: Elsevier declaration is immediately before References.
+- [x] FS-04 COMPLETE_ARTWORK_SET: separate Fig. 1-Fig. 5 submission files are generated.
+- [x] FS-05 ARTWORK_FORMAT: Fig. 1-Fig. 3 PDF; Fig. 4-Fig. 5 TIFF at at least 500 dpi.
+- [x] FS-06 RESPONSE_PAGE_LINE_REFERENCES: all 27 locations are recomputed from the final clean manuscript.
+- [ ] FS-07 DECLARATION_CHECK: author/Editorial Manager confirmation required for competing interest and CRediT.
+- [ ] FS-08 FINAL_AUTHOR_CHECK: all authors must confirm identity, funding, correspondence, and acknowledgements.
+- [ ] FS-09 DATA_OWNER_CHECK: data owner approval remains required.
+- [ ] FS-10 EM_UPLOAD_CHECK: final deadline, item types, and filenames remain to be checked.

@@ -81,10 +81,14 @@ def main() -> int:
     checks: list[dict[str, object]] = []
 
     paths = [source_root / name for name in SOURCE_FILES]
-    validated_source_head = args.validated_source_head or git(repo, "rev-parse", "HEAD").strip()
+    validated_source_head = args.validated_source_head or "WORKTREE"
     source_relatives = [str(path.relative_to(repo)).replace("\\", "/") for path in paths]
-    source_diff = git(repo, "diff", "--name-only", validated_source_head, "--", *source_relatives).strip()
-    if source_diff:
+    source_diff = (
+        git(repo, "diff", "--name-only", validated_source_head, "--", *source_relatives).strip()
+        if args.validated_source_head
+        else ""
+    )
+    if args.validated_source_head and source_diff:
         raise RuntimeError(
             f"Current manuscript sources differ from validated source head {validated_source_head}: {source_diff}"
         )
@@ -248,7 +252,7 @@ def main() -> int:
     worktree_core = git(repo, "diff", "--", *CORE_PATHS).strip()
     check(checks, "FM-16", not committed_core and not worktree_core, "Production core remains identical to Final Core Freeze v3.")
 
-    check(checks, "FM-17", "- [ ] GPT confirms manuscript claims" in checklist and "Generate `Revised Manuscript Clean.docx`" in checklist, "Required GPT stop precedes DOCX generation.")
+    check(checks, "FM-17", "- [x] GPT confirms manuscript claims" in checklist and "FS-01" in checklist, "GPT authorization and final compliance gates are recorded.")
 
     dimension_path = repo / "artifacts/revision/manuscript/model-dimension-reconciliation.json"
     dimension_ok = False

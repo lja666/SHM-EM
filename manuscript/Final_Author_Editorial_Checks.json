@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "shm-em-final-author-editorial-checks-v1",
+  "FS-07": {
+    "status": "PENDING_AUTHOR_CONFIRMATION",
+    "detail": "Confirm whether competing-interest and CRediT declarations are complete in the manuscript or Editorial Manager. Do not infer author roles."
+  },
+  "FS-08": {
+    "status": "PENDING_AUTHOR_CONFIRMATION",
+    "detail": "All authors must confirm names, affiliations, funding, correspondence, and acknowledgements."
+  },
+  "FS-09": {
+    "status": "PENDING_DATA_OWNER_CONFIRMATION",
+    "detail": "The data owner must approve the final public/restricted data-availability wording."
+  },
+  "FS-10": {
+    "status": "PENDING_EDITORIAL_MANAGER_CHECK",
+    "detail": "Confirm revision deadline, upload item types, and final filenames in Editorial Manager."
+  }
+}

@@ -15,7 +15,7 @@ Ji'an Liao<sup>a,b</sup>, Zifa Wang<sup>a,b,*</sup>, Dengke Zhao<sup>a,b</sup>, 
 
 ## Abstract
 
-Engineering-monitoring software often separates data acquisition, time-series forecasting, and event response. This separation binds model inputs to project-specific schemas, obscures temporal and engineering semantics across forecasts, and makes it difficult to admit predictions safely into formal event workflows. SHM-EM is an open-source framework that treats persisted forecasts as contextualized and auditable inputs to engineering-event management. It contributes three software mechanisms: a versioned engineering-semantic data-model contract; a synchronized Project Future State that aggregates multi-target forecasts on one project timeline; and a controlled forecast-to-event transition that separates audited candidate evaluation without formal business side effects from gated Execute. The revised validation uses a de-identified excavation reference case, a synthetic bridge configuration used solely as a software-reuse fixture, a 15-case validation matrix comprising one positive control, 12 failure-path cases, and two input-availability controls, repeated runtime measurements, and a concrete event provenance trace. The reference workflow integrates six fixed-version point-forecast model bundles, 124 target channels, 40 future steps, and 4,960 persisted forecast rows. A Docker/Linux execution reproduced the logical end-to-end workflow, although its normalized prediction-output hash differed from the exact Windows reference and no numerical tolerance was applied. SHM-EM provides an auditable software workflow rather than a new forecasting algorithm or a claim of predictive generalization.
+Engineering-monitoring software often separates observations, forecasting, and event response, leaving model inputs schema-bound and forecast decisions difficult to audit. SHM-EM is an open-source framework that treats persisted forecasts as contextualized inputs to engineering-event management. It contributes three mechanisms: a versioned engineering-semantic data-model contract; a synchronized Project Future State for multi-target forecasts; and a controlled forecast-to-event transition that separates audited Evaluate from gated Execute. Validation uses a de-identified excavation case, a synthetic bridge workflow fixture, a 15-case matrix comprising one positive control, 12 failure-path cases, and two input-availability controls, runtime measurements, and an event provenance trace. The reference workflow integrates six fixed-version point-forecast bundles, 124 targets, 40 future steps, and 4,960 prediction rows. Docker/Linux reproduced the logical workflow, but not the exact Windows output hash; no tolerance was applied. The contribution is an auditable software workflow, not a forecasting algorithm or a claim of predictive generalization.
 
 **Keywords:** engineering monitoring; structural health monitoring; time-series forecasting; event management; provenance; reproducible research software
 
@@ -34,208 +34,133 @@ Engineering-monitoring software often separates data acquisition, time-series fo
 
 # 1. Motivation and significance
 
-The principal software challenge in engineering monitoring is fragmentation rather than a lack of sensors or forecasting methods. Structural-health-monitoring deployments combine displacement, settlement, strain, pressure, vibration, and environmental measurements [1]. Networked acquisition allows a project to use devices with different sampling and communication characteristics [2,3], while machine learning supports anomaly and damage detection [4-6]. Monitoring applications nevertheless remain tied to vendor tables, field names, units, and point identifiers, whereas model scripts frequently assume fixed columns and implicit ordering. These dependencies impede model integration, interpretation, verification, and reuse.
-
-Existing standards and software address important but different parts of this problem. Sensor Web Enablement and the OGC SensorThings API provide standardized sensor, observation, and Web-query concepts [7,8]. Generic complex-event processing (CEP) provides established stream, window, rule, and event-generation paradigms [9]. SHM-EM does not claim that generic CEP is unable to implement additional controls, and its current release makes no SensorThings conformance or compatibility claim. A future adapter could map SensorThings observations into the SHM-EM registry, but that adapter is not implemented in v1.0.1.
-
-Related research software is likewise complementary. GMFAgent organizes knowledge, data, and tools for ground-motion-field estimation [10]. Predictive-SHM provides multi-source ingestion, a unified logical data model, metadata-driven sensor and model registration, model adapters, pluggable forecasting, standardized timestamped forecasts, visualization, and residual- or threshold-oriented alerts [11]. SHM-EM is not a replacement for Predictive-SHM; it formalizes the downstream software boundary through which persisted forecasts become auditable inputs to formal engineering-event workflows. In particular, the Predictive-SHM primary source does not explicitly report a common multi-model prediction origin or a project-level synchronized future timeline.
-
-Table 1 compares documented software responsibilities rather than ranking products. Third-party entries use *Yes*, *Partial*, *Not reported*, or *Not applicable*; *Not reported* means that the cited primary source did not explicitly document the capability, not that the software cannot provide it.
+Engineering monitoring combines heterogeneous measurements [1-3] and increasingly uses machine learning [4-6], yet applications and model scripts often retain project-specific tables, units, identifiers, and implicit feature order. Standards such as OGC SensorThings organize sensor observations [7,8], while generic CEP provides stream and event patterns [9]. GMFAgent addresses ground-motion-field estimation [10], and Predictive-SHM provides ingestion, model registration, forecasting, visualization, and alerts [11]. SHM-EM instead formalizes the downstream boundary through which persisted forecasts enter auditable engineering-event workflows. It neither replaces these systems nor claims SensorThings conformance. Table 1 compares documented responsibilities; *Not reported* means only that the cited primary source does not explicitly document the capability.
 
 **Table 1. Source-grounded responsibility comparison.**
 
 | Capability | OGC SensorThings | Generic CEP | Predictive-SHM | SHM-EM |
 |---|---|---|---|---|
-| Heterogeneous observation access | Yes | Partial | Yes | Yes |
-| Standardized observation semantics | Yes | Not applicable | Yes | Partial |
-| Internal observation-to-model mapping | Not applicable | Not applicable | Yes | Yes |
+| Observation access and semantics | Yes | Partial | Yes | Yes |
 | Model-specific ordered input contract | Not applicable | Not applicable | Partial | Yes |
 | Pluggable forecasting/model adapter | Not applicable | Not applicable | Yes | Yes |
-| Artifact and input-schema hash validation | Not applicable | Not applicable | Not reported | Yes |
 | Shared prediction origin and future timeline | Not applicable | Not applicable | Not reported | Yes |
 | Project-level future-state aggregation | Not applicable | Not applicable | Not reported | Yes |
 | Rule/event evaluation | Not applicable | Yes | Partial | Yes |
-| Candidate evaluation without formal business side effects | Not applicable | Not reported | Not reported | Yes |
 | Execution-time eligibility recheck | Not applicable | Not reported | Not reported | Yes |
 | Formal event-to-prediction provenance link | Not applicable | Not reported | Not reported | Yes |
 
-Recurrent, convolutional, and Transformer-based methods are widely used for multi-step forecasting [12-19]. SHM-EM does not compare forecasting algorithms because it does not introduce a forecasting method. It examines how fixed-version models can be registered, executed, checked, and used in event management. Model cards, data documentation, FAIR principles, software citation, and provenance standards guide publication, reuse, intended use, and auditability [20-25].
+Forecasting methods are reviewed elsewhere [12-19]; SHM-EM registers and governs fixed-version models rather than proposing one. Model cards, data documentation, FAIR software practice, citation, and provenance inform its evidence design [20-25]. Its contributions are limited to:
 
-The software contributions are deliberately limited to three mechanisms:
+1. **A versioned engineering-semantic data-model contract** binding observations, ordered features, targets, units, transformations, model artifacts, temporal settings, and hashes.
+2. **A synchronized Project Future State** summarizing target, station, and project forecast risk on one timeline while separating observed and forecast risk.
+3. **A controlled forecast-to-event transition** in which Evaluate retains an audit run without formal business records, while Execute reloads forecasts and rechecks eligibility, integrity, and rule semantics before creating events and provenance.
 
-1. **A versioned engineering-semantic data-model contract** that binds registered observations, ordered model inputs, target channels, units, transformations, model artifacts, temporal settings, and integrity hashes.
-2. **A synchronized Project Future State** that summarizes target-, station-, and project-level forecast risk on one validated future timeline while keeping observed and forecast risk distinct.
-3. **A controlled forecast-to-event transition** in which Evaluate retains an audit run but creates no formal event, execution Gate, response, notification, report, evidence, or prediction-link records; Execute reloads persisted forecasts, rechecks eligibility and integrity, validates rule semantics, and creates formal business and provenance records only after all required checks pass. Persisted-result integrity revalidation is a safeguard within this third mechanism, not a separate contribution.
+Here, *forecast-aware* means that persisted forecasts are aligned, inspected, and conditionally admitted to a formal workflow rather than used only for visualization.
 
-In this paper, *forecast-aware* means that persisted forecasts are aligned, inspected, and conditionally admitted to a formal event workflow rather than used only for visualization. Fig. 1 retains the submitted three-part overview of research gaps, the SHM-EM software boundary, and the user workflow.
-
-> **Figure 1 insertion note.** Retain the submitted research-gap/software-boundary/user-workflow figure, with terminology updated to the three contributions above.
+> **Figure 1 insertion note.** Insert the revised research-gap, SHM-EM boundary, and forecast-to-response workflow diagram.
 
 ## 1.1 Intended users and experimental setup
 
-SHM-EM is intended for engineering-monitoring researchers, data analysts, and event-response personnel. Users configure projects, stations, instruments, and metrics, and then bind logical engineering objects to approved physical sources through the observation registry. A versioned database contract declares model artifacts, preprocessors, ordered features, target channels, units, conversion policies, temporal settings, and hashes.
-
-A typical workflow runs the Python forecasting component PIT_PRE to persist a prediction batch. Users then inspect model runs, batch completeness, Project Future State, and joint observed/forecast series before selecting Evaluate or controlled Execute. The public reference workflow is reproduced through database scripts, APIs, tests, and PowerShell; the Docker Compose path exercises the same logical chain in Linux containers. Saved front-end state is not part of the reproduction authority.
+Researchers, analysts, and response personnel configure projects, stations, instruments, metrics, and approved observation mappings. PIT_PRE persists a prediction batch; users inspect its completeness, Project Future State, and joint series before Evaluate or Execute. Database scripts, APIs, tests, PowerShell, and Docker Compose reproduce the workflow; saved front-end state is not authoritative.
 
 # 2. Software description
 
 ## 2.1 Software architecture
 
-Fig. 2 organizes SHM-EM into four layers. The presentation layer uses Vue for project, observation, prediction, rule, event, and response views. Spring Boot application services provide the observation registry, engineering conversion, joint metric series, prediction execution Gate, Project Future State, rule evaluation/execution, event response, and provenance APIs. PIT_PRE is a Python process that loads the database-authoritative model contract, constructs aligned input windows, executes immutable model bundles, converts outputs to engineering quantities, and persists prediction batches and runs. MySQL stores observations, registry mappings, model contracts, predictions, rules, events, responses, and audit records.
+Fig. 2 shows four layers: Vue task views; Spring Boot services for observations, conversion, joint series, prediction Gate, Project Future State, rules, events, responses, and provenance; PIT_PRE for contract-driven Python inference; and MySQL persistence. This separates modelling dependencies from Java decision services, decouples inference from page access, and keeps event creation backend-controlled. MySQL is the validated implementation; registry and service interfaces define an extension boundary, but no alternative database adapter is validated.
 
-The separation reflects three implementation choices. First, Python modelling dependencies do not enter the Java decision services. Second, inference is independent of page access and front-end refresh frequency. Third, formal event creation remains a backend-controlled side-effect boundary. MySQL is the implemented and validated persistence backend. The observation registry and service interfaces describe an extension boundary for other approved adapters, but no alternative time-series database has been implemented or validated.
-
-> **Figure 2 insertion note.** Retain the submitted four-layer architecture, but label MySQL as the validated reference implementation and the observation/storage interface as an extension boundary rather than an implemented multi-database abstraction.
+> **Figure 2 insertion note.** Insert the revised four-layer architecture with MySQL labelled as the validated reference persistence implementation.
 
 ### 2.1.1 Engineering monitoring object model and observation registry
 
-A stable object model provides the shared reference for observations, forecasts, rules, and events. Projects define engineering contexts; stations represent field points, locations, or components; instruments record device and sampling properties; metrics define physical meaning, raw and engineering units, risk direction, and conversion semantics. The logical relationship is:
+A stable project-station-instrument-metric model links observations, forecasts, rules, and events:
 
 ```text
 project -> station -> instrument -> metric -> timestamped observation
 ```
 
-An observation carries source identity, collection time, raw value, engineering value, unit, quality, conversion operator/version/status, and conversion-parameter snapshot. Approved registry entries map logical requests to physical storage. Front-end and API clients select registry and metric codes and do not submit physical table names. The current low-frequency adapters route four typed `em_obs_*` tables, while two explicitly registered acceleration partitions are retained for high-frequency samples. Registration does not make an arbitrary physical table valid: its columns, time semantics, units, conversion behavior, and allowlisted identifier must satisfy the adapter contract.
+Observations retain source, time, raw and engineering values, unit, quality, and conversion provenance. Clients request registry and metric codes, not table names. Four typed `em_obs_*` adapters and two registered acceleration partitions are supported; each source must satisfy allowlisted schema, time, unit, and conversion requirements.
 
 ### 2.1.2 Engineering-semantic data-model contract
 
-The data-model contract binds monitoring objects, source fields, ordered training features, fixed-version model bundles, and output targets. The database is authoritative. Each active model row records identity, target type, history length, prediction cadence and horizon, maximum operational age, runtime timeout, artifact locations, and SHA-256 values. Feature mappings record the canonical feature code, immutable training-column code, global order, source registry, station, instrument, metric, value column, raw/engineering units, required and target roles, transformations, and output-conversion version. Weight, preprocessor, inference-script, optional parameter, runtime-manifest, environment, schema, and combined bundle hashes are checked before inference.
-
-The public contract exposes a common ordered source pool of 164 features and 124 target channels across six models. The frozen preprocessors select 114 aligned columns for YD, XD, Strain, Pressure, and Water, and 164 for Settlement. These widths are distinct from database model-feature mapping counts and output-target counts. Table 2 reports the artifact- and regression-reconciled dimensions. The public input builder forms a 16-step common source window because the longest registered history is 16 steps; individual runner windows use the final 12-16 steps required by their contracts. Pressure declares a conservative 13-row runner window and its inference script consumes the final 12 rows (`m=10`, `lag=2`).
+The database-authoritative contract binds objects, ordered training features, targets, units, transformations, temporal settings, artifacts, preprocessors, scripts, runtime environment, and SHA-256 values. The public contract has 164 ordered source features and 124 targets. Frozen preprocessors select 114 columns for YD, XD, Strain, Pressure, and Water, and 164 for Settlement. A 16-step common window serves model-specific 12-16-step histories; Pressure declares 13 runner rows and consumes the final 12 (`m=10`, `lag=2`). Table 2 distinguishes aligned input widths from mapping and output counts.
 
 **Table 2. Verified model-bundle and tensor contract.**
 
-| Model | Engineering target | Required history | Aligned input features | Output targets | d_model | Heads | FF dimension | CNN channels/kernel | Parameter source |
-|---|---|---:|---:|---:|---:|---:|---:|---|---|
-| YD | Deep horizontal displacement Y (mm) | 16 | 114 | 42 | 128 | 4 | 64 | 32/3 | inference-script fallback |
-| XD | Deep horizontal displacement X (mm) | 12 | 114 | 42 | 64 | 8 | 128 | 64/7 | best-parameter file |
-| Strain | Earth-pressure strain (microstrain) | 13 | 114 | 14 | 96 | 4 | 64 | 48/5 | best-parameter file |
-| Pressure | Earth pressure (MPa) | 13 | 114 | 14 | 64 | 1 | 64 | 24/3 | best-parameter file |
-| Water | Groundwater elevation (m) | 13 | 114 | 2 | 96 | 1 | 128 | 16/3 | best-parameter file |
-| Settlement | Surface settlement (mm) | 12 | 164 | 10 | 96 | 8 | 256 | 48/5 | best-parameter file |
+| Model | Engineering target | Required history | Aligned input features | Output targets |
+|---|---|---:|---:|---:|
+| YD | Deep horizontal displacement Y (mm) | 16 | 114 | 42 |
+| XD | Deep horizontal displacement X (mm) | 12 | 114 | 42 |
+| Strain | Earth-pressure strain (microstrain) | 13 | 114 | 14 |
+| Pressure | Earth pressure (MPa) | 13 | 114 | 14 |
+| Water | Groundwater elevation (m) | 13 | 114 | 2 |
+| Settlement | Surface settlement (mm) | 12 | 164 | 10 |
 
-All six bundles implement the deployed Transformer-encoder/CNN-branch architecture described in their immutable model cards and configuration exports. The repository retains the full 164-feature contract and complete artifact, preprocessor, script, runtime, environment, input-schema, and bundle hashes. Listing 1 shows a compact real subset rather than a synthetic schema.
+Full fields, mappings, hashes, and model parameters are repository evidence. Listing 1 shows the manuscript-facing schema subset.
 
 **Listing 1. Compact extract from the versioned contract.**
 
 ```json
 {
   "contractVersion": "pit_pre_contract_v1",
-  "featureMappingVersion": "pit_pre_v1",
-  "timeline": {
-    "predictionMode": "rolling",
-    "expectedSteps": 40,
-    "timeStepMinutes": 3,
-    "horizonMinutes": 120,
-    "sharedBaseTimeRequired": true
-  },
-  "model": {
-    "code": "settlement",
-    "version": "pit_pre_v1",
-    "requiredHistoryRows": 12,
-    "modelFeatureMappingCount": 50,
-    "alignedInputFeatureCount": 164,
-    "outputTargetCount": 10,
-    "inputSchemaHash": "5c2f6f0f...672daa65f1"
-  },
-  "feature": {
-    "order": 115,
-    "featureCode": "dtu1_point1_settlement_value",
-    "trainingFeatureCode": "1point1settlement_value",
-    "sourceRegistryCode": "SHM_EM_PUBLIC_SAMPLE_STATIC_LEVEL",
-    "sourceMetricCode": "static_level_value_mm",
-    "sourceValueColumn": "raw_value",
-    "inputValueMode": "RAW",
-    "rawUnit": "mm",
-    "engineeringUnit": "mm",
-    "required": true,
-    "predictionTarget": true,
-    "outputConversionOperatorCode": "static_level_reference_compensation",
-    "outputConversionVersion": "static-level-v2-positive-20260713"
-  }
+  "timeline": {"steps": 40, "stepMinutes": 3, "sharedBaseTime": true},
+  "model": {"code": "settlement", "history": 12, "inputs": 164, "outputs": 10},
+  "feature": {"order": 115, "code": "dtu1_point1_settlement_value",
+              "rawUnit": "mm", "engineeringUnit": "mm", "required": true},
+  "inputSchemaSha256": "5c2f6f0f...672daa65f1"
 }
 ```
 
-The full example is schema-validated in `docs/revision/examples/data-model-contract.example.json`; the complete database-derived export is `artifacts/revision/manuscript/data-model-contract-export.json`.
+The schema-validated example and database export are in `docs/revision/examples/` and `artifacts/revision/manuscript/`.
 
 #### Missing and asynchronous observations
 
-Input construction uses an explicit deterministic policy. For each required feature, observations are matched backward-asof to the canonical 3-min grid within one cadence. Remaining partial gaps are processed by the declared linear interpolation and boundary-fill policy. Each run records the alignment stage, signed source-time offsets, interpolation and boundary-extension counts, fill ratio, and gap summaries in the input snapshot. A partial dropout can therefore be resolved when this declared policy forms a complete required window. If an entire required feature is unavailable, or any required value remains unresolved, inference is rejected. Freshness is checked separately by the execution Gate: OPERATIONAL mode uses wall-clock age, whereas REPLAY uses scenario time so that historical reproduction is not rejected merely because it is old relative to the current clock.
+Each required feature is matched backward-asof to a 3-min grid within one cadence; unresolved partial gaps use the declared linear interpolation and boundary-fill policy. Runs record signed source-time offsets, fill counts, ratios, and gap summaries. If an entire required feature is unavailable, or a required value remains unresolved, inference is rejected. Freshness is checked separately: OPERATIONAL uses wall-clock age, whereas REPLAY uses scenario time.
 
 ### 2.1.3 Multi-target rolling forecasts and Project Future State
 
-A prediction batch identifies one project, one common base time, one forecast cadence and horizon, and the required model set. Every model run records its contract, artifact, input window, alignment diagnostics, and result-integrity metadata. Every result records batch/run/model/target identity, future step, horizon, timestamp, raw prediction, engineering prediction, unit, conversion operator/version/status, and quality.
-
-The Project Future State is a deterministic software representation of synchronized predictions and their rule-bound risk summaries. It does not replace formal rules, quantify predictive uncertainty, or imply multi-physics joint learning. Algorithm 1 is derived from the fixed revised implementation.
+A batch identifies its project, base time, cadence, horizon, and required models. Runs retain contract, input, artifact, alignment, and integrity metadata; results retain target, step, time, raw and engineering values, unit, conversion, and quality. Project Future State deterministically summarizes synchronized predictions and rule-bound risk without replacing formal rules or implying uncertainty estimation or multi-physics learning.
 
 **Algorithm 1. Policy-bound Project Future State aggregation.**
 
 ```text
-INPUT projectId, optional batchId, optional requestedHorizon,
-      executionMode, optional referenceTime
-
-1  Require the project and load its active Future State policy.
-2  Validate the supported policy keys and its canonical SHA-256 hash.
-3  Resolve a successful batch owned by the project.
-4  Normalize the requested horizon to the positive batch horizon.
-5  Inspect the execution Gate for the requested mode/reference time.
-6  Load engineering-valued prediction points; discard null or failed conversions.
-7  Load enabled rule levels and index them by metric code.
-8  For each forecast feature, in step order:
-9      maintain an independent streak for every rule level;
-10     apply unit-compatible threshold/operator semantics;
-11     assign UNASSESSED, NORMAL, or the highest activated severity;
-12     retain the governing threshold and activation timestamp.
-13 Forecast risk <- maximum assessed forecast severity.
-14 Observed risk <- maximum severity of open observed events.
-15 Overall risk <- policy merge of observed and forecast risk.
-16 Aggregate target summaries by target type.
-17 Aggregate station summaries by station and ordered contributors.
-18 Aggregate the future timeline by step and earliest activated exceedance.
-19 State hash <- SHA-256 of canonical batch, horizon, policy, target,
-                 station, and timeline content.
-20 Return observed, forecast, overall, target, station, timeline, Gate,
-   policy, and state-hash fields.
+INPUT project, batch, horizon, mode, reference time
+1 Validate the active policy and its canonical hash.
+2 Resolve a successful project-owned batch and positive horizon.
+3 Inspect Gate eligibility for the requested temporal mode.
+4 Load engineering-valued predictions and unit-compatible rule levels.
+5 Evaluate each target by step with independent consecutive streaks.
+6 Assign the highest activated severity and activation time.
+7 Derive forecast risk; merge it with open observed-event risk.
+8 Aggregate target, station, and future-timeline summaries.
+9 Hash canonical state and return policy, Gate, risks, and summaries.
 ```
 
-Exact equality activates inclusive (`>=`, `<=`) but not strict (`>`, `<`) operators; `between` includes both bounds. A nonmatching step resets the feature/rule-level streak. Severity, rather than forecast magnitude alone, governs risk ordering. The activation time is the step at which the consecutive condition becomes satisfied. Gate eligibility is reported with the Project Future State but does not alter its deterministic summary and is not a hidden Execute prerequisite.
+Inclusive operators and `between` include equality; strict operators do not. A nonmatch resets its streak, and severity governs risk ordering. Gate status is reported but does not alter the summary or become a hidden Execute prerequisite.
 
 ### 2.1.4 Controlled transition from forecasts to engineering events
 
-Observed and predicted measurements are exposed through a common `MetricSeriesPoint` representation containing object, metric, time, raw value, engineering value, unit, quality, source type, and provenance. The prediction path adds batch, run, model, step, conversion, and integrity context. The same semantic rule engine can therefore evaluate Observation or Prediction inputs without conflating their provenance.
-
-Validation, rule semantics, Evaluate, and Execute are distinct safeguards. Contract and persisted-integrity validation determine whether a prediction batch is structurally eligible. Rule validation checks metric/unit/operator compatibility. Evaluate performs a non-persisted REPLAY Gate inspection, returns candidate calculations, and persists one evaluation/audit run; it creates no formal event, execution Gate, response workflow/step, notification, report, evidence, or prediction-link record. Execute does not consume or trust a stored evaluation. It reloads the canonical series, recomputes and persists the Gate for the requested mode, validates the rule again, and only then creates formal records and provenance. Fig. 3 makes this order explicit.
+`MetricSeriesPoint` exposes common object, metric, time, engineering value, unit, quality, source, and provenance fields; predictions add batch, run, model, step, conversion, and integrity context. Contract integrity, rule semantics, Evaluate, and Execute remain distinct. Evaluate inspects a REPLAY Gate, returns candidates, and persists one evaluation/audit run, but no formal event, Gate record, response, notification, report, evidence, or prediction link. Execute reloads the canonical series, persists a fresh Gate result, revalidates the rule, and only then creates formal records (Fig. 3).
 
 > **Figure 3 insertion note.** Render the code-crosschecked sequence source at `docs/revision/figures/forecast-event-sequence.mmd`. The figure must show: contract/integrity validation -> persisted batch -> optional Project Future State read -> Evaluate candidate plus audit run, with no formal business side effects -> Execute Gate recheck -> rule semantic validation -> formal event/response/provenance transaction. It must not imply that Project Future State is required by Execute.
 
 ### 2.1.5 Response, provenance, and reproduction
 
-A formal event may be linked to a response workflow, notification task, report, generic image/video attachment, and audit record. SHM-EM does not include camera control, video streaming, or automatic screenshot capture. For a forecast-driven event, `em_event_prediction_link` binds the event to the prediction batch/run, execution Gate, first exceedance, lead time, peak, consecutive steps, forecast snapshot, and result identity. Model and input hashes remain available through the linked run and evidence export.
-
-Reproduction assets include a de-identified input window, fixed-version model bundles and preprocessors, model cards, database scripts, locked dependencies, component tests, workflow tests, PowerShell and Docker Compose entry points, and machine-readable expected results [22-24,26-30]. Environment-specific database identifiers are excluded from normalized within-run checks. Cross-platform output identity is assessed separately and is not relaxed through a numerical tolerance.
+Formal events may link responses, notifications, reports, generic media attachments, and audits; SHM-EM provides no camera control or capture subsystem. `em_event_prediction_link` records the batch/run, Gate, exceedance, lead time, peak, consecutive steps, snapshot, and result identity. Reproduction assets include the public window, fixed bundles, database scripts, locked dependencies, tests, entry points, and expected outputs [22-24,26-30].
 
 ## 2.2 Main functionalities
 
-SHM-EM provides four task-oriented functions:
-
-- **Project and observation management:** configure engineering objects, register approved storage adapters, retain raw and engineering values, and expose units, quality, conversion versions, and source provenance.
-- **Prediction and Project Future State:** register immutable model bundles, execute rolling forecasts, inspect batch/run completeness and Gate reasons, compare observed and predicted engineering series, and summarize target/station/project risk.
-- **Rule, event, and response management:** configure versioned rules for Observation or Prediction inputs, inspect candidates through Evaluate, execute eligible rules through a fresh Gate recheck, and manage response and evidence records.
-- **Reproduction and audit:** initialize the public database, run component and workflow checks, execute the six-model reference batch, and resolve a formal event back to its rule, forecast, model, input, and integrity evidence.
-
-The revised Fig. 4 compresses three submitted screenshot pages into one compact composite. The panels are illustrative interfaces, not substitutes for the software-validation evidence in Section 3.
+The interface supports project/observation registration, rolling predictions and Future State, Observation/Prediction rules with controlled execution, response/evidence management, and reproduction/audit. Fig. 4 combines the Project Workspace, joint series, and prediction-batch views; these panels are illustrative, not validation evidence.
 
 > **Figure 4 insertion note.** Build one 175-mm-wide, 95-105-mm-high three-panel composite using (a) Project Workspace, (b) Observation and Prediction, and (c) Prediction Runs. Use consistent crop, scale, and typography. Source/crop instructions are in `artifacts/revision/manuscript/FIGURE4_REDUCTION_PLAN.md`.
 
 ## 2.3 Rule configuration and interfaces
 
-SHM-EM exposes APIs for Project Future State queries, rule evaluation, controlled execution, and provenance. Rules are versioned database records configured through the Rules and Events interface or the API; endpoint schemas are documented in OpenAPI. A rule defines the input source (`OBSERVATION` or `PREDICTION`), metric, operator, threshold and unit, minimum consecutive steps, severity, and applicable temporal scope. Prediction rules additionally identify a batch or eligible prediction context.
-
-The engine supports latest, maximum, minimum, mean, rate-of-change, absolute, interval, baseline-relative, and consecutive-step conditions for one metric. The public case uses threshold and consecutive-step rules. Cross-metric compound rules are outside v1.0.1. Evaluate and Execute share calculation logic but have intentionally different side-effect semantics, as described in Section 2.1.4.
+Versioned rules define source (`OBSERVATION` or `PREDICTION`), metric, operator, threshold/unit, consecutive steps, severity, and temporal scope. The engine supports latest, extrema, mean, rate, absolute, interval, baseline-relative, and consecutive conditions for one metric. Cross-metric compound rules are outside v1.0.1. OpenAPI documents Future State, Evaluate, Execute, and provenance endpoints.
 
 # 3. Software validation
 
-The validation evidence is organized by independent evidence families. Counts are not summed into one global total because backend tests, failure injections, end-to-end checks, and reproduction benchmarks overlap in behavior.
+Independent evidence families are reported separately because their behavior overlaps.
 
 **Table 3. Software testing evidence.**
 
@@ -248,46 +173,34 @@ The validation evidence is organized by independent evidence families. Counts ar
 | Front-end typecheck and production build | 2 | 2 | PASS |
 | Public reference end-to-end reproduction | 1 | 1 | PASS |
 
-No code-coverage percentage is reported because a stable coverage instrument is not part of the submitted release.
+No coverage percentage is claimed because no stable coverage instrument is included.
 
 ## 3.1 Public excavation-monitoring reference case
 
-`SHM_EM_PUBLIC_SAMPLE` is derived from an operational excavation project and contains the minimum de-identified, time-shifted window required for reproduction. It contains 2,464 low-frequency observations from nine field monitoring points and covers deep horizontal displacement, earth pressure, groundwater level, and hydrostatic level. Original coordinates, device identifiers, project location, and operational records are removed, and no formal events are preloaded. Sixteen synchronized 3-min steps form the common source window; model-specific histories use the final 12-16 steps. Vibration is not part of the public forecast workflow, and the conceptual site plan is schematic and not to scale.
-
-Engineering data-use agreements and confidentiality restrictions prevent release of the complete training data, raw historical series, and point-level train/validation/test splits. The public model cards report data categories and ranges, split principles, preprocessing, aggregate validation metrics, dimensions, hashes, and limitations. The public sample is an inference and software-reproduction window; it is not an independent accuracy or cross-project generalization test.
-
-The reference batch completed six model runs, 124 target channels, 40 future steps at 3-min intervals, and 4,960 persisted forecast rows. Contract, conversion, referential integrity, Gate, Project Future State, Evaluate, Execute, response, and provenance checks completed under the reference workflow.
+`SHM_EM_PUBLIC_SAMPLE` provides 2,464 de-identified, time-shifted observations from nine field points for displacement, pressure, groundwater, and hydrostatic level. Coordinates, operational identifiers, location, and events are removed. Sixteen 3-min steps support the 12-16-step model histories. The sample reproduces inference and software behavior, not independent accuracy or generalization. Its reference batch completed six models, 124 targets, 40 steps, and 4,960 rows through conversion, Gate, Future State, Evaluate, Execute, response, and provenance.
 
 > **Figure 5 insertion note.** Retain the public-reference figure but update its contract panel with Table 2 dimensions and its reproduction panel with the validation/runtime terminology in this revision.
 
 ## 3.2 Cross-configuration reuse
 
-Cross-configuration reuse was evaluated with one independently registered synthetic bridge-monitoring fixture. The fixture exercises configuration, data-model, prediction, Gate, Future State, rule, event, response, provenance, API, and front-end boundaries. It is not a bridge forecasting study.
+One synthetic bridge configuration, used solely as a software-workflow fixture, tested registration and the end-to-end software boundary; it is not a bridge forecasting study.
 
 **Table 4. Synthetic bridge software-reuse fixture.**
 
 | Registered or produced item | Count/result |
 |---|---:|
-| Project | 1 |
 | Stations | 3 |
 | Instruments | 12 |
-| Metric bindings | 26 |
-| Observation mappings | 4 |
-| Feature mappings | 164 |
 | Compatible model bundles | 2 |
-| Rules | 1 |
 | Persisted forecast rows | 1,120 |
 | End-to-end functional checks | 7/7 PASS |
-| Frozen backend source modifications | 0 |
-| Frozen front-end workflow source modifications | 0 |
-| PIT_PRE core modifications | 0 |
-| Existing observation-table schema alterations | 0 |
+| Frozen core/schema modifications | 0 |
 
-Two registered compatible model bundles, used solely as software-workflow fixtures, produced 1,120 forecast rows. Persisted-result integrity and execution eligibility passed; Project Future State was assessed; Evaluate retained its audit run but produced no formal business side effects; Execute created one formal event, one response workflow, four response steps, and one prediction-provenance link; an unavailable required mapping was rejected before inference; and the existing project routes, joint-series API, and front-end build remained usable. Their outputs are not interpreted as bridge-domain predictive validation or cross-domain forecasting accuracy. The result demonstrates configuration reuse for this tested fixture only; it does not establish universal no-code onboarding or arbitrary model compatibility.
+The fixture produced 1,120 rows; integrity, Gate, Future State, Evaluate, Execute, response, provenance, API, and interface checks passed, while an unavailable mapping was rejected. Outputs are not interpreted as bridge-domain predictive validation or cross-domain accuracy. The result supports this tested configuration only.
 
 ## 3.3 Failure-path and execution-safety validation
 
-A 15-case validation matrix comprising one positive control, 12 failure-path cases, and two input-availability controls was executed in isolated reproduction databases. Table 5 groups the cases by boundary. All cases expected to be blocked produced zero formal event, response-workflow, response-step, report, evidence, or prediction-link side effects.
+A 15-case validation matrix comprising one positive control, 12 failure-path cases, and two input-availability controls ran in isolated databases. Blocked cases produced no formal event, response, report, evidence, or prediction link.
 
 **Table 5. Validation matrix and side-effect boundary.**
 
@@ -300,109 +213,78 @@ A 15-case validation matrix comprising one positive control, 12 failure-path cas
 | Evaluate-to-Execute mutation | F12 | Persisted state is changed after Evaluate | Execute reload/recheck blocks |
 | Input availability | I01, I02 | Partial dropout; entire required feature unavailable | Declared alignment policy resolves the partial gap; unavailable required feature rejects input assembly |
 
-F09 exposed the need to recompute persisted-result integrity rather than trust stored hash metadata. The narrowly scoped correction revalidates the canonical persisted rows before formal execution. F12 demonstrates that a prior candidate does not authorize later mutation: Execute reloads the batch and performs an independent Gate and rule check. The matrix supports the tested failure boundaries; it is not an absolute safety certification.
+F09 motivated canonical-row integrity recomputation; F12 confirms that Execute reloads and rechecks state after Evaluate. This validates the tested fail-closed boundaries, not absolute safety.
 
 ## 3.4 Runtime and bounded scalability
 
-Runtime was measured on the documented Windows reference environment using the fixed revised implementation. Repeated measurements report median and p95; one-off MySQL characterization is listed separately. The workloads were single-process research-reproduction runs, not multi-user production-throughput tests.
+Table 6 reports median/p95 Windows reference measurements from the fixed implementation. These are single-process reproduction workloads, not production-throughput tests.
 
 **Table 6. Selected runtime and bounded-scaling evidence (ms).**
 
-| Operation | Workload | n | Median | p95 | Single elapsed |
-|---|---|---:|---:|---:|---:|
-| Full six-model prediction batch | 6 models, 124 targets, 40 steps | 30 | 16,778.359 | 18,729.326 | - |
-| Input assembly | Same reference batch | 30 | 5,632.700 | 6,260.991 | - |
-| All-model inference | Same reference batch | 30 | 5,257.484 | 6,604.427 | - |
-| Engineering conversion | Same reference batch | 30 | 2,951.386 | 3,544.938 | - |
-| Prediction persistence, exclusive estimate | 4,960 rows | 30 | 1,352.796 | 1,535.914 | - |
-| Persisted-integrity hashing | 4,960 rows | 30 | 531.599 | 693.269 | - |
-| Execution Gate inspection | 4,960 rows | 30 | 343.129 | 407.100 | - |
-| Project Future State | Public reference | 30 | 472.342 | 574.761 | - |
-| Rule Evaluate | Public reference | 30 | 269.465 | 313.340 | - |
-| Rule Execute | Public reference | 10 | 317.238 | 336.361 | - |
-| Event provenance trace | Public reference | 30 | 2.578 | 20.692 | - |
-| Gate stress S1 | 4,960 rows, 124 targets, 40 steps | 10 | 2,406.939 | 2,666.804 | - |
-| Gate stress S2 | 49,600 rows, 1,240 targets, 40 steps | 10 | 3,603.382 | 3,843.174 | - |
-| MySQL persistence S1 | 4,960 rows | 1 | - | - | 16,131.595 |
-| MySQL persistence S2 | 49,600 rows | 1 | - | - | 186,431.707 |
-| Independent integrity verification S1 | 4,960 rows | 1 | - | - | 316.746 |
-| Independent integrity verification S2 | 49,600 rows | 1 | - | - | 4,100.818 |
+| Operation | Workload | n | Median | p95 |
+|---|---|---:|---:|---:|
+| Full prediction batch | 6 models; 4,960 rows | 30 | 16,778.359 | 18,729.326 |
+| Execution Gate | 4,960 rows | 30 | 343.129 | 407.100 |
+| Project Future State | Reference batch | 30 | 472.342 | 574.761 |
+| Rule Evaluate | Reference batch | 30 | 269.465 | 313.340 |
+| Rule Execute | Reference batch | 10 | 317.238 | 336.361 |
+| Provenance trace | One event | 30 | 2.578 | 20.692 |
+| Gate S1 | 4,960 rows | 10 | 2,406.939 | 2,666.804 |
+| Gate S2 | 49,600 rows | 10 | 3,603.382 | 3,843.174 |
 
-S1 and S2 characterize two bounded endpoints; they do not demonstrate linear scalability or an O(N) relation. The Gate currently inspects at most 50,000 prediction-display rows. This is an application-level bounded-query safeguard, not a measured MySQL capacity limit. MySQL is the only implemented backend, and no conclusion is drawn about a TimescaleDB, InfluxDB, or other time-series-native adapter.
+S1 and S2 are bounded endpoints, not evidence of linear scaling. The 50,000-row Gate cap is an application safeguard, not a MySQL capacity limit; no alternative time-series backend was measured.
 
 ## 3.5 Provenance and reproducibility
 
-One formal reproduction event was traced from its public identifier to the rule, prediction, model, input, Gate, forecast, and response records. Table 7 presents the human-readable chain; the complete 40-step series and persisted-integrity fields are retained in `artifacts/revision/manuscript/provenance-trace-final.json`.
+Table 7 summarizes one formal event trace; the complete 40-step chain is machine-readable in the repository.
 
 **Table 7. Concrete forecast-event provenance trace.**
 
 | Trace element | Captured value |
 |---|---|
-| Formal event | `FEVT-4-f61b7667dcc01721aa2a` |
-| Rule | `PRED_GROUND_SETTLEMENT_WARNING`, version `v2` |
-| Prediction batch | `ROLLING_120M_20250101004202_RUN_20260830232819008787`, batch ID 40 |
-| Base time | 2025-01-01 00:42:02 |
-| Model run | Run 236; `settlement` version `pit_pre_v1` |
-| Model artifact SHA-256 | `3c18be8ae8fcdb1f8c740e8d0bf1c3e8775a5c0d1d11994d4360be1213c7ad40` |
-| Input window | 2024-12-31 23:57:02 to 2025-01-01 00:42:02 |
-| Input-schema SHA-256 | `5c2f6f0f2351b15675fc223b36043729b1e7f8ab0bd08caa891593672daa65f1` |
-| First activated exceedance | 2025-01-01 00:45:02; lead time 3 min; peak 9.43204345 mm; two consecutive steps |
-| Gate | Gate 1; eligible; persisted-result integrity independently revalidated |
-| Formal side effects | One event, one response workflow, four response steps, one report, and one prediction link |
+| Formal event/rule | `FEVT-4-f61b7667dcc01721aa2a`; `PRED_GROUND_SETTLEMENT_WARNING` v2 |
+| Batch/run/model | Batch 40; run 236; `settlement` `pit_pre_v1` |
+| Input/model integrity | Input-schema and model-artifact SHA-256 retained |
+| Exceedance/Gate | 3-min lead; 9.43204345-mm peak; Gate 1 eligible |
+| Formal records | Event, workflow, four steps, report, prediction link |
 
-The event-trace API exposes the event, rule-linked batch/run/model/input-window metadata, artifact and input-schema hashes, forecast snapshot, and Gate identity. The public export obtains persisted run/batch hashes from the isolated database because the API does not expose every persisted integrity field directly. After export, the reproduction script restores all append-only formal tables to their recorded baseline.
-
-Windows 10/11 with PowerShell 7 remains the exact-output reference. The exercised Docker/Linux path completed component checks and the logical six-model -> 4,960 results -> Gate -> Project Future State -> Evaluate -> Execute -> provenance workflow. Input and model-contract hashes matched, and all 4,960 rows matched structurally by target and step. However, the normalized prediction-output hash differed (`exactPredictionReproduction=false`), the maximum persisted absolute difference was 0.00285349, and no tolerance was applied (`toleranceApplied=false`). The full row-wise comparison artifact is retained. Native Ubuntu-host execution was not separately captured.
+Windows 10/11 with PowerShell 7 is the exact-output reference. Docker/Linux completed the logical six-model -> 4,960 results -> Gate -> Future State -> Evaluate -> Execute -> provenance path, with structural target/step and contract hashes matching. Its normalized output hash differed (`exactPredictionReproduction=false`); maximum absolute difference was 0.00285349, `toleranceApplied=false`, and the full row-wise comparison is retained. Native Ubuntu-host execution was not captured.
 
 # 4. Impact
 
 ## 4.1 Reproducible and auditable forecast integration
 
-SHM-EM makes a model run inspectable as a software artifact rather than an implicit script invocation. The versioned contract identifies ordered features, engineering objects, units, conversion versions, temporal settings, artifacts, preprocessors, scripts, runtime dependencies, and hashes. The public reference combines these records with a deterministic input window and expected machine-readable outputs. The software evidence includes 55 backend tests, 13 PIT_PRE tests, the 15-case validation matrix, seven second-configuration checks, two front-end checks, and one public end-to-end reproduction. These overlapping families are reported separately rather than summed.
-
-This evidence establishes contract checking, workflow reproduction, and traceability for the released configurations. It does not establish forecasting superiority, calibrated uncertainty, production throughput, or reliability improvement relative to an unspecified conventional system.
+The contract, deterministic public window, expected outputs, tests, failure matrix, runtime records, and provenance make a model run inspectable rather than an implicit script invocation. Evidence supports contract checking, workflow reproduction, and traceability for the tested configurations, not forecasting superiority, calibrated uncertainty, production throughput, or reliability improvement.
 
 ## 4.2 Cross-configuration reuse
 
-In the synthetic second-configuration experiment, one bridge fixture was registered with three stations, 12 instruments, 26 metric bindings, four observation mappings, 164 feature mappings, two compatible workflow-fixture model bundles, and one rule. The fixed revised release completed seven end-to-end functional checks and produced 1,120 forecast rows without modifying the fixed backend business source, front-end workflow source, PIT_PRE core, or existing observation-table schemas.
-
-This is direct evidence of configuration reuse for one heterogeneous software fixture. It does not validate bridge-domain forecast accuracy, cross-domain model transfer, arbitrary source-table support, universal no-code onboarding, or compatibility with model bundles that do not satisfy the declared adapter and contract requirements.
+The bridge fixture registered three stations, 12 instruments, and two compatible bundles, produced 1,120 rows, passed 7/7 checks, and required zero frozen-core or schema modifications. This supports reuse for one fixture, not bridge accuracy, model transfer, arbitrary tables, or universal no-code onboarding.
 
 ## 4.3 Controlled event transition and traceability
 
-The controlled transition separates exploratory candidate inspection from formal engineering records. Evaluate uses the same engineering-valued series and rule semantics as Execute and retains an evaluation/audit run, but creates no formal event, Gate, response, notification, report, evidence, or prediction-link record. Execute reloads persisted forecasts, revalidates artifact/contract/timeline/quality/freshness and persisted-result integrity, checks engineering units, and creates event, response, and provenance records only after all checks pass. The failure matrix shows zero formal side effects for every case expected to be blocked, and the concrete provenance trace demonstrates how one successful event resolves to its rule, batch, model artifact, input window, forecast snapshot, Gate, and response workflow.
-
-This mechanism supports audit and reproducible inspection. SHA-256 detects accidental corruption, stale hash metadata, and uncoordinated mutation; it is not tamper-proof against an actor able to change both records and hashes.
+Evaluate and Execute share engineering-valued rule calculations but differ at the formal side-effect boundary. The failure matrix shows blocked execution without formal records; the successful trace resolves event, rule, batch, model, input, Gate, forecast, and response. SHA-256 detects accidental or uncoordinated mutation, not a privileged attacker changing both data and hashes.
 
 ## 4.4 Current deployment and scientific scope
 
-The current release has the following boundaries:
+The six bundles emit point forecasts; Gate status is data/artifact/timeline/quality/freshness eligibility, not uncertainty or probabilistic risk. MySQL 8 is the only validated backend, the 50,000-row cap is application-level, and no SensorThings adapter or conformance result exists. The bridge fixture is not field validation, and arbitrary tables or models may require adapter work. Docker/Linux demonstrated logical, not bitwise, portability.
 
-- The six public model bundles emit point forecasts. Gate eligibility is data/artifact/timeline/quality/freshness eligibility, not predictive uncertainty, calibrated confidence, or probabilistic risk.
-- The 50,000-row Gate inspection cap is an application safeguard, not a MySQL capacity limit. MySQL 8 is the only implemented and validated persistence backend; no alternative time-series database adapter has been tested.
-- The observation registry is an internal abstraction. SHM-EM has no OGC SensorThings endpoint, adapter, or conformance result.
-- The software is a research reference implementation without application-level authentication. Production deployment requires TLS, an identity provider, role-based authorization with separate Execute privilege, least-privilege database access, protected audit/provenance storage, secret management, network segmentation, rate limits, and tested backup/restore procedures.
-- Persisted hashes are integrity checks, not cryptographic protection against a privileged attacker. Stronger deployment requires privilege separation and an externally protected append-only store, keyed HMAC, or digital signature.
-- Docker/Linux demonstrated functional and logical portability but not bitwise numerical identity. The normalized output hash differed from Windows, no tolerance was applied, and a native Ubuntu-host result was not separately captured.
-- The synthetic bridge configuration is a software-workflow fixture, not external field validation or cross-domain predictive validation.
-- The current adapter scope covers registered and approved observation sources. Arbitrary forecasting frameworks and physical tables may require explicit adapter and contract work.
-- Forecasts must not be the sole basis for automated safety decisions; engineering review remains necessary.
+SHM-EM is a research reference without application authentication. Production use requires TLS, external identity, role-based and separate Execute authorization, least-privilege database access, secret management, protected audit storage, network controls, rate limits, and tested backup/restore. Forecasts require engineering review and must not be the sole basis for automated safety decisions.
 
 # 5. Conclusions
 
-SHM-EM integrates heterogeneous engineering observations, fixed-version point-forecast models, a synchronized Project Future State, versioned rules, formal events, responses, and provenance. Its three contributions are a versioned engineering-semantic data-model contract, a deterministic synchronized Project Future State, and a controlled forecast-to-event transition. The revised evidence formalizes these mechanisms with a real contract example and model configuration, a code-derived aggregation algorithm and sequence, one public excavation reproduction, one synthetic software-reuse fixture, a 15-case validation matrix, repeated runtime measurements, a concrete event trace, and a bounded Docker/Linux portability result.
-
-The evidence supports reproducible and auditable workflow integration for the tested configurations. It does not establish predictive generalization, calibrated uncertainty, universal no-code reuse, production security, storage-backend neutrality, or exact cross-platform numerical reproduction. Future work may evaluate uncertainty-aware forecasts, paginated or chunked Gate validation, explicit alternative-storage and SensorThings adapters, stronger deployment security, compound rules, native Linux execution, and independent field configurations without weakening the current fail-closed contract and provenance boundaries.
+SHM-EM contributes a versioned engineering-semantic data-model contract, a synchronized Project Future State, and a controlled forecast-to-event transition. The public case, workflow fixture, failure matrix, runtime evidence, provenance trace, and bounded container result support auditable integration for tested configurations. They do not establish predictive generalization, calibrated uncertainty, production security, backend neutrality, or exact cross-platform numerical reproduction.
 
 # 6. Data and software availability
 
-SHM-EM v1.0.1 is available as an immutable release at <https://github.com/lja666/SHM-EM/releases/tag/v1.0.1>, fixed release commit `d7cba1419145e6c75fe69ad63172af5f5abe5028`. The release archive `SHM-EM-v1.0.1.zip` has SHA-256 `ea0973b7c82e06c3c8910ec36fcf2c3d47765a87d11552337a86c69de41a7cef`; the matching checksum sidecar is published with the archive. The source code and six fixed-version model bundles are licensed under the MIT License. The public de-identified sample and conceptual site plan are licensed under CC BY 4.0. The public sample supports engineering conversion, six-model inference, prediction gating, Project Future State construction, rule evaluation, controlled formal execution, response creation, and provenance reproduction; it is not an independent model-generalization dataset.
-
-The complete historical field data cannot be released because they include project location, original device identifiers, operational records, continuous monitoring series, and information subject to ownership and contractual restrictions. The repository documents the private-data boundary, the public subset selection, and the expected machine-readable outputs. The published archive contains the public sample, models, tests, and reproduction documentation but excludes the restricted field dataset, credentials, generated databases, local runtime state, and manuscript working files.
+SHM-EM v1.0.1 is archived at <https://github.com/lja666/SHM-EM/releases/tag/v1.0.1>, fixed release commit `d7cba1419145e6c75fe69ad63172af5f5abe5028`. `SHM-EM-v1.0.1.zip` has SHA-256 `ea0973b7c82e06c3c8910ec36fcf2c3d47765a87d11552337a86c69de41a7cef`. Code and six model bundles use MIT; the de-identified sample and conceptual plan use CC BY 4.0. The sample supports the reported workflow but not model generalization. Restricted historical field data, locations, operational identifiers, credentials, generated databases, and local state are excluded; the repository documents this boundary and provides tests and expected outputs.
 
 # Acknowledgements
 
 The authors thank the members of the research group for their contributions to software development and manuscript preparation. This work was supported by the Scientific Research Fund of the Institute of Engineering Mechanics, China Earthquake Administration (No. 2025B07), the National Natural Science Foundation of China (Nos. 52378543 and 52378544), and the National Key Research and Development Program of China (No. 2023YFC3805203).
+
+# Declaration of generative AI and AI-assisted technologies in the manuscript preparation process
+
+During preparation and revision, the authors used OpenAI ChatGPT and Codex for manuscript organization, language editing, software-code review, test and documentation preparation, and consistency checking. The authors reviewed, edited, and validated all AI-assisted outputs. AI-assisted code changes were human-reviewed and checked by the regression and reproduction procedures reported here. The authors take full responsibility for the publication's content.
 
 # References
 

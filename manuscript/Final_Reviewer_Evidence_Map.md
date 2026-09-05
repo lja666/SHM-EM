@@ -6,7 +6,7 @@
 | R1-1 | Sections 3.2, 4.2; Table 4 | `phase1b-regression.json` and final Git diff | 3 stations; 12 instruments; 1,120 rows; 7/7 end-to-end functional checks; zero core changes |
 | R1-2 | Sections 3.2-3.5; Tables 4-7 | `final-performance-table.md`; reuse/failure/provenance artifacts | Prediction median 16,778.359 ms; Gate 343.129 ms; trace 2.578 ms |
 | R1-3 | Sections 2.1.4, 3.3; Fig. 3; Table 5 | `failure-matrix-v2.md/json` | 1 positive + 12 failure + 2 input controls; expected blocked cases zero side effects |
-| R1-4 | Section 1; Table 1 | `RELATED_SOFTWARE_COMPARISON.md`; source JSON | 12 source-grounded dimensions; no unsupported third-party `No` |
+| R1-4 | Section 1; Table 1 | `RELATED_SOFTWARE_COMPARISON.md`; source JSON | 8 manuscript dimensions; full source-grounded comparison retained; no unsupported third-party `No` |
 | R1-5 | Section 2.1.2; Listing 1 | `DATA_MODEL_CONTRACT_SPEC.md`; schema/example/export | 6 models; 164 ordered common features; 124 targets |
 | R1-6 | Section 2.1.3; Algorithm 1 | `PROJECT_FUTURE_STATE_ALGORITHM.md`; boundary tests | 6/6 boundary cases; median 472.342 ms |
 | R1-7 | Section 2.1.2; Table 2 | `MODEL_DIMENSION_RECONCILIATION.md/json`; model summary | 6 bundles; histories 12-16; aligned inputs 114 for five models and 164 for Settlement; targets total 124; checks pass |
@@ -23,7 +23,7 @@
 | R1-18 | Sections 1, 4.4; Table 1 | `SENSORTHINGS_POSITIONING.md` | No endpoint, adapter, or conformance test |
 | R1-19 | Entire structure | `REPETITION_REDUCTION_MAP.md` | Three contributions retained; integrity safeguard nested under contribution 3 |
 | R2-1 | Section 1; Sections 3.2-3.5 | Comparison + runtime/reuse/failure/provenance | Software evidence, not cross-system forecast accuracy |
-| R2-2 | Section 1; Table 1 | Related-software comparison artifacts | 12 dimensions, controlled vocabulary |
+| R2-2 | Section 1; Table 1 | Related-software comparison artifacts | 8 manuscript dimensions; full repository matrix; controlled vocabulary |
 | R2-3 | Section 2.1.2; Section 3.3 | `features.py`; contract spec; I01-I02 | Partial gap may resolve; entire unavailable feature rejects |
 | R3-1 | Sections 2.1, 2.1.1, 4.4 | `STORAGE_ADAPTER_BOUNDARY.md` | MySQL only; alternative adapter responsibilities documented |
 | R3-2 | Section 4.4 | `SECURITY.md` | TLS, identity, RBAC, Execute privilege, least privilege, protected audit |

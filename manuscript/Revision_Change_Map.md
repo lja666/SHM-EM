@@ -51,12 +51,12 @@
 
 | Item | Source | Final action |
 |---|---|---|
-| Fig. 1 | Submitted Fig. 1 | Retain, update terminology only |
-| Fig. 2 | Submitted Fig. 2 | Retain, clarify MySQL/adapter boundary |
+| Fig. 1 | Revised code-native diagram | Replace the submitted asset with the final three-mechanism workflow |
+| Fig. 2 | Revised code-native diagram | Replace the submitted asset and clarify the MySQL/adapter boundary |
 | Fig. 3 | `docs/revision/figures/forecast-event-sequence.mmd` | Replace/reshape as code-crosschecked sequence |
 | Fig. 4 | `artifacts/revision/manuscript/FIGURE4_REDUCTION_PLAN.md` | Create one compact three-panel composite |
 | Fig. 5 | Submitted Fig. 5 | Retain, correct model dimensions/validation labels |
-| Table 1 | Related-software comparison artifacts | Add source-grounded responsibility comparison |
+| Table 1 | Related-software comparison artifacts | Add compact eight-dimension comparison; retain the full comparison in the repository |
 | Table 2 | `model-config-summary.json` + contract export | Replace incorrect submitted model-input table |
 | Table 3 | `software-test-summary.md` | Add family-level testing summary |
 | Table 4 | Phase 1B final functional evidence | Add software-reuse inventory |

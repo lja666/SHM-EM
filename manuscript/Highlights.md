@@ -1,6 +1,6 @@
 # Highlights
 
-- Versioned contracts align heterogeneous observations with six forecast models.
-- Project Future State synchronizes risk across 124 forecast target channels.
-- Independent Execute gating blocks incomplete or corrupted prediction batches.
-- Formal events retain provenance to models, inputs, forecasts, and responses.
+- Versioned contracts connect heterogeneous observations to six forecast models.
+- Multi-model forecasts are synchronized into one project-wide future view.
+- Independent checks block incomplete or corrupted forecasts before event creation.
+- Formal events retain traceable links to models, inputs, forecasts, and responses.

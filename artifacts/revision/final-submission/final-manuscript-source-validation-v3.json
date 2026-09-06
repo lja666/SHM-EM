@@ -1,9 +1,9 @@
 {
   "schemaVersion": "shm-em-final-manuscript-source-validation-v2",
-  "generatedAtUtc": "2026-09-05T14:12:52.469503+00:00",
+  "generatedAtUtc": "2026-09-06T05:44:59.775604+00:00",
   "finalCoreFreezeV3": "eaa7d85a0b4921ab2f6e54234cff09aee6a30c8f",
-  "head": "5f01fd552ed149946a756f2a715601cf4946d382",
-  "validatedSourceHead": "5f01fd552ed149946a756f2a715601cf4946d382",
+  "head": "39901a8559ea354616678a97c7aa55f62b7e2549",
+  "validatedSourceHead": "39901a8559ea354616678a97c7aa55f62b7e2549",
   "sourceFiles": [
     "manuscript/SHM-EM_Revised_Manuscript_Source.md",
     "manuscript/Response_to_Reviewers_Source.md",

@@ -15,7 +15,7 @@ The automated SoftwareX compliance-correction phase is complete and ready for th
 
 ## SoftwareX compliance result
 
-- Strict clean-DOCX word count: **2795** (limit 3,000; post-disclosure target 2,950)
+- Strict clean-DOCX word count: **2804** (limit 3,000; post-disclosure target 2,950)
 - Final manuscript figures: **5**
 - AI-use declaration: immediately before References
 - Submission artwork: Fig. 1-3 one-page vector PDF; Fig. 4-5 TIFF at 609.6 effective dpi

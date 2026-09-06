@@ -25,8 +25,8 @@
   },
   "cleanMarkedFinalViewTokenSequenceEqual": true,
   "cleanMarkedDocxFinalViewTokenCounts": {
-    "clean": 4409,
-    "marked": 4409
+    "clean": 4420,
+    "marked": 4420
   },
   "pass": true,
   "responseLocations": {

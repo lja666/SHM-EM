@@ -1,14 +1,14 @@
 {
   "schemaVersion": "shm-em-final-submission-compliance-v2",
-  "generatedAtUtc": "2026-09-05T14:12:53.724701+00:00",
+  "generatedAtUtc": "2026-09-06T05:45:00.292038+00:00",
   "countBasis": "Final clean DOCX: artifacts\\revision\\final-submission\\docx\\SHM-EM_Revised_Manuscript_Clean.docx",
-  "strictWordCount": 2795,
-  "sourcePreflightWordCount": 2796,
+  "strictWordCount": 2804,
+  "sourcePreflightWordCount": 2805,
   "automatedGates": [
     {
       "id": "FS-01",
       "status": "PASS",
-      "detail": "Strict count 2795; source preflight 2796; post-disclosure target <=2950: True."
+      "detail": "Strict count 2804; source preflight 2805; post-disclosure target <=2950: True."
     },
     {
       "id": "FS-02",
@@ -48,7 +48,7 @@
     {
       "id": "FS-13",
       "status": "PASS",
-      "detail": "Post-disclosure strict count is 2795 words (target <=2950: True)."
+      "detail": "Post-disclosure strict count is 2804 words (target <=2950: True)."
     },
     {
       "id": "FS-14",

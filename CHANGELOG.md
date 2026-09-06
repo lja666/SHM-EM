@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased
+
+- Reorganized the public repository so curated scientific evidence lives under
+  `docs/evidence` while generated review packages, submission documents,
+  transient logs, screenshots, and duplicate benchmark captures remain local
+  and untracked.
+- Removed journal-packaging and GPT-handoff utilities that are not required to
+  build, run, test, or reproduce SHM-EM.
+
 ## 1.0.1 - 2026-09-01
 
 - Added Linux-container portability evidence and documented the observed

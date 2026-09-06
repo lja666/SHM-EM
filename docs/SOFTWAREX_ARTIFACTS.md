@@ -17,6 +17,7 @@
 | Windows PowerShell reproduction | `docs/REPRODUCIBILITY.md`, `scripts/reproduce-local.ps1` |
 | Automated CI | `.github/workflows/ci.yml` |
 | File integrity | `docs/RELEASE_MANIFEST.md` |
+| Curated validation evidence | `docs/evidence` |
 | License and citation | `LICENSE.txt`, `DATA_LICENSE.txt`, `CITATION.cff`, `codemeta.json` |
 | Third-party notice | `docs/THIRD_PARTY_NOTICES.md` |
 | Change and contribution policy | `CHANGELOG.md`, `CONTRIBUTING.md` |
@@ -35,6 +36,9 @@
   evidence remains supported.
 - Release packaging excludes local dependencies, build outputs, runtime
   configuration, IDE metadata, logs, and named restricted-data files.
+- Journal-submission documents, external-review handoffs, transient logs,
+  screenshots, and generated review packages are not tracked. Only the
+  compact, public evidence indexed in `docs/evidence/README.md` is retained.
 
 ## Remaining Author Metadata
 

@@ -127,7 +127,7 @@ The Phase 2C container run reached the complete logical workflow with matching
 input and contract hashes, but its normalized prediction-output hash differed
 from the frozen Windows baseline. No tolerance was introduced. Therefore the
 native Windows procedure remains the validated exact-reproduction path; see
-`artifacts/revision/portability/portability-limitations.md` for the recorded
+`docs/evidence/portability/portability-limitations.md` for the recorded
 cross-platform boundary.
 
 ## Optional Map

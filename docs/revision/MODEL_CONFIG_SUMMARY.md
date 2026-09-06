@@ -23,4 +23,4 @@ The number of attention heads and dropout cannot be recovered uniquely from tens
 
 The current bundles are CPU-executed point-forecast models. They do not emit calibrated predictive intervals or probabilistic exceedance. The execution gate validates software/data integrity and eligibility; it does not convert a point forecast into a statistical confidence guarantee.
 
-The full hashes, paths, tensor-derived dimensions, and parameter provenance are in `artifacts/revision/manuscript/model-config-summary.json`.
+The full hashes, paths, tensor-derived dimensions, and parameter provenance are in `docs/evidence/model-contract/model-config-summary.json`.

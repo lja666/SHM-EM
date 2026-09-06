@@ -1,1 +1,0 @@
-UPDATE em_prediction_run SET input_schema_hash='aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa' WHERE id=25;

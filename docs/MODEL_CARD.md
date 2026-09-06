@@ -35,8 +35,8 @@ and source metrics. PIT_PRE rejects contract or artifact drift before running.
 
 Each model bundle under `src/pit_pre/models` includes its weight file,
 inference module, and frozen `preprocessor.joblib`. `best_params.json` is
-included where available. `tools/freeze_preprocessors.py` is a maintainer tool,
-not part of normal inference.
+included where available. `src/pit_pre/tools/freeze_preprocessors.py` is a
+maintainer tool, not part of normal inference.
 
 Some frozen training-column identifiers contain Chinese tokens. They remain
 only in `training_feature_code` because renaming them would change the fitted

@@ -12,7 +12,7 @@ The machine-readable sources are:
 - `src/pit_pre/runtime-manifest.json`: Python/runtime dependency contract;
 - `src/pit_pre/pit_pre/contract.py`: authoritative loading and validation behavior.
 
-The complete database-derived export is `artifacts/revision/manuscript/data-model-contract-export.json`. The compact example and its JSON Schema are in `docs/revision/examples/`. The compact file intentionally shows one model, four representative inputs, and two representative targets; it is not a replacement for the full 6-model, 164-feature, 124-target export.
+The complete database-derived export is `docs/evidence/model-contract/data-model-contract-export.json`. The compact example and its JSON Schema are in `docs/revision/examples/`. The compact file intentionally shows one model, four representative inputs, and two representative targets; it is not a replacement for the full 6-model, 164-feature, 124-target export.
 
 ## Contract identity and versions
 

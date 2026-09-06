@@ -133,4 +133,4 @@ The test evidence covers:
 - policy hash drift rejection;
 - deterministic state hashing.
 
-Machine-readable results are exported to `artifacts/revision/manuscript/future-state-boundary-tests.json`.
+Machine-readable results are published in `docs/evidence/verification/future-state-boundary-tests.json`.

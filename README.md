@@ -47,6 +47,7 @@ the public sample contains no acceleration waveform rows.
 | `sql/shm_em_database` | Schema, conversion operators, public sample, and validation |
 | `scripts` | Windows PowerShell reproduction, container diagnostics, startup, and packaging |
 | `docs` | Architecture, installation, reproducibility, model, data, and API documentation |
+| `docs/evidence` | Curated, public evidence supporting the reported contracts, tests, and measurements |
 
 Count definitions for field points, sensors, modules, DTUs, and internal
 installation records are documented in `docs/MONITORING_INVENTORY.md`.
@@ -138,6 +139,7 @@ Public database inputs are applied in this order:
 - [Data Availability](docs/DATA_AVAILABILITY.md)
 - [Forecast-Driven Innovation](docs/FORECAST_DRIVEN_INNOVATION.md)
 - [Release Manifest](docs/RELEASE_MANIFEST.md)
+- [Validation Evidence](docs/evidence/README.md)
 - [SoftwareX Submission Checklist](docs/SOFTWAREX_ARTIFACTS.md)
 - [Third-Party Notices](docs/THIRD_PARTY_NOTICES.md)
 - [Author Actions Before Publication](docs/AUTHOR_ACTIONS.md)

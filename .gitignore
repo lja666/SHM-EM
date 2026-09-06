@@ -1,5 +1,11 @@
 /.shm-em-run/
 /artifacts/
+/manuscript/
+
+# Local journal-submission and external-review working material.
+**/GPT_REVIEW_HANDOFF*.md
+**/*GPT_Review_Package*
+**/*GPT_REVIEW_PACKAGE*
 
 /src/backend/target/
 /src/backend/.idea/

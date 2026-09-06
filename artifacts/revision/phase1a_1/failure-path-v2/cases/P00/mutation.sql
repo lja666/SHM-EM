@@ -1,1 +1,0 @@
--- Positive control: no fault injected.

@@ -1,7 +1,7 @@
 {
   "schemaVersion": "shm-em-final-submission-manifest-v2",
-  "generatedAtUtc": "2026-09-06T05:45:01.569691+00:00",
-  "generationBaseHead": "39901a8559ea354616678a97c7aa55f62b7e2549",
+  "generatedAtUtc": "2026-09-06T10:33:03.080119+00:00",
+  "generationBaseHead": "65b064a68f75e133f75a53f6c1847a514b5c5e8f",
   "branch": "revision/softx-d-26-00931",
   "sourceHashes": {
     "manuscript/SHM-EM_Revised_Manuscript_Source.md": "6d28174b66853fcf831b2ace11576c31df6a52694ff6bf1fef3bc8a75ab81379",
@@ -9,7 +9,7 @@
     "manuscript/Revision_Change_Map.md": "926df9cd918d6483e5b7bd3371fb2624d0626dbc782e2ea978e0d90e205134d6",
     "manuscript/Final_Reviewer_Evidence_Map.md": "467846fa580d0f78a65b10e614e4b58f82aaee3be38bc822f0f7325f9474b2ed",
     "manuscript/Final_Submission_Checklist.md": "50012278a8a8578ed51cab971f7b7b21558547fe74d25dfe83dedff7c845e018",
-    "manuscript/Highlights.md": "ac9b4061ccd7ecb56ea592d4f65c6dbd7e861b2510113aa7dc2aa90192282392"
+    "manuscript/Highlights.md": "d23f5ca875ada53211f5346a7916c41c0d638071f2493337020401c5b2a631e8"
   },
   "finalCoreFreezeV3": "eaa7d85a0b4921ab2f6e54234cff09aee6a30c8f",
   "productionCoreDiff": "NONE",
@@ -59,7 +59,7 @@
     {
       "path": "artifacts/revision/final-submission/submission/Highlights.docx",
       "bytes": 6159477,
-      "sha256": "f179fec0596849c69e928246b0d71627c18b16c2e92d2a6f1082fff881f00f0a"
+      "sha256": "e6dc65601cb26e4e964fdffc9235214c8243a2c7765d0b4ab296f7c27a1e3f12"
     },
     {
       "path": "artifacts/revision/final-submission/submission/SHM-EM_SoftwareX_Revised_Clean.pdf",
@@ -81,8 +81,8 @@
     },
     {
       "path": "artifacts/revision/final-submission/submission/Highlights.pdf",
-      "bytes": 77562,
-      "sha256": "d7fdcc232fecae4ed827eb5bde5bbbb060fa01aff07c98fa6befaebb3d1fdc87",
+      "bytes": 75708,
+      "sha256": "e506b49a0b44c80a3877273c21d71c2ceb48d82f40bc60397f19a40ea071fac0",
       "pages": 1
     },
     {
@@ -219,12 +219,12 @@
     {
       "path": "artifacts/revision/final-submission/submitted-baseline-verification.json",
       "bytes": 1925,
-      "sha256": "86b7f99dd17d723034f2725c245ebbe91d3a0c2c0e786262538fcf593757ca51"
+      "sha256": "261f882595ea6fb5fb19e9483c9ad3d7ed5e55f3b5abd00fc322fcee72fff48c"
     },
     {
       "path": "artifacts/revision/final-submission/FINAL_SUBMISSION_COMPLETION_REPORT.md",
       "bytes": 3261,
-      "sha256": "402e1cfd20839d2ca703dc05996449a7d5c85a0bf522ad608085e76efe00490b"
+      "sha256": "9f0ba90b14054669aa521e2176a9b2b76988ecad3f5f99c48843391a00a1a7a1"
     },
     {
       "path": "artifacts/revision/final-submission/GPT_REVIEW_HANDOFF.md",
@@ -248,8 +248,8 @@
     },
     {
       "path": "manuscript/Highlights.md",
-      "bytes": 332,
-      "sha256": "ac9b4061ccd7ecb56ea592d4f65c6dbd7e861b2510113aa7dc2aa90192282392"
+      "bytes": 339,
+      "sha256": "d23f5ca875ada53211f5346a7916c41c0d638071f2493337020401c5b2a631e8"
     },
     {
       "path": "manuscript/SHM-EM_Revised_Manuscript_Source.md",

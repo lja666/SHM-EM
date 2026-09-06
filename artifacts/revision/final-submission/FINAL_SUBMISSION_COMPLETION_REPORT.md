@@ -20,7 +20,7 @@ The automated SoftwareX compliance-correction phase is complete and ready for th
 - AI-use declaration: immediately before References
 - Submission artwork: Fig. 1-3 one-page vector PDF; Fig. 4-5 TIFF at 609.6 effective dpi
 - Reviewer locations: 27/27 source anchors and rendered final locations verified
-- Highlights: 4 bullets; character counts [78, 75, 77, 76]
+- Highlights: 4 bullets; character counts [78, 73, 81, 81]
 - AI disclosure: Fig. 1-Fig. 5 provenance/captions and the Section 3.5 code-method statement verified
 
 ## Final document set

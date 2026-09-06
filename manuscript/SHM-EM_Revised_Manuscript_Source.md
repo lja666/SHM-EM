@@ -286,7 +286,7 @@ The authors thank the members of the research group for their contributions to s
 
 # Declaration of generative AI and AI-assisted technologies in the manuscript preparation process
 
-During preparation and revision, the authors used OpenAI ChatGPT and Codex for manuscript organization, language editing, explanatory-figure drafting/layout, software-code review, test and documentation preparation, and consistency checking. The authors reviewed, edited, and validated all AI-assisted outputs and take full responsibility for the publication's content.
+During preparation and revision, the authors used OpenAI ChatGPT, OpenAI image-generation/editing tools, and Codex for manuscript organization, language editing, explanatory-figure drafting/layout, software-code review, test and documentation preparation, and consistency checking. The authors reviewed, edited, and validated all AI-assisted outputs and take full responsibility for the publication's content.
 
 # References
 

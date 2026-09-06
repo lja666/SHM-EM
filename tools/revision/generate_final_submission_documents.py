@@ -56,7 +56,7 @@ FIGURES = {
     ),
     4: (
         FINAL_FIGURES / "Fig4_Task_Oriented_Interface_Composite.png",
-        "Fig. 4. SHM-EM views of (a) project risk, (b) a joint observation/forecast series, and (c) batch completeness and eligibility. OpenAI Codex (model/version unrecorded) assisted cropping/composition; panels derive from application captures, with AI-assisted label removal/upscaling in (a). Authors verified displayed content.",
+        "Fig. 4. SHM-EM views of (a) project risk, (b) a joint observation/forecast series, and (c) batch completeness and eligibility. OpenAI Codex (model/version unrecorded) assisted cropping/composition; OpenAI image editing (model/version unrecorded) assisted label removal/upscaling in (a). The panels derive from application captures, and authors verified displayed content.",
         Mm(175),
     ),
     5: (

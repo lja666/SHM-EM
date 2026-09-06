@@ -34,7 +34,7 @@ FIGURE_CAPTIONS = {
     1: "Fig. 1. Research gaps, the SHM-EM software boundary, and the forecast-aware user workflow. OpenAI Codex (model/version unrecorded) assisted layout; authors verified content.",
     2: "Fig. 2. Four-layer SHM-EM architecture. MySQL is the validated reference persistence implementation; registry and service interfaces define the storage-adapter boundary. OpenAI Codex (model/version unrecorded) assisted layout; authors checked the software boundaries.",
     3: "Fig. 3. Controlled sequence from persisted forecasts through optional Project Future State inspection, audited Evaluate, independently gated Execute, and formal provenance. OpenAI Codex (model/version unrecorded) assisted layout; authors checked the code-derived sequence.",
-    4: "Fig. 4. SHM-EM views of (a) project risk, (b) a joint observation/forecast series, and (c) batch completeness and eligibility. OpenAI Codex (model/version unrecorded) assisted cropping/composition; panels derive from application captures, with AI-assisted label removal/upscaling in (a). Authors verified displayed content.",
+    4: "Fig. 4. SHM-EM views of (a) project risk, (b) a joint observation/forecast series, and (c) batch completeness and eligibility. OpenAI Codex (model/version unrecorded) assisted cropping/composition; OpenAI image editing (model/version unrecorded) assisted label removal/upscaling in (a). The panels derive from application captures, and authors verified displayed content.",
     5: "Fig. 5. Public reference case, six-model contract, common timeline, and reproduction checks. The left conceptual panel used OpenAI ChatGPT image generation (model/version unrecorded); OpenAI Codex assisted composition. Authors verified technical labels.",
 }
 SUBMISSION_ARTWORK = {
@@ -206,7 +206,14 @@ def main() -> int:
     )
     figure_declaration = (
         "explanatory-figure drafting/layout" in source
-        and (not args.clean_docx or "explanatory-figure drafting/layout" in counted_text)
+        and "OpenAI image-generation/editing tools" in source
+        and (
+            not args.clean_docx
+            or (
+                "explanatory-figure drafting/layout" in counted_text
+                and "OpenAI image-generation/editing tools" in counted_text
+            )
+        )
     )
     code_method_sentence = (
         "Revision-stage code edits assisted by OpenAI Codex (model/version unrecorded) were human-reviewed "
